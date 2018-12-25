@@ -16,6 +16,20 @@ git init
 git remote add origin <url>
 ```
 
+- 添加代码
+
+```shell
+git add .
+git commit -m '首次提交'
+```
+
+- 首次上传代码带远程库
+
+```shell
+# -f 强制是提交
+git push -u origin master -f
+```
+
 ## 二、 生成 ssh key
 
 - 生成 key
@@ -73,4 +87,19 @@ git config remote.origin.url <url>
 ```shell
 git remote --global set-url origin <url>
 git config --global remote.origin.url <url>
+```
+
+删除
+
+```shell
+vim  ~/.gitconfig
+
+# 修改成如下：  删除 [remote "origin"] 中 origin 字段
+
+[user]
+  email = 884820152@qq.com
+  name = qianyin925
+[credential]
+  helper = store
+[remote]
 ```
