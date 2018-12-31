@@ -124,7 +124,7 @@ export default class ImgContainer extends Component{
     return (
       <div 
         ref={this.wrapperRef}
-        id="img-container"
+        className="img-container"
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
         style={this.wrapperStyle} 

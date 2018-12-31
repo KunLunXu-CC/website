@@ -30,6 +30,8 @@ const entry = path.resolve(__dirname, '../src/index.js');
  * 输出
  */
 const output = {
+  // 记得设置否则 history 模式下二级路由 xxx/xxx 可能会报错
+  publicPath: '/',
   path: path.resolve(__dirname, '../build'),
   filename: 'bundle.js',
 };

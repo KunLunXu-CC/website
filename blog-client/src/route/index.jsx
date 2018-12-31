@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Base from '../pages/Base/index';
 import setting from './setting';
 
 export default () => {
@@ -12,8 +13,10 @@ export default () => {
     />
   ));
   return (
-    <Router>
-      <Switch>{routes}</Switch>
-    </Router>
+    <Base>
+      <Router>
+        <Switch>{routes}</Switch>
+      </Router>
+    </Base>
   );
 };

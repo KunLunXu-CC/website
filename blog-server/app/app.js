@@ -1,5 +1,5 @@
 const Koa = require('koa');
-const routes = require('./routes/index');
+const routes = require('./route.js');
 const app = new Koa();
 // 路由
 routes(app);

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import LeftUserBlock from './subpage/LeftUserBlock';
+import RightArticleList from './subpage/RightArticleList';
 
-export default class ArticleList extends Component{
+import './index.less';
+
+class ArticleList extends Component{
   render(){
     return (
-      <div>
-        ArticleList
+      <div className="home-page">
+        <LeftUserBlock />
+        <RightArticleList /> 
       </div>
     );
   }
 }
+export default ArticleList;
