@@ -24,36 +24,70 @@
     padding: 0 10px;
 
     .header{
-      flex: 0 0 40px;
+      flex: 0 0 35px;
       display: flex;
       align-items: center;
 
       .tag{
-        padding: 5px 10px;
+        height: 70%;
+        padding: 0 10px;
         border-radius: 3px;
-        font-size: 12px;
-        line-height: 1;
         margin-right: 10px;
-        color: #fff;
         background: #3498db;
+
+        color: #fff;
+        font-size: 12px;
+        line-height: normal;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .title{
         flex: 1;
-        display: block;
-        line-height: 30px;
+        height: 100%;
         font-size: 18px;
-        height: 30px;
+        display: flex;
+        align-items: center;
       }
-
-      .time{}
     }
+
     .content{
       flex: 1;
+      color: #666;
     }
+
     .footer{
       flex: 0 0 40px;
       background: pink;
+      display: flex;
+
+      .footer-left{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        .avatar{
+          width: 25px;
+          height: 25px;
+        }
+        .username{
+          padding: 0 10px 0 5px;
+        }
+        .browse{
+  
+        }
+        .comment{
+  
+        }
+      }
+      
+      .time{
+        flex: none;
+        display: flex;
+        align-items: center;
+      }
+
     }
   }
 }

@@ -1,3 +1,9 @@
+/**
+ * props.animation  鼠标停放动效  "pulse"
+ * props.img 图片
+ * props.width 组件宽度，默认 100%
+ * props.height 组件高度， 默认 100%
+ */
 import React, { Component } from 'react';
 import './index.less';
 
@@ -39,6 +45,7 @@ export default class ImgContainer extends Component{
     } else if (width !== wrapperWidth) {
       this.setState({ width: wrapperWidth, height: 'auto' });
     }
+    console.log('-- 刷新图片--');
   };
 
   /**
@@ -76,6 +83,7 @@ export default class ImgContainer extends Component{
   removeEvent = () => {
     window.removeEventListener('resize', this.refreshImgStyle);
   }
+
   /**
    * 鼠标移入组件事件
    */
@@ -91,7 +99,7 @@ export default class ImgContainer extends Component{
   }
 
   /**
-   * 动画函数: 获取动画映射配置, 执行对应的动画
+   * 动画函数: 获取动画映射配置 , 执行对应的动画
    */
   animation = () => {
     if (!this.props.animation){return false;}
@@ -119,15 +127,12 @@ export default class ImgContainer extends Component{
         id="img-container"
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
-        style={{
-          background: 'pink',
-          width: this.props.width || '100%',
-          height: this.props.height || '100%'
-        }} 
+        style={this.wrapperStyle} 
       >
         <img 
+          onLoad = {this.refreshImgStyle}
           ref={this.imgRef}
-          style={{width: this.state.width, height: this.state.height}}
+          style={this.imgStyle}
           src={this.props.img} alt="图片"
         />
       </div>
@@ -138,6 +143,23 @@ export default class ImgContainer extends Component{
   get animationParams(){
     return {
       pulse: { handler: this.pulse, value: 1.2}
+    };
+  }
+
+  // 包裹层样式
+  get wrapperStyle(){
+    return {
+      borderRadius: this.props.borderRadius || '0px',
+      width: this.props.width || '100%',
+      height: this.props.height || '100%'
+    }
+  }
+
+  // 图片样式
+  get imgStyle(){
+    return {
+      width: this.state.width, 
+      height: this.state.height
     };
   }
 }

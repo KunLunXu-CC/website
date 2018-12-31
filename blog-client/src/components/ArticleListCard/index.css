@@ -20,30 +20,53 @@
   padding: 0 10px;
 }
 #article-list-card .card-item:nth-child(2) .header {
-  flex: 0 0 40px;
+  flex: 0 0 35px;
   display: flex;
   align-items: center;
 }
 #article-list-card .card-item:nth-child(2) .header .tag {
-  padding: 5px 10px;
+  height: 70%;
+  padding: 0 10px;
   border-radius: 3px;
-  font-size: 12px;
-  line-height: 1;
   margin-right: 10px;
-  color: #fff;
   background: #3498db;
+  color: #fff;
+  font-size: 12px;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #article-list-card .card-item:nth-child(2) .header .title {
   flex: 1;
-  display: block;
-  line-height: 30px;
+  height: 100%;
   font-size: 18px;
-  height: 30px;
+  display: flex;
+  align-items: center;
 }
 #article-list-card .card-item:nth-child(2) .content {
   flex: 1;
+  color: #666;
 }
 #article-list-card .card-item:nth-child(2) .footer {
   flex: 0 0 40px;
   background: pink;
+  display: flex;
+}
+#article-list-card .card-item:nth-child(2) .footer .footer-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+#article-list-card .card-item:nth-child(2) .footer .footer-left .avatar {
+  width: 25px;
+  height: 25px;
+}
+#article-list-card .card-item:nth-child(2) .footer .footer-left .username {
+  padding: 0 10px 0 5px;
+}
+#article-list-card .card-item:nth-child(2) .footer .time {
+  flex: none;
+  display: flex;
+  align-items: center;
 }
