@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.less';
-import Header from '../Header/index';
-import Footer from '../Footer/index'
+import Header from './subpage/Header';
+import Footer from './subpage/Footer';
 
 class Base extends React.Component{
   render(){
@@ -9,7 +9,8 @@ class Base extends React.Component{
       <div className="base-page">
         <Header />
         <div className="content">
-          {this.props.children}
+          {this.props.leftMenu}
+          {this.props.body}
         </div>
         <Footer />
       </div>
