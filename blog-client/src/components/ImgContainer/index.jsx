@@ -1,5 +1,6 @@
 /**
  * props.animation  鼠标停放动效  "pulse"
+ * props.mouseOver 鼠标是否停放在组件处
  * props.img 图片
  * props.width 组件宽度，默认 100%
  * props.height 组件高度， 默认 100%
@@ -30,6 +31,19 @@ export default class ImgContainer extends Component{
     this.removeEvent();
   }
 
+  componentDidUpdate(preProps, preState){
+    this.handlerMouseOver(preProps, preState);
+  }
+
+  handlerMouseOver = (preProps, preState) => {
+    const preMouseOver = preProps.mouseOver;
+    const nextMouseOver = this.props.mouseOver;
+    if (preMouseOver !== nextMouseOver){
+      nextMouseOver && this.onMouseOver();
+      !nextMouseOver && this.onMouseOut();
+    }
+  }
+
   /**
    * 刷新重置图片样式：宽度、 高度
    */
@@ -45,7 +59,6 @@ export default class ImgContainer extends Component{
     } else if (width !== wrapperWidth) {
       this.setState({ width: wrapperWidth, height: 'auto' });
     }
-    console.log('-- 刷新图片--');
   };
 
   /**

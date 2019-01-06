@@ -20,17 +20,45 @@ export default class ArticleListCard extends React.Component{
   constructor(){
     super();
     this.contentRef = React.createRef();
+    this.state={
+      mouseOver: false
+    }
   }
-  
+
   componentDidMount(){
     clamp(this.contentRef.current, 2);
   }
 
+  setMouseOver = (mouseOver) => {
+    this.setState({mouseOver});
+  }
+
+  /**
+   * 鼠标移入组件事件
+   */
+  onMouseOver = () => {
+    this.setMouseOver(true);
+  }
+
+  /**
+   * 鼠标移出组件事件
+   */
+  onMouseOut = () => {
+    this.setMouseOver(false);
+  }
+  
   render(){
     return (
-      <div className="article-list-card" style={this.props.style || {}}>
+      <div 
+        id="article-list-card" 
+        onMouseOver={this.onMouseOver}
+        onMouseOut={this.onMouseOut}
+        style={this.props.style || {}}>
         <div className="card-item">
-          <ImgContainer animation="pulse" img={this.props.img} />
+          <ImgContainer
+            mouseOver={this.state.mouseOver}
+            animation="pulse" 
+            img={this.props.img} />
         </div>
         <div className="card-item">
           <div className="header">

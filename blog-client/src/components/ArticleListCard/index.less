@@ -1,10 +1,19 @@
-.article-list-card{
+#article-list-card:hover{
+  top: -5px;
+  box-shadow: 0 20px 30px -15px #ccc;
+}
+
+#article-list-card{
   width: 100%;
   height: 100%;
   border: 1px solid #e4ecf3;
   border-radius: 6px;
   overflow: hidden;
   display: flex;
+  position: relative;
+  top: 0;
+  transition: top 0.5s;
+  cursor: pointer;
 
   .card-item {
     height: 100%;
@@ -110,7 +119,6 @@
           margin-right: 5px;
         }
       }
-
     }
   }
 }
