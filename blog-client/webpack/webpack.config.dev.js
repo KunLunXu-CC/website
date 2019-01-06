@@ -17,8 +17,7 @@ const hotModuleReplacementPlugin = new HotModuleReplacementPlugin();
 // const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style.css');
 // 直接拷贝文件进行打包
 const copyWebpackPlugin = new CopyWebpackPlugin(
-  [{ from: path.resolve(__dirname, '../public') }], 
-  {copyUnmodified: true}
+  [{ from: path.resolve(__dirname, '../public') }]
 );
 
 /**
@@ -50,12 +49,12 @@ module.exports = {
         // include: [ path.resolve(__dirname, 'src'), path.resolve(__dirname, 'public') ],
         use: 'babel-loader'
       }, {
-        test: /\.(css|less)$/,
+        test: /\.(css|scss)$/,
         use: [ 
             'style-loader',
             { loader: 'css-loader', options: { importLoaders: 1 } }, 
             'postcss-loader', 
-            'less-loader'
+            'sass-loader'
           ]
         // include: [ path.resolve(__dirname, 'src') ],
         // use: ExtractTextWebpackPlugin.extract({

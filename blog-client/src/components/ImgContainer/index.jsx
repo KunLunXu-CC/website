@@ -6,7 +6,7 @@
  * props.height 组件高度， 默认 100%
  */
 import React, { Component } from 'react';
-import './index.less';
+import './index.scss';
 
 export default class ImgContainer extends Component{
   constructor(){

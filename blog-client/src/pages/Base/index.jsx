@@ -13,7 +13,7 @@
  * - 所有 blog 页面的整体的大小（min-width） 由该页面控制
  */
 import React from 'react';
-import './index.less';
+import './index.scss';
 import Header from './subpage/Header';
 import Footer from './subpage/Footer';
 

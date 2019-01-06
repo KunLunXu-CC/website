@@ -1,7 +1,7 @@
 import React from 'react';
 import ImgContainer from '../ImgContainer/index';
 import clamp from '../../utils/clamp'; 
-import './index.less';
+import './index.scss';
 
 /**
  * 文章列表卡片

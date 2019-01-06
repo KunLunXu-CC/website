@@ -1,7 +1,7 @@
 import React from 'react';
 import ArticleListCard from '@components/ArticleListCard/index';
 import IMG from '@assets/img/2018-11-2218:12:17.png';
-import './index.less';
+import './index.scss';
 
 class ArticlePage extends React.Component{
   render(){
