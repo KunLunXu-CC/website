@@ -1,6 +1,8 @@
 /**
  * props.animation  鼠标停放动效  "pulse"
  * props.mouseOver 鼠标是否停放在组件处
+ * props.border 边框
+ * props.borderRadius 圆角
  * props.img 图片
  * props.width 组件宽度，默认 100%
  * props.height 组件高度， 默认 100%
@@ -163,6 +165,7 @@ export default class ImgContainer extends Component{
   get wrapperStyle(){
     return {
       borderRadius: this.props.borderRadius || '0px',
+      border: this.props.border || 'normal',
       width: this.props.width || '100%',
       height: this.props.height || '100%'
     }

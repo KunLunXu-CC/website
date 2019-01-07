@@ -1,8 +1,9 @@
 #article-list{
   background: #fff;
   padding: 5px;
-
+  min-height: 100%;
   display: flex;
+  margin-left: 10px;
   flex-wrap: wrap;
   align-content: flex-start;
   align-items: flex-start;
