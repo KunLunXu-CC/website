@@ -10,24 +10,11 @@ const { Sider } = Layout;
 class LeftMenu extends React.Component{
   constructor(props){
     super(props);
+    const {defaultOpenKeys, defaultSelectedKeys} = this.getDefaultInfoWithPathname();
     this.state = {
-      openKeys: [],
-      selectedKeys: []
+      defaultOpenKeys,
+      defaultSelectedKeys,
     };
-  }
-
-  componentDidMount(){
-    this.resetMenuWithPathname();
-  }
-
-  componentWillMount(nextProps, nextState){
-    this.resetMenuWithCollapsed(nextProps);
-    // this.resetMenuWithPathname(nextProps);
-
-  }
-
-  componentDidUpdate(nextProps, nextState){
-    this.resetMenuWithPathname(nextProps);
   }
 
   /**
@@ -85,69 +72,40 @@ class LeftMenu extends React.Component{
   /**
    * 点击菜单项的事件
    * - 路由跳转
-   * - 设置　selectedKeys
    * @param {Object} 菜单项信息
    */
   onMenuClick = ({ item, key, keyPath }) => {
     const { push } = this.props.history;
-    const openKeys = keyPath[1] ? [keyPath[1]] : [];
-    const selectedKeys = [keyPath[0]];
-    this.setState({ openKeys, selectedKeys });
     push(key);
   }
 
   /**
-   * SubMenu展开/关闭事件
+   * 根据 pathname 获取 Menu defaultOpenKeys, defaultSelectedKeys
    */
-  onOpenChange = (openKeys) => {
-    this.setState({ openKeys });
-  } 
-
-  /**
-   * g根据 pathname 重设 Menu openKeys selectedKeys
-   * @param {Object} preProps 前一个 props
-   */
-  resetMenuWithPathname = (preProps = {}) => {
-    const { pathname: prePathname } = preProps.location || {};
-    const { pathname: currPathname } = this.props.location;
-    const pathname = currPathname || prePathname;
-    const openKeys = [];
-    const selectedKeys = [];
-    if (prePathname === currPathname){ return false;}
+  getDefaultInfoWithPathname = () => {
+    const { pathname } = this.props.location;
+    let defaultOpenKeys = [];
+    let defaultSelectedKeys = ['/'];
     try {
       setting.forEach( outer => {
       _.isArray(outer.children) && outer.children.forEach( inner => {
           const innerMatch = matchPath(pathname, inner);
           if (innerMatch){
-            openKeys.push(outer.defaultPath || outer.path);
-            selectedKeys.push(inner.defaultPath || inner.path);
+            defaultOpenKeys = [outer.defaultPath || outer.path];
+            defaultSelectedKeys = [inner.defaultPath || inner.path];
             throw 'break';
           }
         });
         const outerMatch = matchPath(pathname, outer);
         if (outerMatch){
-          selectedKeys.push(outer.defaultPath || outer.path);
+          defaultSelectedKeys = [outer.defaultPath || outer.path];
           throw 'break';
         }
       });
     } catch (e){}
-    this.setState({openKeys, selectedKeys});
+    return { defaultOpenKeys, defaultSelectedKeys };
   }
 
-  /**
-   * 根据 collapsed 重设 menu： 收缩菜单栏时应该清空 openKeys
-   * @param {Object} nextProps 前一个 props
-   */
-  resetMenuWithCollapsed = (nextProps ={}) => {
-    const nextCollapsed = nextProps.collapsed;
-    const currCollapsed = this.props.collapsed;
-    console.log('----------------');
-    if (nextCollapsed !== currCollapsed && nextCollapsed === true ){
-      this.setState({openKeys: []}, () => {
-        console.log(1111111)
-      });
-    }
-  }
 
   render(){
     return (
@@ -157,10 +115,9 @@ class LeftMenu extends React.Component{
           theme="dark" 
           mode="inline"
           onClick = {this.onMenuClick}
-          openKeys={this.state.openKeys}
-          onOpenChange={this.onOpenChange}
           inlineCollapsed={this.props.collapsed}
-          selectedKeys={this.state.selectedKeys}>
+          defaultOpenKeys = {this.state.defaultOpenKeys}
+          defaultSelectedKeys = {this.state.defaultSelectedKeys}>
           {this.renderMenu()}
         </Menu>
       </Sider>
