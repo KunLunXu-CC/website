@@ -1,0 +1,39 @@
+.base-frame{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+
+  .base-side {
+    flex:  0 0 200px;
+    height: 100%;
+    overflow-y: auto; // 侧边滚动（后期修改）
+  }
+
+  .base-main{
+    flex: 1;
+    height: 100%;
+    overflow-y: auto; // 主体滚动（后期修改）
+
+    display: flex;
+    flex-direction: column;
+    .base-header{
+      flex: 0 0 64px;
+      background: #fff;
+    }
+
+    .base-content{
+      flex: 1;
+      background: #ccc;
+      height: 8000px;
+    }
+
+    .base-footer{
+      flex: 0 0 64px;
+      background: #eee;
+    }  
+  }
+}

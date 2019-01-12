@@ -1,0 +1,15 @@
+{ 
+  // react 预设 babel 基础预设
+  "presets": ["@babel/preset-react", "@babel/preset-env"],
+  "plugins": [
+    // 下面两个为： 装饰器插件
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+    // 按需加载插件： antd （style: true 会加载 less 文件）
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      "style": "css"
+    }]
+  ]
+}
