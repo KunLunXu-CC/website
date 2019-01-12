@@ -1,39 +1,31 @@
 .base-frame{
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  display: flex;
-
-  .base-side {
-    flex:  0 0 200px;
+  height: 100vh;
+  .base-sider{
     height: 100%;
-    overflow-y: auto; // 侧边滚动（后期修改）
   }
 
-  .base-main{
-    flex: 1;
-    height: 100%;
-    overflow-y: auto; // 主体滚动（后期修改）
-
+  .base-content{
     display: flex;
     flex-direction: column;
-    .base-header{
-      flex: 0 0 64px;
-      background: #fff;
-    }
-
-    .base-content{
+    .base-body{
       flex: 1;
-      background: #ccc;
-      height: 8000px;
     }
 
     .base-footer{
       flex: 0 0 64px;
-      background: #eee;
-    }  
+    }
+  }
+
+  .header {
+    background: #fff;
+    padding: 0;
+
+    .trigger {
+      font-size: 18px;
+      line-height: 64px;
+      padding: 0 24px;
+      cursor: pointer;
+      transition: color .3s;
+    }
   }
 }

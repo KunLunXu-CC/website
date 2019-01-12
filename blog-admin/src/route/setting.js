@@ -1,5 +1,10 @@
 /**
- * router 配置
+ * router 配置: 路由 + 左侧菜单
+ * - path
+ * - 有 defaultPath 时左侧菜单点击时的跳转路由， 否则默认跳转到 path
+ * - icon 
+ * - exact: 严格匹配当　exact　为 false 时  /one/two 可以匹配 /one 
+ * - component
  */
 import HomePage from '../pages/HomePage/index';
 import ArticleCreation from '../pages/Article/ArticleCreation';
@@ -7,18 +12,20 @@ export default [
   {
     path: '/',
     name: '首页',
-    code: 'index',
+    icon: 'home',
     exact: true,
     component: HomePage,
   }, {
     path: '/article',
+    exact: true,
+    icon: 'ordered-list',
     name: '文章管理',
-    code: 'article',
     children: [
       {
-        path: '/article/creation(/:articleId)',
+        path: '/article/creation/:articleId?',
+        exact: true,
+        defaultPath: '/article/creation',
         name: '文章创作',
-        code: 'article-creation',
         component: ArticleCreation,
         children: []
       }
