@@ -38,6 +38,7 @@ const output = {
 module.exports = {
   entry,
   output,
+  mode: 'development',
   module: {
     // 用于配置哪些模块文件的内容不需要进行解析
     noParse: /jquery|lodash/,
@@ -45,7 +46,7 @@ module.exports = {
     rules: [
       {
         test: /\.js(x)?$/,
-        // exclude: [ path.resolve(__dirname, 'node_modules') ],
+        exclude: [ path.resolve(__dirname, 'node_modules') ],
         // include: [ path.resolve(__dirname, 'src'), path.resolve(__dirname, 'public') ],
         use: 'babel-loader'
       }, {
