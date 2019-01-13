@@ -28,12 +28,10 @@ class BaseFrame extends React.Component{
         <Layout>
           <HeaderBlock toggle={this.toggle} collapsed={this.state.collapsed} />
           <Content className="base-content">
-            <div className="base-body">
+            <div className="base-body ptw plw prw">
               {this.props.children}
             </div>
-            <div className="base-footer">
-              <FooterBlock />
-            </div>
+            <FooterBlock />
           </Content>
         </Layout>
       </Layout>

@@ -8,6 +8,7 @@
  */
 import HomePage from '../pages/HomePage/index';
 import ArticleCreation from '../pages/Article/ArticleCreation';
+import TagdManage from '../pages/TagdManage/index';
 export default [
   {
     path: '/',
@@ -30,5 +31,11 @@ export default [
         children: []
       }
     ]
-  }
+  }, {
+    path: '/tags',
+    name: '标签管理',
+    icon: 'tags',
+    exact: true,
+    component: TagdManage,
+  }, 
 ];

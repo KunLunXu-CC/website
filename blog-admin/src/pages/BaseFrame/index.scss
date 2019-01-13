@@ -1,7 +1,9 @@
+@import '../../assets/style/variable';
+
 .base-frame{
-  height: 100vh;
+  height: $hsv;
   .base-sider{
-    height: 100%;
+    height: $hperv;
   }
 
   .base-content{
@@ -10,22 +12,19 @@
     .base-body{
       flex: 1;
     }
+  }
 
-    .base-footer{
-      flex: 0 0 64px;
+  .base-header {
+    background: $color_w;
+    .trigger {
+      line-height: $hpn;
+      transition: color .3s;
     }
   }
 
-  .header {
-    background: #fff;
-    padding: 0;
-
-    .trigger {
-      font-size: 18px;
-      line-height: 64px;
-      padding: 0 24px;
-      cursor: pointer;
-      transition: color .3s;
-    }
+  .base-footer{
+    flex: 0 0 $hpn;
+    color: $color_w;
+    background: $color_b;
   }
 }
