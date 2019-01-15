@@ -41,7 +41,7 @@ module.exports = {
   mode: 'development',
   module: {
     // 用于配置哪些模块文件的内容不需要进行解析
-    noParse: /jquery|lodash/,
+    // noParse: /jquery|lodash/,
     // 规则
     rules: [
       {

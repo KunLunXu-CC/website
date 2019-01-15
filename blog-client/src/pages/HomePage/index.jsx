@@ -5,6 +5,7 @@ export default class HomePage extends Component{
     return (
       <div>
         HomePage
+        <img src={require('../../assets/img/2018-11-2218:12:17.png')} alt=""/>
       </div>
     );
   }

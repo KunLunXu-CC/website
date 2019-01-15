@@ -37,8 +37,10 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "antd": "^3.12.1",
+    "antd": "^3.12.2",
     "lodash": "^4.17.11",
+    "mobx": "^5.8.0",
+    "mobx-react": "^5.4.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1"
