@@ -1,6 +1,9 @@
 const Koa = require('koa');
-const routes = require('./route.js');
+const graphql = require('./graphql');
+const router = require('./route');
 const app = new Koa();
-// 路由
-routes(app);
-app.listen(8000);
+
+router(app);
+graphql(app);
+
+app.listen(7070);

@@ -1,0 +1,27 @@
+
+type Tag{
+  id: ID
+  name: String
+  color: String
+  icon: String
+  parent: Tag
+  creator: String
+  creationTime: Date
+  updater: String
+  updateTime: Date
+  status: Int
+}
+
+input CreateTag{
+  name: String!
+  parent: ID
+  color: String
+  icon: String
+}
+
+input UpdateTag{
+  name: String
+  parent: ID
+  color: String
+  icon: String
+}
