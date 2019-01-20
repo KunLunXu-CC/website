@@ -1,3 +1,10 @@
+extend type Query{
+  getTag: [Tag]
+}
+
+extend type Mutation{
+  createTag(body: CreateTag!): [Tag]
+}
 
 type Tag{
   id: ID

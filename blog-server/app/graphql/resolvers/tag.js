@@ -17,7 +17,7 @@ module.exports = {
     getTag: async (parents, args, context, info) => {
       const data = await mongoModel.Tag.find();
       return data;
-    }
+    },
   },
 
   Mutation: {
