@@ -3,7 +3,7 @@ extend type Query{
 }
 
 extend type Mutation{
-  createTag(body: CreateTag!): [Tag]
+  createTag(body: CreateTagInput!): [Tag]
 }
 
 type Tag{
@@ -19,7 +19,7 @@ type Tag{
   status: Int
 }
 
-input CreateTag{
+input CreateTagInput{
   name: String!
   parent: ID
   color: String

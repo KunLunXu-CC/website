@@ -37,7 +37,6 @@ function getTypeDefs(){
   return typeDefs;
 }
 
-
 module.exports = (app) => {
   const typeDefs = getTypeDefs();
   const resolvers = getResolves();
