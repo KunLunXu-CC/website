@@ -11,6 +11,17 @@ class Mongo {
   }
 
   /**
+   * 初始化（单例的使用）
+   * @param {String} modelPath 
+   */
+  static init(modelPath) {
+    if(!this.instance) {
+      this.instance = new Mongo(modelPath);
+    }
+    return this.instance;
+  }
+
+  /**
    * 链接数据库
    */
   connectServer(){
@@ -27,7 +38,7 @@ class Mongo {
    */
   getModels(){
     const modelPath = this.modelPath;
-    if (Mongo.models){return Mongo.models;}
+    if (this.models){return this.models;}
     const models = {};
     const stree = mapFiles(modelPath);
     _.forIn(stree, (value, fileName) => {
@@ -35,8 +46,8 @@ class Mongo {
         models[fileName] = mongoose.model(fileName, new Schema(value.fields))
       }
     });
-    Mongo.models = models;
-    return Mongo.models;
+    this.models = models;
+    return this.models;
   }
 }
 

@@ -1,6 +1,6 @@
 const mongoModel = require('../../db').getMongoModel();
-module.exports = {
 
+module.exports = {
   Tag: {
     parent: async (parents, args, context, info) => {
       let data = {};
