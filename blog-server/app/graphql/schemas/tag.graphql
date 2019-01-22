@@ -1,9 +1,14 @@
 extend type Query{
-  getTag: [Tag]
+  getTag(params: Params, page: PageInput): TagSearch
 }
 
 extend type Mutation{
   createTag(body: CreateTagInput!): [Tag]
+}
+
+type TagSearch {
+  list: [Tag]
+  page: Page
 }
 
 type Tag{
@@ -17,6 +22,13 @@ type Tag{
   updater: String
   updateTime: Date
   status: Int
+}
+
+input Params {
+  id: ID
+  name: String
+  color: String
+  icon: String
 }
 
 input CreateTagInput{

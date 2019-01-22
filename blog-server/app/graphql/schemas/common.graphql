@@ -1,5 +1,3 @@
-scalar Date
-
 type Query{
   # 占位符 
   _empty: String
@@ -8,4 +6,19 @@ type Query{
 type Mutation{
   # 占位符 
   _empty:String
+}
+
+scalar Date
+
+type Page{
+  # 查询返回分页信息
+  page: Int,
+  pageSize: Int,
+  total: Int,
+}
+
+input PageInput{
+  # 查询输入分页信息
+  page: Int
+  pageSize: Int
 }

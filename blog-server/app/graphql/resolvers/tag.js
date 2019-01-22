@@ -16,8 +16,8 @@ module.exports = {
 
   Query: {
     getTag: async (parents, args, context, info) => {
-      const data = await modelTag.find();
-      return data;
+      const list = await modelTag.find();
+      return {list};
     },
   },
 
