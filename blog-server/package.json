@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:docker": "sudo docker start 5d77155c7721",
-    "start": "nodemon ./app/app.js"
+    "start": "npm run start:docker && nodemon ./app/app.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "mongoose": "^5.3.15"
   },
   "devDependencies": {

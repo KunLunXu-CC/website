@@ -20,7 +20,6 @@ const connectServer = () => {
  * @return {Object} {模型名： 模型对象}
  */
 const initModels = (modelPath) =>{
-  if (this.models){return this.models;}
   const models = {};
   const stree = mapFiles(modelPath);
   _.forIn(stree, (value, fileName) => {
@@ -28,8 +27,7 @@ const initModels = (modelPath) =>{
       models[fileName] = mongoose.model(fileName, new Schema(value.fields))
     }
   });
-  this.models = models;
-  return this.models;
+  return models;
 }
 
 /**
@@ -38,5 +36,5 @@ const initModels = (modelPath) =>{
  */
 module.exports = (modelPath) => {
   connectServer();
-  initModels(modelPath);
+  return initModels(modelPath);
 }

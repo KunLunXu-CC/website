@@ -1,23 +1,20 @@
 const mongoose = require('mongoose');
 const modelTag = mongoose.model('Tag');
 
+const tagServer = require('../../service/tag');
+
 module.exports = {
   Tag: {
     parent: async (parents, args, context, info) => {
-      let data = {};
       if (parents._id){
-        data = await modelTag.findOne({
-          _id: parents.parent
-        });
-      }
-      return data;
+        return await modelTag.findOne({ _id: parents.parent });
+      } else { return {}; }
     },
   },
 
   Query: {
-    getTag: async (parents, args, context, info) => {
-      const list = await modelTag.find();
-      return {list};
+    getTagList: async (parents, args, context, info) => {
+      return await tagServer.getTagList(args);
     },
   },
 

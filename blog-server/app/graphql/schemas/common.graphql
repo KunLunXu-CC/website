@@ -19,6 +19,6 @@ type Page{
 
 input PageInput{
   # 查询输入分页信息
-  page: Int
-  pageSize: Int
+  page: Int!
+  pageSize: Int!
 }

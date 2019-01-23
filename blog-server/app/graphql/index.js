@@ -43,9 +43,7 @@ module.exports = (app) => {
   const server = new ApolloServer({
     typeDefs: gql`${typeDefs}`,
 	  resolvers: resolvers,
-    context: ({ req }) => ({
-      // ctx: app.context
-    })
+    context: ({ req, ctx }) => ({ ctx })
   });
   server.applyMiddleware({ app, path: '/specialUrl' });
 }
