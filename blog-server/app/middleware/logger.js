@@ -9,8 +9,8 @@ const getRequestInfo = (request) => {
 
 module.exports = async (ctx, next) => {
   await next();
-  console.log(`--> base: \n ${ctx.request.method} ${ctx.request.url}`.cyan);
-  console.log(`--> info：\n ${getRequestInfo(ctx.request)}`.cyan);
+  // console.log(`--> base: \n ${ctx.request.method} ${ctx.request.url}`.cyan);
+  // console.log(`--> info：\n ${getRequestInfo(ctx.request)}`.cyan);
 
   // console.log('res >>>', JSON.parse(ctx.response.body));
   // console.log('res.state >>>', ctx.response.status);

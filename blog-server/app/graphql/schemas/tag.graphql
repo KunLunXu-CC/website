@@ -1,12 +1,19 @@
 extend type Query{
-  getTagList(params: QueryParams, page: PageInput): TagList
+  getTagList(params: TagParams, page: PageInput): TagList
 }
 
 extend type Mutation{
-  createTag(body: CreateTag!): TagList
+  createTag(body: UpdateTag!, params: TagParams, page: PageInput): TagList
 }
 
-input QueryParams {
+input UpdateTag {
+  name: String
+  parent: ID
+  color: String
+  icon: String
+}
+
+input TagParams {
   id: ID
   parent: ID
   creator: ID
@@ -27,21 +34,7 @@ type TagList {
   curr: Tag
 }
 
-input CreateTag{
-  name: String!
-  parent: ID
-  color: String
-  icon: String
-}
-
-input UpdateTag{
-  name: String
-  parent: ID
-  color: String
-  icon: String
-}
-
-type Tag{
+type Tag {
   id: ID
   parent: Tag
   creator: ID

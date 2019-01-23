@@ -1,9 +1,10 @@
 const _ = require('lodash');
-const moment = require('moment');
-const mongoose = require('mongoose');
-const modelTag = mongoose.model('Tag');
 const { getTimeConds } = require('../utils/helper');
 
+/**
+ * 获取查询条件
+ * @param {Object} params 查询参数 
+ */
 const getConditions = (params = {}) => {
   const conds = {};
   _.forIn(params, (value, key) => {
@@ -41,7 +42,14 @@ const getConditions = (params = {}) => {
   return conds;
 }
 
+/**
+ * 获取标签列表
+ * @param {Object} ctx      koa上下文
+ * @param {Object}  params  查询参数
+ * @param {Object}  page    分页参数
+ */
 module.exports.getTagList = async ({ctx, params, page}) => {
+  const modelTag = ctx.db.mongo.Tag;
   const conds = getConditions(params);
   const total = await modelTag.find(conds).count();
   let list = [];
