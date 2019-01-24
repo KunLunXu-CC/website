@@ -3,8 +3,9 @@ extend type Query{
 }
 
 extend type Mutation{
+  removeTagByIds(ids: [ID!]!, params: TagParams, page: PageInput): TagList
   createTags(body: [UpdateTag!]!, params: TagParams, page: PageInput): TagList
-  updateTags(ids: [ID!]!, body: UpdateTag!, params: TagParams, page: PageInput): TagList
+  updateTagByIds(ids: [ID!]!, body: UpdateTag!, params: TagParams, page: PageInput): TagList
 }
 
 input UpdateTag {
@@ -16,6 +17,7 @@ input UpdateTag {
 
 input TagParams {
   id: ID
+  ids: [ID!]
   parent: ID
   creator: ID
   updater: ID
@@ -29,10 +31,10 @@ input TagParams {
   status: [Int]
 }
 
-type TagList {
+type TagList{
   list: [Tag]
-  curr: [Tag]
   page: Page
+  change: [Tag]
 }
 
 type Tag {
