@@ -19,15 +19,11 @@ module.exports = {
   },
 
   Mutation: {
-    createTag: async (parents, args, context, info) => {
-      const body = args.body;
-      await modelTag.insertMany({
-        ...body,
-        creator: "创建人先写死",
-        updater: "更新人先写死(创建时加的)",
-      });
-      const data = await modelTag.find();
-      return data;
-    }
+    createTags: async (parents, args, context, info) => {
+      return await tagServer.createTags({...args, ctx: context.ctx});
+    },
+    updateTags: async (parents, args, context, info) => {
+      return await tagServer.updateTags({...args, ctx: context.ctx});
+    },
   }
 };

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:docker": "sudo docker start 5d77155c7721",
-    "start": "npm run start:docker && nodemon ./app/app.js"
+    "start:docker": "sudo docker start 5d77155c7721 && npm run start",
+    "start": "nodemon ./app/app.js"
   },
   "keywords": [],
   "author": "",

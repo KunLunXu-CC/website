@@ -8,8 +8,11 @@ const Schema = mongoose.Schema;
  */
 const connectServer = () => {
   try{
+    const options = {
+      useNewUrlParser: true,
+    };
+    mongoose.connect('mongodb://localhost/blog', options);
     mongoose.set('debug', true);
-    mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true });
   }catch(e){
     console.log('连接出错');
   }

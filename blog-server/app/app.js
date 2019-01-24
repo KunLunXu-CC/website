@@ -10,4 +10,4 @@ middleware(app);
 router(app);
 graphql(app);
 
-app.listen(7070);
+app.listen(4000);
