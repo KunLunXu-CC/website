@@ -16,7 +16,7 @@ const connectServer = () => {
     const host = mongoSetting.host;
     const port = mongoSetting.port;
     const database = mongoSetting.database;
-    mongoose.connect(`mongodb://${host}/${database}:${port}`, options);
+    mongoose.connect(`mongodb://${host}:${port}/${database}`, options);
     mongoose.set('debug', mongoSetting.debug);
   }catch(e){
     console.log('连接出错');
