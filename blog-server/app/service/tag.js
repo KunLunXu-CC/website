@@ -1,5 +1,6 @@
-const _ = require('lodash');
 const { getTimeConds } = require('../utils/helper');
+const { STATUS } = require('../config/constant');
+const _ = require('lodash');
 
 /**
  * 创建标签
@@ -36,7 +37,7 @@ module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
     return {};
   } else {
     let tagList = {};
-    await modelTag.updateMany({ _id: { $in: ids }}, { status: -1 });
+    await modelTag.updateMany({ _id: { $in: ids }}, { status: STATUS.DELETE });
     const change = await modelTag.find({ _id: { $in: ids }});
     params && (tagList = await this.getTagList({ ctx, params, page }));
     return {...tagList, change};
@@ -86,7 +87,7 @@ module.exports.getTagList = async ({ ctx, params, page }) => {
  * @param {Object} params 查询参数 
  */
 const getConditions = ( params = {} ) => {
-  const conds = { status: {$ne: -1} };
+  const conds = { status: {$ne: STATUS.DELETE} };
   _.forIn(params, (value, key) => {
     let startTime = '';
     let endTime = '';
@@ -133,7 +134,7 @@ const getConditions = ( params = {} ) => {
  */
 const tJudgeIsRely = async ( ctx, ids ) => {
   const modelTag = ctx.db.mongo.Tag;
-  if(!!await modelTag.find({ parent: { $in: ids }, status: {$ne: -1}}).count()){
+  if(!!await modelTag.find({ parent: { $in: ids }, status: {$ne: STATUS.DELETE}}).count()){
     return '标签存在子级标签';
   }
   return '';

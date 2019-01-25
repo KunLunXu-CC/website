@@ -1,18 +1,23 @@
-const mongoose = require('mongoose');
 const { mapFiles } = require('../utils/helper');
-const _ = require('lodash');
+const config = require('../config/system');
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const _ = require('lodash');
 
 /**
  * 链接数据库
  */
 const connectServer = () => {
   try{
+    const mongoSetting = config.mongo || {};
     const options = {
       useNewUrlParser: true,
     };
-    mongoose.connect('mongodb://localhost/blog', options);
-    mongoose.set('debug', true);
+    const host = mongoSetting.host;
+    const port = mongoSetting.port;
+    const database = mongoSetting.database;
+    mongoose.connect(`mongodb://${host}/${database}:${port}`, options);
+    mongoose.set('debug', mongoSetting.debug);
   }catch(e){
     console.log('连接出错');
   }
