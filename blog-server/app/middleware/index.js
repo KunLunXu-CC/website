@@ -1,8 +1,8 @@
 /** 放一些比较杂的中间件 */
-const logger = require('./logger');
 const bodyParser = require('koa-bodyparser');
+const logger = require('./logger');
 
 module.exports = (app) => {
-  app.use(bodyParser());
   app.use(logger);
+  app.use(bodyParser());
 }

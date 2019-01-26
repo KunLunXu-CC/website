@@ -35,6 +35,8 @@ type TagList{
   list: [Tag]
   page: Page
   change: [Tag]
+  rescode: Int
+  message: String
 }
 
 type Tag {

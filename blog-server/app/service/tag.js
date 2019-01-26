@@ -10,15 +10,23 @@ const _ = require('lodash');
  * @param {Object}  page    分页参数
  */
 module.exports.createTags = async ({ ctx, body, params, page }) => {
-  const modelTag = ctx.db.mongo.Tag;
-  let tagList = {};
-  const change = await modelTag.insertMany(body.map(v => ({
-    ...v,
-    creator: "创建人先写死",
-    updater: "更新人先写死(创建时加的)",
-  })));
-  params && (tagList = await this.getTagList({ ctx, params, page }));
-  return {...tagList, change};
+  const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '创建成功'});
+  try {
+    data.change = await modelTag.insertMany(body.map(v => ({
+      ...v,
+      creator: "创建人先写死",
+      updater: "更新人先写死(创建时加的)",
+    })));
+  } catch(e) { 
+    data.rescode = 0;
+    data.message = '创建失败';
+  }
+  if (params){
+    const tagList = await this.getTagList({ ctx, params, page });
+    data.list = tagList.list || [];
+    data.page = tagList.page || {};
+  } 
+  return data;
 }
 
 /**
@@ -29,19 +37,27 @@ module.exports.createTags = async ({ ctx, body, params, page }) => {
  * @param {Object} page     分页信息
  */
 module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
+  const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '删除成功'});
   const isRelyError = await tJudgeIsRely(ctx, ids);
-  const modelTag = ctx.db.mongo.Tag;
   if (isRelyError){
     // 存在依赖， 不能直接删除
-    console.log('====>', isRelyError);
-    return {};
+    data.rescode = 0;
+    data.message = isRelyError;
   } else {
-    let tagList = {};
-    await modelTag.updateMany({ _id: { $in: ids }}, { status: STATUS.DELETE });
-    const change = await modelTag.find({ _id: { $in: ids }});
-    params && (tagList = await this.getTagList({ ctx, params, page }));
-    return {...tagList, change};
+    try {
+      await modelTag.updateMany({ _id: { $in: ids }}, { status: STATUS.DELETE });
+    } catch (e) {
+      data.rescode = 0;
+      data.message = '删除失败';
+    }
   }
+  data.change = await modelTag.find({ _id: { $in: ids }});
+  if (params){
+    const tagList = await this.getTagList({ ctx, params, page });
+    data.list = tagList.list || [];
+    data.page = tagList.page || {};
+  } 
+  return data;
 }
 
 /**
@@ -53,12 +69,20 @@ module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
  * @param {Object}  page    分页信息
  */
 module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
-  const modelTag = ctx.db.mongo.Tag;
-  let tagList = {};
-  await modelTag.updateMany({ _id: { $in: ids }}, body, {});
-  const change = await modelTag.find({ _id: { $in: ids }});
-  params && (tagList = await this.getTagList({ ctx, params, page }));
-  return { ...tagList, change };
+  const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '修改成功'});
+  try {
+    await modelTag.updateMany({ _id: { $in: ids }}, body, {});
+  } catch (e) {
+    data.message = 0;
+    data.message = '修改失败';
+  }
+  data.change = await modelTag.find({ _id: { $in: ids }});
+  if (params){
+    const tagList = await this.getTagList({ ctx, params, page });
+    data.list = tagList.list || [];
+    data.page = tagList.page || {};
+  }
+  return data;
 }
 
 /**
@@ -68,18 +92,33 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
  * @param {Object}  page    分页参数
  */
 module.exports.getTagList = async ({ ctx, params, page }) => {
-  const modelTag = ctx.db.mongo.Tag;
+  const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '请求成功'});
   const conds = getConditions(params);
-  const total = await modelTag.find( conds).count();
-  let list = [];
-  if (page){
-    const skip = ( page.page - 1 ) * page.pageSize;
-    const limit = page.pageSize;
-    list = await modelTag.find(conds).skip(skip).limit(limit);
-  } else {
-    list = await modelTag.find(conds);
+  try {
+    if (page){
+      const skip = ( page.page - 1 ) * page.pageSize;
+      const limit = page.pageSize;
+      data.list = await modelTag.find(conds).skip(skip).limit(limit);
+    } else {
+      data.list = await modelTag.find(conds);
+    }
+  } catch (e) {
+    data.rescode = 0;
+    data.message = '请求失败';
   }
-  return { list, page: { ...page, total }};
+  data.page = {...page, total: await modelTag.find( conds).count()};
+  return data;
+}
+
+/**
+ * 获取基础返回数据模型以及模型
+ * @param {Object} ctx          koa 上下文
+ * @param {String} initMessage  初始返回信息
+ */
+const getBaseDataAndModel = ({ctx, initMessage}) => {
+  const data = {rescode: 1, message: initMessage, list: [], page: {}, change: []};
+  const modelTag = ctx.db.mongo.Tag;
+  return {data, modelTag};
 }
 
 /**

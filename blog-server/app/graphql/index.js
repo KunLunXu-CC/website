@@ -6,7 +6,6 @@ const { mapFiles } = require('../utils/helper');
 const { 
   gql,
   ApolloServer, 
-  mergeSchemas, 
 } = require('apollo-server-koa');
 
 /**
@@ -37,13 +36,27 @@ function getTypeDefs(){
   return typeDefs;
 }
 
+/**
+ * 上下文配置
+ */
+function context({req, ctx}){
+  return {ctx};
+}
+
+/**
+ * 错误屏蔽和记录
+ */
+function formatError(app, error){
+  return {message: error.message};
+}
+
 module.exports = (app) => {
-  const typeDefs = getTypeDefs();
-  const resolvers = getResolves();
   const server = new ApolloServer({
-    typeDefs: gql`${typeDefs}`,
-	  resolvers: resolvers,
-    context: ({ req, ctx }) => ({ ctx })
+    typeDefs: gql`${getTypeDefs()}`,
+	  resolvers: getResolves(),
+    context: context,
+    formatError: formatError.bind(null, app)
   });
+
   server.applyMiddleware({ app, path: '/specialUrl' });
 }
