@@ -1,21 +1,21 @@
 export default [{
-  title: 'Name',
+  title: '名字',
   dataIndex: 'name',
   key: 'name',
 }, {
-  title: 'Age',
+  title: '年龄',
   dataIndex: 'age',
   key: 'age',
 }, {
-  title: 'Address',
+  title: '地址',
   dataIndex: 'address',
   key: 'address',
 }, {
-  title: 'Tags',
+  title: '标签',
   key: 'tags',
   dataIndex: 'tags',
   
 }, {
-  title: 'Action',
+  title: '操作',
   key: 'action',
 }];
