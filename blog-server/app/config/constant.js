@@ -6,3 +6,9 @@ module.exports.STATUS = {
   ENABLE: 1, 
   DELETE: -1
 }
+
+// 响应状态 (1: 成功, 0: 失败)
+module.exports.RESCODE = {
+  SUCCESS: 1,
+  FAIL: 0
+};

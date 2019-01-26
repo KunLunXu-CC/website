@@ -1,5 +1,5 @@
+const { STATUS, RESCODE } = require('../config/constant');
 const { getTimeConds } = require('../utils/helper');
-const { STATUS } = require('../config/constant');
 const _ = require('lodash');
 
 /**
@@ -18,7 +18,7 @@ module.exports.createTags = async ({ ctx, body, params, page }) => {
       updater: "更新人先写死(创建时加的)",
     })));
   } catch(e) { 
-    data.rescode = 0;
+    data.rescode = RESCODE.FAIL;
     data.message = '创建失败';
   }
   if (params){
@@ -41,13 +41,13 @@ module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
   const isRelyError = await tJudgeIsRely(ctx, ids);
   if (isRelyError){
     // 存在依赖， 不能直接删除
-    data.rescode = 0;
+    data.rescode = RESCODE.FAIL;
     data.message = isRelyError;
   } else {
     try {
       await modelTag.updateMany({ _id: { $in: ids }}, { status: STATUS.DELETE });
     } catch (e) {
-      data.rescode = 0;
+      data.rescode = RESCODE.FAIL;
       data.message = '删除失败';
     }
   }
@@ -73,7 +73,7 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
   try {
     await modelTag.updateMany({ _id: { $in: ids }}, body, {});
   } catch (e) {
-    data.message = 0;
+    data.message = RESCODE.FAIL;
     data.message = '修改失败';
   }
   data.change = await modelTag.find({ _id: { $in: ids }});
@@ -103,7 +103,7 @@ module.exports.getTagList = async ({ ctx, params, page }) => {
       data.list = await modelTag.find(conds);
     }
   } catch (e) {
-    data.rescode = 0;
+    data.rescode = RESCODE.FAIL;
     data.message = '请求失败';
   }
   data.page = {...page, total: await modelTag.find( conds).count()};
@@ -116,7 +116,7 @@ module.exports.getTagList = async ({ ctx, params, page }) => {
  * @param {String} initMessage  初始返回信息
  */
 const getBaseDataAndModel = ({ctx, initMessage}) => {
-  const data = {rescode: 1, message: initMessage, list: [], page: {}, change: []};
+  const data = {rescode: RESCODE.SUCCESS, message: initMessage, list: [], page: {}, change: []};
   const modelTag = ctx.db.mongo.Tag;
   return {data, modelTag};
 }
