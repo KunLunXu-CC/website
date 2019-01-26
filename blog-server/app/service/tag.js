@@ -38,25 +38,25 @@ module.exports.createTags = async ({ ctx, body, params, page }) => {
  */
 module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '删除成功'});
+  const changeConds = { _id: { $in: ids }, status: {$ne: STATUS.DELETE} };
   const isRelyError = await tJudgeIsRely(ctx, ids);
-  if (isRelyError){
-    // 存在依赖， 不能直接删除
+  if (isRelyError){ // 存在依赖， 不能直接删除
     data.rescode = RESCODE.FAIL;
     data.message = isRelyError;
   } else {
     try {
-      await modelTag.updateMany({ _id: { $in: ids }}, { status: STATUS.DELETE });
+      await modelTag.updateMany(changeConds, { status: STATUS.DELETE });
     } catch (e) {
       data.rescode = RESCODE.FAIL;
       data.message = '删除失败';
     }
   }
-  data.change = await modelTag.find({ _id: { $in: ids }});
   if (params){
     const tagList = await this.getTagList({ ctx, params, page });
     data.list = tagList.list || [];
     data.page = tagList.page || {};
   } 
+  data.change = await modelTag.find(changeConds);
   return data;
 }
 
@@ -76,12 +76,12 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
     data.message = RESCODE.FAIL;
     data.message = '修改失败';
   }
-  data.change = await modelTag.find({ _id: { $in: ids }});
   if (params){
     const tagList = await this.getTagList({ ctx, params, page });
     data.list = tagList.list || [];
     data.page = tagList.page || {};
   }
+  data.change = await modelTag.find({ _id: { $in: ids }});
   return data;
 }
 
@@ -94,6 +94,7 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
 module.exports.getTagList = async ({ ctx, params, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '请求成功'});
   const conds = getConditions(params);
+  data.page = {...page, total: await modelTag.find( conds).count()};
   try {
     if (page){
       const skip = ( page.page - 1 ) * page.pageSize;
@@ -106,7 +107,6 @@ module.exports.getTagList = async ({ ctx, params, page }) => {
     data.rescode = RESCODE.FAIL;
     data.message = '请求失败';
   }
-  data.page = {...page, total: await modelTag.find( conds).count()};
   return data;
 }
 
