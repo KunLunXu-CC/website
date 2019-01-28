@@ -83,3 +83,21 @@
 .plrm { padding: 0 10px !important; }
 .plrw { padding: 0 20px !important; }
 .plrv { padding: 0 30px !important; }
+
+// 链接颜色
+.linkp { color: #47BAEE !important; }
+.linkp:hover { color: #5BCCFF !important; }
+.linkd { color: #ED533A !important;}
+.linkd:hover { color: #FF7761 !important;}
+
+// fontIcon  symbol引用样式
+.iconfont {
+  width: 1em; height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.test{
+  background: red;
+}

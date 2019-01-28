@@ -67,7 +67,7 @@ module.exports = {
         //   ]
         // })
       }, {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
         use: [{
           loader: 'url-loader',
           options: {
@@ -92,6 +92,9 @@ module.exports = {
     //  自定义路径别名 来确保模块引入变得更简单(其实就在解析路径时如果存在对应 key 使用相应的值进行替换)
     alias: {
       '@assets': path.resolve(__dirname, '../src/assets'),
+      '@server': path.resolve(__dirname, '../src/server'),
+      '@hook': path.resolve(__dirname, '../src/hook'),
+      '@config': path.resolve(__dirname, '../src/config'),
       '@components': path.resolve(__dirname, '../src/components')
     },
   },

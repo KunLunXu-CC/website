@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
 import './index.scss';
-import QueryBlock from './subpage/QueryBlock';
+import { getTagList } from '@server';
+import React, {  Fragment } from 'react';
 import TableList from './subpage/TableList';
+import QueryBlock from './subpage/QueryBlock';
+import { useListhook, useModalHook } from '@hook';
 import CreateAndModify from './subpage/CreateAndModify';
 
-const pageStore = () => {
-  const [list, setList] = useState([{},{}]);
-  const [total, setTotal] = useState(2);
-  const [page, setPage] = useState({current: 1, pageSize: 10});
-  const [params, setParams] = useState({});
-  return {list, total, page, params, setList, setTotal, setPage, setParams};
+// 查询数据方法
+const getList = ({ page, params, setList, setTotal }) => {
+  getTagList({ page, params }).then(res => {
+    setList(res.list);
+    setTotal(res.page.total);
+  })
 }
 
 export default () => {
-  const store = pageStore();
+  const listStore = useListhook({getList});
+  const modalStore = useModalHook();
+
   return (
-    <div>
-      <QueryBlock 
-        store={store}
+    <Fragment>
+      <QueryBlock
+        listStore={listStore}
+        modalStore={modalStore}
       />
       <TableList  
-        store={store}
+        listStore={listStore}
+        modalStore={modalStore}
       />
       <CreateAndModify 
-        store={store}
+        listStore={listStore}
+        modalStore={modalStore}
       />
-    </div>
+    </Fragment>
   );
 }

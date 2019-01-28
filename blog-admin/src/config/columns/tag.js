@@ -1,21 +1,29 @@
-export default [{
-  title: '名字',
+export const tagColumnModel = [{
+  title: '标签名称',
   dataIndex: 'name',
   key: 'name',
 }, {
-  title: '年龄',
-  dataIndex: 'age',
-  key: 'age',
+  title: '所属标签',
+  dataIndex: 'parent.name',
+  key: 'parent.name',
 }, {
-  title: '地址',
-  dataIndex: 'address',
-  key: 'address',
+  title: '标签颜色',
+  dataIndex: 'color',
+  key: 'color',
 }, {
-  title: '标签',
-  key: 'tags',
-  dataIndex: 'tags',
+  title: '标签图标',
+  key: 'icon',
+  dataIndex: 'icon',
   
 }, {
-  title: '操作',
-  key: 'action',
+  title: '修改时间',
+  type: 'Date',
+  dataIndex: 'updateTime',
+  key: 'updateTime',
+}, {
+  title: '标签状态',
+  type: 'Status',
+  dataIndex: 'status',
+  desc: {0: '停用', 1: '启用'},
+  key: 'status',
 }];
