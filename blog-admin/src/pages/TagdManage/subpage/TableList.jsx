@@ -72,7 +72,7 @@ export default ({listStore, modalStore}) => {
         pagination={{
           onChange: onChange,
           showQuickJumper: true,
-          total: listStore.total,
+          total: listStore.stats.total,
           current: listStore.page.page,
           pageSize: listStore.page.pageSize,
           showTotal: (total, range) => `当前 ${range[0]} - ${range[1]} 页 总计 ${total} 页`,

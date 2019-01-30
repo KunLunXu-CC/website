@@ -7,10 +7,10 @@ import { useListhook, useModalHook } from '@hook';
 import CreateAndModify from './subpage/CreateAndModify';
 
 // 查询数据方法
-const getList = ({ page, params, setList, setTotal }) => {
+const getList = ({ page, params, setList, setStats }) => {
   getTagList({ page, params }).then(res => {
     setList(res.list);
-    setTotal(res.page.total);
+    setStats(res.stats);
   })
 }
 

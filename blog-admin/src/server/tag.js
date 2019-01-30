@@ -8,9 +8,10 @@ export const getTagList = ({ page, params }) => (new Promise((resolve, reject) =
         variables: {params, page},
         query: `
           query($params: TagParams, $page: PageInput){
-            getTagList( params: $params, page: $page ){
+            tagList( params: $params, page: $page ){
               list{ name, icon id parent {id name} updateTime status color}
-              page{ page pageSize total}
+              page{ page pageSize}
+              stats{ total }
               change{name}    
               rescode
               message
@@ -20,7 +21,7 @@ export const getTagList = ({ page, params }) => (new Promise((resolve, reject) =
     }
   )
   .then(function (response) {
-    const data = response.data.data.getTagList;
+    const data = response.data.data.tagList;
     resolve(data);
   })
   .catch(function (error) {

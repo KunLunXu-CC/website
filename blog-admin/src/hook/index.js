@@ -24,23 +24,23 @@ export const useModalHook = () => {
  * 通用列表 hook
  * @param {Function} getList    查询方法, function({page, params, setList, setTotal}){}
  * - list             列表数据
- * - total            总数
+ * - stats            统计
  * - page             查询参数 - page
  * - params           查询条件
  * - getListInternal  内置查询方法, 调用 getList
  */
 export const useListhook = ({ getList = null }) => {
   const [list, setList] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [stats, setStats] = useState({total: 0});
   const [page, setPage] = useState({page: 1, pageSize: 10});
   const [params, setParams] = useState({});
   const getListInternal = () => {
-    getList && getList({page, params, setList, setTotal});
+    getList && getList({page, params, setList, setStats});
   }
   useEffect(getListInternal, [page, params]); 
   return {
     getList: getListInternal,
-    list, page, total, params, 
-    setList, setPage, setParams, setTotal,
+    list, page, stats, params, 
+    setList, setPage, setParams, setStats,
   };
 }
