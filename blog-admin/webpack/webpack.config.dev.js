@@ -45,7 +45,7 @@ module.exports = {
     // 规则
     rules: [
       {
-        test: /\.js(x)?$/,
+        test: /\.(mjs|js|jsx)$/,
         exclude: [ path.resolve(__dirname, 'node_modules') ],
         // include: [ path.resolve(__dirname, 'src'), path.resolve(__dirname, 'public') ],
         use: 'babel-loader'
@@ -88,7 +88,7 @@ module.exports = {
   // 解析模块
   resolve: {
     // 自动解析确定的扩展
-    extensions: ['.js', '.jsx'],
+    extensions: ['.mjs', '.js', '.jsx'],
     //  自定义路径别名 来确保模块引入变得更简单(其实就在解析路径时如果存在对应 key 使用相应的值进行替换)
     alias: {
       '@assets': path.resolve(__dirname, '../src/assets'),

@@ -6,10 +6,11 @@ export const getTagList = ({ page, params }) => (new Promise((resolve, reject) =
       url: '/specialUrl',
       method: 'post',
       data: {
-        "query": `
-          query{
+        variables: {name: 'qianyin1'},
+        query: `
+          query($name: String){
             getTagList(
-              params: {name: "${params.name || ""}"}
+              params: {name: $name}
               page: {page: ${page.page || 1}, pageSize: ${page.pageSize || 10}}
             ){
               list{ name, icon id parent {id name} updateTime status color}
