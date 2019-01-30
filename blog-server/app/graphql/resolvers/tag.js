@@ -13,7 +13,7 @@ module.exports = {
   },
 
   Query: {
-    getTagList: async (parents, args, context, info) => {
+    tagList: async (parents, args, context, info) => {
       return await tagServer.getTagList({...args, ctx: context.ctx});
     },
   },

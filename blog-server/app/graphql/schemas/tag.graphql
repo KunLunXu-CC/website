@@ -1,5 +1,5 @@
 extend type Query{
-  getTagList(params: TagParams, page: PageInput): TagList
+  tagList(params: TagParams, page: PageInput): TagList
 }
 
 extend type Mutation{
@@ -34,6 +34,7 @@ input TagParams {
 type TagList{
   list: [Tag]
   page: Page
+  stats: Stats
   change: [Tag]
   rescode: Int
   message: String

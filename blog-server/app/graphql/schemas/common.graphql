@@ -10,11 +10,15 @@ type Mutation{
 
 scalar Date
 
+type Stats{
+  # 统计
+  total: Int
+}
+
 type Page{
   # 查询返回分页信息
   page: Int,
   pageSize: Int,
-  total: Int,
 }
 
 input PageInput{

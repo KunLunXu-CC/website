@@ -94,7 +94,8 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
 module.exports.getTagList = async ({ ctx, params, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '请求成功'});
   const conds = getConditions(params);
-  data.page = {...page, total: await modelTag.find( conds).count()};
+  data.page = { ...page };
+  data.stats.total = await modelTag.find( conds).count();
   try {
     if (page){
       const skip = ( page.page - 1 ) * page.pageSize;
@@ -116,7 +117,14 @@ module.exports.getTagList = async ({ ctx, params, page }) => {
  * @param {String} initMessage  初始返回信息
  */
 const getBaseDataAndModel = ({ctx, initMessage}) => {
-  const data = {rescode: RESCODE.SUCCESS, message: initMessage, list: [], page: {}, change: []};
+  const data = {
+    rescode: RESCODE.SUCCESS, 
+    message: initMessage, 
+    list: [], 
+    page: {}, 
+    stats: {},
+    change: []
+  };
   const modelTag = ctx.db.mongo.Tag;
   return {data, modelTag};
 }
