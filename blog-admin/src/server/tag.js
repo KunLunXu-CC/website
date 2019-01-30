@@ -1,26 +1,21 @@
 import axios from './index';
-
 export const getTagList = ({ page, params }) => (new Promise((resolve, reject) => {
   axios(
     {
       url: '/specialUrl',
       method: 'post',
       data: {
-        variables: {name: 'qianyin1'},
+        variables: {params, page},
         query: `
-          query($name: String){
-            getTagList(
-              params: {name: $name}
-              page: {page: ${page.page || 1}, pageSize: ${page.pageSize || 10}}
-            ){
+          query($params: TagParams, $page: PageInput){
+            getTagList( params: $params, page: $page ){
               list{ name, icon id parent {id name} updateTime status color}
               page{ page pageSize total}
               change{name}    
               rescode
               message
             }
-          }
-        `,
+          }`,
       }
     }
   )
@@ -32,7 +27,6 @@ export const getTagList = ({ page, params }) => (new Promise((resolve, reject) =
     // console.log(error);
   });
 }));
-
 
 export const createTags = ({body}) => (new Promise((resolve, reject) => {
   axios(
@@ -49,8 +43,6 @@ export const createTags = ({body}) => (new Promise((resolve, reject) => {
                 color: "${ body.color || "" }", 
               }]
             ){
-              list{ name, icon id parent {id name} updateTime status color}
-              page{ page pageSize total}
               change{name}    
               rescode
               message
@@ -86,8 +78,6 @@ export const updateTagByIds = ({ id, body = {} }) => (new Promise((resolve, reje
                 color: "${ body.color || "" }", 
               }
             ){
-              list{ name, icon id parent {id name} updateTime status color}
-              page{ page pageSize total}
               change{name}    
               rescode
               message
@@ -115,8 +105,6 @@ export const removeTagByIds = ({ id, body = {} }) => (new Promise((resolve, reje
         "query": `
           mutation{
             removeTagByIds( ids: ["${id}"]){
-              list{ name, icon id parent {id name} updateTime status color}
-              page{ page pageSize total}
               change{name}    
               rescode
               message

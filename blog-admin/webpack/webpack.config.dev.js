@@ -1,11 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
+const DefinePlugin = webpack.DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const globalConstant = require('../src/config/globalConstant');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
-
 /* ================== 插件 ================= */
+
+// 全局常量定义
+const definePlugin = new DefinePlugin(globalConstant.development)
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
@@ -79,10 +83,11 @@ module.exports = {
   },
 
   plugins: [
+    definePlugin,
     htmlWebpackPlugin, 
     hotModuleReplacementPlugin,
     // extractTextWebpackPlugin,
-    copyWebpackPlugin
+    copyWebpackPlugin,
   ],
 
   // 解析模块

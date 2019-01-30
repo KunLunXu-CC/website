@@ -3,6 +3,6 @@ export * from './tag';
 
 export default axios.create({
   headers: {'Content-Type':' application/json'},
-  baseURL: 'http://localhost:4000',
+  baseURL: GLOBAL_BLOG_SERVER,
   timeout: 1000,
 });

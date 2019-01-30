@@ -1,4 +1,4 @@
-/* 常量配置 */
+/* y业务常量配置 */
 
 // 操作类型: 编辑 删除 新增
 export const OPERATING_TYPE = {
