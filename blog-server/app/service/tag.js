@@ -9,7 +9,7 @@ const _ = require('lodash');
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页参数
  */
-module.exports.createTags = async ({ ctx, body, params, page }) => {
+module.exports.createTags = async ({ ctx, body, params, orderBy, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '创建成功'});
   try {
     data.change = await modelTag.insertMany(body.map(v => ({
@@ -22,7 +22,7 @@ module.exports.createTags = async ({ ctx, body, params, page }) => {
     data.message = '创建失败';
   }
   if (params){
-    const tagList = await this.getTagList({ ctx, params, page });
+    const tagList = await this.getTagList({ ctx, params, page, orderBy });
     data.list = tagList.list || [];
     data.page = tagList.page || {};
   } 
@@ -36,7 +36,7 @@ module.exports.createTags = async ({ ctx, body, params, page }) => {
  * @param {Object} params   查询参数
  * @param {Object} page     分页信息
  */
-module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
+module.exports.removeTagByIds = async ({ ctx, ids, params, orderBy, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '删除成功'});
   const changeConds = { _id: { $in: ids }, status: {$ne: STATUS.DELETE} };
   const isRelyError = await tJudgeIsRely(ctx, ids);
@@ -52,7 +52,7 @@ module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
     }
   }
   if (params){
-    const tagList = await this.getTagList({ ctx, params, page });
+    const tagList = await this.getTagList({ ctx, params, orderBy, page });
     data.list = tagList.list || [];
     data.page = tagList.page || {};
   } 
@@ -68,7 +68,7 @@ module.exports.removeTagByIds = async ({ ctx, ids, params, page }) => {
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页信息
  */
-module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
+module.exports.updateTagByIds = async ({ ctx, ids, body, orderBy, params, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '修改成功'});
   try {
     await modelTag.updateMany({ _id: { $in: ids }}, body, {});
@@ -77,7 +77,7 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
     data.message = '修改失败';
   }
   if (params){
-    const tagList = await this.getTagList({ ctx, params, page });
+    const tagList = await this.getTagList({ ctx, params, page, orderBy });
     data.list = tagList.list || [];
     data.page = tagList.page || {};
   }
@@ -91,16 +91,17 @@ module.exports.updateTagByIds = async ({ ctx, ids, body, params, page }) => {
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页参数
  */
-module.exports.getTagList = async ({ ctx, params, page }) => {
+module.exports.getTagList = async ({ ctx, params, page, orderBy }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '请求成功'});
   const conds = getConditions(params);
   data.page = { ...page };
-  data.stats.total = await modelTag.find( conds).count();
+  data.stats.total = await modelTag.find(conds).count();
   try {
     if (page){
+      const sort = orderBy || {};
       const skip = ( page.page - 1 ) * page.pageSize;
       const limit = page.pageSize;
-      data.list = await modelTag.find(conds).skip(skip).limit(limit);
+      data.list = await modelTag.find(conds).skip(skip).limit(limit).sort(sort);
     } else {
       data.list = await modelTag.find(conds);
     }
