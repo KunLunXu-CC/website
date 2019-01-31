@@ -30,8 +30,10 @@ const printRequestData = (ctx) => {
 
   const body = ctx.request.body;
   let queryData = '';
-  body && (queryData = JSON.stringify(body, null, 4).replace(/\\n/g, '\r\n'));
-
+  try {
+    body && (queryData = JSON.stringify(body, null, 4).replace(/\\n/g, '\r\n'));
+  } catch (e){}
+  
   console.log(start, colors.cyan('请求参数：'), colors.yellow(params));
   console.log(start, colors.cyan('请求数据：'), colors.yellow(queryData));
 }
@@ -45,10 +47,12 @@ const printRequestData = (ctx) => {
   const params = JSON.stringify({
     status: ctx.status,
   }, null, 4);
-
-  const body = _.isString(ctx.body) 
-    ? JSON.stringify(JSON.parse(ctx.body), null, 4) 
-    : JSON.stringify(ctx.body, null, 4);
+  let body = '';
+  try {
+    body = _.isString(ctx.body) 
+      ? JSON.stringify(JSON.parse(ctx.body), null, 4) 
+      : JSON.stringify(ctx.body, null, 4);
+  } catch (e){}
 
   console.log(start, colors.cyan('响应参数：'), colors.yellow(params));
   console.log(start, colors.cyan('响应数据：'), colors.yellow(body));
