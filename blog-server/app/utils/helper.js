@@ -34,3 +34,19 @@ module.exports.getTimeConds = (startTime, endTime) => {
   endTime && (conds.$lte = endTime);
   return conds;
 }
+
+/**
+ * 在服务运行完毕打印字符图案
+ */
+module.exports.printStartCharPattern = () => {
+  const pattern = [
+    "",
+            "           ▍ ★∴",
+    　"　s ．t ．▍▍a．..r．█▍ ☆ ★∵t ..../ ",
+    "　　◥█▅▅██▅▅██▅▅▅▅▅███◤ ",
+    " 　 ．◥███████████████◤",
+    "～～～～◥█████████████◤～～～～",
+    "～～～～～～～～～～～～～～～～～～～～～～～～"
+  ];
+  console.log(pattern.join('\n').cyan)
+}

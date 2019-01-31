@@ -1,3 +1,4 @@
+const { printStartCharPattern } = require('./utils/helper');
 const middleware = require('./middleware');
 const config = require('./config/system');
 const graphql = require('./graphql');
@@ -11,4 +12,4 @@ middleware(app);
 router(app);
 graphql(app);
 
-app.listen(config.port);
+app.listen(config.port, printStartCharPattern);
