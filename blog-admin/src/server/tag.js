@@ -35,14 +35,11 @@ export const createTags = ({body}) => (new Promise((resolve, reject) => {
       url: '/specialUrl',
       method: 'post',
       data: {
-        "query": `
-          mutation{
+        variables: { body: [body] },
+        query: `
+          mutation($body: [UpdateTag!]!){
             createTags(
-              body: [{
-                name: "${ body.name || "" }", 
-                icon: "${ body.icon || "" }", 
-                color: "${ body.color || "" }", 
-              }]
+              body: $body
             ){
               change{name}    
               rescode
@@ -69,15 +66,12 @@ export const updateTagByIds = ({ id, body = {} }) => (new Promise((resolve, reje
       url: '/specialUrl',
       method: 'post',
       data: {
-        "query": `
-          mutation{
+        variables: {ids: [id], body},
+        query: `
+          mutation($ids: [ID!]!, $body: UpdateTag!){
             updateTagByIds(
-              ids: ["${id}"],
-              body: {
-                name: "${ body.name || "" }", 
-                icon: "${ body.icon || "" }", 
-                color: "${ body.color || "" }", 
-              }
+              ids: $ids,
+              body: $body
             ){
               change{name}    
               rescode
