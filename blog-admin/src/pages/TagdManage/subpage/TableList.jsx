@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import { Card, Table } from 'antd';
 import { removeTagByIds } from '@server';
+import Spin from '@components/Spin';
 import FontIcon from '@components/FontIcon';
 import { IconBtn } from '@components/OperateBtn';
 import { OPERATING_TYPE } from '@config/constant';
@@ -64,20 +65,22 @@ export default ({listStore, modalStore}) => {
   ));
 
   return (
-    <Card title="列表数据" className="mtbw" extra={ extra } >
-      <Table 
-        columns={tagColumnModel} 
-        dataSource={listStore.list}
-        rowKey={(record, index) => (record.id || index)}
-        pagination={{
-          onChange: onChange,
-          showQuickJumper: true,
-          total: listStore.stats.total,
-          current: listStore.page.page,
-          pageSize: listStore.page.pageSize,
-          showTotal: (total, range) => `当前 ${range[0]} - ${range[1]} 页 总计 ${total} 页`,
-        }} 
-      />
-    </Card>
+    <Spin>
+      <Card title="列表数据" className="mtbw" extra={ extra } >
+        <Table 
+          columns={tagColumnModel} 
+          dataSource={listStore.list}
+          rowKey={(record, index) => (record.id || index)}
+          pagination={{
+            onChange: onChange,
+            showQuickJumper: true,
+            total: listStore.stats.total,
+            current: listStore.page.page,
+            pageSize: listStore.page.pageSize,
+            showTotal: (total, range) => `当前 ${range[0]} - ${range[1]} 页 总计 ${total} 页`,
+          }} 
+        />
+      </Card>
+    </Spin>
   );
 }
