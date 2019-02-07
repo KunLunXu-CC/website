@@ -71,6 +71,8 @@ module.exports.removeTagByIds = async ({ ctx, ids, params, orderBy, page }) => {
 module.exports.updateTagByIds = async ({ ctx, ids, body, orderBy, params, page }) => {
   const {data, modelTag} = getBaseDataAndModel({ctx, initMessage: '修改成功'});
   try {
+    body.updateTime = Date.now();
+    body.updater = '更新人暂定';
     await modelTag.updateMany({ _id: { $in: ids }}, body, {});
   } catch (e) {
     data.message = RESCODE.FAIL;
