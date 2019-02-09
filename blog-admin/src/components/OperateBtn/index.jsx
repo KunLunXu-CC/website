@@ -29,11 +29,13 @@ export const IconBtn = ({type, onClick, className}) => {
   }, [type]);
 
   const getBtn = useCallback(() => (
-    <FontIcon
-      onClick={!setting.clickDisable && onClick}
-      icon={setting.icon}
-      className={`cp ${setting.className} ${className}`}
-    />
+    <span>
+      <FontIcon
+        onClick={!setting.clickDisable && onClick}
+        icon={setting.icon}
+        className={`cp ${setting.className} ${className}`}
+      />
+    </span>
   ), [setting, onClick, className]);
 
   if (type === OPERATING_TYPE.DELETE ){

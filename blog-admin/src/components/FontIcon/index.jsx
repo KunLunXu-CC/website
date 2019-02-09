@@ -19,7 +19,7 @@ export default (props) => {
     <svg 
       style={styles}
       aria-hidden="true"
-      onClick={props.onClick}
+      onClick={props.onClick || null}
       className={`iconfont ${props.className || ''}`} 
     >
       <use xlinkHref={props.icon} ></use>
