@@ -34,7 +34,7 @@ export const IconBtn = ({type, onClick, className}) => {
       icon={setting.icon}
       className={`cp ${setting.className} ${className}`}
     />
-  ), [setting]);
+  ), [setting, onClick, className]);
 
   if (type === OPERATING_TYPE.DELETE ){
     return (
