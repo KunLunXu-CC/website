@@ -11,7 +11,7 @@ import React, { useEffect, useCallback, useMemo } from 'react';
 export default ({listStore, modalStore}) => {
   // 分页器 onChange 事件
   const onChange = useCallback((page = 1, pageSize = 10) => {
-    listStore.setPage({page, pageSize});
+    listStore.resetPage({ page, pageSize });
   });
 
   // 编辑(打开弹窗)
@@ -25,7 +25,7 @@ export default ({listStore, modalStore}) => {
 
   // 删除
   const onDelete = useCallback((record) => {
-    listStore.setPage({...listStore.page, page: 1});
+    listStore.resetPage({ page: 1 });
     removeTagByIds({id: record.id});
   });
 

@@ -19,7 +19,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
         const handleFun = mapOperatingWithFun[modalStore.data.type];
         const id = (modalStore.data.current || {}).id;
         handleFun && handleFun({id, body: values}).then(res => {
-          listStore.setPage({...listStore.page, page: 1});
+          listStore.resetPage({ page: 1 });
         });
         closeModal();
       }
