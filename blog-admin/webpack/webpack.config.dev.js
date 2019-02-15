@@ -1,15 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
+const setting = require('../src/config');
 const DefinePlugin = webpack.DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const globalConstant = require('../src/config/globalConstant');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 /* ================== 插件 ================= */
 
 // 全局常量定义
-const definePlugin = new DefinePlugin(globalConstant.development)
+const definePlugin = new DefinePlugin(setting.development)
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({

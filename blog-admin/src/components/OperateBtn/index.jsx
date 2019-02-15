@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { Popconfirm } from 'antd';
-import { OPERATING_TYPE, OPERATING_TYPE_DESC } from '@config/constant';
+import { OPERATING_TYPE, OPERATING_TYPE_DESC } from '@config/conts';
 import FontIcon from '../FontIcon';
 
 // 配置

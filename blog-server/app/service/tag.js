@@ -1,4 +1,4 @@
-const { STATUS, RESCODE } = require('../config/constant');
+const { STATUS, RESCODE } = require('../config/conts');
 const { getTimeConds } = require('../utils/helper');
 const _ = require('lodash');
 

@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
-import { OPERATING_TYPE } from '@config/constant';
+import { OPERATING_TYPE } from '@config/conts';
 import { Modal, Form, Input, Row, Col } from 'antd';
 import { createTags, updateTagByIds } from '@server/index';
 
