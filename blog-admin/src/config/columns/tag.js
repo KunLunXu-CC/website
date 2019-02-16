@@ -8,21 +8,23 @@ export const tagColumnModel = [{
   key: 'parent.name',
 }, {
   title: '标签颜色',
+  type: 'color',
   dataIndex: 'color',
   key: 'color',
 }, {
   title: '标签图标',
+  type: 'icon',
   key: 'icon',
   dataIndex: 'icon',
   
 }, {
   title: '修改时间',
-  type: 'Date',
+  type: 'date',
   dataIndex: 'updateTime',
   key: 'updateTime',
 }, {
   title: '标签状态',
-  type: 'Status',
+  type: 'status',
   dataIndex: 'status',
   desc: {0: '停用', 1: '启用'},
   key: 'status',

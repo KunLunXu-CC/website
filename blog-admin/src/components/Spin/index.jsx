@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Spin } from 'antd';
+import { Spin as AntdSpin } from 'antd';
 import { use } from '@server';
 
 /**
@@ -26,11 +26,11 @@ const useSpinHook = () => {
   return { spinning };
 }
 
-export default (props) => {
+export const Spin = (props) => {
   const store = useSpinHook();
   return (
-    <Spin spinning={store.spinning}>
+    <AntdSpin spinning={store.spinning}>
       {props.children}
-    </Spin>
+    </AntdSpin>
   );
 }

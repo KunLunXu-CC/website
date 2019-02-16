@@ -4,10 +4,11 @@
     "baseUrl": ".",
 
     "paths": {
+      "@kook/*": ["src/hook/*"],
+      "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@config/*": ["src/config/*"],
       "@server/*": ["src/server/*"],
-      "@kook/*": ["src/hook/*"],
       "@components/*": ["src/components/*"]
     },
     "target": "ES6",

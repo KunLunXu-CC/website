@@ -96,10 +96,11 @@ module.exports = {
     extensions: ['.mjs', '.js', '.jsx'],
     //  自定义路径别名 来确保模块引入变得更简单(其实就在解析路径时如果存在对应 key 使用相应的值进行替换)
     alias: {
-      '@assets': path.resolve(__dirname, '../src/assets'),
-      '@server': path.resolve(__dirname, '../src/server'),
       '@hook': path.resolve(__dirname, '../src/hook'),
+      '@utils': path.resolve(__dirname, '../src/utils'),
+      '@server': path.resolve(__dirname, '../src/server'),
       '@config': path.resolve(__dirname, '../src/config'),
+      '@assets': path.resolve(__dirname, '../src/assets'),
       '@components': path.resolve(__dirname, '../src/components')
     },
   },

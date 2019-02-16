@@ -1,6 +1,6 @@
 import { Form, Card, Input, Button } from 'antd';
 import React, { useCallback, useMemo } from 'react';
-import { filterObject } from '../../../utils/helper';
+import { filterObject } from '@utils/helper';
 
 const QueryBlock = ({ form, listStore }) => {
 

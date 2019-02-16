@@ -9,7 +9,7 @@ export const getTagList = ({ page, params }) => (new Promise((resolve, reject) =
         variables: {params, page},
         query: `
           query($params: TagParams, $page: PageInput){
-            tagList( params: $params, page: $page, orderBy: { updateTime: -1 } ){
+            tagList( params: $params, page: $page, orderBy: { creationTime: -1 } ){
               list{ name, icon id parent { id name } updateTime status color}
               page{ page pageSize }
               stats{ total }   

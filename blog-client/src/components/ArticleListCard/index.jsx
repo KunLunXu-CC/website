@@ -1,6 +1,6 @@
 import React from 'react';
 import ImgContainer from '../ImgContainer/index';
-import clamp from '../../utils/clamp'; 
+import clamp from '@utils/clamp'; 
 import './index.scss';
 
 /**

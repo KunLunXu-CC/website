@@ -1,10 +1,8 @@
 import _ from 'lodash';
 import { Card, Table } from 'antd';
 import { removeTagByIds } from '@server';
-import Spin from '@components/Spin';
-import FontIcon from '@components/FontIcon';
-import { IconBtn } from '@components/OperateBtn';
 import { OPERATING_TYPE } from '@config/conts';
+import { Spin, FontIcon, IconBtn } from '@components';
 import handler, { tagColumnModel } from '@config/columns';
 import React, { useEffect, useCallback, useMemo } from 'react';
 
