@@ -1,17 +1,17 @@
 import React, { useMemo, useCallback } from 'react';
 import { Popconfirm } from 'antd';
-import { OPERATING_TYPE, OPERATING_TYPE_DESC } from '@config/conts';
+import { OPERATING_TYPE } from '@config/conts';
 import { FontIcon } from '../';
 
 // 配置
 const settings = {
-  [OPERATING_TYPE.EDIT]: {
+  [OPERATING_TYPE.EDIT.value]: {
     text: '', icon: '#icon-editor' , className: 'f22 linkp'
   }, 
-  [OPERATING_TYPE.DELETE]: {
+  [OPERATING_TYPE.DELETE.value]: {
     text: '', icon: '#icon-shanchu',  className: 'f22 linkd', clickDisable: true 
   }, 
-  [OPERATING_TYPE.CREATE]: {
+  [OPERATING_TYPE.CREATE.value]: {
     text: '', icon: '#icon-xinzeng',  className: 'f22 linkp'
   }, 
 };
@@ -38,7 +38,7 @@ export const IconBtn = ({type, onClick, className}) => {
     </span>
   ), [setting, onClick, className]);
 
-  if (type === OPERATING_TYPE.DELETE ){
+  if (type === OPERATING_TYPE.DELETE.value ){
     return (
       <Popconfirm 
         title="确定要删除该条记录?" 

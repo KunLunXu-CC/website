@@ -5,8 +5,8 @@ import { createTags, updateTagByIds } from '@server/index';
 
 // 操作类型映射处理函数
 const mapOperatingWithFun = {
-  [OPERATING_TYPE.EDIT]: updateTagByIds,
-  [OPERATING_TYPE.CREATE]: createTags
+  [OPERATING_TYPE.EDIT.value]: updateTagByIds,
+  [OPERATING_TYPE.CREATE.value]: createTags
 };
 
 const FormBlock = ({ modalStore, listStore, form }) => {

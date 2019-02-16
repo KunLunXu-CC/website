@@ -2,14 +2,12 @@
 
 // 操作类型: 编辑 删除 新增
 export const OPERATING_TYPE = {
-  EDIT: 'edit',
-  DELETE: 'delete',
-  CREATE: 'create'
+  EDIT: {value: 'edit', desc: '编辑'},
+  DELETE: {value: 'delete', desc: '删除'},
+  CREATE: {value: 'create', desc: '创建'}
 }; 
 
-// 操作类型描述: 编辑 删除 新增
-export const OPERATING_TYPE_DESC = {
-  [OPERATING_TYPE.CREATE]: '新增',
-  [OPERATING_TYPE.EDIT]: '编辑',
-  [OPERATING_TYPE.DELETE]: '删除',
-}; 
+// 标签颜色列表
+export const TAG_COLORS = [
+
+];

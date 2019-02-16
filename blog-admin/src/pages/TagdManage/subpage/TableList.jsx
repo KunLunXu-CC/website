@@ -15,7 +15,7 @@ export default ({listStore, modalStore}) => {
   // 编辑(打开弹窗)
   const onEdit = useCallback((record) => {
     modalStore.openModal({
-      type: OPERATING_TYPE.EDIT,
+      type: OPERATING_TYPE.EDIT.value,
       title: '修改标签',
       current: record
     });
@@ -29,7 +29,7 @@ export default ({listStore, modalStore}) => {
 
   // 创建(打开弹窗)
   const createTag = useCallback(() => {
-    modalStore.openModal({title: '新增标签', type: OPERATING_TYPE.CREATE});
+    modalStore.openModal({title: '新增标签', type: OPERATING_TYPE.CREATE.value});
   });
 
   // 处理 columns
@@ -41,13 +41,13 @@ export default ({listStore, modalStore}) => {
       render: (text, record, index) => ([
         <IconBtn 
           className="mlrn"
-          key={OPERATING_TYPE.EDIT} 
-          type={OPERATING_TYPE.EDIT}
+          key={OPERATING_TYPE.EDIT.value} 
+          type={OPERATING_TYPE.EDIT.value}
           onClick={onEdit.bind(null, record)}/>,
         <IconBtn
           className="mlrn"
-          key={OPERATING_TYPE.DELETE} 
-          type={OPERATING_TYPE.DELETE} 
+          key={OPERATING_TYPE.DELETE.value} 
+          type={OPERATING_TYPE.DELETE.value} 
           onClick={onDelete.bind(null, record)}/>,
       ])
     }]);
