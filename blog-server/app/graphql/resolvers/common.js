@@ -1,6 +1,13 @@
 const { GraphQLScalarType } = require('graphql');
+const commonServer = require('../../service/common');
 module.exports = {
-  // 待测试
+  Query: {
+    options: async ( parents, args, context, info ) => {
+      return await commonServer.options({ ...args, ctx: context.ctx });
+    }
+  },
+
+  // Date 类型数据定义（待测试）
   Date: new GraphQLScalarType({
     name: 'Date',
     description: 'Date类型值',

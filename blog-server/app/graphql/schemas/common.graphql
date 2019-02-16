@@ -1,13 +1,3 @@
-type Query{
-  # 占位符 
-  _empty: String
-}
-
-type Mutation{
-  # 占位符 
-  _empty:String
-}
-
 scalar Date
 
 type Stats{
@@ -25,4 +15,20 @@ input PageInput{
   # 查询输入分页信息
   page: Int!
   pageSize: Int!
+}
+
+## ********* 通用请求 ********
+
+type Query{
+  options(model: String!): [Option]
+}
+
+type Mutation{
+  # 占位符 
+  _empty:String
+}
+
+type Option {
+  id: ID!,
+  name: String!
 }

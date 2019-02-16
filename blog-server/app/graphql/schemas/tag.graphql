@@ -3,9 +3,25 @@ extend type Query{
 }
 
 extend type Mutation{
-  removeTagByIds(ids: [ID!]!, orderBy: TagOrderBy, params: TagParams, page: PageInput): TagList
-  createTags(body: [UpdateTag!]!, orderBy: TagOrderBy, params: TagParams, page: PageInput): TagList
-  updateTagByIds(ids: [ID!]!, body: UpdateTag!, orderBy: TagOrderBy, params: TagParams, page: PageInput): TagList
+  removeTagByIds (
+    ids: [ID!]!, 
+    orderBy: TagOrderBy, 
+    params: TagParams, 
+    page: PageInput
+  ): TagList
+  createTags (
+    body: [UpdateTag!]!, 
+    orderBy: TagOrderBy, 
+    params: TagParams, 
+    page: PageInput
+  ): TagList
+  updateTagByIds (
+    ids: [ID!]!, 
+    body: UpdateTag!, 
+    orderBy: TagOrderBy, 
+    params: TagParams,
+    page: PageInput
+  ): TagList
 }
 
 input UpdateTag {

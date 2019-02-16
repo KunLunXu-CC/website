@@ -24,7 +24,7 @@ const connectServer = () => {
 }
 
 /**
- * 获取模型：
+ * 初始化模型：
  * @param  {String} modelPath 模型路径
  * @return {Object} {模型名： 模型对象}
  */
