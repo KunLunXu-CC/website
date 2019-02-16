@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import { message } from 'antd';
+import React from 'react';
+import * as CONTS from '../config/conts';
+import { message, Select } from 'antd';
 
 /**
  * 根据需要过滤的列表过滤指定对象
@@ -27,4 +29,19 @@ export const handleMessage = (data = {}) => {
   };
   const handler = map[data.rescode];
   handler && handler(data.message);
+}
+
+/**
+ * 通过固定格式的 conts， 获取 antd options
+ * @param {String} name 常量名称
+ * 
+ */
+export const getOptiionsOfconts = (name) => {
+  const options = [];
+  const Option = Select.Option;
+  if (!CONTS[name]) {return options}
+   _.forIn(CONTS[name], (value, key) => {
+    options.push( <Option key={key} value={value.value}>{value.desc}</Option> );
+  })
+  return options;
 }

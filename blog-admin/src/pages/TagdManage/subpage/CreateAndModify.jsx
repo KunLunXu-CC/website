@@ -1,13 +1,18 @@
-import React, { useMemo, useCallback } from 'react';
 import { OPERATING_TYPE } from '@config/conts';
-import { Modal, Form, Input, Row, Col } from 'antd';
-import { createTags, updateTagByIds } from '@server/index';
+import React, { useMemo, useCallback } from 'react';
+import { getOptiionsOfconts } from '@utils/helper';
+import { createTags, updateTagByIds } from '@server';
+import { Modal, Form, Input, Row, Col, Select } from 'antd';
 
 // 操作类型映射处理函数
 const mapOperatingWithFun = {
   [OPERATING_TYPE.EDIT.value]: updateTagByIds,
   [OPERATING_TYPE.CREATE.value]: createTags
 };
+
+// 下拉项
+const colorOptions = getOptiionsOfconts('TAG_COLORS');
+const iconOptions = getOptiionsOfconts('TAG_ICONS');
 
 const FormBlock = ({ modalStore, listStore, form }) => {
   const { getFieldDecorator } = form;
@@ -62,7 +67,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
               {
                 getFieldDecorator("color", {
                   initialValue: initialValues.color,
-                })( <Input placeholder="标签颜色"/> )
+                })( <Select placeholder="标签颜色">{ colorOptions }</Select>)
               }
             </Form.Item>
           </Col>
@@ -71,7 +76,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
               {
                 getFieldDecorator("icon", {
                   initialValue: initialValues.icon,
-                })( <Input placeholder="标签图标"/> )
+                })( <Select placeholder="标签图标">{ iconOptions }</Select> )
               }
             </Form.Item>
           </Col>
