@@ -104,6 +104,7 @@ module.exports.getTagList = async ({ ctx, params, page, orderBy }) => {
       const skip = ( page.page - 1 ) * page.pageSize;
       const limit = page.pageSize;
       data.list = await modelTag.find(conds).skip(skip).limit(limit).sort(sort);
+      data.stats.totalPage = Math.ceil( data.stats.total / page.pageSize );
     } else {
       data.list = await modelTag.find(conds);
     }

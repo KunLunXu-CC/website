@@ -3,9 +3,10 @@ scalar Date
 type Stats{
   # 统计
   total: Int
+  totalPage: Int
 }
 
-type Page{
+type PageOutput{
   # 查询返回分页信息
   page: Int,
   pageSize: Int,
@@ -20,7 +21,11 @@ input PageInput{
 ## ********* 通用请求 ********
 
 type Query{
-  options(model: String!): [Option]
+  options(
+    page: PageInput,
+    model: String!, 
+    params: OptionsParams,
+  ): Options
 }
 
 type Mutation{
@@ -28,7 +33,19 @@ type Mutation{
   _empty:String
 }
 
+## ********* options ********
 type Option {
-  id: ID!,
+  id: ID!
   name: String!
+}
+
+type Options {
+  stats: Stats
+  list: [Option]
+  page: PageOutput
+}
+
+input OptionsParams{
+  ids: [ID!]
+  name: String
 }
