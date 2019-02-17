@@ -14,6 +14,11 @@ const mapOperatingWithFun = {
 const colorOptions = getOptiionsOfconts('TAG_COLORS');
 const iconOptions = getOptiionsOfconts('TAG_ICONS');
 
+// label 组件
+const Label = ({children, required}) => (
+  <span style={{ paddingLeft: required ? '0px' : '10px' }}>{children}</span>
+);
+
 const FormBlock = ({ modalStore, listStore, form }) => {
   const { getFieldDecorator } = form;
 
@@ -52,8 +57,8 @@ const FormBlock = ({ modalStore, listStore, form }) => {
     >
       <Form className="ant-advanced-search-form">
         <Row gutter={8}>
-          <Col span={8}>
-            <Form.Item label="名称">
+          <Col span={12}>
+            <Form.Item label={<Label required>名称</Label>}>
               {
                 getFieldDecorator("name", {
                   initialValue: initialValues.name, 
@@ -62,8 +67,8 @@ const FormBlock = ({ modalStore, listStore, form }) => {
               }
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item label="颜色">
+          <Col span={12}>
+            <Form.Item label={<Label>颜色</Label>}>
               {
                 getFieldDecorator("color", {
                   initialValue: initialValues.color,
@@ -71,8 +76,8 @@ const FormBlock = ({ modalStore, listStore, form }) => {
               }
             </Form.Item>
           </Col>
-          <Col span={8}>
-            <Form.Item label="图标">
+          <Col span={12}>
+            <Form.Item label={<Label>图标</Label>}>
               {
                 getFieldDecorator("icon", {
                   initialValue: initialValues.icon,
