@@ -3,7 +3,7 @@ import { getTagList } from '@server';
 import React, {  Fragment } from 'react';
 import TableList from './subpage/TableList';
 import QueryBlock from './subpage/QueryBlock';
-import { useListhook, useModalHook } from '@hook';
+import { useListHook, useModalHook } from '@hook';
 import CreateAndModify from './subpage/CreateAndModify';
 
 // 查询数据方法
@@ -15,7 +15,7 @@ const getList = ({ page, params, setList, setStats }) => {
 }
 
 export default () => {
-  const listStore = useListhook({getList});
+  const listStore = useListHook({getList});
   const modalStore = useModalHook();
 
   return (

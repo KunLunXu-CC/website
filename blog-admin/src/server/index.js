@@ -1,6 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 export * from './tag';
+export * from './common';
 
 // 创建 axios 实例
 const instance = axios.create({

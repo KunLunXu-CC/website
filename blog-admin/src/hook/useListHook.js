@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
  * - params           查询条件
  * - getListInternal  内置查询方法, 调用 getList
  */
-export const useListhook = ({ getList = null }) => {
+export const useListHook = ({ getList = null }) => {
   const [list, setList] = useState([]);
   const [stats, setStats] = useState({total: 0});
   const [page, setPage] = useState({page: 1, pageSize: 10});
