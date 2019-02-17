@@ -27,13 +27,14 @@ const mapTypeToRender = (value) => ({
 
 // 根据类型（Date Status Color Icon）处理 columns 函数
 export default (columns = []) => (append = []) => {
-  columns.forEach((value, key) => {
+  const cols = columns.map((value, key) => {
     value.render = value.type 
       ? mapTypeToRender(value)[value.type] 
       : mapTypeToRender(value).default;
     return value;
   });
   append.forEach((value, key) => {
-    columns.push(value);
+    cols.push(value);
   });
+  return cols;
 } 

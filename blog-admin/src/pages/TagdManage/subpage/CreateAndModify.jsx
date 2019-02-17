@@ -1,6 +1,6 @@
 import { useOptionsHook } from '@hook';
 import { OPERATING_TYPE } from '@config/conts';
-import React, { useMemo, useCallback, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { getOptiionsOfconts } from '@utils/helper';
 import { createTags, updateTagByIds } from '@server';
 import { Modal, Form, Input, Row, Col, Select } from 'antd';
@@ -36,12 +36,12 @@ const FormBlock = ({ modalStore, listStore, form }) => {
   }, []);
 
   // 查询 
-  const onSearchTagOpts = useCallback((value) => {
+  const onSearchTagOpts = (value) => {
     tagOptsStore.resetParams({name: value});
-  }, []);
+  };
 
   // 弹窗确定事件
-  const onOk = useCallback(() => {
+  const onOk = () => {
     form.validateFieldsAndScroll((error, values) => {
       if(!error){
         const handleFun = mapOperatingWithFun[modalStore.data.type];
@@ -52,7 +52,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
         modalStore.closeModal();
       }
     });
-  }, []);
+  };
 
   // 表单初始值
   const initialValues = useMemo(() => {

@@ -14,31 +14,27 @@ export const useModalHook = (init) => {
 
   // 打开弹窗
   const openModal = useCallback((data) => {
-    
+    openEvents.forEach(event => event(data || init));    
     setData(data || init);
     setIsOpen(true);
-  }, []);
+  }, [openEvents]);
 
   // 关闭弹窗
   const closeModal = useCallback(() => {
+    closeEvents.forEach(event => event(data || init));
     setData(init || {});
     setIsOpen(false);
-  }, []);
+  }, [closeEvents, data, init]);
 
   // 添加打开弹窗的事件（回调函数）
   const onOpen = useCallback((cb) => {
     setOpenEvents([...openEvents, cb]);
-  });
+  }, [openEvents]);
 
   // 添加关闭弹窗的事件（回调函数）
   const onClose = useCallback((cb) => {
     setCloseEvents([...closeEvents, cb]);
-  });
-
-  useEffect(() => {
-    isOpen && openEvents.forEach(event => event(data || init));
-    !isOpen && closeEvents.forEach(event => event(data || init)); 
-  }, [isOpen]);
+  }, [closeEvents]);
 
   return {
     data,

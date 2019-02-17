@@ -28,12 +28,10 @@ export const useOptionsHook = ({ model }) => {
   }, []);
 
   // 重置 params
-  const resetParams = (reParams) => {
-    console.log('=============================================================');
-    console.log(params);
+  const resetParams = useCallback((reParams) => {
     setParams({...params, ...reParams});
     setPage({ page: 1, pageSize: page.pageSize });
-  };
+  }, [params, page]);
 
   // 重置 page (只对 page 进行修改， 不对pageSize 进行修改)
   const resetPage = useCallback(({ page: rePage }) => {

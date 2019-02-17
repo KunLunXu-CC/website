@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 /**
  * 通用列表 hook
@@ -12,26 +12,35 @@ import React, { useState, useEffect } from 'react';
  */
 export const useListHook = ({ getList = null }) => {
   const [list, setList] = useState([]);
+  const [params, setParams] = useState({});
   const [stats, setStats] = useState({total: 0});
   const [page, setPage] = useState({page: 1, pageSize: 10});
-  const [params, setParams] = useState({});
-  const output = { list, stats, page, params };
+
   // /手动刷新
-  output.refresh = () => {
+  const refresh = useCallback(() => {
     getList && getList({page, params, setList, setStats});
-  }
+  }, [page, params, setList, setStats]); 
 
   /**
    * @param {Number} rePage.page
    * @param {Number} rePage.pageSize
    */
-  output.resetPage = (rePage = {}) => {
+  const resetPage = useCallback((rePage = {}) => {
     rePage = {...page, ...rePage};
     setPage(rePage);
-  }
-  output.setParams = setParams;
-  output.setStats = setStats;
-  output.setList = setList;
-  useEffect(output.refresh, [page, params]); 
-  return output;
+  }, [page]);
+
+  useEffect(refresh, [page, params]); 
+
+  return {
+    list, 
+    stats,
+    page, 
+    params,
+    setList,
+    refresh,
+    setStats,
+    setParams,
+    resetPage,
+  };
 }
