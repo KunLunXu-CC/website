@@ -1,5 +1,5 @@
 import { Form, Card, Input, Button } from 'antd';
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import { filterObject } from '@utils/helper';
 
 const QueryBlock = ({ form, listStore }) => {
@@ -9,10 +9,10 @@ const QueryBlock = ({ form, listStore }) => {
    * - 获取查询参数
    * - 修改 listStore 中的查询条件
    */
-  const onSearch = useCallback(() => {
+  const onSearch = () => {
     const params = filterObject(form.getFieldsValue(), [null, undefined]);
-    listStore.setParams(params);
-  });
+    listStore.resetParams(params);
+  };
 
   return (
     <Card>
