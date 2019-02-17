@@ -15,9 +15,9 @@ export default ({listStore, modalStore}) => {
   // 编辑(打开弹窗)
   const onEdit = useCallback((record) => {
     modalStore.openModal({
-      type: OPERATING_TYPE.EDIT.value,
       title: '修改标签',
-      current: record
+      current: record ||  {},
+      type: OPERATING_TYPE.EDIT.value,
     });
   });
 
@@ -25,12 +25,16 @@ export default ({listStore, modalStore}) => {
   const onDelete = useCallback((record) => {
     listStore.resetPage({ page: 1 });
     removeTagByIds({id: record.id});
-  });
+  }, []);
 
   // 创建(打开弹窗)
   const createTag = useCallback(() => {
-    modalStore.openModal({title: '新增标签', type: OPERATING_TYPE.CREATE.value});
-  });
+    modalStore.openModal({
+      current: null,
+      title: '新增标签', 
+      type: OPERATING_TYPE.CREATE.value, 
+    });
+  }, []);
 
   // 处理 columns
   useEffect(() => {
@@ -60,7 +64,7 @@ export default ({listStore, modalStore}) => {
       icon="#icon-xinzeng"
       className="cp f22 linkp"
     />
-  ));
+  ), []);
 
   return (
     <Spin>

@@ -1,34 +1,26 @@
 import axios from './index';
 
-export const getOptions = () => new Promise((resolve, reject) => {
-  axios(
-    {
+export const getOptions = ({model, page, params}) => new Promise((resolve, reject) => {
+  axios({
       url: '/specialUrl',
       method: 'post',
       data: {
-        variables: {},
+        variables: { model, page, params },
         query: `
-          query {
-            options(
-              model: "Tag",
-              page:{
-                page: 2,
-                pageSize: 5
-              },
-              params: {
-                ids: ["5c67d18102579c65a8764a09"],
-                # name: ""
-              }
-            ){ list { id name} stats{total totalPage} page{page pageSize} }
+          query ($model: String!, $page: PageInput, $params: OptionsParams){
+            options( model: $model, page: $page, params: $params){ 
+              list { id name } 
+              page { page pageSize } 
+              stats { total totalPage } 
+            }
           }
         `,
       }
     }
-  )
-  .then(function (response) {
-    
-  })
-  .catch(function (error) {
+  ).then(function (response) {
+    const data = response.data.data.options;
+    resolve(data);
+  }).catch(function (error) {
     // console.log(error);
   });
 });

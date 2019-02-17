@@ -16,7 +16,7 @@ const getList = ({ page, params, setList, setStats }) => {
 
 export default () => {
   const listStore = useListHook({getList});
-  const modalStore = useModalHook();
+  const modalStore = useModalHook({ type: '', title: '', current: null });
 
   return (
     <Fragment>
