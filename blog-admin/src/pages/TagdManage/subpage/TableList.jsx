@@ -56,13 +56,13 @@ export default ({listStore, modalStore}) => {
   }]);
 
   // 新增按钮
-  const extra = useMemo(() => (
+  const extra = (
     <FontIcon
       onClick={createTag}
       icon="#icon-xinzeng"
       className="cp f22 linkp"
     />
-  ), []);
+  );
 
   return (
     <Spin>

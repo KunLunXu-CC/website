@@ -32,7 +32,9 @@ const FormBlock = ({ modalStore, listStore, form }) => {
         tagOptsStore.init();
       }
     });
-    modalStore.onClose(form.resetFields);
+    modalStore.onClose(() => {
+      form.resetFields();
+    });
   }, []);
 
   // 查询 

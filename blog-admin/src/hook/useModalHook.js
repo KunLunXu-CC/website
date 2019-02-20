@@ -12,9 +12,9 @@ import React, { useState, useEffect, useCallback } from 'react';
  * - onOpen       添加开启弹窗事件， 在开启弹窗时将执行 openEvents 事件列表： function(data || init){} data 为开启弹窗时传入的数据
  * - onClose      添加关闭弹窗事件， 在弹窗关闭时将执行 closeEvents 事件列表： unction(data || init){} data 为关闭弹窗前的数据
  */
-export const useModalHook = (init) => {
+export const useModalHook = (init = {}) => {
   const [isOpen, setIsOpen] = useState(false); 
-  const [data, setData] = useState(init || {});
+  const [data, setData] = useState(init);
   const [openEvents, setOpenEvents] = useState([]);
   const [closeEvents, setCloseEvents] = useState([]);
 
@@ -22,20 +22,21 @@ export const useModalHook = (init) => {
    * 打开弹窗
    * @param {Object}  data  开启弹窗时要存储的数据 
    */
-  const openModal = useCallback((data) => {
-    openEvents.forEach(event => event(data || init));    
-    setData(data || init);
+  const openModal = useCallback((value) => {
+    const change = {...data, ...value};
+    openEvents.forEach(event => event(change));    
+    setData(change);
     setIsOpen(true);
-  }, [openEvents]);
+  }, [openEvents, data]);
 
   /**
    * 关闭弹窗
    */
   const closeModal = useCallback(() => {
-    closeEvents.forEach(event => event(data || init));
-    setData(init || {});
+    closeEvents.forEach(event => event(data));
+    setData(init);
     setIsOpen(false);
-  }, [closeEvents, data, init]);
+  }, [closeEvents, data]);
 
   /**
    * 添加打开弹窗的事件（回调函数）
