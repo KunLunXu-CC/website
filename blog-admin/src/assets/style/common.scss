@@ -84,7 +84,7 @@
 .plrw { padding: 0 20px !important; }
 .plrv { padding: 0 30px !important; }
 
-// 链接颜色
+// 链接颜色（通用、删除）
 .linkp { color: #47BAEE !important; }
 .linkp:hover { color: #5BCCFF !important; }
 .linkd { color: #ED533A !important;}
@@ -98,6 +98,16 @@
   overflow: hidden;
 }
 
-.test{
-  background: red;
+// 内容块样式(第一、 第二、 第三)
+.block_first{
+  border-left: 3px solid #94DFFC;
+}
+
+.block_second{
+  margin-top: 20px;
+  border-left: 3px solid #FF4337;
+}
+
+.block_third{
+  border-left: 3px solid #3C3F44;
 }

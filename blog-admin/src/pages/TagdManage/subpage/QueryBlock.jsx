@@ -15,7 +15,7 @@ const QueryBlock = ({ form, listStore }) => {
   };
 
   return (
-    <Card>
+    <Card className="block_first">
       <Form layout="inline">
         <Form.Item>
           {form.getFieldDecorator('name')(<Input placeholder="标签名" size="large"/>)}

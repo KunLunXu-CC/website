@@ -66,7 +66,7 @@ export default ({listStore, modalStore}) => {
 
   return (
     <Spin>
-      <Card title="列表数据" className="mtbw" extra={ extra } >
+      <Card title="列表数据" className="block_second" extra={ extra } >
         <Table 
           columns={columns} 
           dataSource={listStore.list}
