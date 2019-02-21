@@ -7,7 +7,7 @@
  * - component
  */
 import HomePage from '../pages/HomePage/index';
-import ArticleCreation from '../pages/Article/ArticleCreation';
+import ArticleCreation from '../pages/Article/ArticleCreation/index';
 import TagdManage from '../pages/TagdManage/index';
 export default [
   {
