@@ -18,7 +18,11 @@ const QueryBlock = ({ form, listStore }) => {
     <Card className="block_first">
       <Form layout="inline">
         <Form.Item>
-          {form.getFieldDecorator('name')(<Input placeholder="标签名" size="large"/>)}
+          {
+            form.getFieldDecorator('name')(
+              <Input placeholder="标签名" size="large" onPressEnter={onSearch}/>
+            )
+          }
         </Form.Item>
         <Form.Item>
           <Button size="large" type="primary" onClick={onSearch} >
