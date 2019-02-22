@@ -1,5 +1,19 @@
 .preview-btn{
   position: fixed;
-  top: 40%;
+  top: 20%;
   right: 0;
+
+  width: 30px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  background: #bbb;
+  border-radius: 2px 0 0 2px;
+  color: #eee;
+  opacity: 0.3;
+
+  &:hover{
+  opacity: 0.5;
+  }
 }

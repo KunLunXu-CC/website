@@ -18,13 +18,14 @@ export default () => {
 
   return (
     <div>
-      <div className="preview-btn" onClick = {innerStore.onOpen}>
+      <div className="preview-btn cp" onClick = {innerStore.onOpen}>
         <FontIcon icon="#icon-yulan" />
       </div>
       <Drawer
         title="Basic Drawer"
         placement="right"
         closable={false}
+        width="70%"
         onClose={innerStore.onClose}
         visible={innerStore.visible}
       >
