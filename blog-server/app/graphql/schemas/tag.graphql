@@ -7,7 +7,7 @@ extend type Query{
 }
 
 extend type Mutation{
-  removeTagByIds (
+  removeTags (
     conds: TagParams!, 
     orderBy: TagOrderBy, 
     params: TagParams, 
@@ -19,7 +19,7 @@ extend type Mutation{
     params: TagParams, 
     page: PageInput
   ): TagList
-  updateTagByIds (
+  updateTags (
     conds: TagParams!, 
     body: UpdateTag!, 
     orderBy: TagOrderBy, 

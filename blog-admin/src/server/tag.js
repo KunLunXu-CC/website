@@ -66,14 +66,14 @@ export const updateTagByIds = ({ id, body = {} }) => (new Promise((resolve, reje
         variables: {conds: {id}, body},
         query: `
           mutation($conds: TagParams!, $body: UpdateTag!){
-            updateTagByIds( conds: $conds, body: $body ){ rescode message }
+            updateTags( conds: $conds, body: $body ){ rescode message }
           }
         `,
       }
     }
   )
   .then(function (response) {
-    const data = response.data.data.updateTagByIds;
+    const data = response.data.data.updateTags;
     handleMessage({
       rescode: data.rescode,
       message: data.message
@@ -94,14 +94,14 @@ export const removeTagByIds = ({ id }) => (new Promise((resolve, reject) => {
         variables: {conds: {id}},
         query: `
           mutation($conds: TagParams!){
-            removeTagByIds( conds: $conds){ rescode message }
+            removeTags( conds: $conds){ rescode message }
           }
         `,
       }
     }
   )
   .then(function (response) {
-    const data = response.data.data.removeTagByIds;
+    const data = response.data.data.removeTags;
     handleMessage({
       rescode: data.rescode,
       message: data.message

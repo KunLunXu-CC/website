@@ -18,10 +18,10 @@ module.exports = {
     createTags: async (parents, args, context, info) => {
       return await tagServer.create({...args, ctx: context.ctx});
     },
-    removeTagByIds: async (parents, args, context, info) => {
+    removeTags: async (parents, args, context, info) => {
       return await tagServer.remove({...args, ctx: context.ctx});
     },
-    updateTagByIds: async (parents, args, context, info) => {
+    updateTags: async (parents, args, context, info) => {
       return await tagServer.update({...args, ctx: context.ctx});
     },
   }
