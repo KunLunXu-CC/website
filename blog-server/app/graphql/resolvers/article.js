@@ -1,4 +1,5 @@
 const articleServer = require('../../service/article');
+
 module.exports = {
   Mutation: {
     createArticles: async (parents, args, context, info) => {

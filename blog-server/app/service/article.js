@@ -23,7 +23,6 @@ module.exports.createArticles = async ({ ctx, body, params, orderBy, page }) => 
     data.rescode = RESCODE.FAIL;
     data.message = '创建失败';
   }
-  
 }
 
 /**
