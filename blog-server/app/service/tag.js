@@ -1,4 +1,5 @@
 const { STATUS, RESCODE } = require('../config/conts');
+const common = require('./common/index');
 const getConditions = require('../utils/getConditions');
 const _ = require('lodash');
 
@@ -11,24 +12,7 @@ const _ = require('lodash');
  */
 module.exports.create = async ({ ctx, body, params, orderBy, page }) => {
   const data = { rescode: RESCODE.SUCCESS, message: '创建成功', list: [], page: {}, stats: {}, change: []};
-  const server = ctx.db.mongo.Tag;
-  try {
-    data.change = await server.insertMany(body.map(v => ({
-      ...v,
-      creator: "创建人先写死",
-      updater: "更新人先写死(创建时加的)",
-    })));
-  } catch(e) { 
-    data.rescode = RESCODE.FAIL;
-    data.message = '创建失败';
-  }
-  if (params){
-    const listData = await this.getList({ ctx, params, orderBy, page });
-    data.stats = listData.stats || {};
-    data.list = listData.list || [];
-    data.page = listData.page || {};
-  } 
-  return data;
+  return await common.create(data)({ model: 'Tag', ctx, body, params, orderBy, page});
 }
 
 /**
@@ -40,25 +24,8 @@ module.exports.create = async ({ ctx, body, params, orderBy, page }) => {
  */
 module.exports.remove = async ({ ctx, conds, params, orderBy, page }) => {
   const data = { rescode: RESCODE.SUCCESS, message: '删除成功', list: [], page: {}, stats: {}, change: []};
-  const server = ctx.db.mongo.Tag;
-  const changeConds = getConditions(conds);
-  try {
-    await server.updateMany(changeConds, { status: STATUS.DELETE });
-  } catch (e) {
-    data.rescode = RESCODE.FAIL;
-    data.message = '删除失败';
-  }
-
-  if (params){
-    const listData = await this.getList({ ctx, params, orderBy, page });
-    data.stats = listData.stats || {};
-    data.list = listData.list || [];
-    data.page = listData.page || {};
-  } 
-  data.change = await server.find(changeConds);
-  return data;
+  return await common.remove(data)({ model: 'Tag', ctx, conds, params, orderBy, page});
 }
-
 
 /**
  * 修改
@@ -70,24 +37,7 @@ module.exports.remove = async ({ ctx, conds, params, orderBy, page }) => {
  */
 module.exports.update = async ({ ctx, conds, body, orderBy, params, page }) => {
   const data = { rescode: RESCODE.SUCCESS, message: '修改成功', list: [], page: {}, stats: {}, change: []};
-  const server = ctx.db.mongo.Tag;
-  const changeConds = getConditions(conds);
-  try {
-    body.updateTime = Date.now();
-    body.updater = '更新人暂定';
-    await server.updateMany(changeConds, body, {});
-  } catch (e) {
-    data.message = RESCODE.FAIL;
-    data.message = '修改失败';
-  }
-  if (params){
-    const listData = await this.getList({ ctx, params, page, orderBy });
-    data.stats = listData.stats || {};
-    data.list = listData.list || [];
-    data.page = listData.page || {};
-  }
-  data.change = await server.find(changeConds);
-  return data;
+  return await common.update(data)({ model: 'Tag',  ctx, conds, body, orderBy, params, page});
 }
 
  /**
@@ -97,29 +47,20 @@ module.exports.update = async ({ ctx, conds, body, orderBy, params, page }) => {
  * @param {Object}  page    分页参数
  */
 module.exports.getList = async ({  ctx, params, page, orderBy }) => {
-  const server = ctx.db.mongo.Tag;
-  const conds = getConditions(params);
-  const data = { 
-    list: [], 
-    change: [],
-    message: '请求成功', 
-    page: { ...page }, 
-    rescode: RESCODE.SUCCESS, 
-    stats: { total: await server.find(conds).count() }, 
-  };
-  try {
-    if (page){
-      const sort = orderBy || {};
-      const skip = ( page.page - 1 ) * page.pageSize;
-      const limit = page.pageSize;
-      data.list = await server.find(conds).skip(skip).limit(limit).sort(sort);
-      data.stats.totalPage = Math.ceil( data.stats.total / page.pageSize );
-    } else {
-      data.list = await server.find(conds);
-    }
-  } catch (e) {
-    data.rescode = RESCODE.FAIL;
-    data.message = '请求失败';
+  const data = { list: [], change: [], message: '请求成功', page: {},  rescode: RESCODE.SUCCESS, stats: {}, };
+  return await common.getList(data)({ model: 'Tag', ctx, params, page, orderBy});
+}
+
+/**
+ * 标签是否存在依赖, 并返回提示语
+ * @param {Object}  ctx   koa 上下文
+ * @param {Object}  ids   需要检测的 ids 
+ * @return {String}  {空字符： 表示不存在依赖， 非空： 存在依赖时给定的提示语}
+ */
+const tJudgeIsRely = async ( ctx, ids ) => {
+  const modelTag = ctx.db.mongo.Tag;
+  if(!!await modelTag.find({ parent: { $in: ids }, status: {$ne: STATUS.DELETE}}).count()){
+    return '标签存在子级标签';
   }
-  return data;
+  return '';
 }

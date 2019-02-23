@@ -1,7 +1,7 @@
-const { STATUS } = require('../config/conts');
+const { STATUS } = require('../../config/conts');
 
 // 获取下拉项 options
-module.exports.options = async ({ ctx, model, page = {}, params = {} }) => {
+module.exports = async ({ ctx, model, page = {}, params = {} }) => {
   const defautPageSize = 10;
   const server = ctx.db.mongo[model];
   const { ids = [], name = '' } = params;
