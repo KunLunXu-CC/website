@@ -116,6 +116,20 @@ module.exports.getTagList = async ({ ctx, params, page, orderBy }) => {
 }
 
 /**
+ * 获取标签列表
+ * @param {Object}  ctx      koa上下文
+ * @param {Object}  id       通过id查询
+ */
+module.exports.findOne = async ({ ctx, id}) => {
+  const modelTag = ctx.db.mongo.Tag;
+  try {
+    return modelTag.findOne({_id: id});
+  } catch(e){
+    return {};
+  }
+}
+
+/**
  * 获取基础返回数据模型以及模型
  * @param {Object} ctx          koa 上下文
  * @param {String} initMessage  初始返回信息

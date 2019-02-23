@@ -1,0 +1,14 @@
+extend type Mutation {
+  createArticles(
+    body: [UpdateAticle!]!
+  ): String
+}
+
+input UpdateAticle{
+  name: String!
+  desc: String
+  thumb: String
+  tags: [ID!]
+  content: String
+	status: Int
+}
