@@ -1,4 +1,5 @@
 const articleServer = require('../../service/article');
+const tagServer = require('../../service/tag');
 
 module.exports = {
   Query: {
@@ -16,6 +17,19 @@ module.exports = {
     },
     updateArticles: async (parents, args, context, info) => {
       return await articleServer.update({ ...args, ctx: context.ctx });
+    },
+  },
+  
+  Article: {
+    tags: async (parents, args, context, info) => {
+      if (parents.tags){
+        const data = await tagServer.getList({
+          ctx: context.ctx, 
+          params: {ids: parents.tags}
+        });
+        return data.list;
+      }
+      return [];
     },
   }
 }

@@ -71,7 +71,7 @@ type Article{
   name: String!
   desc: String
   thumb: String
-  tags: [ID!]
+  tags: [Tag!]
   content: String
 	status: Int
   creator: ID
