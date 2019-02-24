@@ -67,3 +67,13 @@ module.exports.getList = async ({  ctx, params, page, orderBy }) => {
   const data = { list: [], change: [], message: '请求成功', page: {},  rescode: RESCODE.SUCCESS, stats: {}, };
   return await common.getList(data)({ model: 'Tag', ctx, params, page, orderBy});
 }
+
+/**
+ * 获取标签
+ * @param {Object}  ctx       koa上下文
+ * @param {Object}  params    查询参数
+ */
+module.exports.findOne = async ({ ctx, params }) => {
+  const data = { data: {}, message: '请求成功', rescode: RESCODE.SUCCESS };
+  return await common.findOne(data)({ model: 'Tag', ctx, params });
+}

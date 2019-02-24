@@ -3,7 +3,7 @@ const getConditions = require('../../utils/getConditions');
 const _ = require('lodash');
 
  /**
- * 获取标签列表
+ * 获取数据列表
  * @param {Object}  data     响应基础数据
  * @param {String}  model    模型名称
  * @param {Object}  ctx      koa上下文

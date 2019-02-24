@@ -2,8 +2,12 @@ const tagServer = require('../../service/tag');
 module.exports = {
   Tag: {
     parent: async (parents, args, context, info) => {
-      if (parents._id){
-        return await tagServer.findOne({ id: parents.parent,  ctx: context.ctx});;
+      if (parents.parent){
+        const data = await tagServer.findOne({ 
+          parents: { id: parents.parent },
+          ctx: context.ctx
+        });
+        return data.data;
       } else { return {}; }
     },
   },
