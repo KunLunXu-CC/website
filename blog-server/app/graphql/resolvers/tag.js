@@ -8,7 +8,9 @@ module.exports = {
           ctx: context.ctx
         });
         return data.data;
-      } else { return {}; }
+      } else { 
+        return {}; 
+      }
     },
   },
 

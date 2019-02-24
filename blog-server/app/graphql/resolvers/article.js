@@ -28,8 +28,9 @@ module.exports = {
           params: {ids: parents.tags}
         });
         return data.list;
+      } else {
+        return [];
       }
-      return [];
     },
   }
 }
