@@ -3,6 +3,7 @@ const getList = require('./getList');
 
 /**
  * 创建文章
+ * @param {Object}  data    响应基础数据
  * @param {String}  model   模型名称
  * @param {Object}  ctx     koa上下文
  * @param {Object}  body    创建信息
@@ -10,6 +11,7 @@ const getList = require('./getList');
  * @param {Object}  page    分页参数
  */
 module.exports = (data) => async ({ model, ctx, body, params, orderBy, page }) => {
+  data = {...data};
   const server = ctx.db.mongo[model];
   try {
     data.change = await server.insertMany(body.map(v => ({
@@ -22,7 +24,7 @@ module.exports = (data) => async ({ model, ctx, body, params, orderBy, page }) =
     data.message = '创建失败';
   }
   if (params){
-    const listData = await getList({ model, ctx, params, orderBy, page });
+    const listData = await getList(data)({ model, ctx, params, orderBy, page });
     data.stats = listData.stats || {};
     data.list = listData.list || [];
     data.page = listData.page || {};

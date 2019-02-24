@@ -4,12 +4,14 @@ const _ = require('lodash');
 
  /**
  * 获取标签列表
+ * @param {Object}  data     响应基础数据
  * @param {String}  model    模型名称
  * @param {Object}  ctx      koa上下文
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页参数
  */
 module.exports = (data) => async ({ model, ctx, params, page, orderBy }) => {
+  data = {...data};
   const server = ctx.db.mongo[model];
   const conds = getConditions(params);
   data.page = { ...page };
