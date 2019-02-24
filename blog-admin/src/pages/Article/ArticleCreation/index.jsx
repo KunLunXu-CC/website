@@ -1,18 +1,22 @@
-import React, { Fragment } from 'react';
 import './index.scss';
+import React from 'react';
+import { Form } from 'antd';
+import ThumbBlock from './subpage/ThumbBlock';
 import ContentBlock from './subpage/ContentBlock';
-import TitleBlock from './subpage/TitleBlock';
+import SettingBlock from './subpage/SettingBlock';
 import PreviewBlock from './subpage/PreviewBlock';
+import ActionsBlock from './subpage/ActionsBlock';
 
-class ArticleCreation extends React.Component{
-  render(){
-    return (
-      <Fragment>
-        <TitleBlock />
-        <ContentBlock />
-        <PreviewBlock />
-      </Fragment>
-    );
-  }
+const ArticleCreation = ({form}) => {
+  return (
+    <Form>
+      <SettingBlock form={form}/>
+      <ThumbBlock form={form} />
+      <ContentBlock form={form}/>
+      <ActionsBlock form={form} />
+      <PreviewBlock form={form}/>
+    </Form>
+  );
 }
-export default ArticleCreation;
+
+export default Form.create({})(ArticleCreation);

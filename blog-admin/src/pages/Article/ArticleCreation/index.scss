@@ -17,3 +17,10 @@
   opacity: 0.5;
   }
 }
+
+.title-wrapper{
+  padding: 0 2px;
+  &-input{
+    border: none !important;
+  }
+}

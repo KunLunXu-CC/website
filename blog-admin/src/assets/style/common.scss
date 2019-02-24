@@ -98,7 +98,7 @@
   overflow: hidden;
 }
 
-// 内容块样式(第一、 第二、 第三)
+// 内容块样式(第一、 第二、 第三、第四)
 .block_first{
   border-left: 3px solid #94DFFC;
 }
@@ -109,5 +109,11 @@
 }
 
 .block_third{
+  margin-top: 20px;
+  border-left: 3px solid #87D068;
+}
+
+.block_fourth{
+  margin-top: 20px;
   border-left: 3px solid #3C3F44;
 }
