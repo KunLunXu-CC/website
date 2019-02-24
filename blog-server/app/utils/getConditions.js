@@ -21,6 +21,9 @@ module.exports = ( params = {} ) => {
       case 'status':
         conds.status = { $in: value };
         break;
+      case 'tag':
+        conds.tags = { $elemMatch: {$eq: value} };
+        break;
       case 'startUpdateTime':
       case 'endUpdateTime':
         startTime = params.startUpdateTime;

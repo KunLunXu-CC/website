@@ -30,7 +30,7 @@ extend type Mutation {
 input ArticleParams {
   id: ID
   ids: [ID!]
-  tags: [ID!]
+  tag: ID,
   creator: ID
   updater: ID
   name: String
