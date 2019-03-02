@@ -21,7 +21,6 @@ const Label = ({children, required}) => (
 );
 
 const FormBlock = ({ modalStore, listStore, form }) => {
-  const { getFieldDecorator } = form;
   const tagOptsStore = useOptionsHook({model: "Tag"});
 
   useEffect(() => {
@@ -74,7 +73,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <Form.Item label={<Label required>名称</Label>}>
               {
-                getFieldDecorator("name", {
+                form.getFieldDecorator("name", {
                   initialValue: initialValues.name, 
                   rules: [{ required: true, message: '标签名称必填' }],
                 })( <Input placeholder="标签名称"/> )
@@ -84,7 +83,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <Form.Item label={<Label>父级</Label>}>
               {
-                getFieldDecorator("parent", {
+                form.getFieldDecorator("parent", {
                   initialValue: (initialValues.parent || {}).id,
                 })( 
                   <Select 
@@ -103,7 +102,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <Form.Item label={<Label>颜色</Label>}>
               {
-                getFieldDecorator("color", {
+                form.getFieldDecorator("color", {
                   initialValue: initialValues.color,
                 })( <Select allowClear placeholder="标签颜色">{ colorOptions }</Select>)
               }
@@ -112,7 +111,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <Form.Item label={<Label>图标</Label>}>
               {
-                getFieldDecorator("icon", {
+                form.getFieldDecorator("icon", {
                   initialValue: initialValues.icon,
                 })( <Select allowClear placeholder="标签图标">{ iconOptions }</Select> )
               }

@@ -9,6 +9,7 @@ const Option = Select.Option;
  * - page     请求参数（page{page: 获取多少页数据， pageSize: 每次每页请求个数}）
  * - params   请求参数
  * - list     请求返回的列表
+ * @param {String} model 要获取 options 的模型
  */
 export const useOptionsHook = ({ model }) => {
   const [stats, setStats] = useState({ total: 0, totalPage: 1 });

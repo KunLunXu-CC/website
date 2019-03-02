@@ -1,10 +1,18 @@
 import React from 'react';
-import { Card, Input } from 'antd';
+import { FontIcon } from '@components';
+import { Card, Input, Icon } from 'antd';
 
-export default () => {
+export default ({form}) => {
   return (
-    <Card title="操作按钮" className="block_fourth">
-      操作按钮
-    </Card>
+    <Card 
+      title="操作按钮" 
+      className="block_fourth"
+      bodyStyle={{padding: '0'}}
+      actions={[
+        <FontIcon icon="#icon-quxiao" />,
+        <FontIcon icon="#icon-baocun" />,
+        <FontIcon icon="#icon-fabu" />,
+      ]}
+    />
   );
 }

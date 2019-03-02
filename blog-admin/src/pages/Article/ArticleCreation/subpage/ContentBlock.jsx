@@ -1,14 +1,17 @@
 import React from 'react';
-import { Card, Input } from 'antd';
-import { FontIcon } from '@components';
+import { Card, Input, Form } from 'antd';
 const { TextArea } = Input;
 
 export default ({form}) => (
   <Card
     title="文章编写"
     className="block_third">
-    {form.getFieldDecorator('content', {})(
-      <TextArea autosize={{ minRows: 30, maxRows: 30 }}>描述</TextArea>
-    )}
+    <Form.Item>
+      {form.getFieldDecorator('content', {
+        rules:[{ required: true, message: '请输入文章内容' }]
+      })(
+        <TextArea autosize={{ minRows: 30, maxRows: 30 }} placeholder="请输入文章内容" />
+      )}
+    </Form.Item>
   </Card>
 );

@@ -11,7 +11,7 @@ exports.fields = {
 		type: String,
   },
   desc: {
-    title: '描述',
+    title: '描述（概要）',
 		type: String,
   },
   thumb: {

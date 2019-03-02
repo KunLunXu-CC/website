@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Spin as AntdSpin } from 'antd';
-import { use } from '@server';
+import { use,　eject } from '@server';
 
 /**
  *  hook 状态的分离
@@ -10,7 +10,7 @@ const useSpinHook = () => {
   const [spinning, setSpinning] = useState(false);
   let count = 0;
   useEffect(() => {
-    use({
+    const interceptors = use({
       request: [(config) => {
         count += 1;
         !spinning && setSpinning(true);
@@ -22,7 +22,9 @@ const useSpinHook = () => {
         return response;
       }, (error) => (Promise.reject(error))]
     });
+    return () => { eject(interceptors); }
   }, []);
+
   return { spinning };
 }
 

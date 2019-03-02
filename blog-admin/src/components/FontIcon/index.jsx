@@ -17,13 +17,17 @@ export const FontIcon = (props) => {
   });
 
   return (
-    <svg 
-      style={styles}
-      aria-hidden="true"
-      onClick={props.onClick || null}
-      className={`iconfont ${props.className || ''}`} 
-    >
-      <use xlinkHref={props.icon} ></use>
-    </svg>
+    <span onClick={props.onClick || null}>
+      <svg 
+        style={styles}
+        aria-hidden="true"
+        
+        className={`iconfont ${props.className || ''}`} 
+      >
+        <use xlinkHref={props.icon} ></use>
+      </svg>
+
+      ssss
+    </span>
   );
 }
