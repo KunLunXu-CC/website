@@ -4,7 +4,7 @@
 module.exports.STATUS = {
   DISABLE: 0,     // 禁用： 保存
   ENABLE: 1,      // 启用： 发布
-  DELETE: -11,
+  DELETE: -11,    // 删除
 }
 
 // 响应状态 (1: 成功, 0: 失败)

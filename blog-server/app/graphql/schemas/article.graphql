@@ -68,6 +68,7 @@ type ArticleList{
 }
 
 type Article{
+  id: ID
   name: String!
   desc: String
   thumb: String

@@ -31,6 +31,7 @@ export const TAG_ICONS = {
 export const ARTICLE_STATUS = {
   DISABLE: { VALUE: 0, DESC: '已保存' },
   ENABLE: {VALUE: 1, DESC: '已发布'}, 
+  DELETE: {VALUE: -11, DESC: '已删除'}
 }
 
 // [状态]响应状态

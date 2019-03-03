@@ -1,12 +1,12 @@
 import React from 'react';
-import { FontIcon } from '@components';
 import { Card } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { FontIcon } from '@components';
 import { create } from '@server/article';
 
-export default ({form}) => {
-
+export default withRouter(({form, history}) => {
   const onCancel = () => {
-    console.log('----- 取消 -----');
+    history.goBack();
   }
 
   const onSave = () => {
@@ -22,7 +22,7 @@ export default ({form}) => {
   }
 
   return (
-    <Card 
+    <Card
       title="操作按钮" 
       className="block_fourth"
       bodyStyle={{padding: '0'}}
@@ -48,4 +48,4 @@ export default ({form}) => {
       ]}
     />
   );
-}
+});
