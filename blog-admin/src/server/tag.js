@@ -30,8 +30,7 @@ export const getTagList = ({ page, params }) => (new Promise((resolve, reject) =
 }));
 
 export const createTags = ({body}) => (new Promise((resolve, reject) => {
-  axios(
-    {
+  axios({
       url: '/specialUrl',
       method: 'post',
       data: {
@@ -42,8 +41,7 @@ export const createTags = ({body}) => (new Promise((resolve, reject) => {
           }
         `,
       }
-    }
-  )
+  })
   .then(function (response) {
     const data = response.data.data.createTags;
     handleMessage({

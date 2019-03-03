@@ -18,11 +18,23 @@ export const TAG_COLORS = {
   ORANGE_RED: { VALUE: '#FF5500', DESC: '橙红色' },
 }
 
-// [标签]　图标列表
+// [标签] 图标列表
 export const TAG_ICONS = {
   JS: { VALUE: '#icon-js', DESC: 'JS' },
   CSS: { VALUE: '#icon-css', DESC: 'CSS' },
   WEB: { VALUE: '#icon-qianduan', DESC: '前端' },
   DOCKER: { VALUE: '#icon-docker', DESC: 'docker' },
   UBUNTU: { VALUE: '#icon-ubuntu', DESC: 'ubuntu' },
+};
+
+// [状态] 模型基本状态
+export const ARTICLE_STATUS = {
+  DISABLE: { VALUE: 0, DESC: '已保存' },
+  ENABLE: {VALUE: 1, DESC: '已发布'}, 
+}
+
+// [状态]响应状态
+export const RESCODE = {
+  SUCCESS: {VALUE: 1, DESC: '成功'},   
+  FAIL: {VALUE: 0, DESC: '失败'}
 };

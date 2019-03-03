@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontIcon } from '@components';
-import { Card, Input, Icon } from 'antd';
+import { Card } from 'antd';
+import { createArticle } from '@server/article';
 
 export default ({form}) => {
 
@@ -10,7 +11,7 @@ export default ({form}) => {
 
   const onSave = () => {
     form.validateFieldsAndScroll((errors, values) => {
-      console.log('----- 保存 -----', values);
+      !errors && createArticle({ body: values });
     });
   }
 

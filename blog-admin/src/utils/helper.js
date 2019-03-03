@@ -18,23 +18,21 @@ export const filterObject = (obj, filterVaslue = []) => {
 
 /**
  * 请求错误信息处理函数
- * @param {Object} data 
- * @param {Number} data.rescode   响应代码
- * @param {String} data.message   响应信息
+ * @param {Number} rescode   响应代码
+ * @param {String} message   响应信息
  */
-export const handleMessage = (data = {}) => {
+export const handleMessage = ({ rescode, message: info }) => {
   const map = {
-    0: message.error,
-    1: message.success,
+    [CONTS.RESCODE.FAIL.VALUE]: message.error,
+    [CONTS.RESCODE.SUCCESS.VALUE]: message.success,
   };
-  const handler = map[data.rescode];
-  handler && handler(data.message);
+  const handler = map[rescode];
+  handler && handler(info);
 }
 
 /**
  * 通过固定格式的 conts(常量)， 获取 antd options
  * @param {String} name 常量名称
- * 
  */
 export const getOptiionsOfconts = (name) => {
   const options = [];

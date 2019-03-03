@@ -21,7 +21,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
 
   useEffect(() => {
     modalStore.onOpen((data) => {
-      if(data.current && data.current.parent){
+      if(data.current && data.current.parent && data.current.parent.id){
         tagOptsStore.resetParams({ids: [data.current.parent.id]});
       } else {
         tagOptsStore.init();
@@ -80,7 +80,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
             <FormItem label="父级" length="3">
               {
                 form.getFieldDecorator("parent", {
-                  initialValue: (initialValues.parent || {}).id,
+                  initialValue: (initialValues.parent || {}).id || undefined,
                 })( 
                   <Select 
                     allowClear 
