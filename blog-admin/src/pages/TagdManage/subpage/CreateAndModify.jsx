@@ -16,11 +16,6 @@ const mapHandleFunWithOperating = {
 const colorOptions = getOptiionsOfconts('TAG_COLORS');
 const iconOptions = getOptiionsOfconts('TAG_ICONS');
 
-// label 组件
-const Label = ({children, required}) => (
-  <span style={{ paddingLeft: required ? ' 0px' : '10px' }}>{children}</span>
-);
-
 const FormBlock = ({ modalStore, listStore, form }) => {
   const tagOptsStore = useOptionsHook({model: "Tag"});
 
