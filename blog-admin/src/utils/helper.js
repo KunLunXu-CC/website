@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import * as CONTS from '../config/conts';
+import * as CONTS from '@config/conts';
 import { message, Select } from 'antd';
 
 /**

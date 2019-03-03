@@ -1,7 +1,8 @@
 import axios from './index';
-import { handleMessage } from '../utils/helper'; 
+import {} from '@config/conts';
+import { handleMessage } from '@utils/helper'; 
 
-export const createArticle = ({body}) => (new Promise((resolve, reject) => {
+export const create = ({body}) => (new Promise((resolve, reject) => {
   axios({
     url: '/specialUrl',
     method: 'post',

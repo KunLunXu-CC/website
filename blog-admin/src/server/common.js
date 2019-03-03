@@ -1,4 +1,4 @@
-import axios from './index';
+import axios from '@server';
 
 export const getOptions = ({model, page, params}) => new Promise((resolve, reject) => {
   axios({

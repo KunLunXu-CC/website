@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontIcon } from '@components';
 import { Card } from 'antd';
-import { createArticle } from '@server/article';
+import { create } from '@server/article';
 
 export default ({form}) => {
 
@@ -11,7 +11,7 @@ export default ({form}) => {
 
   const onSave = () => {
     form.validateFieldsAndScroll((errors, values) => {
-      !errors && createArticle({ body: values });
+      !errors && create({ body: values });
     });
   }
 
