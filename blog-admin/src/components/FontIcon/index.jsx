@@ -21,7 +21,7 @@ export const FontIcon = ({ size, color, iconStyle, onClick, className, icon, lab
 
   return (
       <span 
-        style={{...styles}} 
+        style={{ ...styles }} 
         onClick={onClick || null}
         className={` ${className || ''}`} 
       >

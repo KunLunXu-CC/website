@@ -6,9 +6,9 @@ import { createTags, updateTagByIds } from '@server';
 import { Modal, Form, Input, Row, Col, Select } from 'antd';
 
 // 操作类型映射处理函数
-const mapOperatingWithFun = {
-  [OPERATING_TYPE.EDIT.value]: updateTagByIds,
-  [OPERATING_TYPE.CREATE.value]: createTags
+const mapHandleFunWithOperating = {
+  [OPERATING_TYPE.EDIT.VALUE]: updateTagByIds,
+  [OPERATING_TYPE.CREATE.VALUE]: createTags
 };
 
 // 下拉项
@@ -45,7 +45,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
   const onOk = () => {
     form.validateFieldsAndScroll((error, values) => {
       if(!error){
-        const handleFun = mapOperatingWithFun[modalStore.data.type];
+        const handleFun = mapHandleFunWithOperating[modalStore.data.type];
         const id = (modalStore.data.current || {}).id;
         handleFun && handleFun({id, body: values}).then(res => {
           listStore.resetPage({ page: 1 });

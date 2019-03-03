@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import { Card, Table } from 'antd';
+import { Card, Table, Popconfirm } from 'antd';
 import { removeTagByIds } from '@server';
 import { OPERATING_TYPE } from '@config/conts';
-import { Spin, FontIcon, IconBtn } from '@components';
+import { Spin, FontIcon } from '@components';
 import handler, { tagColumnModel } from '@config/columns';
-import React, { useEffect, useMemo } from 'react';
+import React, { Fragment } from 'react';
 
 export default ({listStore, modalStore}) => {
   // 分页器 onChange 事件
@@ -17,7 +17,7 @@ export default ({listStore, modalStore}) => {
     modalStore.openModal({
       title: '修改标签',
       current: record ||  {},
-      type: OPERATING_TYPE.EDIT.value,
+      type: OPERATING_TYPE.EDIT.VALUE,
     });
   };
 
@@ -32,7 +32,7 @@ export default ({listStore, modalStore}) => {
     modalStore.openModal({
       current: null,
       title: '新增标签', 
-      type: OPERATING_TYPE.CREATE.value, 
+      type: OPERATING_TYPE.CREATE.VALUE, 
     });
   };
 
@@ -41,18 +41,23 @@ export default ({listStore, modalStore}) => {
     title: '操作',
     key: 'operate',
     dataIndex: 'operate',
-    render: (text, record, index) => ([
-      <IconBtn 
-        className="mlrn"
-        key={OPERATING_TYPE.EDIT.value} 
-        type={OPERATING_TYPE.EDIT.value}
-        onClick={onEdit.bind(null, record)}/>,
-      <IconBtn
-        className="mlrn"
-        key={OPERATING_TYPE.DELETE.value} 
-        type={OPERATING_TYPE.DELETE.value} 
-        onClick={onDelete.bind(null, record)}/>,
-    ])
+    render: (text, record, index) => (
+      <Fragment>
+        <FontIcon
+          icon="#icon-editor"
+          className="cp f22 mrm linkp"
+          onClick={onEdit.bind(null, record)}
+        />
+        <Popconfirm 
+          okText="确定" 
+          cancelText="取消"
+          title="确定要删除该条记录?" 
+          onConfirm={onDelete.bind(null, record)} 
+        >
+          <FontIcon icon="#icon-shanchu" className="cp f22 linkd" />
+        </Popconfirm>
+      </Fragment>
+    )
   }]);
 
   // 新增按钮
