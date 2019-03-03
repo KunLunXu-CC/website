@@ -8,9 +8,9 @@ import './index.scss';
  * @param {String}            label         label 文字
  * @param {String || NUmber}  length        label 长度
  * @param {Boolean}           required      是否必填（多一个红 *）
- * @param {Boolean}           right         label对齐方式（是否右对齐）
+ * @param {Boolean}           left          label对齐方式（是否左对齐， 默认右边对齐）
  */
-export const FormItem = ({ children, label, length = 4 , required, right}) => {
+export const FormItem = ({ children, label, length = 4 , required, left}) => {
   return (
     <div className="private-form-item">
       <div 
@@ -18,7 +18,7 @@ export const FormItem = ({ children, label, length = 4 , required, right}) => {
         style={{
           paddingTop: '9px',
           flex: `0 0 ${Number(length) + 1}em`,
-          textAlign: right ? 'right' : 'left'
+          textAlign: left ? 'left' : 'right'
         }}
       >
         { required ? <span style={{color: '#f5222d'}}> * </span> : '' }

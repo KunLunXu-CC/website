@@ -1,6 +1,7 @@
 import { useOptionsHook } from '@hook';
 import { OPERATING_TYPE } from '@config/conts';
 import React, { useMemo, useEffect } from 'react';
+import { FormItem } from '@components';
 import { getOptiionsOfconts } from '@utils/helper';
 import { createTags, updateTagByIds } from '@server';
 import { Modal, Form, Input, Row, Col, Select } from 'antd';
@@ -71,17 +72,17 @@ const FormBlock = ({ modalStore, listStore, form }) => {
       <Form className="ant-advanced-search-form">
         <Row gutter={8}>
           <Col span={12}>
-            <Form.Item label={<Label required>名称</Label>}>
+            <FormItem label="名称" length="3" required>
               {
                 form.getFieldDecorator("name", {
                   initialValue: initialValues.name, 
                   rules: [{ required: true, message: '标签名称必填' }],
                 })( <Input placeholder="标签名称"/> )
               }
-            </Form.Item>
+            </FormItem>
           </Col>
           <Col span={12}>
-            <Form.Item label={<Label>父级</Label>}>
+            <FormItem label="父级" length="3">
               {
                 form.getFieldDecorator("parent", {
                   initialValue: (initialValues.parent || {}).id,
@@ -97,25 +98,25 @@ const FormBlock = ({ modalStore, listStore, form }) => {
                   </Select> 
                 )
               }
-            </Form.Item>
+           </FormItem>
           </Col>
           <Col span={12}>
-            <Form.Item label={<Label>颜色</Label>}>
+            <FormItem label="颜色" length="3">
               {
                 form.getFieldDecorator("color", {
                   initialValue: initialValues.color,
                 })( <Select allowClear placeholder="标签颜色">{ colorOptions }</Select>)
               }
-            </Form.Item>
+            </FormItem>
           </Col>
           <Col span={12}>
-            <Form.Item label={<Label>图标</Label>}>
+            <FormItem label="图标" length="3">
               {
                 form.getFieldDecorator("icon", {
                   initialValue: initialValues.icon,
                 })( <Select allowClear placeholder="标签图标">{ iconOptions }</Select> )
               }
-            </Form.Item>
+            </FormItem>
           </Col>
         </Row>
       </Form>
