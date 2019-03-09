@@ -5,6 +5,8 @@
 
     "paths": {
       "@hook/*": ["src/hook/*"],
+      "@pages/*": ["src/pages/*"],
+      "@layout/*": ["src/layout/*"],
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@config/*": ["src/config/*"],
