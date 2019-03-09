@@ -30,6 +30,7 @@ const getRoutesWithSetting = (setting, node) => {
 export default (inputSettings) => {
   const [authorities, setAuthorities] = useState([]);
   const [pathname, setPathname] = useState('/');
+  const [defaultKeys, setDefaultKeys] = useState({ defaultOpenKeys: [], defaultSelectedKeys: [] });
   const [settings, setSettings] = useState(inputSettings);
   const [routeList, setRouteList] = useState([]);
   const [menuList, setMenuList] = useState([]);
@@ -37,13 +38,14 @@ export default (inputSettings) => {
   useEffect(() => {
     resetRouteList();
     resetMenuList();
-  }, []);
+  }, [settings]);
 
   useEffect(() => {
     console.log('-----------------------------------');
     console.log('routeList: ', routeList);
     console.log('menuList: ', menuList);
-  }, [routeList, menuList]);
+    console.log('defaultKeys', defaultKeys);
+  }, [routeList, menuList, defaultKeys]);
   
   
   useEffect(() => {
@@ -51,7 +53,7 @@ export default (inputSettings) => {
   }, [routeList, pathname]);
 
   /**
-   * 重置路由列表
+   * 重置路由列表： 根据配置获取扁平化后的路由配置并过滤多余的配置
    */
   const resetRouteList = () => {
     let node = [], list = [];
@@ -72,7 +74,7 @@ export default (inputSettings) => {
   }
 
   /**
-   * 重置菜单列表
+   * 重置菜单列表: 根据配置项目格式化出渲染菜单栏所需要的数据结构
    */
   const resetMenuList = () => {
     let list = [];
@@ -95,27 +97,34 @@ export default (inputSettings) => {
   }
 
   /**
-   * match路由 匹配的 pathname
+   * 匹配的 pathname， 返回默认菜单栏 默认打开以及选中的key defaultOpenKeys, defaultSelectedKeys
    */
   const matchPathName = () => {
-    // 无法匹配返回 null, 否则返回匹配后的信息（Object）
-    const match = matchPath('/users/123', {
-      path: '/users/5555',
-      exact: true,
-      strict: false
-    })
     const matchNode = routeList.filter( v => {
-      const match = matchPath('/tags', {
+      // 无法匹配返回 null, 否则返回匹配后的信息（Object）
+      const match = matchPath(pathname, {
         path: v.path,
         exact: true,
         strict: false
       })
       return !!match;
+    })[0];
+    if (!matchNode) { return false; }
+    const defaultOpenKeys = matchNode.node[1] ?  [matchNode.node[0]] : [];
+    const defaultSelectedKeys = [ matchNode.node[1] || matchNode.node[0] ];
+    setDefaultKeys({ 
+      defaultOpenKeys, 
+      defaultSelectedKeys,
     });
-
-    console.log('-----::::::::::::::::::::::::::::::', matchNode);
-    console.log(match);
-    return match;
+    return matchNode;
   }
 
+  return {
+    defaultKeys,
+    routeList,
+    menuList,
+    setPathname,
+    setSettings,
+    setAuthorities,
+  };
 }
