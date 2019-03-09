@@ -97,6 +97,7 @@ module.exports = {
     //  自定义路径别名 来确保模块引入变得更简单(其实就在解析路径时如果存在对应 key 使用相应的值进行替换)
     alias: {
       '@hook': path.resolve(__dirname, '../src/hook'),
+      '@pages': path.resolve(__dirname, '../src/pages'),      
       '@utils': path.resolve(__dirname, '../src/utils'),
       '@server': path.resolve(__dirname, '../src/server'),
       '@config': path.resolve(__dirname, '../src/config'),
