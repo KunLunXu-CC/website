@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { matchPath } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Menu, Icon } from 'antd';
+import { matchPath, Switch, Route, Redirect } from 'react-router-dom';
 
 /**
  * 从配置项中获取 routes
- * @param {Object} setting 当前配置项
- * @param {Array} node  节点列表其实就是 path 列表, 
+ * @param {Object} setting    当前配置项
+ * @param {Array} node        节点列表其实就是 path 列表, 
  */
 const getRoutesWithSetting = (setting, node) => {
   const list = [];
@@ -40,14 +41,6 @@ export default (inputSettings) => {
     resetMenuList();
   }, [settings]);
 
-  useEffect(() => {
-    console.log('-----------------------------------');
-    console.log('routeList: ', routeList);
-    console.log('menuList: ', menuList);
-    console.log('defaultKeys', defaultKeys);
-  }, [routeList, menuList, defaultKeys]);
-  
-  
   useEffect(() => {
     matchPathName();
   }, [routeList, pathname]);
@@ -86,6 +79,7 @@ export default (inputSettings) => {
         }
         return {
           children,
+          link: v.link,
           name: v.name,
           path: v.path,
           icon: v.icon,
@@ -119,10 +113,49 @@ export default (inputSettings) => {
     return matchNode;
   }
 
+  /**
+   * 监听 menuList 获取 antd Menu 的子菜单
+   */
+  const menuChildren = useMemo(() => {
+    const recursion = (list) => {
+      return list.map( v => {
+        const title = (
+          <span>
+            {v.icon ? <Icon type={v.icon} /> : null}
+            <span>{v.name}</span>
+          </span>
+        );
+        return (
+          v.children && v.children.length > 0 ?
+          <Menu.SubMenu key={v.path} title={title}>
+            { recursion(v.children) }
+          </Menu.SubMenu> :
+          <Menu.Item key={v.path} link={v.link}>
+            {title}
+          </Menu.Item>
+        );
+      });
+    }
+    return recursion(menuList);
+  }, [menuList]);
+
+  /**
+   * 监听 routeList 并渲染出 route
+   */
+  const routeChildren = useMemo(() => {
+    return (
+      <Switch>
+        {routeList.map( v => ( 
+          <Route exact={v.exact} key={v.path} component={v.page} path={v.path}/>
+        ))}
+      </Switch>
+    );
+  }, [routeList]);
+
   return {
     defaultKeys,
-    routeList,
-    menuList,
+    routeChildren,
+    menuChildren,
     setPathname,
     setSettings,
     setAuthorities,
