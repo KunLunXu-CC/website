@@ -1,40 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 const { Sider } = Layout;
 
 const stateHook = ({ routeHook, location, history, collapsed }) => {
-  const [openKeys, setOpenKeys] = useState([]);
-  const [selectedKeys, setSelectedKeys] = useState([]);
 
   useEffect(() => {
     routeHook.setPathname(location.pathname);
   }, [location.pathname]);
 
-  useEffect(() => {
-    const { defaultOpenKeys, defaultSelectedKeys } = routeHook.defaultKeys;
-    setOpenKeys(defaultOpenKeys);
-    setSelectedKeys(defaultSelectedKeys);
-  }, [routeHook.defaultKeys]);
-
-  useEffect(() => {
-    setOpenKeys([]);
-  }, [collapsed]);
-
   const onMenuClick = ({ item, key, keyPath }) => {
     history && history.push(item.props.link || key);
   }
 
-  const resetOpenKeys = (openKeys) => {
-    setOpenKeys(openKeys);
+  const onOpenChange = (openKeys) => {
+    routeHook.setKeys({ ...routeHook.keys, openKeys });
   }
 
-  const resetSetSelectedKeys = ({ item, key, selectedKeys }) => {
-    setSelectedKeys(selectedKeys);
-  }
+  const keys = useMemo(() => {
+    const values = { selectedKeys: routeHook.keys.selectedKeys };
+    !collapsed && (values.openKeys = routeHook.keys.openKeys);
+    return values;
+  }, [routeHook.keys,collapsed ]);
 
-  return {openKeys, selectedKeys, resetOpenKeys, resetSetSelectedKeys, onMenuClick};
+  return {onOpenChange, onMenuClick, keys};
 }
 
 const LeftMenu = ({ collapsed, routeHook, history, location }) => {
@@ -42,14 +32,12 @@ const LeftMenu = ({ collapsed, routeHook, history, location }) => {
   return (
     <Sider trigger={null} className="base-sider" collapsible collapsed={collapsed} >
       <div> LOGO </div>
-      <Menu 
+      <Menu
         theme="dark" 
         mode="inline"
-        openKeys={state.openKeys}
+        {...state.keys}
         inlineCollapsed={collapsed}
-        selectedKeys={state.selectedKeys}
-        onOpenChange={state.resetOpenKeys}
-        onSelect={state.resetSetSelectedKeys}
+        onOpenChange={state.onOpenChange}
         onClick = {state.onMenuClick}>
         {routeHook.menuChildren}
       </Menu>

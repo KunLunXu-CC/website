@@ -3,7 +3,7 @@ import { Menu, Icon } from 'antd';
 import { matchPath, Switch, Route, Redirect } from 'react-router-dom';
 
 /**
- * 从配置项中获取 routes
+ * 从配置项中筛选 route 所需的
  * @param {Object} setting    当前配置项
  * @param {Array} node        节点列表其实就是 path 列表, 
  */
@@ -11,6 +11,7 @@ const getRoutesWithSetting = (setting, node) => {
   const list = [];
   list.push({
     node: [...node],
+    type: 'page',
     path: setting.path,
     page: setting.page,
     exact: setting.exact || false,
@@ -18,6 +19,7 @@ const getRoutesWithSetting = (setting, node) => {
   if (setting.subpage && setting.subpage.length > 0){
     setting.subpage.forEach(v => {
       list.push({
+        type: 'subpage',
         path: v.path,
         page: v.page,
         exact: v.exact || false,
@@ -31,7 +33,7 @@ const getRoutesWithSetting = (setting, node) => {
 export default (inputSettings) => {
   const [authorities, setAuthorities] = useState([]);
   const [pathname, setPathname] = useState('/');
-  const [defaultKeys, setDefaultKeys] = useState({ defaultOpenKeys: [], defaultSelectedKeys: [] });
+  const [keys, setKeys] = useState({ openKeys: [], selectedKeys: [] });
   const [settings, setSettings] = useState(inputSettings);
   const [routeList, setRouteList] = useState([]);
   const [menuList, setMenuList] = useState([]);
@@ -42,7 +44,7 @@ export default (inputSettings) => {
   }, [settings]);
 
   useEffect(() => {
-    matchPathName();
+    matchPathName(pathname);
   }, [routeList, pathname]);
 
   /**
@@ -93,7 +95,7 @@ export default (inputSettings) => {
   /**
    * 匹配的 pathname， 返回默认菜单栏 默认打开以及选中的key defaultOpenKeys, defaultSelectedKeys
    */
-  const matchPathName = () => {
+  const matchPathName = (pathname) => {
     const matchNode = routeList.filter( v => {
       // 无法匹配返回 null, 否则返回匹配后的信息（Object）
       const match = matchPath(pathname, {
@@ -104,13 +106,13 @@ export default (inputSettings) => {
       return !!match;
     })[0];
     if (!matchNode) { return false; }
-    const defaultOpenKeys = matchNode.node[1] ?  [matchNode.node[0]] : [];
-    const defaultSelectedKeys = [ matchNode.node[1] || matchNode.node[0] ];
-    setDefaultKeys({ 
-      defaultOpenKeys, 
-      defaultSelectedKeys,
-    });
-    return matchNode;
+    const offset = matchNode.type === 'subpage' ? 2 : 1;
+    const node = matchNode.node;
+    const openKeyIndex = node.length - offset - 1;
+    const selectedKeyIndex = node.length - offset;
+    const openKeys = node[openKeyIndex] ? [node[openKeyIndex]] : [];
+    const selectedKeys = node[selectedKeyIndex] ? [node[selectedKeyIndex]] : [];
+    setKeys({ openKeys, selectedKeys });
   }
 
   /**
@@ -153,10 +155,11 @@ export default (inputSettings) => {
   }, [routeList]);
 
   return {
-    defaultKeys,
+    keys,
+    setKeys,
+    setPathname,
     routeChildren,
     menuChildren,
-    setPathname,
     setSettings,
     setAuthorities,
   };

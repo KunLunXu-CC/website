@@ -12,7 +12,6 @@ page: '页面',
 authority: '权限',
 subpage: '子页面',
 children: '儿子'
-
  */
 import React from 'react';
 
@@ -23,17 +22,20 @@ export default [
     icon: 'home',
     exact: true,
     page: HomePage,
-    // subpage: [
-    //   {
-    //     name: '404页面',
-    //     path: '*',
-    //     page: () => {return '404页面'},
-    //   }
-    // ]
+    subpage: [
+      {
+        name: '404页面',
+        type: 'subpage',
+        path: '/404',
+        level: 2,
+        page: () => {return '404页面'},
+      }
+    ]
   }, {
     name: '文章管理',
     icon: 'ordered-list',
     path: '/article',
+    
     children: [
       {
         name: '文章创作',
