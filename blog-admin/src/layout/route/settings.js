@@ -13,6 +13,7 @@ import React from 'react';
 import HomePage from '@pages/HomePage';
 import TagdManage from '@pages/TagdManage';
 import ArticleCreation from '@pages/Article/ArticleCreation';
+import NotFound from '@pages/Error/NotFound';
 
 export default [
   {
@@ -27,7 +28,7 @@ export default [
         type: 'subpage',
         path: '/404',
         level: 2,
-        page: () => {return '404页面'},
+        page: NotFound,
       }
     ]
   }, {

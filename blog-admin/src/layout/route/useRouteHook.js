@@ -149,7 +149,7 @@ export default (inputSettings) => {
   }, [menuList]);
   
   // 路由组件： 路由列表存在但是路由匹配不到则 重定向到 404
-  const NotFount = useCallback(() => {
+  const NotFound = useCallback(() => {
     const matchNode = matchPathName();
     if ( matchNode || routeList.length === 0 ) { return null; }
     return <Redirect to="/404" />;
@@ -162,7 +162,7 @@ export default (inputSettings) => {
         {routeList.map( v => ( 
           <Route exact={v.exact} key={v.path} component={v.page} path={v.path}/>
         ))}
-        <Route component={() => (<NotFount />)} />
+        <Route component={() => (<NotFound />)} />
       </Switch>
     );
   }, [routeList]);
