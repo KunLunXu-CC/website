@@ -12,6 +12,7 @@ const { Content } = Layout;
 const stateHook = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const routeHook = useRouteHook(settings);
+  // 切换菜单是否收起状态（collapsed）
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   }

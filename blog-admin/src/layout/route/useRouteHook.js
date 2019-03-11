@@ -1,13 +1,22 @@
-import React, { useState, useEffect, useMemo } from 'react';
+/**
+ * 路由 hook 实现功能：
+ *  - 通过约定好的路由配置过滤出左侧菜单栏配置， 并返回 antd Menu 组件的 children
+ *  - 通过约定好的路由配置获取扁平化路由配置， 并返回 Router 组件的 children
+ *  - 通过 keys = { openKeys， selectedKeys } setKeys 来存储、设置当前菜单栏已打开、和已选中的 key
+ *  - 支持通过 setPathname 设置当前路由， 并和路由列表进行匹配找出 openKeys， selectedKeys
+ *  - 通过 authorities 来存储当前用户的权限列表（未实现）
+ *  - 将菜单栏的 path 重定向到所有子菜单的第一个（未实现）
+ */
 import { Menu, Icon } from 'antd';
 import { matchPath, Switch, Route, Redirect } from 'react-router-dom';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
 /**
- * 从配置项中筛选 route 所需的
+ * 过滤路由配置： 将没有用的配置项过滤掉， 并标记 route 类型（页面、子页面）
  * @param {Object} setting    当前配置项
- * @param {Array} node        节点列表其实就是 path 列表, 
+ * @param {Array} node        当前配置所在层级的所有 path, 用于后期获取  openKeys， selectedKeys
  */
-const getRoutesWithSetting = (setting, node) => {
+const filterRouteSetting = (setting, node) => {
   const list = [];
   list.push({
     node: [...node],
@@ -31,12 +40,12 @@ const getRoutesWithSetting = (setting, node) => {
 }
 
 export default (inputSettings) => {
-  const [authorities, setAuthorities] = useState([]);
-  const [pathname, setPathname] = useState('/');
   const [keys, setKeys] = useState({ openKeys: [], selectedKeys: [] });
   const [settings, setSettings] = useState(inputSettings);
+  const [authorities, setAuthorities] = useState([]);
   const [routeList, setRouteList] = useState([]);
   const [menuList, setMenuList] = useState([]);
+  const [pathname, setPathname] = useState('/');
 
   useEffect(() => {
     resetRouteList();
@@ -44,12 +53,24 @@ export default (inputSettings) => {
   }, [settings]);
 
   useEffect(() => {
-    matchPathName(pathname);
+    resetKeys();
   }, [routeList, pathname]);
 
-  /**
-   * 重置路由列表： 根据配置获取扁平化后的路由配置并过滤多余的配置
-   */
+  // 匹配的路由： 设置 keys: {openKeys， selectedKeys}
+  const matchPathName = () => {
+    const matchNode = routeList.filter( v => {
+      // 无法匹配返回 null, 否则返回匹配后的信息（Object）
+      const match = matchPath(pathname, {
+        path: v.path,
+        exact: true,
+        strict: false
+      })
+      return !!match;
+    })[0];
+    return (matchNode || false);
+  }
+
+  // 重置路由列表： 根据配置获取扁平化后的路由配置并过滤多余的配置
   const resetRouteList = () => {
     let node = [], list = [];
     const recursion = (settings) => {
@@ -59,7 +80,7 @@ export default (inputSettings) => {
           recursion(v.children);
         } else {
           node.push(v.path);
-          list = [...list, ...getRoutesWithSetting(v, node)];
+          list = [...list, ...filterRouteSetting(v, node)];
           node = [];
         }
       });
@@ -68,9 +89,7 @@ export default (inputSettings) => {
     setRouteList([...list]);
   }
 
-  /**
-   * 重置菜单列表: 根据配置项目格式化出渲染菜单栏所需要的数据结构
-   */
+  // 重置菜单列表: 根据配置项目格式化出渲染菜单栏所需要的数据结构
   const resetMenuList = () => {
     let list = [];
     const recursion = (settings) => {
@@ -92,19 +111,9 @@ export default (inputSettings) => {
     setMenuList(list);
   }
 
-  /**
-   * 匹配的 pathname， 返回默认菜单栏 默认打开以及选中的key defaultOpenKeys, defaultSelectedKeys
-   */
-  const matchPathName = (pathname) => {
-    const matchNode = routeList.filter( v => {
-      // 无法匹配返回 null, 否则返回匹配后的信息（Object）
-      const match = matchPath(pathname, {
-        path: v.path,
-        exact: true,
-        strict: false
-      })
-      return !!match;
-    })[0];
+  // 重置 keys: 根据当前路由和路由列表配置匹配结果来设置
+  const resetKeys = () => {
+    const matchNode = matchPathName();
     if (!matchNode) { return false; }
     const offset = matchNode.type === 'subpage' ? 2 : 1;
     const node = matchNode.node;
@@ -115,9 +124,7 @@ export default (inputSettings) => {
     setKeys({ openKeys, selectedKeys });
   }
 
-  /**
-   * 监听 menuList 获取 antd Menu 的子菜单
-   */
+  // 监听 menuList 获取 antd Menu children
   const menuChildren = useMemo(() => {
     const recursion = (list) => {
       return list.map( v => {
@@ -140,16 +147,22 @@ export default (inputSettings) => {
     }
     return recursion(menuList);
   }, [menuList]);
+  
+  // 路由组件： 路由列表存在但是路由匹配不到则 重定向到 404
+  const NotFount = useCallback(() => {
+    const matchNode = matchPathName();
+    if ( matchNode || routeList.length === 0 ) { return null; }
+    return <Redirect to="/404" />;
+  }, [routeList]);
 
-  /**
-   * 监听 routeList 并渲染出 route
-   */
+  // 监听 routeList 并渲染出 Router children
   const routeChildren = useMemo(() => {
     return (
       <Switch>
         {routeList.map( v => ( 
           <Route exact={v.exact} key={v.path} component={v.page} path={v.path}/>
         ))}
+        <Route component={() => (<NotFount />)} />
       </Switch>
     );
   }, [routeList]);

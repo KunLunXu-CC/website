@@ -1,19 +1,18 @@
+/**
+ * ## 路由配置说明： 同时包含左侧菜单栏以及路由的配置
+ *   - name       路由名称， 同时也是左侧菜单栏名称
+ *   - path       路由 path 参数， 同时在组件渲染过程中将被作为 key 使用
+ *   - link       菜单栏点击跳转链接， 在 path 带有参数时需要设置其默认跳转链接
+ *   - icon       菜单栏图标设置
+ *   - page       路由 component 参数
+ *   - subpage    子页面， 归属于某个页面之下但不在菜单栏显示的子页面
+ *   - children   子级配置
+ *   - authority  是否具有权限（暂时先不弄）
+ */
+import React from 'react';
 import HomePage from '@pages/HomePage';
 import TagdManage from '@pages/TagdManage';
 import ArticleCreation from '@pages/Article/ArticleCreation';
-/**
- * 拾遗补阙
- * 
-name: '名称',
-path: '路径 也是 code ', 
-link: '路由跳转',
-icon: '图标',
-page: '页面',
-authority: '权限',
-subpage: '子页面',
-children: '儿子'
- */
-import React from 'react';
 
 export default [
   {
@@ -43,14 +42,6 @@ export default [
         link: '/article/creation',
         exact: true,
         page: ArticleCreation,
-        // subpage: [
-        //   {
-        //     name: '文章创作-内页',
-        //     path: '/article/creation/:type/:articleId?',
-        //     exact: true,
-        //     page: () => {return '首页'},
-        //   }
-        // ]
       }
     ]
   }, {
