@@ -11,7 +11,7 @@
  */
 import React from 'react';
 import HomePage from '@pages/HomePage';
-import TagdManage from '@pages/TagdManage';
+import TagdManage from '@pages/TagManage';
 import ArticleCreation from '@pages/Article/ArticleCreation';
 import NotFound from '@pages/Error/NotFound';
 
@@ -35,7 +35,6 @@ export default [
     name: '文章管理',
     icon: 'ordered-list',
     path: '/article',
-    
     children: [
       {
         name: '文章创作',
