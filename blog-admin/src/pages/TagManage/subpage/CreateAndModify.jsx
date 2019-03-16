@@ -1,8 +1,7 @@
+import { FormItem } from '@components';
 import { useOptionsHook } from '@hook';
 import { OPERATING_TYPE } from '@config/conts';
 import React, { useMemo, useEffect } from 'react';
-import { FormItem } from '@components';
-import { getOptiionsOfconts } from '@utils/helper';
 import { createTags, updateTagByIds } from '@server';
 import { Modal, Form, Input, Row, Col, Select } from 'antd';
 
@@ -12,17 +11,18 @@ const mapHandleFunWithOperating = {
   [OPERATING_TYPE.CREATE.VALUE]: createTags
 };
 
-// 下拉项
-const colorOptions = getOptiionsOfconts('TAG_COLORS');
-const iconOptions = getOptiionsOfconts('TAG_ICONS');
-
 const FormBlock = ({ modalStore, listStore, form }) => {
+  // 下拉项
+  const colorOptions = useOptionsHook({conts: 'TAG_COLORS'}).options;
+  const iconOptions = useOptionsHook({conts: 'TAG_ICONS'}).options;
   const tagOptsStore = useOptionsHook({model: "Tag"});
 
   useEffect(() => {
     modalStore.onOpen((data) => {
-      if(data.current && data.current.parent && data.current.parent.id){
-        tagOptsStore.resetParams({ids: [data.current.parent.id]});
+      if (data.current && data.current.parent && data.current.parent.id){
+        tagOptsStore.resetParams({
+          conds: {ids: [data.current.parent.id]}
+        });
       } else {
         tagOptsStore.init();
       }
@@ -34,13 +34,15 @@ const FormBlock = ({ modalStore, listStore, form }) => {
 
   // 查询 
   const onSearchTagOpts = (value) => {
-    tagOptsStore.resetParams({name: value});
+    tagOptsStore.resetParams({
+      conds: {name: value}
+    });
   };
 
   // 弹窗确定事件
   const onOk = () => {
     form.validateFieldsAndScroll((error, values) => {
-      if(!error){
+      if (!error){
         const handleFun = mapHandleFunWithOperating[modalStore.data.type];
         const id = (modalStore.data.current || {}).id;
         handleFun && handleFun({id, body: values}).then(res => {

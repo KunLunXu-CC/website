@@ -29,17 +29,3 @@ export const handleMessage = ({ rescode, message: info }) => {
   const handler = map[rescode];
   handler && handler(info);
 }
-
-/**
- * 通过固定格式的 conts(常量)， 获取 antd options
- * @param {String} name 常量名称
- */
-export const getOptiionsOfconts = (name) => {
-  const options = [];
-  const Option = Select.Option;
-  if (!CONTS[name]) {return options}
-   _.forIn(CONTS[name], (value, key) => {
-    options.push( <Option key={key} value={value.VALUE}>{value.DESC}</Option> );
-  })
-  return options;
-}

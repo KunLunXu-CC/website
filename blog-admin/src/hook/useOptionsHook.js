@@ -1,73 +1,91 @@
-import { Select } from 'antd';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import * as CONTS from '@config/conts';
 import { getOptions } from '@server';
+import { Select } from 'antd';
+import _ from 'lodash';
+
 const Option = Select.Option;
 
+// hook 状态初始值
+const initValue = { 
+  params: {
+    page: { page: 1, pageSize: 10 },
+    conds: { filter: [], ids: [], name: '' },
+  },
+  data: {
+    list: [], 
+    stats: {total: 0, totalPage: 1},
+  }
+};
+
 /**
- * 获取 options
- * - stats    请求查询返回的统计数据
- * - page     请求参数（page{page: 获取多少页数据， pageSize: 每次每页请求个数}）
- * - params   请求参数
- * - list     请求返回的列表
- * @param {String} model 要获取 options 的模型
+ * 将常量映射为 data.list
+ * @param {String} conts 常量名称
+ * @return {Array} [{id, name}]
  */
-export const useOptionsHook = ({ model }) => {
-  const [stats, setStats] = useState({ total: 0, totalPage: 1 });
-  const [page, setPage] = useState({ page: 1, pageSize: 10 });
-  const [params, setParams] = useState({ ids:[], name: '' });
-  const [list, setList] = useState([]);
-
-  /**
-   * 内置请求数据函数
-   */
-  const getData = useCallback(() => {
-    getOptions({ model, page, params }).then(res => {
-      setList(res.list);
-      setStats(res.stats);
-    });
+export const contsMapToList = (conts) => {
+  const list = [];
+  CONTS[conts] && _.forIn(CONTS[conts], (value, key) => {
+    list.push({ id: value.VALUE, name: value.DESC });
   });
+  return list;
+};
 
-  /**
-   * 初始化 store： 初始化请求参数（params page） 
-   */
+/**
+ * 下拉项 options hook
+ * @param {String} model 要获取 options 的模型名称
+ * @param {String} conts 要获取 options 的常量名称
+ * @returns {Object}
+ * - init         初始化（初始化请求参数为默认参数）
+ * - options      返回 antd Select 下拉项
+ * - resetParams  重设请求参数
+ */
+export const useOptionsHook = ({ model, conts }) => {
+  const [params, setParams] = useState(initValue.params);
+  const [data, setData] = useState(initValue.data)
+
+  useEffect(() => {
+    getData();
+  }, [params]);
+
+  // 初始化数据（初始化请求参数）
   const init = useCallback(() => {
-    setPage({ page: 1, pageSize: 10 });
-    setParams({ ids: [], name: ''});
+    setParams(initValue.params);
   }, []);
 
   /**
-   * 重设params
-   * @param {Object} value 需要重新设置的字段
+   * 重设 params
+   * @param {Object} conds 查询条件
+   * @param {Object} page  查询页数
    */
-  const resetParams = useCallback((value) => {
-    setParams({...params, ...value});
-    setPage({ page: 1, pageSize: page.pageSize });
-  }, [params, page]);
+  const resetParams = useCallback(({ conds, page }) => {
+    setParams({ 
+      conds: {...params.conds, ...conds},
+      page: {...params.page, ...page}
+    });
+  }, [params]);
 
-  /**
-   * 重设 page: 只对 page 进行修改， 不对pageSize 进行修改
-   * @param {Number} value 要请求多少页的数据
-   */
-  const resetPage = useCallback((value) => {
-    setPage({ ...page, page: value });
-  }, [page]);
+  // 请求数据
+  const getData = useCallback(() => {
+    // 1. 如果传入常量名称，则根据常量映射出数据
+    conts && setData({ 
+      list: contsMapToList(conts),
+      stats: initValue.stats 
+    });
+    // 2. 如果传入了模型名称，则调用通用查询方法获取数据
+    model && getOptions({ model, ...params }).then(({ list, stats }) => {
+      setData({ list, stats });
+    });
+  }, [params]);
 
-
-  // 监听 list 的变化计算 options
-  const options = useMemo(
-    () => list.map(v => (<Option key={v.id} value={v.id}>{v.name}</Option>)), 
-    [list]
-  );
-
-  // 监听 page 的变化
-  useEffect(() => {
-    getData();
-  }, [page]);
+  // 计算 list 并返回 antd select 组件 children
+  const options = useMemo(() => {
+    return data.list.map(v => (<Option key={v.id} value={v.id}>{v.name}</Option>));
+  }, [data.list]);
 
   return {
     init,
     options,
-    resetPage,
     resetParams,
   };
 }
