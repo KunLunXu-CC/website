@@ -1,5 +1,5 @@
 import axios from '@server';
-import { handleMessage } from '@utils/helper'; 
+import { handleMessage } from '@utils'; 
 export const getTagList = ({ page, params }) => (new Promise((resolve, reject) => {
   axios(
     {

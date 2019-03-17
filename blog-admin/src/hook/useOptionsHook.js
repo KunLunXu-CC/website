@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useLoggerHook } from './useUtilsHook';
 import * as CONTS from '@config/conts';
 import { getOptions } from '@server';
 import { Select } from 'antd';
@@ -43,6 +44,9 @@ export const contsMapToList = (conts) => {
 export const useOptionsHook = ({ model, conts }) => {
   const [params, setParams] = useState(initValue.params);
   const [data, setData] = useState(initValue.data)
+
+  // 日志打印
+  useLoggerHook({name: 'options', listenter: {params, data} });
 
   useEffect(() => {
     getData();

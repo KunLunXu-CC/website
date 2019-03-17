@@ -1,3 +1,4 @@
+import { log } from '@utils';
 import axios from 'axios';
 import _ from 'lodash';
 export * from './tag';
@@ -13,14 +14,14 @@ const instance = axios.create({
 /* 全局通用拦截器设置（打印数据） */
 const interceptorsWithPrintInfo = () => {
   instance.interceptors.request.use(function (config) {
-    console.log('request:', config);
+    log('request:', config);
     return config;
   }, function (error) {
     return Promise.reject(error);
   });
   
   instance.interceptors.response.use(function (response) {
-    console.log('response:', response);
+    log('response:', response);
     return response;
   }, function (error) {
     return Promise.reject(error);

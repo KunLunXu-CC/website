@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import {useLoggerHook } from './useUtilsHook';
 
 // 初始值
 const initValue = {
@@ -25,6 +26,9 @@ const initValue = {
 export const useListHook = ({ getList = null, initParams }) => {
   const [params, setParams] = useState({ ...initValue.params, ...initParams });
   const [data, setData] = useState(initValue.data);
+
+  // 日志打印
+  useLoggerHook({name: 'List', listenter: { params, data }});
 
   useEffect(() => { 
     getData();

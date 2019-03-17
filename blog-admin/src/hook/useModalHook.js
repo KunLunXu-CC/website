@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useLoggerHook } from './useUtilsHook';
 
 /**
  * 弹窗 hook
@@ -16,6 +17,9 @@ export const useModalHook = (init = {}) => {
   const [isOpen, setIsOpen] = useState(false); 
   const [openEvents, setOpenEvents] = useState([]);
   const [closeEvents, setCloseEvents] = useState([]);
+
+  // 日志打印
+  useLoggerHook({name: 'modal', listenter: { data, isOpen }});
 
   /**
    * 打开弹窗

@@ -1,6 +1,6 @@
 import axios from './index';
 import * as CONTS from '@config/conts';
-import { handleMessage } from '@utils/helper'; 
+import { handleMessage } from '@utils'; 
 
 /**
  * 初始化创建项目： 进入文章创建时如果不存在 param.articleId 则先进行初始化， 后

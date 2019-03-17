@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Card, Input, Button } from 'antd';
-import { filterObject } from '@utils/helper';
+import { filterObject } from '@utils';
 
 const useStateHook = ({ listHook }) => {
   // 查询
