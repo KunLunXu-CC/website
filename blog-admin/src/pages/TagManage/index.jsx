@@ -7,10 +7,10 @@ import { useListHook, useModalHook } from '@hook';
 import CreateAndModify from './subpage/CreateAndModify';
 
 // 查询数据方法
-const getList = ({ page, params, setList, setStats }) => {
-  getTagList({ page, params }).then(res => {
-    setList(res.list);
-    setStats(res.stats);
+const getList = ({ params, setData }) => {
+  const { page, conds } = params;
+  getTagList({ page, params: conds }).then(({ list, stats }) => {
+    setData({ list, stats });
   })
 }
 

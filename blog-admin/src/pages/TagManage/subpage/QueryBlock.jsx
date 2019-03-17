@@ -11,7 +11,7 @@ const QueryBlock = ({ form, listStore }) => {
    */
   const onSearch = () => {
     const params = filterObject(form.getFieldsValue(), [null, undefined]);
-    listStore.resetParams(params);
+    listStore.setConds(params);
   };
 
   return (
@@ -33,4 +33,4 @@ const QueryBlock = ({ form, listStore }) => {
     </Card>
   );
 }
-export default Form.create()(QueryBlock);
+export default Form.create({})(QueryBlock);

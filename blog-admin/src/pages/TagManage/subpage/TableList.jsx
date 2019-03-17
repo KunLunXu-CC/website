@@ -9,7 +9,7 @@ import React, { Fragment } from 'react';
 export default ({listStore, modalStore}) => {
   // 分页器 onChange 事件
   const onChange = (page = 1, pageSize = 10) => {
-    listStore.resetPage({ page, pageSize });
+    listStore.setPage({ page, pageSize });
   };
 
   // 编辑(打开弹窗)
@@ -23,7 +23,7 @@ export default ({listStore, modalStore}) => {
 
   // 删除
   const onDelete = (record) => {
-    listStore.resetPage({ page: 1 });
+    listStore.setPage({ page: 1 });
     removeTagByIds({id: record.id});
   };
 
@@ -74,14 +74,14 @@ export default ({listStore, modalStore}) => {
       <Card title="列表数据" className="block_second" extra={ extra } >
         <Table 
           columns={columns} 
-          dataSource={listStore.list}
+          dataSource={listStore.data.list}
           rowKey={(record, index) => (record.id || index)}
           pagination={{
             onChange: onChange,
             showQuickJumper: true,
-            total: listStore.stats.total,
-            current: listStore.page.page,
-            pageSize: listStore.page.pageSize,
+            total: listStore.data.stats.total,
+            current: listStore.params.page.page,
+            pageSize: listStore.params.page.pageSize,
             showTotal: (total, range) => `当前 ${range[0]} - ${range[1]} 页 总计 ${total} 页`,
           }} 
         />
