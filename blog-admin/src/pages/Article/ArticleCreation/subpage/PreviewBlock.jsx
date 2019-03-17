@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { FontIcon } from '@components';
 import { Drawer } from 'antd';
 
-const innerHook = () => {
+const useStateHook = () => {
   const [visible, setVisible] = useState(false);
   const onClose = () => {
     setVisible(false);
@@ -14,11 +14,11 @@ const innerHook = () => {
 }
 
 export default () => {
-  const innerStore = innerHook();
+  const { visible, onClose, onOpen } = useStateHook();
 
   return (
     <div>
-      <div className="preview-btn cp" onClick = {innerStore.onOpen}>
+      <div className="preview-btn cp" onClick = {onOpen}>
         <FontIcon icon="#icon-yulan" />
       </div>
       <Drawer
@@ -26,8 +26,8 @@ export default () => {
         placement="right"
         closable={false}
         width="70%"
-        onClose={innerStore.onClose}
-        visible={innerStore.visible}
+        onClose={onClose}
+        visible={visible}
       >
         <p>Some contents...</p>
         <p>Some contents...</p>

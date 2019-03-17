@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { FontIcon } from '@components';
 import { create } from '@server/article';
 
-export default withRouter(({form, history}) => {
+const useStateHook = ({}) => {
   const onCancel = () => {
     history.goBack();
   }
@@ -20,7 +20,11 @@ export default withRouter(({form, history}) => {
       console.log('----- 发布 -----', values);
     });
   }
+  return { onCancel, onSave, onPublish };
+}
 
+export default withRouter((props) => {
+  const { onCancel, onSave, onPublish } = useStateHook(props);
   return (
     <Card
       title="操作按钮" 

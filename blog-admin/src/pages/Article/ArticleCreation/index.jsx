@@ -9,8 +9,7 @@ import SettingBlock from './subpage/SettingBlock';
 import PreviewBlock from './subpage/PreviewBlock';
 import ActionsBlock from './subpage/ActionsBlock';
 
-let ArticleCreation = (props) => {
-  
+const useStateHook = (props) => {
   // 初始化
   const init = () => {
     const {articleId} = props.match.params;
@@ -28,7 +27,9 @@ let ArticleCreation = (props) => {
   useEffect(() => {
     init();
   }, []);
+}
 
+let ArticleCreation = (props) => {
   return (
     <Form>
       <SettingBlock form={props.form}/>

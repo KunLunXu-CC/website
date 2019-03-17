@@ -9,7 +9,7 @@ import HeaderBlock from './subpage/HeaderBlock';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 const { Content } = Layout;
 
-const stateHook = (props) => {
+const useStateHook = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const routeHook = useRouteHook(settings);
   // 切换菜单是否收起状态（collapsed）
@@ -20,16 +20,16 @@ const stateHook = (props) => {
 }
 
 export default (props) => {
-  const state = stateHook();
+  const { collapsed, routeHook, toggleCollapsed } = useStateHook();
   return (
     <BrowserRouter>
       <Layout className="base-frame">
-        <LeftMenu collapsed={state.collapsed} routeHook={state.routeHook}/>
+        <LeftMenu collapsed={collapsed} routeHook={routeHook}/>
         <Layout>
-          <HeaderBlock toggleCollapsed={state.toggleCollapsed} collapsed={state.collapsed} />
+          <HeaderBlock toggleCollapsed={toggleCollapsed} collapsed={collapsed} />
           <Content className="base-content">
             <div className="base-body pw">
-              {state.routeHook.routeChildren}
+              {routeHook.routeChildren}
             </div>
             <FooterBlock />
           </Content> 

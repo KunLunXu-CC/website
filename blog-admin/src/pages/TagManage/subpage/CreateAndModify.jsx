@@ -11,30 +11,30 @@ const mapHandleFunWithOperating = {
   [OPERATING_TYPE.CREATE.VALUE]: createTags
 };
 
-const FormBlock = ({ modalStore, listStore, form }) => {
+const useStateHook = ({ modalHook, listHook, form }) => {
   // 下拉项
   const colorOptions = useOptionsHook({conts: 'TAG_COLORS'}).options;
   const iconOptions = useOptionsHook({conts: 'TAG_ICONS'}).options;
-  const tagOptsStore = useOptionsHook({model: "Tag"});
+  const tagOptionsHook = useOptionsHook({model: "Tag"});
 
   useEffect(() => {
-    modalStore.onOpen((data) => {
+    modalHook.onOpen((data) => {
       if (data.current && data.current.parent && data.current.parent.id){
-        tagOptsStore.resetParams({
-          conds: {ids: [data.current.parent.id]}
+        tagOptionsHook.resetParams({
+          conds: { ids: [data.current.parent.id] }
         });
       } else {
-        tagOptsStore.init();
+        tagOptionsHook.init();
       }
     });
-    modalStore.onClose(() => {
+    modalHook.onClose(() => {
       form.resetFields();
     });
   }, []);
 
   // 查询 
   const onSearchTagOpts = (value) => {
-    tagOptsStore.resetParams({
+    tagOptionsHook.resetParams({
       conds: {name: value}
     });
   };
@@ -43,35 +43,55 @@ const FormBlock = ({ modalStore, listStore, form }) => {
   const onOk = () => {
     form.validateFieldsAndScroll((error, values) => {
       if (!error){
-        const handleFun = mapHandleFunWithOperating[modalStore.data.type];
-        const id = (modalStore.data.current || {}).id;
+        const handleFun = mapHandleFunWithOperating[modalHook.data.type];
+        const id = (modalHook.data.current || {}).id;
         handleFun && handleFun({id, body: values}).then(res => {
-          listStore.setPage({ page: 1 });
+          listHook.setPage({ page: 1 });
         });
-        modalStore.closeModal();
+        modalHook.closeModal();
       }
     });
   };
 
   // 表单初始值
   const initialValues = useMemo(() => {
-    return modalStore.data.current || {};
-  }, [modalStore.data.current]);
+    return modalHook.data.current || {};
+  }, [modalHook.data.current]);
+
+  return {
+    onOk, 
+    iconOptions, 
+    colorOptions, 
+    tagOptionsHook, 
+    initialValues,
+    onSearchTagOpts, 
+  };
+}
+
+const FormBlock = (props) => {
+  const { 
+    onOk, 
+    iconOptions, 
+    colorOptions, 
+    tagOptionsHook, 
+    initialValues,
+    onSearchTagOpts, 
+  } = useStateHook(props);
 
   return (
     <Modal
       onOk={onOk}
       width={800}
-      onCancel={modalStore.closeModal}
-      visible={modalStore.isOpen}
-      title={modalStore.data.title}
+      onCancel={props.modalHook.closeModal}
+      visible={props.modalHook.isOpen}
+      title={props.modalHook.data.title}
     >
       <Form className="ant-advanced-search-form">
         <Row gutter={8}>
           <Col span={12}>
             <FormItem label="名称" length="3" required>
               {
-                form.getFieldDecorator("name", {
+                props.form.getFieldDecorator("name", {
                   initialValue: initialValues.name, 
                   rules: [{ required: true, message: '标签名称必填' }],
                 })( <Input placeholder="标签名称"/> )
@@ -81,7 +101,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <FormItem label="父级" length="3">
               {
-                form.getFieldDecorator("parent", {
+                props.form.getFieldDecorator("parent", {
                   initialValue: (initialValues.parent || {}).id || undefined,
                 })( 
                   <Select 
@@ -91,7 +111,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
                     filterOption = {false} 
                     onSearch={onSearchTagOpts}
                   >
-                    { tagOptsStore.options }
+                    { tagOptionsHook.options }
                   </Select> 
                 )
               }
@@ -100,7 +120,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <FormItem label="颜色" length="3">
               {
-                form.getFieldDecorator("color", {
+                props.form.getFieldDecorator("color", {
                   initialValue: initialValues.color,
                 })( <Select allowClear placeholder="标签颜色">{ colorOptions }</Select>)
               }
@@ -109,7 +129,7 @@ const FormBlock = ({ modalStore, listStore, form }) => {
           <Col span={12}>
             <FormItem label="图标" length="3">
               {
-                form.getFieldDecorator("icon", {
+                props.form.getFieldDecorator("icon", {
                   initialValue: initialValues.icon,
                 })( <Select allowClear placeholder="标签图标">{ iconOptions }</Select> )
               }

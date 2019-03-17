@@ -5,7 +5,7 @@ import { Layout, Menu, Icon } from 'antd';
 const { Sider } = Layout;
 
 // 状态提取
-const stateHook = ({ routeHook, location, history, collapsed }) => {
+const useStateHook = ({ routeHook, location, history, collapsed }) => {
 
   useEffect(() => {
     routeHook.setPathname(location.pathname);
@@ -32,7 +32,7 @@ const stateHook = ({ routeHook, location, history, collapsed }) => {
 }
 
 const LeftMenu = (props) => {
-  const state = stateHook(props);
+  const { onOpenChange, onMenuClick, keys } = useStateHook(props);
   return (
     <Sider 
       collapsible 
@@ -44,10 +44,10 @@ const LeftMenu = (props) => {
       <Menu
         theme="dark" 
         mode="inline"
-        {...state.keys}
-        onClick = {state.onMenuClick}
+        {...keys}
+        onClick = {onMenuClick}
         inlineCollapsed={props.collapsed}
-        onOpenChange={state.onOpenChange}>
+        onOpenChange={onOpenChange}>
         {props.routeHook.menuChildren}
       </Menu>
     </Sider>

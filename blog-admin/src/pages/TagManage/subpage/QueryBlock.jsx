@@ -1,28 +1,25 @@
-import { Form, Card, Input, Button } from 'antd';
 import React from 'react';
+import { Form, Card, Input, Button } from 'antd';
 import { filterObject } from '@utils/helper';
 
-const QueryBlock = ({ form, listStore }) => {
-
-  /**
-   * 查询块
-   * - 获取查询参数
-   * - 修改 listStore 中的查询条件
-   */
+const useStateHook = ({ listHook }) => {
+  // 查询
   const onSearch = () => {
     const params = filterObject(form.getFieldsValue(), [null, undefined]);
-    listStore.setConds(params);
+    listHook.setConds(params);
   };
+  return {onSearch};
+}
 
+const QueryBlock = (props) => {
+  const { onSearch } = useStateHook(props);
   return (
     <Card className="block_first">
       <Form layout="inline">
         <Form.Item>
-          {
-            form.getFieldDecorator('name')(
-              <Input placeholder="标签名" size="large" onPressEnter={onSearch}/>
-            )
-          }
+          {props.form.getFieldDecorator('name')(
+            <Input placeholder="标签名" size="large" onPressEnter={onSearch}/>
+          )}
         </Form.Item>
         <Form.Item>
           <Button size="large" type="primary" onClick={onSearch} >

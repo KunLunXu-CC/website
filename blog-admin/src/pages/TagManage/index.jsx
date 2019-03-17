@@ -14,23 +14,25 @@ const getList = ({ params, setData }) => {
   })
 }
 
-export default () => {
-  const listStore = useListHook({getList});
-  const modalStore = useModalHook({ type: '', title: '', current: null });
+const useStateHook = () => {
+  const stateHook = {};
+  stateHook.listHook = useListHook({getList});
+  stateHook.modalHook = useModalHook({ type: '', title: '', current: null });
+  return stateHook;
+}
 
+export default (props) => {
+  const { listHook, modalHook } = useStateHook(props);
   return (
     <Fragment>
-      <QueryBlock
-        listStore={listStore}
-        modalStore={modalStore}
-      />
-      <TableList  
-        listStore={listStore}
-        modalStore={modalStore}
+      <QueryBlock listHook={listHook} />
+      <TableList 
+        listHook={listHook} 
+        modalHook={modalHook} 
       />
       <CreateAndModify 
-        listStore={listStore}
-        modalStore={modalStore}
+        listHook={listHook} 
+        modalHook={modalHook} 
       />
     </Fragment>
   );
