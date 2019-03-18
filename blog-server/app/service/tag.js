@@ -39,7 +39,7 @@ module.exports.create = async ({ ctx, body, params, orderBy, page }) => {
  */
 module.exports.remove = async ({ ctx, conds, params, orderBy, page }) => {
   const data = { rescode: RESCODE.SUCCESS, message: '删除成功', list: [], page: {}, stats: {}, change: []};
-  return await common.remove(data)({ model: 'Tag', ctx, conds, params, orderBy, page});
+  return await common.remove(data)({ model: 'Tag', ctx, conds, params, orderBy, page });
 }
 
 /**
