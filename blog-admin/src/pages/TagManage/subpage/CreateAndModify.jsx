@@ -21,7 +21,10 @@ const useStateHook = ({ modalHook, listHook, form }) => {
     modalHook.onOpen((data) => {
       if (data.current && data.current.parent && data.current.parent.id){
         tagOptionsHook.resetParams({
-          conds: { ids: [data.current.parent.id] }
+          conds: { 
+            ids: [data.current.parent.id],
+            filter: [data.current.id]
+          }
         });
       } else {
         tagOptionsHook.init();

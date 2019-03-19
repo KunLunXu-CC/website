@@ -77,7 +77,11 @@ export const useOptionsHook = ({ model, conts }) => {
       stats: initValue.stats 
     });
     // 2. 如果传入了模型名称，则调用通用查询方法获取数据
-    model && getOptions({ model, ...params }).then(({ list, stats }) => {
+    model && getOptions({ 
+      model, 
+      page: params.page,
+      params: params.conds  
+    }).then(({ list, stats }) => {
       setData({ list, stats });
     });
   }, [params]);
