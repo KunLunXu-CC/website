@@ -14,7 +14,7 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 // 热模块替换
 const hotModuleReplacementPlugin = new HotModuleReplacementPlugin();
 // css 分离
-// const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style.css');
+const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style.css');
 // 直接拷贝文件进行打包
 const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
@@ -49,22 +49,21 @@ module.exports = {
         // include: [ path.resolve(__dirname, 'src'), path.resolve(__dirname, 'public') ],
         use: 'babel-loader'
       }, {
-        test: /\.(css|scss)$/,
-        use: [ 
-            'style-loader',
-            { loader: 'css-loader', options: { importLoaders: 1 } }, 
+        test: /.(css|scss|sass)$/,
+        use: extractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: [ 
+            { 
+              loader: 'css-loader', 
+              options: { 
+                modules: true ,
+                localIdentName: '[path][name]__[local]__[hash:base64:5]',
+              } 
+            }, 
             'postcss-loader', 
             'sass-loader'
           ]
-        // include: [ path.resolve(__dirname, 'src') ],
-        // use: ExtractTextWebpackPlugin.extract({
-        //   fallback: 'style-loader',
-        //   use: [ 
-        //     { loader: 'css-loader', options: { importLoaders: 1 } }, 
-        //     'postcss-loader', 
-        //     'less-loader'
-        //   ]
-        // })
+        })
       }, {
         test: /\.(png|jpg|gif)$/,
         use: [{
@@ -80,7 +79,7 @@ module.exports = {
   plugins: [
     htmlWebpackPlugin, 
     hotModuleReplacementPlugin,
-    // extractTextWebpackPlugin,
+    extractTextWebpackPlugin,
     copyWebpackPlugin
   ],
 
