@@ -32,7 +32,7 @@ const useStateHook = (props) => {
   return { flexDirection, imgRef, thumbRef, imgStyle, resetImgStyle, onMouseEnter, onMouseLeave, cardClassName }
 }
 
-const ArticleCard = (props) => {
+export const ArticleCard = (props) => {
   const stateHook = useStateHook(props);
   return (
     <div style={{padding: '100px'}}>
@@ -117,5 +117,3 @@ const ArticleCard = (props) => {
 ArticleCard.defaultProps = {
   thumbPosition: 'right'
 }
-
-export default ArticleCard;
