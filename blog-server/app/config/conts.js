@@ -7,6 +7,13 @@ module.exports.STATUS = {
   DELETE: -11,    // 删除
 }
 
+module.exports.ARTICLE_STATUS = {
+  ...this.STATUS,   // 基础状态
+  SAVE: 6,          // 保存
+  RELEASE: 9,       // 发布
+};
+
+
 // 响应状态 (1: 成功, 0: 失败)
 module.exports.RESCODE = {
   SUCCESS: 1,

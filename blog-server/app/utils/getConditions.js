@@ -4,7 +4,7 @@ const { STATUS } = require('../config/conts');
 
 /**
  * 获取查询条件
- * @param {Object} params 查询参数 
+ * @param {Object} params 查询参数  
  */
 module.exports = ( params = {} ) => {
   const conds = { status: {$ne: STATUS.DELETE} };

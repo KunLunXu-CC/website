@@ -29,8 +29,8 @@ export const TAG_ICONS = {
 
 // [状态] 模型基本状态
 export const ARTICLE_STATUS = {
-  DISABLE: { VALUE: 0, DESC: '已保存' },
-  ENABLE: {VALUE: 1, DESC: '已发布'}, 
+  SAVE: { VALUE: 6, DESC: '已保存' },
+  RELEASE: {VALUE: 9, DESC: '已发布'}, 
   DELETE: {VALUE: -11, DESC: '已删除'}
 }
 

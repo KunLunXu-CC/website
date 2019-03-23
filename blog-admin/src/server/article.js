@@ -2,10 +2,7 @@ import axios from './index';
 import * as CONTS from '@config/conts';
 import { handleMessage } from '@utils'; 
 
-/**
- * 初始化创建项目： 进入文章创建时如果不存在 param.articleId 则先进行初始化， 后
- * @param {} param0 
- */
+// 初始化创建项目： 进入文章创建时如果不存在 param.articleId 则先进行初始化
 export const init = () => (new Promise((resolve, reject) => {
   axios({
     url: '/specialUrl',
@@ -15,7 +12,7 @@ export const init = () => (new Promise((resolve, reject) => {
         body: [{
           name: '初始化标题', 
           content: '初始化内容', 
-          status: CONTS.ARTICLE_STATUS.DISABLE.VALUE
+          status: CONTS.ARTICLE_STATUS.DELETE.VALUE
         }] 
       },
       query: `
@@ -25,12 +22,51 @@ export const init = () => (new Promise((resolve, reject) => {
       `,
     }
   })
-  .then(function (response) {
+  .then((response) => {
     const data = response.data.data.createArticles;
     const id = data.change[0].id;
     resolve(id);
   })
   .catch(function (error) {
     // console.log(error);
+  });
+}));
+
+/**
+ * 更新文章
+ * @param {Object} body { name, desc, thumb, tags, content, status }
+ */
+export const update = ({body, ids}) => (new Promise((resolve, reject) => {
+  axios({
+    url: '/specialUrl',
+    method: 'post',
+    data: {
+      variables: {
+        body: {
+          ...body,
+          status: CONTS.ARTICLE_STATUS.SAVE.VALUE
+        },
+        conds: { 
+          ids,
+          status: [ 
+            CONTS.ARTICLE_STATUS.SAVE.VALUE,
+            CONTS.ARTICLE_STATUS.DELETE.VALUE,
+            CONTS.ARTICLE_STATUS.RELEASE.VALUE,
+          ]
+        }
+      },
+      query: `
+        mutation($body: UpdateAticle!, $conds: ArticleParams!){
+          updateArticles(body: $body, conds: $conds){
+            rescode message change { id name desc thumb tags{ id name } content status }
+          }
+        }
+      `
+    },
+  }).then((response) => {
+    const data = response.data.data.updateArticles;
+    resolve(data); 
+  }).catch((error) => {
+    reject(error);
   });
 }));

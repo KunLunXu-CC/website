@@ -6,7 +6,7 @@ const getList = require('./getList');
  * @param {Object}  data    响应基础数据
  * @param {String}  model   模型名称
  * @param {Object}  ctx     koa上下文
- * @param {Object}  conds   要删除数据的查询条件
+ * @param {Object}  conds   要更新数据的查询条件
  * @param {Object}  body    创建信息
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页信息

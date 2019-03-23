@@ -2,21 +2,26 @@ import React from 'react';
 import { Card } from 'antd';
 import { withRouter } from 'react-router-dom';
 import { FontIcon } from '@components';
-import { create } from '@server/article';
+import { update } from '@server/article';
 
-const useStateHook = ({}) => {
+const useStateHook = (props) => {
+
+  // 取消
   const onCancel = () => {
-    history.goBack();
+    console.log('---------- 取消 ----------');
   }
 
+  // 保存
   const onSave = () => {
-    form.validateFieldsAndScroll((errors, values) => {
-      !errors && create({ body: values });
+    const { articleId } = props.match.params;
+    props.form.validateFieldsAndScroll((errors, values) => {
+      !errors && update({ body: values, ids: [articleId] });
     });
   }
 
+  // 发布
   const onPublish = () => {
-    form.validateFieldsAndScroll((errors, values) => {
+    props.form.validateFieldsAndScroll((errors, values) => {
       console.log('----- 发布 -----', values);
     });
   }
