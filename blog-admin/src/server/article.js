@@ -2,6 +2,30 @@ import axios from './index';
 import * as CONTS from '@config/conts';
 import { handleMessage } from '@utils'; 
 
+// 获取文章
+export const getList = ({params, orderBy, page}) => (new Promise((resolve, reject) => {
+  axios({
+    url: '/specialUrl',
+    method: 'post',
+    data: {
+      variables: { params, orderBy, page },
+      query: `
+        query( $params: ArticleParams, $orderBy: ArticleOrderBy, $page: PageInput ){
+          aticleList(params: $params,orderBy: $orderBy, page: $page ){
+            list{ id name desc thumb tags {id name} content status }
+          }
+        }
+      `
+    }
+  }).then(response => {
+    const data = response.data.data.aticleList;
+    resolve(data);
+  }).catch(error => {
+    reject(error);
+  });
+}));
+
+
 // 初始化创建项目： 进入文章创建时如果不存在 param.articleId 则先进行初始化
 export const init = () => (new Promise((resolve, reject) => {
   axios({
@@ -42,10 +66,7 @@ export const update = ({body, ids}) => (new Promise((resolve, reject) => {
     method: 'post',
     data: {
       variables: {
-        body: {
-          ...body,
-          status: CONTS.ARTICLE_STATUS.SAVE.VALUE
-        },
+        body: { ...body },
         conds: { 
           ids,
           status: [ 

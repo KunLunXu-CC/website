@@ -1,47 +1,59 @@
 import React from 'react';
-import { Card } from 'antd';
-import { withRouter } from 'react-router-dom';
+import { Card, message } from 'antd';
+import * as CONTS from '@config/conts';
 import { FontIcon } from '@components';
 import { update } from '@server/article';
+import { withRouter } from 'react-router-dom';
 
 const useStateHook = (props) => {
-
-  // 取消
-  const onCancel = () => {
-    console.log('---------- 取消 ----------');
+  /**
+   * 更新数据
+   * @param {} values 表单数据
+   * @param {} type   更新类型（ save: 保存、 release: 发布 ）
+   */
+  const onUpdate = ({values, type = 'save'}) => {
+    const { articleId } = props.match.params;
+    const typeMap = {
+      save: {
+        status: CONTS.ARTICLE_STATUS.SAVE.VALUE,
+        successText: '保存成功'
+      },
+      release: {
+        status: CONTS.ARTICLE_STATUS.RELEASE.VALUE,
+        successText: '发布成功'
+      }
+    };
+    values.status = typeMap[type].status;
+    update({ body: values, ids: [articleId] }).then(res => {
+      props.setArticle(res.change[0]);
+      message.success(typeMap[type].successText);
+    });
   }
 
   // 保存
   const onSave = () => {
-    const { articleId } = props.match.params;
     props.form.validateFieldsAndScroll((errors, values) => {
-      !errors && update({ body: values, ids: [articleId] });
+      !errors && onUpdate({values, type: 'save'});
     });
   }
 
   // 发布
-  const onPublish = () => {
+  const onRelease = () => {
     props.form.validateFieldsAndScroll((errors, values) => {
-      console.log('----- 发布 -----', values);
+      !errors && onUpdate({values, type: 'release'});      
     });
   }
-  return { onCancel, onSave, onPublish };
+  return { onSave, onRelease };
 }
 
 export default withRouter((props) => {
-  const { onCancel, onSave, onPublish } = useStateHook(props);
+  const { onSave, onRelease } = useStateHook(props);
   return (
     <Card
       title="操作按钮" 
       className="block_fourth"
       bodyStyle={{padding: '0'}}
       actions={[
-        <FontIcon 
-          size="18px"
-          label="取消"
-          onClick = {onCancel}
-          icon="#icon-quxiao" 
-        />,
         <FontIcon 
           size="18px"
           label="保存"
@@ -52,7 +64,7 @@ export default withRouter((props) => {
           size="18px"
           label="发布"
           icon="#icon-fabu" 
-          onClick = {onPublish}
+          onClick = {onRelease}
         />,
       ]}
     />
