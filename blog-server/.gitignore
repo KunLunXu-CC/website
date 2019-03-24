@@ -3,6 +3,7 @@
 
 # production
 /build
+/static/**/*.png
 
 # misc
 .DS_Store
