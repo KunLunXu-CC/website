@@ -4,9 +4,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 --  Table structure for `cSessionInfo`
 -- ----------------------------
-DROP TABLE IF EXISTS 'cSessionInfo';
+DROP TABLE IF EXISTS `cSessionInfo`;
 
-CREATE TABLE 'cSessionInfo' (
+CREATE TABLE `cSessionInfo` (
   `open_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `uuid` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `skey` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
