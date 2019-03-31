@@ -1,4 +1,4 @@
-const { STATUS, RESCODE } = require('../../config/conts');
+const { STATUS, RESCODE } = require('../../../config/conts');
 const getConditions = require('../../utils/getConditions');
 const getList = require('./getList');
 const _ = require('lodash');

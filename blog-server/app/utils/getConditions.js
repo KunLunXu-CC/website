@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const { getTimeConds } = require('./helper');
-const { STATUS } = require('../config/conts');
+const { STATUS } = require('../../config/conts');
 
 /**
  * 获取查询条件

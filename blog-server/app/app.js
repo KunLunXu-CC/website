@@ -1,6 +1,6 @@
 const { printStartCharPattern } = require('./utils/helper');
 const middleware = require('./middleware');
-const config = require('./config/system');
+const config = require('../config/system');
 const graphql = require('./graphql');
 const router = require('./route');
 const Koa = require('koa');

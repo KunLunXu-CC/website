@@ -1,4 +1,4 @@
-const { STATUS, RESCODE } = require('../config/conts');
+const { STATUS, RESCODE } = require('../../config/conts');
 const common = require('./common/index');
 const _ = require('lodash');
 

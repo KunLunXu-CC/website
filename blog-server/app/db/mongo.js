@@ -1,5 +1,5 @@
 const { mapFiles } = require('../utils/helper');
-const config = require('../config/system');
+const config = require('../../config/system');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const _ = require('lodash');

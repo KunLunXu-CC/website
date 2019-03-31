@@ -1,4 +1,4 @@
-const { RESCODE } = require('../../config/conts');
+const { RESCODE } = require('../../../config/conts');
 const getList = require('./getList');
 
 /**

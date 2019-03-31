@@ -1,4 +1,4 @@
-const { STATUS } = require('../../config/conts');
+const { STATUS } = require('../../../config/conts');
 
 // 获取下拉项 options
 module.exports = async ({ ctx, model, page = {}, params = {} }) => {
