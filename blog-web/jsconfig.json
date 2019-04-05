@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+
+    "paths": {
+      "@api/*": ["src/api/*"],
+      "@app/*": ["src/app/*"],
+      "@hook/*": ["src/hook/*"],
+      "@utils/*": ["src/utils/*"],
+      "@layout/*": ["src/layout/*"],
+      "@assets/*": ["src/assets/*"],
+      "@config/*": ["src/config/*"],
+      "@components/*": ["src/components/*"]
+    },
+    "target": "ES6",
+    "module": "es6",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
