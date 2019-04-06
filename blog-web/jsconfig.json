@@ -10,6 +10,7 @@
       "@page/*": ["src/page/*"],
       "@utils/*": ["src/utils/*"],
       "@store/*": ["src/store/*"],
+      "@layout/*": ["src/layout/*"],
       "@assets/*": ["src/assets/*"],
       "@config/*": ["src/config/*"],
       "@components/*": ["src/components/*"]

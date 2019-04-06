@@ -1,8 +1,12 @@
 {
   "plugins": [
+    // 为api提供沙箱的垫片方案，不会污染全局的 api
+    ["@babel/plugin-transform-runtime"],
     // 下面两个插件：修饰器
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     ["@babel/plugin-proposal-class-properties", { "loose" : true }],
+    // asyn await 支持
+    ["@babel/plugin-transform-async-to-generator"],
     // 按需加载
     ["import", {
       "libraryName": "antd",

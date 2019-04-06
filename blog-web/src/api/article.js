@@ -1,5 +1,5 @@
 import axios from './index';
-import * as CONTS from '@config/conts';
+import * as CONTS from '@config/consts';
 import { handleMessage } from '@utils'; 
 
 // 获取文章

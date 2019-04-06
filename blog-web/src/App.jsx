@@ -1,10 +1,9 @@
 import React from 'react';
-import Store from '@store/index';
-
-import Home from '@page/Home/index';
+import Store from '@store';
+import Layout from '@layout';
 
 export default () => (
   <Store>
-    <Home></Home>
+    <Layout/>
   </Store>
 );

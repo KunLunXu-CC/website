@@ -9,6 +9,7 @@ module.exports.alias = {
   '@store': path.resolve(__dirname, '../src/store'),      
   '@utils': path.resolve(__dirname, '../src/utils'),
   '@config': path.resolve(__dirname, '../src/config'),
+  '@layout': path.resolve(__dirname, '../src/layout'),
   '@assets': path.resolve(__dirname, '../src/assets'),
   '@components': path.resolve(__dirname, '../src/components')
 }
