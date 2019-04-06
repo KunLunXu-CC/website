@@ -23,6 +23,7 @@ module.exports.globalConsts = {
 
   // 开发
   development: {
+    _DEV_: true,
     GLOBAL_SERVER: JSON.stringify('http://localhost:4000'),
   },
 }

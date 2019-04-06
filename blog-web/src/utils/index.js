@@ -34,7 +34,5 @@ export const handleMessage = ({ rescode, message: info }) => {
  * 通用打印: 当前为开发环境下才允许打印
  */
 export const log = (...args) => {
-  if (process.env.NODE_ENV === 'development'){
-    console.log(...args);
-  }
+  _DEV_ && console.log(...args);
 }
