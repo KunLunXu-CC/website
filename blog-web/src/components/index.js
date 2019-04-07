@@ -1,3 +1,7 @@
-export * from './Spin';
-export * from './FontIcon';
-export * from './Layout';
+import FontIcon from './FontIcon';
+import Modal from './Modal';
+
+export {
+  FontIcon,
+  Modal,
+};

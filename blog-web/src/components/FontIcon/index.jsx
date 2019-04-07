@@ -1,6 +1,6 @@
 /**
  * 字体图标组件简单封装
- * @param {String}    props.icon        字体图标名( #icon-editor )
+ * @param {String}    props.icon        字体图标名( icon-editor )
  * @param {String}    props.color       字体图标颜色（red）
  * @param {String}    props.size        字体图标大小（15px）
  * @param {Object}    props.iconStyle   字体图标样式
@@ -10,7 +10,7 @@
  * @param {Object}    props.labelStyle  label 样式
  */
 import React, { useMemo } from 'react';
-export const FontIcon = ({ size, color, iconStyle, onClick, className, icon, label, labelStyle }) => {
+export default ({ size, color, iconStyle, onClick, className, icon, label, labelStyle }) => {
   // 样式
   const styles = useMemo(() => {
     const _styles = {...iconStyle};
@@ -26,7 +26,7 @@ export const FontIcon = ({ size, color, iconStyle, onClick, className, icon, lab
         className={` ${className || ''}`} 
       >
         <svg aria-hidden="true" className="iconfont">
-          <use xlinkHref={icon} ></use>
+          <use xlinkHref={`#${icon}`} ></use>
         </svg>
         {
           label ? 
