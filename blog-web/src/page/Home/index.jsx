@@ -9,7 +9,8 @@ const Home = (props) => {
       height: '800px',
       width: '100%',
       border: '50px solid #fff',
-      position: 'relative'
+      position: 'relative',
+      overflow: 'hidden'
     }}>
       <Modal width={1000}/>
     </div>

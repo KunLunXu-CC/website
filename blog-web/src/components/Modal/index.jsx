@@ -1,6 +1,6 @@
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
+import React, { useCallback, useState, useEffect, useMemo, useRef } from 'react';
 import _ from 'lodash';
-import {reckonCursor, reckonStyleParams, reckonOffset, reckonStyle} from './helper';
+import {reckonCursor, reckonStyleParams, reckonOffset, reckonStyle, getParentInfo} from './helper';
 import css from './index.module.scss';
 
 // 默认状态值
@@ -18,6 +18,8 @@ const defaultState = {
 const useStateHook = (props) => {
   const [styleParams, setStyleParams] = useState(defaultState.styleParams);
   const [isMouseDown, setIsMouseDown] = useState(defaultState.isMouseDown);
+  const [downOffset, setDownOffset] = useState(null);
+  const modalRef = useRef(null);
 
   useEffect(() => {
     window.onmousemove = onDrag;
@@ -29,6 +31,12 @@ const useStateHook = (props) => {
     ...styleParams
   })), [styleParams]);
 
+  const resetStyleParams = useCallback((reset) => {
+    const data = {...styleParams, ...reset};
+    if (_.isEqual(data, styleParams)){return false;}
+    setStyleParams(data);
+  }, [styleParams]);
+
   // 拖动
   const onDrag = useCallback((e) => {
     if (styleParams.cursor === defaultState.styleParams.cursor || !isMouseDown){ return false; }
@@ -36,10 +44,12 @@ const useStateHook = (props) => {
       ...styleParams, 
       movex: e.movementX, 
       movey: e.movementY,
+      maxW: getParentInfo({ ref: modalRef }).clientWidth,
+      maxH: getParentInfo({ ref: modalRef }).clientHeight,
+      offset: downOffset,
     })[styleParams.cursor];
-    console.log(reset);
-    setStyleParams({ ...styleParams, ...reset });
-  }, [styleParams, isMouseDown]);
+    resetStyleParams(reset);
+  }, [styleParams, isMouseDown, downOffset]);
 
   // 设置 cursor
   const setCursor = useCallback((e) => {
@@ -47,7 +57,7 @@ const useStateHook = (props) => {
     if (current !== defaultState.styleParams.cursor && isMouseDown){ return false; }
     const offset = reckonOffset({e, ...styleParams});
     const cursor = reckonCursor({ ...offset, current });
-    cursor && setStyleParams({ ...styleParams, cursor });
+    cursor && resetStyleParams({cursor});
   }, [styleParams, isMouseDown]);
 
   // 鼠标移动事件
@@ -59,6 +69,7 @@ const useStateHook = (props) => {
   const onMouseDown = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    setDownOffset(reckonOffset({e, ...styleParams}));
     setIsMouseDown(true);
   }
 
@@ -67,7 +78,7 @@ const useStateHook = (props) => {
     setIsMouseDown(false);
   }
 
-  return { style, onMouseMove }
+  return { style, onMouseMove, modalRef }
 }
 
 export default (props) => {
@@ -75,6 +86,7 @@ export default (props) => {
   return (
     <div 
       style={state.style} 
+      ref={state.modalRef}
       className={css['modal']} 
       onMouseMove={state.onMouseMove}
     >
