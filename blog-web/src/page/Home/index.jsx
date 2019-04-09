@@ -3,8 +3,15 @@ import { Modal } from '@components';
 
 const Home = (props) => {
   return (
-    <div>
-      <Modal></Modal>
+    <div style={{
+      boxSizing: 'border-box',
+      background: '#eee',
+      height: '800px',
+      width: '100%',
+      border: '50px solid #fff',
+      position: 'relative'
+    }}>
+      <Modal width={1000}/>
     </div>
   );
 }
