@@ -30,8 +30,6 @@ export const reckonCursor = ({ current, left, right, top, bottom }) => {
 }
 
 const hValue = ({current, move, min, max}) => {
-  console.log('--------------');
-  console.log(current, move, min, max);
   // 1. 默认值
   let value = current + move;
   // 2. 最值验证
@@ -85,9 +83,9 @@ export const reckonStyleParams = ({ offset, width, height, top, left, movex, mov
     // offset.left
     const maxL = maxW ? maxW - offset.left : void 0;
     const hLeft = hValue({ current: left, move: movex, min: -offset.left, max: maxL});
-
-    // const hTop = hValue({ current: top, move: movey});
-    return {left: hLeft.value}
+    const maxT = maxW ? maxH - offset.top : void 0;
+    const hTop = hValue({ current: top, move: movey, max: maxT});
+    return {left: hLeft.value, top: hTop.value}
   };
 
   return {
