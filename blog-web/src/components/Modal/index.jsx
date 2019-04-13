@@ -1,84 +1,78 @@
-import React, { useCallback, useState, useEffect, useMemo, useRef } from 'react';
+// 要求父节点无 padding margin border
+import React, { useCallback, useState, useEffect, useMemo, useRef, memo } from 'react';
 import _ from 'lodash';
-import {reckonCursor, reckonStyleParams, reckonOffset, reckonStyle, getParentInfo} from './helper';
+import helper from './helper';
 import css from './index.module.scss';
 
 // 默认状态值
 const defaultState = {
   isMouseDown: false,
   styleParams: {
-    width: 100, 
-    height: 100, 
-    left: 10, 
-    top: 10,
     cursor: 'auto', 
+    width: 100, height: 100, 
+    translateX: 10, translateY: 10,
   }
 };
 
 const useStateHook = (props) => {
   const [styleParams, setStyleParams] = useState(defaultState.styleParams);
-  const [isMouseDown, setIsMouseDown] = useState(defaultState.isMouseDown);
-  const [downOffset, setDownOffset] = useState(null);
+  const [mouseDownState, setMouseDownState] = useState(null);
   const modalRef = useRef(null);
 
   useEffect(() => {
-    window.onmousemove = onDrag;
+    console.log('------------------ 刷新 ------------------------');
+  });
+
+  useEffect(() => {
+    window.onmousemove = onMouseMove;
     window.onmousedown = onMouseDown;
     window.onmouseup = onMouseUp;
   }); 
 
-  const style = useMemo(() => (reckonStyle({
-    ...styleParams
-  })), [styleParams]);
-
-  const resetStyleParams = useCallback((reset) => {
-    const data = {...styleParams, ...reset};
-    if (_.isEqual(data, styleParams)){return false;}
-    setStyleParams(data);
-  }, [styleParams]);
-
-  // 拖动
-  const onDrag = useCallback((e) => {
-    if (styleParams.cursor === defaultState.styleParams.cursor || !isMouseDown){ return false; }
-    const reset = reckonStyleParams({
-      ...styleParams, 
-      movex: e.movementX, 
-      movey: e.movementY,
-      maxW: getParentInfo({ ref: modalRef }).clientWidth,
-      maxH: getParentInfo({ ref: modalRef }).clientHeight,
-      offset: downOffset,
-    })[styleParams.cursor];
-    resetStyleParams(reset);
-  }, [styleParams, isMouseDown, downOffset]);
-
-  // 设置 cursor
-  const setCursor = useCallback((e) => {
-    const current = styleParams.cursor;
-    if (current !== defaultState.styleParams.cursor && isMouseDown){ return false; }
-    const offset = reckonOffset({e, ...styleParams});
-    const cursor = reckonCursor({ ...offset, current });
-    cursor && resetStyleParams({cursor});
-  }, [styleParams, isMouseDown]);
-
-  // 鼠标移动事件
-  const onMouseMove = (e) => {
-    setCursor(e);
+  const resetStyleParams = (reset) => {
+    reset = {...styleParams, ...reset};
+    if (_.isEqual(reset, styleParams)){ return false;}
+    setStyleParams(reset);
   }
 
-  // 鼠标按下
+  const onMove = (e) => {
+    if (!mouseDownState || !mouseDownState.handler){return false;}
+    const reset = mouseDownState.handler({ e, mouseDownState, modalRef });
+    resetStyleParams(reset);
+  }
+
+  const onMouseMove = (e) => {
+    // 1. 获取鼠标在 modal 边界状态， 并设置 modal.style.cursor
+    const state = helper.getMouseState({ e, modalRef, styleParams });
+    resetStyleParams({cursor: state.cursor});
+    // 2. 处理函数（鼠标按下） ？ 执行处理函数 ： 不做处理
+    onMove(e);
+  }
+
   const onMouseDown = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setDownOffset(reckonOffset({e, ...styleParams}));
-    setIsMouseDown(true);
+    // 1. 是否触碰到 modal 边界 ？ 设置鼠标按下状态 ： 否则不做处理
+    const state = helper.getMouseState({ e, modalRef, styleParams });
+    if (!state.type){return false;}
+    setMouseDownState(state);
   }
 
-  // 鼠标弹起来
   const onMouseUp = (e) => {
-    setIsMouseDown(false);
+    // 1. 清除所有可以清除的： modal cursor 、处理函数 = null
+    setMouseDownState(null);
   }
 
-  return { style, onMouseMove, modalRef }
+  const style = useMemo(() => ({
+    cursor: styleParams.cursor,
+    width: `${styleParams.width}px`,
+    height: `${styleParams.height}px`,
+    transform: `translate(${styleParams.translateX}px, ${styleParams.translateY}px)`,
+  
+    background: 'blue',
+  }), [styleParams]);
+
+  return { style, modalRef }
 }
 
 export default (props) => {
@@ -88,7 +82,6 @@ export default (props) => {
       style={state.style} 
       ref={state.modalRef}
       className={css['modal']} 
-      onMouseMove={state.onMouseMove}
     >
       modal
     </div>

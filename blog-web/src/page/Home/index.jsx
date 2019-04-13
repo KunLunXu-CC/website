@@ -5,14 +5,15 @@ const Home = (props) => {
   return (
     <div style={{
       boxSizing: 'border-box',
-      background: '#eee',
-      height: '800px',
       width: '100%',
-      border: '50px solid #fff',
+      padding: '50px',
       position: 'relative',
       overflow: 'hidden'
     }}>
+      <div style={{height: '800px', background: '#eee'}}>
+        
       <Modal width={1000}/>
+      </div>
     </div>
   );
 }
