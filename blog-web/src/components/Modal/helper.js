@@ -56,7 +56,7 @@ class Helper {
    * @param {Object} e                移动事件对象
    * @param {Object} mouseDownState   鼠标按下时存储的状态
    * @param {Object} modalRef         modal ref
-   * @param {Number} minW             modal 允许缩小的最下宽度
+   * @param {Number} minW             modal 允许缩小的最小宽度
    * @return {Object} { width, translateX } styleParams 用于计算样式
    */
   hLeft = ({ e, mouseDownState, modalRef, minW = this.MIN_W }) => {
@@ -66,18 +66,22 @@ class Helper {
       clientX: e.clientX, 
       clientY: e.clientY, 
     });
-    
     let offset = left - clientX;
-    width = width + offset;
-    translateX = translateX - offset;
-    if (width < minW){
-      offset = minW - width;
-      translateX = translateX - offset;
-      width = width + offset;
-    }
-    return { width, translateX };
+    (width + offset) < minW && (offset += minW - (width + offset));
+    return { 
+      width: width + offset,
+      translateX: translateX - offset,
+    };
   }
 
+  /**
+   * modal 右边框移动处理函数
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minW             modal 允许缩小的最小宽度
+   * @return {Object} { width } styleParams 用于计算样式
+   */
   hRight = ({ e, mouseDownState, modalRef, minW = this.MIN_W }) => {
     let { width, right } = mouseDownState;
     const { clientX } = this.formatClient({ 
@@ -90,6 +94,14 @@ class Helper {
     return { width };
   }
 
+  /**
+   * modal 上边框移动处理函数
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minH             modal 允许缩小的最小高度
+   * @return {Object} { height, translateY } styleParams 用于计算样式
+   */
   hTop = ({ e, mouseDownState, modalRef, minH = this.MIN_H }) => {
     let { height, top, translateY } = mouseDownState;
     const { clientY } = this.formatClient({ 
@@ -98,16 +110,21 @@ class Helper {
       clientY: e.clientY, 
     });
     let offset = top - clientY;
-    height = height + offset; 
-    translateY = translateY - offset;
-    if (height < minH){
-      offset = minH - height;
-      translateY = translateY - offset;
-      height = height + offset;
-    }
-    return { height, translateY };
+    (height + offset) < minH && (offset += minH - (height + offset));
+    return {
+      height: height + offset,
+      translateY: translateY - offset,
+    };
   }
 
+  /**
+   * modal 下边框移动处理函数
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minH             modal 允许缩小的最小高度
+   * @return {Object} { height } styleParams 用于计算样式
+   */
   hBottom = ({ e, mouseDownState, modalRef, minH = this.MIN_H }) => {
     let { height, bottom } = mouseDownState;
     const { clientY } = this.formatClient({
@@ -120,106 +137,170 @@ class Helper {
     return { height };
   }
 
+  /**
+   * modal 左上角移动处理函数： 合并 hLeft 和 hTop 返回值
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minH             modal 允许缩小的最小高度
+   * @param {Number} minW             modal 允许缩小的最小宽度
+   * @return {Object} { ... } styleParams 用于计算样式
+   */
   hLeftTop = (...args) => ({ ...this.hLeft(...args), ...this.hTop(...args)});
 
+  /**
+   * modal 右上角移动处理函数： 合并 hRight 和 hTop 返回值
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minH             modal 允许缩小的最小高度
+   * @param {Number} minW             modal 允许缩小的最小宽度
+   * @return {Object} { ... } styleParams 用于计算样式
+   */
   hRightTop = (...args) => ({ ...this.hRight(...args), ...this.hTop(...args)});
 
+  /**
+   * modal 左下角移动处理函数： 合并 hLeft 和 hBottom 返回值
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minH             modal 允许缩小的最小高度
+   * @param {Number} minW             modal 允许缩小的最小宽度
+   * @return {Object} { ... } styleParams 用于计算样式
+   */
   hLeftBottom =(...args) => ({ ...this.hLeft(...args), ...this.hBottom(...args)});
 
+  /**
+   * modal 右下角移动处理函数： 合并 hRight 和 hBottom 返回值
+   * @param {Object} e                移动事件对象
+   * @param {Object} mouseDownState   鼠标按下时存储的状态
+   * @param {Object} modalRef         modal ref
+   * @param {Number} minH             modal 允许缩小的最小高度
+   * @param {Number} minW             modal 允许缩小的最小宽度
+   * @return {Object} { ... } styleParams 用于计算样式
+   */
   hRightBottom = (...args) => ({ ...this.hRight(...args), ...this.hBottom(...args)});
 
-  // 鼠标状态映射配置(鼠标事件 clientX, clientY， modal rect(left, top, right, bottom) )
+  /**
+   * 合并鼠标状态： 根据鼠标的状态获取自定义参数并合并状态后返回
+   * @param {Number} state.clientX      鼠标事件 clientX
+   * @param {Number} state.clientY      鼠标事件 clientY
+   * 
+   * @param {Number} state.left         modal rect left
+   * @param {Number} state.top          modal rect top
+   * @param {Number} state.right        modal rect right
+   * @param {Number} state.bottom       modal rect bottom
+   * 
+   * @param {String} state.cursor       modal styleParams cursor
+   * @param {Number} state.width        modal styleParams width
+   * @param {Number} state.height       modal styleParams height
+   * @param {Number} state.translateX   modal styleParams translateX
+   * @param {Number} state.translateY   modal styleParams translateY
+   * 
+   * @return {Object} {...state, conds, cursor, handler, type} 状态参数合并自定义参数 
+   */
   mergeMouseState = (state) => {
+    // 判断鼠标是否位于 modal 宽高范围内
     const onWidth = state.left - state.clientX < this.FT_BORDER && state.clientX - state.right < this.FT_BORDER;
     const onHeight = state.top - state.clientY < this.FT_BORDER && state.clientY - state.bottom < this.FT_BORDER;
+
+    // 判断鼠标是否落在 modal 边界
     const onLeft = Math.abs(state.clientX - state.left) <= this.FT_BORDER  && onHeight;
     const onRight = Math.abs(state.clientX - state.right) <= this.FT_BORDER && onHeight;
     const onBottom = Math.abs(state.clientY - state.bottom) <= this.FT_BORDER && onWidth;
     const onTop = Math.abs(state.clientY - state.top) <= this.FT_BORDER && onWidth;
 
+    // 判断鼠标 y 轴是否在可 modal 可拖拽范围内， 并且在宽度范围内
     const onDrag = state.clientY - state.top > 0 && state.clientY - state.top < this.FT_DRAG && onWidth;
 
+    // 配置表： conds 鼠标所处位置限制条件、cursor 鼠标手势样式、handler 处理函数、type 类型你也可以来当做唯一值（name）
     const settingList = [{
-      conds:  onLeft && !onTop && !onBottom,
+      type: 'left',
       cursor: 'w-resize',
       handler: this.hLeft,
-      type: 'left'
+      conds:  onLeft && !onTop && !onBottom,
     }, {
-      conds:  onRight && !onTop && !onBottom,
+      type: 'right',
       cursor: 'e-resize',
       handler: this.hRight,
-      type: 'right'
+      conds:  onRight && !onTop && !onBottom,
     }, {
-      conds:  onTop && !onLeft && !onRight,
+      type: 'top',
       cursor: 'n-resize',
       handler: this.hTop,
-      type: 'top'
+      conds:  onTop && !onLeft && !onRight,
     }, {
-      conds:  onBottom && !onLeft && !onRight,
+      type: 'bottom',
       cursor: 's-resize',
       handler: this.hBottom,
-      type: 'bottom'
+      conds:  onBottom && !onLeft && !onRight,
     }, {
-      conds:  onLeft && onTop,
+      type: 'leftTop',
       cursor: 'nw-resize',
       handler: this.hLeftTop,
-      type: 'leftTop'
+      conds:  onLeft && onTop,
     }, {
-      conds:  onRight && onTop,
+      type: 'rightTop',
       cursor: 'ne-resize',
       handler: this.hRightTop,
-      type: 'rightTop'
+      conds:  onRight && onTop,
     }, {
-      conds:  onLeft && onBottom,
+      type: 'leftBottom',
       cursor: 'sw-resize',
       handler: this.hLeftBottom,
-      type: 'leftBottom'
+      conds:  onLeft && onBottom,
     }, {
-      conds:  onRight && onBottom,
+      type: 'rightBottom',
       cursor: 'se-resize',
       handler: this.hRightBottom,
-      type: 'rightBottom'
+      conds:  onRight && onBottom,
     }, {
+      type: 'drag',
       conds:  onDrag,
       cursor: 'pointer',
       handler: this.hDrag,
-      type: 'drag',
     }, {
-      conds:  true,
-      cursor: 'auto',
-      handler: null,
       type: null,
+      conds:  true,
+      handler: null,
+      cursor: 'auto',
     }];
     const filter = settingList.filter(v => v.conds)[0];
     return { ...state, ...filter };
   }
 
   /**
-   * 获取鼠标状态 modal 上的状态(事件对象、modalRef) return {状态}
-   * @return {Object} 
-   * {
-   *  type, 
-   *  conds, 
-   *  cursor, 
-   *  handler, 
-   *  clientX, clientY, 
-   *  top, left, right, bottom, 
-   *  width, height,
-   *  translateX, translateY, 
-   * }
+   * 获取鼠标状态
+   * @param {Object} e              鼠标事件对象
+   * @param {Object} modalRef       modal ref
+   * @param {Object} styleParams    modal 样式参数
+   * @return {Object} {...} mergeMouseState 返回值
+   * --- 自定义参数（根据鼠标所处位置判定）
+   * - type
+   * - conds
+   * - cursor
+   * - handler
+   * --- 鼠标事件对象 clientX clientY
+   * - clientX
+   * - clientY
+   * --- modal rect
+   * - top
+   * - left
+   * - right
+   * - bottom
+   * --- modal 样式计算参数
+   * - width
+   * - height
+   * - translateX
+   * - translateY
    */
   getMouseState = ({ e, modalRef, styleParams }) => {
-    // 1. 获取 e clientx clienty
-    const { clientX, clientY } = e;
-    // 2. 获取 modal left, top, right, bottom
     const  rect = modalRef.current.getBoundingClientRect();
     const { left, top, right, bottom } = rect;
-    // 3. 计算
-    const revalue = this.mergeMouseState({ 
+    const { clientX, clientY } = e;
+    return this.mergeMouseState({ 
       clientX, clientY, left, top, right, bottom, ...styleParams
     });
-    // 4. 返回： {type， cursor, handler}
-    return revalue; 
   }
  
 }

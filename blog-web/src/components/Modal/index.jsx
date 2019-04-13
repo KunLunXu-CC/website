@@ -1,5 +1,12 @@
 // 要求父节点无 padding margin border
-import React, { useCallback, useState, useEffect, useMemo, useRef, memo } from 'react';
+import React, { 
+  memo,
+  useRef, 
+  useMemo, 
+  useState, 
+  useEffect, 
+  useCallback, 
+} from 'react';
 import _ from 'lodash';
 import helper from './helper';
 import css from './index.module.scss';
@@ -8,9 +15,11 @@ import css from './index.module.scss';
 const defaultState = {
   isMouseDown: false,
   styleParams: {
+    width: 100, 
+    height: 100, 
     cursor: 'auto', 
-    width: 100, height: 100, 
-    translateX: 10, translateY: 10,
+    translateX: 10, 
+    translateY: 10,
   }
 };
 
@@ -29,37 +38,53 @@ const useStateHook = (props) => {
     window.onmouseup = onMouseUp;
   }); 
 
+  /**
+   * 计算（合并设置）styleParams
+   * @param {Object} reset 
+   */
   const resetStyleParams = (reset) => {
     reset = {...styleParams, ...reset};
     if (_.isEqual(reset, styleParams)){ return false;}
     setStyleParams(reset);
   }
 
+  /**
+   * 处理移动函数： 执行处理函数并设置 styleParams
+   * @param {Object} e 事件对象
+   */
   const onMove = (e) => {
     if (!mouseDownState || !mouseDownState.handler){return false;}
     const reset = mouseDownState.handler({ e, mouseDownState, modalRef });
     resetStyleParams(reset);
   }
 
+  /**
+   * 鼠标移动事件： 1. 获取鼠标状态并设置 styleParams 2. 执行移动函数
+   * @param {Object} e 事件对象
+   */
   const onMouseMove = (e) => {
-    // 1. 获取鼠标在 modal 边界状态， 并设置 modal.style.cursor
     const state = helper.getMouseState({ e, modalRef, styleParams });
     resetStyleParams({cursor: state.cursor});
-    // 2. 处理函数（鼠标按下） ？ 执行处理函数 ： 不做处理
     onMove(e);
   }
 
+  /**
+   * 鼠标按下事件： 1. 取消默认行为和冒泡 2. 获取鼠标状态并设置 mouseDownState
+   * @param {Object} e 事件对象
+   */
   const onMouseDown = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    // 1. 是否触碰到 modal 边界 ？ 设置鼠标按下状态 ： 否则不做处理
     const state = helper.getMouseState({ e, modalRef, styleParams });
     if (!state.type){return false;}
     setMouseDownState(state);
   }
 
+  /**
+   * 鼠标弹起事件： 1. 移除 mouseDownState
+   * @param {Object} e 事件对象
+   */
   const onMouseUp = (e) => {
-    // 1. 清除所有可以清除的： modal cursor 、处理函数 = null
     setMouseDownState(null);
   }
 
