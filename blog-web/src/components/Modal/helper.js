@@ -3,11 +3,37 @@ import _ from 'lodash';
 class Helper {
   constructor(){
     // modal 可缩小的默认最小宽高
-    this.MIN_H = 100;
-    this.MIN_W = 100;
+    this.MIN_H = 250;
+    this.MIN_W = 500;
     // 容错(边界、 拖拽)
     this.FT_BORDER = 2;
     this.FT_DRAG = 30;
+  }
+
+  /**
+   * 设置（计算）样式：
+   * @param {Object} styleParams 样式参数
+   * @return {Object} jsx 样式对象 
+   */
+  getStyle = ({ styleParams }) => {
+    const width = _.isNumber(styleParams.width) ? `${styleParams.width}px` : styleParams.width; 
+    const height = _.isNumber(styleParams.height) ? `${styleParams.height}px` : styleParams.height; 
+    return {
+      width,
+      height,
+      cursor: styleParams.cursor,
+      transform: `translate(${styleParams.translateX}px, ${styleParams.translateY}px)`,
+    };
+  }
+
+  /**
+   * 为父容器设置 cursor
+   * @param {Object} modalRef   modal ref
+   * @param {String} cursor     curosor 样式
+   */
+  setParentCursor = ({modalRef, cursor}) => {
+    const node = modalRef.current.parentNode;
+    node.style.cursor = cursor
   }
 
   /**

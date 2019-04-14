@@ -1,3 +1,72 @@
+%transition-color {
+  transition: color 0.5s;
+}
+
+%transition-w-h {
+  transition: all 0.01s;
+}
+
 .modal{
+  @extend %transition-w-h;
   position: absolute;
+  border-radius: 10px;
+  background: #04071b;
+  overflow: hidden;
+
+  &-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.modal-tool{
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 0, 0, 0.1);
+  display: flex;
+  > div {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 19px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: {
+      top: 10px;
+      bottom: 10px;
+      left: 10px;
+    };
+  }
+  .close{
+    color: #ff625a;
+    @extend %transition-color;
+    background: #ff625a;
+  }
+  .shrink{
+    color: #ffc12f;
+    @extend %transition-color;
+    background: #ffc12f;
+  }
+  .zoom{
+    color: #29ce42;
+    @extend %transition-color;
+    background: #29ce42;
+  }
+  &:hover{
+    .close{ 
+      @extend %transition-color;      
+      color: #333; 
+    }
+    .shrink{ 
+      @extend %transition-color;      
+      color: #333; 
+    }
+    .zoom{  
+      @extend %transition-color;      
+      color: #333; 
+    }
+  }
 }

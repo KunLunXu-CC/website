@@ -1,7 +1,2 @@
-import FontIcon from './FontIcon';
-import Modal from './Modal';
-
-export {
-  FontIcon,
-  Modal,
-};
+export { default as FontIcon } from './FontIcon';
+export { default as Modal } from './Modal';
