@@ -24,15 +24,19 @@ const defaultState = {
   }
 };
 
+// modal 状态
+const MODAL_STATUS = {
+  CLOSE: 'close',
+  NORMAL: 'normal',
+  MINIMIZE: 'minimize',
+  MAXIMIZE: 'maximize',
+};
+
 const useStateHook = (props) => {
   const [styleParams, setStyleParams] = useState(defaultState.styleParams);
-  const [oldStyleParams, setOldStyleParams] = useState({});
   const [mouseDownState, setMouseDownState] = useState(null);
+  const histories = useMemo(() => ({}), []);
   const modalRef = useRef(null);
-
-  useEffect(() => {
-    console.log('------------------ 刷新 ------------------------');
-  });
 
   useEffect(() => {
     window.onmousemove = onMouseMove;
@@ -96,23 +100,46 @@ const useStateHook = (props) => {
    * 关闭 modal
    */
   const onClose = (e) => {
-    
-    console.log('关闭');
+    if (!histories[MODAL_STATUS.CLOSE]){
+      histories[MODAL_STATUS.CLOSE] = styleParams;
+      resetStyleParams({
+        width: 100,
+        height: 100,
+        translateX: 0,
+        translateY: 0,
+      });
+    } else {
+      const reset = {...histories[MODAL_STATUS.CLOSE]};
+      histories[MODAL_STATUS.CLOSE] = null;
+      resetStyleParams(reset);
+    };
   }
 
   /**
    * 缩小 modal
    */
-  const onShrink = () => {
-    console.log('缩小');
+  const onMinimize = () => {
+    if (!histories[MODAL_STATUS.MINIMIZE]){
+      histories[MODAL_STATUS.MINIMIZE] = styleParams;
+      resetStyleParams({
+        width: 100,
+        height: 100,
+        translateX: 0,
+        translateY: 0,
+      });
+    } else {
+      const reset = {...histories[MODAL_STATUS.MINIMIZE]};
+      histories[MODAL_STATUS.MINIMIZE] = null;
+      resetStyleParams(reset);
+    };
   }
 
   /**
    * 切换最大（还原）
    */
-  const onZoom = () => {
-    if (_.isEmpty(oldStyleParams)){
-      setOldStyleParams(styleParams);
+  const onMaximize = () => {
+    if (!histories[MODAL_STATUS.MAXIMIZE]){
+      histories[MODAL_STATUS.MAXIMIZE] = styleParams;
       resetStyleParams({
         width: '100%',
         height: '100%',
@@ -120,8 +147,9 @@ const useStateHook = (props) => {
         translateY: 0,
       });
     } else {
-      setOldStyleParams({});
-      resetStyleParams(oldStyleParams);
+      const reset = {...histories[MODAL_STATUS.MAXIMIZE]};
+      histories[MODAL_STATUS.MAXIMIZE] = null;
+      resetStyleParams(reset);
     };
   }
 
@@ -129,7 +157,7 @@ const useStateHook = (props) => {
     styleParams
   }), [styleParams]);
 
-  return { style, modalRef, onClose, onShrink, onZoom }
+  return { style, modalRef, onClose, onMinimize, onMaximize }
 }
 
 export default (props) => {
@@ -142,10 +170,10 @@ export default (props) => {
           <div className={css['close']} onClick={state.onClose}>
             <FontIcon icon="icon-guanbi6-copy" />
           </div>
-          <div className={css['shrink']} onClick={state.onShrink}>
+          <div className={css['shrink']} onClick={state.onMinimize}>
             <FontIcon icon="icon-suoxiao" />
           </div>
-          <div className={css['zoom']} onClick={state.onZoom}>
+          <div className={css['zoom']} onClick={state.onMaximize}>
             <FontIcon icon="icon-fangda1" />
           </div>
         </div>
