@@ -328,7 +328,7 @@ class Helper {
       clientX, clientY, left, top, right, bottom, ...styleParams
     });
   }
- 
+
 }
 
 export default new Helper(); 

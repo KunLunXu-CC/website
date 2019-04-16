@@ -6,6 +6,7 @@
   transition: all 0.01s;
 }
 
+/* modal 容器层 */
 .modal{
   @extend %transition-w-h;
   position: absolute;
@@ -20,6 +21,7 @@
   }
 }
 
+/* 工具 */ 
 .modal-tool{
   position: absolute;
   left: 0;
