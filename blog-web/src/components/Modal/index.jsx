@@ -39,10 +39,15 @@ const useStateHook = (props) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    window.onmousemove = onMouseMove;
-    window.onmousedown = onMouseDown;
-    window.onmouseup = onMouseUp;
-  }); 
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousedown', onmousedown);
+    window.addEventListener('mouseup', onmouseup);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousedown', onmousedown);
+      window.removeEventListener('mouseup', onmouseup);
+    }
+  }, [onMouseMove, onmousedown, onmouseup]); 
 
   /**
    * 计算（合并设置）styleParams

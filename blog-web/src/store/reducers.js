@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import mock from './mock/reducer';
+import routes from './routes/reducer';
 
 export default combineReducers({
-  mock
+  routes,
 });
