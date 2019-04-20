@@ -3,8 +3,8 @@
   background: rgba($color: red, $alpha: 0.1);
 }
 
-
 /* Dock 样式 */
+$dock-size: 100px;
 %dock{
   position: fixed;
   right: 0;
@@ -25,7 +25,7 @@
 
 .dock-hidden{
   @extend %dock;
-  bottom: -100px;
+  bottom: -$dock-size;
 }
 
 .dock-wrapper{
@@ -44,8 +44,8 @@
   padding: 0 10px;
 
   &-content{
-    width: 100px;
-    height: 100px;
+    width: $dock-size;
+    height: $dock-size;
     background: blue;
   }
 }

@@ -1,4 +1,5 @@
 import React, {
+  useRef,
   useMemo,
   useState,
   useEffect,
@@ -9,52 +10,46 @@ import scss from '../index.module.scss';
 const FT = 20;
 const useStateHook = () => {
   const [show, setShow] = useState(false);
-  const staticState = useMemo(v => ({
-    mouseEnter: false
-  }), []);
+  const dockRef = useRef();
 
   useEffect(() => {
-    window.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseleave', onMouseLeave);
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
     }
-  }, [onMouseMove]);
+  });
 
+  // document mousemove 事件
   const onMouseMove = useCallback((e) => {
     const { clientHeight } = document.documentElement;
-    const conds = [
-      staticState.mouseEnter,
-      clientHeight - e.clientY < FT
-    ];
-    const reset = conds.includes(true);
+    const { top } = dockRef.current.getBoundingClientRect();
+    const reset = [
+      e.clientY > top,
+      clientHeight - e.clientY < FT,
+    ].includes(true);
     reset !== show && setShow(reset);
-  }, [show]);
-  
-  const onMouseEnter = useCallback(() => {
-    staticState.mouseEnter = true;
-  }, []);
+  }, [show, dockRef]);
 
+  // document mouseLeave 事件
   const onMouseLeave = useCallback(() => {
-    staticState.mouseEnter = false;
     setShow(false);
   }, []);
 
+  // 计算 dock className
   const dockClassName = useMemo( () => (
     scss[`dock-${show ? 'show' : 'hidden'}`]
   ), [show]);
 
-  return { dockClassName, onMouseEnter, onMouseLeave };
+  return { dockClassName, onMouseLeave, dockRef };
 }
 
 export default () => {
   const state = useStateHook();
 
   return (
-    <div 
-      onMouseEnter={state.onMouseEnter}
-      onMouseLeave={state.onMouseLeave}
-      className={state.dockClassName}
-    >
+    <div ref={state.dockRef} className={state.dockClassName} >
       <div className={scss['dock-wrapper']}>
         <div className={scss['dock-app']}>
           <div className={scss['dock-app-content']}></div>
@@ -69,7 +64,6 @@ export default () => {
           <div className={scss['dock-app-content']}></div>
         </div>
       </div>
-
     </div>
   );
 }
