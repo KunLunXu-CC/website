@@ -14,8 +14,8 @@ export default ({ size, color, iconStyle, onClick, className, icon, label, label
   // 样式
   const styles = useMemo(() => {
     const _styles = {...iconStyle};
-    size && (_styles.fontSize = size);
-    color && (_styles.color = color);
+    _styles.fontSize = size || '14px';
+    _styles.color = color || void 0;
     return _styles;
   }, []);
 

@@ -5,6 +5,8 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import dockList from '@config/dock';
+import { FontIcon } from '@components';
 import scss from '../index.module.scss';
 
 const FT = 20;
@@ -51,18 +53,15 @@ export default () => {
   return (
     <div ref={state.dockRef} className={state.dockClassName} >
       <div className={scss['dock-wrapper']}>
-        <div className={scss['dock-app']}>
-          <div className={scss['dock-app-content']}></div>
-        </div>
-        <div className={scss['dock-app']}>
-          <div className={scss['dock-app-content']}></div>
-        </div>
-        <div className={scss['dock-app']}>
-          <div className={scss['dock-app-content']}></div>
-        </div>
-        <div className={scss['dock-app']}>
-          <div className={scss['dock-app-content']}></div>
-        </div>
+        {
+          dockList.map(v => (
+            <div className={scss['dock-app']} key={v.code}>
+              <div className={scss['dock-app-content']}>
+                <FontIcon icon={v.icon} size="50px"/>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </div>
   );
