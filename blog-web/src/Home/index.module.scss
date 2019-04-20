@@ -1,0 +1,51 @@
+.home {
+  height: 100vh;
+  background: rgba($color: red, $alpha: 0.1);
+}
+
+
+/* Dock 样式 */
+%dock{
+  position: fixed;
+  right: 0;
+  left: 0;
+
+  font-size: 0;
+  letter-spacing: -4px;
+  text-align: center;
+  background: rgba($color: blue, $alpha: 0.1);
+
+  transition: bottom 0.5s;
+}
+
+.dock-show{
+  @extend %dock;
+  bottom: 0;
+}
+
+.dock-hidden{
+  @extend %dock;
+  bottom: -100px;
+}
+
+.dock-wrapper{
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 0;
+  letter-spacing: -4px;
+
+  background: red;
+}
+
+.dock-app{
+  display: inline-block;
+  font-size: 0;
+  letter-spacing: -4px;
+  padding: 0 10px;
+
+  &-content{
+    width: 100px;
+    height: 100px;
+    background: blue;
+  }
+}

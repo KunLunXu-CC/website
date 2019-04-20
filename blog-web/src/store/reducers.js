@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import apps from './apps/reducer';
+import routes from './routes/reducer';
 
 export default combineReducers({
-  apps,
+  routes,
 });
