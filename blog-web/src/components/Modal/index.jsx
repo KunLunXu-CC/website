@@ -39,13 +39,13 @@ const useStateHook = (props) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mousedown', onmousedown);
-    window.addEventListener('mouseup', onmouseup);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousedown', onmousedown);
+    document.addEventListener('mouseup', onmouseup);
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mousedown', onmousedown);
-      window.removeEventListener('mouseup', onmouseup);
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mousedown', onmousedown);
+      document.removeEventListener('mouseup', onmouseup);
     }
   }, [onMouseMove, onmousedown, onmouseup]); 
 
@@ -75,6 +75,7 @@ const useStateHook = (props) => {
    */
   const onMouseMove = (e) => {
     const state = helper.getMouseState({ e, modalRef, styleParams });
+    console.log(state.cursor);
     resetStyleParams({cursor: state.cursor});
     onMove(e);
   }

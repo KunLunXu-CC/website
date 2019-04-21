@@ -1,4 +1,4 @@
-import React from 'react';
+import Note from './Note';
 
 export default [
   {
@@ -14,7 +14,7 @@ export default [
     code: 'note',
     exact: true,
     path: '/note',
-    app: () => (<div>笔记</div>) 
+    app: Note
   }, {
     name: '标签',
     icon: 'icon-biaoqian1',

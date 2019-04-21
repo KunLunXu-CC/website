@@ -2,6 +2,7 @@
 .dosktop {
   height: 100vh;
   width: 100vw;
+  // position: relative;
 
   background: {
     position: center center;
@@ -13,6 +14,7 @@
 $dock-size: 70px;
 %dock{
   position: fixed;
+  z-index: 999;
   right: 0;
   left: 0;
 
@@ -40,8 +42,8 @@ $dock-size: 70px;
   font-size: 0;
   letter-spacing: -4px;
 
-  background: rgba($color: #221e1c, $alpha: 0.6);
-  border: 1px solid rgba($color: #fff, $alpha: 1.0);
+  background: rgba($color: #221e1c, $alpha: 0.8);
+  border: 1px solid rgba($color: #fff, $alpha: 0.2);
   border-bottom: none;
   border-radius: $radius $radius 0 0;
 }
@@ -58,4 +60,13 @@ $dock-size: 70px;
     text-align: center;
     line-height: $dock-size;
   }
+}
+
+/* AppBlock 样式 */
+.app-block{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }

@@ -5,12 +5,15 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import { connect } from  'react-redux';
+import { open } from '@store/routes/action';
+import { bindActionCreators } from 'redux';
 import dockList from '@config/dock';
 import { FontIcon } from '@components';
 import scss from '../index.module.scss';
 
 const FT = 20;
-const useStateHook = () => {
+const useStateHook = (props) => {
   const [show, setShow] = useState(false);
   const dockRef = useRef();
 
@@ -44,11 +47,17 @@ const useStateHook = () => {
     scss[`dock-${show ? 'show' : 'hidden'}`]
   ), [show]);
 
-  return { dockClassName, onMouseLeave, dockRef };
+  // 点击事件 
+  const onClick = (dock) => {
+    const url = dock.path;
+    props.open(url);
+  }
+
+  return { dockClassName, onMouseLeave, dockRef, onClick };
 }
 
-export default () => {
-  const state = useStateHook();
+const Dock = (props) => {
+  const state = useStateHook(props);
 
   return (
     <div ref={state.dockRef} className={state.dockClassName} >
@@ -56,7 +65,9 @@ export default () => {
         {
           dockList.map(v => (
             <div className={scss['dock-app']} key={v.code}>
-              <div className={scss['dock-app-content']}>
+              <div 
+                className={scss['dock-app-content']} 
+                onClick={state.onClick.bind(null, v)}>
                 <FontIcon icon={v.icon} size="50px"/>
               </div>
             </div>
@@ -66,3 +77,8 @@ export default () => {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  open: bindActionCreators(open, dispatch)
+});
+export default connect(null, mapDispatchToProps)(Dock);

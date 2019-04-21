@@ -5,16 +5,15 @@ import React, {
   useEffect,
 } from 'react';
 import _ from 'lodash';
+import { connect } from 'react-redux';
 import scss from '../index.module.scss';
 import HomeBg from '@assets/img/home_bg.jpg';
-import BG from '@assets/img/bg.png';
-
 const SCALE = 1920 / 1080;
 
-const useStateHook = () => {
+const useStateHook = (props) => {
   const [bgSize, setBgSize] = useState({width: '100%', height: '100%'});
   const desktopRef = useRef();
-  
+  console.log('===>>>', props);
   useEffect(() => {
     resetBgSize();
   }, []);
@@ -45,8 +44,8 @@ const useStateHook = () => {
   return { desktopRef, backgroundSize };
 }
 
-export default () => {
-  const state = useStateHook();
+const Desktop = (props) => {
+  const state = useStateHook(props);
   return (
     <div 
       className={scss['dosktop']}
@@ -56,7 +55,11 @@ export default () => {
         backgroundSize: state.backgroundSize,
       }}
     >
-      
+      {/*  */}
     </div>
   );
 }
+
+export default connect((state) => ({
+  routes: state.routes
+}), null)(Desktop);
