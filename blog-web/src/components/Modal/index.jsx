@@ -40,14 +40,14 @@ const useStateHook = (props) => {
 
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mousedown', onmousedown);
-    document.addEventListener('mouseup', onmouseup);
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('mouseup', onMouseUp);
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mousedown', onmousedown);
-      document.removeEventListener('mouseup', onmouseup);
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('mouseup', onMouseUp);
     }
-  }, [onMouseMove, onmousedown, onmouseup]); 
+  }); 
 
   /**
    * 计算（合并设置）styleParams
@@ -75,7 +75,6 @@ const useStateHook = (props) => {
    */
   const onMouseMove = (e) => {
     const state = helper.getMouseState({ e, modalRef, styleParams });
-    console.log(state.cursor);
     resetStyleParams({cursor: state.cursor});
     onMove(e);
   }

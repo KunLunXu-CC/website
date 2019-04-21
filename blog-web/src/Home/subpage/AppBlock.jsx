@@ -15,14 +15,12 @@ const useStateHook = (props) => {
 const AppBlock = (props) => {
   return (
     <div className={scss['app-block']}>
-      <div style={{position: 'relative'}}>
-        {
-          props.routes.map( v => {
-            const App = v.app;
-            return (<App key={v.url}/>);
-          })
-        }
-      </div>
+      {
+        props.routes.map( v => {
+          const App = v.app;
+          return (<App key={v.url}/>);
+        })
+      }
     </div>
   );
 }
