@@ -16,30 +16,26 @@ const minStyleParams = {
   translateY: '100vh',
 };
 
-// 开启 app
+// 开启 app reducer 处理函数
 const openApp = (state, action) => {
   const { payload } = action;
   if (!state.some(v => v.url === payload.url)){
     return [ ...state, action.payload ];
   } else {
-    return state.map(v => (v.url === payload.url ? { 
-      ...v, min: v.min ? null : {
-        width: 0,
-        height: 0,
-        translateX: '100vw',
-        translateY: '100vh',
-      } 
-    } : v));
+    return state.map(v => ( 
+      v.url === payload.url ? { ...v, min: v.min ? null : minStyleParams } : v
+    ));
   }
 }
 
-// 关闭 app
+// 关闭 app reducer 处理函数
 const closeApp = (state, action) => {
-  _.remove(action.payload || [], v => v.url === route.url);
+  const { url } = action.payload;
+  _.remove(state, v => v.url === url);
   return [...state];
 }
 
-// 最大化（切换）
+// 最大化（切换） reducer 处理函数
 export const maximize = (state, action) => (state.map( v => {
   if (v.url === action.payload.url){ 
     const route = action.payload;
@@ -48,7 +44,7 @@ export const maximize = (state, action) => (state.map( v => {
   return v;
 }));
 
-// 最小化（切换）
+// 最小化（切换） reducer 处理函数
 export const minimize = (state, action) => (state.map( v => {
   if (v.url === action.payload.url){ 
     const route = action.payload;
@@ -57,7 +53,6 @@ export const minimize = (state, action) => (state.map( v => {
   return v;
 }));
 
-// 
 export default (state = initState, action) => {
   const mapTypeToHandler = {
     [ACTION_TYPE.OPEN_APP]: openApp,

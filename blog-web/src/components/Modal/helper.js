@@ -6,7 +6,7 @@ class Helper {
     this.MIN_H = 250;
     this.MIN_W = 500;
     // 容错(边界、 拖拽)
-    this.FT_BORDER = 2;
+    this.FT_BORDER = 4;
     this.FT_DRAG = 30;
   }
 
@@ -37,7 +37,7 @@ class Helper {
    * @param {Object} modalRef   modal ref
    * @param {String} cursor     curosor 样式
    */
-  setParentCursor = ({modalRef, cursor}) => {
+  setParentCursor = ({ modalRef, cursor }) => {
     const node = modalRef.current.parentNode;
     node.style.cursor = cursor
   }
