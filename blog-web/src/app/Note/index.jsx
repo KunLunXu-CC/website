@@ -1,9 +1,9 @@
 import React from 'react';
 import { Modal } from '@components';
 
-const Note = () => {
+const Note = (props) => {
   return (
-    <Modal>
+    <Modal route={props.route}>
       笔记
     </Modal>
   );

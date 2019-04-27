@@ -13,7 +13,7 @@ const SCALE = 1920 / 1080;
 const useStateHook = (props) => {
   const [bgSize, setBgSize] = useState({width: '100%', height: '100%'});
   const desktopRef = useRef();
-  console.log('===>>>', props);
+
   useEffect(() => {
     resetBgSize();
   }, []);

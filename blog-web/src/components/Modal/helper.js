@@ -16,13 +16,19 @@ class Helper {
    * @return {Object} jsx 样式对象 
    */
   getStyle = ({ styleParams }) => {
-    const width = _.isNumber(styleParams.width) ? `${styleParams.width}px` : styleParams.width; 
-    const height = _.isNumber(styleParams.height) ? `${styleParams.height}px` : styleParams.height; 
-    return {
-      width,
-      height,
-      cursor: styleParams.cursor,
-      transform: `translate(${styleParams.translateX}px, ${styleParams.translateY}px)`,
+    let { width, height, translateX, translateY, cursor} = styleParams;
+
+    width = _.isNumber(width) ? `${width}px` : width; 
+    height = _.isNumber(height) ? `${height}px` : height; 
+
+    translateX = _.isNumber(translateX) ? `${translateX}px` : translateX; 
+    translateY = _.isNumber(translateY) ? `${translateY}px` : translateY; 
+
+    return { 
+      width, 
+      height, 
+      cursor,
+      transform: `translate(${translateX}, ${translateY})`,
     };
   }
 

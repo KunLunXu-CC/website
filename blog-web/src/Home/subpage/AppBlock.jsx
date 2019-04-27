@@ -18,7 +18,7 @@ const AppBlock = (props) => {
       {
         props.routes.map( v => {
           const App = v.app;
-          return (<App key={v.url}/>);
+          return (<App key={v.url} route={v}/>);
         })
       }
     </div>

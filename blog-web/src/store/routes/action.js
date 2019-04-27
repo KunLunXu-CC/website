@@ -1,10 +1,9 @@
 import * as ACTION_TYPE from './actionType';
+import { APP_STATUS } from '@config/consts';
 import { matchPath } from 'react-router-dom';
 import apps from '@app/index';
 
 export const open = (url) => {
-  console.log(url);
-
   let match = void 0;
   const app = apps.find( v => {
     match = matchPath(url, {
@@ -17,10 +16,11 @@ export const open = (url) => {
 
   return {
     type: ACTION_TYPE.OPEN_APP,
-    payload: { ...app, match, url }
+    payload: { ...app, match, url, status: APP_STATUS.SHOW.VALUE }
   };
 }
 
-export const close = ({}) => {
-
-}
+export const close = ({route}) => ({
+  type: ACTION_TYPE.CLOSE_APP,
+  payload: { ...route }
+});

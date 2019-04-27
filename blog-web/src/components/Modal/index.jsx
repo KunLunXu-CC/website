@@ -10,7 +10,10 @@ import React, {
 import _ from 'lodash';
 import helper from './helper';
 import css from './index.module.scss';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { FontIcon } from '@components';
+import { close } from '@store/routes/action';
 
 // 默认状态值
 const defaultState = {
@@ -105,32 +108,22 @@ const useStateHook = (props) => {
    * 关闭 modal
    */
   const onClose = (e) => {
-    if (!histories[MODAL_STATUS.CLOSE]){
-      histories[MODAL_STATUS.CLOSE] = styleParams;
-      resetStyleParams({
-        width: 100,
-        height: 100,
-        translateX: 0,
-        translateY: 0,
-      });
-    } else {
-      const reset = {...histories[MODAL_STATUS.CLOSE]};
-      histories[MODAL_STATUS.CLOSE] = null;
-      resetStyleParams(reset);
-    };
+    const route = props.route;
+    props.close && props.close({route});
   }
 
   /**
    * 缩小 modal
    */
   const onMinimize = () => {
+    
     if (!histories[MODAL_STATUS.MINIMIZE]){
       histories[MODAL_STATUS.MINIMIZE] = styleParams;
       resetStyleParams({
         width: 100,
         height: 100,
-        translateX: 0,
-        translateY: 0,
+        translateX: '50vw',
+        translateY: '80vh',
       });
     } else {
       const reset = {...histories[MODAL_STATUS.MINIMIZE]};
@@ -165,7 +158,7 @@ const useStateHook = (props) => {
   return { style, modalRef, onClose, onMinimize, onMaximize }
 }
 
-export default (props) => {
+const Modal = (props) => {
   const state = useStateHook(props);
   return (
     <div style={state.style}  ref={state.modalRef} className={css['modal']}>
@@ -182,9 +175,14 @@ export default (props) => {
             <FontIcon icon="icon-fangda1" />
           </div>
         </div>
+        {/* 内容 */}
+        {props.children}
       </div>
-
-      1111111111
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  close: bindActionCreators(close, dispatch)
+});
+export default connect(null, mapDispatchToProps)(Modal);
