@@ -39,9 +39,3 @@ export const RESCODE = {
   SUCCESS: {VALUE: 1, DESC: '成功'},   
   FAIL: {VALUE: 0, DESC: '失败'}
 };
-
-// [状态]响应状态
-export const APP_STATUS = {
-  SHOW: {VALUE: 1, DESC: '显示'},   
-  HIDDEN: {VALUE: 0, DESC: '隐藏'},
-};

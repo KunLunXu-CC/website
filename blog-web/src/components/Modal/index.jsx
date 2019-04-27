@@ -11,9 +11,9 @@ import _ from 'lodash';
 import helper from './helper';
 import css from './index.module.scss';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { FontIcon } from '@components';
-import { close } from '@store/routes/action';
+import { bindActionCreators } from 'redux';
+import { close, maximize, minimize } from '@store/routes/action';
 
 // 默认状态值
 const defaultState = {
@@ -113,47 +113,23 @@ const useStateHook = (props) => {
   }
 
   /**
-   * 缩小 modal
+   * 最小化（切换）
    */
   const onMinimize = () => {
-    
-    if (!histories[MODAL_STATUS.MINIMIZE]){
-      histories[MODAL_STATUS.MINIMIZE] = styleParams;
-      resetStyleParams({
-        width: 100,
-        height: 100,
-        translateX: '50vw',
-        translateY: '80vh',
-      });
-    } else {
-      const reset = {...histories[MODAL_STATUS.MINIMIZE]};
-      histories[MODAL_STATUS.MINIMIZE] = null;
-      resetStyleParams(reset);
-    };
+    props.minimize({ route: props.route });
   }
 
   /**
-   * 切换最大（还原）
+   * 最大化（切换）
    */
   const onMaximize = () => {
-    if (!histories[MODAL_STATUS.MAXIMIZE]){
-      histories[MODAL_STATUS.MAXIMIZE] = styleParams;
-      resetStyleParams({
-        width: '100%',
-        height: '100%',
-        translateX: 0,
-        translateY: 0,
-      });
-    } else {
-      const reset = {...histories[MODAL_STATUS.MAXIMIZE]};
-      histories[MODAL_STATUS.MAXIMIZE] = null;
-      resetStyleParams(reset);
-    };
+    props.maximize({ route: props.route });
   }
 
-  const style = useMemo(helper.getStyle.bind(null, {
-    styleParams
-  }), [styleParams]);
+  const style = useMemo(() => {
+    const params = props.route.min || props.route.max || styleParams;
+    return helper.getStyle({ styleParams: params });
+  }, [styleParams, props.route]);
 
   return { style, modalRef, onClose, onMinimize, onMaximize }
 }
@@ -183,6 +159,8 @@ const Modal = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  close: bindActionCreators(close, dispatch)
+  close: bindActionCreators(close, dispatch),
+  maximize: bindActionCreators(maximize, dispatch),
+  minimize: bindActionCreators(minimize, dispatch),
 });
 export default connect(null, mapDispatchToProps)(Modal);

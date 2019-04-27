@@ -16,11 +16,29 @@ export const open = (url) => {
 
   return {
     type: ACTION_TYPE.OPEN_APP,
-    payload: { ...app, match, url, status: APP_STATUS.SHOW.VALUE }
+    payload: { 
+      url, 
+      match, 
+      ...app,
+      min: null, 
+      max: null,
+    }
   };
 }
 
-export const close = ({route}) => ({
+export const close = ({ route }) => ({
   type: ACTION_TYPE.CLOSE_APP,
   payload: { ...route }
+});
+
+// 最大化（切换） 当前 styleParams
+export const maximize = ({ route }) => ({
+  type: ACTION_TYPE.APP_MAX,
+  payload: { ...route, max: !route.max }
+});
+
+// 最小化（切换） 当前 styleParams
+export const minimize = ({ route }) => ({
+  type: ACTION_TYPE.APP_MIN,
+  payload: { ...route, min: !route.min }
 });
