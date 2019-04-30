@@ -1,6 +1,6 @@
 import React from 'react';
 import Store from '@store';
-import Home from './Home';
+import Home from '@home';
 import { 
   Route,
   BrowserRouter as Router, 

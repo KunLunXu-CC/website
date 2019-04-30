@@ -4,12 +4,11 @@ const path = require('path');
 module.exports.alias = {
   '@app': path.resolve(__dirname, '../src/app'),      
   '@api': path.resolve(__dirname, '../src/api'),
-  '@page': path.resolve(__dirname, '../src/page'),
+  '@home': path.resolve(__dirname, '../src/home'),
   '@hook': path.resolve(__dirname, '../src/hook'),
   '@store': path.resolve(__dirname, '../src/store'),      
   '@utils': path.resolve(__dirname, '../src/utils'),
   '@config': path.resolve(__dirname, '../src/config'),
-  '@layout': path.resolve(__dirname, '../src/layout'),
   '@assets': path.resolve(__dirname, '../src/assets'),
   '@components': path.resolve(__dirname, '../src/components')
 }
