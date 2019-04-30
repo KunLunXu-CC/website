@@ -1,4 +1,6 @@
+import Tag from './Tag';
 import Note from './Note';
+import Article from './Article';
 
 export default [
   {
@@ -7,7 +9,7 @@ export default [
     code: 'article',
     exact: true,
     path: '/article',
-    app: () => (<div>文章</div>) 
+    app: Article
   }, {
     name: '笔记',
     icon: 'icon-jilu',
@@ -21,6 +23,6 @@ export default [
     code: 'tag',
     exact: true,
     path: '/tag',
-    app: () => (<div>标签</div>) 
+    app: Tag
   }
 ];
