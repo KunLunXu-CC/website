@@ -20,7 +20,6 @@ class Helper {
 
     width = _.isNumber(width) ? `${width}px` : width; 
     height = _.isNumber(height) ? `${height}px` : height; 
-
     translateX = _.isNumber(translateX) ? `${translateX}px` : translateX; 
     translateY = _.isNumber(translateY) ? `${translateY}px` : translateY; 
 
