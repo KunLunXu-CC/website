@@ -55,20 +55,18 @@ export const minimize = (state, action) => (state.map( v => {
 
 // 切换应用 
 export const toggle = (state, action) => {
-  // if (state[state.length - 1].url === action.payload.url){ return state }
-  // const remove = _.remove(state, v => (v.url === action.payload.url));
-  // const reset = [...state, ...remove];
-  // return reset;
-  return state;
+  if (state[state.length - 1].url === action.payload.url){ return state }
+  const remove = _.remove(state, v => (v.url === action.payload.url));
+  return [...state, ...remove];
 }
 
 export default (state = initState, action) => {
   const mapTypeToHandler = {
     [ACTION_TYPE.OPEN_APP]: openApp,
-    [ACTION_TYPE.CLOSE_APP]: closeApp,
     [ACTION_TYPE.APP_MAX]: maximize,
     [ACTION_TYPE.APP_MIN]: minimize,
     [ACTION_TYPE.TOGGLE_APP]: toggle,
+    [ACTION_TYPE.CLOSE_APP]: closeApp,
   };
   const handler= mapTypeToHandler[action.type];
   if (!handler || !action.type){return state};

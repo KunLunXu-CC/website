@@ -72,14 +72,19 @@ const useStateHook = (props) => {
     onMove(e);
   }
 
+  // 切换应用 
+  const onToggle = () => {
+    props.toggle({ url: props.route.url });
+  }
+
   // 鼠标按下事件： 1. 取消默认行为和冒泡 2. 为父级容器设置 cursor 样式 3. 获取鼠标状态并设置 mouseDownState
   const onMouseDown = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
+    e.stopPropagation(); e.preventDefault();
     const state = helper.getMouseState({ e, modalRef, styleParams });
     if (!state.type){return false;}
     helper.setParentCursor({ modalRef, cursor:  state.cursor});
     setMouseDownState(state);
+    onToggle();
   }
 
   // 鼠标弹起事件： 1. 重置父级 cursor 样式 2. 移除 mouseDownState
@@ -103,33 +108,23 @@ const useStateHook = (props) => {
     props.maximize({ route: props.route });
   }
 
-  // 点击事件：  切换应用
-  const onClick = () => {
-    console.log('==================================');
-    console.log('==>>', props.route.url);
-    props.toggle({
-      url: props.route.url
-    });
-  }
-
   // 计算样式参数： 最小化样式 || 最大化样式 || 正常样式
   const style = useMemo(() => {
     const params = props.route.min || props.route.max || styleParams;
     return helper.getStyle({ styleParams: params });
   }, [styleParams, props.route]);
 
-  return { style, modalRef, onClose, onMinimize, onMaximize, onClick, onMouseDown }
+  return { style, modalRef, onClose, onMinimize, onMaximize, onMouseDown }
 }
 
 const Modal = (props) => {
   const state = useStateHook(props);
   return (
     <div 
-      onClick={state.onClick}
       style={state.style}  
       ref={state.modalRef}
-      onMouseDown={state.onMouseDown}
       className={css['modal']}
+      onMouseDown={state.onMouseDown}
     >
       <div className={css['modal-content']}>
         {/* 工具栏 */}
