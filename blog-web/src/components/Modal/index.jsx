@@ -77,14 +77,19 @@ const useStateHook = (props) => {
     props.toggle({ url: props.route.url });
   }
 
-  // 鼠标按下事件： 1. 取消默认行为和冒泡 2. 为父级容器设置 cursor 样式 3. 获取鼠标状态并设置 mouseDownState
-  const onMouseDown = (e) => {
-    e.stopPropagation(); e.preventDefault();
+  // 1. 为父级容器设置 cursor 样式 2. 获取鼠标状态并设置 mouseDownState
+  const onResize = (e) => {
     const state = helper.getMouseState({ e, modalRef, styleParams });
     if (!state.type){return false;}
     helper.setParentCursor({ modalRef, cursor:  state.cursor});
     setMouseDownState(state);
-    onToggle();
+  }
+
+  // 鼠标按下事件： 1. 取消默认行为和冒泡 
+  const onMouseDown = (e) => {
+    e.stopPropagation(); e.preventDefault();
+    onResize(e);
+    onToggle(e);
   }
 
   // 鼠标弹起事件： 1. 重置父级 cursor 样式 2. 移除 mouseDownState
