@@ -13,7 +13,7 @@ import css from './index.module.scss';
 import { connect } from 'react-redux';
 import { FontIcon } from '@components';
 import { bindActionCreators } from 'redux';
-import { close, maximize, minimize } from '@store/routes/action';
+import { close, maximize, minimize, toggle } from '@store/routes/action';
 
 // 默认状态值
 const defaultState = {
@@ -43,14 +43,13 @@ const useStateHook = (props) => {
 
   useEffect(() => {
     document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mousedown', onMouseDown);
     document.addEventListener('mouseup', onMouseUp);
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mousedown', onMouseDown);
       document.removeEventListener('mouseup', onMouseUp);
     }
   }); 
+
 
   // 计算（合并设置）styleParams
   const resetStyleParams = (reset) => {
@@ -104,19 +103,34 @@ const useStateHook = (props) => {
     props.maximize({ route: props.route });
   }
 
+  // 点击事件：  切换应用
+  const onClick = () => {
+    console.log('==================================');
+    console.log('==>>', props.route.url);
+    props.toggle({
+      url: props.route.url
+    });
+  }
+
   // 计算样式参数： 最小化样式 || 最大化样式 || 正常样式
   const style = useMemo(() => {
     const params = props.route.min || props.route.max || styleParams;
     return helper.getStyle({ styleParams: params });
   }, [styleParams, props.route]);
 
-  return { style, modalRef, onClose, onMinimize, onMaximize }
+  return { style, modalRef, onClose, onMinimize, onMaximize, onClick, onMouseDown }
 }
 
 const Modal = (props) => {
   const state = useStateHook(props);
   return (
-    <div style={state.style}  ref={state.modalRef} className={css['modal']}>
+    <div 
+      onClick={state.onClick}
+      style={state.style}  
+      ref={state.modalRef}
+      onMouseDown={state.onMouseDown}
+      className={css['modal']}
+    >
       <div className={css['modal-content']}>
         {/* 工具栏 */}
         <div className={css['modal-tool']}>
@@ -139,7 +153,10 @@ const Modal = (props) => {
 
 const mapDispatchToProps = (dispatch) => ({
   close: bindActionCreators(close, dispatch),
+  toggle: bindActionCreators(toggle, dispatch),
   maximize: bindActionCreators(maximize, dispatch),
   minimize: bindActionCreators(minimize, dispatch),
 });
-export default connect(null, mapDispatchToProps)(Modal);
+export default connect((state) => ({
+  routes: state.routes
+}), mapDispatchToProps)(Modal);

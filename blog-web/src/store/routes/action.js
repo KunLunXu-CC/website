@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as ACTION_TYPE from './actionType';
 import { APP_STATUS } from '@config/consts';
 import { matchPath } from 'react-router-dom';
@@ -55,4 +56,13 @@ export const maximize = ({ route }) => ({
 export const minimize = ({ route }) => ({
   type: ACTION_TYPE.APP_MIN,
   payload: { ...route, min: !route.min }
+});
+
+/**
+ * 应用切换
+ * @param {String} url 应用 url， 应用唯一标识
+ */
+export const toggle = ({ url }) => ({
+  type: ACTION_TYPE.TOGGLE_APP,
+  payload: { url }
 });
