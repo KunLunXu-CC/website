@@ -50,6 +50,7 @@ module.exports.printStartCharPattern = () => {
     "～～～～◥█████████████◤～～～～",
     "～～～～～～～～～～～～～～～～～～～～～～～～",
     `当前服务：localhost:${system.port}`,
+    `graphql 服务：localhost:${system.port}${system.graphql.path}`,
   ];
   console.log(pattern.join('\n').cyan)
 }

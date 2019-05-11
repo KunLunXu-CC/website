@@ -2,6 +2,9 @@
 const setting = {
   development: {                      // 开发阶段环境配置
     port: 4000,                       // 系统应用端口
+    graphql: {                        // graphql 配置
+      path: '/specialUrl',            // graphql 应用路由
+    },
     mongo: {                          // mongo 配置
       debug: true,                    // 是否启用 debug
       port: 27017,                    // 端口号

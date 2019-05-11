@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
+const system = require('../../config/system');
 const { mapFiles } = require('../utils/helper');
 
 const { 
@@ -53,10 +54,10 @@ function formatError(app, error){
 module.exports = (app) => {
   const server = new ApolloServer({
     typeDefs: gql`${getTypeDefs()}`,
-	  resolvers: getResolves(),
+    resolvers: getResolves(),
     context: context,
     formatError: formatError.bind(null, app)
   });
 
-  server.applyMiddleware({ app, path: '/specialUrl' });
+  server.applyMiddleware({ app, path: system.graphql.path });
 }
