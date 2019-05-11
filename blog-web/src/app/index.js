@@ -9,6 +9,7 @@ export default [
     code: 'article',
     exact: true,
     path: '/article',
+    url: '/article',
     app: Article
   }, {
     name: '笔记',
@@ -16,6 +17,7 @@ export default [
     code: 'note',
     exact: true,
     path: '/note',
+    url: '/note',
     app: Note
   }, {
     name: '标签',
@@ -23,6 +25,7 @@ export default [
     code: 'tag',
     exact: true,
     path: '/tag',
+    url: '/tag',
     app: Tag
   }
 ];

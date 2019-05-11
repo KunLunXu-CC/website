@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { STATUS } = require('../../../config/conts');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 exports.title = '文章';
@@ -27,12 +28,12 @@ exports.fields = {
 		type: String,
   },
 	status: {
-		title: '状态（0 禁用 1 启用 -1 删除）',
-		default: 1,
+		title: '状态',
+		default: STATUS.ENABLE,
 		type: Number,
 	},
   creator: {
-		title: '创建人（MySQL用户id）',
+		title: '创建人',
 		type: String,
 	},
 	creationTime: {
@@ -41,7 +42,7 @@ exports.fields = {
 		default: Date.now,
 	},
 	updater: {
-		title: '最近更新人（Mysql用户id）',
+		title: '最近更新人',
 		type: String,
 	},
 	updateTime: {
