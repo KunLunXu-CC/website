@@ -17,7 +17,7 @@ module.exports = (data) => async ({ model, ctx, conds, body, orderBy, params, pa
   const changeConds = getConditions(conds);
   try {
     body.updateTime = Date.now();
-    body.updater = '更新人暂定';
+    body.updater = null;
     await server.updateMany(changeConds, body, {});
   } catch (e) {
     data.message = RESCODE.FAIL;

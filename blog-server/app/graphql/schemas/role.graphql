@@ -1,0 +1,85 @@
+extend type Query {
+  roleList(
+    orderBy: RoleOrderBy, 
+    params: RoleParams, 
+    page: PageInput
+  ): RoleList
+}
+
+extend type Mutation {
+  removeRoles (
+    conds: RoleParams!
+    orderBy: RoleOrderBy
+    params: RoleParams
+    page: PageInput
+  ): RoleList
+
+  createRoles (
+    body: [UpdateRole!]!
+    orderBy: RoleOrderBy
+    params: RoleParams
+    page: PageInput
+  ): RoleList
+
+  updateRoles (
+    conds: RoleParams!
+    body: UpdateRole!
+    orderBy: RoleOrderBy
+    params: RoleParams
+    page: PageInput
+  ): RoleList
+}
+
+type RoleList {
+  list: [Role]
+  stats: Stats
+  change: [Role]
+  rescode: Int
+  message: String
+  page: PageOutput
+}
+
+type Role {
+  id: ID,
+  name: String
+  desc: String
+  auth: [Auth]
+  status: Int
+
+  updateTime: Date
+  creationTime: Date
+}
+
+scalar Auth {
+  name: String
+  code: String
+  readable: Int
+  writable: Int
+}
+
+input RoleParams {
+  id: ID
+  ids: [ID!]
+  name: String
+  desc: String
+  status: [Int]
+
+  creator: ID
+  updater: ID
+  startUpdateTime: Date
+  endUpdateTime: Date
+  startCreationTime: Date
+  endCreationTime: Date
+}
+
+input UpdateRole {
+  name: String
+  desc: String
+  auth: [Auth]
+  status: Int
+}
+
+input RoleOrderBy {
+  updateTime: Int
+  creationTime: Int
+}

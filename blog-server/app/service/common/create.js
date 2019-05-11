@@ -16,8 +16,8 @@ module.exports = (data) => async ({ model, ctx, body, params, orderBy, page }) =
   try {
     data.change = await server.insertMany(body.map(v => ({
       ...v,
-      creator: "创建人先写死",
-      updater: "更新人先写死(创建时加的)",
+      creator: null,
+      updater: null,
     })));
   } catch(e) { 
     data.rescode = RESCODE.FAIL;
