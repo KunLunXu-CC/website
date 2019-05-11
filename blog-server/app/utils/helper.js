@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
+const system = require('../../config/system');
 
 /**
  * 映射指定路径下的所有指定后缀文件
@@ -47,7 +48,8 @@ module.exports.printStartCharPattern = () => {
     "　　◥█▅▅██▅▅██▅▅▅▅▅███◤ ",
     " 　 ．◥███████████████◤",
     "～～～～◥█████████████◤～～～～",
-    "～～～～～～～～～～～～～～～～～～～～～～～～"
+    "～～～～～～～～～～～～～～～～～～～～～～～～",
+    `当前服务：localhost:${system.port}`,
   ];
   console.log(pattern.join('\n').cyan)
 }
