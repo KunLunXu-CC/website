@@ -3,7 +3,7 @@ const {getList, create, remove, update } = require('../../service/common');
 module.exports = {
   Query: {
     aticleList: async (parents, args, context, info) => {
-      return await getList({ ...args, ctx: context.ctx });
+      return await getList({ model: 'Article', ...args, ctx: context.ctx });
     },
   },
 
@@ -15,7 +15,7 @@ module.exports = {
       return await remove({ model: 'Article', ...args, ctx: context.ctx });
     },
     updateArticles: async (parents, args, context, info) => {
-      return await update({ model: 'Article',...args, ctx: context.ctx });
+      return await update({ model: 'Article', ...args, ctx: context.ctx });
     },
   },
   
