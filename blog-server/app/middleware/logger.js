@@ -42,20 +42,17 @@ const printRequestData = (ctx) => {
  */
 
 printResponseData = (ctx) => {
+  let body = {};
+  try {
+    body = _.isString(ctx.body) ? JSON.parse(ctx.body) : ctx.body;
+  } catch (e){}
   const params = JSON.stringify({
     status: ctx.status,
+    body,
   }, null, 4);
-  let body = '';
-  try {
-    body = _.isString(ctx.body) 
-      ? JSON.stringify(JSON.parse(ctx.body), null, 4) 
-      : JSON.stringify(ctx.body, null, 4);
-  } catch (e){}
 
-  console.log(start, colors.cyan('响应参数：'), colors.yellow(params));
-  console.log(start, colors.cyan('响应数据：'), colors.yellow(body));
+  console.log(start, colors.cyan('响应数据：'), colors.yellow(params));
 }
-
 
 module.exports = async (ctx, next) => {
 
