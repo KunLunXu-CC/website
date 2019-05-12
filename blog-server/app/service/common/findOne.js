@@ -1,15 +1,14 @@
 const { RESCODE } = require('../../../config/conts');
 const getConditions = require('../../utils/getConditions');
 
- /**
- * 获取数据
- * @param {Object}  data     响应基础数据
- * @param {String}  model    模型名称
- * @param {Object}  ctx      koa上下文
+/**
+ * 通用获取单条数据方法
+ * @param {String}  model   模型名称
+ * @param {Object}  ctx     koa上下文
  * @param {Object}  params  查询参数
  */
-module.exports = (data) => async ({ model, ctx, params }) => {
-  data = {...data};
+module.exports = async ({ model, ctx, params }) => {
+  const data = { rescode: RESCODE.SUCCESS, message: '创建成功', data: {}};
   const server = ctx.db.mongo[model];
   const conds = getConditions(params);
   try {

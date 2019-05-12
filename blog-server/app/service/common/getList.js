@@ -2,16 +2,16 @@ const { RESCODE } = require('../../../config/conts');
 const getConditions = require('../../utils/getConditions');
 const _ = require('lodash');
 
- /**
- * 获取数据列表
- * @param {Object}  data     响应基础数据
+/**
+ * 通用获取数据列表方法
  * @param {String}  model    模型名称
  * @param {Object}  ctx      koa上下文
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页参数
+ * @param {Object}  orderBy 排序
  */
-module.exports = (data) => async ({ model, ctx, params, page, orderBy }) => {
-  data = {...data};
+module.exports = async ({ model, ctx, params, page, orderBy }) => {
+  const data = { list: [], change: [], message: '请求成功', page: {},  rescode: RESCODE.SUCCESS, stats: {}, };
   const server = ctx.db.mongo[model];
   const conds = getConditions(params);
   data.page = { ...page };

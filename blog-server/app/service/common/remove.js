@@ -4,16 +4,16 @@ const getList = require('./getList');
 const _ = require('lodash');
 
 /**
- * 删除文章（假删）
- * @param {Object}  data    响应基础数据
+ * 通用删除（假删）方法
  * @param {String}  model   模型名称
  * @param {Object} ctx      koa 上下文
  * @param {Object} conds    要删除数据的查询条件
  * @param {Object} params   查询参数
  * @param {Object} page     分页信息
+ * @param {Object} orderBy  排序
  */
-module.exports =  (data) => async ({ model, ctx, conds, params, orderBy, page }) => {
-  data = {...data};
+module.exports = async ({ model, ctx, conds, params, orderBy, page }) => {
+  const data = { rescode: RESCODE.SUCCESS, message: '删除成功', list: [], page: {}, stats: {}, change: []};
   const server = ctx.db.mongo[model];
   const changeConds = getConditions(conds);
   try {

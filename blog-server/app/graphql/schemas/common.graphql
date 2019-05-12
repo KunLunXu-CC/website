@@ -46,7 +46,7 @@ type Options {
 }
 
 input OptionsParams{
-  ids: [ID!]
+  include: [ID!]
   name: String
   filter: [ID!]
 }

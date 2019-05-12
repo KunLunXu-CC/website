@@ -2,16 +2,16 @@ const { RESCODE } = require('../../../config/conts');
 const getList = require('./getList');
 
 /**
- * 创建文章
- * @param {Object}  data    响应基础数据
+ * 通用创建数据方法
  * @param {String}  model   模型名称
  * @param {Object}  ctx     koa上下文
- * @param {Object}  body    创建信息
+ * @param {Array}   body    创建信息
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页参数
+ * @param {Object}  orderBy 排序
  */
-module.exports = (data) => async ({ model, ctx, body, params, orderBy, page }) => {
-  data = {...data};
+module.exports = async ({ model, ctx, body, params, orderBy, page }) => {
+  const data = { rescode: RESCODE.SUCCESS, message: '创建成功', list: [], page: {}, stats: {}, change: []};
   const server = ctx.db.mongo[model];
   try {
     data.change = await server.insertMany(body.map(v => ({

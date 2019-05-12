@@ -2,17 +2,17 @@ const { RESCODE } = require('../../../config/conts');
 const getConditions = require('../../utils/getConditions');
 const getList = require('./getList');
 /**
- * 修改
- * @param {Object}  data    响应基础数据
+ * 通用修改方法
  * @param {String}  model   模型名称
  * @param {Object}  ctx     koa上下文
  * @param {Object}  conds   要更新数据的查询条件
  * @param {Object}  body    创建信息
  * @param {Object}  params  查询参数
  * @param {Object}  page    分页信息
+ * @param {Object}  orderBy 排序
  */
-module.exports = (data) => async ({ model, ctx, conds, body, orderBy, params, page }) => {
-  data = {...data};
+module.exports = async ({ model, ctx, conds, body, orderBy, params, page }) => {
+  const data = { rescode: RESCODE.SUCCESS, message: '修改成功', list: [], page: {}, stats: {}, change: []};
   const server = ctx.db.mongo[model];
   const changeConds = getConditions(conds);
   try {
