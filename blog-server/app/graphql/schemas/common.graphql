@@ -1,12 +1,5 @@
 scalar Date
 
-scalar Auth {
-  name: String
-  code: String
-  readable: Int
-  writable: Int
-}
-
 scalar Page {
   page: Int
   pageSize: Int

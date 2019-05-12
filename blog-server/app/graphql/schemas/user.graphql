@@ -6,6 +6,30 @@ extend type Query {
   ): UserList
 }
 
+extend type Mutation {
+  createUsers(
+    body: [UpdateUser!]!
+    orderBy: OrderBy
+    params: UserParams
+    page: Page
+  ): UserList
+
+  removeUsers (
+    conds: UserParams! 
+    orderBy: OrderBy
+    params: UserParams
+    page: Page
+  ): UserList
+
+  updateUsers (
+    conds: UserParams!
+    body: UpdateUser!
+    orderBy: OrderBy
+    params: UserParams
+    page: Page
+  ): UserList
+}
+
 type UserList {
   list: [User]
   stats: Stats
@@ -23,8 +47,8 @@ type User {
   sex: Int
 
   status: Int
-  creator: ID
-  updater: ID
+  creator: User
+  updater: User
   updateTime: Date
   creationTime: Date
 }
@@ -44,4 +68,13 @@ input UserParams {
   endUpdateTime: Date
   startCreationTime: Date
   endCreationTime: Date
+}
+
+input UpdateUser {
+  name: String
+  account: String
+  password: String
+  role: ID
+  sex: Int
+  status: Int
 }

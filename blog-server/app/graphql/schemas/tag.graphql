@@ -72,12 +72,13 @@ type TagList{
 type Tag {
   id: ID
   parent: Tag
-  creator: ID
-  updater: ID
   name: String
   color: String
   icon: String
+
+  status: Int
+  creator: User
+  updater: User
   updateTime: Date
   creationTime: Date
-  status: Int
 }

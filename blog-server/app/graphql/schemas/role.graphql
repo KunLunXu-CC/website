@@ -39,13 +39,22 @@ type RoleList {
   page: Page
 }
 
+scalar Auth {
+  name: String
+  code: String
+  readable: Int
+  writable: Int
+}
+
 type Role {
   id: ID
   name: String
   desc: String
   auth: [Auth]
+  
   status: Int
-
+  creator: User
+  updater: User
   updateTime: Date
   creationTime: Date
 }

@@ -72,8 +72,8 @@ type Article{
   tags: [Tag!]
   content: String
 	status: Int
-  creator: ID
-  updater: ID
+  creator: User
+  updater: User
   updateTime: Date
   creationTime: Date
 }
