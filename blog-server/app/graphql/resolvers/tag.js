@@ -4,7 +4,8 @@ module.exports = {
   Tag: {
     parent: async (parents, args, context, info) => {
       if (parents.parent){
-        const data = await findOne({ 
+        const data = await findOne({
+          model: 'Tag',
           parents: { id: parents.parent },
           ctx: context.ctx
         });
@@ -17,19 +18,19 @@ module.exports = {
 
   Query: {
     tagList: async (parents, args, context, info) => {
-      return await getList({...args, ctx: context.ctx});
+      return await getList({ model: 'Tag', ...args, ctx: context.ctx });
     },
   },
 
   Mutation: {
     createTags: async (parents, args, context, info) => {
-      return await create({...args, ctx: context.ctx});
+      return await create({ model: 'Tag', ...args, ctx: context.ctx });
     },
     removeTags: async (parents, args, context, info) => {
-      return await remove({...args, ctx: context.ctx});
+      return await remove({ model: 'Tag', ...args, ctx: context.ctx });
     },
     updateTags: async (parents, args, context, info) => {
-      return await update({...args, ctx: context.ctx});
+      return await update({ model: 'Tag', ...args, ctx: context.ctx });
     },
   }
 };

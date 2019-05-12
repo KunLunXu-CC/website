@@ -16,7 +16,9 @@ module.exports = async ({ model, ctx, conds, params, orderBy, page }) => {
   const data = { rescode: RESCODE.SUCCESS, message: '删除成功', list: [], page: {}, stats: {}, change: []};
   const server = ctx.db.mongo[model];
   const changeConds = getConditions(conds);
+  let changeIds = [];
   try {
+    changeIds = (await server.find(changeConds)).map(v => v._id);
     await server.updateMany(changeConds, { status: STATUS.DELETE });
   } catch (e) {
     data.rescode = RESCODE.FAIL;
@@ -24,11 +26,11 @@ module.exports = async ({ model, ctx, conds, params, orderBy, page }) => {
   }
 
   if (params){
-    const listData = await getList(data)({ model, ctx, params, orderBy, page });
+    const listData = await getList({ model, ctx, params, orderBy, page });
     data.stats = listData.stats || {};
     data.list = listData.list || [];
     data.page = listData.page || {};
   } 
-  data.change = await server.find(changeConds);
+  data.change = await server.find({_id: {$in: changeIds}});
   return data;
 }

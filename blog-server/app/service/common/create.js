@@ -24,7 +24,7 @@ module.exports = async ({ model, ctx, body, params, orderBy, page }) => {
     data.message = '创建失败';
   }
   if (params){
-    const listData = await getList(data)({ model, ctx, params, orderBy, page });
+    const listData = await getList({ model, ctx, params, orderBy, page });
     data.stats = listData.stats || {};
     data.list = listData.list || [];
     data.page = listData.page || {};
