@@ -25,19 +25,6 @@ module.exports.mapFiles = (pathUrl, suffix = 'js', filter = []) => {
 }
 
 /**
- * 处理日期范围查询条件
- * @param {String} startTime  开始时间
- * @param {String} endTime    结束时间
- * @return {Object} {$gte: xx, $lte: xx}
- */
-module.exports.getTimeConds = (startTime, endTime) => {
-  const conds = {};
-  startTime && (conds.$gte = startTime);
-  endTime && (conds.$lte = endTime);
-  return conds;
-}
-
-/**
  * 在服务运行完毕打印字符图案
  */
 module.exports.printStartCharPattern = () => {

@@ -14,7 +14,7 @@ extend type Mutation{
     page: PageInput
   ): TagList
   createTags (
-    body: [UpdateTag!]!, 
+    body: [createTag!]!, 
     orderBy: TagOrderBy, 
     params: TagParams, 
     page: PageInput
@@ -29,6 +29,13 @@ extend type Mutation{
 }
 
 input UpdateTag {
+  name: String
+  parent: ID
+  color: String
+  icon: String
+}
+
+input createTag {
   name: String!
   parent: ID
   color: String

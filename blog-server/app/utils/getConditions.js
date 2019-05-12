@@ -1,6 +1,64 @@
 const _ = require('lodash');
-const { getTimeConds } = require('./helper');
 const { STATUS } = require('../../config/conts');
+
+
+/**
+ * 处理日期范围查询条件
+ * @param {String} startTime  开始时间
+ * @param {String} endTime    结束时间
+ * @return {Object} {$gte: xx, $lte: xx}
+ */
+const getTimeConds = (startTime, endTime) => {
+  const conds = {};
+  startTime && (conds.$gte = startTime);
+  endTime && (conds.$lte = endTime);
+  return conds;
+}
+
+/**
+ * 获取处理函数
+ * @param {Object} params 查询参数
+ * @param {Object} conds  查询条件
+ * @param {String} key    当前处理值 key
+ * @param {*}      value  当前处理值
+ */
+const getHandler = ({ params, conds, key, value }) => ([
+  {
+    conds: key === 'id',
+    handler: () => (conds._id = value)
+  }, {
+    conds: key === 'ids',
+    handler: () => (conds._id = { $in: value})
+  }, {
+    conds: key === 'status',
+    handler: () => (conds.status = _.isArray(value) ? { $in: value} : value)
+  }, {
+    conds: ['startUpdateTime', 'endUpdateTime'].includes(key),
+    handler: () => {
+      if (conds.updateTime){return false;}
+      conds.updateTime = getTimeConds(params.startUpdateTime, params.endUpdateTime);
+    }
+  }, {
+    conds: ['startCreationTime', 'endCreationTime'].includes(key),
+    handler: () => {
+      if (conds.creationTime){return false;}
+      conds.creationTime = getTimeConds(params.startCreationTime, params.endCreationTime);
+    }
+  },
+  // 特殊字段处理
+  {
+    conds: key === 'tags',
+    handler: () => (conds.tags = { $elemMatch: {$eq: value} })
+  },
+  // 按值类型进行处理
+  {
+    conds: _.isString(value),
+    handler: () => (conds[key] = {$regex: value})
+  }, {
+    conds: _.isArray(value),
+    handler: () => (conds[key] = {$in: value})
+  }
+]);
 
 /**
  * 获取查询条件
@@ -9,37 +67,8 @@ const { STATUS } = require('../../config/conts');
 module.exports = ( params = {} ) => {
   const conds = { status: {$ne: STATUS.DELETE} };
   _.forIn(params, (value, key) => {
-    let startTime = '';
-    let endTime = '';
-    switch (key){
-      case 'id':
-        conds._id= value;
-        break;
-      case 'ids':
-        conds._id= {$in: value};
-        break;
-      case 'status':
-        conds.status = { $in: value };
-        break;
-      case 'tag':
-        conds.tags = { $elemMatch: {$eq: value} };
-        break;
-      case 'startUpdateTime':
-      case 'endUpdateTime':
-        startTime = params.startUpdateTime;
-        endTime = params.endUpdateTime;
-        conds.updateTime = getTimeConds(startTime, endTime);
-        break;
-      case 'startCreationTime':
-      case 'endCreationTime':
-        startTime = params.startCreationTime;
-        endTime = params.endCreationTime;
-        conds.creationTime = getTimeConds(startTime, endTime);
-        break;
-      default :
-        conds[key] = { $regex: value };
-        break;
-    }
+    const handler = (getHandler({ params, conds, key, value }).find( v => v.conds) || {}).handler;
+    handler && handler();
   });
   return conds;
 }
