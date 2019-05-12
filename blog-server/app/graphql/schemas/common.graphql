@@ -1,28 +1,33 @@
 scalar Date
 
+scalar Auth {
+  name: String
+  code: String
+  readable: Int
+  writable: Int
+}
+
+scalar Page {
+  page: Int
+  pageSize: Int
+}
+
 type Stats{
   # 统计
   total: Int
   totalPage: Int
 }
 
-type PageOutput{
-  # 查询返回分页信息
-  page: Int,
-  pageSize: Int,
-}
-
-input PageInput{
-  # 查询输入分页信息
-  page: Int!
-  pageSize: Int!
+input OrderBy {
+  updateTime: Int
+  creationTime: Int
 }
 
 ## ********* 通用请求 ********
 
 type Query{
   options(
-    page: PageInput,
+    page: Page,
     model: String!, 
     params: OptionsParams,
   ): Options
@@ -42,7 +47,7 @@ type Option {
 type Options {
   stats: Stats
   list: [Option]
-  page: PageOutput
+  page: Page
 }
 
 input OptionsParams{

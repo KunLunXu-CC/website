@@ -1,36 +1,38 @@
 extend type Query {
   aticleList(
-    orderBy: ArticleOrderBy, 
-    params: ArticleParams, 
-    page: PageInput
+    orderBy: OrderBy
+    params: ArticleParams
+    page: Page
   ): ArticleList
 }
 extend type Mutation {
   createArticles(
-    body: [UpdateAticle!]!, 
-    orderBy: ArticleOrderBy, 
-    params: ArticleParams, 
-    page: PageInput
-  ): ArticleList,
-  removeArticles (
-    conds: ArticleParams!, 
-    orderBy: ArticleOrderBy, 
-    params: ArticleParams, 
-    page: PageInput
+    body: [UpdateAticle!]!
+    orderBy: OrderBy
+    params: ArticleParams
+    page: Page
   ): ArticleList
+
+  removeArticles (
+    conds: ArticleParams! 
+    orderBy: OrderBy
+    params: ArticleParams
+    page: Page
+  ): ArticleList
+
   updateArticles (
-    conds: ArticleParams!, 
-    body: UpdateAticle!, 
-    orderBy: ArticleOrderBy, 
-    params: ArticleParams,
-    page: PageInput
+    conds: ArticleParams!
+    body: UpdateAticle!
+    orderBy: OrderBy
+    params: ArticleParams
+    page: Page
   ): ArticleList
 }
 
 input ArticleParams {
   id: ID
   ids: [ID!]
-  tag: ID,
+  tag: ID
   creator: ID
   updater: ID
   name: String
@@ -53,18 +55,13 @@ input UpdateAticle{
 	status: Int
 }
 
-input ArticleOrderBy {
-  updateTime: Int
-  creationTime: Int
-}
-
 type ArticleList{
   list: [Article]
   stats: Stats
   change: [Article]
   rescode: Int
   message: String
-  page: PageOutput
+  page: Page
 }
 
 type Article{

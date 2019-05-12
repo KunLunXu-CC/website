@@ -1,0 +1,47 @@
+extend type Query {
+  userList(
+    orderBy: OrderBy
+    params: UserParams
+    page: Page
+  ): UserList
+}
+
+type UserList {
+  list: [User]
+  stats: Stats
+  change: [User]
+  rescode: Int
+  message: String
+  page: Page
+}
+
+type User {
+  id: ID
+  name: String
+  account: String
+  role: Role
+  sex: Int
+
+  status: Int
+  creator: ID
+  updater: ID
+  updateTime: Date
+  creationTime: Date
+}
+
+input UserParams {
+  id: ID
+  ids: [ID!]
+  name: String
+  account: String
+  role: ID
+  sex: Int
+
+  status: [Int]
+  creator: ID
+  updater: ID
+  startUpdateTime: Date
+  endUpdateTime: Date
+  startCreationTime: Date
+  endCreationTime: Date
+}

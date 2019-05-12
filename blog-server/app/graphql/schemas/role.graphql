@@ -1,32 +1,32 @@
 extend type Query {
   roleList(
-    orderBy: RoleOrderBy, 
-    params: RoleParams, 
-    page: PageInput
+    orderBy: OrderBy 
+    params: RoleParams
+    page: Page
   ): RoleList
 }
 
 extend type Mutation {
   removeRoles (
     conds: RoleParams!
-    orderBy: RoleOrderBy
+    orderBy: OrderBy
     params: RoleParams
-    page: PageInput
+    page: Page
   ): RoleList
 
   createRoles (
     body: [UpdateRole!]!
-    orderBy: RoleOrderBy
+    orderBy: OrderBy
     params: RoleParams
-    page: PageInput
+    page: Page
   ): RoleList
 
   updateRoles (
     conds: RoleParams!
     body: UpdateRole!
-    orderBy: RoleOrderBy
+    orderBy: OrderBy
     params: RoleParams
-    page: PageInput
+    page: Page
   ): RoleList
 }
 
@@ -36,11 +36,11 @@ type RoleList {
   change: [Role]
   rescode: Int
   message: String
-  page: PageOutput
+  page: Page
 }
 
 type Role {
-  id: ID,
+  id: ID
   name: String
   desc: String
   auth: [Auth]
@@ -50,20 +50,13 @@ type Role {
   creationTime: Date
 }
 
-scalar Auth {
-  name: String
-  code: String
-  readable: Int
-  writable: Int
-}
-
 input RoleParams {
   id: ID
   ids: [ID!]
   name: String
   desc: String
-  status: [Int]
 
+  status: [Int]
   creator: ID
   updater: ID
   startUpdateTime: Date
@@ -77,9 +70,4 @@ input UpdateRole {
   desc: String
   auth: [Auth]
   status: Int
-}
-
-input RoleOrderBy {
-  updateTime: Int
-  creationTime: Int
 }
