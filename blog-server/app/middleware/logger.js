@@ -1,6 +1,7 @@
 const _ = require('lodash');
+const moment = require('moment');
 const colors = require('colors');
-const start = colors.red("[*]");
+const start = colors.red(`[*${moment().format('YYYY-MM-DDD:HH:mm:ss')}*]`);
 
 /**
  * 打印字符图案
