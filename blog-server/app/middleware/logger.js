@@ -23,19 +23,17 @@ const printStart = () => {
  * @param {Object} ctx 上下文
  */
 const printRequestData = (ctx) => {
+  const body = ctx.request.body;
+  let queryDoc = body.query || '';
+  body.query && delete body.query;
   const params = JSON.stringify({
     method: ctx.request.method,
-    url: ctx.request.url
+    url: ctx.request.url,
+    ...(body || {}),
   }, null, 4);
 
-  const body = ctx.request.body;
-  let queryData = '';
-  try {
-    body && (queryData = JSON.stringify(body, null, 4).replace(/\\n/g, '\r\n'));
-  } catch (e){}
-  
   console.log(start, colors.cyan('请求参数：'), colors.yellow(params));
-  console.log(start, colors.cyan('请求数据：'), colors.yellow(queryData));
+  console.log(start, colors.cyan('请求文档：'), colors.yellow(queryDoc));
 }
 
 /**
@@ -43,7 +41,7 @@ const printRequestData = (ctx) => {
  * @param {Object} ctx 上下文
  */
 
- printResponseData = (ctx) => {
+printResponseData = (ctx) => {
   const params = JSON.stringify({
     status: ctx.status,
   }, null, 4);
