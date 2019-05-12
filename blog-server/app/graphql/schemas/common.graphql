@@ -16,6 +16,17 @@ input OrderBy {
   creationTime: Int
 }
 
+interface QueryList {
+  id: ID
+  name: String
+
+  status: Int
+  creator: User
+  updater: User
+  updateTime: Date
+  creationTime: Date
+}
+
 ## ********* 通用请求 ********
 
 type Query{

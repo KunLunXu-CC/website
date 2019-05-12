@@ -39,7 +39,7 @@ type UserList {
   page: Page
 }
 
-type User {
+type User implements QueryList {
   id: ID
   name: String
   account: String

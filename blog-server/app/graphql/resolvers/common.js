@@ -23,5 +23,11 @@ module.exports = {
       // 解析请求参数值
       return new Date(ast.value);
     },
-  })
+  }),
+
+  // QueryList 接口
+  QueryList: {
+    __resolveType: () => 'QueryList',
+    
+  },
 }; 
