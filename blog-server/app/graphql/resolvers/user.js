@@ -1,4 +1,5 @@
 const { getList, create, remove, update, findOne  } = require('../../service/common');
+const { creator, updater } = require('./fragment');
 
 module.exports = {
   Query: {
@@ -20,6 +21,8 @@ module.exports = {
   },
 
   User: {
+    creator, 
+    updater,
     role: async (parents, args, context, info) => {
       if (parents.role){
         const data = await findOne({ 

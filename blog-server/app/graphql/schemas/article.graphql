@@ -64,13 +64,14 @@ type ArticleList{
   page: Page
 }
 
-type Article{
-  id: ID
-  name: String!
+type Article implements QueryList {
   desc: String
   thumb: String
   tags: [Tag!]
   content: String
+
+  id: ID
+  name: String!
 	status: Int
   creator: User
   updater: User

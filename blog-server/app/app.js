@@ -1,4 +1,4 @@
-const { printStartCharPattern } = require('./utils/helper');
+const { printStartCharPattern } = require('./utils');
 const middleware = require('./middleware');
 const config = require('../config/system');
 const graphql = require('./graphql');

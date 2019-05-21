@@ -27,7 +27,8 @@ module.exports = {
 
   // QueryList 接口
   QueryList: {
-    __resolveType: () => 'QueryList',
-    
+    __resolveType(obj, context, info){
+      return 'QueryList';
+    }
   },
 }; 

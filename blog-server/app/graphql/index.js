@@ -2,7 +2,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const system = require('../../config/system');
-const { mapFiles } = require('../utils/helper');
+const { requireFiles } = require('../utils');
 
 const { 
   gql,
@@ -13,7 +13,9 @@ const {
  * 获取结构器并进行合并
  */
 function getResolves(){
-  const resolves = mapFiles(path.resolve(__dirname, './resolvers'));
+  const dir = path.resolve(__dirname, './resolvers');
+  const filter = ['fragment.js'];
+  const resolves = requireFiles({ dir, filter });
   const mergeResolves = _.merge(..._.values(resolves));
   return mergeResolves;
 }

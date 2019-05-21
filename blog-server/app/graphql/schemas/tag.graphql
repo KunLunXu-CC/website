@@ -69,13 +69,13 @@ type TagList{
   page: Page
 }
 
-type Tag {
-  id: ID
+type Tag implements QueryList {
   parent: Tag
-  name: String
   color: String
   icon: String
 
+  id: ID
+  name: String
   status: Int
   creator: User
   updater: User

@@ -1,3 +1,3 @@
-const { mapFiles } = require('../../utils/helper');
+const { requireFiles } = require('../../utils');
 const path = require('path');
-module.exports = mapFiles(path.resolve(__dirname, '.'));
+module.exports = requireFiles({ dir: path.resolve(__dirname, '.') });

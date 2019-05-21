@@ -40,12 +40,12 @@ type UserList {
 }
 
 type User implements QueryList {
-  id: ID
-  name: String
   account: String
   role: Role
   sex: Int
 
+  id: ID
+  name: String
   status: Int
   creator: User
   updater: User

@@ -1,4 +1,4 @@
-const { mapFiles } = require('../utils/helper');
+const { requireFiles } = require('../utils');
 const config = require('../../config/system');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -30,7 +30,7 @@ const connectServer = () => {
  */
 const initModels = (modelPath) =>{
   const models = {};
-  const stree = mapFiles(modelPath);
+  const stree = requireFiles({dir: modelPath});
   _.forIn(stree, (value, fileName) => {
     if (value.type === 'MongoDB'){
       models[fileName] = mongoose.model(fileName, new Schema(value.fields))

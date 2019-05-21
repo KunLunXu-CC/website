@@ -46,12 +46,12 @@ scalar Auth {
   writable: Int
 }
 
-type Role {
-  id: ID
-  name: String
+type Role implements QueryList {
   desc: String
   auth: [Auth]
   
+  id: ID
+  name: String
   status: Int
   creator: User
   updater: User
