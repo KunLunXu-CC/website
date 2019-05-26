@@ -1,4 +1,5 @@
 const { getList, create, remove, update, findOne  } = require('../../service/common');
+const { login } = require('../../service/user');
 const { creator, updater } = require('./fragment');
 
 module.exports = {
@@ -18,6 +19,9 @@ module.exports = {
     updateUsers: async (parents, args, context, info) => {
       return await update({ model: 'User', ...args, ctx: context.ctx });
     },
+    login: async (parents, args, context, info) => {
+      return await login({ ...args, ctx: context.ctx });
+    }
   },
 
   User: {

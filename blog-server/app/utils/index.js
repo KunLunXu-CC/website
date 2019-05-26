@@ -1,6 +1,7 @@
-const _ = require('lodash');
 const fs = require('fs');
+const _ = require('lodash');
 const path = require('path');
+const crypto = require('crypto');
 const system = require('../../config/system');
 
 /**
@@ -23,6 +24,17 @@ module.exports.requireFiles = ({ dir, suffix = 'js', filter = [] }) => {
     }
   });
   return tree
+}
+
+/**
+ * 创建 hash 通用方法
+ * @param {String} data 待加密数据
+ * @param {String} type hash 类型，常见类型有 md5 sha1 相对更加安全类型 sha256 sha512
+ */
+module.exports.createHash = ({ data, type = 'md5' }) => {
+  const hash = crypto.createHash(type);
+  hash.update(data);
+  return hash.digest('hex');
 }
 
 /**

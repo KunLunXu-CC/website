@@ -28,6 +28,18 @@ extend type Mutation {
     params: UserParams
     page: Page
   ): UserList
+
+  login (
+    account: String!
+    password: String!
+  ): Login
+
+}
+
+type Login {
+  user: User,
+  rescode: Int
+  message: String
 }
 
 type UserList {
