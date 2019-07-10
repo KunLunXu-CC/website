@@ -8,11 +8,8 @@ import _ from 'lodash';
 import { useObserver } from "mobx-react-lite";
 import { useStore } from '@store/index';
 import { Modal } from '@components';
+
 import scss from '../index.module.scss';
-
-const useStateHook = (props, store) => {
-
-}
 
 const AppBlock = (props) => useObserver(() => {
   const store = useStore();

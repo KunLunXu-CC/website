@@ -10,8 +10,9 @@ import React, {
 import _ from 'lodash';
 import helper from './helper';
 import { debounce } from '@utils';
-import scss from './index.module.scss';
 import { FontIcon } from '@components';
+
+import scss from './index.module.scss';
 
 // 默认状态值
 const defaultState = {

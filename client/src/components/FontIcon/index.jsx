@@ -20,16 +20,16 @@ export default ({ size, color, iconStyle, onClick, className, icon, label, label
   }, []);
 
   return (
-      <span style={{ ...styles }} onClick={onClick || null} className={` ${className || ''}`} >
-        <svg aria-hidden="true" className="iconfont">
-          <use xlinkHref={`#${icon}`} ></use>
-        </svg>
-        {
-          label ? 
-          <span style={{padding: '0 5px', ...labelStyle}}>
-            {label}
-          </span> : null
-        }
+    <span style={{ ...styles }} onClick={onClick || null} className={` ${className || ''}`} >
+      <svg aria-hidden="true" className="iconfont">
+        <use xlinkHref={`#${icon}`} ></use>
+      </svg>
+      {
+        label ?
+        <span style={{padding: '0 5px', ...labelStyle}}>
+          {label}
+        </span> : null
+      }
     </span>
   );
 }
