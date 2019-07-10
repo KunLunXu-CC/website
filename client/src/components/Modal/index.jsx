@@ -9,9 +9,9 @@ import React, {
 } from 'react';
 import _ from 'lodash';
 import helper from './helper';
+import { debounce } from '@utils';
 import scss from './index.module.scss';
 import { FontIcon } from '@components';
-import { useStore } from '@store/index';
 
 // 默认状态值
 const defaultState = {
@@ -33,7 +33,7 @@ const MODAL_STATUS = {
   MAXIMIZE: 'maximize',
 };
 
-const useStateHook = (props, store) => {
+const useStateHook = (props) => {
   const [styleParams, setStyleParams] = useState(defaultState.styleParams);
   const [mouseDownState, setMouseDownState] = useState(null);
   const histories = useMemo(() => ({}), []);
@@ -47,7 +47,6 @@ const useStateHook = (props, store) => {
       document.removeEventListener('mouseup', onMouseUp);
     }
   });
-
 
   // 计算（合并设置）styleParams
   const resetStyleParams = (reset) => {
@@ -68,11 +67,6 @@ const useStateHook = (props, store) => {
     const state = helper.getMouseState({ e, modalRef, styleParams });
     resetStyleParams({cursor: state.cursor});
     onMove(e);
-  }
-
-  // 切换应用
-  const onToggle = () => {
-    store.app.toggle({ url: props.route.url });
   }
 
   // 1. 为父级容器设置 cursor 样式 2. 获取鼠标状态并设置 mouseDownState
@@ -96,33 +90,22 @@ const useStateHook = (props, store) => {
     setMouseDownState(null);
   }
 
-  // 关闭 modal
-  const onClose = (e) => {
-    store.app.close({url: props.route.url});
-  }
-
-  // 最小化（切换）
-  const onMinimize = () => {
-    store.app.minimize({ route: props.route });
-  }
-
-  // 最大化（切换）
-  const onMaximize = () => {
-    store.app.maximize({ route: props.route });
+  // 切换应用
+  const onToggle = () => {
+    props.onToggle && props.onToggle();
   }
 
   // 计算样式参数： 最小化样式 || 最大化样式 || 正常样式
   const style = useMemo(() => {
-    const params = props.route.min || props.route.max || styleParams;
+    const params = props.app.min || props.app.max || styleParams;
     return helper.getStyle({ styleParams: params });
-  }, [styleParams, props.route]);
+  }, [styleParams, props.app]);
 
-  return { style, modalRef, onClose, onMinimize, onMaximize, onMouseDown }
+  return { style, modalRef, onMouseDown }
 }
 
 const Modal = (props) => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+  const state = useStateHook(props);
   return (
     <div
       style={state.style}
@@ -133,13 +116,13 @@ const Modal = (props) => {
       <div className={scss['modal-content']}>
         {/* 工具栏 */}
         <div className={scss['modal-tool']}>
-          <div className={scss['close']} onClick={state.onClose}>
+          <div className={scss['close']} onClick={props.onClose}>
             <FontIcon icon="icon-guanbi6-copy" />
           </div>
-          <div className={scss['shrink']} onClick={state.onMinimize}>
+          <div className={scss['shrink']} onClick={props.onMinimize}>
             <FontIcon icon="icon-suoxiao" />
           </div>
-          <div className={scss['zoom']} onClick={state.onMaximize}>
+          <div className={scss['zoom']} onClick={props.onMaximize}>
             <FontIcon icon="icon-fangda1" />
           </div>
         </div>

@@ -3,9 +3,9 @@ import { Modal } from '@components';
 
 const Note = (props) => {
   return (
-    <Modal route={props.route}>
+    <div>
       笔记
-    </Modal>
+    </div>
   );
 }
 

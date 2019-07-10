@@ -5,8 +5,8 @@ import { message, Select } from 'antd';
 
 /**
  * 根据需要过滤的列表过滤指定对象
- * @param {Object} obj          要过滤的对象 
- * @param {Array} filterVaslue  要过滤的值的列表 
+ * @param {Object} obj          要过滤的对象
+ * @param {Array} filterVaslue  要过滤的值的列表
  */
 export const filterObject = (obj, filterVaslue = []) => {
   const filter = {};
@@ -35,4 +35,17 @@ export const handleMessage = ({ rescode, message: info }) => {
  */
 export const log = (...args) => {
   _DEV_ && console.log(...args);
+}
+
+/**
+ * 防抖
+ * @param {Function} fn  传入函数
+ * @param {Number} wait  等待时长
+ */
+export const debounce = (fn, wait) => {
+  var timeout = null;
+  return (e) => {
+    if(timeout !== null){clearTimeout(timeout);};
+    timeout = setTimeout(fn.bind(null, escape), wait);
+  }
 }

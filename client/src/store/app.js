@@ -31,9 +31,9 @@ export default class Store {
   @action
   open = (url) => {
     let match = void 0;
-    const route = this.list.find(v => (v.url === url));
-    if (!!route){
-      !!route.min && this.minimize({ route });
+    const app = this.list.find(v => (v.url === url));
+    if (!!app){
+      !!app.min && this.minimize(app);
     } else {
       const app = apps.find( v => matchPath(url, { path: v.path, exact: v.exact,strict: false}));
       this.list = [...this.list, { url, match, ...app, min: null, max: null }];
@@ -42,48 +42,47 @@ export default class Store {
 
   /**
  * 关闭 app
- * @param {String} url 路由
+ * @param {Object} app 当前应用配置
  */
   @action
-  close = ({ url }) => {
-    this.list = this.list.filter(v => v.url !== url);
+  close = (app) => {
+    this.list = this.list.filter(v => v.url !== app.url);
   };
 
   /**
  * 最大化（切换）
- * @param {Object} route 当前操作 app 的 route
+ * @param {Object} app 当前应用配置
  */
   @action
-  maximize = ({ route }) => {
+  maximize = (app) => {
     this.list = this.list.map(v => ((
-      v.url !== route.url ? v
-      : { ...route, max: !route.max ? maxStyleParams : null }
+      v.url !== app.url ? v
+      : { ...app, max: !app.max ? maxStyleParams : null }
     )));
   };
 
   /**
    * 最小化（切换）
-   * @param {Object} route 当前操作 app 的 route
+   * @param {Object} app 当前应用配置
    */
   @action
-  minimize = ({ route }) => {
+  minimize = (app) => {
     this.list = this.list.map(v => ((
-      v.url !== route.url ? v
-      : { ...route, min: !route.min ? minStyleParams : null }
+      v.url !== app.url ? v
+      : { ...app, min: !app.min ? minStyleParams : null }
     )));
   };
 
   /**
    * 应用切换
-   * @param {String} url 应用 url， 应用唯一标识
+   * @param {Object} app 当前应用配置
    */
   @action
-  toggle = ({ url }) => {
-    if (this.list[this.list.length - 1].url === url){ return false; }
-    const remove = _.remove(this.list, v => (v.url === url));
+  toggle = (app) => {
+    if (this.list[this.list.length - 1].url === app.url){ return false; }
+    const remove = _.remove(this.list, v => (v.url === app.url));
     this.list = [...this.list, ...remove];
   };
-
 
   print = () => {
     console.group('%c[store]app', 'color: green;');
