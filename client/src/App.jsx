@@ -1,10 +1,10 @@
 import Home from '@home';
 import React from 'react';
-import Store from '@store';
-import { 
+import {
   Route,
-  BrowserRouter as Router, 
+  BrowserRouter as Router,
 } from 'react-router-dom';
+import Store from '@store/index';
 import '@assets/style/common.scss';
 import '@assets/font/fonticon/iconfont';
 

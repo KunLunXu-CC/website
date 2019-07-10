@@ -1,28 +1,26 @@
 // 要求父节点无 padding margin border
-import React, { 
+import React, {
   memo,
-  useRef, 
-  useMemo, 
-  useState, 
-  useEffect, 
-  useCallback, 
+  useRef,
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
 } from 'react';
 import _ from 'lodash';
 import helper from './helper';
-import css from './index.module.scss';
-import { connect } from 'react-redux';
+import scss from './index.module.scss';
 import { FontIcon } from '@components';
-import { bindActionCreators } from 'redux';
-import { close, maximize, minimize, toggle } from '@store/routes/action';
+import { useStore } from '@store/index';
 
 // 默认状态值
 const defaultState = {
   isMouseDown: false,
   styleParams: {
-    width: 500, 
-    height: 300, 
-    cursor: 'auto', 
-    translateX: 10, 
+    width: 500,
+    height: 300,
+    cursor: 'auto',
+    translateX: 10,
     translateY: 10,
   }
 };
@@ -35,7 +33,7 @@ const MODAL_STATUS = {
   MAXIMIZE: 'maximize',
 };
 
-const useStateHook = (props) => {
+const useStateHook = (props, store) => {
   const [styleParams, setStyleParams] = useState(defaultState.styleParams);
   const [mouseDownState, setMouseDownState] = useState(null);
   const histories = useMemo(() => ({}), []);
@@ -48,7 +46,7 @@ const useStateHook = (props) => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     }
-  }); 
+  });
 
 
   // 计算（合并设置）styleParams
@@ -72,9 +70,9 @@ const useStateHook = (props) => {
     onMove(e);
   }
 
-  // 切换应用 
+  // 切换应用
   const onToggle = () => {
-    props.toggle({ url: props.route.url });
+    store.app.toggle({ url: props.route.url });
   }
 
   // 1. 为父级容器设置 cursor 样式 2. 获取鼠标状态并设置 mouseDownState
@@ -85,7 +83,7 @@ const useStateHook = (props) => {
     setMouseDownState(state);
   }
 
-  // 鼠标按下事件： 1. 取消默认行为和冒泡 
+  // 鼠标按下事件： 1. 取消默认行为和冒泡
   const onMouseDown = (e) => {
     e.stopPropagation(); e.preventDefault();
     onResize(e);
@@ -100,17 +98,17 @@ const useStateHook = (props) => {
 
   // 关闭 modal
   const onClose = (e) => {
-    props.close && props.close({url: props.route.url});
+    store.app.close({url: props.route.url});
   }
 
   // 最小化（切换）
   const onMinimize = () => {
-    props.minimize({ route: props.route });
+    store.app.minimize({ route: props.route });
   }
 
   // 最大化（切换）
   const onMaximize = () => {
-    props.maximize({ route: props.route });
+    store.app.maximize({ route: props.route });
   }
 
   // 计算样式参数： 最小化样式 || 最大化样式 || 正常样式
@@ -123,24 +121,25 @@ const useStateHook = (props) => {
 }
 
 const Modal = (props) => {
-  const state = useStateHook(props);
+  const store = useStore();
+  const state = useStateHook(props, store);
   return (
-    <div 
-      style={state.style}  
+    <div
+      style={state.style}
       ref={state.modalRef}
-      className={css['modal']}
+      className={scss['modal']}
       onMouseDown={state.onMouseDown}
     >
-      <div className={css['modal-content']}>
+      <div className={scss['modal-content']}>
         {/* 工具栏 */}
-        <div className={css['modal-tool']}>
-          <div className={css['close']} onClick={state.onClose}>
+        <div className={scss['modal-tool']}>
+          <div className={scss['close']} onClick={state.onClose}>
             <FontIcon icon="icon-guanbi6-copy" />
           </div>
-          <div className={css['shrink']} onClick={state.onMinimize}>
+          <div className={scss['shrink']} onClick={state.onMinimize}>
             <FontIcon icon="icon-suoxiao" />
           </div>
-          <div className={css['zoom']} onClick={state.onMaximize}>
+          <div className={scss['zoom']} onClick={state.onMaximize}>
             <FontIcon icon="icon-fangda1" />
           </div>
         </div>
@@ -151,12 +150,4 @@ const Modal = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  close: bindActionCreators(close, dispatch),
-  toggle: bindActionCreators(toggle, dispatch),
-  maximize: bindActionCreators(maximize, dispatch),
-  minimize: bindActionCreators(minimize, dispatch),
-});
-export default connect((state) => ({
-  routes: state.routes
-}), mapDispatchToProps)(Modal);
+export default Modal;

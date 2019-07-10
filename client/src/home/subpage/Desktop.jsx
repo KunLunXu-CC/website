@@ -5,7 +5,6 @@ import React, {
   useEffect,
 } from 'react';
 import _ from 'lodash';
-import { connect } from 'react-redux';
 import scss from '../index.module.scss';
 import HomeBg from '@assets/img/home_bg.jpg';
 const SCALE = 1920 / 1080;
@@ -47,7 +46,7 @@ const useStateHook = (props) => {
 const Desktop = (props) => {
   const state = useStateHook(props);
   return (
-    <div 
+    <div
       className={scss['dosktop']}
       ref={state.desktopRef}
       style={{
@@ -60,6 +59,4 @@ const Desktop = (props) => {
   );
 }
 
-export default connect((state) => ({
-  routes: state.routes
-}), null)(Desktop);
+export default Desktop;
