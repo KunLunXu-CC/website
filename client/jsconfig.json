@@ -7,7 +7,7 @@
       "@api/*": ["src/api/*"],
       "@app/*": ["src/app/*"],
       "@hook/*": ["src/hook/*"],
-      "@home/*": ["src/home/*"],
+      "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
       "@store/*": ["src/store/*"],
       "@assets/*": ["src/assets/*"],

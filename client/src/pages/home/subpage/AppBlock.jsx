@@ -1,12 +1,6 @@
-import React, {
-  useRef,
-  useMemo,
-  useState,
-  useEffect,
-} from 'react';
-import _ from 'lodash';
+import React from 'react';
 import { useObserver } from "mobx-react-lite";
-import { useStore } from '@store/index';
+import { useStore } from '@store';
 import { Modal } from '@components';
 
 import scss from '../index.module.scss';

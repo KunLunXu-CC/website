@@ -2,11 +2,11 @@ const path = require('path');
 
 /* 路径别名配置 */
 module.exports.alias = {
-  '@app': path.resolve(__dirname, '../src/app'),      
+  '@app': path.resolve(__dirname, '../src/app'),
   '@api': path.resolve(__dirname, '../src/api'),
-  '@home': path.resolve(__dirname, '../src/home'),
   '@hook': path.resolve(__dirname, '../src/hook'),
-  '@store': path.resolve(__dirname, '../src/store'),      
+  '@store': path.resolve(__dirname, '../src/store'),
+  '@pages': path.resolve(__dirname, '../src/pages'),
   '@utils': path.resolve(__dirname, '../src/utils'),
   '@config': path.resolve(__dirname, '../src/config'),
   '@assets': path.resolve(__dirname, '../src/assets'),
