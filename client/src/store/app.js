@@ -3,18 +3,11 @@ import { matchPath } from 'react-router-dom';
 import apps from '@app/index';
 import _ from 'lodash';
 
-const maxStyleParams = {
-  width: '100%',
-  height: '100%',
-  translateX: 0,
-  translateY: 0,
-};
-
 const minStyleParams = {
   width: 0,
   height: 0,
-  translateX: '100vw',
-  translateY: '100vh',
+  offsetX: 100,
+  offsetY: 100,
 };
 
 export default class Store {
@@ -33,10 +26,10 @@ export default class Store {
     let match = void 0;
     const app = this.list.find(v => (v.url === url));
     if (!!app){
-      !!app.min && this.minimize(app);
+      !!app.min && this.minimize(app, false);
     } else {
-      const app = apps.find( v => matchPath(url, { path: v.path, exact: v.exact,strict: false}));
-      this.list = [...this.list, { url, match, ...app, min: null, max: null }];
+      const app = apps.find( v => matchPath(url, { path: v.path, exact: true, strict: false}));
+      this.list = [...this.list, { url, match, ...app }];
     }
   }
 
@@ -50,26 +43,14 @@ export default class Store {
   };
 
   /**
- * 最大化（切换）
- * @param {Object} app 当前应用配置
- */
-  @action
-  maximize = (app) => {
-    this.list = this.list.map(v => ((
-      v.url !== app.url ? v
-      : { ...app, max: !app.max ? maxStyleParams : null }
-    )));
-  };
-
-  /**
    * 最小化（切换）
    * @param {Object} app 当前应用配置
    */
   @action
-  minimize = (app) => {
+  minimize = (app, isMin) => {
     this.list = this.list.map(v => ((
       v.url !== app.url ? v
-      : { ...app, min: !app.min ? minStyleParams : null }
+      : { ...app, isMin }
     )));
   };
 

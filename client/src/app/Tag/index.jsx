@@ -1,10 +1,10 @@
 import React from 'react';
-import { Modal } from '@components';
+import { Modal } from 'qyrc';
 
 const Note = (props) => {
   return (
-    <div>
-      笔记
+    <div style={{ background: '#04071b' }}>
+      标签
     </div>
   );
 }

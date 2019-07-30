@@ -7,12 +7,18 @@
     ["@babel/plugin-proposal-class-properties", { "loose" : true }],
     // asyn await 支持
     ["@babel/plugin-transform-async-to-generator"],
-    // 按需加载
+    // 按需加载 - antd
     ["import", {
       "libraryName": "antd",
       "libraryDirectory": "es",
       "style": "css"
-    }], 
+    }, "antd"], 
+    // 按需加载 - qyrc
+    ["import", {
+      "libraryName": "qyrc",
+      "libraryDirectory": "es",
+      "style": true
+    }, "qyrc"], 
   ],
   "presets": ["@babel/preset-react", "@babel/preset-env"]
 }
