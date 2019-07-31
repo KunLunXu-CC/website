@@ -8,21 +8,21 @@ export default [
     icon: 'icon-wenzhang',
     code: 'article',
     path: '/article',
-    url: '/article',
-    app: Article
+    defaultUrl: '/article',
+    component: Article
   }, {
     name: '笔记',
     icon: 'icon-jilu',
     code: 'note',
     path: '/note',
-    url: '/note',
-    app: Note
+    defaultUrl: '/note',
+    component: Note
   }, {
     name: '标签',
     icon: 'icon-biaoqian1',
     code: 'tag',
     path: '/tag',
-    url: '/tag',
-    app: Tag
+    defaultUrl: '/tag',
+    component: Tag
   }
 ];

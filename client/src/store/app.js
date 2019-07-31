@@ -3,13 +3,6 @@ import { matchPath } from 'react-router-dom';
 import apps from '@app/index';
 import _ from 'lodash';
 
-const minStyleParams = {
-  width: 0,
-  height: 0,
-  offsetX: 100,
-  offsetY: 100,
-};
-
 export default class Store {
   constructor(){
     autorun(this.print);
@@ -24,12 +17,14 @@ export default class Store {
   @action
   open = (url) => {
     let match = void 0;
-    const app = this.list.find(v => (v.url === url));
+    let app = this.list.find(v => (v.url === url));
     if (!!app){
-      !!app.min && this.minimize(app, false);
+      this.minimize(app);
     } else {
-      const app = apps.find( v => matchPath(url, { path: v.path, exact: true, strict: false}));
-      this.list = [...this.list, { url, match, ...app }];
+      app = apps.find( v => (
+        match = matchPath(url, { path: v.path, exact: true, strict: false})
+      ));
+      !!app && (this.list = [...this.list, { ...app, url, match, isMin: false }]);
     }
   }
 
@@ -47,11 +42,8 @@ export default class Store {
    * @param {Object} app 当前应用配置
    */
   @action
-  minimize = (app, isMin) => {
-    this.list = this.list.map(v => ((
-      v.url !== app.url ? v
-      : { ...app, isMin }
-    )));
+  minimize = (app) => {
+    this.list = this.list.map(v => ({ ...v, isMin: !v.isMin }));
   };
 
   /**

@@ -47,7 +47,7 @@ const useStateHook = (props, store) => {
 
   // 点击事件
   const onClick = (dock) => {
-    store.app.open(dock.path);
+    store.app.open(dock.defaultUrl);
   }
 
   return { dockClassName, onMouseLeave, dockRef, onClick };

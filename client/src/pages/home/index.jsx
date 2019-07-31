@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 import Dock from './subpage/Dock';
-import AppBlock from './subpage/AppBlock';
+import AppList from './subpage/AppList';
 import Desktop from './subpage/Desktop';
 
 const Home = (props) => {
@@ -9,7 +9,7 @@ const Home = (props) => {
     <Fragment>
       <Dock/>
       <Desktop/>
-      <AppBlock />
+      <AppList />
     </Fragment>
   );
 }
