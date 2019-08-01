@@ -1,9 +1,14 @@
 import React from 'react';
+import { Image } from 'qyrc';
+import scss from './index.module.scss';
+import HomeBg from '@assets/img/home_bg.jpg';
 
-export default () => {
+const Desktop = (props) => {
   return (
-    <div>
-      登录
-    </div>
+    <Image src={HomeBg} className={scss['login']}>
+    {/*  */}
+    </Image>
   );
-};
+}
+
+export default Desktop;
