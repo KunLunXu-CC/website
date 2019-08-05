@@ -5,9 +5,9 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import { Icon } from 'qyrc';
 import { useStore } from '@store/index';
 import dockList from '@config/dock';
-import { FontIcon } from '@components';
 import scss from './index.module.scss';
 
 const FT = 20;
@@ -66,7 +66,7 @@ const Dock = (props) => {
               <div
                 className={scss['dock-app-content']}
                 onClick={state.onClick.bind(null, v)}>
-                <FontIcon icon={v.icon} size="50px"/>
+                <Icon type={v.icon} style={{ fontSize: '50px' }}/>
               </div>
             </div>
           ))
