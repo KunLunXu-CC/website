@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 
-import Dock from './subpage/Dock';
-import AppList from './subpage/AppList';
-import Desktop from './subpage/Desktop';
+import DockList from './subpage/DockList/index';
+import AppList from './subpage/AppList/index';
+import Desktop from './subpage/Desktop/index';
 
 const Home = (props) => {
   return (
     <Fragment>
-      <Dock/>
+      <DockList/>
       <Desktop/>
       <AppList />
     </Fragment>

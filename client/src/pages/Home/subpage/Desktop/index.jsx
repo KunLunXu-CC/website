@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'qyrc';
-import scss from '../index.module.scss';
+import scss from './index.module.scss';
 import HomeBg from '@assets/img/home_bg.jpg';
 
 const Desktop = (props) => {

@@ -1,11 +1,3 @@
-/* Desktop 样式 */
-.dosktop {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
 
 /* Dock 样式 */
 $dock-size: 70px;
@@ -57,13 +49,4 @@ $dock-size: 70px;
     text-align: center;
     line-height: $dock-size;
   }
-}
-
-/* AppBlock 样式 */
-.app-block{
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
 }

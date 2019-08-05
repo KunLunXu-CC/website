@@ -8,7 +8,7 @@ import React, {
 import { useStore } from '@store/index';
 import dockList from '@config/dock';
 import { FontIcon } from '@components';
-import scss from '../index.module.scss';
+import scss from './index.module.scss';
 
 const FT = 20;
 const useStateHook = (props, store) => {

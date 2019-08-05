@@ -3,7 +3,7 @@ import { useObserver } from "mobx-react-lite";
 
 import { Modal } from 'qyrc';
 import { useStore } from '@store';
-import scss from '../index.module.scss';
+import scss from './index.module.scss';
 
 export default (props) => useObserver(() => {
   const store = useStore();
