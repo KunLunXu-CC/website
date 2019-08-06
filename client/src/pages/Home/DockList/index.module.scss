@@ -1,6 +1,9 @@
 
 /* Dock 样式 */
 $dock-size: 70px;
+$dock-padding: 10px;
+$radius: 10px;
+
 %dock{
   position: fixed;
   z-index: 9;
@@ -8,7 +11,6 @@ $dock-size: 70px;
   left: 0;
 
   font-size: 0;
-  letter-spacing: -4px;
   text-align: center;
   transition: bottom 0.5s;
 }
@@ -20,17 +22,15 @@ $dock-size: 70px;
 
 .dock-hidden{
   @extend %dock;
-  bottom: -$dock-size - 5;
+  // bottom: -$dock-size - 5;
+  bottom: 0;
 }
 
 .dock-wrapper{
-  $radius: 10px;
   box-sizing: border-box;
   display: inline-block;
-  padding: 0 10px;
+  padding: 0 $dock-padding;
   font-size: 0;
-  letter-spacing: -4px;
-
   background: rgba($color: #221e1c, $alpha: 0.8);
   border: 1px solid rgba($color: #fff, $alpha: 0.2);
   border-bottom: none;
@@ -40,13 +40,8 @@ $dock-size: 70px;
 .dock-app{
   display: inline-block;
   font-size: 0;
-  letter-spacing: -4px;
-
   &-content{
-    cursor: pointer;
-    width: $dock-size;
-    height: $dock-size;
     text-align: center;
-    line-height: $dock-size;
+    padding: $dock-padding;
   }
 }

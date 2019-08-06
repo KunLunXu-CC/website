@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:docker": "sudo docker start 5d77155c7721 && npm run start",
     "start": "NODE_ENV=development nodemon ./app/app.js"
   },
   "keywords": [],
