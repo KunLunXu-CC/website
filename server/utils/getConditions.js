@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { STATUS } = require('../../config/conts');
+const { STATUS } = require('../config/conts');
 
 
 /**

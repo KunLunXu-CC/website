@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const NodeRSA = require('node-rsa');
-const { createHash } = require('../utils');
+const { createHash } = require('../../utils');
 const { RESCODE } = require('../../config/conts');
 
 /**

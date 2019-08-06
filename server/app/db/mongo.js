@@ -1,4 +1,4 @@
-const { requireFiles } = require('../utils');
+const { requireFiles } = require('../../utils');
 const config = require('../../config/system');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;

@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const path = require('path');
 const crypto = require('crypto');
-const system = require('../../config/system');
+const system = require('../config/system');
 
 /**
  * 加载指定目录路径下的所有指定后缀文件

@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const moment = require('moment');
 const colors = require('colors');
+const config = require('../../config/system');
 const start = colors.red(`[*${moment().format('YYYY-MM-DDD:HH:mm:ss')}*]`);
 
 /**
@@ -24,6 +25,7 @@ const printStart = () => {
  * @param {Object} ctx 上下文
  */
 const printRequestData = (ctx) => {
+  if (ctx.request.url === config.graphql.path) {return false;}
   const body = ctx.request.body;
   let queryDoc = body.query || '';
   body.query && delete body.query;
@@ -32,7 +34,6 @@ const printRequestData = (ctx) => {
     url: ctx.request.url,
     ...(body || {}),
   }, null, 4);
-
   console.log(start, colors.cyan('请求参数：'), colors.yellow(params));
   console.log(start, colors.cyan('请求文档：'), colors.yellow(queryDoc));
 }
@@ -43,6 +44,7 @@ const printRequestData = (ctx) => {
  */
 
 printResponseData = (ctx) => {
+  if (ctx.request.url === config.graphql.path) {return false;}
   let body = {};
   try {
     body = _.isString(ctx.body) ? JSON.parse(ctx.body) : ctx.body;
@@ -51,7 +53,6 @@ printResponseData = (ctx) => {
     status: ctx.status,
     body,
   }, null, 4);
-
   console.log(start, colors.cyan('响应数据：'), colors.yellow(params));
 }
 

@@ -2,7 +2,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const system = require('../../config/system');
-const { requireFiles } = require('../utils');
+const { requireFiles } = require('../../utils');
 
 const { 
   gql,

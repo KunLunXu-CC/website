@@ -1,5 +1,5 @@
 const { RESCODE } = require('../../../config/conts');
-const getConditions = require('../../utils/getConditions');
+const getConditions = require('../../../utils/getConditions');
 
 /**
  * 通用获取单条数据方法
