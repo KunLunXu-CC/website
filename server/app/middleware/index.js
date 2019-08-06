@@ -10,5 +10,5 @@ module.exports = (app) => {
   // 解析 body
   app.use(bodyParser());
   // 静态服务（优先于 route 执行， 注意避免路由冲突）
-  app.use(staticServe(path.resolve(__dirname, '../../static')));
+  app.use(staticServe(path.resolve(__dirname, '../static')));
 }

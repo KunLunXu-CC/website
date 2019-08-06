@@ -1,38 +1,40 @@
 const mongoose = require('mongoose');
-const { STATUS } = require('../../../config/conts');
+const { STATUS } = require('../config/conts');
 const ObjectId = mongoose.Schema.Types.ObjectId;
-// const Mixed = mongoose.Schema.Types.Mixed;
 
-exports.title = '标签';
+exports.title = '文章';
 exports.type = 'MongoDB';
 
 exports.fields = {
-	name: {
-		title: '标签名称',
+  name: {
+		title: '标题',
 		required: true,
 		type: String,
-	},
-	parent: {
-		title: '父级标签ID',
-		type: ObjectId
-	},
-	color: {
-		title: '标签色值',
+  },
+  desc: {
+    title: '描述（概要）',
 		type: String,
-		default: '#5BCCFF',
-	},
-	icon: {
-		title: '标签图标',
-		type: String
-	},
+  },
+  thumb: {
+    title: "缩略图",
+    type: String
+  },
+  tags: {
+    title: '标签ID',
+		type: [ObjectId],
+  },
+  content: {
+    title: '内容',
+		type: String,
+  },
 	status: {
 		title: '状态',
 		default: STATUS.ENABLE,
 		type: Number,
 	},
-	creator: {
+  creator: {
 		title: '创建人',
-		type: String
+		type: String,
 	},
 	creationTime: {
 		title: '创建时间',
@@ -48,4 +50,4 @@ exports.fields = {
 		type: Date,
 		default: Date.now,
 	},
-};
+}
