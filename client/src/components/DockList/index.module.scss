@@ -1,0 +1,47 @@
+
+/* Dock 样式 */
+$dock-size: 70px;
+$dock-padding: 10px;
+$radius: 10px;
+
+%dock-transition {
+  transition: bottom 0.5s;
+};
+
+.dock{
+  position: fixed;
+  z-index: 9;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+
+  @extend %dock-transition;
+}
+
+.dock-show{
+  @extend %dock-transition;
+  bottom: 0;
+}
+
+.dock-hidden{
+  @extend %dock-transition;
+  bottom: -$dock-size - 5;
+}
+
+.dock-body{
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 $dock-padding;
+
+  background: rgba($color: #221e1c, $alpha: 0.8);
+  border: 1px solid rgba($color: #fff, $alpha: 0.2);
+  border-bottom: none;
+  border-radius: $radius $radius 0 0;
+
+  .dock-app{
+    padding: $dock-padding;
+  }
+}
+
