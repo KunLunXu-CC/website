@@ -1,4 +1,4 @@
-.login-body {
+.login {
   width: 360px;
   height: 400px;
   padding: 20px;
@@ -6,8 +6,8 @@
   background: #fff;
 
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 100px;
+  top: 20%;
 
   &-head {
     overflow: hidden;
