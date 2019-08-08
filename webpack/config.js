@@ -17,12 +17,12 @@ module.exports.alias = {
 module.exports.globalConsts = {
   // 生产
   production: {
-    GLOBAL_SERVER: JSON.stringify('http://localhost:4000'),
+    GLOBAL_SERVICE: JSON.stringify('http://localhost:4000'),
   },
 
   // 开发
   development: {
     _DEV_: true,
-    GLOBAL_SERVER: JSON.stringify('http://localhost:4000'),
+    GLOBAL_SERVICE: JSON.stringify('http://localhost:4000'),
   },
 }

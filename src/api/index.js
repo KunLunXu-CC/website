@@ -3,11 +3,12 @@ import axios from 'axios';
 import _ from 'lodash';
 export * from './tag';
 export * from './common';
+export * from './user';
 
 // 创建 axios 实例
 const instance = axios.create({
-  headers: {'Content-Type':' application/json'},
-  baseURL: GLOBAL_BLOG_SERVER,
+  headers: { 'Content-Type':' application/json' },
+  baseURL: GLOBAL_SERVICE,
   timeout: 1000,
 });
 
