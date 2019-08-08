@@ -36,6 +36,6 @@ export const ARTICLE_STATUS = {
 
 // [状态]响应状态
 export const RESCODE = {
-  SUCCESS: {VALUE: 1, DESC: '成功'},   
-  FAIL: {VALUE: 0, DESC: '失败'}
+  SUCCESS: { VALUE: 1, DESC: '成功' },   
+  FAIL: { VALUE: 0, DESC: '失败' }
 };

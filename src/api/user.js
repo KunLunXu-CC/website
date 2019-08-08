@@ -1,26 +1,24 @@
-import axios from '.';
+import axios from '@utils/request';
+import { rsa } from '@utils/encryption';
 
-export const login = ({ account, password }) => (new Promise((resolve, reject) => {
-  axios(
-    {
-      url: '/specialUrl',
-      method: 'post',
-      data: {
-        variables: { account, password },
-        query: `
-        mutation($account: String, $password: String){
-          login( account: $account, password: $password ){ 
-            rescode 
-            message 
-          }
-        }`,
+export const login = ({ account, password }) => axios({
+  url: '/specialUrl',
+  method: 'post',
+  data: {
+    variables: { account, password: password ? rsa(password) : void 0 },
+    query: `
+    mutation($account: String, $password: String){
+      login( account: $account, password: $password ){
+        user { id name account sex status role { id desc auth name } }
+        rescode 
+        message 
       }
-    }
-  )
-  .then(function (response) {
-    
-  })
-  .catch(function (error) {
-  
-  });
-}));
+    }`,
+  }
+})
+.then(res => {
+  return res.data.data.login;
+})
+.catch(err => {
+
+});

@@ -2,10 +2,12 @@ import React from 'react';
 import { observable, action, autorun, toJS } from 'mobx';
 const StoreContext = React.createContext(null);
 import App from './app';
+import User from './user';
 
 // 组合全局 store
 class Store {
   @observable app = new App();
+  @observable user = new User();
 };
 
 // 导出 hook 使用 hook 方法

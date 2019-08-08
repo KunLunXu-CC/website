@@ -45,8 +45,8 @@ const Desktop = (props) => {
             {props.form.getFieldDecorator('password', {
                rules: [{ required: true, message: '请输入密码!' }],
             })(
-              <Input 
-                size="large" 
+              <Input.Password 
+                size="large"
                 placeholder="请输入密码"
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
             )}
