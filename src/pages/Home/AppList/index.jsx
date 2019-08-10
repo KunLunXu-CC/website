@@ -10,12 +10,13 @@ export default (props) => useObserver(() => {
   return (
     <div className={scss['app-block']}>
       {store.app.list.map(v => {
-        const { component: Component, isMin, url } = v;
+        const { component: Component, isMin, url, defaultParams } = v;
         return (
           <Modal
             key={url}
             isMin={isMin}
             dragHeight={80}
+            defaultParams={defaultParams}
             onClose={store.app.close.bind(null, v)}
             onMin={store.app.minimize.bind(null, v)}
             onMouseDown={store.app.toggle.bind(null, v)}
