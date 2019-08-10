@@ -1,11 +1,19 @@
 import React, { useRef } from 'react';
-import { Modal } from 'qyrc';
+import { ThreeColumnLayout } from 'qyrc';
+
+import scss from './index.module.scss';
+import Content from './Content';
+import Header from './Header';
+import Menu from './Menu';
 
 const Note = (props) => {
   return (
-    <div style={{ background: '#04071b', width: '100%', height: '100%', color: '#fff' }}>
-      笔记
-    </div>
+    <ThreeColumnLayout
+      className={scss['note']}
+      content={<Content/>}
+      header={<Header/>}
+      menu={<Menu/>}
+    />
   );
 }
 

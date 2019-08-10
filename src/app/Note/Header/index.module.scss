@@ -1,0 +1,17 @@
+.header {
+  width: 100%;
+  height: 50px;
+  background: #373738;
+
+  border-bottom: 1px solid #1a1a1a;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-input {
+    width: 40%;
+    color: rgba($color: #fff, $alpha: 0.8) !important;
+    border: none;
+    background: #1e1f22 !important;
+  }
+}
