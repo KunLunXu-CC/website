@@ -18,7 +18,10 @@ export default [
     component: Note,
     icon: 'icon-jilu',
     defaultUrl: '/note',
-    defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
+    modalProps: {
+      dragHeight: 50,
+      defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
+    },
   },
   // {
   //   name: '标签',
