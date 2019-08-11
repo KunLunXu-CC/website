@@ -6,9 +6,24 @@ import _ from 'lodash';
 export default class Store {
   constructor(){
     autorun(this.print);
+    this.init();
   }
 
   @observable list = [];
+
+  /**
+   * 初始化：打开默认开启的弹窗
+   */
+  @action
+  init = () => {
+    const rest = apps.filter(v => v.defaultOpen).map(v => ({
+      ...v,
+      isMin: false,
+      url: v.defaultUrl,
+      match: matchPath(v.defaultUrl, { path: v.path, exact: true, strict: false}),
+    }));
+    this.list = [...this.list, ...rest];
+  }
 
   /**
    * 开启 app

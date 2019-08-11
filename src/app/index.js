@@ -17,6 +17,7 @@ export default [
     path: '/note',
     component: Note,
     icon: 'icon-jilu',
+    defaultOpen: true,
     defaultUrl: '/note',
     modalProps: {
       dragHeight: 50,
