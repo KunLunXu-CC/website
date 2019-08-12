@@ -1,18 +1,20 @@
 import React, { useRef } from 'react';
-import { ThreeColumnLayout } from 'qyrc';
+
+import { ChatLayout } from '@components';
 
 import scss from './index.module.scss';
-import Content from './Content';
+import EditBox from './EditBox';
+import ListBox from './ListBox';
 import Header from './Header';
 import Menu from './Menu';
 
 const Note = (props) => {
   return (
-    <ThreeColumnLayout
-      className={scss['note']}
-      content={<Content/>}
+    <ChatLayout 
       header={<Header/>}
-      menu={<Menu/>}
+      list={<ListBox />}
+      edit={<EditBox />}
+      menu={<Menu />}
     />
   );
 }

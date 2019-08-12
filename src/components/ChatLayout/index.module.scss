@@ -1,0 +1,29 @@
+// flex 布局控制
+.chat {
+  display: flex;
+  flex-direction: column;
+  &-header { flex: none;}
+  &-body {flex: 1;}
+  &-header {flex: none;}
+}
+
+.chat-body {
+  display: flex;
+  &-side {flex: none;}
+  &-menu {flex: none;}
+  &-content {flex: 1;}
+}
+
+.chat-body-content {
+  display: flex;
+  flex-direction: column;
+  &-list {flex: 1;}
+  &-edit {flex: none;}
+}
+// 非 flex 布局样式
+.chat {
+  height: 100%;
+  div {
+    overflow: hidden;
+  }
+}

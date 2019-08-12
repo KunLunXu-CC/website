@@ -8,10 +8,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  &-input {
-    width: 40%;
-    color: rgba($color: #fff, $alpha: 0.8) !important;
+
+  :global(.ant-input){
+    width: 40%;    
+    color: rgba($color: #fff, $alpha: 0.8);
+    background: #1e1f22;
     border: none;
-    background: #1e1f22 !important;
   }
 }

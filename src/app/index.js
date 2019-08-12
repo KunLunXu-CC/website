@@ -20,7 +20,7 @@ export default [
     defaultOpen: true,
     defaultUrl: '/note',
     modalProps: {
-      dragHeight: 50,
+      dragHeight: 40,
       defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
     },
   },

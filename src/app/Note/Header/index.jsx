@@ -9,7 +9,6 @@ export default () => {
       <Input
         placeholder="搜索"
         // prefix={<Icon type="search" style={{ color: '#fff' }}/>}
-        className={scss['header-input']}
         onMouseDown={(e) => {
           e.stopPropagation();
           e.nativeEvent.stopPropagation();
