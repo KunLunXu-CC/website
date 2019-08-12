@@ -21,6 +21,7 @@ export default [
     defaultUrl: '/note',
     modalProps: {
       dragHeight: 40,
+      toolPosition: {top: 15, left: 5},
       defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
     },
   },

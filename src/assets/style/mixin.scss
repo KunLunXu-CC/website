@@ -1,0 +1,16 @@
+
+// 设置 input 默认 placeholder 样式
+@mixin input-placeholder ($color){
+  :-moz-placeholder {
+    color: $color;
+  }
+  ::-moz-placeholder {
+    color: $color;
+  }
+  input:-ms-input-placeholder {
+    color: $color;
+  }
+  input::-webkit-input-placeholder {
+    color: $color;
+  }
+}

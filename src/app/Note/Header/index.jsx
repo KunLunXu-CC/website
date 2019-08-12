@@ -6,14 +6,14 @@ import scss from './index.module.scss';
 export default () => {
   return (
     <div className={scss['header']}>
-      <Input
+      <Input.Search
         placeholder="搜索"
-        // prefix={<Icon type="search" style={{ color: '#fff' }}/>}
+        onSearch={value => console.log(value)}
         onMouseDown={(e) => {
           e.stopPropagation();
           e.nativeEvent.stopPropagation();
         }}
-      ></Input>
+      />
     </div>
   );
 };
