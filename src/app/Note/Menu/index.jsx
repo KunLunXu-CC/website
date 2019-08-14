@@ -1,9 +1,11 @@
 import _ from 'lodash';
 import { Menu, Icon } from 'antd';
 import { TagMenu } from '@components';
+import { useObserver } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
 
 import scss from './index.module.scss';
+import { useStore } from '../store'
 
 const dataModel = [
   {
@@ -77,28 +79,27 @@ const dataModel = [
   },
 ];
 
-const useStateHook = () => {
-  const [dataSource, setDataSource] = useState([]);
-
+const useStateHook = (props, store) => {
   const onChange = (selectedKey) => {
     console.log('--->>> 当前 selectedKey', selectedKey);
   };
 
   useEffect(() => {
-    setDataSource(dataModel);
+    store.getTagList();
   }, []);
 
-  return { dataSource, onChange };
+  return { onChange };
 };
 
 export default (props) => {
-  const state = useStateHook(props);
-  return (
+  const store = useStore();
+  const state = useStateHook(props, store);
+  return useObserver(() =>(
     <div className={scss['menu-wrapper']}>
       <TagMenu 
         onChange={state.onChange}
-        dataSource={state.dataSource}
+        dataSource={store.tagList.toJS()}
       />
     </div>
-  );
+  ));
 };

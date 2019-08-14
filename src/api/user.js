@@ -2,7 +2,7 @@ import axios from '@utils/request';
 import { rsa } from '@utils/encryption';
 
 export const login = ({ account, password }) => axios({
-  url: '/specialUrl',
+  url: GLOBAL_SERVICE.GRAPHQL_URL,
   method: 'post',
   data: {
     variables: { account, password: password ? rsa(password) : void 0 },
@@ -15,10 +15,8 @@ export const login = ({ account, password }) => axios({
       }
     }`,
   }
-})
-.then(res => {
+}).then(res => {
   return res.data.data.login;
-})
-.catch(err => {
+}).catch(err => {
 
 });

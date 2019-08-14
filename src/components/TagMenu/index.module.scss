@@ -1,61 +1,64 @@
-:global {
-  $menu-bg: transparent;
-  $menu-color: rgba($color: #fff, $alpha: 0.3);
-  $menu-color-active: rgba($color: #fff, $alpha: 0.6);
 
-  %default {
-    color: $menu-color;
-    background: $menu-bg;
-  }
+.tag-menu {
+  padding: { top: 10px; };
+  :global{
+    $menu-bg: transparent;
+    $menu-color: rgba($color: #fff, $alpha: 0.3);
+    $menu-color-active: rgba($color: #fff, $alpha: 0.6);
+  
+    %default {
+      color: $menu-color;
+      background: $menu-bg;
+    }
 
-  %selected {
-    color: $menu-color-active;
-    background: $menu-bg;
-  }
+    %selected {
+      color: $menu-color-active;
+      background: $menu-bg;
+    }
 
-  // 整体菜单样式覆盖
-  .ant-menu-dark {
-    border: none;
-    @extend %default;
-
-    // 子菜单样式覆盖
-    .ant-menu-inline.ant-menu-sub {
-      box-shadow: none;
+    .ant-menu-dark {
+      border: none;
       @extend %default;
-    }
 
-    // 标题样式覆盖 - 正常状态
-    .ant-menu-submenu-title {
-      .ant-menu-submenu-arrow {
-        opacity: 0.1;
+      // 子菜单样式覆盖
+      .ant-menu-inline.ant-menu-sub {
+        box-shadow: none;
+        @extend %default;
       }
-    }
-
-    // 标题样式覆盖 - 鼠标停放状态
-    .ant-menu-submenu-active > .ant-menu-submenu-title,
-    .ant-menu-submenu-selected > .ant-menu-submenu-title,
-    .ant-menu-submenu-open > .ant-menu-submenu-title {
-      @extend %selected;
-      .ant-menu-submenu-arrow {
-        opacity: 0.6 !important;
+  
+      // 标题样式覆盖 - 正常状态
+      .ant-menu-submenu-title {
+        .ant-menu-submenu-arrow {
+          opacity: 0.1;
+        }
       }
-    }
-
-    // 根菜单样式覆盖 - 正常状态
-    .ant-menu-item {
-      @extend %default;
-      border-left: 2px solid transparent;
-    }
-
-    // 根菜单样式覆盖 - 停放状态
-    .ant-menu-item.ant-menu-item-active,
-    .ant-menu-item.ant-menu-item-selected {
-      @extend %selected;
-    }
-
-    // 根菜单样式覆盖 - 选中状态
-    .ant-menu-item.ant-menu-item-selected {
-      border-left: 2px solid $menu-color-active;
+  
+      // 标题样式覆盖 - 鼠标停放状态
+      .ant-menu-submenu-active > .ant-menu-submenu-title,
+      .ant-menu-submenu-selected > .ant-menu-submenu-title,
+      .ant-menu-submenu-open > .ant-menu-submenu-title {
+        @extend %selected;
+        .ant-menu-submenu-arrow {
+          opacity: 0.6 !important;
+        }
+      }
+  
+      // 根菜单样式覆盖 - 正常状态
+      .ant-menu-item {
+        @extend %default;
+        border-left: 2px solid transparent;
+      }
+  
+      // 根菜单样式覆盖 - 停放状态
+      .ant-menu-item.ant-menu-item-active,
+      .ant-menu-item.ant-menu-item-selected {
+        @extend %selected;
+      }
+  
+      // 根菜单样式覆盖 - 选中状态
+      .ant-menu-item.ant-menu-item-selected {
+        border-left: 2px solid $menu-color-active;
+      }
     }
   }
 }

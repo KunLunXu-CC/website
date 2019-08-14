@@ -1,16 +1,35 @@
 
 import _ from 'lodash';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
+import { Icon } from 'qyrc';
 import React, { useState, useEffect } from 'react';
 
-import { getTreeData } from '@utils';
 import scss from './index.module.scss';
+
+// 扁平数据转树形形结构数据
+const getTreeData = (data = []) => {
+  const recursion = (parents, childrens) => {
+    parents.forEach(p => {
+      p.children = childrens.filter(c => c.parent.id === p.id);
+      recursion(p.children, childrens);
+    });
+  };
+
+  let childrens = [];
+  let parents = [];
+  data.forEach(v => {
+    v.parent.id ? (childrens.push(v)) : (parents.push(v));
+  });
+  recursion(parents, childrens);
+  return parents;
+};
 
 // 1. 标题
 const Title = ({ data }) => (
   <span>
-    <Icon type={data.icon} />
-    <span>{data.title}</span>
+    <Icon type={data.icon} /> 
+    &nbsp;&nbsp;
+    <span>{data.name}</span>
   </span>
 );
 
@@ -31,7 +50,8 @@ const useStateHook = (props) => {
   const onClick = ({ key }) => setSelectedKey(key);
 
   useEffect(() => {
-    setTreeData(getTreeData(props.dataSource));
+    const base = [{ id: 'all', name: '全部', icon: 'icon-all' }];
+    setTreeData([...base, ...getTreeData(props.dataSource)]);
   }, [props.dataSource]);
 
   useEffect(() => {
@@ -44,14 +64,16 @@ const useStateHook = (props) => {
 export default (props) => {
   const state = useStateHook(props);
   return (
-    <Menu
-      theme="dark"
-      mode="inline"
-      onClick={state.onClick}
-      defaultSelectedKeys={['all']}
-      style={{ width: '100%', minHeight: '100%' }}
-    >
-      {renderMenu(state.treeData)}
-    </Menu>
+    <div className={scss['tag-menu']}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        onClick={state.onClick}
+        defaultSelectedKeys={['all']}
+        style={{ width: '100%', minHeight: '100%' }}
+      >
+        {renderMenu(state.treeData)}
+      </Menu>
+    </div>
   );
 };

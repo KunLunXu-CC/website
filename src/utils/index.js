@@ -49,27 +49,3 @@ export const debounce = (fn, wait) => {
     timeout = setTimeout(fn.bind(null, escape), wait);
   }
 }
-
-/**
- * 扁平数据转树形形结构数据
- * @param {Object[]} data         扁平数据源
- * @param {String} parentField    父级和子级关联的字段
- * @param {String} childField     子级和父级关联的字段
- */
-export const getTreeData = (data = [],  parentField = 'id', childField = 'parent') => {
-  const recursion = (parents, childrens) => {
-    parents.forEach(p => {
-      p.children = childrens.filter(c => c[childField] === p[parentField]);
-      recursion(p.children, childrens);
-    });
-  };
-
-  let childrens = [];
-  let parents = [];
-  data.forEach(v => {
-    v.parent ? (childrens.push(v)) : (parents.push(v));
-  });
-
-  recursion(parents, childrens);
-  return parents;
-};
