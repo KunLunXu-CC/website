@@ -20,7 +20,7 @@ export default (props) => {
           {props.side}
         </div>
         <VariableBlock
-          operationList={['right']} 
+          operationList={['right']}
           style={{ height: '100%', transform: `translate(0px, 0px)` }}
           className={scss['chat-body-menu']}
         >
@@ -28,16 +28,18 @@ export default (props) => {
         </VariableBlock>
         <div className={scss['chat-body-content']}>
           <div className={scss['chat-body-content-list']}>
-            {props.list}
+            <div className={scss['container']}>{props.list}</div>
           </div>
           <VariableBlock
-            operationList={['top']} 
+            operationList={['top']}
             defaultParams={{ height: 100 }}
             constraintSize={{ height: 100 }}
             className={scss['chat-body-content-edit']}
             style={{ width: '100%', transform: `translate(0px, 0px)` }}
           >
-            {props.edit}
+            <div className={scss['container']}>
+              {props.edit}
+            </div>
           </VariableBlock>
         </div>
       </div>

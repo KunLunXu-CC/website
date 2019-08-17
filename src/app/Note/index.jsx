@@ -4,18 +4,18 @@ import { ChatLayout } from '@components';
 
 import scss from './index.module.scss';
 import StoreProvider from './store';
-import EditBox from './EditBox';
-import ListBox from './ListBox';
+import EditBlock from './EditBlock';
+import ListBlock from './ListBlock';
 import Header from './Header';
 import Menu from './Menu';
 
 const Note = (props) => {
   return (
     <StoreProvider>
-      <ChatLayout 
+      <ChatLayout
         header={<Header/>}
-        list={<ListBox />}
-        edit={<EditBox />}
+        list={<ListBlock />}
+        edit={<EditBlock />}
         menu={<Menu />}
       />
     </StoreProvider>

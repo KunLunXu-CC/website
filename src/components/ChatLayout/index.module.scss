@@ -17,10 +17,20 @@
 .chat-body-content {
   display: flex;
   flex-direction: column;
-  &-list {flex: 1;}
-  &-edit {flex: none;}
+  &-list {flex: 1; position: relative;}
+  &-edit {flex: none; position: relative;}
 }
+
 // 非 flex 布局样式
 .chat {
   height: 100%;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
 }

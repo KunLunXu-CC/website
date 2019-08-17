@@ -57,29 +57,38 @@ module.exports = {
         exclude: [ path.resolve(__dirname, 'node_modules') ],
         // include: [ path.resolve(__dirname, 'src'), path.resolve(__dirname, 'public') ],
         use: 'babel-loader'
-      }, {
+      },
+      {
         test: cssRegex,
         exclude: cssModuleRegex,
         sideEffects: true,
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
-          use: [ 
-            { loader: 'css-loader', options: { importLoaders: 1 } }, 
-            'postcss-loader', 
+          use: [
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader',
             'sass-loader'
           ]
         })
-      }, {
+      },
+      {
         test: cssModuleRegex,
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
-          use: [ 
-            { loader: 'css-loader', options: { importLoaders: 1, modules: true } }, 
-            'postcss-loader', 
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]__[hash:base64]'
+              }
+            },
+            'postcss-loader',
             'sass-loader'
           ]
         })
-      }, {
+      },
+      {
         test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
         use: [{
           loader: 'url-loader',
@@ -87,13 +96,17 @@ module.exports = {
             limit: 10000
           }
         }]
-      }
+      },
+      {
+        test: /\.(text|md)$/,
+        use: 'raw-loader',
+      },
     ]
   },
 
   plugins: [
     definePlugin,
-    htmlWebpackPlugin, 
+    htmlWebpackPlugin,
     hotModuleReplacementPlugin,
     extractTextWebpackPlugin,
     copyWebpackPlugin,
