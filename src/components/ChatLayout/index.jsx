@@ -17,14 +17,18 @@ export default (props) => {
       </div>
       <div className={scss['chat-body']}>
         <div className={scss['chat-body-side']}>
-          {props.side}
+          <div className={scss['container']}>
+            {props.side}
+          </div>
         </div>
         <VariableBlock
           operationList={['right']}
           style={{ height: '100%', transform: `translate(0px, 0px)` }}
           className={scss['chat-body-menu']}
         >
-          {props.menu}
+          <div className={scss['container']}>
+            {props.menu}
+          </div>
         </VariableBlock>
         <div className={scss['chat-body-content']}>
           <div className={scss['chat-body-content-list']}>

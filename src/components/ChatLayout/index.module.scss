@@ -9,8 +9,8 @@
 
 .chat-body {
   display: flex;
-  &-side {flex: none;}
-  &-menu {flex: none;}
+  &-side {flex: none; position: relative;}
+  &-menu {flex: none; position: relative;}
   &-content {flex: 1;}
 }
 
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   &-list {flex: 1; position: relative;}
-  &-edit {flex: none; position: relative;}
+  &-edit {flex: none; position: relative; }
 }
 
 // 非 flex 布局样式
@@ -32,5 +32,5 @@
   left: 0;
   right: 0;
   bottom: 0;
-  overflow: auto;
+  overflow: hidden;
 }

@@ -3,6 +3,7 @@ import { Menu, Icon } from 'antd';
 import { TagMenu } from '@components';
 import { useObserver } from 'mobx-react-lite';
 import React, { useState, useEffect } from 'react';
+import { Scroll } from 'qyrc';
 
 import scss from './index.module.scss';
 import { useStore } from '../store'
@@ -95,11 +96,11 @@ export default (props) => {
   const store = useStore();
   const state = useStateHook(props, store);
   return useObserver(() =>(
-    <div className={scss['menu-wrapper']}>
+    <Scroll className={scss['menu-wrapper']}>
       <TagMenu 
         onChange={state.onChange}
         dataSource={store.tagList.toJS()}
       />
-    </div>
+    </Scroll>
   ));
 };
