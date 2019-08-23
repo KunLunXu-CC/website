@@ -1,22 +1,23 @@
 import React, { useRef } from 'react';
-
-import { ChatLayout } from '@components';
+import { NoteLayout } from '@components';
 
 import scss from './index.module.scss';
 import StoreProvider from './store';
-import EditBlock from './EditBlock';
-import ListBlock from './ListBlock';
+import Console from './Console';
 import Header from './Header';
-import Menu from './Menu';
+import Work from './Work';
+import List from './List';
+import Side from './Side';
 
 const Note = (props) => {
   return (
     <StoreProvider>
-      <ChatLayout
+      <NoteLayout
+        list={<List />}
+        work={<Work />}
+        side= {<Side />}
         header={<Header/>}
-        list={<ListBlock />}
-        edit={<EditBlock />}
-        menu={<Menu />}
+        console={<Console />}
       />
     </StoreProvider>
   );

@@ -1,12 +1,10 @@
 import React from 'react';
-import { Scroll } from 'qyrc';
-
 import scss from './index.module.scss';
 
 export default () => {
   return (
-    <Scroll className={scss['edit-box']}>
-
-    </Scroll>
+    <div className={scss['side']}>
+      11111111111
+    </div>
   );
 };
