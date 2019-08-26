@@ -5,25 +5,38 @@ import { observable, action, autorun, toJS } from 'mobx';
 
 import { getTagList } from '@api';
 
+const BASE_TAG = { 
+  id: 'all', 
+  name: '全部', 
+  icon: 'icon-all', 
+}
+
 class Store {
   constructor(global){
     this.global = global;
     autorun(this.print);
   }
-
+  @observable tag = BASE_TAG.id;
   @observable tagList = [];
 
+
   @action
-  getTagList(){
+  setTag = (value) => {
+    this.tag = value;
+  }
+
+  @action
+  getTagList = () => {
     getTagList().then(data => {
       const { list } = data;
-      this.tagList = list;
+      this.tagList = [BASE_TAG, ...list];
     });
   };
 
   print = () => {
     console.group('%c[store]Note', 'color: green;');
     console.log('tagList: ', toJS(this.tagList));
+    console.log('tag: ', toJS(this.tag));
     console.groupEnd();
   }
 };

@@ -1,6 +1,5 @@
 @charset "utf-8";
 
-// flex 布局控制
 .note {
   height: 100%;
   display: flex;
@@ -26,7 +25,7 @@
     flex: none; 
     width: 80px; 
     position: relative;
-    background: #1C2022;
+    background: #292929;
   }
   &-list {
     flex: none; 
