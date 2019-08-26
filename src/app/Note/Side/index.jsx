@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu } from 'antd';
 import { Scroll, Icon } from 'qyrc';
 import { TagMenu } from '@components';
@@ -15,6 +15,10 @@ const useStateHook = (props, store) => {
   const onClick = ({ key }) => {
     store.setTag(key);
   }
+
+  useEffect(() => {
+    store.getTags();
+  }, []);
 
   return { onClick };
 }

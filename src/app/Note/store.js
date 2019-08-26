@@ -3,7 +3,7 @@ const StoreContext = React.createContext(null);
 import { useStore as useGlobalStore } from '@store';
 import { observable, action, autorun, toJS } from 'mobx';
 
-import { getTagList } from '@api';
+import { getTags } from '@api';
 
 const BASE_TAG = { 
   id: 'all', 
@@ -26,8 +26,8 @@ class Store {
   }
 
   @action
-  getTagList = () => {
-    getTagList().then(data => {
+  getTags = () => {
+    getTags().then(data => {
       const { list } = data;
       this.tagList = [BASE_TAG, ...list];
     });

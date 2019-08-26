@@ -12,10 +12,6 @@ const useStateHook = (props, store) => {
     console.log('--->>> 当前 selectedKey', selectedKey);
   };
 
-  useEffect(() => {
-    store.getTagList();
-  }, []);
-
   return { onChange };
 };
 

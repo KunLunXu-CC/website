@@ -1,22 +1,22 @@
 import axios from '@utils/request';
 
-export const getTagList = ({ page, params } = {}) => axios({
+export const getTags = ({ pagination, search } = {}) => axios({
   url: GLOBAL_SERVICE.GRAPHQL_URL,
   method: 'post',
   data: {
-    variables: { params, page },
+    variables: { search, pagination },
     query: `
-      query($params: TagParams, $page: Page){
-        tagList( params: $params, page: $page, orderBy: { creationTime: -1 } ){
+      query($search: TagSearch, $pagination: Pagination){
+        tags( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
           list{ name, icon id parent { id name } updateTime status color}
-          stats{ total }   
+          pagination 
           rescode
           message
         }
       }`,
   }
 }).then(res => {
-  return res.data.data.tagList;
+  return res.data.data.tags;
 }).catch(err => {
 
 });

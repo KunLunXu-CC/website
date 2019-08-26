@@ -63,12 +63,14 @@ use({
 use({ 
   request: [
     (config) => {
-      config.headers.Authorization = localStorage.getItem('authorization');
+      const authorization = localStorage.getItem('authorization');
+      authorization && (config.headers.Authorization = authorization);
       return config;
     }
   ],
   response: [
     (response)=> {
+      response.headers.authorization && 
       localStorage.setItem('authorization', response.headers.authorization);
       return response; 
     }
