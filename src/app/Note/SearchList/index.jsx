@@ -11,11 +11,6 @@ const useStateHook = (props, store) => {
   const onClick = ({ key }) => {
     store.setNote(key);
   };
-
-  useEffect(() => {
-    store.getNotes();
-  }, []);
-
   return { onClick };
 };
 

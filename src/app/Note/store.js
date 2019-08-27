@@ -19,11 +19,20 @@ class Store {
     _.forIn(this.reaction, v => reaction(v.data, v.effect));
   }
 
+  @observable search = {
+    name: '',
+  };
+
   @observable tag = BASE_TAG.id;
   @observable tagList = [];
 
   @observable note = null;
   @observable noteList = [];
+
+  @action
+  setSearch = (value) => {
+    this.search = { ...this.search, ...value };
+  }
 
   @action
   setTag = (value) => {
@@ -39,14 +48,6 @@ class Store {
   };
 
   @action
-  getNotes = () => {
-    getNotes().then(data => {
-      const { list } = data;
-      this.noteList = [...list];
-    });
-  };
-
-  @action
   setNote = (id) => {
     this.note = this.noteList.find(v => v.id === id);
   }
@@ -57,11 +58,19 @@ class Store {
       console.group('%c[store]Note', 'color: green;');
       console.log('tagList: ', toJS(this.tagList));
       console.log('tag: ', toJS(this.tag));
-
       console.log('noteList: ', toJS(this.noteList));
       console.log('note: ', toJS(this.note));
       console.groupEnd();
-    }
+    },
+    getNotes: () => {
+      const params = {
+        search: { ...this.search }
+      };
+      getNotes(params).then(data => {
+        const { list } = data;
+        this.noteList = [...list];
+      })
+    },
   };
 
   // reaction 函数列表
@@ -69,7 +78,7 @@ class Store {
     setDefaultNote: {
       data: () => (this.noteList[0] || null),
       effect: v => (this.note = v),
-    }
+    },
   };
 
 };
