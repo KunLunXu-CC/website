@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React from 'react';
 const StoreContext = React.createContext(null);
 import { useStore as useGlobalStore } from '@store';
-import { observable, action, autorun, toJS } from 'mobx';
+import { observable, action, autorun, reaction, toJS } from 'mobx';
 
-import { getTags } from '@api';
+import { getTags, getNotes } from '@api';
 
 const BASE_TAG = { 
   id: 'all', 
@@ -14,11 +15,15 @@ const BASE_TAG = {
 class Store {
   constructor(global){
     this.global = global;
-    autorun(this.print);
+    _.forIn(this.autorun, v => autorun(v));
+    _.forIn(this.reaction, v => reaction(v.data, v.effect));
   }
+
   @observable tag = BASE_TAG.id;
   @observable tagList = [];
 
+  @observable note = null;
+  @observable noteList = [];
 
   @action
   setTag = (value) => {
@@ -33,12 +38,40 @@ class Store {
     });
   };
 
-  print = () => {
-    console.group('%c[store]Note', 'color: green;');
-    console.log('tagList: ', toJS(this.tagList));
-    console.log('tag: ', toJS(this.tag));
-    console.groupEnd();
+  @action
+  getNotes = () => {
+    getNotes().then(data => {
+      const { list } = data;
+      this.noteList = [...list];
+    });
+  };
+
+  @action
+  setNote = (id) => {
+    this.note = this.noteList.find(v => v.id === id);
   }
+
+  // 自动运行函数列表
+  autorun = {
+    print: () => {
+      console.group('%c[store]Note', 'color: green;');
+      console.log('tagList: ', toJS(this.tagList));
+      console.log('tag: ', toJS(this.tag));
+
+      console.log('noteList: ', toJS(this.noteList));
+      console.log('note: ', toJS(this.note));
+      console.groupEnd();
+    }
+  };
+
+  // reaction 函数列表
+  reaction = {
+    setDefaultNote: {
+      data: () => (this.noteList[0] || null),
+      effect: v => (this.note = v),
+    }
+  };
+
 };
 
 // 导出 hook 使用 hook 方法

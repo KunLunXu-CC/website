@@ -21,13 +21,13 @@
 .note-body {
   flex: 1;
   display: flex;
-  &-side {
+  &-tag-list {
     flex: none; 
-    width: 80px; 
+    width: 60px; 
     position: relative;
     background: #292929;
   }
-  &-list {
+  &-search-list {
     flex: none; 
     position: relative;  
     background: rgba($color: #1a191a, $alpha: 0.99);
@@ -38,7 +38,7 @@
     flex-direction: column;
     background: #292929;
     border-left: 1px solid #1a1a1a;
-    &-work {
+    &-work-area {
       flex: 1; 
       position: relative;
     }

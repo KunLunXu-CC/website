@@ -1,9 +1,11 @@
-.side {
+.list {
   width: 100%;
   height: 100%;
-  padding: { top: 10px; };
+  padding: { top: 5px; };
   :global{
     $menu-bg: transparent;
+    $menu-bg-active: rgba($color: #fff, $alpha: 0.05);
+
     $menu-color: rgba($color: #fff, $alpha: 0.3);
     $menu-color-active: rgba($color: #fff, $alpha: 0.6);
   
@@ -14,7 +16,7 @@
 
     %selected {
       color: $menu-color-active;
-      background: $menu-bg;
+      background: $menu-bg-active;
     }
 
     // 菜单
@@ -24,10 +26,9 @@
 
       // 根菜单样式覆盖 - 正常状态
       .ant-menu-item {
+        height: 30px;
+        line-height: 30px;
         @extend %default;
-        font-size: 28px;
-        margin-bottom: 20px;
-        border-left: 2px solid transparent;
       }
   
       // 根菜单样式覆盖 - 停放状态
@@ -35,21 +36,17 @@
       .ant-menu-item.ant-menu-item-selected {
         @extend %selected;
       }
-  
-      // 根菜单样式覆盖 - 选中状态
-      .ant-menu-item.ant-menu-item-selected {
-        border-left: 2px solid $menu-color-active;
-      }
-    }
-
-    // 图标
-    .qyrc-icon {
-      opacity: 0.8;
     }
 
     // 滚动条设置
-    .qyrc-sroll-bar-slider {
-      width: 4px;
+    .qyrc-sroll-bar {
+      opacity: 0.5;
+      right: 0;
+      .qyrc-sroll-bar-slider {
+        width: 6px;
+      }
     }
+
   }
 }
+

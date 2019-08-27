@@ -5,17 +5,17 @@ import scss from './index.module.scss';
 import StoreProvider from './store';
 import Console from './Console';
 import Header from './Header';
-import Work from './Work';
-import List from './List';
-import Side from './Side';
+import WorkArea from './WorkArea';
+import SearchList from './SearchList';
+import TagList from './TagList';
 
 const Note = (props) => {
   return (
     <StoreProvider>
       <NoteLayout
-        list={<List />}
-        work={<Work />}
-        side= {<Side />}
+        searchList={<SearchList />}
+        workArea={<WorkArea />}
+        tagList= {<TagList />}
         header={<Header/>}
         console={<Console />}
       />

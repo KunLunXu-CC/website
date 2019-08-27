@@ -8,7 +8,7 @@ import { RESCODE } from '@config/consts';
 export default class Store {
   constructor(){
     this.login({});
-    autorun(this.print);
+    _.forIn(this.autorun, v => autorun(v));    
   }
 
   @observable user = {};
@@ -24,11 +24,14 @@ export default class Store {
     return { res, logined: RESCODE.SUCCESS.VALUE === res.rescode };
   });
 
-  print = () => {
-    console.group('%c[store]user', 'color: green;');
-    console.log('user: ', toJS(this.user));
-    console.log('role: ', toJS(this.role));
-    console.log('auth: ', toJS(this.auth));
-    console.groupEnd();
-  }
+  // 自动运行函数列表
+  autorun = {
+    print: () => {
+      console.group('%c[store]user', 'color: green;');
+      console.log('user: ', toJS(this.user));
+      console.log('role: ', toJS(this.role));
+      console.log('auth: ', toJS(this.auth));
+      console.groupEnd();
+    }
+  };
 }

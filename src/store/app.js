@@ -1,12 +1,12 @@
-import { observable, action, autorun, toJS } from 'mobx';
-import { matchPath } from 'react-router-dom';
-import apps from '@app/index';
 import _ from 'lodash';
+import { matchPath } from 'react-router-dom';
+import { observable, action, autorun, toJS } from 'mobx';
+import apps from '@app/index';
 
 export default class Store {
   constructor(){
-    autorun(this.print);
     this.init();
+    _.forIn(this.autorun, v => autorun(v));      
   }
 
   @observable list = [];
@@ -73,8 +73,15 @@ export default class Store {
   };
 
   print = () => {
-    console.group('%c[store]app', 'color: green;');
-    console.log('list: ', toJS(this.list));
-    console.groupEnd();
+    
   }
+
+  // 自动运行函数列表
+  autorun = {
+    print: () => {
+      console.group('%c[store]app', 'color: green;');
+      console.log('list: ', toJS(this.list));
+      console.groupEnd();
+    }
+  };
 };

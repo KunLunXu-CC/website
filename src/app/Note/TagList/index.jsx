@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
 import { Menu } from 'antd';
 import { Scroll, Icon } from 'qyrc';
 import { TagMenu } from '@components';
+import React, { useEffect } from 'react';
 import { useObserver } from 'mobx-react-lite';
 import scss from './index.module.scss';
 import { useStore } from '../store';
@@ -31,6 +31,7 @@ export default (props) => {
       <Menu
         theme="dark"
         mode="inline"
+        inlineIndent={0}
         onClick={state.onClick}
         defaultSelectedKeys={['all']}
         style={{ width: '100%', minHeight: '100%' }}
@@ -44,3 +45,4 @@ export default (props) => {
     </Scroll>
   ));
 };
+
