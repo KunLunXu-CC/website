@@ -15,7 +15,7 @@
 .note-footer {
   flex: none;
   background: #373738;
-  border-bottom: 1px solid #1a1a1a;
+  border-top: 1px solid #1a1a1a;
 }
 
 .note-body {
@@ -32,21 +32,11 @@
     position: relative;  
     background: rgba($color: #1a191a, $alpha: 0.99);
   }
-  &-content {
+  &-work-area {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    position: relative;
     background: #292929;
     border-left: 1px solid #1a1a1a;
-    &-work-area {
-      flex: 1; 
-      position: relative;
-    }
-    &-console {
-      flex: none; 
-      position: relative; 
-      border-top: 1px solid #404040;
-    }
   }
 }
 

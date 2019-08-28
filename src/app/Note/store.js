@@ -19,9 +19,7 @@ class Store {
     _.forIn(this.reaction, v => reaction(v.data, v.effect));
   }
 
-  @observable search = {
-    name: '',
-  };
+  @observable search = { name: '' };
 
   @observable tag = BASE_TAG.id;
   @observable tagList = [];
@@ -66,6 +64,7 @@ class Store {
       const params = {
         search: { ...this.search }
       };
+      !!this.tag && this.tag !== BASE_TAG.id && (params.search.tags = [this.tag]);
       getNotes(params).then(data => {
         const { list } = data;
         this.noteList = [...list];

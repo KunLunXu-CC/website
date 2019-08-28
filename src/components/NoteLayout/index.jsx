@@ -25,18 +25,8 @@ export default (props) => {
           style={{ height: '100%', transform: `translate(0px, 0px)` }}>
           <div className={scss['container']}>{props.searchList}</div>
         </VariableBlock>
-        <div className={scss['note-body-content']}>
-          <div className={scss['note-body-content-work-area']}>
-            <div className={scss['container']}>{props.workArea}</div>
-          </div>
-          <VariableBlock
-            operationList={['top']}
-            defaultParams={{ height: 100 }}
-            constraintSize={{ height: 100 }}
-            className={scss['note-body-content-console']}
-            style={{ width: '100%', transform: `translate(0px, 0px)` }}>
-            <div className={scss['container']}>{props.console}</div>
-          </VariableBlock>
+        <div className={scss['note-body-work-area']}>
+          <div className={scss['container']}>{props.workArea}</div>
         </div>
       </div>
       <div className={scss['note-footer']}>{props.footer}</div>

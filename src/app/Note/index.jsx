@@ -2,12 +2,12 @@ import React, { useRef } from 'react';
 import { NoteLayout } from '@components';
 
 import scss from './index.module.scss';
-import StoreProvider from './store';
-import Console from './Console';
-import Header from './Header';
-import WorkArea from './WorkArea';
 import SearchList from './SearchList';
+import StoreProvider from './store';
+import WorkArea from './WorkArea';
 import TagList from './TagList';
+import Header from './Header';
+import Footer from './Footer';
 
 const Note = (props) => {
   return (
@@ -17,7 +17,7 @@ const Note = (props) => {
         workArea={<WorkArea />}
         tagList= {<TagList />}
         header={<Header/>}
-        console={<Console />}
+        footer={<Footer />}
       />
     </StoreProvider>
   );
