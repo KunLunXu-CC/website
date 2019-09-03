@@ -1,11 +1,16 @@
 import React from 'react';
+import Layout from './Layout';
+import Body from './Body';
+import Side from './Side';
+import Tags from './Tags';
 
-const Note = (props) => {
+export default (props) => {
   return (
-    <div style={{ background: '#04071b', width: '100%', height: '100%', color: '#fff'  }}>
-      文章
-    </div>
+    <Layout 
+      body={<Body/>}
+      side={<Side/>}
+      tags={<Tags/>}
+    />
   );
 }
 
-export default Note;

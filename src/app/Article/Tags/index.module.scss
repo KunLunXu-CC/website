@@ -1,0 +1,72 @@
+.tags {
+  padding: {
+    top: 50px;
+  }
+
+
+  :global{
+    $menu-bg: transparent;
+    $menu-color: rgba($color: #fff, $alpha: 1);
+    $menu-color-active: rgba($color: #397dff, $alpha: 1);
+    $side-border-size: 3px;
+    %default {
+      // color: $menu-color;
+      background: $menu-bg;
+    }
+
+    %selected {
+      // color: $menu-color-active;
+      background: $menu-bg;
+    }
+
+    // 菜单
+    .ant-menu {
+      border: none;
+      @extend %default;
+
+      // 根菜单样式覆盖 - 正常状态
+      .ant-menu-item {
+        @extend %default;
+        text-align: center;
+        margin: {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 10px;
+        };
+        border-left: $side-border-size solid transparent;
+        border-right: $side-border-size solid transparent;
+      }
+  
+      // 根菜单样式覆盖 - 停放状态
+      .ant-menu-item.ant-menu-item-active,
+      .ant-menu-item.ant-menu-item-selected {
+        @extend %selected;
+      }
+  
+      // 根菜单样式覆盖 - 选中状态
+      .ant-menu-item.ant-menu-item-selected {
+        border-left: $side-border-size solid $menu-color-active;
+      }
+
+      // .ant-menu-inline-collapsed .ant-menu-item {}
+    }
+
+    // 图标
+    .qyrc-icon {
+      font-size: 14px;
+      margin-right: 10px;
+      opacity: 1;
+    }
+
+    // 滚动条设置
+    .qyrc-sroll-bar {
+      opacity: 0.5;
+      right: 0;
+      .qyrc-sroll-bar-slider {
+        width: 2px;
+      }
+    }
+
+  }
+}
