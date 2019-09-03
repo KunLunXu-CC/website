@@ -17,7 +17,11 @@ module.exports.alias = {
 module.exports.globalConsts = {
   // 生产
   production: {
-    GLOBAL_SERVICE: JSON.stringify('http://localhost:4000'),
+    _DEV_: false,
+    GLOBAL_SERVICE: {
+      HOST: JSON.stringify('node:4000'),
+      GRAPHQL_URL: JSON.stringify('/specialUrl'),
+    },
   },
 
   // 开发
