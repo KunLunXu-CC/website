@@ -1,72 +1,79 @@
+
 .tags {
-  padding: {
-    top: 50px;
+  height: 100%;
+  max-width: 120px;
+  overflow: hidden;
+  padding: { top: 50px;}
+
+  display: flex;
+  flex-direction: column;
+
+  &-middle {
+    flex: 1;
+
   }
 
+  &-bottom {
+    flex: none;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    padding: {
+      top: 20px;
+      bottom: 20px;
+    };
+  }
+}
 
-  :global{
-    $menu-bg: transparent;
-    $menu-color: rgba($color: #fff, $alpha: 1);
-    $menu-color-active: rgba($color: #397dff, $alpha: 1);
-    $side-border-size: 3px;
-    %default {
-      // color: $menu-color;
-      background: $menu-bg;
+:global {
+  .qyrc-modal-tool.article-modal-tool {
+    .qyrc-modal-tool-item {
+      font-size: 14px;
     }
+  }
+}
 
-    %selected {
-      // color: $menu-color-active;
-      background: $menu-bg;
-    }
+:global{
+  $menu-bg: transparent;
+  $menu-color: rgba($color: #fff, $alpha: 1);
+  $menu-color-active: rgba($color: #397dff, $alpha: 1);
+  %default {
+    background: $menu-bg;
+  }
 
-    // 菜单
-    .ant-menu {
-      border: none;
+  %selected {
+    background: $menu-bg;
+  }
+
+  // 菜单
+  .ant-menu {
+    border: none;
+    @extend %default;
+
+    // 根菜单样式覆盖 - 正常状态
+    .ant-menu-item {
       @extend %default;
 
-      // 根菜单样式覆盖 - 正常状态
-      .ant-menu-item {
-        @extend %default;
-        text-align: center;
-        margin: {
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 10px;
-        };
-        border-left: $side-border-size solid transparent;
-        border-right: $side-border-size solid transparent;
-      }
-  
-      // 根菜单样式覆盖 - 停放状态
-      .ant-menu-item.ant-menu-item-active,
-      .ant-menu-item.ant-menu-item-selected {
-        @extend %selected;
-      }
-  
-      // 根菜单样式覆盖 - 选中状态
-      .ant-menu-item.ant-menu-item-selected {
-        border-left: $side-border-size solid $menu-color-active;
-      }
-
-      // .ant-menu-inline-collapsed .ant-menu-item {}
-    }
-
-    // 图标
-    .qyrc-icon {
-      font-size: 14px;
-      margin-right: 10px;
-      opacity: 1;
-    }
-
-    // 滚动条设置
-    .qyrc-sroll-bar {
-      opacity: 0.5;
-      right: 0;
-      .qyrc-sroll-bar-slider {
-        width: 2px;
+      &::after {
+        right: initial;
+        left: 0;
       }
     }
 
+    // 根菜单样式覆盖 - 停放状态
+    .ant-menu-item.ant-menu-item-active,
+    .ant-menu-item.ant-menu-item-selected {
+      @extend %selected;
+    }
   }
+
+  // 滚动条设置
+  .qyrc-sroll-bar {
+    opacity: 0.5;
+    right: 0;
+    .qyrc-sroll-bar-slider {
+      width: 2px;
+    }
+  }
+
 }
