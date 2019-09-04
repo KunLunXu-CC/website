@@ -9,7 +9,7 @@ const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 /* ================== 插件 ================= */
 
 // 全局常量定义
-const definePlugin = new DefinePlugin(config.globalConsts.development)
+const definePlugin = new DefinePlugin(config.globalConsts.production)
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({

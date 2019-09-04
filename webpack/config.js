@@ -19,7 +19,7 @@ module.exports.globalConsts = {
   production: {
     _DEV_: false,
     GLOBAL_SERVICE: {
-      HOST: JSON.stringify('node:4000'),
+      HOST: JSON.stringify('http://localhost:4000'),
       GRAPHQL_URL: JSON.stringify('/specialUrl'),
     },
   },
