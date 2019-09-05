@@ -1,16 +1,18 @@
 import React from 'react';
-import Layout from './Layout';
+import StoreProvider from './store';
+import scss from './index.module.scss';
 import Body from './Body';
 import Side from './Side';
 import Tags from './Tags';
 
 export default (props) => {
   return (
-    <Layout 
-      body={<Body/>}
-      side={<Side/>}
-      tags={<Tags/>}
-    />
+    <StoreProvider>
+      <div className={scss['layout']}>
+        <div className={scss['layout-tags']}><Tags/></div>
+        <div className={scss['layout-body']}><Body/></div>
+        <div className={scss['layout-side']}><Side/></div>
+      </div>
+    </StoreProvider>
   );
 }
-

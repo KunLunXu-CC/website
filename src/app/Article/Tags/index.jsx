@@ -1,38 +1,44 @@
-import React, { useState } from 'react';
-import { Icon, Scroll } from 'qyrc';
+import React, { 
+  useState,
+  useEffect, 
+} from 'react';
 import { Menu } from 'antd';
+import { Icon, Scroll } from 'qyrc';
+import { useObserver } from 'mobx-react-lite';
+
+import { useStore } from '../store';
 import scss from './index.module.scss';
 
-const useStateHook = () => {
-  const [collapsed, setCollapsed] = useState(false);
+// 获取所有根级节点
+const getRootChildren = (data = []) => (data.filter(
+  item => (!data.find(v => v.parent === item.id)
+)));
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  }
-
-  return { toggleCollapsed, collapsed };
+const useStateHook = (props, store) => {
+  useEffect(() => {
+    store.getTags();
+  }, []);
+  return {};
 }
 
 export default (props) => {
-  const state = useStateHook(props);
-
-  return (
+  const store = useStore();
+  const state = useStateHook(props, store);
+  return useObserver(() => (
     <div className={scss['tags']}>
       <Scroll className={scss['tags-middle']}>
         <Menu
           mode="inline"
-          inlineCollapsed={state.collapsed}>
-          {new Array(20).fill(0).map((v, index) => (
-            <Menu.Item key={`${index}`}>
-              <Icon type="icon-iconzhankai" className="anticon"/>
-              <span>Option 1111111111111111111111111111111</span>
+          defaultSelectedKeys={['all']}
+          inlineCollapsed={store.collapsed}>
+          {getRootChildren(store.tagList).map( v => (
+            <Menu.Item key={v.id}>
+              <Icon type={v.icon}  className="anticon"/>
+              <span>{v.name}</span>
             </Menu.Item>
           ))}
         </Menu>
       </Scroll>
-      <div className={scss['tags-bottom']} onClick={state.toggleCollapsed}>
-        <Icon className="anticon" type="icon-iconzhankai" />
-      </div>
     </div>
-  );
+  ));
 }
