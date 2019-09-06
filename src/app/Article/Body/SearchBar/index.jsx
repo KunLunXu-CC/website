@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon } from 'qyrc';
 import { Input } from 'antd';
+import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
@@ -12,11 +13,14 @@ const useStateHook = () => {
 export default () => {
   const store = useStore();
 
-  return (
+  return useObserver(() => (
     <div className={scss['search-bar']}>
       <div className={scss['search-bar-prefix']}>
-        <Icon type="icon-fanhui" onClick={store.toggleCollapsed}/>
-        <Icon type="icon-fanhui"/>
+        <Icon 
+          type={store.collapsed ? "icon-zhankai" :"icon-shousuo1" } 
+          onClick={store.toggleCollapsed}
+        />
+        {/* <Icon type="icon-fanhui"/> */}
       </div>
       <div className={scss['search-bar-input']}>
         <Input
@@ -29,5 +33,5 @@ export default () => {
       <div className={scss['search-bar-suffix']}>
       </div>
     </div>
-  );
+  ));
 }
