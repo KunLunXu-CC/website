@@ -19,13 +19,13 @@ module.exports.globalConsts = {
   production: {
     _DEV_: false,
     PUBLICKEY: JSON.stringify(`-----BEGIN PUBLIC KEY-----
-    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoWATfIA97hbj8rbtZBPo
-    T+gR7iK5IV1weysfOSJcE1CoqJt9bePHkQeBLj1cWbM9m5wvkB2WQN3YCKDHzqVd
-    9pQ6AHOkx7cCxMrjBm8QEV7ACU+NN/2MBRmOHiuRq+PdDfV+V6b/RYCn8hMmVkTU
-    SGGyYkSou8bigBkCwv56x7I0AkdSkCQ1oYgWqfbW9Ms6QTIxmeCO2sI4mr/ABYDi
-    oVHY0hIBM9nR8Dcb4u/faXRh2nwhBgpSm09CXaKzFv2WmYxWgul3i6zlzAhziO6s
-    ogueSeM9qOIZhWn2uAd8pHsK3KHUA91EPphQvR+ReFJV6J1t5a7Cy5+I9sz62jIz
-    JwIDAQAB
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtYoDPmfZtEUFErIkiuAl
+    YgCZ5bsGcgTFCaolkyhuz75xRLte3y+7Bm6aIB1hPKA2+eFtBC515KVrgcJyYUVM
+    GC/YUYizqAUjNi8ir09qnIIgv6XQ4gjVrXGwh1djlki9JzZP0Leh1Ayuqm5vD0LJ
+    YraG5xmUptNmRI8oDmZBtgvkIsrHjCg/gTobgvatYjONOsOvE+53NcKmeoE9UZvd
+    ohY3iFtXOUbfgAj7DETuOzL6XEzn6rVEE8tzIvqwtma+to+HzYSmZiDhpZ5MPURr
+    40bsYEpIsIcuZa+K+LId8GgyyKw3kNc80JBqOmXgzs8QhmgLh6UqB6FWSZP4kr0G
+    JQIDAQAB
     -----END PUBLIC KEY-----`),
     GLOBAL_SERVICE: {
       HOST: JSON.stringify('http://www.qianyin925.com:4000'),
