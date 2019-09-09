@@ -29,7 +29,7 @@ module.exports.globalConsts = {
     -----END PUBLIC KEY-----`),
     GLOBAL_SERVICE: {
       HOST: JSON.stringify('http://www.qianyin925.com:4000'),
-      GRAPHQL_URL: JSON.stringify('/specialUrl'),
+      GRAPHQL_URL: JSON.stringify('/graphql'),
     },
   },
 
@@ -47,7 +47,7 @@ module.exports.globalConsts = {
     -----END PUBLIC KEY-----`),
     GLOBAL_SERVICE: {
       HOST: JSON.stringify('http://localhost:4000'),
-      GRAPHQL_URL: JSON.stringify('/specialUrl'),
+      GRAPHQL_URL: JSON.stringify('/graphql'),
     },
   },
 }
