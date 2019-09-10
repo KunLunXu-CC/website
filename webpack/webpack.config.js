@@ -5,7 +5,6 @@ const DefinePlugin = webpack.DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 /* ================== 插件 ================= */
 
 // 全局常量定义
@@ -15,37 +14,27 @@ const definePlugin = new DefinePlugin(config.globalConsts.production)
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../public/index.html')
 });
-// 热模块替换
-const hotModuleReplacementPlugin = new HotModuleReplacementPlugin();
+
 // css 分离
-const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style.css');
+const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style/[hash].style.css');
+
 // 直接拷贝文件进行打包
 const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
 );
-
-/**
- * 入口
- */
-const entry = path.resolve(__dirname, '../src/index.js');
-
-/**
- * 输出
- */
-const output = {
-  // 记得设置否则 history 模式下二级路由 xxx/xxx 可能会报错
-  publicPath: '/',
-  path: path.resolve(__dirname, '../build'),
-  filename: 'bundle.js',
-};
 
 // css 匹配规则
 const cssRegex = /\.(css|scss)$/;
 const cssModuleRegex = /\.module\.(css|scss)$/;
 
 module.exports = {
-  entry,
-  output,
+  entry: path.resolve(__dirname, '../src/index.js'),
+  output: {
+    // 记得设置否则 history 模式下二级路由 xxx/xxx 可能会报错
+    publicPath: '/',
+    path: path.resolve(__dirname, '../build'),
+    filename: 'js/[hash].bundle.js',
+  },
   mode: 'production',
   module: {
     // 用于配置哪些模块文件的内容不需要进行解析
@@ -54,8 +43,7 @@ module.exports = {
     rules: [
       {
         test: /\.(mjs|js|jsx)$/,
-        exclude: [ path.resolve(__dirname, 'node_modules') ],
-        // include: [ path.resolve(__dirname, 'src'), path.resolve(__dirname, 'public') ],
+        exclude: /node_modules/,
         use: 'babel-loader'
       },
       {
@@ -107,7 +95,6 @@ module.exports = {
   plugins: [
     definePlugin,
     htmlWebpackPlugin,
-    hotModuleReplacementPlugin,
     extractTextWebpackPlugin,
     copyWebpackPlugin,
   ],
@@ -122,6 +109,5 @@ module.exports = {
 
   devServer: {
     historyApiFallback: true,
-    hot: true
   }
 }
