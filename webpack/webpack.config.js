@@ -23,23 +23,28 @@ const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
 );
 
-// css 匹配规则
 const cssRegex = /\.(css|scss)$/;
 const cssModuleRegex = /\.module\.(css|scss)$/;
 
 module.exports = {
+  mode: 'production',
   entry: path.resolve(__dirname, '../src/index.js'),
   output: {
-    // 记得设置否则 history 模式下二级路由 xxx/xxx 可能会报错
     publicPath: '/',
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[hash].bundle.js',
   },
-  mode: 'production',
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: "all",
+  //     minSize: 20000,
+  //     minChunks: 1,
+  //     maxAsyncRequests: 5,
+  //     maxInitialRequests: 3,
+  //     name: true
+  //   }
+  // },
   module: {
-    // 用于配置哪些模块文件的内容不需要进行解析
-    // noParse: /jquery|lodash/,
-    // 规则
     rules: [
       {
         test: /\.(mjs|js|jsx)$/,
@@ -81,7 +86,8 @@ module.exports = {
         use: [{
           loader: 'url-loader',
           options: {
-            limit: 10000
+            limit: 10000,
+            name: 'assets/[hash].[ext]'
           }
         }]
       },
@@ -99,11 +105,8 @@ module.exports = {
     copyWebpackPlugin,
   ],
 
-  // 解析模块
   resolve: {
-    // 自动解析确定的扩展
     extensions: ['.mjs', '.js', '.jsx'],
-    // 自定义路径别名 来确保模块引入变得更简单(其实就在解析路径时如果存在对应 key 使用相应的值进行替换)
     alias: config.alias || {},
   },
 
