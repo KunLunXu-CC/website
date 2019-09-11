@@ -32,16 +32,20 @@ module.exports = {
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, '../build'),
-    filename: 'js/[hash].bundle.js',
+    filename: 'js/[name].[hash].bundle.js',
   },
   // optimization: {
   //   splitChunks: {
-  //     chunks: "all",
-  //     minSize: 20000,
-  //     minChunks: 1,
-  //     maxAsyncRequests: 5,
-  //     maxInitialRequests: 3,
-  //     name: true
+  //     cacheGroups: {
+  //       reactBase: {
+  //         name: 'react',
+  //         test: (module) => {
+  //           return /react|redux|prop-types|lodash/.test(module.context);
+  //         },
+  //         chunks: 'initial',
+  //         priority: 10,
+  //       },
+  //     }
   //   }
   // },
   module: {
