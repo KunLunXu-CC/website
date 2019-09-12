@@ -34,20 +34,44 @@ module.exports = {
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[name].[hash].bundle.js',
   },
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       reactBase: {
-  //         name: 'react',
-  //         test: (module) => {
-  //           return /react|redux|prop-types|lodash/.test(module.context);
-  //         },
-  //         chunks: 'initial',
-  //         priority: 10,
-  //       },
-  //     }
-  //   }
-  // },
+  optimization: {
+    splitChunks: {
+      maxInitialRequests: 10,
+      cacheGroups: {
+        // lodash: {
+        //   name: 'lodash',
+        //   test: (module) => {
+        //     return /lodash/.test(module.context);
+        //   },
+        //   priority: 10,
+        //   chunks: 'all',
+        // },
+        // react: {
+        //   name: 'react',
+        //   test: (module) => {
+        //     return /mobx.*|react.*/.test(module.context);
+        //   },
+        //   priority: 8,
+        //   chunks: 'all',
+        // },
+        // axios: {
+        //   name: 'axios',
+        //   test: (module) => {
+        //     return /axios|jsencrypt|moment/.test(module.context);
+        //   },
+        //   priority: 7,
+        //   chunks: 'all',
+        // },
+        // rest: {
+        //   name: 'rest',
+        //   test: (module) => {
+        //     return !(/antd|qyrc/.test(module.context));
+        //   },
+        //   chunks: 'all',
+        // },
+      }
+    }
+  },
   module: {
     rules: [
       {
