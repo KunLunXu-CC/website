@@ -5,10 +5,11 @@ const DefinePlugin = webpack.DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 /* ================== 插件 ================= */
 
 // 全局常量定义
-const definePlugin = new DefinePlugin(config.globalConsts.production)
+const definePlugin = new DefinePlugin(config.globalConsts.production);
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
@@ -22,6 +23,9 @@ const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style/[hash].styl
 const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
 );
+
+// 打包监测
+const bundleAnalyzerPlugin = new WebpackBundleAnalyzer.BundleAnalyzerPlugin();
 
 const cssRegex = /\.(css|scss)$/;
 const cssModuleRegex = /\.module\.(css|scss)$/;
@@ -38,37 +42,26 @@ module.exports = {
     splitChunks: {
       maxInitialRequests: 10,
       cacheGroups: {
-        // lodash: {
-        //   name: 'lodash',
-        //   test: (module) => {
-        //     return /lodash/.test(module.context);
-        //   },
-        //   priority: 10,
-        //   chunks: 'all',
-        // },
-        // react: {
-        //   name: 'react',
-        //   test: (module) => {
-        //     return /mobx.*|react.*/.test(module.context);
-        //   },
-        //   priority: 8,
-        //   chunks: 'all',
-        // },
-        // axios: {
-        //   name: 'axios',
-        //   test: (module) => {
-        //     return /axios|jsencrypt|moment/.test(module.context);
-        //   },
-        //   priority: 7,
-        //   chunks: 'all',
-        // },
-        // rest: {
-        //   name: 'rest',
-        //   test: (module) => {
-        //     return !(/antd|qyrc/.test(module.context));
-        //   },
-        //   chunks: 'all',
-        // },
+        react: {
+          chunks: 'all',
+          name: 'react',
+          test: /[\\/]node_modules[\\/](react.*|mobx.*)[\\/]/,
+        },
+        lodash: {
+          chunks: 'all',
+          name: 'lodash',
+          test: /[\\/]node_modules[\\/]lodash[\\/]/,
+        },
+        moment: {
+          chunks: 'all',
+          name: 'moment',
+          test: /[\\/]node_modules[\\/]moment[\\/]/,
+        },
+        antDesign: {
+          chunks: 'all',
+          name: 'antDesign',
+          test: /[\\/]node_modules[\\/]@ant-design[\\/]/,
+        },
       }
     }
   },
@@ -128,9 +121,10 @@ module.exports = {
 
   plugins: [
     definePlugin,
-    htmlWebpackPlugin,
-    extractTextWebpackPlugin,
     copyWebpackPlugin,
+    htmlWebpackPlugin,
+    bundleAnalyzerPlugin,
+    extractTextWebpackPlugin,
   ],
 
   resolve: {
