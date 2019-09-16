@@ -5,7 +5,7 @@ const DefinePlugin = webpack.DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
-const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
+// const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 /* ================== 插件 ================= */
 
 // 全局常量定义
@@ -25,7 +25,7 @@ const copyWebpackPlugin = new CopyWebpackPlugin(
 );
 
 // 打包监测
-const bundleAnalyzerPlugin = new WebpackBundleAnalyzer.BundleAnalyzerPlugin();
+// const bundleAnalyzerPlugin = new WebpackBundleAnalyzer.BundleAnalyzerPlugin();
 
 const cssRegex = /\.(css|scss)$/;
 const cssModuleRegex = /\.module\.(css|scss)$/;
@@ -123,7 +123,7 @@ module.exports = {
     definePlugin,
     copyWebpackPlugin,
     htmlWebpackPlugin,
-    bundleAnalyzerPlugin,
+    // bundleAnalyzerPlugin,
     extractTextWebpackPlugin,
   ],
 
