@@ -11,4 +11,3 @@ reactDom.render((
     <Router />
   </Store>
 ), document.getElementById('root'));
-
