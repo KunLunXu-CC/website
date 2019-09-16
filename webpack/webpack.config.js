@@ -4,7 +4,7 @@ const config = require('./config');
 const DefinePlugin = webpack.DefinePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 /* ================== 插件 ================= */
 
@@ -16,13 +16,15 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../public/index.html')
 });
 
-// css 分离
-const extractTextWebpackPlugin = new ExtractTextWebpackPlugin('style/[hash].style.css');
-
 // 直接拷贝文件进行打包
 const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
 );
+
+const miniCssExtractPlugin = new MiniCssExtractPlugin({
+  filename:'style/[name].[hash].css',
+  chunkFilename: 'style/[id].[hash].css',
+});
 
 // 打包监测
 // const bundleAnalyzerPlugin = new WebpackBundleAnalyzer.BundleAnalyzerPlugin();
@@ -40,29 +42,8 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      maxInitialRequests: 10,
-      cacheGroups: {
-        react: {
-          chunks: 'all',
-          name: 'react',
-          test: /[\\/]node_modules[\\/](react.*|mobx.*)[\\/]/,
-        },
-        lodash: {
-          chunks: 'all',
-          name: 'lodash',
-          test: /[\\/]node_modules[\\/]lodash[\\/]/,
-        },
-        moment: {
-          chunks: 'all',
-          name: 'moment',
-          test: /[\\/]node_modules[\\/]moment[\\/]/,
-        },
-        antDesign: {
-          chunks: 'all',
-          name: 'antDesign',
-          test: /[\\/]node_modules[\\/]@ant-design[\\/]/,
-        },
-      }
+      maxSize: 30000,
+      chunks: 'all',
     }
   },
   module: {
@@ -76,31 +57,37 @@ module.exports = {
         test: cssRegex,
         exclude: cssModuleRegex,
         sideEffects: true,
-        use: ExtractTextWebpackPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: { importLoaders: 1 } },
-            'postcss-loader',
-            'sass-loader'
-          ]
-        })
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
         test: cssModuleRegex,
-        use: ExtractTextWebpackPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[local]__[hash:base64]'
-              }
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
             },
-            'postcss-loader',
-            'sass-loader'
-          ]
-        })
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]__[hash:base64]'
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
@@ -124,7 +111,7 @@ module.exports = {
     copyWebpackPlugin,
     htmlWebpackPlugin,
     // bundleAnalyzerPlugin,
-    extractTextWebpackPlugin,
+    miniCssExtractPlugin,
   ],
 
   resolve: {
