@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.config.dev.js --open",
-    "build": "rm -rf build && webpack --config ./webpack/webpack.config.js",
+    "build": "rm -rf build/* && webpack --config ./webpack/webpack.config.js",
     "commit": "git-cz",
     "release": "standard-version"
   },
