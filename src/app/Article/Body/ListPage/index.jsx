@@ -7,7 +7,7 @@ export default () => {
   return (
     <div className={scss['search-page']}>
       <Item />
-      测试打印1
+      测试2
     </div>
   );
 }
