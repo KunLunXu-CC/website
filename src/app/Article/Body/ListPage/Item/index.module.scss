@@ -1,17 +1,72 @@
+@import '../../../../../assets/style/mixin.scss';
+
 .item {
-  height: 200px;
+  display: flex;
+  height: 250px;
+  cursor: pointer;
+  overflow: hidden;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0px 1px 20px -6px rgba(0,0,0,.1);
 }
 
-.iframe {
-  position: absolute;
-  width: 100%;
+.bg {
+  width: 52%;
   height: 100%;
-  z-index: -1;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-  top: 0px;
+  overflow: hidden;
+}
+
+.detail {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.time {
+  color: #999;
+  line-height: 1;
+  font-size: 12px;
+  :global {
+    .qyrc-icon {
+      font-size: 16px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.title {
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.info {
+  display: flex;
+  font-size: 12px;
+  .info-item {
+    color: #999;
+    padding-right: 10px;
+    :global {
+      .qyrc-icon {
+        font-size: 16px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.desc {
+  flex: 1;
+  padding: 10px 0;
+  line-height: 1.8;
+  p {
+    @include line-clamp(3);
+  } 
+}
+
+.entry {
+  color: #999;
+  font-size: 20px;
 }

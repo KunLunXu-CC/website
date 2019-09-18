@@ -15,7 +15,7 @@ export default [
       dragHeight: 40,
       toolPosition: {top: 5, left: 5},
       toolClassName: 'article-modal-tool',
-      defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
+      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
   {

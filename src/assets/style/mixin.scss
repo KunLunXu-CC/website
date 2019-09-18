@@ -1,4 +1,3 @@
-
 // 设置 input 默认 placeholder 样式
 @mixin input-placeholder ($color){
   :-moz-placeholder {
@@ -12,5 +11,19 @@
   }
   input::-webkit-input-placeholder {
     color: $color;
+  }
+}
+
+// 行截断 - 超出显示神略号: $line 显示多少行
+@mixin line-clamp ($line){
+  @if $line == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
   }
 }
