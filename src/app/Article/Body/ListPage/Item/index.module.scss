@@ -7,6 +7,7 @@
   overflow: hidden;
   background: #fff;
   border-radius: 10px;
+  margin-bottom: 30px;
   box-shadow: 0px 1px 20px -6px rgba(0,0,0,.1);
 }
 
@@ -17,7 +18,7 @@
 }
 
 .detail {
-  width: 40%;
+  flex: 1;
   height: 100%;
   display: flex;
   padding: 20px;
@@ -45,9 +46,10 @@
 .info {
   display: flex;
   font-size: 12px;
+
   .info-item {
     color: #999;
-    padding-right: 10px;
+    @include line-clamp(1);    
     :global {
       .qyrc-icon {
         font-size: 16px;
@@ -69,4 +71,28 @@
 .entry {
   color: #999;
   font-size: 20px;
+}
+
+
+// 居左设计
+.item.left {
+  text-align: left;
+  .info {
+    justify-content: flex-start;
+    .info-item {
+      padding-right: 10px;
+    }
+  }
+}
+
+// 居右设计
+.item.right {
+  text-align: right;
+  flex-direction: row-reverse;
+  .info {
+    justify-content: flex-end;
+    .info-item {
+      padding-left: 10px;
+    }
+  }
 }
