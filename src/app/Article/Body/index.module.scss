@@ -7,4 +7,15 @@
   &-page {
     flex: 1;
   }
+
+  :global {
+    // 滚动条设置
+    .qyrc-sroll-bar {
+      opacity: 0.5;
+      right: 0;
+      .qyrc-sroll-bar-slider {
+        width: 4px;
+      }
+    }
+  }
 }
