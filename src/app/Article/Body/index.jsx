@@ -7,9 +7,7 @@ import scss from './index.module.scss';
 export default () => {
   return (
     <div className={scss['body']}>
-      <div className={scss['body-search-bar']}>
-        <SearchBar />
-      </div>
+      <SearchBar />
       <Scroll className={scss['body-page']}>
         <ListPage />
       </Scroll>
