@@ -9,6 +9,10 @@
   border-radius: 10px;
   margin-bottom: 30px;
   box-shadow: 0px 1px 20px -6px rgba(0,0,0,.1);
+
+  &:hover {
+    box-shadow: 0px 1px 20px -6px rgba(0,0,0,.2);
+  }
 }
 
 .bg {

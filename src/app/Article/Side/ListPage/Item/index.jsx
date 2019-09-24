@@ -5,10 +5,18 @@ import IMG from '@assets/img/left.jpg';
 
 export default (props) => {
   return (
-    <div className={scss['item']}>
-      <Image src={props.data.img} >
-        item
-      </Image>
-    </div>
+    <Image 
+      height="100px" 
+      src={props.data.img} 
+      className={scss['item']}>
+      <div className={scss['mask']}>
+        <div className={scss['title']}>
+          PIXIV
+        </div>
+        <div className={scss['desc']}>
+          P 站的正确打开方式
+        </div>
+      </div>
+    </Image>
   );
 }
