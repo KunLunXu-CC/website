@@ -1,4 +1,5 @@
 import React from 'react';
+import { Scroll } from 'qyrc';
 import scss from './index.module.scss';
 
 import Item from './Item';
@@ -18,12 +19,13 @@ const mockdata = [
 
 export default () => {
   return (
-    <div className={scss['search-page']}>
+    <Scroll className={scss['list']}>
       {
         mockdata.map((v, index) => (
           <Item align={index % 2 !== 0 ? 'right' : 'left'}/>
         ))
       }
-    </div>
+      <br/>
+    </Scroll>
   );
 }
