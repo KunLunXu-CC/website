@@ -1,7 +1,16 @@
 .side {
   width: 100%;
   height: 100%;
-
+  display: flex;
+  flex-direction: column;
+  padding: {
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+  };
+  .body-side {
+    flex: 1;
+  }
 
   :global {
     // 滚动条设置

@@ -1,0 +1,13 @@
+
+.title {
+  color: #999;
+  font-size: 18px;
+  line-height: 40px;
+  padding: 10px;
+  :global {
+    .qyrc-icon {
+      color: #999;
+      font-size: 30px;
+    }
+  }
+}
