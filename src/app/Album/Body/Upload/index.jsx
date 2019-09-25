@@ -6,8 +6,9 @@ import { useStore } from '../../store';
 import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
-  const onClose = () => {}
-
+  const onClose = () => {
+    store.upload.close();
+  }
   return { onClose };
 } 
 
@@ -20,10 +21,10 @@ export default (props) => {
       width="50%"
       closable={false}
       placement="left"
-      onClose={() => {}}
       title="Basic Drawer"
       getContainer={false}
-      visible={store.showUpload}
+      onClose={state.onClose}
+      visible={store.upload.show}
       style={{ position: 'absolute'}}
     >
       <p>Some contents...</p>

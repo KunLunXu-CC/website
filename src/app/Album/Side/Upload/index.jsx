@@ -5,7 +5,7 @@ import { useStore } from '../../store';
 
 const useStateHooks = (props, store) => {
   const onClick = () => {
-    store.toggleShowUpload();
+    store.upload.open();
   }
   return { onClick };
 };

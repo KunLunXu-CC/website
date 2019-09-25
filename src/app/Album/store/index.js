@@ -1,36 +1,25 @@
 import _ from 'lodash';
 import React from 'react';
-const StoreContext = React.createContext(null);
 import { useStore as useGlobalStore } from '@store';
 import { observable, action, autorun, reaction, toJS } from 'mobx';
 
-import { } from '@api';
+import Upload from './upload';
+
+const StoreContext = React.createContext(null);
 
 class Store {
   constructor(global){
     this.global = global;
-    _.forIn(this.autorun, v => autorun(v));
-    _.forIn(this.reaction, v => reaction(v.data, v.effect));
+    autorun(this.print);
   }
 
-  @observable showUpload = false;
+  @observable upload = new Upload(this);
 
-  @action
-  toggleShowUpload = () => {
-    this.showUpload = !this.showUpload;
-  }
-
-  // 自动运行函数列表
-  autorun = {
-    print: () => {
-      console.group('%c[store]Album', 'color: green;');
-      // console.log('tagList: ', toJS(this.tagList));
-      console.groupEnd();
-    },
+  print = () => {
+    console.group('%c[store]Album', 'color: green;');
+    console.log('upload: ', toJS(this.upload));
+    console.groupEnd();   
   };
-
-  // reaction 函数列表
-  reaction = {};
 };
 
 // 导出 hook 使用 hook 方法
