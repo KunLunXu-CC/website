@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+.layout-side {
+  width: 180px;
+  background: rgba($color: #f1f1f1, $alpha: .99);
+}
+
+.layout-body {
+  flex: 1;
+  background: #fff;
+}

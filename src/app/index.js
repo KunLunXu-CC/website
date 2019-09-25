@@ -1,13 +1,28 @@
 import Tag from './Tag';
 import Note from './Note';
+import Album from './Album';
 import Article from './Article';
 
 export default [
   {
+    name: '相册',
+    code: 'album',
+    path: '/album',
+    component: Album,
+    defaultOpen: true,
+    defaultUrl: '/album',
+    icon: 'icon-wenzhang',
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: {top: 15, left: 15},
+      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
+    },
+  },
+  {
     name: '文章',
     icon: 'icon-wenzhang',
     code: 'article',
-    defaultOpen: true,
+    defaultOpen: false,
     path: '/article',
     defaultUrl: '/article',
     component: Article,
