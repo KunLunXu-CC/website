@@ -1,0 +1,11 @@
+.footer {
+  padding: 0 8px;
+  border-top: 1px solid #e8e8e8;
+
+  :global{
+    .ant-btn {
+      float: right;
+      margin: 10px 8px;
+    }
+  }
+}

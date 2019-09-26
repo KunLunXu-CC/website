@@ -8,6 +8,8 @@ export default () => {
   return (
     <div className={scss['body']}>
       <Upload />
+      <Header />
+      <List />
     </div>
   );
 }

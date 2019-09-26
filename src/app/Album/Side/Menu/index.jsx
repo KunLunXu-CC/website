@@ -13,7 +13,7 @@ import scss from './index.module.scss';
 const listData = [
   { key: 'all', name: '所有', icon: 'icon-all' },
   { key: 'article', name: '文章', icon: 'icon-24' },
-  { key: 'cover', name: '封面', icon: 'icon-icon-test' },
+  { key: 'cover', name: '封面', icon: 'icon-genghuanfengmian' },
   { key: 'desktop', name: '桌面背景', icon: 'icon-yunzhuomian-shouye' },
 ];
 

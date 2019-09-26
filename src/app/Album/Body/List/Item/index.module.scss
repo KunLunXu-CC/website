@@ -1,0 +1,42 @@
+.item {
+  display: flex;
+  height: 250px;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  flex-direction: column;
+  width: calc(50% - 10px);
+  margin: { bottom: 20px; };
+  border: 1px solid #f9f9f9;
+  box-shadow: 2px 0 8px rgba($color: #ddd, $alpha: .2);
+}
+
+.preview {
+  flex: 1;
+  overflow: hidden;
+}
+
+.info {
+  height: 70px;
+  padding: 10px;
+  display: flex;
+  &-icon {
+    color: #1890ff;
+    font-size: 18px;
+    padding: {right: 10px;};
+  }
+  
+  &-body {
+    flex: 1;
+
+    &-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    &-time {
+      color: #999;
+    }
+  }
+}

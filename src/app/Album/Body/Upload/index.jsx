@@ -4,6 +4,8 @@ import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
+import Footer from './Footer';
+import Form from './Form';
 
 const useStateHook = (props, store) => {
   const onClose = () => {
@@ -18,16 +20,16 @@ export default (props) => {
 
   return useObserver(() => (
     <Drawer
-      width="50%"
-      closable={false}
+      width="80%"
+      title="文件上传"
       placement="left"
-      title="Basic Drawer"
       getContainer={false}
       onClose={state.onClose}
+      className={scss['upload']}
       visible={store.upload.show}
-      style={{ position: 'absolute'}}
     >
-      <p>Some contents...</p>
+      <Form />
+      <Footer />
     </Drawer>
   ));
 }
