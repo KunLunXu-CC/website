@@ -1,11 +1,12 @@
 import React from 'react';
-import { Icon } from 'qyrc';
+import { Icon, Scroll } from 'qyrc';
+import UploadList from './UploadList';
 import scss from './index.module.scss';
 
 export default (props) => {
   return (
-    <div className={scss['form']}>
-      
-    </div>
+    <Scroll className={scss['form']}>
+      <UploadList />
+    </Scroll>
   );
 }

@@ -1,0 +1,36 @@
+.upload {
+  display: flex;
+  height: 120px;
+  cursor: pointer;
+  color: #d9d9d9;
+  position: relative;
+  border-radius: 4px;
+  align-items: center;
+  transition: all .5s;
+  background: #fafafa;
+  justify-content: center;
+  border: 1px dashed #d9d9d9;
+  align-content: space-around;
+
+  :global {
+    .qyrc-icon {
+      font-size: 40px;
+    }
+  }
+
+
+  input {
+    width: 0;
+    height: 0;  
+    opacity: 0;
+  }
+
+  &:hover {
+    color: #1890ff;
+    border-color: #1890ff;
+  }
+}
+
+.item {
+  height: 120px;
+}

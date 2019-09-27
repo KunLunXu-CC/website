@@ -20,7 +20,7 @@ export default (props) => {
 
   return useObserver(() => (
     <Drawer
-      width="80%"
+      width="420"
       title="文件上传"
       placement="left"
       getContainer={false}

@@ -7,6 +7,7 @@ export default class Store {
     this.parent = parent;
   }
 
+  /***** 显示表单 *****/
   @observable show = false;
 
   @action
@@ -14,4 +15,21 @@ export default class Store {
 
   @action
   open = () => (this.show = true);
+
+  /***** 上传文件列表 *****/
+  @observable fileList = []; 
+
+  @action
+  addFiles = (files) => {
+    if (!files){return false;}
+    this.fileList = [ ...this.fileList, ...files ];
+  }
+
+  @action
+  removeFile = (file) => {
+    this.fileList = file 
+      ? this.fileList.filter(v => (!_.isEqual(v, file))) 
+      : [];
+  }
+
 };
