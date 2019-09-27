@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { observable, action, autorun, reaction, toJS } from 'mobx';
-import { } from '@api';
+import { uploadPhotos } from '@api';
 
 export default class Store {
   constructor(parent){
@@ -30,6 +30,15 @@ export default class Store {
     this.fileList = file 
       ? this.fileList.filter(v => (!_.isEqual(v, file))) 
       : [];
+  }
+
+  /***** 文件上传 *****/ 
+  @action
+  upload = () => {
+    console.log('=====>>>>>>>>>>>', toJS(this.fileList));
+    uploadPhotos({
+      body: { files: toJS(this.fileList) }
+    });
   }
 
 };

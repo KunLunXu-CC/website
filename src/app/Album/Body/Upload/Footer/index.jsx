@@ -13,7 +13,7 @@ const useStateHook = (props, store) => {
 
   // 上传
   const onUpload = () => {
-
+    store.upload.upload();
   }
 
   return { onCancel, onUpload };

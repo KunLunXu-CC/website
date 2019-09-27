@@ -28,7 +28,7 @@ export default (props) => {
       </label>
       {store.upload.fileList.map((file, index) => (
         <div key={index} className={scss['item']}>
-          <Image />
+          {/* <Image /> */}
         </div>
       ))}
 
