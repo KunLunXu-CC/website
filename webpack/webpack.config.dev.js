@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 /* ================== 插件 ================= */
 
 // 全局常量定义
-const definePlugin = new DefinePlugin(config.globalConsts.production);
+const definePlugin = new DefinePlugin(config.globalConsts.development);
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
