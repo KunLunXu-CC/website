@@ -26,12 +26,11 @@ export default (props) => {
         <Icon type="icon-tupianshangchuan"/>
         <input type="file" multiple="multiple" onChange={state.addFiles}/>
       </label>
-      {store.upload.fileList.map((file, index) => (
+      {/* {store.upload.fileList.map((file, index) => (
         <div key={index} className={scss['item']}>
-          {/* <Image /> */}
+          
         </div>
-      ))}
-
+      ))} */}
     </div>
   ));
 }

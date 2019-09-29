@@ -35,7 +35,6 @@ export default class Store {
   /***** 文件上传 *****/ 
   @action
   upload = () => {
-    console.log('=====>>>>>>>>>>>', toJS(this.fileList));
     uploadPhotos({
       body: { files: toJS(this.fileList) }
     });
