@@ -6,15 +6,32 @@ import { Menu } from 'antd';
 import { Icon } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 
+import { PHOTO_TYPE } from '@config/consts';
 import { useStore } from '../../store';
 import scss from './index.module.scss';
 
 // 菜单列表数据
 const listData = [
-  { key: 'all', name: '所有', icon: 'icon-all' },
-  { key: 'article', name: '文章', icon: 'icon-24' },
-  { key: 'cover', name: '封面', icon: 'icon-genghuanfengmian' },
-  { key: 'desktop', name: '桌面背景', icon: 'icon-yunzhuomian-shouye' },
+  { 
+    key: 'all', 
+    name: '所有', 
+    icon: 'icon-all',
+  },
+  { 
+    name: '文章', 
+    icon: 'icon-24',
+    key: PHOTO_TYPE.ARTICLE.VALUE, 
+  },
+  { 
+    name: '封面', 
+    key: PHOTO_TYPE.COVER.VALUE, 
+    icon: 'icon-genghuanfengmian',
+  },
+  { 
+    name: '桌面背景', 
+    key: PHOTO_TYPE.DESKTOP.VALUE, 
+    icon: 'icon-yunzhuomian-shouye',
+  },
 ];
 
 const useStateHook = (props, store) => {

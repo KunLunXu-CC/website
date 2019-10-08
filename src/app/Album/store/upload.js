@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { observable, action, autorun, reaction, toJS } from 'mobx';
+import { PHOTO_TYPE } from '@config/consts';
 import { uploadPhotos } from '@api';
 
 export default class Store {
@@ -32,6 +33,14 @@ export default class Store {
       : [];
   }
 
+  /***** 类型选择 *****/ 
+  @observable type = PHOTO_TYPE.UNKNOWN.VALUE;
+
+  @action
+  setType = (value) => {
+    this.type = value ? value : PHOTO_TYPE.UNKNOWN.VALUE;
+  }
+
   /***** 文件上传 *****/ 
   @action
   upload = () => {
@@ -39,5 +48,4 @@ export default class Store {
       body: { files: toJS(this.fileList) }
     });
   }
-
 };
