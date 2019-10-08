@@ -11,7 +11,7 @@ export default [
     component: Album,
     defaultOpen: true,
     defaultUrl: '/album',
-    icon: 'icon-wenzhang',
+    icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
       toolPosition: {top: 15, left: 15},
