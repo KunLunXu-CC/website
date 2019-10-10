@@ -1,6 +1,7 @@
 import Tag from './Tag';
 import Note from './Note';
 import Album from './Album';
+import Editor from './Editor';
 import Article from './Article';
 
 export default [
@@ -9,8 +10,22 @@ export default [
     code: 'album',
     path: '/album',
     component: Album,
-    defaultOpen: true,
+    defaultOpen: false,
     defaultUrl: '/album',
+    icon: 'icon-banjixiangce',
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: {top: 15, left: 15},
+      defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
+    },
+  },
+  {
+    name: '编辑器',
+    code: 'editor',
+    path: '/editor',
+    component: Editor,
+    defaultOpen: true,
+    defaultUrl: '/editor',
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
