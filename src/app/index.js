@@ -26,10 +26,10 @@ export default [
     component: Editor,
     defaultOpen: true,
     defaultUrl: '/editor',
-    icon: 'icon-banjixiangce',
+    icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
-      toolPosition: {top: 15, left: 15},
+      toolPosition: {top: 15, right: 15},
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },

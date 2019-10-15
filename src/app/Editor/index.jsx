@@ -1,11 +1,26 @@
 import React, { useEffect } from 'react';
+import StoreProvider from './store';
+
+import Side from './Side';
+import Menu from './Menu';
+import Work from './Work';
+import Header from './Header';
+
 import scss from './index.module.scss';
-// import highlight from 'highlight';
-// https://www.cnblogs.com/wangzhihui/articles/7004826.html
+
 export default () => {
   return (
-    <div className={scss['editor']}>
-      <textarea name="" id="mdedttor" cols="100" rows="20"></textarea>
-    </div>
+    <StoreProvider>
+      <div className={scss['editor']}>
+        <div className={scss['editor-side']}><Side/></div>
+        <div className={scss['editor-body']}>
+          <div className={scss['editor-body-header']}><Header/></div>
+          <div className={scss['editor-body-middle']}>
+            <div className={scss['editor-body-middle-menu']}><Menu/></div>
+            <div className={scss['editor-body-middle-work']}><Work/></div>
+          </div>
+        </div>
+      </div>
+    </StoreProvider>
   );
 };
