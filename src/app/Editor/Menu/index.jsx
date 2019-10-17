@@ -41,11 +41,16 @@ const useStateHook = (props, store) => {
     return data.map(v => (recursion(v)))
   }
 
+  // 选择项时
+  const onSelect = (args) => {
+    console.log('==>>> args', args);
+  }
+
   useEffect(() => {
     
   }, []);
 
-  return { renderMenuList };
+  return { renderMenuList, onSelect };
 }
 
 export default (props) => {
@@ -56,8 +61,10 @@ export default (props) => {
     <div className={scss['menu']}>
       <Scroll className={scss['menu-middle']}>
         <Menu
+          multiple
           mode="inline"
-          inlineCollapsed={false}>
+          inlineCollapsed={false}
+          onSelect={state.onSelect}>
           {state.renderMenuList()}
         </Menu>
       </Scroll>

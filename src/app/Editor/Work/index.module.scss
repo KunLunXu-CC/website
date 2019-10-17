@@ -1,5 +1,68 @@
 .work {
   width: 100%;
   height: 100%;
-  background: #2e3a46;  
+  display: flex;
+  overflow: hidden;
+  background: #2e3a46; 
+  flex-direction: column;
+
+  :global {
+
+    // tabs 最外层
+    .ant-tabs {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    // tabs tab部分(上部分)
+    .ant-tabs-bar {
+      margin: 0;
+      border: none;
+      overflow: hidden;
+      background: #24303c;
+
+      .ant-tabs-tab {
+        margin: 0px !important;
+        border: none !important;
+        border-radius: 0px !important;
+        background: #24303c !important;
+        border-right: 1px solid #070507 !important;
+        color: rgba($color: #fff, $alpha: 0.5) !important;
+  
+        &:hover {
+          background: #2e3a46 !important;
+          color: rgba($color: #fff, $alpha: 0.7) !important;
+        }
+      }
+
+      .ant-tabs-tab-active.ant-tabs-tab {
+        background: #2e3a46 !important;
+        color: rgba($color: #fff, $alpha: 0.7) !important;
+      }
+
+      .ant-tabs.ant-tabs-card .ant-tabs-card-bar {
+        margin: 0 !important;
+      }
+    }
+
+    // tabs 内容部分(中间部分)
+    .ant-tabs-content { 
+      flex: 1; 
+    }
+
+    // tabpane 
+    .ant-tabs-tabpane {
+      height: 100%;
+      position: relative;
+    }
+  }
+
+  .tab-pane-body {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+  }
 }

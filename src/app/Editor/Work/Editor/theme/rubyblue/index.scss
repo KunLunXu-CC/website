@@ -1,0 +1,15 @@
+// codeMirror 整体样式设置
+.CodeMirror {
+  background: transparent !important;
+  height: initial;
+  overflow: hidden;
+  .CodeMirror-gutters {
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .CodeMirror-linenumber {
+    color: rgba($color: #fff, $alpha: 0.2) !important;
+    padding-right: 20px;
+  }
+}
