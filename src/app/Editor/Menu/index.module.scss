@@ -22,54 +22,79 @@
   }
   
   :global{
-    // $menu-bg: transparent;
-    // $menu-color: rgba($color: #fff, $alpha: 1);
-    // $menu-color-active: rgba($color: #397dff, $alpha: 1);
-    // %default {
-    //   background: $menu-bg;
-    //   color: #397dff;
-    // }
-  
-    // %selected {
-    //   background: $menu-bg;
-    // }
 
     // antd - 菜单
     .ant-menu {
       $bg: transparent;
-
+      $color: #bec7ce;
+      $bg-selected: #2e3a46;
+      
       border: none;
+      color: $color;
       background: $bg;
   
-      // 根菜单样式覆盖 - 正常状态
-      .ant-menu-item {
-        background: $bg;
-  
-        &::after {
-          right: initial;
-          left: 0;
+      // 子菜单标题
+      .ant-menu-submenu-title {
+        padding: 0 10px !important;
+      }
+
+      // 子菜单 - 展开 
+      .ant-menu-submenu-open {
+        :local(.menu-arrow) { 
+          transform: rotate(90deg); 
         }
       }
-  
+
+      // 子菜单 - 活动或者选中
+      .ant-menu-submenu-active,
+      .ant-menu-submenu-selected {
+        .ant-menu-submenu-title {
+          color: $color !important;
+          background: $bg-selected !important;
+        }
+      }
+
+      // 子菜单 - 选中但是被打开则不显示任何样式
+      .ant-menu-submenu-selected.ant-menu-submenu-open {
+        .ant-menu-submenu-title {
+          color: $color !important;
+          background: $bg !important;
+        }
+      }
+
+      // 子菜单 - 左侧虚线
+      .ant-menu-sub {
+        position: relative;
+
+        &::after {
+          top: 0;
+          bottom: 0;
+          left: 22px;
+          content: '';
+          position: absolute;
+          border-left: 1px dashed #5d6b76;
+        }
+      }
+
+      // 根菜单样式覆盖 - 正常状态
+      .ant-menu-item {
+        border: none;
+        background: $bg;
+        margin: 0px !important;
+        padding: 0 24px 0 34px !important;
+        &::after { display: none; }
+      }
+
       // 根菜单样式覆盖 - 停放状态
       .ant-menu-item.ant-menu-item-active,
       .ant-menu-item.ant-menu-item-selected {
-        // @extend %selected;
-      }
-
-      // 子标题
-      .ant-menu-submenu-title {
-        padding: 0 24px 0 34px !important;
-      }
-      
-      // 可选项
-      .ant-menu-item {
-        padding: 0 24px 0 34px !important;
+        color: $color;
+        background: $bg-selected;
       }
 
       // 箭头
       .ant-menu-submenu-arrow {
-        left: 16px;
+        display: none;
       }
     }
   
