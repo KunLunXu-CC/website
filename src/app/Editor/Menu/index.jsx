@@ -61,7 +61,6 @@ export default (props) => {
     <div className={scss['menu']}>
       <Scroll className={scss['menu-middle']}>
         <Menu
-          multiple
           mode="inline"
           inlineCollapsed={false}
           onSelect={state.onSelect}>
