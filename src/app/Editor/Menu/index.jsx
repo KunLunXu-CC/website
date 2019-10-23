@@ -10,35 +10,28 @@ import { useObserver } from 'mobx-react-lite';
 import { useStore } from '../store';
 import scss from './index.module.scss';
 
-const data = [
-  { name: 'JS', id: 'id-js', children: [
-    { name: 'JS1', id: 'id-js1' },
-    { name: 'JS2', id: 'id-js2' },
-    { name: 'JS3', id: 'id-js3' },
-  ]},
-  { name: 'CSS', id: 'id-css', children: [
-    { name: 'CSS1', id: 'id-css1'},
-    { name: 'CSS2', id: 'id-css2'},
-    { name: 'CSS3', id: 'id-css3'},
-    { name: 'CSS4', id: 'id-css4'},
-  ]},
-];
-
 const useStateHook = (props, store) => {
+
+  // 初始化数据
+  const initData = () => {
+    store.tag.getTags();
+  }
 
   // 渲染菜单列表
   const renderMenuList = () => {
     const recursion = (item) => {
-      const { name, children, id } = item;
-      return children ? 
-        <Menu.SubMenu key={id} title={<div>
+      return item.type === 'tag' ? 
+        <Menu.SubMenu key={item.id} title={<Fragment>
           <Icon type="icon-jiantou" className={scss['menu-arrow']}/>
-          <Icon type="icon-wenjianjia"/>{name}</div>}>
-          {children.map(v => (recursion(v)))}
+          <Icon type="icon-wenjianjia"/>{item.name}</Fragment>}>
+          {item.children.length !== 0 
+            ? item.children.map(v => (recursion(v)))
+            : <Menu.Item key={`${item.id}-empty`}>-----</Menu.Item>
+          }
         </Menu.SubMenu> :
-        <Menu.Item key={id}>{name}</Menu.Item>;
+        <Menu.Item key={item.id}>{item.name}</Menu.Item>;
     }
-    return data.map(v => (recursion(v)))
+    return store.menu.list.map(v => (recursion(v)))
   }
 
   // 选择项时
@@ -47,7 +40,7 @@ const useStateHook = (props, store) => {
   }
 
   useEffect(() => {
-    
+    initData();
   }, []);
 
   return { renderMenuList, onSelect };

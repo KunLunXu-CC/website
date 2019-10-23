@@ -33,13 +33,8 @@
       color: $color;
       background: $bg;
   
-      // 子菜单标题
-      .ant-menu-submenu-title {
-        padding: 0 10px !important;
-      }
-
       // 子菜单 - 展开 
-      .ant-menu-submenu-open {
+      .ant-menu-submenu-open > .ant-menu-submenu-title {
         :local(.menu-arrow) { 
           transform: rotate(90deg); 
         }
@@ -48,7 +43,7 @@
       // 子菜单 - 活动或者选中
       .ant-menu-submenu-active,
       .ant-menu-submenu-selected {
-        .ant-menu-submenu-title {
+        > .ant-menu-submenu-title {
           color: $color !important;
           background: $bg-selected !important;
         }
@@ -81,7 +76,6 @@
         border: none;
         background: $bg;
         margin: 0px !important;
-        padding: 0 24px 0 34px !important;
         &::after { display: none; }
       }
 
