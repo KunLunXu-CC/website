@@ -2,7 +2,7 @@ import axios from '@utils/request';
 import { rsa } from '@utils/encryption';
 
 export const login = async ({ account, password }) => {
-  const res = axios({
+  const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

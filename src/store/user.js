@@ -17,12 +17,13 @@ export default class Store {
 
   // 登录: 返回请求数据以及登录状态
   @action
-  login = ({ account, password }) => login({ account, password }).then(res => {
+  login = async ({ account, password }) => {
+    const res = await login({ account, password });
     this.user = res.user;
     this.role = res.user.role;
     this.auth = res.user.role.auth;
     return { res, logined: RESCODE.SUCCESS.VALUE === res.rescode };
-  });
+  };
 
   // 自动运行函数列表
   autorun = {
