@@ -2,23 +2,15 @@
 .menu {
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  position: relative;
   background: #3d4b56;
   
-  overflow: hidden;
-
   display: flex;
   flex-direction: column;
 
   &-middle {
     flex: 1;
-  }
-
-  :global {
-    .qyrc-modal-tool.article-modal-tool {
-      .qyrc-modal-tool-item {
-        font-size: 14px;
-      }
-    }
   }
   
   :global{
