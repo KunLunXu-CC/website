@@ -1,7 +1,6 @@
 .editor {
   width: 100%;
   height: 100%;
-
   display: flex;
 
   &-body {
@@ -12,8 +11,30 @@
     &-middle {
       flex: 1;
       display: flex;
+
+      &-menu {
+        position: relative;
+        
+        &-body {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          position: absolute;
+        }
+      }
+
       &-work {
         flex: 1;
+        position: relative;
+        
+        &-body {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          position: absolute;
+        }
       }
     }
   }
