@@ -24,11 +24,17 @@
       border: none;
       color: $color;
       background: $bg;
-  
-      // 子菜单 - 展开 
-      .ant-menu-submenu-open > .ant-menu-submenu-title {
-        :local(.menu-arrow) { 
-          transform: rotate(90deg); 
+
+      // 设置分割线(虚线)
+      .ant-menu-sub {
+        position: relative;
+        
+        :local(.menu-dividing){
+          top: 0;
+          width: 1;
+          bottom: 0;
+          position: absolute;
+          border-right: 1px dashed #5d6b76;;
         }
       }
 
@@ -41,6 +47,11 @@
         }
       }
 
+      // 子菜单 - 正常
+      .ant-menu-submenu-title {
+        padding-right: 5px !important;
+      }
+
       // 子菜单 - 选中但是被打开则不显示任何样式
       .ant-menu-submenu-selected.ant-menu-submenu-open {
         .ant-menu-submenu-title {
@@ -49,25 +60,12 @@
         }
       }
 
-      // 子菜单 - 左侧虚线
-      .ant-menu-sub {
-        position: relative;
-
-        &::after {
-          top: 0;
-          bottom: 0;
-          left: 22px;
-          content: '';
-          position: absolute;
-          border-left: 1px dashed #5d6b76;
-        }
-      }
-
       // 根菜单样式覆盖 - 正常状态
       .ant-menu-item {
         border: none;
         background: $bg;
         margin: 0px !important;
+        padding-right: 5px !important;
         &::after { display: none; }
       }
 

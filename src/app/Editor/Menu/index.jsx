@@ -8,6 +8,7 @@ import { Icon, Scroll } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 
 import Operation from './Operation';
+import MenuTitle from './MenuTitle';
 import { useStore } from '../store';
 import scss from './index.module.scss';
 
@@ -18,27 +19,29 @@ const useStateHook = (props, store) => {
     store.tag.getTags();
   }
 
+  // 点击更多
+  const onMore = (type, data) => {}
+
   // 渲染菜单列表
   const renderMenuList = () => {
-    const recursion = (item) => {
+    const recursion = (item, index) => {
       return item.type === 'tag' ? 
         <Menu.SubMenu 
           key={item.id} 
-          title={
-          <Fragment>
-            <Icon type="icon-jiantou" className={scss['menu-arrow']}/>
-            <Icon type="icon-wenjianjia"/>
-            {item.name}
-            <Icon type="icon-wenjianjia"/>
-          </Fragment>}>
-          {item.children.length !== 0 
-            ? item.children.map(v => (recursion(v)))
-            : <Menu.Item key={`${item.id}-empty`}>-----</Menu.Item>
+          title={<MenuTitle data={item} type="subMenu" onMore={onMore}/>}>
+          {item.children.length !== 0 ? 
+            item.children.map(v => (recursion(v, index + 1))) : 
+            <Menu.Item key={`${item.id}-empty`}>
+              <MenuTitle data={item} type="empty" onMore={onMore}/>
+            </Menu.Item>
           }
+          <div className={scss['menu-dividing']} style={{ left: `${index * 24 + 12}px` }} />
         </Menu.SubMenu> :
-        <Menu.Item key={item.id}>{item.name}</Menu.Item>;
+        <Menu.Item key={item.id}>
+          <MenuTitle data={item} type="item" onMore={onMore}/>
+        </Menu.Item>;
     }
-    return store.menu.list.map(v => (recursion(v)))
+    return store.menu.list.map(v => (recursion(v, 1)))
   }
 
   // 选择项时
