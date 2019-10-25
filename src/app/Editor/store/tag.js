@@ -10,9 +10,16 @@ export default class Store {
 
   @observable tags = [];
 
+  // 查询 tag
   @action
   getTags = async () => {
     const res = await getTags();
     this.tags = _.get(res, 'list') || [];
+  }
+
+  // 创建虚拟 tag 点击编辑用来占位
+  @action
+  addFictitiousTag = (parent) => {
+    console.log('===>>>> parent', toJS(parent));
   }
 };

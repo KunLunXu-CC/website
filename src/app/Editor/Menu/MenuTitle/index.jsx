@@ -3,11 +3,13 @@ import React, {
   Fragment,
   useEffect, 
 } from 'react';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, Input } from 'antd';
 import { Icon, Scroll } from 'qyrc';
+
+import { useStore } from '../../store';
 import scss from './index.module.scss';
 
-const useStateHook = (props) => {
+const useStateHook = (props, store) => {
 
   // 阻止事件冒泡
   const stopPropagation = (e) => {
@@ -18,7 +20,9 @@ const useStateHook = (props) => {
   const onClick = ({ key, keyPath, item, domEvent }) => {
     stopPropagation(domEvent);
     const handler = {
-      createFolder: () => {},
+      createFolder: () => {
+        store.tag.addFictitiousTag(props.data);
+      },
       createArticle: () => {},
       deleteFolder: () => {},
       deleteArticle: () => {},
@@ -31,7 +35,9 @@ const useStateHook = (props) => {
 
 // props.type = 'subMenu | item ' props.data props.onMore
 export default (props) => {
-  const state = useStateHook(props);
+  const store = useStore();
+  const state = useStateHook(props, store);
+  
   const menu = (
     <Menu onClick={state.onClick} className={scss['operation-menu']}>
       <Menu.Item key="createFolder">

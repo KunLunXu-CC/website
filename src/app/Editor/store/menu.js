@@ -7,7 +7,6 @@ export default class Store {
   }
   
   @computed get list() {
-
     let parents = this.parent.tag.tags.filter(v => !v.parent.id);
     let children = this.parent.tag.tags.filter(v => !!v.parent.id);
 
