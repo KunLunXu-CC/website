@@ -10,6 +10,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    :global {
+      .qyrc-icon {
+        box-sizing: content-box;
+        padding: 10px 0px;
+      }
+    }
+
   }
 }
 
@@ -31,4 +39,14 @@
   }
 }
 
-
+.operation-menu {
+  background: #2c343a;
+  :global {
+    .ant-dropdown-menu-item {
+      color: rgba($color: #fff, $alpha: 0.5);
+      &:hover{
+        background-color: rgba($color: #fff, $alpha: 0.1)
+      }
+    }
+  }
+}

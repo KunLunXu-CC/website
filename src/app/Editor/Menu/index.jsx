@@ -7,7 +7,6 @@ import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 
-import Operation from './Operation';
 import MenuTitle from './MenuTitle';
 import { useStore } from '../store';
 import scss from './index.module.scss';
@@ -68,7 +67,6 @@ export default (props) => {
           {state.renderMenuList()}
         </Menu>
       </Scroll>
-      <Operation />
     </div>
   ));
 }
