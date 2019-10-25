@@ -9,29 +9,40 @@ import scss from './index.module.scss';
 
 const useStateHook = (props) => {
 
-  // 点击更多
-  const onMore = (e) => {
+  // 阻止事件冒泡
+  const stopPropagation = (e) => {
     e.stopPropagation();
-    props.onMore(props.type, props.data);
   }
 
-  return { onMore };
+  // 点击操作菜单: 根据 key 处理不同操作
+  const onClick = ({ key, keyPath, item, domEvent }) => {
+    stopPropagation(domEvent);
+    const handler = {
+      createFolder: () => {},
+      createArticle: () => {},
+      deleteFolder: () => {},
+      deleteArticle: () => {},
+    };
+    handler[key]();    
+  }
+  
+  return { onClick, stopPropagation };
 }
 
 // props.type = 'subMenu | item ' props.data props.onMore
 export default (props) => {
   const state = useStateHook(props);
   const menu = (
-    <Menu className={scss['operation-menu']}>
-      <Menu.Item key="0">
+    <Menu onClick={state.onClick} className={scss['operation-menu']}>
+      <Menu.Item key="createFolder">
         <Icon type="icon-wenjianjia"/>
-        新建文件夹
+        创建文件夹
       </Menu.Item>
-      <Menu.Item key="1">
+      <Menu.Item key="createArticle">
         <Icon type="icon-24"/>
-        新建文件        
+        创建文章      
       </Menu.Item>
-      <Menu.Item key="3">
+      <Menu.Item key={props.type === 'subMenu' ? 'deleteFolder': 'deleteArticle'}>
         <Icon type="icon-shanchu" />
         删除
       </Menu.Item>
@@ -50,7 +61,11 @@ export default (props) => {
         {props.data.name}
       </div>
       <div className={scss['menu-title-more']}>
-        <Dropdown placement="bottomRight" overlay={menu} trigger={['click']}>
+        <Dropdown
+          overlay={menu} 
+          trigger={['click']}
+          placement="bottomRight" 
+          onClick={state.stopPropagation} >
           <Icon type="icon-gengduo" onClick={state.onMore}/>
         </Dropdown>
       </div>

@@ -18,16 +18,13 @@ const useStateHook = (props, store) => {
     store.tag.getTags();
   }
 
-  // 点击更多
-  const onMore = (type, data) => {}
-
   // 渲染菜单列表
   const renderMenuList = () => {
     const recursion = (item, index) => {
       return item.type === 'tag' ? 
         <Menu.SubMenu 
           key={item.id} 
-          title={<MenuTitle data={item} type="subMenu" onMore={onMore}/>}>
+          title={<MenuTitle data={item} type="subMenu"/>}>
           {item.children.length !== 0 ? 
             item.children.map(v => (recursion(v, index + 1))) : 
             <Menu.Item className={scss['menu-item-empty']} key={`${item.id}-empty`} />
@@ -35,7 +32,7 @@ const useStateHook = (props, store) => {
           <div className={scss['menu-dividing']} style={{ left: `${index * 24 + 12}px` }} />
         </Menu.SubMenu> :
         <Menu.Item key={item.id}>
-          <MenuTitle data={item} type="item" onMore={onMore}/>
+          <MenuTitle data={item} type="item"/>
         </Menu.Item>;
     }
     return store.menu.list.map(v => (recursion(v, 1)))
