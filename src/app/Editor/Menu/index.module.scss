@@ -13,6 +13,11 @@
     flex: 1;
   }
   
+  .menu-item-empty {
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
   :global{
 
     // antd - 菜单

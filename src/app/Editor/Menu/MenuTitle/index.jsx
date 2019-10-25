@@ -45,14 +45,6 @@ export default (props) => {
           </div>
         </div>
       );
-    case 'empty':
-      return (
-        <div className={scss['menu-title']}>
-          <div className={scss['menu-title-content']}>
-            {/* <Icon type="icon-wenjianjia"/>          */}
-          </div>
-        </div>
-      );
     default:
       return null;
   }

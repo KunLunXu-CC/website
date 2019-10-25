@@ -1,6 +1,10 @@
 .operation {
-  top: 0;
-  left: 0;
-  display: none;
+  top: 99999990px;
+  right: 4px;
+  width: 150px;
+  height: 200px;
   position: absolute;
+  border-radius: 4px;
+  background: #24303c;
+  border: 1px solid #34404c;
 }
