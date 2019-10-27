@@ -17,6 +17,7 @@ export default class Store {
   print = () => {
     console.group('%c[store]Editor', 'color: green;');
     console.log('tag: ', toJS(this.tag));
+    console.log('menu: ', toJS(this.menu));
     console.groupEnd();   
   };
 };

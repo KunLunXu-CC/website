@@ -7,8 +7,9 @@ export default class Store {
   }
   
   @computed get list() {
-    let parents = this.parent.tag.tags.filter(v => !v.parent.id);
-    let children = this.parent.tag.tags.filter(v => !!v.parent.id);
+    const data = JSON.parse(JSON.stringify(this.parent.tag.tags));
+    let parents = data.filter(v => !v.parent.id);
+    let children = data.filter(v => !!v.parent.id);
 
     const translator = (parents, children) => {
       parents.forEach((parent) => {

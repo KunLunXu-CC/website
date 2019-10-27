@@ -3,6 +3,9 @@
 
   &-content {
     flex: 1;
+    height: 40px;
+    display: flex;
+    align-items: center;
   }
 
   &-more {
@@ -14,15 +17,33 @@
     :global {
       .qyrc-icon {
         box-sizing: content-box;
-        padding: 10px 0px;
+        padding: 10px 5px;
       }
     }
+  }
 
+  &-input {
+    flex: 1;
+    width: 20px;
+    padding: 2px;
+    border: none;
+    color: #Fff;
+    outline: none;
+    height: initial;
+    border-radius: 0px;
+    background: rgba($color: #fff, $alpha: 0.1);
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: none;
+      box-shadow: none;
+    }
   }
 }
 
-:global{
 
+:global{
   // 子菜单 - 展开 - 旋转箭头
   .ant-menu-submenu-open > .ant-menu-submenu-title {
     :local(.menu-title-arrow) { 
@@ -39,6 +60,7 @@
   }
 }
 
+// 操作菜单
 .operation-menu {
   background: #2c343a;
   :global {

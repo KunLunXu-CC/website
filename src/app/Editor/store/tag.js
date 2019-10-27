@@ -20,6 +20,10 @@ export default class Store {
   // 创建虚拟 tag 点击编辑用来占位
   @action
   addFictitiousTag = (parent) => {
-    console.log('===>>>> parent', toJS(parent));
+    const { id, name } = parent;
+    this.tags = [
+      { editor: true, id: 'new', name: void 0, parent: { id, name } },
+      ...this.tags,
+    ];
   }
 };
