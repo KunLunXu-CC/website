@@ -14,16 +14,44 @@ export default class Store {
   @action
   getTags = async () => {
     const res = await getTags();
-    this.tags = _.get(res, 'list') || [];
+    this.tags = res.list.map(v => ({...v, editor: false }));
   }
 
-  // 创建虚拟 tag 点击编辑用来占位
+  // 创建 tag
   @action
-  addFictitiousTag = (parent) => {
+  createTag = ({ value, parent }) => {
+    this.tags = this.tags.map(v => ({ ...v,  editor: false }));
+    console.log('--->>>>>>> createTag', value, parent);
+  }
+
+  // 更新 tag
+  @action
+  updateTag = ({ id, value }) => {
+    this.tags = this.tags.map(v => ({ ...v,  editor: false }));
+    console.log('--->>>>>>> updateTag', id, value);
+  }
+
+  // 创建文件夹: 创建虚拟 tag
+  @action
+  createFolder = (parent) => {
     const { id, name } = parent;
     this.tags = [
-      { editor: true, id: 'new', name: void 0, parent: { id, name } },
+      { 
+        id: 'newTag', 
+        editor: true, 
+        name: void 0, 
+        parent: { id, name },
+      },
       ...this.tags,
     ];
+  }
+
+  // 编辑文件夹: 找到数据设置 editor: true
+  @action
+  editorFolder = ({ id }) => {
+    this.tags = this.tags.map(v => {
+      v.id === id && (v.editor = true);
+      return v;
+    });
   }
 };

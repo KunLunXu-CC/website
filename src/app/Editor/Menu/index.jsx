@@ -40,14 +40,19 @@ const useStateHook = (props, store) => {
 
   // 选择项时
   const onSelect = (args) => {
-    console.log('==>>> args', args);
+    // console.log('------------->> menu args', args)
+  }
+
+  // SubMenu 展开/关闭的回调
+  const onOpenChange = (openKeys) => {
+    store.menu.onOpenChange(openKeys);
   }
 
   useEffect(() => {
     initData();
   }, []);
 
-  return { renderMenuList, onSelect };
+  return { renderMenuList, onSelect, onOpenChange };
 }
 
 export default (props) => {
@@ -60,7 +65,9 @@ export default (props) => {
         <Menu
           mode="inline"
           inlineCollapsed={false}
-          onSelect={state.onSelect}>
+          onSelect={state.onSelect}
+          openKeys={store.menu.openKeys}
+          onOpenChange={state.onOpenChange}>
           {state.renderMenuList()}
         </Menu>
       </Scroll>

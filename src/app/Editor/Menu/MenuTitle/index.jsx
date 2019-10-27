@@ -23,10 +23,13 @@ const useStateHook = (props, store) => {
     stopPropagation(domEvent);
     const handler = {
       createFolder: () => {
-        store.tag.addFictitiousTag(props.data);
+        store.menu.onOpenChange(props.data.id);
+        store.tag.createFolder(props.data);
       },
       createArticle: () => {},
-      editorFolder: () => {},
+      editorFolder: () => {
+        store.tag.editorFolder(props.data);
+      },
       editorArticle: () => {},
       deleteFolder: () => {},
       deleteArticle: () => {},
@@ -36,12 +39,16 @@ const useStateHook = (props, store) => {
 
   // 编辑数据： 根据 id 值判断是编辑还是创建
   const onEditor = (e) => {
-    console.log('========>>>', e.target.value);
+    const value = e.target.value;
+    const { id, parent } = props.data;
+    props.data.id === 'newTag'
+      ? store.tag.createTag({ value, parent })
+      : store.tag.updateTag({ value, id });
   }
 
   useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
-  }, []);
+  });
 
   return { onClickOperationMenu, stopPropagation, onEditor, editorInputRef };
 }
