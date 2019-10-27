@@ -1,3 +1,4 @@
+// 来自 [腾讯前端博客](http://www.alloyteam.com/)
 !
 function(t) {
     function o(a) {
