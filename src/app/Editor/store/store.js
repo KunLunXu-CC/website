@@ -3,6 +3,7 @@ import { observable, action, autorun, reaction, toJS } from 'mobx';
 
 import Tag from './tag';
 import Menu from './menu';
+import Article from './article';
 
 export default class Store {
 
@@ -13,11 +14,13 @@ export default class Store {
 
   @observable tag = new Tag(this);
   @observable menu = new Menu(this);
+  @observable article = new Article(this);
 
   print = () => {
     console.group('%c[store]Editor', 'color: green;');
-    console.log('tag: ', toJS(this.tag));
+    console.log('article: ', toJS(this.article));
     console.log('menu: ', toJS(this.menu));
-    console.groupEnd();   
+    console.log('tag: ', toJS(this.tag));
+    console.groupEnd();
   };
 };

@@ -20,15 +20,26 @@ export default class Store {
 
   // 菜单列表: 计算、处理 this.parent.tag.tags
   @computed get list() {
-    const data = JSON.parse(JSON.stringify(this.parent.tag.tags));
-    let parents = data.filter(v => !v.parent.id);
-    let children = data.filter(v => !!v.parent.id);
+    
+    const tags = JSON.parse(JSON.stringify(this.parent.tag.tags)).map(v => ({
+      ...v,
+      type: 'tag',
+    }));
+  
+    // const aticles = _.cloneDeepWith(this.parent.article.aticles, (v) => ({
+    //   name: '111111',
+    //   ...v,
+    // }));
+
+    console.log('==>>> 克隆数据');
+
+    let parents = tags.filter(v => !v.parent.id);
+    let children = tags.filter(v => !!v.parent.id);
 
     const translator = (parents, children) => {
       parents.forEach((parent) => {
         parent.children = [];
         children.forEach((current, index) => {
-          parent.type = current.type = 'tag';
           if (current.parent.id === parent.id) {
             let temp = JSON.parse(JSON.stringify(children));
             temp.splice(index, 1);
@@ -38,6 +49,7 @@ export default class Store {
         });
       });
     };
+
     translator(parents, children);
 
     console.log('===>>>>>>>>>>> menu list', parents);
