@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { observable, action, autorun, reaction, toJS } from 'mobx';
 import { PHOTO_TYPE } from '@config/consts';
-import { getTags } from '@api';
+import { getTags, createTags } from '@api';
 
 export default class Store {
   constructor(parent){
@@ -19,9 +19,12 @@ export default class Store {
 
   // 创建 tag
   @action
-  createTag = ({ value, parent }) => {
+  createTag = async ({ value, parent }) => {
     this.tags = this.tags.map(v => ({ ...v,  editor: false }));
-    console.log('--->>>>>>> createTag', value, parent);
+    await createTags({ 
+      search: {},
+      body: [{ name: '创建1', parent }], 
+    });
   }
 
   // 更新 tag

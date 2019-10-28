@@ -40,10 +40,9 @@ const useStateHook = (props, store) => {
   // 编辑数据： 根据 id 值判断是编辑还是创建
   const onEditor = (e) => {
     const value = e.target.value;
-    const { id, parent } = props.data;
     props.data.id === 'newTag'
-      ? store.tag.createTag({ value, parent })
-      : store.tag.updateTag({ value, id });
+      ? store.tag.createTag({ value, parent: _.get(props.data, 'parent.id', null) })
+      : store.tag.updateTag({ value, id: props.data.id });
   }
 
   useEffect(() => {
