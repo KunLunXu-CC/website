@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { observable, action, autorun, reaction, toJS } from 'mobx';
 import { PHOTO_TYPE } from '@config/consts';
-import { getTags, createTags } from '@api';
+import * as api from '@api';
 
 export default class Store {
   constructor(parent){
@@ -13,25 +13,39 @@ export default class Store {
   // 查询 tag
   @action
   getTags = async () => {
-    const res = await getTags();
+    const res = await api.getTags();
     this.tags = res.list.map(v => ({...v, editor: false }));
   }
 
-  // 创建 tag
+  // 创建 tag: 调用 api
   @action
-  createTag = async ({ value, parent }) => {
-    this.tags = this.tags.map(v => ({ ...v,  editor: false }));
-    await createTags({ 
+  createTag = async ({ name, parent }) => {
+    const { list } = await api.createTags({ 
       search: {},
-      body: [{ name: '创建1', parent }], 
+      body: [{ name, parent }], 
     });
+    this.tags = list;
   }
 
   // 更新 tag
   @action
-  updateTag = ({ id, value }) => {
-    this.tags = this.tags.map(v => ({ ...v,  editor: false }));
-    console.log('--->>>>>>> updateTag', id, value);
+  updateTag = async ({ id, name }) => {
+    const { list } = await api.updateTags({ 
+      search: {},
+      conds: { id },
+      body: { name }, 
+    });
+    this.tags = list;
+  }
+
+  // 更新 tag
+  @action
+  removeTags = async ({ id }) => {
+    const { list } = await api.removeTags({ 
+      search: {},
+      conds: { id },
+    });
+    this.tags = list;
   }
 
   // 创建文件夹: 创建虚拟 tag

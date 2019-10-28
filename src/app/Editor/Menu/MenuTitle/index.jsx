@@ -16,34 +16,54 @@ const useStateHook = (props, store) => {
   // 阻止事件冒泡
   const stopPropagation = (e) => {
     e.stopPropagation();
-  }
+  };
 
-  // 点击操作菜单: 根据 key 处理不同操作
+  // 创建文件架
+  const createFolder = () => {
+    store.menu.onOpenChange(props.data.id);
+    store.tag.createFolder(props.data);
+  };
+
+  // 编辑文件夹
+  const editorFolder = () => {
+    store.tag.editorFolder(props.data);
+  };
+
+  // 删除文件夹
+  const deleteFolder = () => {
+    store.tag.removeTags({ id: props.data.id });
+  };
+
+  // 创建文章
+  const createArticle = () => {};
+
+  // 编辑文章
+  const editorArticle = () => {};
+
+  // 删除文章
+  const deleteArticle = () => {};
+
+  // 点击操作菜单: 根据 key 分发到不同处理函数
   const onClickOperationMenu = ({ key, keyPath, item, domEvent }) => {
     stopPropagation(domEvent);
     const handler = {
-      createFolder: () => {
-        store.menu.onOpenChange(props.data.id);
-        store.tag.createFolder(props.data);
-      },
-      createArticle: () => {},
-      editorFolder: () => {
-        store.tag.editorFolder(props.data);
-      },
-      editorArticle: () => {},
-      deleteFolder: () => {},
-      deleteArticle: () => {},
+      createFolder,
+      editorFolder,
+      deleteFolder,
+      createArticle,
+      editorArticle,
+      deleteArticle,
     };
     handler[key]();    
-  }
+  };
 
   // 编辑数据： 根据 id 值判断是编辑还是创建
   const onEditor = (e) => {
-    const value = e.target.value;
+    const name = e.target.value;
     props.data.id === 'newTag'
-      ? store.tag.createTag({ value, parent: _.get(props.data, 'parent.id', null) })
-      : store.tag.updateTag({ value, id: props.data.id });
-  }
+      ? store.tag.createTag({ name, parent: _.get(props.data, 'parent.id', null) })
+      : store.tag.updateTag({ name, id: props.data.id });
+  };
 
   useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
