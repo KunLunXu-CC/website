@@ -18,10 +18,10 @@ const useStateHook = (props, store) => {
     e.stopPropagation();
   };
 
-  // 创建文件架
+  // 创建文件夹
   const createFolder = () => {
     store.menu.onOpenChange(props.data.id);
-    store.tag.createFolder(props.data);
+    store.tag.createFictitiousTag(props.data);
   };
 
   // 编辑文件夹
@@ -35,7 +35,10 @@ const useStateHook = (props, store) => {
   };
 
   // 创建文章
-  const createArticle = () => {};
+  const createArticle = () => {
+    store.menu.onOpenChange(props.data.id);
+    store.article.createFictitiousArticle(props.data);
+  };
 
   // 编辑文章
   const editorArticle = () => {};
@@ -108,7 +111,7 @@ export default (props) => {
             <Icon type="icon-jiantou" className={scss['menu-title-arrow']}/>
             <Icon type="icon-wenjianjia"/>
           </Fragment>
-        : null}
+        : <Icon type="icon-24"/>}
         {props.data.editor ? 
           <Input
             onBlur={state.onEditor}

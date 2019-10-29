@@ -18,21 +18,16 @@ export default class Store {
       : this.openKeys = _.uniq([...this.openKeys, openKeys]);
   }
 
-  // 菜单列表: 计算、处理 this.parent.tag.tags
+  // 菜单列表: 计算、处理 this.parent.tag.tags、this.parent.article.articles
   @computed get list() {
-    
-    const tags = JSON.parse(JSON.stringify(this.parent.tag.tags)).map(v => ({
+    const tags = _.cloneDeep(this.parent.tag.tags).map(v => ({
       ...v,
       type: 'tag',
     }));
-  
-    // const aticles = _.cloneDeepWith(this.parent.article.aticles, (v) => ({
-    //   name: '111111',
-    //   ...v,
-    // }));
-
-    console.log('==>>> 克隆数据');
-
+    const articles = _.cloneDeep(this.parent.article.articles).map(v => ({ 
+      ...v, 
+      type: 'article', 
+    }));
     let parents = tags.filter(v => !v.parent.id);
     let children = tags.filter(v => !!v.parent.id);
 
@@ -47,12 +42,13 @@ export default class Store {
             parent.children.push(current);
           }
         });
+        // 挂载当前目录下所有文章: 默认按照第一个 tag 为准
+        parent.children.push(...articles.filter(
+          article => (_.get(article, 'tags[0].id') === parent.id)
+        ));
       });
     };
-
     translator(parents, children);
-
-    console.log('===>>>>>>>>>>> menu list', parents);
     return parents;
   }
 };

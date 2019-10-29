@@ -1,6 +1,6 @@
 import axios from '@utils/request';
 
-export const getAticles = async ({ pagination, search } = {}) => {
+export const getArticles = async ({ pagination, search } = {}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
@@ -8,7 +8,7 @@ export const getAticles = async ({ pagination, search } = {}) => {
       variables: { search, pagination },
       query: `
         query($search: ArticleSearch, $pagination: Pagination){
-          aticles( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
+          articles( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
             list { id name desc thumb content tags { id name }  }
             pagination 
             rescode
@@ -17,5 +17,5 @@ export const getAticles = async ({ pagination, search } = {}) => {
         }`,
     }
   });
-  return res.data.data.aticles;  
+  return res.data.data.articles;  
 }

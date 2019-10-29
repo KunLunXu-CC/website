@@ -20,37 +20,37 @@ export default class Store {
   // 创建 tag: 调用 api
   @action
   createTag = async ({ name, parent }) => {
-    const { list } = await api.createTags({ 
+    const res = await api.createTags({ 
       search: {},
       body: [{ name, parent }], 
     });
-    this.tags = list;
+    this.tags = res.list.map(v => ({...v, editor: false }));
   }
 
   // 更新 tag
   @action
   updateTag = async ({ id, name }) => {
-    const { list } = await api.updateTags({ 
+    const res = await api.updateTags({ 
       search: {},
       conds: { id },
       body: { name }, 
     });
-    this.tags = list;
+    this.tags = res.list.map(v => ({...v, editor: false }));
   }
 
   // 更新 tag
   @action
   removeTags = async ({ id }) => {
-    const { list } = await api.removeTags({ 
+    const res = await api.removeTags({ 
       search: {},
       conds: { id },
     });
-    this.tags = list;
+    this.tags = res.list.map(v => ({...v, editor: false }));
   }
 
-  // 创建文件夹: 创建虚拟 tag
+  // 创建虚拟 tag (占位符)
   @action
-  createFolder = (parent) => {
+  createFictitiousTag = (parent) => {
     const { id, name } = parent;
     this.tags = [
       { 

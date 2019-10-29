@@ -8,12 +8,27 @@ export default class Store {
     this.parent = parent;
   }
 
-  @observable aticles = [];
+  @observable articles = [];
 
-  // 查询 aticles
+  // 查询 articles
   @action
-  getAticles = async () => {
-    const { list } = await api.getAticles();
-    this.aticles = list;
+  getArticles = async () => {
+    const res = await api.getArticles();
+    this.articles = res.list.map(v => ({...v, editor: false }));
+  }
+
+  // 创建虚拟 article (占位符)
+  @action
+  createFictitiousArticle = (parent) => {
+    const { id, name } = parent;
+    this.articles = [
+      { 
+        editor: true,
+        name: void 0, 
+        id: 'newArticle', 
+        tags: [{ id, name }],
+      },
+      ...this.articles,
+    ];
   }
 };

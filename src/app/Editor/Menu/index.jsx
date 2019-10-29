@@ -16,7 +16,7 @@ const useStateHook = (props, store) => {
   // 初始化数据
   const initData = () => {
     store.tag.getTags();
-    store.article.getAticles();
+    store.article.getArticles();
   }
 
   // 渲染菜单列表
