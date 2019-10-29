@@ -41,10 +41,14 @@ const useStateHook = (props, store) => {
   };
 
   // 编辑文章
-  const editorArticle = () => {};
+  const editorArticle = () => {
+    store.article.editorArticle(props.data);
+  };
 
   // 删除文章
-  const deleteArticle = () => {};
+  const deleteArticle = () => {
+    store.article.removeArticle({ id: props.data.id });
+  };
 
   // 点击操作菜单: 根据 key 分发到不同处理函数
   const onClickOperationMenu = ({ key, keyPath, item, domEvent }) => {
@@ -60,12 +64,18 @@ const useStateHook = (props, store) => {
     handler[key]();    
   };
 
-  // 编辑数据： 根据 id 值判断是编辑还是创建
+  // 编辑数据： 根据 id 判断是编辑还是创建，根据 type 值来判断操作对象
   const onEditor = (e) => {
     const name = e.target.value;
-    props.data.id === 'newTag'
-      ? store.tag.createTag({ name, parent: _.get(props.data, 'parent.id', null) })
-      : store.tag.updateTag({ name, id: props.data.id });
+    if (props.data.type === 'tag'){
+      props.data.id === 'newTag'
+        ? store.tag.createTag({ name, parent: props.data.parent.id})
+        : store.tag.updateTag({ name, id: props.data.id });
+    } else {
+        props.data.id === 'newArticle'
+          ? store.article.createArticle({ name, tags: [props.data.tags[0].id] })
+          : store.article.updateArticle({ name, id: props.data.id });
+    }
   };
 
   useEffect(() => {

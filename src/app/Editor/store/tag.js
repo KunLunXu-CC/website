@@ -38,7 +38,7 @@ export default class Store {
     this.tags = res.list.map(v => ({...v, editor: false }));
   }
 
-  // 更新 tag
+  // 删除 tag
   @action
   removeTags = async ({ id }) => {
     const res = await api.removeTags({ 
