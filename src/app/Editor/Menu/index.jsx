@@ -11,6 +11,8 @@ import MenuTitle from './MenuTitle';
 import { useStore } from '../store';
 import scss from './index.module.scss';
 
+const INLINE_INDENT = 14;  // 菜单缩进大小
+
 const useStateHook = (props, store) => {
 
   // 初始化数据
@@ -30,7 +32,10 @@ const useStateHook = (props, store) => {
             item.children.map(v => (recursion(v, index + 1))) : 
             <Menu.Item className={scss['menu-item-empty']} key={`${item.id}-empty`} />
           }
-          <div className={scss['menu-dividing']} style={{ left: `${index * 24 + 12}px` }} />
+          <div 
+            className={scss['menu-dividing']} 
+            style={{ left: `${index * INLINE_INDENT + 12}px` }} 
+          />
         </Menu.SubMenu> :
         <Menu.Item key={item.id}>
           <MenuTitle data={item} type="item"/>
@@ -67,6 +72,7 @@ export default (props) => {
           mode="inline"
           inlineCollapsed={false}
           onSelect={state.onSelect}
+          inlineIndent={INLINE_INDENT}
           openKeys={store.menu.openKeys}
           onOpenChange={state.onOpenChange}>
           {state.renderMenuList()}

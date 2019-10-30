@@ -1,11 +1,13 @@
 import React, {
   useRef,
+  useMemo,
   useState,
   Fragment,
   useEffect,
 } from 'react';
-import { Dropdown, Menu, Input } from 'antd';
+import classNames from 'classnames';
 import { Icon, Scroll } from 'qyrc';
+import { Dropdown, Menu, Input } from 'antd';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
@@ -78,11 +80,35 @@ const useStateHook = (props, store) => {
     }
   };
 
+  // 记得箭头小图标
+  const arrowClass = useMemo(() => {
+    return classNames(
+      scss['menu-title-arrow'], 
+      {[scss['menu-title-arrow-article']]: props.data.type === 'article'}
+    );
+  },[props.data.type]);
+
+  // 菜单图标
+  const menuIcon = useMemo(() => {
+    const map = {
+      article: 'icon-24',
+      tag: 'icon-wenjianjia',
+    };
+    return map[props.data.type];
+  },[props.data.type]);
+
   useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
   });
 
-  return { onClickOperationMenu, stopPropagation, onEditor, editorInputRef };
+  return { 
+    menuIcon,
+    onEditor, 
+    arrowClass, 
+    editorInputRef, 
+    stopPropagation, 
+    onClickOperationMenu, 
+  };
 }
 
 // props.type = 'subMenu | item ' props.data props.onMore
@@ -116,12 +142,8 @@ export default (props) => {
   return (
     <div className={scss['menu-title']}>
       <div className={scss['menu-title-content']}>
-        {props.type === 'subMenu' ? 
-          <Fragment>
-            <Icon type="icon-jiantou" className={scss['menu-title-arrow']}/>
-            <Icon type="icon-wenjianjia"/>
-          </Fragment>
-        : <Icon type="icon-24"/>}
+        <Icon type="icon-jiantou" className={state.arrowClass}/>
+        <Icon type={state.menuIcon}/>
         {props.data.editor ? 
           <Input
             onBlur={state.onEditor}
