@@ -22,8 +22,12 @@ const useStateHook = (props, store) => {
 
   // 创建文件夹
   const createFolder = () => {
-    store.menu.onOpenChange(props.data.id);
-    store.tag.createFictitiousTag(props.data);
+    if (props.data.type === 'tag'){
+      store.menu.onOpenChange(props.data.id);
+      store.tag.createFictitiousTag(props.data);
+    } else {
+      store.tag.createFictitiousTag(props.data.tags[0]);
+    }
   };
 
   // 编辑文件夹
@@ -38,8 +42,12 @@ const useStateHook = (props, store) => {
 
   // 创建文章
   const createArticle = () => {
-    store.menu.onOpenChange(props.data.id);
-    store.article.createFictitiousArticle(props.data);
+    if (props.data.type === 'tag'){
+      store.menu.onOpenChange(props.data.id);
+      store.article.createFictitiousArticle(props.data);
+    } else {
+      store.article.createFictitiousArticle(props.data.tags[0]);
+    }
   };
 
   // 编辑文章
@@ -152,8 +160,7 @@ export default (props) => {
             defaultValue={props.data.name}
             onClick={state.stopPropagation}
             className={scss['menu-title-input']} 
-          />
-        : props.data.name}
+          /> : props.data.name}
       </div>
       {!props.data.editor ? 
         <div className={scss['menu-title-more']}>
