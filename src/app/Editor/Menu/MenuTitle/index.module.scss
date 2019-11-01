@@ -2,11 +2,29 @@
 
 .menu-title {
   display: flex;
+  align-items: center;
 
   &-content {
     flex: 1;
     height: 40px;
     @include line-clamp(1);
+    
+    &-input {
+      padding: 2px;
+      border: none;
+      color: #Fff;
+      outline: none;
+      height: initial;
+      border-radius: 0px;
+      background: rgba($color: #fff, $alpha: 0.1);
+  
+      &:hover,
+      &:focus,
+      &:active {
+        border: none;
+        box-shadow: none;
+      }
+    }
   }
 
   &-more {
@@ -23,24 +41,6 @@
     }
   }
 
-  &-input {
-    flex: 1;
-    width: 20px;
-    padding: 2px;
-    border: none;
-    color: #Fff;
-    outline: none;
-    height: initial;
-    border-radius: 0px;
-    background: rgba($color: #fff, $alpha: 0.1);
-
-    &:hover,
-    &:focus,
-    &:active {
-      border: none;
-      box-shadow: none;
-    }
-  }
   .menu-title-arrow-article {
     opacity: 0;
   }

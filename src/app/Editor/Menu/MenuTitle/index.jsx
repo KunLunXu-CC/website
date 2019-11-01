@@ -149,9 +149,9 @@ export default (props) => {
 
   return (
     <div className={scss['menu-title']}>
+      <Icon type="icon-jiantou" className={state.arrowClass}/>
+      <Icon type={state.menuIcon}/>
       <div className={scss['menu-title-content']}>
-        <Icon type="icon-jiantou" className={state.arrowClass}/>
-        <Icon type={state.menuIcon}/>
         {props.data.editor ? 
           <Input
             onBlur={state.onEditor}
@@ -159,7 +159,7 @@ export default (props) => {
             onPressEnter={state.onEditor}
             defaultValue={props.data.name}
             onClick={state.stopPropagation}
-            className={scss['menu-title-input']} 
+            className={scss['menu-title-content-input']} 
           /> : props.data.name}
       </div>
       {!props.data.editor ? 
