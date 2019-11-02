@@ -5,14 +5,14 @@
   overflow: hidden;
   position: relative;
   background: #3d4b56;
-  
+
   display: flex;
   flex-direction: column;
 
   &-middle {
     flex: 1;
   }
-  
+
   .menu-item-empty {
     height: 0 !important;
     overflow: hidden !important;
@@ -25,7 +25,7 @@
       $bg: transparent;
       $color: #bec7ce;
       $bg-selected: #2e3a46;
-      
+
       border: none;
       color: $color;
       background: $bg;
@@ -33,7 +33,7 @@
       // 设置分割线(虚线)
       .ant-menu-sub {
         position: relative;
-        
+
         :local(.menu-dividing){
           top: 0;
           width: 1;
@@ -86,7 +86,7 @@
         display: none;
       }
     }
-  
+
     // 滚动条设置
     .qyrc-sroll-bar {
       opacity: 0.5;
@@ -94,6 +94,25 @@
       .qyrc-sroll-bar-slider {
         width: 2px;
       }
+    }
+  }
+
+  // 底部添加 tag
+  .munu-new-tag {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    cursor: pointer;
+    color: #bec7ce;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    transition: all 0.5s;
+    background: rgba($color: #2e3a46, $alpha: 0.5);
+
+    &:hover {
+      opacity: 1;
     }
   }
 }

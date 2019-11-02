@@ -20,9 +20,9 @@ export default class Store {
   // 创建 tag: 调用 api
   @action
   createTag = async ({ name, parent }) => {
-    const res = await api.createTags({ 
+    const res = await api.createTags({
       search: {},
-      body: [{ name, parent }], 
+      body: [{ name, parent }],
     });
     this.tags = res.list.map(v => ({...v, editor: false }));
   }
@@ -30,10 +30,10 @@ export default class Store {
   // 更新 tag
   @action
   updateTag = async ({ id, name }) => {
-    const res = await api.updateTags({ 
+    const res = await api.updateTags({
       search: {},
       conds: { id },
-      body: { name }, 
+      body: { name },
     });
     this.tags = res.list.map(v => ({...v, editor: false }));
   }
@@ -41,7 +41,7 @@ export default class Store {
   // 删除 tag
   @action
   removeTags = async ({ id }) => {
-    const res = await api.removeTags({ 
+    const res = await api.removeTags({
       search: {},
       conds: { id },
     });
@@ -50,13 +50,13 @@ export default class Store {
 
   // 创建虚拟 tag (占位符)
   @action
-  createFictitiousTag = (parent) => {
+  createFictitiousTag = (parent = {}) => {
     const { id, name } = parent;
     this.tags = [
-      { 
-        id: 'newTag', 
-        editor: true, 
-        name: void 0, 
+      {
+        id: 'newTag',
+        editor: true,
+        name: void 0,
         parent: { id, name },
       },
       ...this.tags,
