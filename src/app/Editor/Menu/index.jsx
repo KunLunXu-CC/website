@@ -1,6 +1,4 @@
 import React, {
-  useState,
-  Fragment,
   useEffect,
 } from 'react';
 import { Menu } from 'antd';
@@ -45,8 +43,9 @@ const useStateHook = (props, store) => {
   }
 
   // 选择项时
-  const onSelect = (args) => {
-    // console.log('------------->> menu args', args)
+  const onSelect = ({ key }) => {
+    store.article.open(key);
+    store.menu.toggleSelected(key);
   }
 
   // 添加 tag
@@ -79,7 +78,8 @@ export default (props) => {
           onSelect={state.onSelect}
           inlineIndent={INLINE_INDENT}
           openKeys={store.menu.openKeys}
-          onOpenChange={state.onOpenChange}>
+          onOpenChange={state.onOpenChange}
+          selectedKeys={[store.menu.selected]}>
           {state.renderMenuList()}
         </Menu>
       </Scroll>

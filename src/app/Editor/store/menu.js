@@ -9,12 +9,20 @@ export default class Store {
   // 当前展开的 SubMenu 菜单项 key 数组
   @observable openKeys = [];
 
+  @observable selected = null;  // 当前选中 key
+
+  // 选择子项
+  @action
+  toggleSelected = (key) => {
+    this.selected = this.selected === key ? null : key;
+  }
+
   // SubMenu 展开/关闭的回调
   @action
   onOpenChange = (openKeys) => {
     if (!openKeys){return false;}
-    _.isArray(openKeys) 
-      ? this.openKeys = [...openKeys] 
+    _.isArray(openKeys)
+      ? this.openKeys = [...openKeys]
       : this.openKeys = _.uniq([...this.openKeys, openKeys]);
   }
 
@@ -24,9 +32,9 @@ export default class Store {
       ...v,
       type: 'tag',
     }));
-    const articles = _.cloneDeep(this.parent.article.articles).map(v => ({ 
-      ...v, 
-      type: 'article', 
+    const articles = _.cloneDeep(this.parent.article.articles).map(v => ({
+      ...v,
+      type: 'article',
     }));
     let parents = tags.filter(v => !v.parent.id);
     let children = tags.filter(v => !!v.parent.id);

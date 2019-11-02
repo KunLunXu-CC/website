@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { observable, action, autorun, reaction, toJS } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import { PHOTO_TYPE } from '@config/consts';
 import * as api from '@api';
 
@@ -9,6 +9,34 @@ export default class Store {
   }
 
   @observable articles = [];
+
+  @observable openList = []; // 开启列表: { article： id, change }
+
+  // 获取工作窗口数据
+  @computed get works(){
+    return this.openList.map( v => ({
+      ...v,
+      article: this.articles.find(article => article.id === v.article),
+    }));
+  }
+
+  // 打开: 文章
+  @action
+  open = (article) => {
+    // 过滤: 如果已存在
+    if (!this.openList.find(v => v.article === article)){
+      this.openList = [...this.openList, {
+        article,
+        change: false,
+      }];
+    }
+  }
+
+  // 关闭: 文章
+  @action
+  close = (article) => {
+    this.openList = this.openList.filter(v => v.article !== article);
+  }
 
   // 查询 articles
   @action
@@ -20,9 +48,9 @@ export default class Store {
   // 创建 articles
   @action
   createArticle = async ({ name, tags }) => {
-    const res = await api.createArticles({ 
+    const res = await api.createArticles({
       search: {},
-      body: [{ name, tags }], 
+      body: [{ name, tags }],
     });
     this.articles = res.list.map(v => ({...v, editor: false }));
   }
@@ -30,10 +58,10 @@ export default class Store {
   // 更新 articles
   @action
   updateArticle = async ({ name, id }) => {
-    const res = await api.updateArticles({ 
+    const res = await api.updateArticles({
       search: {},
       conds: { id },
-      body: { name }, 
+      body: { name },
     });
     this.articles = res.list.map(v => ({...v, editor: false }));
   }
@@ -41,7 +69,7 @@ export default class Store {
   // 删除 tag
   @action
   removeArticle = async ({ id }) => {
-    const res = await api.removeArticles({ 
+    const res = await api.removeArticles({
       search: {},
       conds: { id },
     });
@@ -53,10 +81,10 @@ export default class Store {
   createFictitiousArticle = (parent) => {
     const { id, name } = parent;
     this.articles = [
-      { 
+      {
         editor: true,
-        name: void 0, 
-        id: 'newArticle', 
+        name: void 0,
+        id: 'newArticle',
         tags: [{ id, name }],
       },
       ...this.articles,
