@@ -1,50 +1,50 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  useRef,
+  useMemo,
+  useEffect,
+} from 'react';
 import { Scroll } from 'qyrc';
 import CodeMirror from "codemirror";
 
 import md from './test.md';
 
 import scss from './index.module.scss';
+import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
+import './theme';                                 // 引入 codemirror 主题(样式)
 
-// 引入模式
-// import 'codemirror/mode/javascript/javascript.js';
-import 'codemirror/mode/markdown/markdown.js';
+const useStateHook = () => {
+  const editorBodyRef = useRef(null);
+  const immutable = useMemo(() => ({
+    codeMirror: null,
+  }), []);
 
-// 基础样式
-import 'codemirror/lib/codemirror.css';
-
-// 引入主题
-import './theme/rubyblue';
-
-const theme = [
-  'bespin',
-  'blackboard',
-  'mbo',
-  'midnight',
-  'oceanic-next',
-  'paraiso-dark',
-  'yonce',
-];
-
-export default () => {
-
-  const ref = useRef(null);
+  const createCodeMirror = () => {
+    immutable.codeMirror = CodeMirror(editorBodyRef.current, {
+      value: md,
+      tabSize: 2,
+      indentUnit: 2,
+      lineNumbers: true,
+      mode:  "markdown",
+      lineWrapping: true,
+      theme: 'oceanic-next',
+    });
+  }
 
   useEffect(() => {
-    const myCodeMirror = CodeMirror(ref.current, {
-      value: md,
-      mode:  "markdown",
-      indentUnit: 2,
-      tabSize: 2,
-      lineNumbers: true,
-      lineWrapping: true,
-      theme: theme[4],
-    });
+    createCodeMirror();
   }, []);
+
+  return { editorBodyRef };
+}
+
+export default () => {
+  const state = useStateHook();
 
   return (
     <Scroll className={scss['editor']}>
-      <div ref={ref} />
+      <div
+        ref={state.editorBodyRef}
+        className={scss['editor-body']}/>
     </Scroll>
   );
 }

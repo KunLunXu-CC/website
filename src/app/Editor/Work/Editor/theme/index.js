@@ -1,3 +1,6 @@
+// 基础样式
+import 'codemirror/lib/codemirror.css';
+
 // 引入 codemirror 主题
 import 'codemirror/theme/bespin.css';
 import 'codemirror/theme/blackboard.css';
