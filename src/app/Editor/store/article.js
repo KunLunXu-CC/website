@@ -20,14 +20,16 @@ export default class Store {
     }));
   }
 
-  // 打开文章 change
+  // 切换状态(change)
   @action
-  setChange = (id, value) => {
+  toggleStatusWithChange = (id, content) => {
     const item = this.openList.find(v => v.article === id);
-    if (item && item.change !== value){
+    const article = this.articles.find(v => v.id === id);
+    const change = article.content !== content;
+    if (item && item.change !== change){
       this.openList = this.openList.map(v => ({
         ...v,
-        change: v.article === id ? value : v.change,
+        change: v.article === id ? change : v.change,
       }));
     }
   }

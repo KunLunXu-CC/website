@@ -22,7 +22,8 @@ const useStateHook = (props, store) => {
   // change 事件
   const onChange = () => {
     const { id } = props.data.article;
-    store.article.setChange(id, true);
+    const content = immutable.codeMirror.getValue();
+    store.article.toggleStatusWithChange(id, content);
   }
 
   const createCodeMirror = () => {
@@ -39,13 +40,14 @@ const useStateHook = (props, store) => {
   }
 
   // 保存
-  const onSave = () => {
+  const onSave = async () => {
     const { id } = props.data.article;
-    store.article.setChange(id, false);
-    store.article.updateArticle({
+    const content = immutable.codeMirror.getValue();
+    await store.article.updateArticle({
       id,
-      body: { content: immutable.codeMirror.getValue() },
+      body: { content },
     });
+    store.article.toggleStatusWithChange(id, content);
   }
 
   // 监听 ctrl + s

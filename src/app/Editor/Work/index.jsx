@@ -1,7 +1,9 @@
 import React, {
   useEffect
 } from 'react';
+import { Icon } from 'qyrc';
 import { Tabs } from 'antd';
+import classNames from 'classnames';
 import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '../store';
@@ -10,15 +12,9 @@ import Editor from './Editor';
 
 const useStateHook = (props, store) => {
   // 移除
-  const remove = (key) => {
+  const onClose = (key) => {
     store.article.close(key);
     store.menu.toggleSelected(key);
-  }
-
-  // 编辑
-  const onEdit = (targetKey, action) => {
-    const handlers = { remove };
-    handlers[action](targetKey);
   }
 
   // tabs change 事件
@@ -26,7 +22,7 @@ const useStateHook = (props, store) => {
     store.menu.toggleSelected(activeKey);
   }
 
-  return { onEdit, onTabsChange };
+  return { onClose, onTabsChange };
 }
 
 export default (props) => {
@@ -36,13 +32,24 @@ export default (props) => {
   return useObserver(() => (
     <div className={scss['work']}>
       <Tabs
-        hideAdd
-        type="editable-card"
-        onEdit={state.onEdit}
         onChange={state.onTabsChange}
         activeKey={store.menu.selected}>
         {store.article.works.map(v => (
-          <Tabs.TabPane tab={v.article.name} key={v.article.id}>
+          <Tabs.TabPane
+            key={v.article.id}
+            tab={(
+              <span className={scss['work-tab']}>
+                {v.article.name}&nbsp;&nbsp;
+                <Icon
+                  type="icon-guanbi6"
+                  className={classNames(
+                    scss['work-tab-icon'],
+                    {[scss['work-tab-icon-change']]: v.change}
+                  )}
+                  onClick={state.onClose.bind(null, v.article.id )}
+                />
+              </span>
+            )}>
             <div className={scss['tab-pane-body']}>
               <Editor data={v}/>
             </div>
