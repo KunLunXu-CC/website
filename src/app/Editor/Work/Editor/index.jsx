@@ -41,7 +41,7 @@ const useStateHook = (props, store) => {
 
   // 保存
   const onSave = async () => {
-    const { id } = props.data.article;
+    const { article: { id }, change } = props.data;
     const content = immutable.codeMirror.getValue();
     await store.article.updateArticle({
       id,
@@ -52,7 +52,8 @@ const useStateHook = (props, store) => {
 
   // 监听 ctrl + s
   const onKeyDown = (event) => {
-    if (event.keyCode !== 83 && !event.ctrlKey && !event.metaKey){return false;}
+    const downCtrrl = event.ctrlKey || event.metaKey;
+    if (event.keyCode !== 83 || !downCtrrl){return false;}
     event.preventDefault();
     onSave();
   }
