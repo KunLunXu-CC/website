@@ -71,7 +71,7 @@ const useStateHook = (props, store) => {
       editorArticle,
       deleteArticle,
     };
-    handler[key]();    
+    handler[key]();
   };
 
   // 编辑数据： 根据 id 判断是编辑还是创建，根据 type 值来判断操作对象
@@ -84,14 +84,14 @@ const useStateHook = (props, store) => {
     } else {
         props.data.id === 'newArticle'
           ? store.article.createArticle({ name, tags: [props.data.tags[0].id] })
-          : store.article.updateArticle({ name, id: props.data.id });
+          : store.article.updateArticle({ body: { name }, id: props.data.id });
     }
   };
 
   // 记得箭头小图标
   const arrowClass = useMemo(() => {
     return classNames(
-      scss['menu-title-arrow'], 
+      scss['menu-title-arrow'],
       {[scss['menu-title-arrow-article']]: props.data.type === 'article'}
     );
   },[props.data.type]);
@@ -109,13 +109,13 @@ const useStateHook = (props, store) => {
     editorInputRef.current && editorInputRef.current.focus();
   });
 
-  return { 
+  return {
     menuIcon,
-    onEditor, 
-    arrowClass, 
-    editorInputRef, 
-    stopPropagation, 
-    onClickOperationMenu, 
+    onEditor,
+    arrowClass,
+    editorInputRef,
+    stopPropagation,
+    onClickOperationMenu,
   };
 }
 
@@ -125,7 +125,7 @@ export default (props) => {
   const state = useStateHook(props, store);
 
   const menu = (
-    <Menu 
+    <Menu
       className={scss['operation-menu']}
       onClick={state.onClickOperationMenu}>
       <Menu.Item key="createFolder">
@@ -134,11 +134,11 @@ export default (props) => {
       </Menu.Item>
       <Menu.Item key="createArticle">
         <Icon type="icon-24"/>
-        创建文章      
+        创建文章
       </Menu.Item>
       <Menu.Item key={props.type === 'subMenu' ? 'editorFolder': 'editorArticle'}>
         <Icon type="icon-baocun"/>
-        编辑     
+        编辑
       </Menu.Item>
       <Menu.Item key={props.type === 'subMenu' ? 'deleteFolder': 'deleteArticle'}>
         <Icon type="icon-shanchu" />
@@ -152,27 +152,27 @@ export default (props) => {
       <Icon type="icon-jiantou" className={state.arrowClass}/>
       <Icon type={state.menuIcon}/>
       <div className={scss['menu-title-content']}>
-        {props.data.editor ? 
+        {props.data.editor ?
           <Input
             onBlur={state.onEditor}
             ref={state.editorInputRef}
             onPressEnter={state.onEditor}
             defaultValue={props.data.name}
             onClick={state.stopPropagation}
-            className={scss['menu-title-content-input']} 
+            className={scss['menu-title-content-input']}
           /> : props.data.name}
       </div>
-      {!props.data.editor ? 
+      {!props.data.editor ?
         <div className={scss['menu-title-more']}>
           <Dropdown
-            overlay={menu} 
+            overlay={menu}
             trigger={['click']}
-            placement="bottomRight" 
+            placement="bottomRight"
             onClick={state.stopPropagation} >
             <Icon type="icon-gengduo" onClick={state.onMore}/>
           </Dropdown>
         </div>
-      : null} 
+      : null}
     </div>
   );
 };

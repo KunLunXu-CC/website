@@ -20,6 +20,18 @@ export default class Store {
     }));
   }
 
+  // 打开文章 change
+  @action
+  setChange = (id, value) => {
+    const item = this.openList.find(v => v.article === id);
+    if (item && item.change !== value){
+      this.openList = this.openList.map(v => ({
+        ...v,
+        change: v.article === id ? value : v.change,
+      }));
+    }
+  }
+
   // 打开: 文章
   @action
   open = (article) => {
@@ -57,11 +69,11 @@ export default class Store {
 
   // 更新 articles
   @action
-  updateArticle = async ({ name, id }) => {
+  updateArticle = async ({ body, id }) => {
     const res = await api.updateArticles({
+      body,
       search: {},
       conds: { id },
-      body: { name },
     });
     this.articles = res.list.map(v => ({...v, editor: false }));
   }
