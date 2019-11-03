@@ -6,18 +6,14 @@ import { useObserver } from 'mobx-react-lite';
 import { useStore } from '../../store';
 import scss from './index.module.scss';
 
-const useStateHook = () => {
-
-}
-
 export default () => {
   const store = useStore();
 
   return useObserver(() => (
     <div className={scss['search-bar']}>
       <div className={scss['search-bar-prefix']}>
-        <Icon 
-          type={store.collapsed ? "icon-zhankai" :"icon-shousuo1" } 
+        <Icon
+          type={store.collapsed ? "icon-zhankai" :"icon-shousuo1" }
           onClick={store.toggleCollapsed}
         />
         {/* <Icon type="icon-fanhui"/> */}

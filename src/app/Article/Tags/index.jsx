@@ -1,6 +1,5 @@
-import React, { 
-  useState,
-  useEffect, 
+import React, {
+  useEffect,
 } from 'react';
 import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
@@ -23,7 +22,8 @@ const useStateHook = (props, store) => {
 
 export default (props) => {
   const store = useStore();
-  const state = useStateHook(props, store);
+  useStateHook(props, store);
+
   return useObserver(() => (
     <div className={scss['tags']}>
       <Scroll className={scss['tags-middle']}>

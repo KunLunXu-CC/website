@@ -44,9 +44,24 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.(js|jsx)$/,
+        include: [
+          path.resolve(__dirname, '../src'),
+        ],
+        exclude: [
+          path.resolve(__dirname, '../src/assets/font'),
+        ],
+
+        loader: 'eslint-loader',
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
         test: /\.(mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: ['babel-loader'],
       },
       {
         test: cssRegex,

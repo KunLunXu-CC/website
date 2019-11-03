@@ -6,7 +6,7 @@ import apps from '@app/index';
 export default class Store {
   constructor(){
     this.init();
-    _.forIn(this.autorun, v => autorun(v));      
+    _.forIn(this.autorun, v => autorun(v));
   }
 
   @observable list = [];
@@ -54,10 +54,9 @@ export default class Store {
 
   /**
    * 最小化（切换）
-   * @param {Object} app 当前应用配置
    */
   @action
-  minimize = (app) => {
+  minimize = () => {
     this.list = this.list.map(v => ({ ...v, isMin: !v.isMin }));
   };
 
@@ -73,7 +72,7 @@ export default class Store {
   };
 
   print = () => {
-    
+
   }
 
   // 自动运行函数列表

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { NoteLayout } from '@components';
 
-import scss from './index.module.scss';
+// import scss from './index.module.scss';
 import SearchList from './SearchList';
 import StoreProvider from './store';
 import WorkArea from './WorkArea';
@@ -9,7 +9,7 @@ import TagList from './TagList';
 import Header from './Header';
 import Footer from './Footer';
 
-const Note = (props) => {
+const Note = () => {
   return (
     <StoreProvider>
       <NoteLayout

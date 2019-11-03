@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import { observable, action, autorun, reaction, toJS } from 'mobx';
+import { observable, autorun, toJS } from 'mobx';
 
 import Tag from './tag';
 import Menu from './menu';

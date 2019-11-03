@@ -1,6 +1,5 @@
 import { Menu } from 'antd';
 import { Scroll, Icon } from 'qyrc';
-import { TagMenu } from '@components';
 import React, { useEffect } from 'react';
 import { useObserver } from 'mobx-react-lite';
 import scss from './index.module.scss';

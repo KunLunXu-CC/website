@@ -1,15 +1,16 @@
 import { Image, Icon } from 'qyrc';
-import React, { useRef } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import IMG from '@assets/img/74857125_p0.png';
 import scss from './index.module.scss';
 
-const useStateHook = (props) => {
-  
-};
+// const useStateHook = () => {
+
+// };
 
 export default (props) => {
-  const state = useStateHook(props);
+  // const state = useStateHook(props);
+
   return (
     <div className={classNames(scss['item'], scss[props.align || 'left'])}>
       <div className={scss['detail']}>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Icon, Scroll } from 'qyrc';
+import { Scroll } from 'qyrc';
 import Select from './Select';
 import UploadList from './UploadList';
 import scss from './index.module.scss';
 
-export default (props) => {
+export default () => {
   return (
     <Scroll className={scss['form']}>
       <Select />

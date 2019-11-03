@@ -1,5 +1,5 @@
 import React from 'react';
-import { observable, action, autorun, toJS } from 'mobx';
+import { observable } from 'mobx';
 const StoreContext = React.createContext(null);
 import App from './app';
 import User from './user';

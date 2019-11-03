@@ -4,7 +4,7 @@ import scss from './index.module.scss';
 import Body from './Body';
 import Side from './Side';
 
-export default (props) => {
+export default () => {
   return (
     <StoreProvider>
       <div className={scss['layout']}>

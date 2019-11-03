@@ -4,7 +4,6 @@ import React, {
   useMemo,
   useState,
   useEffect,
-  useCallback,
 } from 'react';
 import { Icon } from 'qyrc';
 import classNames from 'classnames';
@@ -68,14 +67,14 @@ const Dock = (props) => {
   const state = useStateHook(props);
 
   return (
-    <div 
-      ref={state.dockRef} 
+    <div
+      ref={state.dockRef}
       className={classNames(state.dockClassName, scss['dock'])} >
       <div className={scss['dock-body']}>
         {props.dataSource.map(v => (
-          <div 
-            key={v.code} 
-            className={scss['dock-app']} 
+          <div
+            key={v.code}
+            className={scss['dock-app']}
             onClick={state.onClick.bind(null, v)}>
             <Icon type={v.icon} style={{ fontSize: '50px' }}/>
           </div>

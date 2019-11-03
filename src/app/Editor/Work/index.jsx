@@ -1,6 +1,4 @@
-import React, {
-  useEffect
-} from 'react';
+import React from 'react';
 import { Icon } from 'qyrc';
 import { Tabs } from 'antd';
 import classNames from 'classnames';

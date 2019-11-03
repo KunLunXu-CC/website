@@ -1,7 +1,6 @@
-import _ from 'lodash';
 import React from 'react';
 import { useStore as useGlobalStore } from '@store';
-import { observable, action, autorun, reaction, toJS } from 'mobx';
+import { observable, autorun, toJS } from 'mobx';
 
 import Upload from './upload';
 
@@ -18,7 +17,7 @@ class Store {
   print = () => {
     console.group('%c[store]Album', 'color: green;');
     console.log('upload: ', toJS(this.upload));
-    console.groupEnd();   
+    console.groupEnd();
   };
 };
 

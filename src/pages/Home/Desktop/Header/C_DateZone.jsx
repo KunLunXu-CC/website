@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import scss from './index.module.scss';
 
 // TODO：优化，是否可以放于浏览器进程中
-const useStateHook = (props) => {
+const useStateHook = () => {
   const [date, setDate] = useState(moment());
 
   useEffect(() => {

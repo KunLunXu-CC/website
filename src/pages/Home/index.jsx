@@ -4,7 +4,7 @@ import DockList from './DockList/index';
 import AppList from './AppList/index';
 import Desktop from './Desktop/index';
 
-const Home = (props) => {
+const Home = () => {
   return (
     <Fragment>
       <DockList/>

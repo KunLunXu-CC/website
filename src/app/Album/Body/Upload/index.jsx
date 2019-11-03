@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Button } from 'antd';
+import { Drawer } from 'antd';
 import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '../../store';
@@ -12,7 +12,7 @@ const useStateHook = (props, store) => {
     store.upload.close();
   }
   return { onClose };
-} 
+}
 
 export default (props) => {
   const store = useStore();

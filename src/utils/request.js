@@ -14,23 +14,23 @@ const instance = axios.create({
  * @param   {Array}  request     请求拦截器[请求成功处理函数 function(config)， 请求失败处理函数 function(error)]
  * @param   {Array}  response    响应拦截器[响应成功处理函数 function(response), 响应失败处理函数 function(error)]
  * @return  {Object} { request: '移除请求拦截器 || null', response '移除响应拦截器 || null' }
- * 
- * @example 
- * const interceptors = use({ 
+ *
+ * @example
+ * const interceptors = use({
  *  request: [function(config), function(error)],
  *  response: [function(response), function(error)]
  * });
  */
 export const use = ({request, response}) => ({
   request: _.isArray(request) ? instance.interceptors.request.use(request[0], request[1]) : null,
-  response　: _.isArray(response) ? instance.interceptors.response.use(response[0], response[1]) : null,
+  response: _.isArray(response) ? instance.interceptors.response.use(response[0], response[1]) : null,
 });
 
 /**
  * 取消指定拦截器 (直接将上面use方法返回值传入即可移除对应的拦截器)
- * @param {Object}  request 　拦截请求时返回的值
- * @param {Object}  response 拦截响应时返回的值
- * 
+ * @param {Object} request 拦截请求时返回的值
+ * @param {Object} response 拦截响应时返回的值
+ *
  * @example 配合上面的 use 方法使用
  * // 添加拦截器
  * const interceptors = use(...args);
@@ -38,29 +38,29 @@ export const use = ({request, response}) => ({
  * eject(interceptors);
  */
 export const eject = ({request, response}) => {
-  request &&　instance.interceptors.request.eject(request);
-  response　&& instance.interceptors.response.eject(response);
+  request && instance.interceptors.request.eject(request);
+  response && instance.interceptors.response.eject(response);
 }
 
 /* 添加拦截器: 打印数据 */
-use({ 
+use({
   request: [
-    (config) => { 
-      log('request:', config); 
+    (config) => {
+      log('request:', config);
       return config;
     }
   ],
   response: [
-    (response)=> { 
-      log('response:', response); 
-      return response; 
+    (response)=> {
+      log('response:', response);
+      return response;
     }
   ]
 });
 
 
 /* 存储/添加 token*/
-use({ 
+use({
   request: [
     (config) => {
       const authorization = localStorage.getItem('authorization');
@@ -70,9 +70,9 @@ use({
   ],
   response: [
     (response)=> {
-      response.headers.authorization && 
+      response.headers.authorization &&
       localStorage.setItem('authorization', response.headers.authorization);
-      return response; 
+      return response;
     }
   ]
 });

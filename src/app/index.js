@@ -1,4 +1,4 @@
-import Tag from './Tag';
+// import Tag from './Tag';
 import Note from './Note';
 import Album from './Album';
 import Editor from './Editor';

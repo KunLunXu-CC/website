@@ -5,7 +5,7 @@ import Body from './Body';
 import Side from './Side';
 import Tags from './Tags';
 
-export default (props) => {
+export default () => {
   return (
     <StoreProvider>
       <div className={scss['layout']}>

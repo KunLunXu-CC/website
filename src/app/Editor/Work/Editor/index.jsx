@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import { Scroll } from 'qyrc';
 import CodeMirror from "codemirror";
-import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
@@ -41,7 +40,7 @@ const useStateHook = (props, store) => {
 
   // 保存
   const onSave = async () => {
-    const { article: { id }, change } = props.data;
+    const { article: { id } } = props.data;
     const content = immutable.codeMirror.getValue();
     await store.article.updateArticle({
       id,

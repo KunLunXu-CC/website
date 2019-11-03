@@ -22,7 +22,7 @@ export default () => {
     <Scroll className={scss['list']}>
       {
         mockdata.map((v, index) => (
-          <Item align={index % 2 !== 0 ? 'right' : 'left'}/>
+          <Item key={index} align={index % 2 !== 0 ? 'right' : 'left'}/>
         ))
       }
       <br/>

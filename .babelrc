@@ -12,13 +12,13 @@
       "libraryName": "antd",
       "libraryDirectory": "es",
       "style": "css"
-    }, "antd"], 
+    }, "antd"],
     // 按需加载 - qyrc
     ["import", {
       "libraryName": "qyrc",
       "libraryDirectory": "es",
       "style": true
-    }, "qyrc"], 
+    }, "qyrc"]
   ],
   "presets": ["@babel/preset-react", "@babel/preset-env"]
 }

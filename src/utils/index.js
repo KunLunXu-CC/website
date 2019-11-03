@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import React from 'react';
+import { message } from 'antd';
 import * as CONTS from '@config/consts';
-import { message, Select } from 'antd';
 
 /**
  * 根据需要过滤的列表过滤指定对象
@@ -44,7 +43,7 @@ export const log = (...args) => {
  */
 export const debounce = (fn, wait) => {
   var timeout = null;
-  return (e) => {
+  return () => {
     if(timeout !== null){clearTimeout(timeout);};
     timeout = setTimeout(fn.bind(null, escape), wait);
   }

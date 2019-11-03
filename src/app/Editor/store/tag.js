@@ -1,6 +1,4 @@
-import _ from 'lodash';
-import { observable, action, autorun, reaction, toJS } from 'mobx';
-import { PHOTO_TYPE } from '@config/consts';
+import { observable, action } from 'mobx';
 import * as api from '@api';
 
 export default class Store {

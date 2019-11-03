@@ -1,13 +1,12 @@
 import React from 'react';
 import { Image } from 'qyrc';
 import scss from './index.module.scss';
-import IMG from '@assets/img/left.jpg';
 
 export default (props) => {
   return (
-    <Image 
-      height="100px" 
-      src={props.data.img} 
+    <Image
+      height="100px"
+      src={props.data.img}
       className={scss['item']}>
       <div className={scss['mask']}>
         <div className={scss['title']}>

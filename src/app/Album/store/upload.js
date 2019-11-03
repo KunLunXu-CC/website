@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { observable, action, autorun, reaction, toJS } from 'mobx';
+import { observable, action, toJS } from 'mobx';
 import { PHOTO_TYPE } from '@config/consts';
 import { uploadPhotos } from '@api';
 
@@ -18,7 +18,7 @@ export default class Store {
   open = () => (this.show = true);
 
   /***** 上传文件列表 *****/
-  @observable fileList = []; 
+  @observable fileList = [];
 
   @action
   addFiles = (files) => {
@@ -28,12 +28,12 @@ export default class Store {
 
   @action
   removeFile = (file) => {
-    this.fileList = file 
-      ? this.fileList.filter(v => (!_.isEqual(v, file))) 
+    this.fileList = file
+      ? this.fileList.filter(v => (!_.isEqual(v, file)))
       : [];
   }
 
-  /***** 类型选择 *****/ 
+  /***** 类型选择 *****/
   @observable type = PHOTO_TYPE.UNKNOWN.VALUE;
 
   @action
@@ -41,7 +41,7 @@ export default class Store {
     this.type = value ? value : PHOTO_TYPE.UNKNOWN.VALUE;
   }
 
-  /***** 文件上传 *****/ 
+  /***** 文件上传 *****/
   @action
   upload = () => {
     uploadPhotos({

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { observable, action, autorun, reaction, computed, toJS } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 export default class Store {
   constructor(parent){

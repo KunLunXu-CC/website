@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { VariableBlock} from 'qyrc';
 import StoreProvider from './store';
 
@@ -17,7 +17,7 @@ export default () => {
         <div className={scss['editor-body']}>
           <div className={scss['editor-body-header']}><Header/></div>
           <div className={scss['editor-body-middle']}>
-            <VariableBlock 
+            <VariableBlock
               operationList={['right']}
               style={{ height: '100%' }}
               margin={{ right: '40%' }}

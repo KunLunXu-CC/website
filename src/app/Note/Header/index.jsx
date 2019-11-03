@@ -1,6 +1,5 @@
 import React from 'react';
-import { Input, Icon } from 'antd';
-import { useObserver } from 'mobx-react-lite';
+import { Input } from 'antd';
 
 import { useStore } from '../store'
 import scss from './index.module.scss';

@@ -1,8 +1,8 @@
 import _ from 'lodash';
+import React from 'react';
+import { Menu } from 'antd';
 import { Scroll } from 'qyrc';
-import { Menu, Icon } from 'antd';
 import { useObserver } from 'mobx-react-lite';
-import React, { useState, useEffect } from 'react';
 
 import scss from './index.module.scss';
 import { useStore } from '../store'

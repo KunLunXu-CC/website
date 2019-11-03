@@ -1,12 +1,10 @@
 import React, {
   useRef,
   useMemo,
-  useState,
-  Fragment,
   useEffect,
 } from 'react';
+import { Icon } from 'qyrc';
 import classNames from 'classnames';
-import { Icon, Scroll } from 'qyrc';
 import { Dropdown, Menu, Input } from 'antd';
 
 import { useStore } from '../../store';
@@ -61,7 +59,7 @@ const useStateHook = (props, store) => {
   };
 
   // 点击操作菜单: 根据 key 分发到不同处理函数
-  const onClickOperationMenu = ({ key, keyPath, item, domEvent }) => {
+  const onClickOperationMenu = ({ key, domEvent }) => {
     stopPropagation(domEvent);
     const handler = {
       createFolder,

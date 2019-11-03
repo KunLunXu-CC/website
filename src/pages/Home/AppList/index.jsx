@@ -5,7 +5,7 @@ import { Modal } from 'qyrc';
 import { useStore } from '@store';
 import scss from './index.module.scss';
 
-export default (props) => useObserver(() => {
+export default () => useObserver(() => {
   const store = useStore();
   return (
     <div className={scss['app-block']}>

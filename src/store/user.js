@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { login } from '@api';
-import { matchPath } from 'react-router-dom';
 import { observable, action, autorun, toJS } from 'mobx';
 
 import { RESCODE } from '@config/consts';
@@ -8,7 +7,7 @@ import { RESCODE } from '@config/consts';
 export default class Store {
   constructor(){
     this.login({});
-    _.forIn(this.autorun, v => autorun(v));    
+    _.forIn(this.autorun, v => autorun(v));
   }
 
   @observable user = {};
