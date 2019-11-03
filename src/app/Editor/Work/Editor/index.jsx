@@ -18,26 +18,6 @@ const useStateHook = (props, store) => {
     codeMirror: null,
   }), []);
 
-  // change 事件
-  const onChange = () => {
-    const { id } = props.data.article;
-    const content = immutable.codeMirror.getValue();
-    store.article.toggleStatusWithChange(id, content);
-  }
-
-  const createCodeMirror = () => {
-    immutable.codeMirror = CodeMirror(editorBodyRef.current, {
-      tabSize: 2,
-      indentUnit: 2,
-      lineNumbers: true,
-      mode:  "markdown",
-      lineWrapping: true,
-      theme: 'oceanic-next',
-      value: _.get(props, 'data.article.content') || '',
-    });
-    immutable.codeMirror.on('change', onChange);
-  }
-
   // 保存
   const onSave = async () => {
     const { article: { id } } = props.data;
@@ -58,8 +38,21 @@ const useStateHook = (props, store) => {
   }
 
   useEffect(() => {
-    createCodeMirror();
-  }, []);
+    immutable.codeMirror = CodeMirror(editorBodyRef.current, {
+      tabSize: 2,
+      indentUnit: 2,
+      lineNumbers: true,
+      mode:  "markdown",
+      lineWrapping: true,
+      theme: 'oceanic-next',
+      value: _.get(props, 'data.article.content') || '',
+    });
+    immutable.codeMirror.on('change', () => {
+      const { id } = props.data.article;
+      const content = immutable.codeMirror.getValue();
+      store.article.toggleStatusWithChange(id, content);
+    });
+  }, [props.data.article.id]);
 
   return { editorBodyRef, onKeyDown };
 }
