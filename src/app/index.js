@@ -6,7 +6,7 @@ import Article from './Article';
 
 export default [
   {
-    name: '相册',
+    name:'相册',
     code: 'album',
     path: '/album',
     component: Album,
