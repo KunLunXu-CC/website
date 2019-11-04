@@ -17,12 +17,10 @@ const useStateHook = (props) => {
 
   useEffect(() => {
     if (!dockRef.current){return false;}
-    let preShow = show;
 
     // 1. 重置 show 状态
     const resetShow = (value) => {
-      if (value === preShow) { return false;}
-      preShow = value;
+      if (value === show) { return false;}
       setShow(value);
     };
 
@@ -48,7 +46,7 @@ const useStateHook = (props) => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
     }
-  }, []);
+  }, [show]);
 
   // 计算 dock className
   const dockClassName = useMemo( () => (

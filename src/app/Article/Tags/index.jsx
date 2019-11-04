@@ -14,9 +14,11 @@ const getRootChildren = (data = []) => (data.filter(
 )));
 
 const useStateHook = (props, store) => {
+
   useEffect(() => {
     store.getTags();
-  }, []);
+  }, [store]);
+
   return {};
 }
 

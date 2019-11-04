@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, {
   useRef,
   useMemo,
@@ -45,14 +44,14 @@ const useStateHook = (props, store) => {
       mode:  "markdown",
       lineWrapping: true,
       theme: 'oceanic-next',
-      value: _.get(props, 'data.article.content') || '',
+      value: props.data.article.content || '',
     });
     immutable.codeMirror.on('change', () => {
-      const { id } = props.data.article;
+      const id= props.data.article.id;
       const content = immutable.codeMirror.getValue();
       store.article.toggleStatusWithChange(id, content);
     });
-  }, [props.data.article.id]);
+  }, [props.data.article.content, props.data.article.id, store, immutable]);
 
   return { editorBodyRef, onKeyDown };
 }

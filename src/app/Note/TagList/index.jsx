@@ -17,7 +17,7 @@ const useStateHook = (props, store) => {
 
   useEffect(() => {
     store.getTags();
-  }, []);
+  }, [store]);
 
   return { onClick };
 }
