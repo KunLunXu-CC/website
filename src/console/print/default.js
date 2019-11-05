@@ -8,5 +8,5 @@ $console.log(
     padding: 2px 5px; 
     border-radius: 4px;
     background: #1890ff; 
-  `,''
+  `, ''
 );

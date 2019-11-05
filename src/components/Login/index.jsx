@@ -17,7 +17,7 @@ const useStateHook = (props) => {
   const onLogin = () => {
     props.form.validateFieldsAndScroll((errors, values) => {
       if (!!errors){return false;}
-      _.isFunction(props.onLogin) && props.onLogin({ ...values });
+      _.isFunction(props.onLogin) && props.onLogin({ ... values });
     });
   };
 
@@ -33,7 +33,7 @@ const Desktop = (props) => {
         <Form>
           <Form.Item>
             {props.form.getFieldDecorator('account', {
-               rules: [{ required: true, message: '请输入账号!' }],
+              rules: [{ required: true, message: '请输入账号!' }],
             })(
               <Input 
                 size="large" 
@@ -43,7 +43,7 @@ const Desktop = (props) => {
           </Form.Item>
           <Form.Item>
             {props.form.getFieldDecorator('password', {
-               rules: [{ required: true, message: '请输入密码!' }],
+              rules: [{ required: true, message: '请输入密码!' }],
             })(
               <Input.Password 
                 size="large"

@@ -17,12 +17,12 @@ export default class Store {
   @action
   init = () => {
     const rest = apps.filter(v => v.defaultOpen).map(v => ({
-      ...v,
+      ... v,
       isMin: false,
       url: v.defaultUrl,
       match: matchPath(v.defaultUrl, { path: v.path, exact: true, strict: false}),
     }));
-    this.list = [...this.list, ...rest];
+    this.list = [... this.list, ... rest];
   }
 
   /**
@@ -39,7 +39,7 @@ export default class Store {
       app = apps.find( v => (
         match = matchPath(url, { path: v.path, exact: true, strict: false})
       ));
-      !!app && (this.list = [...this.list, { ...app, url, match, isMin: false }]);
+      !!app && (this.list = [... this.list, { ... app, url, match, isMin: false }]);
     }
   }
 
@@ -57,7 +57,7 @@ export default class Store {
    */
   @action
   minimize = () => {
-    this.list = this.list.map(v => ({ ...v, isMin: !v.isMin }));
+    this.list = this.list.map(v => ({ ... v, isMin: !v.isMin }));
   };
 
   /**
@@ -68,7 +68,7 @@ export default class Store {
   toggle = (app) => {
     if (this.list[this.list.length - 1].url === app.url){ return false; }
     const remove = _.remove(this.list, v => (v.url === app.url));
-    this.list = [...this.list, ...remove];
+    this.list = [... this.list, ... remove];
   };
 
   print = () => {

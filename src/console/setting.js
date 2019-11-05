@@ -6,7 +6,7 @@ const setting = () => {
   window.$console = window.console;
   if (_DEV_){return false;}
   window.console = {
-    ...window.console,
+    ... window.console,
     log: () => {},
     info: () => {},
     group: () => {},

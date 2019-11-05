@@ -6,9 +6,9 @@ import scss from './index.module.scss';
 import { useStore } from '../store';
 
 // 获取所有根级节点
-const getRootChildren = (data = []) => (data.filter(
-  item => (!data.find(v => v.parent === item.id)
-)));
+const getRootChildren = (data = []) => (
+  data.filter(item => (!data.find(v => v.parent === item.id)))
+);
 
 const useStateHook = (props, store) => {
   const onClick = ({ key }) => {

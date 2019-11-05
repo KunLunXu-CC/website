@@ -32,8 +32,8 @@ export const handleMessage = ({ rescode, message: info }) => {
 /**
  * 通用打印: 当前为开发环境下才允许打印
  */
-export const log = (...args) => {
-  _DEV_ && console.log(...args);
+export const log = (... args) => {
+  _DEV_ && console.log(... args);
 }
 
 /**
@@ -44,7 +44,7 @@ export const log = (...args) => {
 export const debounce = (fn, wait) => {
   var timeout = null;
   return () => {
-    if(timeout !== null){clearTimeout(timeout);};
+    if (timeout !== null){clearTimeout(timeout);};
     timeout = setTimeout(fn.bind(null, escape), wait);
   }
 }

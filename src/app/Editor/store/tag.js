@@ -12,7 +12,7 @@ export default class Store {
   @action
   getTags = async () => {
     const res = await api.getTags();
-    this.tags = res.list.map(v => ({...v, editor: false }));
+    this.tags = res.list.map(v => ({... v, editor: false }));
   }
 
   // 创建 tag: 调用 api
@@ -22,7 +22,7 @@ export default class Store {
       search: {},
       body: [{ name, parent }],
     });
-    this.tags = res.list.map(v => ({...v, editor: false }));
+    this.tags = res.list.map(v => ({... v, editor: false }));
   }
 
   // 更新 tag
@@ -33,7 +33,7 @@ export default class Store {
       conds: { id },
       body: { name },
     });
-    this.tags = res.list.map(v => ({...v, editor: false }));
+    this.tags = res.list.map(v => ({... v, editor: false }));
   }
 
   // 删除 tag
@@ -43,7 +43,7 @@ export default class Store {
       search: {},
       conds: { id },
     });
-    this.tags = res.list.map(v => ({...v, editor: false }));
+    this.tags = res.list.map(v => ({... v, editor: false }));
   }
 
   // 创建虚拟 tag (占位符)
@@ -57,7 +57,7 @@ export default class Store {
         name: void 0,
         parent: { id, name },
       },
-      ...this.tags,
+      ... this.tags,
     ];
   }
 

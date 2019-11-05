@@ -13,7 +13,7 @@ export default class Store {
   // 获取工作窗口数据
   @computed get works(){
     return this.openList.map( v => ({
-      ...v,
+      ... v,
       article: this.articles.find(article => article.id === v.article),
     }));
   }
@@ -26,7 +26,7 @@ export default class Store {
     const change = article.content !== content;
     if (item && item.change !== change){
       this.openList = this.openList.map(v => ({
-        ...v,
+        ... v,
         change: v.article === id ? change : v.change,
       }));
     }
@@ -37,7 +37,7 @@ export default class Store {
   open = (article) => {
     // 过滤: 如果已存在
     if (!this.openList.find(v => v.article === article)){
-      this.openList = [...this.openList, {
+      this.openList = [... this.openList, {
         article,
         change: false,
       }];
@@ -54,7 +54,7 @@ export default class Store {
   @action
   getArticles = async () => {
     const res = await api.getArticles();
-    this.articles = res.list.map(v => ({...v, editor: false }));
+    this.articles = res.list.map(v => ({... v, editor: false }));
   }
 
   // 创建 articles
@@ -64,7 +64,7 @@ export default class Store {
       search: {},
       body: [{ name, tags }],
     });
-    this.articles = res.list.map(v => ({...v, editor: false }));
+    this.articles = res.list.map(v => ({... v, editor: false }));
   }
 
   // 更新 articles
@@ -75,7 +75,7 @@ export default class Store {
       search: {},
       conds: { id },
     });
-    this.articles = res.list.map(v => ({...v, editor: false }));
+    this.articles = res.list.map(v => ({... v, editor: false }));
   }
 
   // 删除 tag
@@ -85,7 +85,7 @@ export default class Store {
       search: {},
       conds: { id },
     });
-    this.articles = res.list.map(v => ({...v, editor: false }));
+    this.articles = res.list.map(v => ({... v, editor: false }));
   }
 
   // 创建虚拟 article (占位符)
@@ -99,7 +99,7 @@ export default class Store {
         id: 'newArticle',
         tags: [{ id, name }],
       },
-      ...this.articles,
+      ... this.articles,
     ];
   }
 

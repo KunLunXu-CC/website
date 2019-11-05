@@ -23,7 +23,7 @@ export default class Store {
   @action
   addFiles = (files) => {
     if (!files){return false;}
-    this.fileList = [ ...this.fileList, ...files ];
+    this.fileList = [ ... this.fileList, ... files ];
   }
 
   @action

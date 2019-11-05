@@ -29,7 +29,7 @@ class Store {
 
   @action
   setSearch = (value) => {
-    this.search = { ...this.search, ...value };
+    this.search = { ... this.search, ... value };
   }
 
   @action
@@ -41,7 +41,7 @@ class Store {
   getTags = () => {
     getTags().then(data => {
       const { list } = data;
-      this.tagList = [BASE_TAG, ...list];
+      this.tagList = [BASE_TAG, ... list];
     });
   };
 
@@ -62,12 +62,12 @@ class Store {
     },
     getNotes: () => {
       const params = {
-        search: { ...this.search }
+        search: { ... this.search }
       };
       !!this.tag && this.tag !== BASE_TAG.id && (params.search.tags = [this.tag]);
       getNotes(params).then(data => {
         const { list } = data;
-        this.noteList = [...list];
+        this.noteList = [... list];
       })
     },
   };

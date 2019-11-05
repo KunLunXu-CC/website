@@ -79,8 +79,8 @@ export default (props) => {
         </Menu>
       </Scroll>
       <div
-          onClick={state.addTag}
-          className={scss['munu-new-tag']} >
+        onClick={state.addTag}
+        className={scss['munu-new-tag']} >
         <Icon type="icon-xinzeng" />
       </div>
     </div>

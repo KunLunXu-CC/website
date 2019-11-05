@@ -22,18 +22,18 @@ export default class Store {
   onOpenChange = (openKeys) => {
     if (!openKeys){return false;}
     _.isArray(openKeys)
-      ? this.openKeys = [...openKeys]
-      : this.openKeys = _.uniq([...this.openKeys, openKeys]);
+      ? this.openKeys = [... openKeys]
+      : this.openKeys = _.uniq([... this.openKeys, openKeys]);
   }
 
   // 菜单列表: 计算、处理 this.parent.tag.tags、this.parent.article.articles
   @computed get list() {
     const tags = _.cloneDeep(this.parent.tag.tags).map(v => ({
-      ...v,
+      ... v,
       type: 'tag',
     }));
     const articles = _.cloneDeep(this.parent.article.articles).map(v => ({
-      ...v,
+      ... v,
       type: 'article',
     }));
     let parents = tags.filter(v => !v.parent.id);
@@ -51,7 +51,7 @@ export default class Store {
           }
         });
         // 挂载当前目录下所有文章: 默认按照第一个 tag 为准
-        parent.children.push(...articles.filter(
+        parent.children.push(... articles.filter(
           article => (_.get(article, 'tags[0].id') === parent.id)
         ));
       });

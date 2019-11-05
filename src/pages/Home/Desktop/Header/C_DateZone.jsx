@@ -9,7 +9,7 @@ const useStateHook = () => {
 
   useEffect(() => {
     const cleard = setInterval(() => setDate(moment()), 1000);
-    return clearImmediate.bind(null,cleard );
+    return clearImmediate.bind(null, cleard);
   }, []);
 
   return { date };

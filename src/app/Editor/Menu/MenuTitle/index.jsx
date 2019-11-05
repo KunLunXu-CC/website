@@ -80,9 +80,9 @@ const useStateHook = (props, store) => {
         ? store.tag.createTag({ name, parent: props.data.parent.id})
         : store.tag.updateTag({ name, id: props.data.id });
     } else {
-        props.data.id === 'newArticle'
-          ? store.article.createArticle({ name, tags: [props.data.tags[0].id] })
-          : store.article.updateArticle({ body: { name }, id: props.data.id });
+      props.data.id === 'newArticle'
+        ? store.article.createArticle({ name, tags: [props.data.tags[0].id] })
+        : store.article.updateArticle({ body: { name }, id: props.data.id });
     }
   };
 
@@ -92,7 +92,7 @@ const useStateHook = (props, store) => {
       scss['menu-title-arrow'],
       {[scss['menu-title-arrow-article']]: props.data.type === 'article'}
     );
-  },[props.data.type]);
+  }, [props.data.type]);
 
   // 菜单图标
   const menuIcon = useMemo(() => {
@@ -101,7 +101,7 @@ const useStateHook = (props, store) => {
       tag: 'icon-wenjianjia',
     };
     return map[props.data.type];
-  },[props.data.type]);
+  }, [props.data.type]);
 
   useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
@@ -169,8 +169,8 @@ export default (props) => {
             onClick={state.stopPropagation} >
             <Icon type="icon-gengduo" onClick={state.onMore}/>
           </Dropdown>
-        </div>
-      : null}
+        </div> : null
+      }
     </div>
   );
 };

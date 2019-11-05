@@ -22,8 +22,12 @@ const instance = axios.create({
  * });
  */
 export const use = ({request, response}) => ({
-  request: _.isArray(request) ? instance.interceptors.request.use(request[0], request[1]) : null,
-  response: _.isArray(response) ? instance.interceptors.response.use(response[0], response[1]) : null,
+  request: _.isArray(request) 
+    ? instance.interceptors.request.use(request[0], request[1]) 
+    : null,
+  response: _.isArray(response) 
+    ? instance.interceptors.response.use(response[0], response[1]) 
+    : null,
 });
 
 /**

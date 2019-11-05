@@ -9,7 +9,7 @@ const useStateHook = (props, store) => {
   // select option 数据
   const options = useMemo(() => {
     const res = [];
-    for(let key in PHOTO_TYPE){
+    for (let key in PHOTO_TYPE){
       res.push({ 
         key: PHOTO_TYPE[key].VALUE, 
         title: PHOTO_TYPE[key].DESC,
