@@ -1,11 +1,12 @@
 import axios from '@utils/request';
 
-export const getTags = async ({ pagination, search } = {}) => {
+export const getTags = async ({pagination, search} = {}) => {
+
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, pagination },
+      variables: {search, pagination},
       query: `
         query($search: TagSearch, $pagination: Pagination){
           tags( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
@@ -17,15 +18,17 @@ export const getTags = async ({ pagination, search } = {}) => {
         }`,
     }
   });
-  return res.data.data.tags;  
+  return res.data.data.tags;
+
 }
 
-export const createTags = async ({ body, search, pagination } = {}) => {
+export const createTags = async ({body, search, pagination} = {}) => {
+
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { body, search, pagination },
+      variables: {body, search, pagination},
       query: `
         mutation(
           $body: [TagFields!]!, 
@@ -47,14 +50,16 @@ export const createTags = async ({ body, search, pagination } = {}) => {
     }
   });
   return res.data.data.createTags;
+
 }
 
-export const updateTags = async ({ conds, body, search, pagination } = {}) => {
+export const updateTags = async ({conds, body, search, pagination} = {}) => {
+
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: {conds, body, search, pagination},
       query: `
         mutation(
           $conds: TagSearch!,
@@ -78,14 +83,16 @@ export const updateTags = async ({ conds, body, search, pagination } = {}) => {
     }
   });
   return res.data.data.updateTags;
+
 }
 
-export const removeTags = async ({ conds, body, search, pagination } = {}) => {
+export const removeTags = async ({conds, body, search, pagination} = {}) => {
+
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: {conds, body, search, pagination},
       query: `
         mutation(
           $conds: TagSearch!,
@@ -107,4 +114,5 @@ export const removeTags = async ({ conds, body, search, pagination } = {}) => {
     }
   });
   return res.data.data.removeTags;
+
 }

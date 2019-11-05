@@ -1,11 +1,12 @@
 import axios from '@utils/request';
 
-export const getNotes = async ({ pagination, search } = {}) => {
+export const getNotes = async ({pagination, search} = {}) => {
+
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, pagination },
+      variables: {search, pagination},
       query: `
         query($search: NoteSearch, $pagination: Pagination){
           notes( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
@@ -18,4 +19,5 @@ export const getNotes = async ({ pagination, search } = {}) => {
     }
   });
   return res.data.data.notes;
+
 };

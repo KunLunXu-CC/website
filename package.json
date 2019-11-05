@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --config ./webpack/webpack.config.dev.js --open",
     "build": "rm -rf build/* && webpack --config ./webpack/webpack.config.js",
     "commit": "git-cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "eslint:fix": "eslint --fix src"
   },
   "keywords": [],
   "author": "",

@@ -39,5 +39,14 @@ module.exports = {
     "switch-colon-spacing": [1, {"after": true, "before": false}],    // 强制在 switch 的冒号左右有空格
     "no-extra-semi": 0,                                               // 禁止不必要的分号
     "no-extra-boolean-cast": 0,                                       // 禁止不必要的布尔转换
-  }
+    "no-var": 1,                                                      // 禁止使用 var
+    "space-infix-ops": 1,                                             // 要求中缀操作符周围有空格
+    "eol-last": 1,                                                    // 文件结尾空一行
+    "no-multiple-empty-lines": 1,                                     // 行末不要空格
+    "padded-blocks": 1,                                               // 不要故意留一些没必要的空白行
+    "object-curly-spacing": 1,                                        // 花括号 {} 里加空格
+    "array-bracket-spacing": 1,                                       // 方括号[]里不要加空格
+    "key-spacing": 1,                                                 // 在对象的属性中， 键值之间要有空格
+    "no-trailing-spaces": 1,                                          // 行末不要空格
+  } 
 }

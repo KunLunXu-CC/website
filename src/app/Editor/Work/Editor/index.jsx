@@ -53,7 +53,7 @@ const useStateHook = (props, store) => {
         store.article.toggleStatusWithChange(id, content);
       });
     } 
-  }, [props.data.article, immutable]);
+  }, [props.data.article, immutable, store]);
 
   return { editorBodyRef, onKeyDown };
 }
