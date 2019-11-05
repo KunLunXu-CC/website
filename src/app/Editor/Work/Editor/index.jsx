@@ -37,21 +37,23 @@ const useStateHook = (props, store) => {
   }
 
   useEffect(() => {
-    immutable.codeMirror = CodeMirror(editorBodyRef.current, {
-      tabSize: 2,
-      indentUnit: 2,
-      lineNumbers: true,
-      mode:  "markdown",
-      lineWrapping: true,
-      theme: 'oceanic-next',
-      value: props.data.article.content || '',
-    });
-    immutable.codeMirror.on('change', () => {
-      const id= props.data.article.id;
-      const content = immutable.codeMirror.getValue();
-      store.article.toggleStatusWithChange(id, content);
-    });
-  }, [props.data.article.content, props.data.article.id, store, immutable]);
+    if (!immutable.codeMirror) {
+      immutable.codeMirror = CodeMirror(editorBodyRef.current, {
+        tabSize: 2,
+        indentUnit: 2,
+        lineNumbers: true,
+        mode:  "markdown",
+        lineWrapping: true,
+        theme: 'oceanic-next',
+        value: props.data.article.content || '',
+      });
+      immutable.codeMirror.on('change', () => {
+        const id= props.data.article.id;
+        const content = immutable.codeMirror.getValue();
+        store.article.toggleStatusWithChange(id, content);
+      });
+    } 
+  }, [props.data.article, immutable]);
 
   return { editorBodyRef, onKeyDown };
 }
