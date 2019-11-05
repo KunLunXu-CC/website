@@ -13,7 +13,7 @@ export default () => {
     <div className={scss['search-bar']}>
       <div className={scss['search-bar-prefix']}>
         <Icon
-          type={store.collapsed ? "icon-zhankai" :"icon-shousuo1" }
+          type={store.collapsed ? "icon-zhankai" : "icon-shousuo1" }
           onClick={store.toggleCollapsed}
         />
         {/* <Icon type="icon-fanhui"/> */}

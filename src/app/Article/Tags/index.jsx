@@ -14,7 +14,6 @@ const getRootChildren = (data = []) => (
 );
 
 const useStateHook = (props, store) => {
-
   useEffect(() => {
     store.getTags();
   }, [store]);

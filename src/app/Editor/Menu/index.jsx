@@ -12,7 +12,6 @@ import scss from './index.module.scss';
 const INLINE_INDENT = 14;  // 菜单缩进大小
 
 const useStateHook = (props, store) => {
-
   // 渲染菜单列表
   const renderMenuList = () => {
     const recursion = (item, index) => {

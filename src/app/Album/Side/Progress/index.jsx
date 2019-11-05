@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import scss from './index.module.scss';
 
 const useStateHook = () => {
-
   // bar 样式
   const barStyle = useMemo(() => ({
     width: '80%',
