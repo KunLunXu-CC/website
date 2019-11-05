@@ -5,15 +5,14 @@ import { useStore } from '../../../../store';
 import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
-
   // select option 数据
   const options = useMemo(() => {
     const res = [];
     for (let key in PHOTO_TYPE){
-      res.push({ 
-        key: PHOTO_TYPE[key].VALUE, 
+      res.push({
+        key: PHOTO_TYPE[key].VALUE,
         title: PHOTO_TYPE[key].DESC,
-        value: PHOTO_TYPE[key].VALUE, 
+        value: PHOTO_TYPE[key].VALUE,
       });
     }
     return res;

@@ -15,8 +15,8 @@ export default [
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
-      toolPosition: {top: 15, left: 15},
-      defaultParams: {width: 1000, height: 530, offsetX: 50, offsetY: 50},
+      toolPosition: { top: 15, left: 15 },
+      defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
   {
@@ -29,8 +29,8 @@ export default [
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
-      toolPosition: {top: 15, right: 15},
-      defaultParams: {width: 1000, height: 530, offsetX: 50, offsetY: 50},
+      toolPosition: { top: 15, right: 15 },
+      defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
   {
@@ -43,9 +43,9 @@ export default [
     component: Article,
     modalProps: {
       dragHeight: 40,
-      toolPosition: {top: 5, left: 5},
+      toolPosition: { top: 5, left: 5 },
       toolClassName: 'article-modal-tool',
-      defaultParams: {width: 1220, height: 630, offsetX: 50, offsetY: 50},
+      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
   {
@@ -58,8 +58,8 @@ export default [
     defaultUrl: '/note',
     modalProps: {
       dragHeight: 40,
-      toolPosition: {top: 15, left: 5},
-      defaultParams: {width: 980, height: 500, offsetX: 50, offsetY: 50},
+      toolPosition: { top: 15, left: 5 },
+      defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
     },
   },
   // {

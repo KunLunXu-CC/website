@@ -42,7 +42,7 @@ export default (props) => {
                   type="icon-guanbi6"
                   className={classNames(
                     scss['work-tab-icon'],
-                    {[scss['work-tab-icon-change']]: v.change}
+                    { [scss['work-tab-icon-change']]: v.change }
                   )}
                   onClick={state.onClose.bind(null, v.article.id )}
                 />

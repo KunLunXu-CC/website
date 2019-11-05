@@ -1,13 +1,12 @@
 import axios from '@utils/request';
-import {rsa} from '@utils/encryption';
+import { rsa } from '@utils/encryption';
 
-export const login = async ({account, password}) => {
-
+export const login = async ({ account, password }) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: {account, password: password ? rsa(password) : void 0},
+      variables: { account, password: password ? rsa(password) : void 0 },
       query: `
       mutation($account: String, $password: String){
         login( account: $account, password: $password ){
@@ -19,5 +18,4 @@ export const login = async ({account, password}) => {
     }
   });
   return res.data.data.login;
-
 }

@@ -77,7 +77,7 @@ const useStateHook = (props, store) => {
     const name = e.target.value;
     if (props.data.type === 'tag'){
       props.data.id === 'newTag'
-        ? store.tag.createTag({ name, parent: props.data.parent.id})
+        ? store.tag.createTag({ name, parent: props.data.parent.id })
         : store.tag.updateTag({ name, id: props.data.id });
     } else {
       props.data.id === 'newArticle'
@@ -90,7 +90,7 @@ const useStateHook = (props, store) => {
   const arrowClass = useMemo(() => {
     return classNames(
       scss['menu-title-arrow'],
-      {[scss['menu-title-arrow-article']]: props.data.type === 'article'}
+      { [scss['menu-title-arrow-article']]: props.data.type === 'article' }
     );
   }, [props.data.type]);
 
@@ -134,11 +134,11 @@ export default (props) => {
         <Icon type="icon-24"/>
         创建文章
       </Menu.Item>
-      <Menu.Item key={props.type === 'subMenu' ? 'editorFolder': 'editorArticle'}>
+      <Menu.Item key={props.type === 'subMenu' ? 'editorFolder' : 'editorArticle'}>
         <Icon type="icon-baocun"/>
         编辑
       </Menu.Item>
-      <Menu.Item key={props.type === 'subMenu' ? 'deleteFolder': 'deleteArticle'}>
+      <Menu.Item key={props.type === 'subMenu' ? 'deleteFolder' : 'deleteArticle'}>
         <Icon type="icon-shanchu" />
         删除
       </Menu.Item>

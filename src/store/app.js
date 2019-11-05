@@ -1,15 +1,12 @@
 import _ from 'lodash';
-import {matchPath} from 'react-router-dom';
-import {observable, action, autorun, toJS} from 'mobx';
+import { matchPath } from 'react-router-dom';
+import { observable, action, autorun, toJS } from 'mobx';
 import apps from '@app/index';
 
 export default class Store {
-
   constructor(){
-
     this.init();
     _.forIn(this.autorun, v => autorun(v));
-
   }
 
   @observable list = [];
@@ -19,15 +16,13 @@ export default class Store {
    */
   @action
   init = () => {
-
     const rest = apps.filter(v => v.defaultOpen).map(v => ({
       ... v,
       isMin: false,
       url: v.defaultUrl,
-      match: matchPath(v.defaultUrl, {path: v.path, exact: true, strict: false}),
+      match: matchPath(v.defaultUrl, { path: v.path, exact: true, strict: false }),
     }));
     this.list = [... this.list, ... rest];
-
   }
 
   /**
@@ -36,22 +31,16 @@ export default class Store {
    */
   @action
   open = (url) => {
-
     let match = void 0;
     let app = this.list.find(v => (v.url === url));
     if (!!app){
-
       this.minimize(app);
-
     } else {
-
       app = apps.find( v => (
-        match = matchPath(url, {path: v.path, exact: true, strict: false})
+        match = matchPath(url, { path: v.path, exact: true, strict: false })
       ));
-      !!app && (this.list = [... this.list, {... app, url, match, isMin: false}]);
-
+      !!app && (this.list = [... this.list, { ... app, url, match, isMin: false }]);
     }
-
   }
 
   /**
@@ -60,9 +49,7 @@ export default class Store {
  */
   @action
   close = (app) => {
-
     this.list = this.list.filter(v => v.url !== app.url);
-
   };
 
   /**
@@ -70,9 +57,7 @@ export default class Store {
    */
   @action
   minimize = () => {
-
-    this.list = this.list.map(v => ({... v, isMin: !v.isMin}));
-
+    this.list = this.list.map(v => ({ ... v, isMin: !v.isMin }));
   };
 
   /**
@@ -81,15 +66,11 @@ export default class Store {
    */
   @action
   toggle = (app) => {
-
     if (this.list[this.list.length - 1].url === app.url){
-
       return false;
-
     }
     const remove = _.remove(this.list, v => (v.url === app.url));
     this.list = [... this.list, ... remove];
-
   };
 
   print = () => {
@@ -99,12 +80,9 @@ export default class Store {
   // 自动运行函数列表
   autorun = {
     print: () => {
-
       console.group('%c[store]app', 'color: green;');
       console.log('list: ', toJS(this.list));
       console.groupEnd();
-
     }
   };
-
 };

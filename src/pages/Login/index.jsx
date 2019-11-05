@@ -13,8 +13,8 @@ const useStateHook = (props, store) => {
   // 登录
   const onLogin = ({ account, password }) => {
     store.user.login({ account, password }).then(({ logined }) => {
-      logined 
-        ? props.history.push('/') 
+      logined
+        ? props.history.push('/')
         : message.warning('登录失败, 账号或密码错误！');
     });
   };

@@ -1,6 +1,6 @@
 /**
  * 用户登录组件
- * @param {Function} props.onLogin  登录触发事件 ({ account, password }) => {} 
+ * @param {Function} props.onLogin  登录触发事件 ({ account, password }) => {}
  * @returns {ReactDOM}
  */
 
@@ -35,8 +35,8 @@ const Desktop = (props) => {
             {props.form.getFieldDecorator('account', {
               rules: [{ required: true, message: '请输入账号!' }],
             })(
-              <Input 
-                size="large" 
+              <Input
+                size="large"
                 placeholder="请输入账号"
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
             )}
@@ -45,7 +45,7 @@ const Desktop = (props) => {
             {props.form.getFieldDecorator('password', {
               rules: [{ required: true, message: '请输入密码!' }],
             })(
-              <Input.Password 
+              <Input.Password
                 size="large"
                 placeholder="请输入密码"
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}/>

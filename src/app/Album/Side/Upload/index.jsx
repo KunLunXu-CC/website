@@ -18,7 +18,7 @@ export default (props) => {
     <div className={scss['upload']}>
       <Button
         block
-        icon="upload" 
+        icon="upload"
         type="primary"
         onClick={state.onClick}>
         上传

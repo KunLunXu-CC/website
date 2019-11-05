@@ -6,9 +6,7 @@ import JSEncrypt from 'jsencrypt';
  * @returns {String}      加密后的数据
  */
 export const rsa = (data) => {
-
   const encrypt = new JSEncrypt();
   encrypt.setPublicKey(PUBLICKEY);
   return encrypt.encrypt(data);
-
 };

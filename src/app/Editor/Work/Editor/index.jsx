@@ -42,17 +42,17 @@ const useStateHook = (props, store) => {
         tabSize: 2,
         indentUnit: 2,
         lineNumbers: true,
-        mode:  "markdown",
+        mode: "markdown",
         lineWrapping: true,
         theme: 'oceanic-next',
         value: props.data.article.content || '',
       });
       immutable.codeMirror.on('change', () => {
-        const id= props.data.article.id;
+        const id = props.data.article.id;
         const content = immutable.codeMirror.getValue();
         store.article.toggleStatusWithChange(id, content);
       });
-    } 
+    }
   }, [props.data.article, immutable, store]);
 
   return { editorBodyRef, onKeyDown };

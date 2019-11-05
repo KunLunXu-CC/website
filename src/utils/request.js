@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import axios from 'axios';
-import {log} from '@utils';
+import { log } from '@utils';
 
 // 创建 axios 实例
 const instance = axios.create({
-  headers: {'Content-Type': ' application/json'},
+  headers: { 'Content-Type': ' application/json' },
   baseURL: GLOBAL_SERVICE.HOST,
   timeout: 10000,
 });
@@ -21,7 +21,7 @@ const instance = axios.create({
  *  response: [function(response), function(error)]
  * });
  */
-export const use = ({request, response}) => ({
+export const use = ({ request, response }) => ({
   request: _.isArray(request)
     ? instance.interceptors.request.use(request[0], request[1])
     : null,
@@ -41,29 +41,23 @@ export const use = ({request, response}) => ({
  * // 取消对应拦截器
  * eject(interceptors);
  */
-export const eject = ({request, response}) => {
-
+export const eject = ({ request, response }) => {
   request && instance.interceptors.request.eject(request);
   response && instance.interceptors.response.eject(response);
-
 }
 
 /* 添加拦截器: 打印数据 */
 use({
   request: [
     (config) => {
-
       log('request:', config);
       return config;
-
     }
   ],
   response: [
     (response)=> {
-
       log('response:', response);
       return response;
-
     }
   ]
 });
@@ -73,20 +67,16 @@ use({
 use({
   request: [
     (config) => {
-
       const authorization = localStorage.getItem('authorization');
       authorization && (config.headers.Authorization = authorization);
       return config;
-
     }
   ],
   response: [
     (response)=> {
-
       response.headers.authorization &&
       localStorage.setItem('authorization', response.headers.authorization);
       return response;
-
     }
   ]
 });

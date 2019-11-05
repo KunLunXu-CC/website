@@ -5,7 +5,6 @@ import scss from './index.module.scss';
 import { useStore } from '../../../store';
 
 const useStateHook = (props, store) => {
-
   // 取消
   const onCancel = () => {
     store.upload.close();

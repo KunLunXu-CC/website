@@ -1,5 +1,5 @@
 import React from 'react';
-import { VariableBlock} from 'qyrc';
+import { VariableBlock } from 'qyrc';
 import StoreProvider from './store';
 
 import Side from './Side';

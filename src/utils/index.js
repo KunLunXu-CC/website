@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {message} from 'antd';
+import { message } from 'antd';
 import * as CONTS from '@config/consts';
 
 /**
@@ -8,15 +8,11 @@ import * as CONTS from '@config/consts';
  * @param {Array} filterVaslue  要过滤的值的列表
  */
 export const filterObject = (obj, filterVaslue = []) => {
-
   const filter = {};
   _.forIn(obj, (value, key) => {
-
     !filterVaslue.includes(value) && (filter[key] = value);
-
   });
   return filter;
-
 }
 
 /**
@@ -24,24 +20,20 @@ export const filterObject = (obj, filterVaslue = []) => {
  * @param {Number} rescode   响应代码
  * @param {String} message   响应信息
  */
-export const handleMessage = ({rescode, message: info}) => {
-
+export const handleMessage = ({ rescode, message: info }) => {
   const map = {
     [CONTS.RESCODE.FAIL.VALUE]: message.error,
     [CONTS.RESCODE.SUCCESS.VALUE]: message.success,
   };
   const handler = map[rescode];
   handler && handler(info);
-
 }
 
 /**
  * 通用打印: 当前为开发环境下才允许打印
  */
 export const log = (... args) => {
-
   _DEV_ && console.log(... args);
-
 }
 
 /**
@@ -50,17 +42,11 @@ export const log = (... args) => {
  * @param {Number} wait  等待时长
  */
 export const debounce = (fn, wait) => {
-
   let timeout = null;
   return () => {
-
     if (timeout !== null){
-
       clearTimeout(timeout);
-
     };
     timeout = setTimeout(fn.bind(null, escape), wait);
-
   }
-
 }

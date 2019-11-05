@@ -6,7 +6,6 @@ import scss from './index.module.scss';
 import { useStore } from '../../../../store';
 
 const useStateHooks = (props, store) => {
-
   // 添加文件
   const addFiles = (e) => {
     const files = e.target.files;

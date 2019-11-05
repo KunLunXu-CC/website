@@ -1,9 +1,7 @@
 // 来自 [腾讯前端博客](http://www.alloyteam.com/)
 !
 function(t) {
-
   function o(a) {
-
     if (e[a]) return e[a].exports;
     let l = e[a] = {
       exports: {},
@@ -13,77 +11,56 @@ function(t) {
     return t[a].call(l.exports, l, l.exports, o),
     l.loaded = !0,
     l.exports
-
   }
   var e = {};
   o.m = t,
   o.c = e,
   o.p = "http://cdn.alloyteam.com/assets/",
   o(0)
-
 } ([function(t, o, e) {
-
   t.exports = e(6)
-
 },
 function(t, o) {},
   , ,
   function(t, o, e) {
-
     "use strict";
     function a() {
-
       s.info("%c小样，你打开Console是想窃取情报吗？那就如你所愿 @!@", "color: #3498DB;font-weight: 600;"),
       setTimeout(function() {
-
         s.log("%cA%cl%cl%co%cy %cT%ce%ca%cm", "font-size:90px;color:#3498DB;font-family: verdana;text-shadow:0px 1px 0px #3498DB,0px 2px 0px #3498DB,0px 3px 0px #3498DB,0px 4px 0px #3498DB, 0px 5px 0px  #3498DB,0px 6px 0px #3498DB, 0px 7px 0px #3498DB,0px 8px 7px #3498DB", "font-size:90px;color:#7f8ea0;font-family: verdana;text-shadow:0px 1px 0px #7f8ea0,0px 2px 0px #7f8ea0,0px 3px 0px #7f8ea0,0px 4px 0px #7f8ea0, 0px 5px 0px  #7f8ea0,0px 6px 0px #7f8ea0, 0px 7px 0px #7f8ea0,0px 8px 7px #7f8ea0", "font-size:120px;color:#89d04f;font-family: arial;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f", "font-size:90px;color:#fd6a7f;font-family: verdana;text-shadow:0px 1px 0px #fd6a7f,0px 2px 0px #fd6a7f,0px 3px 0px #fd6a7f,0px 4px 0px #fd6a7f, 0px 5px 0px  #fd6a7f,0px 6px 0px #fd6a7f, 0px 7px 0px #fd6a7f,0px 8px 7px #fd6a7f", "font-size:90px;color:#89d04f;font-family: verdana;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f", "font-size:90px;color:#3498DB;font-family: verdana;text-shadow:0px 1px 0px #3498DB,0px 2px 0px #3498DB,0px 3px 0px #3498DB,0px 4px 0px #3498DB, 0px 5px 0px  #3498DB,0px 6px 0px #3498DB, 0px 7px 0px #3498DB,0px 8px 7px #3498DB", "font-size:90px;color:#89d04f;font-family: verdana;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f", "font-size:90px;color:#95A5A6;font-family: verdana;text-shadow:0px 1px 0px #95A5A6,0px 2px 0px #95A5A6,0px 3px 0px #95A5A6,0px 4px 0px #95A5A6, 0px 5px 0px  #95A5A6,0px 6px 0px #95A5A6, 0px 7px 0px #95A5A6,0px 8px 7px #95A5A6", "font-size:90px;color:#fd6a7f;font-family: helveltica;text-shadow:0px 1px 0px #fd6a7f,0px 2px 0px #fd6a7f,0px 3px 0px #fd6a7f,0px 4px 0px #fd6a7f, 0px 5px 0px  #fd6a7f,0px 6px 0px #fd6a7f, 0px 7px 0px #fd6a7f,0px 8px 7px #fd6a7f")
-
       },
       1e3),
       setTimeout(function() {
-
         s.log("我们是腾讯Web前端团队-%cAlloyTeam", "font-weight: bold;color:#fd6a7f")
-
       },
       1500),
       setTimeout(function() {
-
         s.log("我们的愿景是：%c成为地球卓越的Web团队", "font-weight: bold;color:#fd6a7f")
-
       },
       2e3),
       window._start
-
     }
     function l() {
-
       let t = new Audio;
       t.src = "http://pub.idqqimg.com/tfc/home/mp3/music/song.mp3",
       t.play()
-
     }
     function c() {
-
       let t = 0;
       p("yes",
         function() {
-
           return s.log("年轻人，眼光不错哟！这里我就偷偷给你几个秘密锦囊，打开有惊喜哦✉，别跑，有神曲!"),
           s.log("%c我要福利%c我要应聘%c我要学习%c我要听神曲%c,输入以上密码即可打开锦囊", "background-color:#3498DB;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", "background-color:#fd6a7f;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", "background-color:#89d04f;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", "background-color:#3498DB;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", ""),
           "↓↓请输入密码↓↓"
-
         }),
       p("no",
         function() {
-
           return s.log("年纪轻轻就撒谎，这不对呀，记得要改！不管怎样，还是给你几个秘密锦囊，打开有惊喜哦✉，别跑，有神曲!"),
           s.log("%c我要福利%c我要应聘%c我要学习%c我要听神曲%c,输入以上密码即可打开锦囊", "background-color:#3498DB;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", "background-color:#fd6a7f;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", "background-color:#89d04f;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", "background-color:#3498DB;color:#fff;padding: 5px 10px;margin-right: 10px;line-height:30px;border-radius: 4px;", ""),
           "↓↓请输入密码↓↓"
-
         }),
       p("我要福利",
         function() {
-
           let o = null;
           return o = t < 2 ? r[t] : r[2],
           s.log("%c", "padding:113px 75px;line-height:240px;background:url('" + o + "') no-repeat;background-size:100% 100%;"),
@@ -91,28 +68,22 @@ function(t, o) {},
           s.log("%c如果看不到福利，请升级的chrome", "color:#95A5A6"),
           t++,
           "♥♥♥♥♥"
-
         }),
       p("我要应聘",
         function() {
-
           return copy && copy("Kinvix@QQ.com"),
           s.log("不废话，快快递上你的简历，小伙伴儿们已经饥渴难耐！\n快速面试通道： %cKinvix@QQ.com (%c☑已复制到剪贴板)", "color: #fd6a7f", "color: #95A5A6"),
           "↗↗↗↗↗↗"
-
         }),
       p("我要学习",
         function() {
-
           return s.log("%c优秀的技术文章，卖力的撕逼大神在等着你", "color:#3498DB"),
           s.log("%c%c", "padding:80px;line-height:160px;background:url('http://cdn.alloyteam.com/assets/img/weixin-7531e9.gif') no-repeat center center;background-size:140px 140px;", "padding:80px;line-height:160px;background:url('http://cdn.alloyteam.com/assets/img/qq-71f7f2.gif') no-repeat center center;background-size:140px 140px;"),
           s.log("     ↑↑↑微信公众号↑↑↑", "        ↑↑↑QQ群162225981↑↑↑"),
           "赶紧拿起手机扫一扫！等你飞起！✈✈✈✈"
-
         }),
       p("我要听神曲",
         function() {
-
           return l(),
           s.log("%c一人我饮酒醉，MC AlloyTeam在这里等候多时啦！快带上耳机或者打开你的音响，来享受音乐的魅力。", "color:#3498DB"),
           s.log("%c腾讯AlloyTeam首张单曲，专为Coder打造。程序员版《成都》送给你，喜欢的朋友们点一波赞666", "color:#3498DB"),
@@ -120,47 +91,35 @@ function(t, o) {},
           s.log("%c↘↘手机扫一扫，音乐不会跑♬♬♫♫♩♪♫♪♬，好听的歌曲与朋友们一起分享吧", "color:#fd6a7f"),
           s.log("%c", "padding:80px;line-height:160px;background:url('" + m + "') no-repeat center center;background-size:140px 140px;"),
           "♥♥♥♥♥赶紧扫一扫♥♥♥♥♥"
-
         }),
       p("_start",
         function() {
-
           return setTimeout(function() {
-
             s.log(
               "那么，请以%c★代码的名义★%c告诉我，你愿意加入这个帅气逼人的AlloyTeam团队吗(%cyes or no)%c?",
               "color:#fd6a7f;font-weight:bold;",
               "",
               "color:#fd6a7f", ""
             )
-
           },
           2500),
           ""
-
         })
-
     }
     function p(t, o) {
-
       Object.defineProperty(window, t, {
         get: o
       })
-
     }
     function n() {
-
       let t = new Image;
       Object.defineProperty(t, "id", {
         get: function() {
-
           c(),
           a()
-
         }
       }),
       s.log("%c", t)
-
     }
     var r = [e(12), e(13), e(11)],
       i = e(9),
@@ -170,10 +129,8 @@ function(t, o) {},
         info: function() {}
       };
     n()
-
   },
   function(t, o) {
-
     "use strict";
     t.exports = {
       channel: {
@@ -419,37 +376,26 @@ function(t, o) {},
       "@xmlns:slash": "http://purl.org/rss/1.0/modules/slash/",
       "@version": "2.0"
     }
-
   },
   function(t, o, e) {
-
     "use strict";
     function a(t) {
-
       return t && t.__esModule ? t : {
         default:
             t
       }
-
     }
     function l() {
-
       $(window).scrollTop() > 0 ? $("#header").addClass("header-scrolled") : $("#header").removeClass("header-scrolled")
-
     }
     function c() {
-
       function t(t) {
-
         let o = 0;
         for (t.length; o < 5; o++) {
-
           let a = t[o];
           e.push('<li><a target="_blank" href="' + a.link + '"><h4>' + a.title + '</h4><span class="i-author">' + a.creator + "</span></a></li>")
-
         }
         $("#post_container").html(e.join(""))
-
       }
       var o = [],
         e = [];
@@ -457,33 +403,25 @@ function(t, o) {},
         url: "http://www.alloyteam.com/feed/",
         dataType: "xml",
         success: function(e) {
-
           $(e).find("item").each(function() {
-
             let t = $(this);
             o.push({
               title: t.find("title").text(),
               link: t.find("link").text(),
               creator: t.find("pubDate").next().text()
             })
-
           }),
           0 == o.length && (o = e.channel.item),
           t(o)
-
         },
         error: function() {
-
           o = i.
             default.channel.item,
           t(o)
-
         }
       })
-
     }
     function p(t) {
-
       let o = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         e = "2017-4-17",
         a = new Date(new Date(e).getTime() + 1e3 * (t - 1) * 3600 * 24 * 7),
@@ -492,63 +430,43 @@ function(t, o) {},
         p = "";
       return p = 1 === l || 21 === l || 31 === l ? l + "st" : 2 === l || 22 === l ? l + "nd" : 3 === l || 23 === l ? l + "rd" : l + "th",
       c + " " + p
-
     }
     function n() {
-
       $.ajax({
         url: "http://www.alloyteam.com/alloyshare/admin/cgi-bin/get_last_period",
         success: function(t) {
-
           ! t.retcode && t.data.period && $("#weeklyNum").html('<span class="weekly-num">' + p(t.data.period) + "</span>").show()
-
         }
       })
-
     }
     e(1),
     e(4);
     var r = e(5),
       i = a(r);
     $(document).ready(function() {
-
       $("#indexCarousel").addClass("show"),
       l(),
       $(window).bind("scroll",
         function() {
-
           l()
-
         }),
       c(),
       n()
-
     })
-
   },
   , ,
   function(t, o, e) {
-
     t.exports = e.p + "img/music-210512.gif"
-
   },
   function(t, o, e) {
-
     t.exports = e.p + "img/music_qr-63cb6b.png"
-
   },
   function(t, o, e) {
-
     t.exports = e.p + "img/ruhua-c2cfe3.jpg"
-
   },
   function(t, o, e) {
-
     t.exports = e.p + "img/yanagao00-f5f991.jpg"
-
   },
   function(t, o, e) {
-
     t.exports = e.p + "img/yanagao02-2a5c14.jpg"
-
   }]);

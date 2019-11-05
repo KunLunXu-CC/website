@@ -43,8 +43,8 @@ module.exports = {
     "space-infix-ops": 1,                                             // 要求中缀操作符周围有空格
     "eol-last": 1,                                                    // 文件结尾空一行
     "no-multiple-empty-lines": 1,                                     // 行末不要空格
-    "padded-blocks": 1,                                               // 不要故意留一些没必要的空白行
-    "object-curly-spacing": 1,                                        // 花括号 {} 里加空格
+    "padded-blocks": [1, 'never'],                                    // 不要故意留一些没必要的空白行
+    "object-curly-spacing": [1, 'always'],                            // 花括号 {} 里加空格
     "array-bracket-spacing": 1,                                       // 方括号[]里不要加空格
     "key-spacing": 1,                                                 // 在对象的属性中， 键值之间要有空格
     "no-trailing-spaces": 1,                                          // 行末不要空格
