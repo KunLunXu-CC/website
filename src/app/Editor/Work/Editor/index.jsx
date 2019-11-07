@@ -4,7 +4,7 @@ import React, {
   useEffect,
 } from 'react';
 import { Scroll } from 'qyrc';
-import CodeMirror from "codemirror";
+import CodeMirror from 'codemirror';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
@@ -29,9 +29,9 @@ const useStateHook = (props, store) => {
   }
 
   // 监听 ctrl + s
-  const onKeyDown = (event) => {
+  const onKeyDown = event => {
     const downCtrrl = event.ctrlKey || event.metaKey;
-    if (event.keyCode !== 83 || !downCtrrl){return false;}
+    if (event.keyCode !== 83 || !downCtrrl) {return false;}
     event.preventDefault();
     onSave();
   }
@@ -42,13 +42,13 @@ const useStateHook = (props, store) => {
         tabSize: 2,
         indentUnit: 2,
         lineNumbers: true,
-        mode: "markdown",
+        mode: 'markdown',
         lineWrapping: true,
         theme: 'oceanic-next',
         value: props.data.article.content || '',
       });
       immutable.codeMirror.on('change', () => {
-        const id = props.data.article.id;
+        const { id } = props.data.article;
         const content = immutable.codeMirror.getValue();
         store.article.toggleStatusWithChange(id, content);
       });
@@ -58,7 +58,7 @@ const useStateHook = (props, store) => {
   return { editorBodyRef, onKeyDown };
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 

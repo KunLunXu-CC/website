@@ -44,7 +44,7 @@ export const log = (... args) => {
 export const debounce = (fn, wait) => {
   let timeout = null;
   return () => {
-    if (timeout !== null){
+    if (timeout !== null) {
       clearTimeout(timeout);
     };
     timeout = setTimeout(fn.bind(null, escape), wait);

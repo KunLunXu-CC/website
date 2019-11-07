@@ -4,7 +4,7 @@ import { PHOTO_TYPE } from '@config/consts';
 import { uploadPhotos } from '@api';
 
 export default class Store {
-  constructor(parent){
+  constructor (parent) {
     this.parent = parent;
   }
 
@@ -21,15 +21,15 @@ export default class Store {
   @observable fileList = [];
 
   @action
-  addFiles = (files) => {
-    if (!files){
+  addFiles = files => {
+    if (!files) {
       return false;
     }
     this.fileList = [... this.fileList, ... files];
   }
 
   @action
-  removeFile = (file) => {
+  removeFile = file => {
     this.fileList = file
       ? this.fileList.filter(v => (!_.isEqual(v, file)))
       : [];
@@ -39,7 +39,7 @@ export default class Store {
   @observable type = PHOTO_TYPE.UNKNOWN.VALUE;
 
   @action
-  setType = (value) => {
+  setType = value => {
     this.type = value ? value : PHOTO_TYPE.UNKNOWN.VALUE;
   }
 

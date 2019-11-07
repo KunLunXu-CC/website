@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import * as api from '@api';
 
 export default class Store {
-  constructor(parent){
+  constructor (parent) {
     this.parent = parent;
   }
 
@@ -64,9 +64,9 @@ export default class Store {
   // 编辑文件夹: 找到数据设置 editor: true
   @action
   editorFolder = ({ id }) => {
-    this.tags = this.tags.map(v => {
-      v.id === id && (v.editor = true);
-      return v;
-    });
+    this.tags = this.tags.map(v => ({
+      ... v,
+      editor: v.id === id ? true : v.editor,
+    }));
   }
 };

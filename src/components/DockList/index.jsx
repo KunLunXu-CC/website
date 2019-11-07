@@ -11,21 +11,21 @@ import scss from './index.module.scss';
 
 const FT = 20;
 
-const useStateHook = (props) => {
+const useStateHook = props => {
   const [show, setShow] = useState(false);
   const dockRef = useRef();
 
   useEffect(() => {
-    if (!dockRef.current){return false;}
+    if (!dockRef.current) {return false;}
 
     // 1. 重置 show 状态
-    const resetShow = (value) => {
+    const resetShow = value => {
       if (value === show) { return false;}
       setShow(value);
     };
 
     // 2. 鼠标移动事件
-    const onMouseMove = (e) => {
+    const onMouseMove = e => {
       const { clientHeight } = document.documentElement;
       const { top } = dockRef.current.getBoundingClientRect();
       const reset = [
@@ -54,14 +54,14 @@ const useStateHook = (props) => {
   ), [show]);
 
   // 点击事件
-  const onClick = (dock) => {
+  const onClick = dock => {
     _.isFunction(props.onClick) && props.onClick(dock);
   }
 
   return { dockClassName, dockRef, onClick };
 }
 
-const Dock = (props) => {
+export default props => {
   const state = useStateHook(props);
 
   return (
@@ -81,5 +81,3 @@ const Dock = (props) => {
     </div>
   );
 }
-
-export default Dock;

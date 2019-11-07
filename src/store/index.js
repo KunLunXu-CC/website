@@ -20,7 +20,7 @@ export const useStore = () => {
 };
 
 // 导出 context.Provider
-export default (props) => {
+export default props => {
   const store = new Store();
   return (
     <StoreContext.Provider value={store}>

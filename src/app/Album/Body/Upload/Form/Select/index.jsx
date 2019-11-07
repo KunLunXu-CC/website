@@ -8,7 +8,7 @@ const useStateHook = (props, store) => {
   // select option 数据
   const options = useMemo(() => {
     const res = [];
-    for (let key in PHOTO_TYPE){
+    for (let key in PHOTO_TYPE) {
       res.push({
         key: PHOTO_TYPE[key].VALUE,
         title: PHOTO_TYPE[key].DESC,
@@ -18,14 +18,14 @@ const useStateHook = (props, store) => {
     return res;
   }, []);
 
-  const onChange = (value) => {
+  const onChange = value => {
     store.upload.setType(value);
   }
 
   return { options, onChange };
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return (

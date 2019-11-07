@@ -9,18 +9,14 @@ import TagList from './TagList';
 import Header from './Header';
 import Footer from './Footer';
 
-const Note = () => {
-  return (
-    <StoreProvider>
-      <NoteLayout
-        searchList={<SearchList />}
-        workArea={<WorkArea />}
-        tagList= {<TagList />}
-        header={<Header/>}
-        footer={<Footer />}
-      />
-    </StoreProvider>
-  );
-}
-
-export default Note;
+export default () => (
+  <StoreProvider>
+    <NoteLayout
+      searchList={<SearchList />}
+      workArea={<WorkArea />}
+      tagList= {<TagList />}
+      header={<Header/>}
+      footer={<Footer />}
+    />
+  </StoreProvider>
+);

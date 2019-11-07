@@ -4,12 +4,10 @@ import Header from './Header';
 import Upload from './Upload';
 import scss from './index.module.scss';
 
-export default () => {
-  return (
-    <div className={scss['body']}>
-      <Upload />
-      <Header />
-      <List />
-    </div>
-  );
-}
+export default () => (
+  <div className={scss['body']}>
+    <Upload />
+    <Header />
+    <List />
+  </div>
+);

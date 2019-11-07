@@ -5,7 +5,7 @@ import { observable, action, autorun, toJS } from 'mobx';
 import { RESCODE } from '@config/consts';
 
 export default class Store {
-  constructor(){
+  constructor () {
     this.login({});
     _.forIn(this.autorun, v => autorun(v));
   }

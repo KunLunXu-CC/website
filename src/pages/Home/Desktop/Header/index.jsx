@@ -5,11 +5,9 @@ import ToolList from './C_ToolList';
 
 import scss from './index.module.scss';
 
-export default () => {
-  return (
-    <div className={scss['dosktop-header']}>
-      <DateZone />
-      <ToolList />
-    </div>
-  );
-};
+export default () => (
+  <div className={scss['dosktop-header']}>
+    <DateZone />
+    <ToolList />
+  </div>
+);

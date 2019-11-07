@@ -49,13 +49,13 @@ export const eject = ({ request, response }) => {
 /* 添加拦截器: 打印数据 */
 use({
   request: [
-    (config) => {
+    config => {
       log('request:', config);
       return config;
     }
   ],
   response: [
-    (response)=> {
+    response => {
       log('response:', response);
       return response;
     }
@@ -66,14 +66,14 @@ use({
 /* 存储/添加 token*/
 use({
   request: [
-    (config) => {
+    config => {
       const authorization = localStorage.getItem('authorization');
       authorization && (config.headers.Authorization = authorization);
       return config;
     }
   ],
   response: [
-    (response)=> {
+    response => {
       response.headers.authorization &&
       localStorage.setItem('authorization', response.headers.authorization);
       return response;

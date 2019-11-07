@@ -15,7 +15,7 @@ export const useStore = () => {
 };
 
 // 导出 context.Provider
-export default (props) => {
+export default props => {
   const globalStore = useGlobalStore();
   const store = new Store(globalStore);
   return (

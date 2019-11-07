@@ -35,21 +35,18 @@ const listData = [
 //   return {};
 // }
 
-export default () => {
-  // const store = useStore();
-  // const state = useStateHook(props, store);
-  return useObserver(() => (
-    <div className={scss['menu']}>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={['all']}>
-        {listData.map( v => (
-          <Menu.Item key={v.key}>
-            <Icon type={v.icon}  className="anticon"/>
-            <span>{v.name}</span>
-          </Menu.Item>
-        ))}
-      </Menu>
-    </div>
-  ));
-}
+export default () => useObserver(() => (
+  <div className={scss['menu']}>
+    <Menu
+      mode="inline"
+      defaultSelectedKeys={['all']}>
+      {listData.map( v => (
+        <Menu.Item key={v.key}>
+          <Icon type={v.icon}  className="anticon"/>
+          <span>{v.name}</span>
+        </Menu.Item>
+      ))}
+    </Menu>
+  </div>
+));
+

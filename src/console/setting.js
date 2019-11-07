@@ -4,7 +4,7 @@
  */
 const setting = () => {
   window.$console = window.console;
-  if (_DEV_){
+  if (_DEV_) {
     return false;
   }
   window.console = {

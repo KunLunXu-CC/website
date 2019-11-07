@@ -2,7 +2,7 @@ import { observable, action, computed } from 'mobx';
 import * as api from '@api';
 
 export default class Store {
-  constructor(parent){
+  constructor (parent) {
     this.parent = parent;
   }
 
@@ -11,7 +11,7 @@ export default class Store {
   @observable openList = []; // 开启列表: { article： id, change }
 
   // 获取工作窗口数据
-  @computed get works(){
+  @computed get works () {
     return this.openList.map( v => ({
       ... v,
       article: this.articles.find(article => article.id === v.article),
@@ -24,7 +24,7 @@ export default class Store {
     const item = this.openList.find(v => v.article === id);
     const article = this.articles.find(v => v.id === id);
     const change = article.content !== content;
-    if (item && item.change !== change){
+    if (item && item.change !== change) {
       this.openList = this.openList.map(v => ({
         ... v,
         change: v.article === id ? change : v.change,
@@ -34,9 +34,9 @@ export default class Store {
 
   // 打开: 文章
   @action
-  open = (article) => {
+  open = article => {
     // 过滤: 如果已存在
-    if (!this.openList.find(v => v.article === article)){
+    if (!this.openList.find(v => v.article === article)) {
       this.openList = [... this.openList, {
         article,
         change: false,
@@ -46,7 +46,7 @@ export default class Store {
 
   // 关闭: 文章
   @action
-  close = (article) => {
+  close = article => {
     this.openList = this.openList.filter(v => v.article !== article);
   }
 
@@ -90,7 +90,7 @@ export default class Store {
 
   // 创建虚拟 article (占位符)
   @action
-  createFictitiousArticle = (parent) => {
+  createFictitiousArticle = parent => {
     const { id, name } = parent;
     this.articles = [
       {

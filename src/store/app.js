@@ -4,7 +4,7 @@ import { observable, action, autorun, toJS } from 'mobx';
 import apps from '@app/index';
 
 export default class Store {
-  constructor(){
+  constructor () {
     this.init();
     _.forIn(this.autorun, v => autorun(v));
   }
@@ -30,10 +30,10 @@ export default class Store {
    * @param {String} url 路由
    */
   @action
-  open = (url) => {
+  open = url => {
     let match = void 0;
     let app = this.list.find(v => (v.url === url));
-    if (!!app){
+    if (!!app) {
       this.minimize(app);
     } else {
       app = apps.find( v => (
@@ -48,7 +48,7 @@ export default class Store {
  * @param {Object} app 当前应用配置
  */
   @action
-  close = (app) => {
+  close = app => {
     this.list = this.list.filter(v => v.url !== app.url);
   };
 
@@ -65,8 +65,8 @@ export default class Store {
    * @param {Object} app 当前应用配置
    */
   @action
-  toggle = (app) => {
-    if (this.list[this.list.length - 1].url === app.url){
+  toggle = app => {
+    if (this.list[this.list.length - 1].url === app.url) {
       return false;
     }
     const remove = _.remove(this.list, v => (v.url === app.url));

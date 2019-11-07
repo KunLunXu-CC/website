@@ -17,15 +17,13 @@ const mockdata = [
   { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
 ];
 
-export default () => {
-  return (
-    <Scroll className={scss['list']}>
-      {
-        mockdata.map((v, index) => (
-          <Item key={index} align={index % 2 !== 0 ? 'right' : 'left'}/>
-        ))
-      }
-      <br/>
-    </Scroll>
-  );
-}
+export default () => (
+  <Scroll className={scss['list']}>
+    {
+      mockdata.map((v, index) => (
+        <Item key={index} align={index % 2 !== 0 ? 'right' : 'left'}/>
+      ))
+    }
+    <br/>
+  </Scroll>
+);

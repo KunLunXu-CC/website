@@ -3,11 +3,9 @@ import ListPage from './ListPage';
 import SearchBar from './SearchBar';
 import scss from './index.module.scss';
 
-export default () => {
-  return (
-    <div className={scss['body']}>
-      <SearchBar />
-      <ListPage />
-    </div>
-  );
-}
+export default () => (
+  <div className={scss['body']}>
+    <SearchBar />
+    <ListPage />
+  </div>
+);

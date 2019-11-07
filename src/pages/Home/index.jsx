@@ -4,14 +4,10 @@ import DockList from './DockList/index';
 import AppList from './AppList/index';
 import Desktop from './Desktop/index';
 
-const Home = () => {
-  return (
-    <Fragment>
-      <DockList/>
-      <Desktop/>
-      <AppList />
-    </Fragment>
-  );
-}
-
-export default Home;
+export default () => (
+  <Fragment>
+    <DockList/>
+    <Desktop/>
+    <AppList />
+  </Fragment>
+);

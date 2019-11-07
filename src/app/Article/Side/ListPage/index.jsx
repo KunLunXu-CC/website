@@ -16,10 +16,8 @@ const mock = [
   { img: 'https://view.moezx.cc/images/2019/06/11/74751807_angel.jpg', },
 ];
 
-export default () => {
-  return (
-    <Scroll className={scss['list']}>
-      {mock.map((v, index) => (<Item key={index} data={v}/>))}
-    </Scroll>
-  );
-}
+export default () => (
+  <Scroll className={scss['list']}>
+    {mock.map((v, index) => (<Item key={index} data={v}/>))}
+  </Scroll>
+);

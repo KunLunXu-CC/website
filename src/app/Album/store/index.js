@@ -7,7 +7,7 @@ import Upload from './upload';
 const StoreContext = React.createContext(null);
 
 class Store {
-  constructor(global){
+  constructor (global) {
     this.global = global;
     autorun(this.print);
   }
@@ -31,7 +31,7 @@ export const useStore = () => {
 };
 
 // 导出 context.Provider
-export default (props) => {
+export default props => {
   const globalStore = useGlobalStore();
   const store = new Store(globalStore);
   return (

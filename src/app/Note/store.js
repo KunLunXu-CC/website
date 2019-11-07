@@ -13,7 +13,7 @@ const BASE_TAG = {
 }
 
 class Store {
-  constructor(global){
+  constructor (global) {
     this.global = global;
     _.forIn(this.autorun, v => autorun(v));
     _.forIn(this.reaction, v => reaction(v.data, v.effect));
@@ -28,12 +28,12 @@ class Store {
   @observable noteList = [];
 
   @action
-  setSearch = (value) => {
+  setSearch = value => {
     this.search = { ... this.search, ... value };
   }
 
   @action
-  setTag = (value) => {
+  setTag = value => {
     this.tag = value;
   }
 
@@ -46,7 +46,7 @@ class Store {
   };
 
   @action
-  setNote = (id) => {
+  setNote = id => {
     this.note = this.noteList.find(v => v.id === id);
   }
 
@@ -91,7 +91,7 @@ export const useStore = () => {
 };
 
 // 导出 context.Provider
-export default (props) => {
+export default props => {
   const globalStore = useGlobalStore();
   const store = new Store(globalStore);
   return (

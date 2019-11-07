@@ -4,13 +4,11 @@ import scss from './index.module.scss';
 import Body from './Body';
 import Side from './Side';
 
-export default () => {
-  return (
-    <StoreProvider>
-      <div className={scss['layout']}>
-        <div className={scss['layout-side']}><Side/></div>
-        <div className={scss['layout-body']}><Body/></div>
-      </div>
-    </StoreProvider>
-  );
-}
+export default () => (
+  <StoreProvider>
+    <div className={scss['layout']}>
+      <div className={scss['layout-side']}><Side/></div>
+      <div className={scss['layout-body']}><Body/></div>
+    </div>
+  </StoreProvider>
+);

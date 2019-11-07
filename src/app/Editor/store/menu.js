@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { observable, action, computed } from 'mobx';
 
 export default class Store {
-  constructor(parent){
+  constructor (parent) {
     this.parent = parent;
   }
 
@@ -13,14 +13,14 @@ export default class Store {
 
   // 选择子项
   @action
-  toggleSelected = (key) => {
+  toggleSelected = key => {
     this.selected = this.selected === key ? null : key;
   }
 
   // SubMenu 展开/关闭的回调
   @action
-  onOpenChange = (openKeys) => {
-    if (!openKeys){
+  onOpenChange = openKeys => {
+    if (!openKeys) {
       return false;
     }
     _.isArray(openKeys)
@@ -29,7 +29,7 @@ export default class Store {
   }
 
   // 菜单列表: 计算、处理 this.parent.tag.tags、this.parent.article.articles
-  @computed get list() {
+  @computed get list () {
     const tags = _.cloneDeep(this.parent.tag.tags).map(v => ({
       ... v,
       type: 'tag',
@@ -42,7 +42,7 @@ export default class Store {
     let children = tags.filter(v => !!v.parent.id);
 
     const translator = (parents, children) => {
-      parents.forEach((parent) => {
+      parents.forEach(parent => {
         parent.children = [];
         children.forEach((current, index) => {
           if (current.parent.id === parent.id) {

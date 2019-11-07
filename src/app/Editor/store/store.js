@@ -5,7 +5,7 @@ import Menu from './menu';
 import Article from './article';
 
 export default class Store {
-  constructor(global){
+  constructor (global) {
     this.global = global;
     autorun(this.print);
   }

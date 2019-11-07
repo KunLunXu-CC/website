@@ -7,15 +7,15 @@ import { useStore } from '../../../../store';
 
 const useStateHooks = (props, store) => {
   // 添加文件
-  const addFiles = (e) => {
+  const addFiles = e => {
     const files = e.target.files;
-    store.upload.addFiles(Array.from(files));
+    store.upload.addFiles(... files);
   }
 
   return { addFiles };
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHooks(props, store);
 
