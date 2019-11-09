@@ -15,7 +15,7 @@ const useStateHook = () => {
   return { date };
 };
 
-const DateZone = (props) => {
+const DateZone = props => {
   const state = useStateHook(props);
   return (
     <div className={scss['dosktop-header-date']}>

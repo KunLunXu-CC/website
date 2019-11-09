@@ -14,7 +14,7 @@ const useStateHook = (props, store) => {
   return { onClose };
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 

@@ -14,13 +14,13 @@ const useStateHook = (props, store) => {
   const editorInputRef = useRef(null);
 
   // 阻止事件冒泡
-  const stopPropagation = (e) => {
+  const stopPropagation = e => {
     e.stopPropagation();
   };
 
   // 创建文件夹
   const createFolder = () => {
-    if (props.data.type === 'tag'){
+    if (props.data.type === 'tag') {
       store.menu.onOpenChange(props.data.id);
       store.tag.createFictitiousTag(props.data);
     } else {
@@ -40,7 +40,7 @@ const useStateHook = (props, store) => {
 
   // 创建文章
   const createArticle = () => {
-    if (props.data.type === 'tag'){
+    if (props.data.type === 'tag') {
       store.menu.onOpenChange(props.data.id);
       store.article.createFictitiousArticle(props.data);
     } else {
@@ -73,9 +73,9 @@ const useStateHook = (props, store) => {
   };
 
   // 编辑数据： 根据 id 判断是编辑还是创建，根据 type 值来判断操作对象
-  const onEditor = (e) => {
+  const onEditor = e => {
     const name = e.target.value;
-    if (props.data.type === 'tag'){
+    if (props.data.type === 'tag') {
       props.data.id === 'newTag'
         ? store.tag.createTag({ name, parent: props.data.parent.id })
         : store.tag.updateTag({ name, id: props.data.id });
@@ -87,12 +87,10 @@ const useStateHook = (props, store) => {
   };
 
   // 记得箭头小图标
-  const arrowClass = useMemo(() => {
-    return classNames(
-      scss['menu-title-arrow'],
-      { [scss['menu-title-arrow-article']]: props.data.type === 'article' }
-    );
-  }, [props.data.type]);
+  const arrowClass = useMemo(() => classNames(
+    scss['menu-title-arrow'],
+    { [scss['menu-title-arrow-article']]: props.data.type === 'article' }
+  ), [props.data.type]);
 
   // 菜单图标
   const menuIcon = useMemo(() => {
@@ -118,7 +116,7 @@ const useStateHook = (props, store) => {
 }
 
 // props.type = 'subMenu | item ' props.data props.onMore
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 

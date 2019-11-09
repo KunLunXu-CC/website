@@ -16,21 +16,21 @@ const useStateHook = (props, store) => {
   const renderMenuList = () => {
     const recursion = (item, index) => (
       item.type === 'tag' ?
-      <Menu.SubMenu
-        key={item.id}
-        title={<MenuTitle data={item} type="subMenu"/>}>
-        {item.children.length !== 0 ?
-          item.children.map(v => (recursion(v, index + 1))) :
-          <Menu.Item className={scss['menu-item-empty']} key={`${item.id}-empty`} />
-        }
-        <div
-          className={scss['menu-dividing']}
-          style={{ left: `${index * INLINE_INDENT + 12}px` }}
-        />
-      </Menu.SubMenu> :
-      <Menu.Item key={item.id}>
-        <MenuTitle data={item} type="item"/>
-      </Menu.Item>
+        <Menu.SubMenu
+          key={item.id}
+          title={<MenuTitle data={item} type="subMenu"/>}>
+          {item.children.length !== 0 ?
+            item.children.map(v => (recursion(v, index + 1))) :
+            <Menu.Item className={scss['menu-item-empty']} key={`${item.id}-empty`} />
+          }
+          <div
+            className={scss['menu-dividing']}
+            style={{ left: `${index * INLINE_INDENT + 12}px` }}
+          />
+        </Menu.SubMenu> :
+        <Menu.Item key={item.id}>
+          <MenuTitle data={item} type="item"/>
+        </Menu.Item>
     );
     return store.menu.list.map(v => (recursion(v, 1)))
   }

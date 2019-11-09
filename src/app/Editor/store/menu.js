@@ -43,6 +43,7 @@ export default class Store {
 
     const translator = (parents, children) => {
       parents.forEach(parent => {
+        // eslint-disable-next-line no-param-reassign
         parent.children = [];
         children.forEach((current, index) => {
           if (current.parent.id === parent.id) {

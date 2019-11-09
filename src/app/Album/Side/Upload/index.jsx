@@ -10,7 +10,7 @@ const useStateHooks = (props, store) => {
   return { onClick };
 };
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHooks(props, store);
 

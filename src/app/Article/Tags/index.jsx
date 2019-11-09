@@ -21,7 +21,7 @@ const useStateHook = (props, store) => {
   return {};
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   useStateHook(props, store);
 

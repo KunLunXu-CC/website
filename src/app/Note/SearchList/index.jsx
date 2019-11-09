@@ -14,10 +14,10 @@ const useStateHook = (props, store) => {
   return { onClick };
 };
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
-  return useObserver(() =>(
+  return useObserver(() => (
     <Scroll className={scss['list']}>
       <Menu
         theme="dark"

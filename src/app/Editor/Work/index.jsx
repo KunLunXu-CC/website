@@ -10,20 +10,20 @@ import Editor from './Editor';
 
 const useStateHook = (props, store) => {
   // 移除
-  const onClose = (key) => {
+  const onClose = key => {
     store.article.close(key);
     store.menu.toggleSelected(key);
   }
 
   // tabs change 事件
-  const onTabsChange = (activeKey) => {
+  const onTabsChange = activeKey => {
     store.menu.toggleSelected(activeKey);
   }
 
   return { onClose, onTabsChange };
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 

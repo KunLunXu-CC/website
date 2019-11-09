@@ -13,7 +13,7 @@ import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
 import './theme';                                 // 引入 codemirror 主题(样式)
 
 // 阻止默认行为
-const preventDefault = (e) => {
+const preventDefault = e => {
   e.preventDefault();
 }
 
@@ -52,7 +52,7 @@ const useStateHook = (props, store) => {
   }
 
   // 上传： 统一处理上传操作
-  const onUpload = (file) => {
+  const onUpload = file => {
     const handlers = [
       { test: /^image\/.*/ig, fun: uploadPhone },
     ];
@@ -61,14 +61,14 @@ const useStateHook = (props, store) => {
   }
 
   // 监听粘贴动作: 实现图片的粘贴上传
-  const onPaste = (event) => {
-    if (!event.clipboardData || !event.clipboardData.items){return false;}
-    const item = event.clipboardData.items[0];
+  const onPaste = event => {
+    if (!event.clipboardData || !event.clipboardData.items) {return false;}
+    const [item] = event.clipboardData.items;
     item.kind === 'file' && onUpload(item.getAsFile());
   }
 
   // 监听拖动事件(注意和 onDrap 区分开)：实现图片的粘贴拖拽上传
-  const onDrop = (event) => {
+  const onDrop = event => {
     event.preventDefault();
     const file = _.get(event, 'dataTransfer.files.[0]', null);
     file && onUpload(file);

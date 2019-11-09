@@ -68,6 +68,7 @@ use({
   request: [
     config => {
       const authorization = localStorage.getItem('authorization');
+      // eslint-disable-next-line no-param-reassign
       authorization && (config.headers.Authorization = authorization);
       return config;
     }

@@ -112,10 +112,10 @@ export default class Store {
   // 编辑文章: 找到数据设置 editor: true
   @action
   editorArticle = ({ id }) => {
-    this.articles = this.articles.map(v => {
-      v.id === id && (v.editor = true);
-      return v;
-    });
+    this.articles = this.articles.map(v => ({
+      ... v,
+      editor: v.id === id,
+    }));
   }
 
   // 上传图片

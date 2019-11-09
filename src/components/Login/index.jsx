@@ -12,11 +12,11 @@ import { Input, Form, Button, Icon } from 'antd';
 import scss from './index.module.scss';
 import Head from '@assets/img/login_head.jpg';
 
-const useStateHook = (props) => {
+const useStateHook = props => {
   // 登录
   const onLogin = () => {
     props.form.validateFieldsAndScroll((errors, values) => {
-      if (!!errors){return false;}
+      if (!!errors) {return false;}
       _.isFunction(props.onLogin) && props.onLogin({ ... values });
     });
   };
@@ -24,7 +24,7 @@ const useStateHook = (props) => {
   return { onLogin };
 };
 
-const Desktop = (props) => {
+const Desktop = props => {
   const state = useStateHook(props);
   return (
     <div className={scss['login']}>

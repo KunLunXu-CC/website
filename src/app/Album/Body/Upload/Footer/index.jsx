@@ -18,7 +18,7 @@ const useStateHook = (props, store) => {
   return { onCancel, onUpload };
 }
 
-export default (props) => {
+export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 

@@ -11,7 +11,7 @@ const useStateHook = () => {
   return { barStyle };
 };
 
-export default (props) => {
+export default props => {
   const state = useStateHook(props);
 
   return (

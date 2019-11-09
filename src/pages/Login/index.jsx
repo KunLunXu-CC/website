@@ -21,7 +21,7 @@ const useStateHook = (props, store) => {
   return { onLogin };
 };
 
-const Login = (props) => {
+const Login = props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return (
