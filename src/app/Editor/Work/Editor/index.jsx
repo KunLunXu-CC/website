@@ -36,6 +36,30 @@ const useStateHook = (props, store) => {
     onSave();
   }
 
+  // 上传图片
+  const uploadPhone = async ({ file }) => {
+    const url = await store.article.uploadPhone({
+      article: props.data.article.id,
+      file,
+    });
+    url && immutable.codeMirror.replaceSelection(`![插入图片](${url})`);
+  }
+
+  // 监听粘贴动作: 实现图片的粘贴上传
+  const onPaste = (event) => {
+    if (!event.clipboardData || !event.clipboardData.items){return false;}
+    const item = event.clipboardData.items[0];
+    if (item.kind === 'file'){
+      let file = item.getAsFile();
+      const handlers = [
+        { test: /^image\/.*/ig, fun: uploadPhone },
+      ];
+      const hande = handlers.find(v => (v.test.test(file.type)));
+      hande && hande.fun({ file });
+    }
+  }
+
+  // 初始化 codeMirror
   useEffect(() => {
     if (!immutable.codeMirror) {
       immutable.codeMirror = CodeMirror(editorBodyRef.current, {
@@ -55,7 +79,7 @@ const useStateHook = (props, store) => {
     }
   }, [props.data.article, immutable, store]);
 
-  return { editorBodyRef, onKeyDown };
+  return { editorBodyRef, onKeyDown, onPaste };
 }
 
 export default props => {
@@ -65,8 +89,9 @@ export default props => {
   return (
     <Scroll className={scss['editor']}>
       <div
-        onKeyDown={state.onKeyDown}
+        onPaste={state.onPaste}
         ref={state.editorBodyRef}
+        onKeyDown={state.onKeyDown}
         className={scss['editor-body']}/>
     </Scroll>
   );

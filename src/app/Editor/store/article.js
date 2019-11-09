@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import { observable, action, computed } from 'mobx';
+import { PHOTO_TYPE } from '@config/consts';
 import * as api from '@api';
 
 export default class Store {
@@ -17,6 +19,8 @@ export default class Store {
       article: this.articles.find(article => article.id === v.article),
     }));
   }
+
+  /***** 处理菜单 *****/
 
   // 切换状态(change)
   @action
@@ -50,6 +54,8 @@ export default class Store {
     this.openList = this.openList.filter(v => v.article !== article);
   }
 
+  /***** 处理文章 *****/
+
   // 查询 articles
   @action
   getArticles = async () => {
@@ -78,7 +84,7 @@ export default class Store {
     this.articles = res.list.map(v => ({ ... v, editor: false }));
   }
 
-  // 删除 tag
+  // 删除 文章
   @action
   removeArticle = async ({ id }) => {
     const res = await api.removeArticles({
@@ -110,5 +116,15 @@ export default class Store {
       v.id === id && (v.editor = true);
       return v;
     });
+  }
+
+  // 上传图片
+  uploadPhone = async ({ file, article }) => {
+    const res = await api.uploadPhotos({
+      files: [file],
+      payload: article,
+      type: PHOTO_TYPE.ARTICLE.VALUE,
+    });
+    return _.get(res, '[0].url', '');
   }
 };

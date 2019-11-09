@@ -47,7 +47,7 @@ export default class Store {
   @action
   upload = () => {
     uploadPhotos({
-      body: { files: toJS(this.fileList) }
+      files: toJS(this.fileList)
     });
   }
 };

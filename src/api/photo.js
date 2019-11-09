@@ -1,8 +1,11 @@
+import _ from 'lodash';
 import axios from '@utils/request';
 
-export const uploadPhotos = async ({ body }) => {
+export const uploadPhotos = async ({ files, type, payload }) => {
   const formData = new FormData();
-  body.files.forEach(v => (formData.append('file', v)));
+  payload && formData.append('payload', payload);
+  _.isFinite(type) && formData.append('type', type);
+  files.forEach(v => (formData.append('file', v)));
 
   const res = await axios({
     data: formData,
@@ -11,5 +14,5 @@ export const uploadPhotos = async ({ body }) => {
     timeout: 1000 * 60 * 30,
     headers: { 'Content-Type': 'multipart/form-data' },
   });
-  return res.data.data.login;
+  return res.data.data;
 };
