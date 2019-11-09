@@ -12,6 +12,11 @@ import scss from './index.module.scss';
 import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
 import './theme';                                 // 引入 codemirror 主题(样式)
 
+// 阻止默认行为
+const preventDefault = (e) => {
+  e.preventDefault();
+}
+
 const useStateHook = (props, store) => {
   const editorBodyRef = useRef(null);
   const immutable = useMemo(() => ({
@@ -65,7 +70,6 @@ const useStateHook = (props, store) => {
   // 监听拖动事件(注意和 onDrap 区分开)：实现图片的粘贴拖拽上传
   const onDrop = (event) => {
     event.preventDefault();
-    event.stopPropagation();
     const file = _.get(event, 'dataTransfer.files.[0]', null);
     file && onUpload(file);
   }
@@ -96,13 +100,13 @@ const useStateHook = (props, store) => {
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
-
   return (
     <Scroll className={scss['editor']}>
       <div
         onDrop={state.onDrop}
         onPaste={state.onPaste}
         ref={state.editorBodyRef}
+        onDragOver={preventDefault}
         onKeyDown={state.onKeyDown}
         className={scss['editor-body']}/>
     </Scroll>
