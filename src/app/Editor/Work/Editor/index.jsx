@@ -3,6 +3,7 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
+import _ from 'lodash';
 import { Scroll } from 'qyrc';
 import CodeMirror from 'codemirror';
 
@@ -45,18 +46,28 @@ const useStateHook = (props, store) => {
     url && immutable.codeMirror.replaceSelection(`![插入图片](${url})`);
   }
 
+  // 上传： 统一处理上传操作
+  const onUpload = (file) => {
+    const handlers = [
+      { test: /^image\/.*/ig, fun: uploadPhone },
+    ];
+    const hande = handlers.find(v => (v.test.test(file.type)));
+    hande && hande.fun({ file });
+  }
+
   // 监听粘贴动作: 实现图片的粘贴上传
   const onPaste = (event) => {
     if (!event.clipboardData || !event.clipboardData.items){return false;}
     const item = event.clipboardData.items[0];
-    if (item.kind === 'file'){
-      let file = item.getAsFile();
-      const handlers = [
-        { test: /^image\/.*/ig, fun: uploadPhone },
-      ];
-      const hande = handlers.find(v => (v.test.test(file.type)));
-      hande && hande.fun({ file });
-    }
+    item.kind === 'file' && onUpload(item.getAsFile());
+  }
+
+  // 监听拖动事件(注意和 onDrap 区分开)：实现图片的粘贴拖拽上传
+  const onDrop = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const file = _.get(event, 'dataTransfer.files.[0]', null);
+    file && onUpload(file);
   }
 
   // 初始化 codeMirror
@@ -79,7 +90,7 @@ const useStateHook = (props, store) => {
     }
   }, [props.data.article, immutable, store]);
 
-  return { editorBodyRef, onKeyDown, onPaste };
+  return { editorBodyRef, onKeyDown, onPaste, onDrop };
 }
 
 export default props => {
@@ -89,6 +100,7 @@ export default props => {
   return (
     <Scroll className={scss['editor']}>
       <div
+        onDrop={state.onDrop}
         onPaste={state.onPaste}
         ref={state.editorBodyRef}
         onKeyDown={state.onKeyDown}
