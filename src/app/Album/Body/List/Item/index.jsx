@@ -3,11 +3,11 @@ import { Image, Icon } from 'qyrc';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss['item']}>
-    <div className={scss['preview']}>
+  <div className={scss.item}>
+    <div className={scss.preview}>
       <Image src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.6/img/other/th%20(3).jpg"/>
     </div>
-    <div className={scss['info']}>
+    <div className={scss.info}>
       <div className={scss['info-icon']}>
         <Icon type="icon-genghuanfengmian" />
       </div>

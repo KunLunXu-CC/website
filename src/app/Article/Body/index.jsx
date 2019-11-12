@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss['body']}>
+  <div className={scss.body}>
     <SearchBar />
     <ListPage />
   </div>

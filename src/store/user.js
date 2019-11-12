@@ -32,6 +32,6 @@ export default class Store {
       console.log('role: ', toJS(this.role));
       console.log('auth: ', toJS(this.auth));
       console.groupEnd();
-    }
+    },
   };
 }

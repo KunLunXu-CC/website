@@ -19,7 +19,7 @@ class Store {
     console.log('upload: ', toJS(this.upload));
     console.groupEnd();
   };
-};
+}
 
 // 导出 hook 使用 hook 方法
 export const useStore = () => {

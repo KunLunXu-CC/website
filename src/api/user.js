@@ -1,5 +1,5 @@
 import axios from '@utils/request';
-import { rsa } from '@utils/encryption';
+import { rsa } from '@utils';
 
 export const login = async ({ account, password }) => {
   const res = await axios({
@@ -15,7 +15,9 @@ export const login = async ({ account, password }) => {
           message 
         }
       }`,
-    }
+    },
   });
   return res.data.data.login;
-}
+};
+
+export const logout = async () => {};

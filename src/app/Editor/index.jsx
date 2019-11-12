@@ -11,7 +11,7 @@ import scss from './index.module.scss';
 
 export default () => (
   <StoreProvider>
-    <div className={scss['editor']}>
+    <div className={scss.editor}>
       <div className={scss['editor-side']}><Side/></div>
       <div className={scss['editor-body']}>
         <div className={scss['editor-body-header']}><Header/></div>

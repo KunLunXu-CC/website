@@ -9,5 +9,5 @@ export default [
     exact: true,
     path: '/login',
     component: pages.Login,
-  }
+  },
 ];

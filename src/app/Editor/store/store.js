@@ -21,4 +21,4 @@ export default class Store {
     console.log('tag: ', toJS(this.tag));
     console.groupEnd();
   };
-};
+}

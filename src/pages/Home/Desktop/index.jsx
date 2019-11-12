@@ -7,7 +7,7 @@ import scss from './index.module.scss';
 import HomeBg from '@assets/img/home_bg.jpg';
 
 export default () => (
-  <Image src={HomeBg} className={scss['dosktop']}>
+  <Image src={HomeBg} className={scss.dosktop}>
     <Header />
   </Image>
 );

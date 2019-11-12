@@ -6,12 +6,12 @@ export default props => (
   <Image
     height="100px"
     src={props.data.img}
-    className={scss['item']}>
-    <div className={scss['mask']}>
-      <div className={scss['title']}>
+    className={scss.item}>
+    <div className={scss.mask}>
+      <div className={scss.title}>
         PIXIV
       </div>
-      <div className={scss['desc']}>
+      <div className={scss.desc}>
         P 站的正确打开方式
       </div>
     </div>

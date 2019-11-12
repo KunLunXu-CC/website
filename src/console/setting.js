@@ -14,6 +14,6 @@ const setting = () => {
     group: () => {},
     groupEnd: () => {},
   }
-}
+};
 
 setting();

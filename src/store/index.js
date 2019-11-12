@@ -1,14 +1,15 @@
 import React from 'react';
 import { observable } from 'mobx';
-const StoreContext = React.createContext(null);
 import App from './app';
 import User from './user';
+
+const StoreContext = React.createContext(null);
 
 // 组合全局 store
 class Store {
   @observable app = new App();
   @observable user = new User();
-};
+}
 
 // 导出 hook 使用 hook 方法
 export const useStore = () => {

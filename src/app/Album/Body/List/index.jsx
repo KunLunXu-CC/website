@@ -6,7 +6,7 @@ import Item from './Item';
 
 export default () => (
   <Scroll>
-    <div className={scss['list']}>
+    <div className={scss.list}>
       <Item />
       <Item />
       <Item />

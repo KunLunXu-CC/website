@@ -25,10 +25,10 @@ const Login = props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return (
-    <Image src={HomeBg} className={scss['login']}>
+    <Image src={HomeBg} className={scss.login}>
       <LoginComponent onLogin={state.onLogin}/>
     </Image>
   );
-}
+};
 
 export default withRouter(Login);

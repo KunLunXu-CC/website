@@ -15,10 +15,10 @@ export const getTags = async ({ pagination, search } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.tags;
-}
+};
 
 export const createTags = async ({ body, search, pagination } = {}) => {
   const res = await axios({
@@ -44,10 +44,10 @@ export const createTags = async ({ body, search, pagination } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.createTags;
-}
+};
 
 export const updateTags = async ({ conds, body, search, pagination } = {}) => {
   const res = await axios({
@@ -75,10 +75,10 @@ export const updateTags = async ({ conds, body, search, pagination } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.updateTags;
-}
+};
 
 export const removeTags = async ({ conds, body, search, pagination } = {}) => {
   const res = await axios({
@@ -104,7 +104,7 @@ export const removeTags = async ({ conds, body, search, pagination } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.removeTags;
-}
+};

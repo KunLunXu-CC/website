@@ -10,7 +10,7 @@ import Form from './Form';
 const useStateHook = (props, store) => {
   const onClose = () => {
     store.upload.close();
-  }
+  };
   return { onClose };
 }
 
@@ -24,12 +24,12 @@ export default props => {
       title="文件上传"
       placement="left"
       getContainer={false}
+      className={scss.upload}
       onClose={state.onClose}
-      className={scss['upload']}
       visible={store.upload.show}
     >
       <Form />
       <Footer />
     </Drawer>
   ));
-}
+};

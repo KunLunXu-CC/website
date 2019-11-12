@@ -15,10 +15,10 @@ export const getArticles = async ({ pagination, search } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.articles;
-}
+};
 
 export const createArticles = async ({ body, search, pagination } = {}) => {
   const res = await axios({
@@ -44,10 +44,10 @@ export const createArticles = async ({ body, search, pagination } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.createArticles;
-}
+};
 
 export const updateArticles = async ({ conds, body, search, pagination } = {}) => {
   const res = await axios({
@@ -75,10 +75,10 @@ export const updateArticles = async ({ conds, body, search, pagination } = {}) =
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.updateArticles;
-}
+};
 
 export const removeArticles = async ({ conds, body, search, pagination } = {}) => {
   const res = await axios({
@@ -104,7 +104,7 @@ export const removeArticles = async ({ conds, body, search, pagination } = {}) =
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.removeArticles;
-}
+};

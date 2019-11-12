@@ -69,4 +69,4 @@ export default class Store {
       editor: v.id === id ? true : v.editor,
     }));
   }
-};
+}

@@ -16,11 +16,16 @@ const useStateHook = props => {
   const dockRef = useRef();
 
   useEffect(() => {
-    if (!dockRef.current) {return false;}
+    if (!dockRef.current) {
+      return false;
+    }
 
     // 1. 重置 show 状态
     const resetShow = value => {
-      if (value === show) { return false;}
+      if (value === show) {
+        return false;
+      }
+
       setShow(value);
     };
 
@@ -45,21 +50,21 @@ const useStateHook = props => {
     return () => {
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseleave', onMouseLeave);
-    }
+    };
   }, [show]);
 
   // 计算 dock className
-  const dockClassName = useMemo( () => (
+  const dockClassName = useMemo(() => (
     scss[`dock-${show ? 'show' : 'hidden'}`]
   ), [show]);
 
   // 点击事件
   const onClick = dock => {
     _.isFunction(props.onClick) && props.onClick(dock);
-  }
+  };
 
   return { dockClassName, dockRef, onClick };
-}
+};
 
 export default props => {
   const state = useStateHook(props);
@@ -67,7 +72,7 @@ export default props => {
   return (
     <div
       ref={state.dockRef}
-      className={classNames(state.dockClassName, scss['dock'])} >
+      className={classNames(state.dockClassName, scss.dock)} >
       <div className={scss['dock-body']}>
         {props.dataSource.map(v => (
           <div
@@ -80,4 +85,4 @@ export default props => {
       </div>
     </div>
   );
-}
+};

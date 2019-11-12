@@ -5,7 +5,7 @@ import Upload from './Upload';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss['body']}>
+  <div className={scss.body}>
     <Upload />
     <Header />
     <List />

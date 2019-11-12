@@ -5,7 +5,7 @@ import UploadList from './UploadList';
 import scss from './index.module.scss';
 
 export default () => (
-  <Scroll className={scss['form']}>
+  <Scroll className={scss.form}>
     <Select />
     <UploadList />
   </Scroll>

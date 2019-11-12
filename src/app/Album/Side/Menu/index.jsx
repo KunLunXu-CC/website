@@ -36,14 +36,14 @@ const listData = [
 // }
 
 export default () => useObserver(() => (
-  <div className={scss['menu']}>
+  <div className={scss.menu}>
     <Menu
       mode="inline"
       defaultSelectedKeys={['all']}>
-      {listData.map( v => (
-        <Menu.Item key={v.key}>
-          <Icon type={v.icon}  className="anticon"/>
-          <span>{v.name}</span>
+      {listData.map(value => (
+        <Menu.Item key={value.key}>
+          <Icon type={value.icon}  className="anticon"/>
+          <span>{value.name}</span>
         </Menu.Item>
       ))}
     </Menu>

@@ -16,7 +16,9 @@ const useStateHook = props => {
   // 登录
   const onLogin = () => {
     props.form.validateFieldsAndScroll((errors, values) => {
-      if (!!errors) {return false;}
+      if (!!errors) {
+        return false;
+      }
       _.isFunction(props.onLogin) && props.onLogin({ ... values });
     });
   };
@@ -27,7 +29,7 @@ const useStateHook = props => {
 const Desktop = props => {
   const state = useStateHook(props);
   return (
-    <div className={scss['login']}>
+    <div className={scss.login}>
       <div className={scss['login-head']} ><Image src={Head}/></div>
       <div className={scss['login-form']}>
         <Form>
@@ -58,6 +60,6 @@ const Desktop = props => {
       </div>
     </div>
   );
-}
+};
 
 export default Form.create()(Desktop);

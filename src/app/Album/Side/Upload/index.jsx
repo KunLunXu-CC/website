@@ -6,7 +6,7 @@ import { useStore } from '../../store';
 const useStateHooks = (props, store) => {
   const onClick = () => {
     store.upload.open();
-  }
+  };
   return { onClick };
 };
 
@@ -15,7 +15,7 @@ export default props => {
   const state = useStateHooks(props, store);
 
   return (
-    <div className={scss['upload']}>
+    <div className={scss.upload}>
       <Button
         block
         icon="upload"
@@ -25,4 +25,4 @@ export default props => {
       </Button>
     </div>
   );
-}
+};

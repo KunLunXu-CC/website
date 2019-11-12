@@ -15,7 +15,9 @@ export const getNotes = async ({ pagination, search } = {}) => {
             message
           }
         }`,
-    }
+    },
   });
   return res.data.data.notes;
 };
+
+export const removeNotes = async () => {};

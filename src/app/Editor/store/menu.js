@@ -38,8 +38,8 @@ export default class Store {
       ... v,
       type: 'article',
     }));
-    let parents = tags.filter(v => !v.parent.id);
-    let children = tags.filter(v => !!v.parent.id);
+    const parents = tags.filter(v => !v.parent.id);
+    const children = tags.filter(v => !!v.parent.id);
 
     const translator = (parents, children) => {
       parents.forEach(parent => {
@@ -47,7 +47,7 @@ export default class Store {
         parent.children = [];
         children.forEach((current, index) => {
           if (current.parent.id === parent.id) {
-            let temp = JSON.parse(JSON.stringify(children));
+            const temp = JSON.parse(JSON.stringify(children));
             temp.splice(index, 1);
             translator([current], temp);
             parent.children.push(current);
@@ -62,4 +62,4 @@ export default class Store {
     translator(parents, children);
     return parents;
   }
-};
+}

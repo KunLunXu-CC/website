@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { message } from 'antd';
+import JSEncrypt from 'jsencrypt';
 import * as CONTS from '@config/consts';
 
 /**
@@ -13,7 +14,7 @@ export const filterObject = (obj, filterVaslue = []) => {
     !filterVaslue.includes(value) && (filter[key] = value);
   });
   return filter;
-}
+};
 
 /**
  * 请求错误信息处理函数
@@ -27,14 +28,14 @@ export const handleMessage = ({ rescode, message: info }) => {
   };
   const handler = map[rescode];
   handler && handler(info);
-}
+};
 
 /**
  * 通用打印: 当前为开发环境下才允许打印
  */
 export const log = (... args) => {
   _DEV_ && console.log(... args);
-}
+};
 
 /**
  * 防抖
@@ -46,7 +47,18 @@ export const debounce = (fn, wait) => {
   return () => {
     if (timeout !== null) {
       clearTimeout(timeout);
-    };
+    }
     timeout = setTimeout(fn.bind(null, escape), wait);
-  }
-}
+  };
+};
+
+/**
+ * RSA 加密
+ * @param {String} data   待加密数据
+ * @returns {String}      加密后的数据
+ */
+export const rsa = data => {
+  const encrypt = new JSEncrypt();
+  encrypt.setPublicKey(PUBLICKEY);
+  return encrypt.encrypt(data);
+};

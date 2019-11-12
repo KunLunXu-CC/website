@@ -4,8 +4,8 @@ import { Input, Badge } from 'antd';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss['header']}>
-    <div className={scss['search']}>
+  <div className={scss.header}>
+    <div className={scss.header}>
       <Input
         size="large"
         placeholder="查询"
@@ -13,7 +13,7 @@ export default () => (
         prefix={<Icon type="icon-search" style={{ color: 'rgba(0,0,0,.25)' }} />}
       />
     </div>
-    <div className={scss['notice']}>
+    <div className={scss.notice}>
       <Badge dot>
         <Icon type="icon-notice" />
       </Badge>

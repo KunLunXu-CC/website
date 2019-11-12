@@ -7,7 +7,7 @@ import Tags from './Tags';
 
 export default () => (
   <StoreProvider>
-    <div className={scss['layout']}>
+    <div className={scss.layout}>
       <div className={scss['layout-tags']}><Tags/></div>
       <div className={scss['layout-body']}><Body/></div>
       <div className={scss['layout-side']}><Side/></div>

@@ -6,7 +6,7 @@ import Side from './Side';
 
 export default () => (
   <StoreProvider>
-    <div className={scss['layout']}>
+    <div className={scss.layout}>
       <div className={scss['layout-side']}><Side/></div>
       <div className={scss['layout-body']}><Body/></div>
     </div>

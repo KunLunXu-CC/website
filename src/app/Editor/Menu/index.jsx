@@ -25,31 +25,31 @@ const useStateHook = (props, store) => {
           }
           <div
             className={scss['menu-dividing']}
-            style={{ left: `${index * INLINE_INDENT + 12}px` }}
+            style={{ left: `${(index * INLINE_INDENT) + 12}px` }}
           />
         </Menu.SubMenu> :
         <Menu.Item key={item.id}>
           <MenuTitle data={item} type="item"/>
         </Menu.Item>
     );
-    return store.menu.list.map(v => (recursion(v, 1)))
-  }
+    return store.menu.list.map(v => (recursion(v, 1)));
+  };
 
   // 选择项时
   const onSelect = ({ key }) => {
     store.article.open(key);
     store.menu.toggleSelected(key);
-  }
+  };
 
   // 添加 tag
   const addTag = () => {
     store.tag.createFictitiousTag();
-  }
+  };
 
   // SubMenu 展开/关闭的回调
   const onOpenChange = openKeys => {
     store.menu.onOpenChange(openKeys);
-  }
+  };
 
   useEffect(() => {
     store.tag.getTags();
@@ -57,14 +57,14 @@ const useStateHook = (props, store) => {
   }, [store]);
 
   return { renderMenuList, onSelect, onOpenChange, addTag };
-}
+};
 
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 
   return useObserver(() => (
-    <div className={scss['menu']}>
+    <div className={scss.menu}>
       <Scroll className={scss['menu-middle']}>
         <Menu
           mode="inline"
@@ -84,4 +84,4 @@ export default props => {
       </div>
     </div>
   ));
-}
+};
