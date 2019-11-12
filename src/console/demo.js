@@ -3,47 +3,46 @@
 function (t) {
   function o (a) {
     if (e[a]) return e[a].exports;
-    let l = e[a] = {
+    const l = e[a] = {
       exports: {},
       id: a,
-      loaded: !1
+      loaded: !1,
     };
     return t[a].call(l.exports, l, l.exports, o),
     l.loaded = !0,
-    l.exports
+    l.exports;
   }
   var e = {};
   o.m = t,
   o.c = e,
   o.p = 'http://cdn.alloyteam.com/assets/',
-  o(0)
+  o(0);
 } ([function (t, o, e) {
-  t.exports = e(6)
+  t.exports = e(6);
 },
-function (t, o) {},
-  , ,
+function (t, o) {},,  ,
   function (t, o, e) {
     'use strict';
     function a () {
       s.info('%c小样，你打开Console是想窃取情报吗？那就如你所愿 @!@', 'color: #3498DB;font-weight: 600;'),
       setTimeout(() => {
-        s.log('%cA%cl%cl%co%cy %cT%ce%ca%cm', 'font-size:90px;color:#3498DB;font-family: verdana;text-shadow:0px 1px 0px #3498DB,0px 2px 0px #3498DB,0px 3px 0px #3498DB,0px 4px 0px #3498DB, 0px 5px 0px  #3498DB,0px 6px 0px #3498DB, 0px 7px 0px #3498DB,0px 8px 7px #3498DB', 'font-size:90px;color:#7f8ea0;font-family: verdana;text-shadow:0px 1px 0px #7f8ea0,0px 2px 0px #7f8ea0,0px 3px 0px #7f8ea0,0px 4px 0px #7f8ea0, 0px 5px 0px  #7f8ea0,0px 6px 0px #7f8ea0, 0px 7px 0px #7f8ea0,0px 8px 7px #7f8ea0', 'font-size:120px;color:#89d04f;font-family: arial;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f', 'font-size:90px;color:#fd6a7f;font-family: verdana;text-shadow:0px 1px 0px #fd6a7f,0px 2px 0px #fd6a7f,0px 3px 0px #fd6a7f,0px 4px 0px #fd6a7f, 0px 5px 0px  #fd6a7f,0px 6px 0px #fd6a7f, 0px 7px 0px #fd6a7f,0px 8px 7px #fd6a7f', 'font-size:90px;color:#89d04f;font-family: verdana;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f', 'font-size:90px;color:#3498DB;font-family: verdana;text-shadow:0px 1px 0px #3498DB,0px 2px 0px #3498DB,0px 3px 0px #3498DB,0px 4px 0px #3498DB, 0px 5px 0px  #3498DB,0px 6px 0px #3498DB, 0px 7px 0px #3498DB,0px 8px 7px #3498DB', 'font-size:90px;color:#89d04f;font-family: verdana;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f', 'font-size:90px;color:#95A5A6;font-family: verdana;text-shadow:0px 1px 0px #95A5A6,0px 2px 0px #95A5A6,0px 3px 0px #95A5A6,0px 4px 0px #95A5A6, 0px 5px 0px  #95A5A6,0px 6px 0px #95A5A6, 0px 7px 0px #95A5A6,0px 8px 7px #95A5A6', 'font-size:90px;color:#fd6a7f;font-family: helveltica;text-shadow:0px 1px 0px #fd6a7f,0px 2px 0px #fd6a7f,0px 3px 0px #fd6a7f,0px 4px 0px #fd6a7f, 0px 5px 0px  #fd6a7f,0px 6px 0px #fd6a7f, 0px 7px 0px #fd6a7f,0px 8px 7px #fd6a7f')
+        s.log('%cA%cl%cl%co%cy %cT%ce%ca%cm', 'font-size:90px;color:#3498DB;font-family: verdana;text-shadow:0px 1px 0px #3498DB,0px 2px 0px #3498DB,0px 3px 0px #3498DB,0px 4px 0px #3498DB, 0px 5px 0px  #3498DB,0px 6px 0px #3498DB, 0px 7px 0px #3498DB,0px 8px 7px #3498DB', 'font-size:90px;color:#7f8ea0;font-family: verdana;text-shadow:0px 1px 0px #7f8ea0,0px 2px 0px #7f8ea0,0px 3px 0px #7f8ea0,0px 4px 0px #7f8ea0, 0px 5px 0px  #7f8ea0,0px 6px 0px #7f8ea0, 0px 7px 0px #7f8ea0,0px 8px 7px #7f8ea0', 'font-size:120px;color:#89d04f;font-family: arial;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f', 'font-size:90px;color:#fd6a7f;font-family: verdana;text-shadow:0px 1px 0px #fd6a7f,0px 2px 0px #fd6a7f,0px 3px 0px #fd6a7f,0px 4px 0px #fd6a7f, 0px 5px 0px  #fd6a7f,0px 6px 0px #fd6a7f, 0px 7px 0px #fd6a7f,0px 8px 7px #fd6a7f', 'font-size:90px;color:#89d04f;font-family: verdana;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f', 'font-size:90px;color:#3498DB;font-family: verdana;text-shadow:0px 1px 0px #3498DB,0px 2px 0px #3498DB,0px 3px 0px #3498DB,0px 4px 0px #3498DB, 0px 5px 0px  #3498DB,0px 6px 0px #3498DB, 0px 7px 0px #3498DB,0px 8px 7px #3498DB', 'font-size:90px;color:#89d04f;font-family: verdana;text-shadow:0px 1px 0px #89d04f,0px 2px 0px #89d04f,0px 3px 0px #89d04f,0px 4px 0px #89d04f, 0px 5px 0px  #89d04f,0px 6px 0px #89d04f, 0px 7px 0px #89d04f,0px 8px 7px #89d04f', 'font-size:90px;color:#95A5A6;font-family: verdana;text-shadow:0px 1px 0px #95A5A6,0px 2px 0px #95A5A6,0px 3px 0px #95A5A6,0px 4px 0px #95A5A6, 0px 5px 0px  #95A5A6,0px 6px 0px #95A5A6, 0px 7px 0px #95A5A6,0px 8px 7px #95A5A6', 'font-size:90px;color:#fd6a7f;font-family: helveltica;text-shadow:0px 1px 0px #fd6a7f,0px 2px 0px #fd6a7f,0px 3px 0px #fd6a7f,0px 4px 0px #fd6a7f, 0px 5px 0px  #fd6a7f,0px 6px 0px #fd6a7f, 0px 7px 0px #fd6a7f,0px 8px 7px #fd6a7f');
       },
       1e3),
       setTimeout(() => {
-        s.log('我们是腾讯Web前端团队-%cAlloyTeam', 'font-weight: bold;color:#fd6a7f')
+        s.log('我们是腾讯Web前端团队-%cAlloyTeam', 'font-weight: bold;color:#fd6a7f');
       },
       1500),
       setTimeout(() => {
-        s.log('我们的愿景是：%c成为地球卓越的Web团队', 'font-weight: bold;color:#fd6a7f')
+        s.log('我们的愿景是：%c成为地球卓越的Web团队', 'font-weight: bold;color:#fd6a7f');
       },
       2e3),
-      window._start
+      window._start;
     }
     function l () {
-      let t = new Audio;
+      const t = new Audio;
       t.src = 'http://pub.idqqimg.com/tfc/home/mp3/music/song.mp3',
-      t.play()
+      t.play();
     }
     function c () {
       let t = 0;
@@ -63,7 +62,7 @@ function (t, o) {},
           t < 2 ? s.log('从白天到深夜，一直都可以都陪着你撸%c代码%c的美女程序员%c㊣', 'color: #95A5A6;', '', 'color:#3498DB') : (copy && copy('Kinvix@QQ.com'), s.log('太贪心,不给你看了！想要看更多，就快来我们团队让校花手把手教你写前端吧\n简历砸向这里:Kinvix@QQ.com(%c☑已复制到剪贴板)', 'color: #95A5A6')),
           s.log('%c如果看不到福利，请升级的chrome', 'color:#95A5A6'),
           t++,
-          '♥♥♥♥♥'
+          '♥♥♥♥♥';
         }),
       p('我要应聘',
         () => (copy && copy('Kinvix@QQ.com'),
@@ -89,34 +88,34 @@ function (t, o) {},
             'color:#fd6a7f;font-weight:bold;',
             '',
             'color:#fd6a7f', ''
-          )
+          );
         },
         2500),
-        ''))
+        ''));
     }
     function p (t, o) {
       Object.defineProperty(window, t, {
-        get: o
-      })
+        get: o,
+      });
     }
     function n () {
-      let t = new Image;
+      const t = new Image;
       Object.defineProperty(t, 'id', {
         get () {
           c(),
-          a()
-        }
+          a();
+        },
       }),
-      s.log('%c', t)
+      s.log('%c', t);
     }
-    var r = [e(12), e(13), e(11)],
-      i = e(9),
-      m = e(10),
-      s = window.console || {
-        log () {},
-        info () {}
-      };
-    n()
+    var r = [e(12), e(13), e(11)];
+    var i = e(9);
+    var m = e(10);
+    var s = window.console || {
+      log () {},
+      info () {},
+    };
+    n();
   },
   function (t, o) {
     'use strict';
@@ -126,7 +125,7 @@ function (t, o) {},
         link: [{
           '@href': 'http://www.alloyteam.com/feed/?jsonp=callback',
           '@rel': 'self',
-          '@type': 'application/rss+xml'
+          '@type': 'application/rss+xml',
         },
         'http://www.alloyteam.com'],
         description: '腾讯全端 AlloyTeam 团队 Blog',
@@ -144,7 +143,7 @@ function (t, o) {},
           category: ['Web开发', '资源工具'],
           guid: 'http://www.alloyteam.com/?p=12124',
           description: '原文链接：https://github.com/AlloyTeam/omi/blob/master/docs/ […]',
-          commentRss: 'http://www.alloyteam.com/2017/03/omi-released-command-line-interface-omi-cli/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/03/omi-released-command-line-interface-omi-cli/feed/',
         },
         {
           title: '从工程化角度讨论如何快速构建可靠React组件',
@@ -155,7 +154,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=12083',
           description: '原文链接 前言 React 的开发也已经有2年时间了，先从QQ的家校群，转成做互动直播，主要是花样直播这一块。 […]',
-          commentRss: 'http://www.alloyteam.com/2017/03/from-an-engineering-point-of-view-discusses-how-to-construct-reliable-components-react/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/03/from-an-engineering-point-of-view-discusses-how-to-construct-reliable-components-react/feed/',
         },
         {
           title: 'Omi应用md2site发布-markdown转网站利器',
@@ -166,7 +165,7 @@ function (t, o) {},
           category: ['作品', '资源工具'],
           guid: 'http://www.alloyteam.com/?p=12077',
           description: '写在前面 Md2site是基于Omi的一款Markdown转网站工具，使用简单，生成的文件轻巧，功能强大。 当 […]',
-          commentRss: 'http://www.alloyteam.com/2017/03/omi-md2site-release-markdown-go-web-site-tool/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/03/omi-md2site-release-markdown-go-web-site-tool/feed/',
         },
         {
           title: '线条之美，玩转SVG线条动画',
@@ -177,7 +176,7 @@ function (t, o) {},
           category: ['Web开发', 'svg'],
           guid: 'http://www.alloyteam.com/?p=12024',
           description: '通常来说web前端实现动画效果主要通过下面几种方案： css动画；利用css3的样式效果可以将dom元素做出动 […]',
-          commentRss: 'http://www.alloyteam.com/2017/02/the-beauty-of-the-lines-break-lines-svg-animation/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/02/the-beauty-of-the-lines-break-lines-svg-animation/feed/',
         },
         {
           title: '2017年试试Web组件化框架Omi',
@@ -188,7 +187,7 @@ function (t, o) {},
           category: ['Alloy 实验室', 'JavaScript', 'Web开发', '作品', '团队', '移动 Web 开发', '移动开发', '资源工具'],
           guid: 'http://www.alloyteam.com/?p=11852',
           description: 'Open and modern framework for building user interfaces. […]',
-          commentRss: 'http://www.alloyteam.com/2017/02/2017-try-web-component-framework-omi/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/02/2017-try-web-component-framework-omi/feed/',
         },
         {
           title: 'webgl世界 matrix入门',
@@ -199,7 +198,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11681',
           description: '这次没有带来游戏啦，本来还是打算用一个小游戏来介绍阴影，但是发现阴影这块想完完整整介绍一次太大了，涉及到很多， […]',
-          commentRss: 'http://www.alloyteam.com/2017/01/getting-started-with-webgl-world-matrix/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/01/getting-started-with-webgl-world-matrix/feed/',
         },
         {
           title: '从零开始React服务器渲染',
@@ -210,7 +209,7 @@ function (t, o) {},
           category: ['HTML5', 'JavaScript', 'Node.js', 'Web开发'],
           guid: 'http://www.alloyteam.com/?p=11750',
           description: '一.前言 当我们选择使用Node+React的技术栈开发Web时，React提供了一种优雅的方式实现服务器渲染 […]',
-          commentRss: 'http://www.alloyteam.com/2017/01/react-from-scratch-server-render/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/01/react-from-scratch-server-render/feed/',
         },
         {
           title: '模块加载工具制造指南',
@@ -221,7 +220,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11716',
           description: '前言 看到这个标题，估计有同学会想，又要重复造轮子么？其实重复造轮子在大多数情况下确实是不太可取的，既浪费了精 […]',
-          commentRss: 'http://www.alloyteam.com/2017/01/module-loading-tools-guide/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/01/module-loading-tools-guide/feed/',
         },
         {
           title: 'AlloyTouch实现下拉刷新',
@@ -232,7 +231,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11784',
           description: '原文地址:https://github.com/AlloyTeam/AlloyTouch/wiki/Pull- […]',
-          commentRss: 'http://www.alloyteam.com/2017/01/alloytouch-implementing-dropdown-refresh/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/01/alloytouch-implementing-dropdown-refresh/feed/',
         },
         {
           title: 'HTTP2 Server Push的研究',
@@ -243,7 +242,7 @@ function (t, o) {},
           category: ['Web开发', 'http2'],
           guid: 'http://www.alloyteam.com/?p=11743',
           description: '1，HTTP2的新特性。 关于HTTP2的新特性，读着可以参看我之前的文章，这里就不在多说了，本篇文章主要讲一 […]',
-          commentRss: 'http://www.alloyteam.com/2017/01/http2-server-push-research/feed/'
+          commentRss: 'http://www.alloyteam.com/2017/01/http2-server-push-research/feed/',
         },
         {
           title: 'AlloyTouch实战–60行代码搞定QQ看点资料卡',
@@ -254,7 +253,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11739',
           description: '原文链接：https://github.com/AlloyTeam/AlloyTouch/wiki/kandi […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-combat-60-lines-of-code-get-qq-aspect-data-card/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-combat-60-lines-of-code-get-qq-aspect-data-card/feed/',
         },
         {
           title: 'transformjs污染了DOM?',
@@ -265,7 +264,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11737',
           description: '原文链接: https://github.com/AlloyTeam/AlloyTouch/wiki/Powe […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/transformjs-polluting-the-dom/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/transformjs-polluting-the-dom/feed/',
         },
         {
           title: 'AlloyTouch 0.2.0发布–鱼和熊掌兼得',
@@ -276,7 +275,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11733',
           description: '原文链接：https://github.com/AlloyTeam/AlloyTouch/wiki/Alloy […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-0-2-0-released-have-your-cake-and-eat-it-too/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-0-2-0-released-have-your-cake-and-eat-it-too/feed/',
         },
         {
           title: 'AlloyTouch全屏滚动插件发布–30秒搞定顺滑H5页',
@@ -287,7 +286,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11726',
           description: '原文链接：https://github.com/AlloyTeam/AlloyTouch/wiki/Alloy […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-full-screen-scroll-plugin-released-30-seconds-to-get-smooth-page-h5/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-full-screen-scroll-plugin-released-30-seconds-to-get-smooth-page-h5/feed/',
         },
         {
           title: 'react动画难写？试试react版transformjs',
@@ -298,7 +297,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11722',
           description: '简介 transformjs在非react领域用得风生水起，那么react技术栈的同学能用上吗？答案是可以的。 […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/react-animations-difficult-to-write-try-react-transformjs/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/react-animations-difficult-to-write-try-react-transformjs/feed/',
         },
         {
           title: '你必须收藏的Github技巧',
@@ -309,7 +308,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11720',
           description: '一秒钟把Github项目变成前端网站 GitHub Pages大家可能都知道，常用的做法，是建立一个gh-pa […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/you-must-collect-the-github-tips/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/you-must-collect-the-github-tips/feed/',
         },
         {
           title: 'HTML5 Canvas玩转酷炫大波浪进度图',
@@ -320,7 +319,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11714',
           description: '如上图所见，本文就是要实现上面那种效果。 由于最近AlloyTouch要写一个下拉刷新的酷炫loading效果 […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/html5-canvas-playing-cool-big-wave-of-progress/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/html5-canvas-playing-cool-big-wave-of-progress/feed/',
         },
         {
           title: '一分钟搞定AlloyTouch图片轮播组件',
@@ -331,7 +330,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11708',
           description: '轮播图也涉及到触摸和触摸反馈，同时，AlloyTouch可以把惯性运动打开或者关闭，并且设置min和max为运 […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/a-minutes-alloytouch-picture-carousel-component/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/a-minutes-alloytouch-picture-carousel-component/feed/',
         },
         {
           title: 'AlloyTouch与three.js 3D模型交互',
@@ -342,7 +341,7 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11706',
           description: '如你所见，上面的cube的旋转、加速、减速停止都是通过AlloyTouch去实现的。 演示 代码 [crayo […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-and-three-js-3d-model-interaction/feed/'
+          commentRss: 'http://www.alloyteam.com/2016/12/alloytouch-and-three-js-3d-model-interaction/feed/',
         },
         {
           title: '移动Web触摸与运动解决方案AlloyTouch开源啦',
@@ -353,8 +352,8 @@ function (t, o) {},
           category: 'Web开发',
           guid: 'http://www.alloyteam.com/?p=11678',
           description: '传送门 Github地址：https://github.com/AlloyTeam/AlloyTouch 简介 […]',
-          commentRss: 'http://www.alloyteam.com/2016/12/mobile-web-touch-and-motion-solutions-alloytouch-open-source/feed/'
-        }]
+          commentRss: 'http://www.alloyteam.com/2016/12/mobile-web-touch-and-motion-solutions-alloytouch-open-source/feed/',
+        }],
       },
       '@xmlns:content': 'http://purl.org/rss/1.0/modules/content/',
       '@xmlns:wfw': 'http://wellformedweb.org/CommentAPI/',
@@ -362,99 +361,101 @@ function (t, o) {},
       '@xmlns:atom': 'http://www.w3.org/2005/Atom',
       '@xmlns:sy': 'http://purl.org/rss/1.0/modules/syndication/',
       '@xmlns:slash': 'http://purl.org/rss/1.0/modules/slash/',
-      '@version': '2.0'
-    }
+      '@version': '2.0',
+    };
   },
   function (t, o, e) {
     'use strict';
     function a (t) {
       return t && t.__esModule ? t : {
         default:
-            t
-      }
+            t,
+      };
     }
     function l () {
-      $(window).scrollTop() > 0 ? $('#header').addClass('header-scrolled') : $('#header').removeClass('header-scrolled')
+      $(window).scrollTop() > 0 ? $('#header').addClass('header-scrolled') : $('#header').removeClass('header-scrolled');
     }
     function c () {
       function t (t) {
         let o = 0;
         for (t.length; o < 5; o++) {
-          let a = t[o];
-          e.push(`<li><a target="_blank" href="${a.link}"><h4>${a.title}</h4><span class="i-author">${a.creator}</span></a></li>`)
+          const a = t[o];
+          e.push(`<li><a target="_blank" href="${a.link}"><h4>${a.title}</h4><span class="i-author">${a.creator}</span></a></li>`);
         }
-        $('#post_container').html(e.join(''))
+        $('#post_container').html(e.join(''));
       }
-      var o = [],
-        e = [];
+      let o = [];
+      var e = [];
       $.ajax({
         url: 'http://www.alloyteam.com/feed/',
         dataType: 'xml',
         success (e) {
-          $(e).find('item').each(function () {
-            let t = $(this);
-            o.push({
-              title: t.find('title').text(),
-              link: t.find('link').text(),
-              creator: t.find('pubDate').next().text()
-            })
-          }),
+          $(e).find('item')
+            .each(function () {
+              const t = $(this);
+              o.push({
+                title: t.find('title').text(),
+                link: t.find('link').text(),
+                creator: t.find('pubDate').next()
+                  .text(),
+              });
+            }),
           0 == o.length && (o = e.channel.item),
-          t(o)
+          t(o);
         },
         error () {
           o = i.
             default.channel.item,
-          t(o)
-        }
-      })
+          t(o);
+        },
+      });
     }
     function p (t) {
-      let o = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        e = '2017-4-17',
-        a = new Date(new Date(e).getTime() + 1e3 * (t - 1) * 3600 * 24 * 7),
-        l = a.getDate(),
-        c = o[a.getMonth()],
-        p = '';
+      const o = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const e = '2017-4-17';
+      const a = new Date(new Date(e).getTime() + 1e3 * (t - 1) * 3600 * 24 * 7);
+      const l = a.getDate();
+      const c = o[a.getMonth()];
+      let p = '';
       return p = 1 === l || 21 === l || 31 === l ? `${l}st` : 2 === l || 22 === l ? `${l}nd` : 3 === l || 23 === l ? `${l}rd` : `${l}th`,
-      `${c} ${p}`
+      `${c} ${p}`;
     }
     function n () {
       $.ajax({
         url: 'http://www.alloyteam.com/alloyshare/admin/cgi-bin/get_last_period',
         success (t) {
-          ! t.retcode && t.data.period && $('#weeklyNum').html(`<span class="weekly-num">${p(t.data.period)}</span>`).show()
-        }
-      })
+          ! t.retcode && t.data.period && $('#weeklyNum').html(`<span class="weekly-num">${p(t.data.period)}</span>`)
+            .show();
+        },
+      });
     }
     e(1),
     e(4);
-    var r = e(5),
-      i = a(r);
+    const r = e(5);
+    var i = a(r);
     $(document).ready(() => {
       $('#indexCarousel').addClass('show'),
       l(),
       $(window).bind('scroll',
         () => {
-          l()
+          l();
         }),
       c(),
-      n()
-    })
-  },
-  , ,
+      n();
+    });
+  },,  ,
   function (t, o, e) {
-    t.exports = `${e.p}img/music-210512.gif`
-  },
-  function (t, o, e) {
-    t.exports = `${e.p}img/music_qr-63cb6b.png`
+    t.exports = `${e.p}img/music-210512.gif`;
   },
   function (t, o, e) {
-    t.exports = `${e.p}img/ruhua-c2cfe3.jpg`
+    t.exports = `${e.p}img/music_qr-63cb6b.png`;
   },
   function (t, o, e) {
-    t.exports = `${e.p}img/yanagao00-f5f991.jpg`
+    t.exports = `${e.p}img/ruhua-c2cfe3.jpg`;
   },
   function (t, o, e) {
-    t.exports = `${e.p}img/yanagao02-2a5c14.jpg`
+    t.exports = `${e.p}img/yanagao00-f5f991.jpg`;
+  },
+  function (t, o, e) {
+    t.exports = `${e.p}img/yanagao02-2a5c14.jpg`;
   }]);

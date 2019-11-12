@@ -19,20 +19,20 @@ const useStateHook = (props, store) => {
   }, [store]);
 
   return {};
-}
+};
 
 export default props => {
   const store = useStore();
   useStateHook(props, store);
 
   return useObserver(() => (
-    <div className={scss['tags']}>
+    <div className={scss.tags}>
       <Scroll className={scss['tags-middle']}>
         <Menu
           mode="inline"
           defaultSelectedKeys={['all']}
           inlineCollapsed={store.collapsed}>
-          {getRootChildren(store.tagList).map( v => (
+          {getRootChildren(store.tagList).map(v => (
             <Menu.Item key={v.id}>
               <Icon type={v.icon}  className="anticon"/>
               <span>{v.name}</span>
@@ -42,4 +42,4 @@ export default props => {
       </Scroll>
     </div>
   ));
-}
+};

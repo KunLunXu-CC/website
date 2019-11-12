@@ -12,7 +12,7 @@ const useStateHook = (props, store) => {
     store.upload.close();
   };
   return { onClose };
-}
+};
 
 export default props => {
   const store = useStore();

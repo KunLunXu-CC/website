@@ -8,7 +8,7 @@ export default class Store {
     this.parent = parent;
   }
 
-  /***** 显示表单 *****/
+  /** *** 显示表单 *****/
   @observable show = false;
 
   @action
@@ -17,7 +17,7 @@ export default class Store {
   @action
   open = () => (this.show = true);
 
-  /***** 上传文件列表 *****/
+  /** *** 上传文件列表 *****/
   @observable fileList = [];
 
   @action
@@ -35,7 +35,7 @@ export default class Store {
       : [];
   }
 
-  /***** 类型选择 *****/
+  /** *** 类型选择 *****/
   @observable type = PHOTO_TYPE.UNKNOWN.VALUE;
 
   @action
@@ -43,11 +43,11 @@ export default class Store {
     this.type = value ? value : PHOTO_TYPE.UNKNOWN.VALUE;
   }
 
-  /***** 文件上传 *****/
+  /** *** 文件上传 *****/
   @action
   upload = () => {
     uploadPhotos({
-      files: toJS(this.fileList)
+      files: toJS(this.fileList),
     });
   }
-};
+}

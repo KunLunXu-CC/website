@@ -16,3 +16,5 @@ export const uploadPhotos = async ({ files, type, payload }) => {
   });
   return res.data.data;
 };
+
+export const removePhotos = async () => {};

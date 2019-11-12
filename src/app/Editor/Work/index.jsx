@@ -13,22 +13,22 @@ const useStateHook = (props, store) => {
   const onClose = key => {
     store.article.close(key);
     store.menu.toggleSelected(key);
-  }
+  };
 
   // tabs change 事件
   const onTabsChange = activeKey => {
     store.menu.toggleSelected(activeKey);
-  }
+  };
 
   return { onClose, onTabsChange };
-}
+};
 
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
 
   return useObserver(() => (
-    <div className={scss['work']}>
+    <div className={scss.work}>
       <Tabs
         onChange={state.onTabsChange}
         activeKey={store.menu.selected}>
@@ -44,7 +44,7 @@ export default props => {
                     scss['work-tab-icon'],
                     { [scss['work-tab-icon-change']]: v.change }
                   )}
-                  onClick={state.onClose.bind(null, v.article.id )}
+                  onClick={state.onClose.bind(null, v.article.id)}
                 />
               </span>
             )}>

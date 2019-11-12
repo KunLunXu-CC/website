@@ -113,7 +113,7 @@ const useStateHook = (props, store) => {
     stopPropagation,
     onClickOperationMenu,
   };
-}
+};
 
 // props.type = 'subMenu | item ' props.data props.onMore
 export default props => {

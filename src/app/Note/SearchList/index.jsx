@@ -5,7 +5,7 @@ import { Scroll } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 
 import scss from './index.module.scss';
-import { useStore } from '../store'
+import { useStore } from '../store';
 
 const useStateHook = (props, store) => {
   const onClick = ({ key }) => {
@@ -18,7 +18,7 @@ export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return useObserver(() => (
-    <Scroll className={scss['list']}>
+    <Scroll className={scss.list}>
       <Menu
         theme="dark"
         mode="inline"
@@ -27,7 +27,7 @@ export default props => {
         selectedKeys={[_.get(store, 'note.id')]}
         style={{ width: '100%', minHeight: '100%' }}
       >
-        {store.noteList.map( v => (
+        {store.noteList.map(v => (
           <Menu.Item key={v.id}>{v.name}</Menu.Item>
         ))}
       </Menu>

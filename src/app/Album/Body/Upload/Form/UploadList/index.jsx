@@ -10,10 +10,10 @@ const useStateHooks = (props, store) => {
   const addFiles = e => {
     const { files } = e.target;
     store.upload.addFiles(... files);
-  }
+  };
 
   return { addFiles };
-}
+};
 
 export default props => {
   const store = useStore();
@@ -21,15 +21,15 @@ export default props => {
 
   return useObserver(() => (
     <div className={scss['upload-list']}>
-      <label className={scss['upload']}>
+      <label className={scss.upload}>
         <Icon type="icon-tupianshangchuan"/>
         <input type="file" multiple="multiple" onChange={state.addFiles}/>
       </label>
       {store.upload.fileList.map((file, index) => (
-        <div key={index} className={scss['item']}>
+        <div key={index} className={scss.item}>
           <Image src={file} />
         </div>
       ))}
     </div>
   ));
-}
+};

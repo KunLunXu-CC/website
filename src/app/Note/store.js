@@ -1,16 +1,16 @@
 import _ from 'lodash';
 import React from 'react';
-const StoreContext = React.createContext(null);
 import { useStore as useGlobalStore } from '@store';
 import { observable, action, autorun, reaction, toJS } from 'mobx';
 
 import { getTags, getNotes } from '@api';
+const StoreContext = React.createContext(null);
 
 const BASE_TAG = {
   id: 'all',
   name: '全部',
   icon: 'icon-all',
-}
+};
 
 class Store {
   constructor (global) {
@@ -62,13 +62,13 @@ class Store {
     },
     getNotes: () => {
       const params = {
-        search: { ... this.search }
+        search: { ... this.search },
       };
       !!this.tag && this.tag !== BASE_TAG.id && (params.search.tags = [this.tag]);
       getNotes(params).then(data => {
         const { list } = data;
         this.noteList = [... list];
-      })
+      });
     },
   };
 
@@ -79,7 +79,7 @@ class Store {
       effect: v => (this.note = v),
     },
   };
-};
+}
 
 // 导出 hook 使用 hook 方法
 export const useStore = () => {

@@ -96,9 +96,8 @@ module.exports = {
     "comma-dangle": [1, 'always-multiline'],                          // 当最后一个元素或属性与闭括号 ] 或 } 在 不同的行时, 要求使用拖尾逗号；当在 同一行时, 禁止使用拖尾逗号。
     "no-new-wrappers": 1,                                             // 禁止对 String, Number 和 Boolean 使用 new 操作符
     "radix": [1, "always"],                                           // 当使用parseInt()函数时要求使用第二参数
-
-    // "id-length": [1, 2],                                              // 强制标识符的最小长度为2
-    'camelcase': [1, "always"],                                       // 强制使用驼峰
+    // "id-length": [1, 2],                                           // 强制标识符的最小长度为2
+    'camelcase': [1],                                                 // 强制使用驼峰
     "new-cap": 1,                                                     // 要求构造函数首字母大写
 
     "eqeqeq": 1,                                                      // 要求使用 === 1==

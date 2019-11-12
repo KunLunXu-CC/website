@@ -13,7 +13,7 @@ const setting = () => {
     info: () => {},
     group: () => {},
     groupEnd: () => {},
-  }
+  };
 };
 
 setting();

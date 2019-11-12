@@ -6,30 +6,24 @@ import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
   // select option 数据
-  const options = useMemo(() => {
-    const res = [];
-    for (let key in PHOTO_TYPE) {
-      res.push({
-        key: PHOTO_TYPE[key].VALUE,
-        title: PHOTO_TYPE[key].DESC,
-        value: PHOTO_TYPE[key].VALUE,
-      });
-    }
-    return res;
-  }, []);
+  const options = useMemo(() => Object.keys(PHOTO_TYPE).map(key => ({
+    key: PHOTO_TYPE[key].VALUE,
+    title: PHOTO_TYPE[key].DESC,
+    value: PHOTO_TYPE[key].VALUE,
+  })), []);
 
   const onChange = value => {
     store.upload.setType(value);
-  }
+  };
 
   return { options, onChange };
-}
+};
 
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return (
-    <div className={scss['select']}>
+    <div className={scss.select}>
       <Select
         allowClear
         onChange={state.onChange}
@@ -42,4 +36,4 @@ export default props => {
       </Select>
     </div>
   );
-}
+};

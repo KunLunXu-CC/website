@@ -36,7 +36,7 @@ export default class Store {
     if (!!app) {
       this.minimize(app);
     } else {
-      app = apps.find( v => (
+      app = apps.find(v => (
         match = matchPath(url, { path: v.path, exact: true, strict: false })
       ));
       !!app && (this.list = [... this.list, { ... app, url, match, isMin: false }]);
@@ -83,6 +83,6 @@ export default class Store {
       console.group('%c[store]app', 'color: green;');
       console.log('list: ', toJS(this.list));
       console.groupEnd();
-    }
+    },
   };
-};
+}

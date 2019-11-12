@@ -14,13 +14,13 @@ export default class Store {
 
   // 获取工作窗口数据
   @computed get works () {
-    return this.openList.map( v => ({
+    return this.openList.map(v => ({
       ... v,
       article: this.articles.find(article => article.id === v.article),
     }));
   }
 
-  /***** 处理菜单 *****/
+  /** *** 处理菜单 *****/
 
   // 切换状态(change)
   @action
@@ -54,7 +54,7 @@ export default class Store {
     this.openList = this.openList.filter(v => v.article !== article);
   }
 
-  /***** 处理文章 *****/
+  /** *** 处理文章 *****/
 
   // 查询 articles
   @action
@@ -127,4 +127,4 @@ export default class Store {
     });
     return _.get(res, '[0].url', '');
   }
-};
+}

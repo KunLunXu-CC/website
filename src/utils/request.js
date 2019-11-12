@@ -44,7 +44,7 @@ export const use = ({ request, response }) => ({
 export const eject = ({ request, response }) => {
   request && instance.interceptors.request.eject(request);
   response && instance.interceptors.response.eject(response);
-}
+};
 
 /* 添加拦截器: 打印数据 */
 use({
@@ -52,14 +52,14 @@ use({
     config => {
       log('request:', config);
       return config;
-    }
+    },
   ],
   response: [
     response => {
       log('response:', response);
       return response;
-    }
-  ]
+    },
+  ],
 });
 
 
@@ -71,15 +71,15 @@ use({
       // eslint-disable-next-line no-param-reassign
       authorization && (config.headers.Authorization = authorization);
       return config;
-    }
+    },
   ],
   response: [
     response => {
       response.headers.authorization &&
       localStorage.setItem('authorization', response.headers.authorization);
       return response;
-    }
-  ]
+    },
+  ],
 });
 
 export default instance;

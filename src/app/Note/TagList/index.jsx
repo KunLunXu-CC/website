@@ -13,20 +13,20 @@ const getRootChildren = (data = []) => (
 const useStateHook = (props, store) => {
   const onClick = ({ key }) => {
     store.setTag(key);
-  }
+  };
 
   useEffect(() => {
     store.getTags();
   }, [store]);
 
   return { onClick };
-}
+};
 
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return useObserver(() => (
-    <Scroll className={scss['side']}>
+    <Scroll className={scss.side}>
       <Menu
         theme="dark"
         mode="inline"
@@ -35,7 +35,7 @@ export default props => {
         defaultSelectedKeys={['all']}
         style={{ width: '100%', minHeight: '100%' }}
       >
-        {getRootChildren(store.tagList).map( v => (
+        {getRootChildren(store.tagList).map(v => (
           <Menu.Item key={v.id}>
             <Icon type={v.icon} title={v.name}/>
           </Menu.Item>
