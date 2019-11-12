@@ -74,9 +74,9 @@ export default props => {
       ref={state.dockRef}
       className={classNames(state.dockClassName, scss.dock)} >
       <div className={scss['dock-body']}>
-        {props.dataSource.map(v => (
+        {props.dataSource.map((v, index) => (
           <div
-            key={v.code}
+            key={v.key || index}
             className={scss['dock-app']}
             onClick={state.onClick.bind(null, v)}>
             <Icon type={v.icon} style={{ fontSize: '50px' }}/>

@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { matchPath } from 'react-router-dom';
 import { observable, action, autorun, toJS } from 'mobx';
 import apps from '@app/index';
 
@@ -19,27 +18,22 @@ export default class Store {
     const rest = apps.filter(v => v.defaultOpen).map(v => ({
       ... v,
       isMin: false,
-      url: v.defaultUrl,
-      match: matchPath(v.defaultUrl, { path: v.path, exact: true, strict: false }),
     }));
     this.list = [... this.list, ... rest];
   }
 
   /**
    * 开启 app
-   * @param {String} url 路由
+   * @param {Object} app 要打开应用配置
    */
   @action
-  open = url => {
-    let match = void 0;
-    let app = this.list.find(v => (v.url === url));
-    if (!!app) {
-      this.minimize(app);
+  open = app => {
+    const current = this.list.find(v => (v.key === app.key));
+    if (!!current) {
+      this.minimize(current);
     } else {
-      app = apps.find(v => (
-        match = matchPath(url, { path: v.path, exact: true, strict: false })
-      ));
-      !!app && (this.list = [... this.list, { ... app, url, match, isMin: false }]);
+      const newApp = apps.find(v => v.key === app.key);
+      !!app && (this.list = [... this.list, { ... newApp, isMin: false }]);
     }
   }
 
@@ -49,15 +43,19 @@ export default class Store {
  */
   @action
   close = app => {
-    this.list = this.list.filter(v => v.url !== app.url);
+    this.list = this.list.filter(v => v.key !== app.key);
   };
 
   /**
    * 最小化（切换）
+   * @param {Object} app 当前应用
    */
   @action
-  minimize = () => {
-    this.list = this.list.map(v => ({ ... v, isMin: !v.isMin }));
+  minimize = app => {
+    this.list = this.list.map(v => ({
+      ... v,
+      isMin: v.key === app.key ? !v.isMin : v.isMin,
+    }));
   };
 
   /**
@@ -66,10 +64,10 @@ export default class Store {
    */
   @action
   toggle = app => {
-    if (this.list[this.list.length - 1].url === app.url) {
+    if (this.list[this.list.length - 1].key === app.key) {
       return false;
     }
-    const remove = _.remove(this.list, v => (v.url === app.url));
+    const remove = _.remove(this.list, v => (v.key === app.key));
     this.list = [... this.list, ... remove];
   };
 

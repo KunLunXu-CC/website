@@ -7,11 +7,9 @@ import Article from './Article';
 export default [
   {
     name: '相册',
-    code: 'album',
-    path: '/album',
+    key: 'album',
     component: Album,
     defaultOpen: false,
-    defaultUrl: '/album',
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
@@ -21,11 +19,9 @@ export default [
   },
   {
     name: '编辑器',
-    code: 'editor',
-    path: '/editor',
+    key: 'editor',
     component: Editor,
     defaultOpen: true,
-    defaultUrl: '/editor',
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
@@ -36,10 +32,8 @@ export default [
   {
     name: '文章',
     icon: 'icon-wenzhang',
-    code: 'article',
+    key: 'article',
     defaultOpen: false,
-    path: '/article',
-    defaultUrl: '/article',
     component: Article,
     modalProps: {
       dragHeight: 40,
@@ -50,12 +44,10 @@ export default [
   },
   {
     name: '笔记',
-    code: 'note',
-    path: '/note',
+    key: 'note',
     component: Note,
     icon: 'icon-jilu',
     defaultOpen: false,
-    defaultUrl: '/note',
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 15, left: 5 },
@@ -65,7 +57,7 @@ export default [
   // {
   //   name: '标签',
   //   icon: 'icon-biaoqian1',
-  //   code: 'tag',
+  //   key: 'tag',
   //   path: '/tag',
   //   defaultUrl: '/tag',
   //   component: Tag

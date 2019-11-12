@@ -10,10 +10,10 @@ export default () => useObserver(() => {
   return (
     <div className={scss['app-block']}>
       {store.app.list.map(v => {
-        const { component: Component, isMin, url, modalProps } = v;
+        const { component: Component, isMin, key, modalProps } = v;
         return (
           <Modal
-            key={url}
+            key={key}
             isMin={isMin}
             onClose={store.app.close.bind(null, v)}
             onMin={store.app.minimize.bind(null, v)}

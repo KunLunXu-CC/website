@@ -6,7 +6,7 @@ import dockConfig from '@config/dock';
 
 const useStateHook = (props, store) => {
   const onClick = dock => {
-    store.app.open(dock.defaultUrl);
+    store.app.open(dock);
   };
   return { onClick };
 };
