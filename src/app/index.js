@@ -9,7 +9,7 @@ export default [
     name: '相册',
     key: 'album',
     component: Album,
-    defaultOpen: false,
+    defaultOpen: true,
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,

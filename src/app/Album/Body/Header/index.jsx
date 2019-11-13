@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 
 export default () => (
   <div className={scss.header}>
-    <div className={scss.header}>
+    <div className={scss.search}>
       <Input
         size="large"
         placeholder="查询"
