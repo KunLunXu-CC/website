@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { observable, action, autorun, toJS } from 'mobx';
 import apps from '@app/index';
+import { observable, action, autorun, toJS } from 'mobx';
 
 export default class Store {
   constructor () {
@@ -8,11 +8,14 @@ export default class Store {
     _.forIn(this.autorun, v => autorun(v));
   }
 
+  /**
+   * 应用列表
+   * 1. 包含 app 基本配置(参考 src/app/index.js)
+   * 2. isMin 表示应用是否是最小化
+   */
   @observable list = [];
 
-  /**
-   * 初始化：打开默认开启的弹窗
-   */
+  // 初始化：打开默认开启的弹窗
   @action
   init = () => {
     const rest = apps.filter(v => v.defaultOpen).map(v => ({
@@ -59,7 +62,7 @@ export default class Store {
   };
 
   /**
-   * 应用切换
+   * 应用切换: 开启多个应用时, 点击下层应用将切换至顶层
    * @param {Object} app 当前应用配置
    */
   @action
@@ -70,10 +73,6 @@ export default class Store {
     const remove = _.remove(this.list, v => (v.key === app.key));
     this.list = [... this.list, ... remove];
   };
-
-  print = () => {
-
-  }
 
   // 自动运行函数列表
   autorun = {
