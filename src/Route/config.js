@@ -10,4 +10,9 @@ export default [
     path: '/login',
     component: pages.Login,
   },
+  {
+    exact: true,
+    path: '/demo',
+    component: pages.Demo,
+  },
 ];

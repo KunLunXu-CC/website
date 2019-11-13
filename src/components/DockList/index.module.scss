@@ -1,47 +1,86 @@
 
 /* Dock 样式 */
-$dock-size: 70px;
-$dock-padding: 10px;
 $radius: 10px;
+$dock-height: 70px;
 
-%dock-transition {
-  transition: bottom 0.5s;
-};
-
-.dock{
-  position: fixed;
-  z-index: 9;
-  right: 0;
+// dock 样式
+.dock {
   left: 0;
-
+  right: 0;
+  z-index: 9;
+  opacity: 0;
   display: flex;
+  position: fixed;
+  padding-top: 20px;
+  height: $dock-height;
+  transition: all 0.5s;
+  box-sizing: content-box;
   justify-content: center;
+  bottom: -$dock-height - 5;
 
-  @extend %dock-transition;
+  &:hover {
+    bottom: 0; 
+    opacity: 1;   
+  }
 }
 
-.dock-show{
-  @extend %dock-transition;
-  bottom: 0;
-}
-
-.dock-hidden{
-  @extend %dock-transition;
-  bottom: -$dock-size - 5;
-}
-
-.dock-body{
+// dock 内容块
+.dock-body {
   display: flex;
+  min-width: 50%;
+  height: $dock-height;
+  align-items: center;
   box-sizing: border-box;
-  padding: 0 $dock-padding;
-
-  background: rgba($color: #221e1c, $alpha: 0.8);
-  border: 1px solid rgba($color: #fff, $alpha: 0.2);
-  border-bottom: none;
+  justify-content: center;
   border-radius: $radius $radius 0 0;
+  background: rgba(255, 255, 255, 0.2);
+}
 
-  .dock-app{
-    padding: $dock-padding;
+// 应用设置
+.dock-app {
+  cursor: pointer;
+  position: relative;
+
+  // 图标大小设置
+  .dock-icon {
+    font-size: 45px;
+    transition: all 0.3s;
+    transform-origin: 40% 70%;
+
+    // 设置倒影
+    -webkit-box-reflect: below 2px -webkit-gradient(
+      linear, 
+      left top, 
+      left bottom, 
+      from(transparent), 
+      color-stop(0.7, transparent), 
+      to(rgba(255, 255, 255, .5))
+    );
+  }
+
+  // 文字提示
+  .dock-tooltip {
+    left: 0;
+    width: 100%;
+    display: none;
+    padding: 4px 0;
+    text-align: center;
+    border-radius: 7px;
+    position: absolute;
+    bottom: $dock-height;
+    background-color: #222;
+  }
+  
+  &:hover {
+    .dock-icon {
+      margin: 0 20px;
+      transform: scale(1.5);
+    }
+
+    .dock-tooltip {
+      color: #fff;
+      display: block;
+    } 
   }
 }
 
