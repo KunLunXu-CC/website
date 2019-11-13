@@ -1,10 +1,9 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { Icon } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
 
 import { PHOTO_TYPE } from '@config/consts';
-// import { useStore } from '../../store';
+import { useStore } from '../../store';
 import scss from './index.module.scss';
 
 // 菜单列表数据
@@ -31,22 +30,32 @@ const listData = [
   },
 ];
 
-// const useStateHook = () => {
-//   return {};
-// }
+const useStateHook = (props, store) => {
+  // 菜单点击事件
+  const onClick = ({ key }) => {
+    store.photos.toggleType(key);
+  };
+  return { onClick };
+};
 
-export default () => useObserver(() => (
-  <div className={scss.menu}>
-    <Menu
-      mode="inline"
-      defaultSelectedKeys={['all']}>
-      {listData.map(value => (
-        <Menu.Item key={value.key}>
-          <Icon type={value.icon}  className="anticon"/>
-          <span>{value.name}</span>
-        </Menu.Item>
-      ))}
-    </Menu>
-  </div>
-));
+export default props => {
+  const store = useStore();
+  const state = useStateHook(props, store);
+
+  return (
+    <div className={scss.menu}>
+      <Menu
+        mode="inline"
+        onClick={state.onClick}
+        defaultSelectedKeys={['all']}>
+        {listData.map(value => (
+          <Menu.Item key={value.key}>
+            <Icon type={value.icon}  className="anticon"/>
+            <span>{value.name}</span>
+          </Menu.Item>
+        ))}
+      </Menu>
+    </div>
+  );
+};
 

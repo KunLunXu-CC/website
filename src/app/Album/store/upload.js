@@ -3,7 +3,7 @@ import { observable, action, toJS } from 'mobx';
 import { PHOTO_TYPE } from '@config/consts';
 import * as api from '@api';
 
-export default class Store {
+export default class Upload {
   constructor (parent) {
     this.parent = parent;
   }

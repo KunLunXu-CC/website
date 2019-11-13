@@ -1,17 +1,24 @@
+import _ from 'lodash';
 import { observable, autorun, toJS } from 'mobx';
 import Upload from './upload';
+import Photos from './photos';
 
 export default class Store {
   constructor (global) {
     this.global = global;
-    autorun(this.print);
+    _.forIn(this.autorun, v => autorun(v));
   }
 
   @observable upload = new Upload(this);
+  @observable photos = new Photos(this);
 
-  print = () => {
-    console.group('%c[store]Album', 'color: green;');
-    console.log('upload: ', toJS(this.upload));
-    console.groupEnd();
-  };
+  // 自动运行列表
+  autorun = {
+    print: () => {
+      console.group('%c[store]Album', 'color: green;');
+      console.log('upload: ', toJS(this.upload));
+      console.log('photos: ', toJS(this.photos));
+      console.groupEnd();
+    },
+  }
 }
