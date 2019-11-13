@@ -1,25 +1,8 @@
 import React from 'react';
 import { useStore as useGlobalStore } from '@store';
-import { observable, autorun, toJS } from 'mobx';
-
-import Upload from './upload';
+import Store from './store';
 
 const StoreContext = React.createContext(null);
-
-class Store {
-  constructor (global) {
-    this.global = global;
-    autorun(this.print);
-  }
-
-  @observable upload = new Upload(this);
-
-  print = () => {
-    console.group('%c[store]Album', 'color: green;');
-    console.log('upload: ', toJS(this.upload));
-    console.groupEnd();
-  };
-}
 
 // 导出 hook 使用 hook 方法
 export const useStore = () => {

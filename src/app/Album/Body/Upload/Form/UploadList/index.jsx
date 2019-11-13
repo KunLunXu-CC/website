@@ -9,7 +9,7 @@ const useStateHooks = (props, store) => {
   // 添加文件
   const addFiles = e => {
     const { files } = e.target;
-    store.upload.addFiles(... files);
+    store.upload.addFiles(files);
   };
 
   return { addFiles };
