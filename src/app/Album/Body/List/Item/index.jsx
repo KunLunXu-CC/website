@@ -25,7 +25,9 @@ export default props => {
   return (
     <div className={scss.item}>
       <div className={scss.preview}>
-        <Image src={props.data.url}/>
+        <div className={scss['preview-body']}>
+          <Image src={props.data.url}/>
+        </div>
       </div>
       <div className={scss.info}>
         <div className={scss['info-icon']}>
