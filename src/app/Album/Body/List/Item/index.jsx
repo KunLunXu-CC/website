@@ -15,7 +15,12 @@ const useStateHook = props => {
     return desc && desc.DESC;
   }, [props.data]);
 
-  return { desc };
+  // 删除
+  const onDelete = () => {
+    _.isFunction(props.onDelete) && props.onDelete(props.data);
+  };
+
+  return { desc, onDelete };
 };
 
 // "https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.6/img/other/th%20(3).jpg"
@@ -27,6 +32,9 @@ export default props => {
       <div className={scss.preview}>
         <div className={scss['preview-body']}>
           <Image src={props.data.url}/>
+        </div>
+        <div className={scss['preview-mask']}>
+          <Icon type="icon-shanchu" onClick={state.onDelete}/>
         </div>
       </div>
       <div className={scss.info}>

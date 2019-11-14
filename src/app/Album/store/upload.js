@@ -51,6 +51,7 @@ export default class Upload {
       type: this.type,
       files: toJS(this.fileList),
     });
+    this.fileList = [];
     return res;
   }
 }

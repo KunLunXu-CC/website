@@ -10,8 +10,8 @@ export const getPhotos = async ({ pagination, search }) => {
       query: `
         query($search: PhotoSearch, $pagination: Pagination){
           photos( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
-            list { id sourceFileName url type creationTime }
-            pagination 
+            list { id name sourceFileName url type creationTime }
+            pagination
             rescode
             message
           }
@@ -53,10 +53,10 @@ export const removePhotos = async ({ conds, body, search, pagination }) => {
             conds: $conds,
             search: $search,
             pagination: $pagination,
-            orderBy: { creationTime: -1 } 
+            orderBy: { creationTime: -1 }
           ){
-            list { id sourceFileName url type creationTime }
-            pagination 
+            list { id name sourceFileName url type creationTime }
+            pagination
             rescode
             message
           }

@@ -20,11 +20,12 @@ const useStateHook = (props, store) => {
         message: '文件上传成功!',
       });
       store.photos.setList();
+    } else {
+      store.message.setMessage({
+        type: 'error',
+        message: '上传文件列表不能为空!',
+      });
     }
-    store.message.setMessage({
-      type: 'error',
-      message: '上传文件列表不能为空!',
-    });
   };
 
   return { onCancel, onUpload };
