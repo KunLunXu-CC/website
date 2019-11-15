@@ -37,12 +37,12 @@ export const uploadPhotos = async ({ files, type, payload }) => {
   return res.data.data;
 };
 
-export const removePhotos = async ({ conds, body, search, pagination }) => {
+export const removePhotos = async ({ conds, search, pagination }) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: { conds, search, pagination },
       query: `
         mutation(
           $conds: PhotoSearch!,

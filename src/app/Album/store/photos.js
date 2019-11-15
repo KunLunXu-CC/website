@@ -28,6 +28,17 @@ export default class Photos {
     this.list = list;
   }
 
+  // 删除图片
+  @action
+  removePhotos = async ({ id }) => {
+    const res = await api.removePhotos({
+      conds: { id },
+      search: this.getSearch(),
+    });
+    this.list = res.list;
+    return res;
+  };
+
   // 获取搜索条件
   getSearch = () => {
     const search = {};

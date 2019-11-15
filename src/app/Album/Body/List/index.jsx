@@ -5,10 +5,10 @@ import { useObserver } from 'mobx-react-lite';
 import { useStore } from '../../store';
 import Item from './Item';
 
-const useStateHook = () => {
+const useStateHook = store => {
   // 删除
   const onDelete = data => {
-    console.log('============>>> 文件删除:', data);
+    store.photos.removePhotos({ id: data.id });
   };
 
   return { onDelete };
@@ -16,7 +16,7 @@ const useStateHook = () => {
 
 export default () => {
   const store = useStore();
-  const state = useStateHook();
+  const state = useStateHook(store);
 
   return useObserver(() => (
     <Scroll>
