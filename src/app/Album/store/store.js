@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { observable, autorun, toJS } from 'mobx';
+import Spin from './spin';
 import Upload from './upload';
 import Photos from './photos';
 import Message from './message';
@@ -13,6 +14,7 @@ export default class Store {
   @observable upload = new Upload(this);
   @observable photos = new Photos(this);
   @observable message = new Message(this);
+  @observable spin = new Spin(this);
 
   // 自动运行列表
   autorunList = {
@@ -21,6 +23,7 @@ export default class Store {
       console.log('message: ', toJS(this.message));
       console.log('upload: ', toJS(this.upload));
       console.log('photos: ', toJS(this.photos));
+      console.log('spin: ', toJS(this.spin));
       console.groupEnd();
     },
   }

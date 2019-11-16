@@ -12,20 +12,8 @@ const useStateHook = (props, store) => {
 
   // 上传
   const onUpload = async () => {
-    if (store.upload.fileList.length > 0) {
-      await store.upload.upload();
-      store.upload.close();
-      store.message.setMessage({
-        type: 'success',
-        message: '文件上传成功!',
-      });
-      store.photos.setList();
-    } else {
-      store.message.setMessage({
-        type: 'error',
-        message: '上传文件列表不能为空!',
-      });
-    }
+    await store.upload.upload();
+    store.photos.setList();
   };
 
   return { onCancel, onUpload };

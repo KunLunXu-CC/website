@@ -1,4 +1,7 @@
+import { Spin } from 'antd';
+import { useObserver } from 'mobx-react-lite';
 import React, { useEffect, useRef } from 'react';
+
 import { useStore } from './store';
 import scss from './index.module.scss';
 import Body from './Body';
@@ -17,11 +20,15 @@ const useStateHook = (props, store) => {
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
-  return (
+  return useObserver(() => (
     <div className={scss.layout}>
       <div className={scss['layout-side']}><Side/></div>
       <div className={scss['layout-body']}><Body/></div>
       <div ref={state.messageRef} />
+      {store.spin.spinning
+        ? <Spin className={scss['layout-spin']}/>
+        : null
+      }
     </div>
-  );
+  ));
 };

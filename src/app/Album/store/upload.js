@@ -47,10 +47,27 @@ export default class Upload {
   // 上传图片
   @action
   upload = async () => {
+    // 非空校验
+    if (this.fileList.length === 0) {
+      this.parent.message.setMessage({
+        type: 'error',
+        message: '上传文件列表不能为空!',
+      });
+      return false;
+    }
+
+    // 上传文件
+    this.parent.spin.open();
     const res = await api.uploadPhotos({
       type: this.type,
       files: toJS(this.fileList),
     });
+    this.parent.spin.close();
+    this.parent.message.setMessage({
+      type: 'success',
+      message: '文件上传成功!',
+    });
+    this.show = false;
     this.fileList = [];
     return res;
   }

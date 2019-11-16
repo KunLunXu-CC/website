@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import { observable, action, reaction } from 'mobx';
+import { observable, action } from 'mobx';
 
 export default class Photos {
   constructor (parent) {
@@ -10,6 +9,11 @@ export default class Photos {
 
   @action
   open = () => {
+    !this.spinning && (this.spinning = true);
+  }
 
+  @action
+  close = () => {
+    this.spinning && (this.spinning = false);
   }
 }
