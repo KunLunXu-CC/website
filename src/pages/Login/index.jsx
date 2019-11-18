@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'qyrc';
 import { message } from 'antd';
 import { withRouter } from 'react-router-dom';
 
