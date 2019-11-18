@@ -5,9 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import { useStore } from '@store';
 import { Login as LoginComponent } from '@components';
-
-import scss from './index.module.scss';
-import HomeBg from '@assets/img/home_bg.jpg';
+import Background from './Background';
 
 const useStateHook = (props, store) => {
   // 登录
@@ -25,9 +23,9 @@ const Login = props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return (
-    <Image src={HomeBg} className={scss.login}>
+    <Background>
       <LoginComponent onLogin={state.onLogin}/>
-    </Image>
+    </Background>
   );
 };
 

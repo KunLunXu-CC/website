@@ -1,13 +1,12 @@
-import _ from 'lodash';
 import { login } from '@api';
-import { observable, action, autorun, toJS } from 'mobx';
+import { observable, action } from 'mobx';
 
 import { RESCODE } from '@config/consts';
 
 export default class Store {
-  constructor () {
+  constructor (parent) {
+    this.parent = parent;
     this.login({});
-    _.forIn(this.autorun, v => autorun(v));
   }
 
   @observable user = {};
@@ -22,16 +21,5 @@ export default class Store {
     this.role = res.user.role;
     this.auth = res.user.role.auth;
     return { res, logined: RESCODE.SUCCESS.VALUE === res.rescode };
-  };
-
-  // 自动运行函数列表
-  autorun = {
-    print: () => {
-      console.group('%c[store]user', 'color: green;');
-      console.log('user: ', toJS(this.user));
-      console.log('role: ', toJS(this.role));
-      console.log('auth: ', toJS(this.auth));
-      console.groupEnd();
-    },
   };
 }

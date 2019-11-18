@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import apps from '@app/index';
-import { observable, action, autorun, toJS } from 'mobx';
+import { observable, action } from 'mobx';
 
 export default class Store {
-  constructor () {
+  constructor (parent) {
+    this.parent = parent;
     this.init();
-    _.forIn(this.autorun, v => autorun(v));
   }
 
   /**
@@ -72,14 +72,5 @@ export default class Store {
     }
     const remove = _.remove(this.list, v => (v.key === app.key));
     this.list = [... this.list, ... remove];
-  };
-
-  // 自动运行函数列表
-  autorun = {
-    print: () => {
-      console.group('%c[store]app', 'color: green;');
-      console.log('list: ', toJS(this.list));
-      console.groupEnd();
-    },
   };
 }
