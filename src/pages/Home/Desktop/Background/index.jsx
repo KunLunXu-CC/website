@@ -12,7 +12,6 @@ export default props => (
     error={<Error/>}
     loading={<Loading/>}
     className={scss.background}>
-      111111111111
     {props.children}
   </Image>
 );
