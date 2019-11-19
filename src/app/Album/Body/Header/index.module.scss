@@ -11,13 +11,18 @@
       outline: none;
       box-shadow: none;
     }
+
+    .ant-input-affix-wrapper .ant-input:not(:first-child) {
+      padding-left: 40px;
+    }
+
     .ant-input {
       width: 80%;
       background: #f8f8f8;
       @extend %clear-style;
 
       &:hover, &:focus {
-        @extend %clear-style; 
+        @extend %clear-style;
       }
     }
   }
