@@ -3,6 +3,7 @@ import { observable, autorun, toJS } from 'mobx';
 
 import App from './app';
 import User from './user';
+import Dock from './dock';
 import Desktop from './desktop';
 
 export default class Store {
@@ -12,6 +13,7 @@ export default class Store {
 
   @observable app = new App(this);
   @observable user = new User(this);
+  @observable dock = new Dock(this);
   @observable desktop = new Desktop(this);
 
   // 自动运行列表
@@ -20,6 +22,7 @@ export default class Store {
       console.group('%c[store]全局', 'color: green;');
       console.log('desktop: ', toJS(this.desktop));
       console.log('user: ', toJS(this.user));
+      console.log('dock: ', toJS(this.dock));
       console.log('app: ', toJS(this.app));
       console.groupEnd();
     },

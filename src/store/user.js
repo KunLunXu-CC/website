@@ -11,7 +11,7 @@ export default class Store {
 
   @observable user = {};
   @observable role = {};
-  @observable auth = {};
+  @observable auth = [];
 
   // 登录: 返回请求数据以及登录状态
   @action

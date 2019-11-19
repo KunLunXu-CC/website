@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { observable, action, autorun, reaction } from 'mobx';
+import { observable, action, reaction } from 'mobx';
 import { getTags, getNotes } from '@api';
 
 const BASE_TAG = {
@@ -11,7 +11,6 @@ const BASE_TAG = {
 export default class Store {
   constructor (parent) {
     this.parent = parent;
-    _.forIn(this.autorun, v => autorun(v));
     _.forIn(this.reaction, v => reaction(v.data, v.effect));
   }
 
@@ -73,7 +72,9 @@ export default class Store {
   // reaction 函数列表
   reaction = {
     setDefaultNote: {
-      data: () => (this.noteList[0] || null),
+      data: () => (
+        this.noteList.length > 0 ? this.noteList[0] : null
+      ),
       effect: v => (this.note = v),
     },
   };

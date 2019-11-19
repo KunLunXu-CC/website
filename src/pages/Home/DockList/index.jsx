@@ -1,8 +1,8 @@
 import React from 'react';
+import { useObserver } from 'mobx-react-lite';
 
-import { useStore } from '@store/index';
+import { useStore } from '@store';
 import { DockList } from '@components';
-import dockConfig from '@config/dock';
 
 const useStateHook = (props, store) => {
   const onClick = dock => {
@@ -14,10 +14,11 @@ const useStateHook = (props, store) => {
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
-  return (
+
+  return useObserver(() => (
     <DockList
-      dataSource={dockConfig}
       onClick={state.onClick}
+      dataSource={store.dock.list}
     />
-  );
+  ));
 };
