@@ -15,7 +15,7 @@ const getRootChildren = (data = []) => (
 
 const useStateHook = (props, store) => {
   useEffect(() => {
-    store.getTags();
+    store.tag.getTags();
   }, [store]);
 
   return {};
@@ -31,8 +31,8 @@ export default props => {
         <Menu
           mode="inline"
           defaultSelectedKeys={['all']}
-          inlineCollapsed={store.collapsed}>
-          {getRootChildren(store.tagList).map(v => (
+          inlineCollapsed={store.tag.collapsed}>
+          {getRootChildren(store.tag.list).map(v => (
             <Menu.Item key={v.id}>
               <Icon type={v.icon}  className="anticon"/>
               <span>{v.name}</span>

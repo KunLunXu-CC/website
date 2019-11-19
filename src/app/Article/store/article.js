@@ -1,10 +1,6 @@
 import _ from 'lodash';
-import React from 'react';
-import { useStore as useGlobalStore } from '@store';
-import { observable, action, autorun, reaction, toJS } from 'mobx';
-
+import { observable, action, autorun, reaction } from 'mobx';
 import { getTags, getNotes } from '@api';
-const StoreContext = React.createContext(null);
 
 const BASE_TAG = {
   id: 'all',
@@ -12,9 +8,9 @@ const BASE_TAG = {
   icon: 'icon-all',
 };
 
-class Store {
-  constructor (global) {
-    this.global = global;
+export default class Store {
+  constructor (parent) {
+    this.parent = parent;
     _.forIn(this.autorun, v => autorun(v));
     _.forIn(this.reaction, v => reaction(v.data, v.effect));
   }
@@ -62,14 +58,6 @@ class Store {
 
   // 自动运行函数列表
   autorun = {
-    print: () => {
-      console.group('%c[store]Artile', 'color: green;');
-      console.log('tagList: ', toJS(this.tagList));
-      console.log('tag: ', toJS(this.tag));
-      console.log('noteList: ', toJS(this.noteList));
-      console.log('note: ', toJS(this.note));
-      console.groupEnd();
-    },
     getNotes: () => {
       const params = {
         search: { ... this.search },
@@ -90,23 +78,3 @@ class Store {
     },
   };
 }
-
-// 导出 hook 使用 hook 方法
-export const useStore = () => {
-  const store = React.useContext(StoreContext);
-  if (!store) {
-    throw new Error('You have forgot to use StoreProvider, shame on you.');
-  }
-  return store;
-};
-
-// 导出 context.Provider
-export default props => {
-  const globalStore = useGlobalStore();
-  const store = new Store(globalStore);
-  return (
-    <StoreContext.Provider value={store}>
-      {props.children}
-    </StoreContext.Provider>
-  );
-};

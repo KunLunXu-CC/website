@@ -1,0 +1,25 @@
+import _ from 'lodash';
+import { observable, autorun, toJS } from 'mobx';
+
+import Tag from './tag';
+import Article from './article';
+
+export default class Store {
+  constructor (global) {
+    this.global = global;
+    _.forIn(this.autorun, v => autorun(v));
+  }
+
+  @observable tag = new Tag(this);
+  @observable article = new Article(this);
+
+  // 自动运行函数列表
+  autorun = {
+    print: () => {
+      console.group('%c[store]Artile', 'color: green;');
+      console.log('article: ', toJS(this.article));
+      console.log('tag: ', toJS(this.tag));
+      console.groupEnd();
+    },
+  }
+}
