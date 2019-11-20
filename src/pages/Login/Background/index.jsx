@@ -14,7 +14,7 @@ import scss from './index.module.scss';
 const useStateHook = store => {
   const bg = useMemo(() => {
     const index = Math.floor(Math.random() * store.desktop.bgList.length);
-    return store.desktop.bgList > 0
+    return store.desktop.bgList.length > 0
       ? _.get(store.desktop.bgList, `[${index}].url`, '')
       : '';
   }, [store.desktop.bgList]);
