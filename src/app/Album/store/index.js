@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useStore as useGlobalStore } from '@store';
 import Store from './store';
 
@@ -16,7 +16,7 @@ export const useStore = () => {
 // 导出 context.Provider
 export default props => {
   const globalStore = useGlobalStore();
-  const store = new Store(globalStore);
+  const store = useMemo(() => (new Store(globalStore)), [globalStore]);
   return (
     <StoreContext.Provider value={store}>
       {props.children}

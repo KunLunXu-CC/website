@@ -21,7 +21,7 @@ export default () => useObserver(() => {
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
             {...modalProps}
           >
-            <Component />
+            <Component/>
           </Modal>
         );
       })}
