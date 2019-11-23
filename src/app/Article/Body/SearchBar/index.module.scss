@@ -28,9 +28,9 @@
       .ant-input {
         background: #f8f8f8;
         @extend %clear-style;
-
+        padding-left: 40px !important;
         &:hover, &:focus {
-          @extend %clear-style; 
+          @extend %clear-style;
         }
       }
     }

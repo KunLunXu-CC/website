@@ -10,8 +10,21 @@
   margin-bottom: 30px;
   box-shadow: 0px 1px 20px -6px rgba(0,0,0,.1);
 
+  :global {
+    .qyrc-image-bg {
+      display: block;
+      transform: scale(1);
+      transition: all .5s;
+    }
+  }
+
   &:hover {
     box-shadow: 0px 1px 20px -6px rgba(0,0,0,.2);
+    :global {
+      .qyrc-image-bg {
+        transform: scale(1.2);
+      }
+    }
   }
 }
 
@@ -53,7 +66,7 @@
 
   .info-item {
     color: #999;
-    @include line-clamp(1);    
+    @include line-clamp(1);
     :global {
       .qyrc-icon {
         font-size: 16px;
@@ -69,7 +82,7 @@
   line-height: 1.8;
   p {
     @include line-clamp(3);
-  } 
+  }
 }
 
 .entry {

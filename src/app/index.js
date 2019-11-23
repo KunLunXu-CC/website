@@ -37,7 +37,7 @@ export default [
     component: Article,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 5, left: 5 },
+      toolPosition: { top: 10, left: 10 },
       toolClassName: 'article-modal-tool',
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
