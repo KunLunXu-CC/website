@@ -8,14 +8,9 @@ import { useObserver } from 'mobx-react-lite';
 import { useStore } from '../store';
 import scss from './index.module.scss';
 
-// 获取所有根级节点
-const getRootChildren = (data = []) => (
-  data.filter(item => (!data.find(v => v.parent === item.id)))
-);
-
 const useStateHook = (props, store) => {
   useEffect(() => {
-    store.tag.getTags();
+    store.menu.getList();
   }, [store]);
 
   return {};
@@ -31,8 +26,8 @@ export default props => {
         <Menu
           mode="inline"
           defaultSelectedKeys={['all']}
-          inlineCollapsed={store.tag.collapsed}>
-          {getRootChildren(store.tag.list).map(v => (
+          inlineCollapsed={store.menu.collapsed}>
+          {store.menu.list.map(v => (
             <Menu.Item key={v.id}>
               <Icon type={v.icon}  className="anticon"/>
               <span>{v.name}</span>

@@ -5,8 +5,8 @@
   background: rgba($color: #f1f1f2, $alpha: 1.0);
 
   display: flex;
-  
-  &-tags {
+
+  &-menu {
     flex: none;
     display: flex;
   }
@@ -16,12 +16,12 @@
     display: flex;
     overflow: hidden;
     border-radius: 10px 0 0 10px;
-    background: rgba($color: #fff, $alpha: 1); 
+    background: rgba($color: #fff, $alpha: 1);
   }
 
   &-side {
     flex: none;
     width: 220px;
-    background: rgba($color: #fff, $alpha: 1); 
+    background: rgba($color: #fff, $alpha: 1);
   }
 }

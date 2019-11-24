@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { observable, autorun, toJS } from 'mobx';
 
-import Tag from './tag';
+import Menu from './menu';
 // import Article from './article';
 
 export default class Store {
@@ -10,7 +10,7 @@ export default class Store {
     _.forIn(this.autorun, v => autorun(v));
   }
 
-  @observable tag = new Tag(this);
+  @observable menu = new Menu(this);
   // @observable article = new Article(this);
 
   // 自动运行函数列表
@@ -18,7 +18,7 @@ export default class Store {
     print: () => {
       console.group('%c[store]Artile', 'color: green;');
       // console.log('article: ', toJS(this.article));
-      console.log('tag: ', toJS(this.tag));
+      console.log('menu: ', toJS(this.menu));
       console.groupEnd();
     },
   }

@@ -30,10 +30,8 @@ export default class Store {
   }
 
   @action
-  getTags = () => {
-    getTags().then(data => {
-      const { list } = data;
-      this.list = [BASE_TAG, ... list];
-    });
+  getList = async () => {
+    const { list } = await getTags();
+    this.list = [BASE_TAG, ... list];
   }
 }
