@@ -20,7 +20,11 @@ const mockdata = [
 export default () => (
   <Scroll className={scss.list}>
     {mockdata.map((value, index) => (
-      <Item key={index} align={index % 2 !== 0 ? 'right' : 'left'}/>
+      <Item
+        key={index}
+        data={value}
+        align={index % 2 !== 0 ? 'right' : 'left'}
+      />
     ))}
     <br/>
   </Scroll>

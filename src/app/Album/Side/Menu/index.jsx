@@ -18,17 +18,17 @@ const listData = [
     key: DEFAULT_TYPE,
   },
   {
-    name: '文章',
     icon: 'icon-24',
+    name: PHOTO_TYPE.ARTICLE.DESC,
     key: PHOTO_TYPE.ARTICLE.VALUE,
   },
   {
-    name: '封面',
-    key: PHOTO_TYPE.COVER.VALUE,
+    key: PHOTO_TYPE.THUMB.VALUE,
+    name: PHOTO_TYPE.THUMB.DESC,
     icon: 'icon-genghuanfengmian',
   },
   {
-    name: '桌面背景',
+    name: PHOTO_TYPE.DESKTOP.DESC,
     key: PHOTO_TYPE.DESKTOP.VALUE,
     icon: 'icon-yunzhuomian-shouye',
   },

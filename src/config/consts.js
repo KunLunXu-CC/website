@@ -45,5 +45,5 @@ export const PHOTO_TYPE = {
   UNKNOWN: { VALUE: 0, DESC: '未知' },         // 未知
   ARTICLE: { VALUE: 1, DESC: '文章' },         // 文章
   DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
-  COVER: { VALUE: 3, DESC: '封面' },           // 封面(通用)
+  THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
 };
