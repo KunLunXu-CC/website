@@ -1,31 +1,24 @@
 import React from 'react';
 import { Scroll } from 'qyrc';
-import scss from './index.module.scss';
+import { useObserver } from 'mobx-react-lite';
 
 import Item from './Item';
 
-const mockdata = [
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-  { time: '', title: '', views: '', comments: '', tag: '', desc: '' },
-];
+import scss from './index.module.scss';
+import { useStore } from '../../store';
 
-export default () => (
-  <Scroll className={scss.list}>
-    {mockdata.map((value, index) => (
-      <Item
-        key={index}
-        data={value}
-        align={index % 2 !== 0 ? 'right' : 'left'}
-      />
-    ))}
-    <br/>
-  </Scroll>
-);
+export default () => {
+  const store = useStore();
+  return useObserver(() => (
+    <Scroll className={scss.list}>
+      {store.article.list.map((value, index) => (
+        <Item
+          data={value}
+          key={value.id}
+          align={index % 2 !== 0 ? 'right' : 'left'}
+        />
+      ))}
+      <br/>
+    </Scroll>
+  ));
+};

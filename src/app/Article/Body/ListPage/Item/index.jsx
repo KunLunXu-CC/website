@@ -2,6 +2,7 @@ import React, {
   useMemo,
 } from 'react';
 import _ from 'lodash';
+import moment from 'moment';
 import { Image, Icon } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 import classNames from 'classnames';
@@ -21,7 +22,6 @@ const useStateHook = (props, store) => {
       ? _.get(store.article.thumbs, `[${index}].url`, '')
       : '';
   }, [props.data.img, store.article.thumbs]);
-
   return { img };
 };
 
@@ -35,10 +35,11 @@ export default props => {
         <div className={scss.detail}>
           <div className={scss.time}>
             <Icon type="icon-48copy11" />
-            发布于 2019-06-04
+            更新于&nbsp;
+            {moment(_.get(props, 'data.updateTime')).format('YYYY-MM-DD')}
           </div>
           <div className={scss.title}>
-            PIL 合并 RGB 通道图与 Alpha 通道图
+            {_.get(props, 'data.name', '---')}
           </div>
           <div className={scss.info}>
             <div className={scss['info-item']}>
@@ -48,13 +49,13 @@ export default props => {
               <Icon type="icon-pinglunliang" /> 25 条评论
             </div>
             <div className={scss['info-item']}>
-              <Icon type="icon-biaoqian" /> 野生技术协会
+              <Icon type="icon-biaoqian" />
+              {_.get(props, 'data.tags[0].name', '---')}
             </div>
           </div>
           <div className={scss.desc}>
             <p>
-              明日方舟拆包以后发现立绘被分成了两张图，一个储存的是 RGB 通道的信息，另一个储存的是 Alpha 通道的信息
-              明日方舟拆包以后发现立绘被分成了两张图，一个储存的是 RGB 通道的信息，另一个储存的是 Alpha 通道的信息
+              {_.get(props, 'data.desc') || _.get(props, 'data.content')}
             </p>
           </div>
           <div className={scss.entry}>

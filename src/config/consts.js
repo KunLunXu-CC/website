@@ -47,3 +47,10 @@ export const PHOTO_TYPE = {
   DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
   THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
 };
+
+// tag 默认状态(所有)
+export const TAG_ALL = {
+  id: 'all',
+  name: '全部',
+  icon: 'icon-all',
+};

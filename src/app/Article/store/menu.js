@@ -1,13 +1,7 @@
 import _ from 'lodash';
 import { observable, action, reaction } from 'mobx';
-
+import { TAG_ALL } from '@config/consts';
 import { getTags } from '@api';
-
-const BASE_TAG = {
-  id: 'all',
-  name: '全部',
-  icon: 'icon-all',
-};
 
 export default class Store {
   constructor (parent) {
@@ -16,7 +10,7 @@ export default class Store {
   }
 
   @observable collapsed = false;  // 菜单收缩状态
-  @observable tag = BASE_TAG.id;  // 当前 tag
+  @observable tag = TAG_ALL.id;  // 当前 tag
   @observable list = [];       // tag 列表
 
   @action
@@ -32,6 +26,6 @@ export default class Store {
   @action
   getList = async () => {
     const { list } = await getTags();
-    this.list = [BASE_TAG, ... list];
+    this.list = [TAG_ALL, ... list];
   }
 }

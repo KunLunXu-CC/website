@@ -9,8 +9,8 @@ export const getArticles = async ({ pagination, search } = {}) => {
       query: `
         query($search: ArticleSearch, $pagination: Pagination){
           articles( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
-            list { id name desc thumb content tags { id name }  }
-            pagination 
+            list { id name desc thumb content tags { id name } updateTime }
+            pagination
             rescode
             message
           }
@@ -28,18 +28,18 @@ export const createArticles = async ({ body, search, pagination } = {}) => {
       variables: { body, search, pagination },
       query: `
         mutation(
-          $body: [AticleFields!]!, 
-          $search: ArticleSearch, 
+          $body: [AticleFields!]!,
+          $search: ArticleSearch,
           $pagination: Pagination
         ){
-          createArticles( 
-            body: $body, 
-            search: $search, 
-            pagination: $pagination, 
-            orderBy: { creationTime: -1 } 
+          createArticles(
+            body: $body,
+            search: $search,
+            pagination: $pagination,
+            orderBy: { creationTime: -1 }
           ){
             list { id name desc thumb content tags { id name } }
-            pagination 
+            pagination
             rescode
             message
           }
@@ -63,14 +63,14 @@ export const updateArticles = async ({ conds, body, search, pagination } = {}) =
           $pagination: Pagination
         ){
           updateArticles(
-            body: $body, 
+            body: $body,
             conds: $conds,
-            search: $search, 
-            pagination: $pagination, 
-            orderBy: { creationTime: -1 } 
+            search: $search,
+            pagination: $pagination,
+            orderBy: { creationTime: -1 }
           ){
             list { id name desc thumb content tags { id name } }
-            pagination 
+            pagination
             rescode
             message
           }
@@ -96,10 +96,10 @@ export const removeArticles = async ({ conds, body, search, pagination } = {}) =
             conds: $conds,
             search: $search,
             pagination: $pagination,
-            orderBy: { creationTime: -1 } 
+            orderBy: { creationTime: -1 }
           ){
             list { id name desc thumb content tags { id name } }
-            pagination 
+            pagination
             rescode
             message
           }
