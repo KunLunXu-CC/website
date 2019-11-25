@@ -50,7 +50,7 @@ export default class Photos {
   // 获取搜索条件
   getSearch = () => {
     const search = {};
-    _.isNumber(this.type) && (search.type = this.type);
+    _.isNumber(this.type) && (search.type = [this.type]);
     return search;
   }
 

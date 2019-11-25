@@ -12,7 +12,7 @@ export default class Store {
 
   @action
   getBgList = async () => {
-    const search = { type: PHOTO_TYPE.DESKTOP.VALUE };
+    const search = { type: [PHOTO_TYPE.DESKTOP.VALUE] };
     const { list } = await api.getPhotos({ search });
     this.bgList = list;
   }

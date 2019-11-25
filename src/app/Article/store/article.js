@@ -14,7 +14,10 @@ export default class Store {
 
   @action
   getThumbs = async () => {
-    const search = { type: PHOTO_TYPE.THUMB.VALUE };
+    const search = { type: [
+      PHOTO_TYPE.THUMB.VALUE,
+      PHOTO_TYPE.DESKTOP.VALUE,
+    ] };
     const { list } = await api.getPhotos({ search });
     this.thumbs = list;
   }
