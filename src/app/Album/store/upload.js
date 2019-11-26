@@ -30,6 +30,12 @@ export default class Upload {
     this.fileList = [... this.fileList, ... files];
   }
 
+  // 清除待上传图片
+  @action
+  clearFiles = () => {
+    this.fileList = [];
+  }
+
   // 移除图片
   @action
   removeFile = file => {
@@ -68,7 +74,7 @@ export default class Upload {
       message: '文件上传成功!',
     });
     this.show = false;
-    this.fileList = [];
+    this.clearFiles();
     return res;
   }
 }

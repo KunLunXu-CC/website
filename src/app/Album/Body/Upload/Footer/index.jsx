@@ -8,6 +8,7 @@ const useStateHook = (props, store) => {
   // 取消
   const onCancel = () => {
     store.upload.close();
+    store.upload.clearFiles();
   };
 
   // 上传
