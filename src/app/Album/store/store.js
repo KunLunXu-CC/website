@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { observable, autorun, toJS } from 'mobx';
-import Spin from './spin';
 import Upload from './upload';
 import Photos from './photos';
-import Message from './message';
+import Spin from '@store/common/spin';
+import Message from '@store/common/message';
 
 export default class Store {
   constructor (global) {

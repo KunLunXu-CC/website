@@ -27,7 +27,9 @@ export default class Store {
   // 获取列表
   @action
   getList = async (search = this.getSearch()) => {
-    const { list } = await api.getArticles({ search });
+    const { list } = await this.parent.spin.runTask(async () => (
+      await api.getArticles({ search })
+    ));
     this.list = list;
   }
 

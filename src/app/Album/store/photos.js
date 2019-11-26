@@ -24,25 +24,26 @@ export default class Photos {
   // 设置(查询)列表
   @action
   setList = async (search = this.getSearch()) => {
-    this.parent.spin.open();
-    const { list } = await api.getPhotos({ search });
-    this.parent.spin.close();
+    const { list } = await this.parent.spin.runTask(async () => (
+      await api.getPhotos({ search })
+    ));
     this.list = list;
   }
 
   // 删除图片
   @action
   removePhotos = async ({ id }) => {
-    this.parent.spin.open();
-    const res = await api.removePhotos({
-      conds: { id },
-      search: this.getSearch(),
-    });
+    // 1. 删除图片
+    const res = await this.parent.spin.runTask(async () => (
+      await api.removePhotos({
+        conds: { id },
+        search: this.getSearch(),
+      })
+    ));
     this.parent.message.setMessage({
       type: 'success',
       message: '文件删除成功!',
     });
-    this.parent.spin.close();
     this.list = res.list;
     return res;
   };

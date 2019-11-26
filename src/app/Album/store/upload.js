@@ -63,12 +63,13 @@ export default class Upload {
     }
 
     // 上传文件
-    this.parent.spin.open();
-    const res = await api.uploadPhotos({
-      type: this.type,
-      files: toJS(this.fileList),
-    });
-    this.parent.spin.close();
+    const res = await this.parent.spin.runTask(async () => (
+      await api.uploadPhotos({
+        type: this.type,
+        files: toJS(this.fileList),
+      })
+    ));
+
     this.parent.message.setMessage({
       type: 'success',
       message: '文件上传成功!',
