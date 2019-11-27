@@ -10,6 +10,11 @@ import scss from './index.module.scss';
 import { useStore } from '../../../store';
 
 const useStateHook = (props, store) => {
+  // 点击
+  const onClick = () => (
+    store.article.onRead(props.data)
+  );
+
   // 获取图片
   const img = useMemo(() => {
     // 1. 数据中存在缩略图则直接返回
@@ -22,7 +27,7 @@ const useStateHook = (props, store) => {
       ? _.get(store.article.thumbs, `[${index}].url`, '')
       : '';
   }, [props.data.img, store.article.thumbs]);
-  return { img };
+  return { img, onClick };
 };
 
 export default props => {
@@ -31,7 +36,9 @@ export default props => {
   return useObserver(() => {
     const state = useStateHook(props, store);
     return (
-      <div className={classNames(scss.item, scss[props.align || 'left'])}>
+      <div
+        onClick={state.onClick}
+        className={classNames(scss.item, scss[props.align || 'left'])}>
         <div className={scss.detail}>
           <div className={scss.time}>
             <Icon type="icon-48copy11" />

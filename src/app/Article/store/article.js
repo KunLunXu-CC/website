@@ -11,9 +11,17 @@ export default class Store {
     _.forIn(this.reactionList, v => reaction(v.data, v.effect));
   }
 
-  @observable list = [];      // 文章列表
-  @observable thumbs = []     // 缩略图
+  @observable list = [];        // 文章列表
+  @observable thumbs = [];      // 缩略图
+  @observable article = null;   // 缩略图
 
+  // 阅读
+  @action
+  onRead = article => {
+    this.article = { ... article };
+  }
+
+  // 获取缩略图
   @action
   getThumbs = async () => {
     const search = { type: [

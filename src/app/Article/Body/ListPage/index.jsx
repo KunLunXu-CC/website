@@ -1,16 +1,13 @@
-import React from 'react';
-import { Scroll } from 'qyrc';
+import React, { Fragment } from 'react';
 import { useObserver } from 'mobx-react-lite';
 
 import Item from './Item';
-
-import scss from './index.module.scss';
 import { useStore } from '../../store';
 
 export default () => {
   const store = useStore();
   return useObserver(() => (
-    <Scroll className={scss.list}>
+    <Fragment>
       {store.article.list.map((value, index) => (
         <Item
           data={value}
@@ -19,6 +16,6 @@ export default () => {
         />
       ))}
       <br/>
-    </Scroll>
+    </Fragment>
   ));
 };
