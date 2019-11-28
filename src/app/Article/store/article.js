@@ -17,8 +17,14 @@ export default class Store {
 
   // 阅读
   @action
-  onRead = article => {
+  read = article => {
     this.article = { ... article };
+  }
+
+  // 辍学: 取消阅读
+  @action
+  drop = () => {
+    this.article = null;
   }
 
   // 获取缩略图

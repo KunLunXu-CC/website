@@ -38,6 +38,15 @@
 
   &-suffix {
     flex: none;
-    width: 100px;
+    :global {
+      .qyrc-icon {
+        color: #999;
+        font-size: 30px;
+        cursor: pointer;
+        box-sizing: content-box;
+        padding: { top: 5px; bottom: 5px; left: 30px; };
+        &:hover { color: rgba($color: #397dff, $alpha: 0.8); }
+      }
+    }
   }
 }

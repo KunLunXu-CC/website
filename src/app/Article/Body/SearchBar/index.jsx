@@ -6,17 +6,31 @@ import { useObserver } from 'mobx-react-lite';
 import { useStore } from '../../store';
 import scss from './index.module.scss';
 
-export default () => {
+const useStateHook = (props, store) => {
+  // 回退
+  const onBack = () => {
+    store.article.drop();
+  };
+
+  // 收缩 / 展开
+  const onToggleCollapsed = () => {
+    store.menu.toggleCollapsed();
+  };
+
+  return { onBack, onToggleCollapsed };
+};
+
+export default props => {
   const store = useStore();
+  const state = useStateHook(props, store);
 
   return useObserver(() => (
     <div className={scss['search-bar']}>
       <div className={scss['search-bar-prefix']}>
         <Icon
+          onClick={state.onToggleCollapsed}
           type={store.menu.collapsed ? 'icon-zhankai' : 'icon-shousuo1' }
-          onClick={store.menu.toggleCollapsed}
         />
-        {/* <Icon type="icon-fanhui"/> */}
       </div>
       <div className={scss['search-bar-input']}>
         <Input
@@ -27,6 +41,12 @@ export default () => {
         />
       </div>
       <div className={scss['search-bar-suffix']}>
+        {store.article.article ?
+          <Icon
+            onClick={state.onBack}
+            type="icon-huituishuikuansuoshuqi"
+          /> : null
+        }
       </div>
     </div>
   ));

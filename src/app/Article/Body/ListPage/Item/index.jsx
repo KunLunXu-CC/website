@@ -12,7 +12,7 @@ import { useStore } from '../../../store';
 const useStateHook = (props, store) => {
   // 点击
   const onClick = () => (
-    store.article.onRead(props.data)
+    store.article.read(props.data)
   );
 
   // 获取图片
