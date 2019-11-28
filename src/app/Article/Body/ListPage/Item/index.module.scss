@@ -80,8 +80,13 @@
   flex: 1;
   padding: 10px 0;
   line-height: 1.8;
+  position: relative;
   p {
+    left: 0;
+    right: 0;
+    position: absolute;
     @include line-clamp(3);
+    word-wrap: break-word;
   }
 }
 
