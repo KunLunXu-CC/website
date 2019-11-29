@@ -1,0 +1,26 @@
+.menu {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  position: fixed;
+
+  z-index: 999;
+  background: rgba($color: #fff, $alpha: 0.45);
+  box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.05);
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  :global {
+    .qyrc-icon {
+      color: #000;
+      margin: {
+        left: 10px;
+        right: 10px;
+      };
+      font-size: 20px;
+    }
+  }
+}
