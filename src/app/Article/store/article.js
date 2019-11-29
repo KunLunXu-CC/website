@@ -11,14 +11,21 @@ export default class Store {
     _.forIn(this.reactionList, v => reaction(v.data, v.effect));
   }
 
-  @observable list = [];        // 文章列表
-  @observable thumbs = [];      // 缩略图
-  @observable article = null;   // 缩略图
+  @observable list = [];             // 文章列表
+  @observable thumbs = [];           // 缩略图
+  @observable searchValue = void 0;  // 搜索词条
+  @observable article = null;        // 缩略图
 
   // 阅读
   @action
   read = article => {
     this.article = { ... article };
+  }
+
+  // 搜索
+  @action
+  search = value => {
+    this.searchValue = value;
   }
 
   // 辍学: 取消阅读
@@ -49,7 +56,7 @@ export default class Store {
 
   // 获取查询条件
   getSearch = () => {
-    const search = {};
+    const search = { name: this.searchValue };
     (this.parent.menu.tag !== TAG_ALL.id) &&
     (search.tags = [this.parent.menu.tag]);
     return search;

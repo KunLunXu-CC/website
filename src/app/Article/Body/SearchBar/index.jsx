@@ -17,7 +17,12 @@ const useStateHook = (props, store) => {
     store.menu.toggleCollapsed();
   };
 
-  return { onBack, onToggleCollapsed };
+  // 搜索
+  const onSearch = event => {
+    store.article.search(event.target.value);
+  };
+
+  return { onBack, onToggleCollapsed, onSearch };
 };
 
 export default props => {
@@ -36,7 +41,7 @@ export default props => {
         <Input
           size="large"
           placeholder="查询"
-          onPressEnter={() => {}}
+          onPressEnter={state.onSearch}
           prefix={<Icon type="icon-search" style={{ color: 'rgba(0,0,0,.25)' }} />}
         />
       </div>
