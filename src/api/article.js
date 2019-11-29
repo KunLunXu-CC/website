@@ -9,7 +9,7 @@ export const getArticles = async ({ pagination, search } = {}) => {
       query: `
         query($search: ArticleSearch, $pagination: Pagination){
           articles( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
-            list { id name desc thumb content tags { id name } updateTime }
+            list { id name desc thumb content tags { id name } views updateTime }
             pagination
             rescode
             message
@@ -38,7 +38,7 @@ export const createArticles = async ({ body, search, pagination } = {}) => {
             pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
-            list { id name desc thumb content tags { id name } }
+            list { id name desc thumb content tags { id name } views }
             pagination
             rescode
             message
@@ -69,7 +69,7 @@ export const updateArticles = async ({ conds, body, search, pagination } = {}) =
             pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
-            list { id name desc thumb content tags { id name } }
+            list { id name desc thumb content tags { id name } views }
             pagination
             rescode
             message

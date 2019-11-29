@@ -62,3 +62,12 @@ export const rsa = data => {
   encrypt.setPublicKey(PUBLICKEY);
   return encrypt.encrypt(data);
 };
+
+/**
+ * 格式化数字
+ * @param {Number} num  待处理数据
+ */
+export const formatNum = num => [... `${num}`].reverse()
+  .reduce((res, current, index) => (
+    `${current}${index !== 0 && index % 3 === 0 ? ',' : ''}${res}`, '')
+  );

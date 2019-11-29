@@ -4,8 +4,10 @@ import React, {
 import _ from 'lodash';
 import moment from 'moment';
 import { Image, Icon } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
 import classNames from 'classnames';
+import { useObserver } from 'mobx-react-lite';
+
+import { formatNum } from '@utils';
 import scss from './index.module.scss';
 import { useStore } from '../../../store';
 
@@ -32,7 +34,6 @@ const useStateHook = (props, store) => {
 
 export default props => {
   const store = useStore();
-
   return useObserver(() => {
     const state = useStateHook(props, store);
     return (
@@ -50,7 +51,8 @@ export default props => {
           </div>
           <div className={scss.info}>
             <div className={scss['info-item']}>
-              <Icon type="icon-liulanliang" /> 5,411 热度
+              <Icon type="icon-liulanliang" />
+              {formatNum(_.get(props, 'data.views.length', 0))} 热度
             </div>
             <div className={scss['info-item']}>
               <Icon type="icon-pinglunliang" /> 25 条评论
