@@ -21,7 +21,7 @@ export default [
     name: '编辑器',
     key: 'editor',
     component: Editor,
-    defaultOpen: false,
+    defaultOpen: true,
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
@@ -33,7 +33,7 @@ export default [
     name: '文章',
     icon: 'icon-wenzhang',
     key: 'article',
-    defaultOpen: true,
+    defaultOpen: false,
     component: Article,
     modalProps: {
       dragHeight: 40,

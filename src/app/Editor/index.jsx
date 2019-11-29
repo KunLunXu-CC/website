@@ -17,9 +17,10 @@ export default () => (
         <div className={scss['editor-body-header']}><Header/></div>
         <div className={scss['editor-body-middle']}>
           <VariableBlock
+            margin={{ right: '20%' }}
             operationList={['right']}
             style={{ height: '100%' }}
-            margin={{ right: '40%' }}
+            constraintSize={{ width: 4 }}
             className={scss['editor-body-middle-menu']} >
             <div className={scss['editor-body-middle-menu-body']}>
               <Menu/>

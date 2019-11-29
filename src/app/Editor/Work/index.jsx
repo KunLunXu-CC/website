@@ -29,31 +29,33 @@ export default props => {
 
   return useObserver(() => (
     <div className={scss.work}>
-      <Tabs
-        onChange={state.onTabsChange}
-        activeKey={store.menu.selected}>
-        {store.article.works.map(v => (
-          <Tabs.TabPane
-            key={v.article.id}
-            tab={(
-              <span className={scss['work-tab']}>
-                {v.article.name}&nbsp;&nbsp;
-                <Icon
-                  type="icon-guanbi6"
-                  className={classNames(
-                    scss['work-tab-icon'],
-                    { [scss['work-tab-icon-change']]: v.change }
-                  )}
-                  onClick={state.onClose.bind(null, v.article.id)}
-                />
-              </span>
-            )}>
-            <div className={scss['tab-pane-body']}>
-              <Editor data={v}/>
-            </div>
-          </Tabs.TabPane>
-        ))}
-      </Tabs>
+      {store.article.works.length > 0 ?
+        <Tabs
+          onChange={state.onTabsChange}
+          activeKey={store.menu.selected}>
+          {store.article.works.map(v => (
+            <Tabs.TabPane
+              key={v.article.id}
+              tab={(
+                <span className={scss['work-tab']}>
+                  {v.article.name}&nbsp;&nbsp;
+                  <Icon
+                    type="icon-guanbi6"
+                    className={classNames(
+                      scss['work-tab-icon'],
+                      { [scss['work-tab-icon-change']]: v.change }
+                    )}
+                    onClick={state.onClose.bind(null, v.article.id)}
+                  />
+                </span>
+              )}>
+              <div className={scss['tab-pane-body']}>
+                <Editor data={v}/>
+              </div>
+            </Tabs.TabPane>
+          ))}
+        </Tabs> : null
+      }
     </div>
   ));
 };
