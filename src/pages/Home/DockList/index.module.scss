@@ -5,10 +5,10 @@ $dock-padding: 10px;
 $radius: 10px;
 
 %dock{
-  position: fixed;
-  z-index: 9;
-  right: 0;
   left: 0;
+  right: 0;
+  z-index: 1;
+  position: fixed;
 
   font-size: 0;
   text-align: center;

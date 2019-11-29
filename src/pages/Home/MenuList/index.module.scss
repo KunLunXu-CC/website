@@ -2,10 +2,10 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
   height: 30px;
   position: fixed;
 
-  z-index: 999;
   background: rgba($color: #fff, $alpha: 0.45);
   box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.05);
 

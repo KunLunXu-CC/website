@@ -21,7 +21,7 @@ export default [
     name: '编辑器',
     key: 'editor',
     component: Editor,
-    defaultOpen: false,
+    defaultOpen: true,
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
