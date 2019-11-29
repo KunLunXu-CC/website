@@ -52,7 +52,7 @@ export default props => {
           <div className={scss.info}>
             <div className={scss['info-item']}>
               <Icon type="icon-liulanliang" />
-              {formatNum(_.get(props, 'data.views.length', 0))} 热度
+              {formatNum(_.get(props, 'data.viewCount', 0))} 热度
             </div>
             <div className={scss['info-item']}>
               <Icon type="icon-pinglunliang" /> 25 条评论
