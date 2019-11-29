@@ -12,15 +12,15 @@ const useStateHook = (props, store) => {
   // 获取图片
   const img = useMemo(() => {
     // 1. 数据中存在缩略图则直接返回
-    if (props.data.img) {
-      return props.data.img;
+    if (props.data.thumb) {
+      return props.data.thumb;
     }
     // 2. 获取随机缩略图
     const index = Math.floor(Math.random() * store.article.thumbs.length);
     return store.article.thumbs.length > 0
       ? _.get(store.article.thumbs, `[${index}].url`, '')
       : '';
-  }, [props.data.img, store.article.thumbs]);
+  }, [props.data.thumb, store.article.thumbs]);
 
   return { img };
 };
@@ -35,11 +35,11 @@ export default props => {
         src={state.img}
         className={scss.item}>
         <div className={scss.mask}>
-          <div className={scss.title}>
-            PIXIV
+          <div className={scss.tag}>
+            {_.get(props, 'data.tags[0].name', '---')}
           </div>
-          <div className={scss.desc}>
-            P 站的正确打开方式
+          <div className={scss.title}>
+            {_.get(props, 'data.name', '---')}
           </div>
         </div>
       </Image>

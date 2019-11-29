@@ -1,3 +1,5 @@
+@import '../../../../../assets/style/mixin.scss';
+
 .item {
   cursor: pointer;
   overflow: hidden;
@@ -30,7 +32,7 @@
   position: relative;
   background: rgba(0, 0, 0, .7);
 
-  .title {
+  .tag {
     top: 18px;
     right: 100%;
     width: 100%;
@@ -44,29 +46,32 @@
     transition: right $transition-time;
   }
 
-  .desc {
+  .title {
     top: 50%;
     left: 100%;
     height: 50%;
     width: 100%;
     display: flex;
+    padding: 0 10px;
     font-size: 12px;
+    text-align: center;
     position: absolute;
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 0.6);
     transition: left $transition-time;
+    @include line-clamp(3);
   }
 }
 
 .mask:hover {
   opacity: 1;
 
-  .title {
+  .tag {
     right: 0;
   }
 
-  .desc {
+  .title {
     left: 0;
   }
 }

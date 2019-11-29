@@ -8,10 +8,12 @@ export default class Store {
     this.parent = parent;
     this.getThumbs();
     this.getList();
+    this.getTopList();
     _.forIn(this.reactionList, v => reaction(v.data, v.effect));
   }
 
   @observable list = [];             // 文章列表
+  @observable tops = [];             // 热门
   @observable thumbs = [];           // 缩略图
   @observable searchValue = void 0;  // 搜索词条
   @observable article = null;        // 缩略图
@@ -43,6 +45,27 @@ export default class Store {
     ] };
     const { list } = await api.getPhotos({ search });
     this.thumbs = list;
+  }
+
+  // 获取列表
+  @action
+  getList = async (search = this.getSearch()) => {
+    const { list } = await this.parent.spin.runTask(async () => (
+      await api.getArticles({ search })
+    ));
+    this.list = list;
+  }
+
+  // 获取 TOP 列表
+  @action
+  getTopList = async () => {
+    const { list } = await this.parent.spin.runTask(async () => (
+      await api.getArticles({
+        orderBy: { viewCount: -1 },
+        pagination: { curent: 1, pageSize: 10 },
+      })
+    ));
+    this.tops = list;
   }
 
   // 获取列表

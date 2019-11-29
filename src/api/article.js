@@ -1,14 +1,18 @@
 import axios from '@utils/request';
 
-export const getArticles = async ({ pagination, search } = {}) => {
+export const getArticles = async ({
+  search,
+  pagination,
+  orderBy = { creationTime: -1 },
+} = {}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, pagination },
+      variables: { search, pagination, orderBy },
       query: `
-        query($search: ArticleSearch, $pagination: Pagination){
-          articles( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
+        query($search: ArticleSearch, $pagination: Pagination, $orderBy: OrderBy){
+          articles( search: $search, pagination: $pagination, orderBy: $orderBy ){
             list { id name desc thumb content tags { id name } viewCount updateTime }
             pagination
             rescode
