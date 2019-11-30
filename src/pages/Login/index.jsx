@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { message } from 'antd';
 import { useStore } from '@store';
 import { withRouter } from 'react-router-dom';
@@ -15,6 +15,11 @@ const useStateHook = (props, store) => {
         : message.warning('登录失败, 账号或密码错误！');
     });
   };
+
+  useEffect(() => {
+    localStorage.setItem('authorization', null);
+  }, []);
+
   return { onLogin };
 };
 
