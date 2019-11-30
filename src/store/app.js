@@ -5,7 +5,6 @@ import { observable, action } from 'mobx';
 export default class Store {
   constructor (parent) {
     this.parent = parent;
-    this.init();
   }
 
   /**
@@ -14,16 +13,6 @@ export default class Store {
    * 2. isMin 表示应用是否是最小化
    */
   @observable list = [];
-
-  // 初始化：打开默认开启的弹窗
-  @action
-  init = () => {
-    const rest = apps.filter(v => v.defaultOpen).map(v => ({
-      ... v,
-      isMin: false,
-    }));
-    this.list = [... this.list, ... rest];
-  }
 
   /**
    * 开启 app

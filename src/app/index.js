@@ -9,7 +9,6 @@ export default [
     name: '相册',
     key: 'album',
     component: Album,
-    defaultOpen: false,
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
@@ -21,7 +20,6 @@ export default [
     name: '编辑器',
     key: 'editor',
     component: Editor,
-    defaultOpen: true,
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
@@ -31,10 +29,9 @@ export default [
   },
   {
     name: '文章',
-    icon: 'icon-wenzhang',
     key: 'article',
-    defaultOpen: false,
     component: Article,
+    icon: 'icon-wenzhang',
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 10, left: 10 },
@@ -47,7 +44,6 @@ export default [
     key: 'note',
     component: Note,
     icon: 'icon-jilu',
-    defaultOpen: false,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 15, left: 5 },
