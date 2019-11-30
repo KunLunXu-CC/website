@@ -10,7 +10,6 @@ module.exports.alias = {
   '@utils': path.resolve(__dirname, '../src/utils'),
   '@config': path.resolve(__dirname, '../src/config'),
   '@assets': path.resolve(__dirname, '../src/assets'),
-  '@components': path.resolve(__dirname, '../src/components')
 }
 
 /* 全局变量 */

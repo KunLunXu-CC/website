@@ -26,7 +26,7 @@ const useStateHook = props => {
   return { onLogin };
 };
 
-const Desktop = props => {
+export default Form.create()(props => {
   const state = useStateHook(props);
   return (
     <div className={scss.login}>
@@ -60,6 +60,4 @@ const Desktop = props => {
       </div>
     </div>
   );
-};
-
-export default Form.create()(Desktop);
+});

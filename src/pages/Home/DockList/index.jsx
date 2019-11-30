@@ -1,8 +1,8 @@
 import React from 'react';
+import { useStore } from '@store';
 import { useObserver } from 'mobx-react-lite';
 
-import { useStore } from '@store';
-import { DockList } from '@components';
+import List from './List';
 
 const useStateHook = (props, store) => {
   const onClick = dock => {
@@ -16,7 +16,7 @@ export default props => {
   const state = useStateHook(props, store);
 
   return useObserver(() => (
-    <DockList
+    <List
       onClick={state.onClick}
       dataSource={store.dock.list}
     />

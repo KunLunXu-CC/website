@@ -1,9 +1,9 @@
 import React from 'react';
 import { message } from 'antd';
+import { useStore } from '@store';
 import { withRouter } from 'react-router-dom';
 
-import { useStore } from '@store';
-import { Login as LoginComponent } from '@components';
+import Form from './Form';
 import Background from './Background';
 
 const useStateHook = (props, store) => {
@@ -23,7 +23,7 @@ const Login = props => {
   const state = useStateHook(props, store);
   return (
     <Background>
-      <LoginComponent onLogin={state.onLogin}/>
+      <Form onLogin={state.onLogin}/>
     </Background>
   );
 };

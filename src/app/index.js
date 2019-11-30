@@ -1,5 +1,4 @@
 // import Tag from './Tag';
-import Note from './Note';
 import Album from './Album';
 import Editor from './Editor';
 import Article from './Article';
@@ -37,17 +36,6 @@ export default [
       toolPosition: { top: 10, left: 10 },
       toolClassName: 'article-modal-tool',
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
-    },
-  },
-  {
-    name: '笔记',
-    key: 'note',
-    component: Note,
-    icon: 'icon-jilu',
-    modalProps: {
-      dragHeight: 40,
-      toolPosition: { top: 15, left: 5 },
-      defaultParams: { width: 980, height: 500, offsetX: 50, offsetY: 50 },
     },
   },
   // {

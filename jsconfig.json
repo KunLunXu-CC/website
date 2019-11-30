@@ -11,8 +11,7 @@
       "@utils/*": ["src/utils/*"],
       "@store/*": ["src/store/*"],
       "@assets/*": ["src/assets/*"],
-      "@config/*": ["src/config/*"],
-      "@components/*": ["src/components/*"]
+      "@config/*": ["src/config/*"]
     },
     "target": "ES6",
     "module": "es6",
