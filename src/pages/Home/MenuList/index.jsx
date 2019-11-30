@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from 'qyrc';
 
 import Date from './Date';
+import User from './User';
 import scss from './index.module.scss';
 
 export default () => (
@@ -9,6 +10,6 @@ export default () => (
     <Date/>
     <Icon type="icon-wifi"/>
     <Icon type="icon-dianliang"/>
-    <Icon type="icon-caidan"/>
+    <User/>
   </div>
 );
