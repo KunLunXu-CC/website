@@ -4,11 +4,11 @@ import React, {
   useEffect,
 } from 'react';
 import _ from 'lodash';
-import { Scroll } from 'qyrc';
 import codeMirror from 'codemirror';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
+// import 'codemirror/addon/scroll/simplescrollbars.js';
 import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
 import './theme';                                 // 引入 codemirror 主题(样式)
 
@@ -84,9 +84,10 @@ const useStateHook = (props, store) => {
       immutable.codeMirror = codeMirror(editorBodyRef.current, {
         tabSize: 2,
         indentUnit: 2,
-        lineNumbers: true,
         mode: 'markdown',
+        lineNumbers: true,
         lineWrapping: true,
+        // scrollbarStyle: 'overlay',
         theme: 'oceanic-next',
         value: props.data.article.content || '',
       });
@@ -105,14 +106,13 @@ export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
   return (
-    <Scroll className={scss.editor}>
-      <div
-        onDrop={state.onDrop}
-        onPaste={state.onPaste}
-        ref={state.editorBodyRef}
-        onDragOver={preventDefault}
-        onKeyDown={state.onKeyDown}
-        className={scss['editor-body']}/>
-    </Scroll>
+    <div
+      onDrop={state.onDrop}
+      className={scss.editor}
+      onPaste={state.onPaste}
+      ref={state.editorBodyRef}
+      onDragOver={preventDefault}
+      onKeyDown={state.onKeyDown}
+    />
   );
 };
