@@ -8,7 +8,6 @@ import codeMirror from 'codemirror';
 
 import { useStore } from '../../store';
 import scss from './index.module.scss';
-// import 'codemirror/addon/scroll/simplescrollbars.js';
 import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
 import './theme';                                 // 引入 codemirror 主题(样式)
 
@@ -87,8 +86,8 @@ const useStateHook = (props, store) => {
         mode: 'markdown',
         lineNumbers: true,
         lineWrapping: true,
-        // scrollbarStyle: 'overlay',
         theme: 'oceanic-next',
+        cursorScrollMargin: 200, // 该参数受限于 .CodeMirror-lines padding 值
         value: props.data.article.content || '',
       });
       immutable.codeMirror.on('change', () => {

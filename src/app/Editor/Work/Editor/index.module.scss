@@ -8,6 +8,14 @@
     .CodeMirror-linenumber {
       padding-right: 20px;
     }
+
+    .CodeMirror-lines {
+      // 需要配合 option.cursorScrollMargin 进行使用
+      padding: {
+        top: 20;
+        bottom: 200px;
+      };
+    }
   }
   &-body {
     padding: 20px;
