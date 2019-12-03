@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { observable, action } from 'mobx';
 
 export default class Photos {

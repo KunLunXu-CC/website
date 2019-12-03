@@ -3,7 +3,6 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
-import _ from 'lodash';
 import codeMirror from 'codemirror';
 
 import { useStore } from '../../store';

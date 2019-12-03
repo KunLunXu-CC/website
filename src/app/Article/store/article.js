@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import * as api from '@api';
 import { observable, action, reaction } from 'mobx';
 import { PHOTO_TYPE, TAG_ALL } from '@config/consts';

@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const config = require('./config');
 const DefinePlugin = webpack.DefinePlugin;
+const ProvidePlugin = webpack.ProvidePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,6 +11,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // 全局常量定义
 const definePlugin = new DefinePlugin(config.globalConsts.development);
+
+// 自动加载
+const providePlugin = new ProvidePlugin(config.providePlugin);
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
@@ -118,6 +122,7 @@ module.exports = {
 
   plugins: [
     definePlugin,
+    providePlugin,
     copyWebpackPlugin,
     htmlWebpackPlugin,
     // bundleAnalyzerPlugin,

@@ -1,5 +1,11 @@
 const path = require('path');
 
+// 自动加载 配置
+module.exports.providePlugin = {
+  _: 'lodash',
+  lodash: 'lodash',
+};
+
 /* 路径别名配置 */
 module.exports.alias = {
   '@app': path.resolve(__dirname, '../src/app'),

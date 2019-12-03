@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import apps from '@app/index';
 import { observable, action } from 'mobx';
 

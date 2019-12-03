@@ -1,7 +1,6 @@
 import React, {
   useMemo,
 } from 'react';
-import _ from 'lodash';
 import moment from 'moment';
 import { Image, Icon } from 'qyrc';
 import classNames from 'classnames';

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+
 import axios from '@utils/request';
 
 export const getPhotos = async ({ pagination, search }) => {

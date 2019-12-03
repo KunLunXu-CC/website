@@ -10,6 +10,8 @@ module.exports = {
     node: true                  //
   },
   globals: {
+    _: true,
+    lodash: true,
     $console: true,
     GLOBAL_SERVICE: true,
     PUBLICKEY: true,

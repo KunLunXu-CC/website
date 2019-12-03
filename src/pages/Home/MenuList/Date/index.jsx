@@ -3,7 +3,6 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import _ from 'lodash';
 import moment from 'moment';
 
 import scss from './index.module.scss';

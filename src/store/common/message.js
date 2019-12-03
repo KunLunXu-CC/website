@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { notification } from 'antd';
 import { observable, action, reaction } from 'mobx';
 

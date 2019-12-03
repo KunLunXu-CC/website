@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { observable, autorun, toJS } from 'mobx';
 
 import Tag from './tag';

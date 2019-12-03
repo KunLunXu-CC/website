@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import { Markdown } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';

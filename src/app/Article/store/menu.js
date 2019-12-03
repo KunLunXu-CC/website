@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { observable, action, reaction } from 'mobx';
 import { TAG_ALL } from '@config/consts';
 import { getTags } from '@api';

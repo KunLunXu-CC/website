@@ -1,7 +1,6 @@
 import React, {
   useMemo,
 } from 'react';
-import _ from 'lodash';
 import { Image } from 'qyrc';
 import { useStore } from '@store';
 import { withRouter } from 'react-router-dom';

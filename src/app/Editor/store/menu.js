@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { observable, action, computed } from 'mobx';
 
 export default class Store {

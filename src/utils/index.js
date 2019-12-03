@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { message } from 'antd';
 import JSEncrypt from 'jsencrypt';
 import * as CONTS from '@config/consts';
