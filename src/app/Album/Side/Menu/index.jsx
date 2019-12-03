@@ -23,6 +23,11 @@ const listData = [
     key: PHOTO_TYPE.ARTICLE.VALUE,
   },
   {
+    icon: 'icon-touxiang',
+    name: PHOTO_TYPE.AVATAR.DESC,
+    key: PHOTO_TYPE.AVATAR.VALUE,
+  },
+  {
     key: PHOTO_TYPE.THUMB.VALUE,
     name: PHOTO_TYPE.THUMB.DESC,
     icon: 'icon-genghuanfengmian',

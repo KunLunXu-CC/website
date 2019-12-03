@@ -1,36 +1,49 @@
-/**
- * 用户登录组件
- * @param {Function} props.onLogin  登录触发事件 ({ account, password }) => {}
- * @returns {ReactDOM}
- */
-
+import React, {
+  useMemo,
+} from 'react';
 import _ from 'lodash';
-import React from 'react';
 import { Image } from 'qyrc';
-import { Input, Form, Button, Icon } from 'antd';
+import { useStore } from '@store';
+import { withRouter } from 'react-router-dom';
+import { Input, Form, Button, Icon, message } from 'antd';
 
 import scss from './index.module.scss';
-import Head from '@assets/img/login_head.jpg';
 
-const useStateHook = props => {
+const useStateHook = (props, store) => {
+  // 随机头像
+  const avatar = useMemo(() => {
+    const index = Math.floor(Math.random() * store.avatar.list.length);
+    return store.avatar.list.length > 0
+      ? _.get(store.avatar.list, `[${index}].url`, '')
+      : '';
+  }, [store.avatar.list]);
+
   // 登录
   const onLogin = () => {
-    props.form.validateFieldsAndScroll((errors, values) => {
+    props.form.validateFieldsAndScroll((errors, { account, password }) => {
       if (!!errors) {
         return false;
       }
-      _.isFunction(props.onLogin) && props.onLogin({ ... values });
+      store.user.login({ account, password }).then(({ logined }) => {
+        logined
+          ? props.history.push('/')
+          : message.warning('登录失败, 账号或密码错误！');
+      });
     });
   };
 
-  return { onLogin };
+  return { onLogin, avatar };
 };
 
-export default Form.create()(props => {
-  const state = useStateHook(props);
+export default Form.create()(withRouter(props => {
+  const store = useStore();
+  const state = useStateHook(props, store);
+
   return (
     <div className={scss.login}>
-      <div className={scss['login-head']} ><Image src={Head}/></div>
+      <div className={scss['login-avatar']} >
+        <Image src={state.avatar}/>
+      </div>
       <div className={scss['login-form']}>
         <Form>
           <Form.Item>
@@ -60,4 +73,4 @@ export default Form.create()(props => {
       </div>
     </div>
   );
-});
+}));

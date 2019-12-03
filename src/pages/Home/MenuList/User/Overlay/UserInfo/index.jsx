@@ -1,19 +1,33 @@
+import React, {
+  useMemo,
+} from 'react';
 import _ from 'lodash';
-import React from 'react';
 import { Image } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '@store';
 import scss from './index.module.scss';
-import icon from '@assets/img/login_head.jpg';
 
-export default () => {
+const useStateHook = (props, store) => {
+  // 随机头像
+  const avatar = useMemo(() => {
+    const index = Math.floor(Math.random() * store.avatar.list.length);
+    return store.avatar.list.length > 0
+      ? _.get(store.avatar.list, `[${index}].url`, '')
+      : '';
+  }, [store.avatar.list]);
+
+  return { avatar };
+};
+
+export default props => {
   const store = useStore();
+  const state = useStateHook(props, store);
 
   return useObserver(() => (
     <div className={scss.userInfo}>
-      <div className={scss.icon}>
-        <Image src={icon}/>
+      <div className={scss.avatar}>
+        <Image src={state.avatar}/>
       </div>
       <div className={scss.name}>
         {_.get(store, 'user.user.name') || '---'}
