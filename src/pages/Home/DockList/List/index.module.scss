@@ -1,7 +1,8 @@
 
 /* Dock 样式 */
-$radius: 10px;
-$dock-height: 70px;
+$radius: 10px;                 // 容器圆角大小
+$dock-height: 70px;            // 高度
+$dock-trigger-height: 15px;    // 鼠标距离底部多少显示 dock
 
 // dock 样式
 .dock {
@@ -11,16 +12,16 @@ $dock-height: 70px;
   opacity: 0;
   display: flex;
   position: fixed;
-  padding-top: 20px;
   height: $dock-height;
   transition: all 0.5s;
   box-sizing: content-box;
   justify-content: center;
   bottom: -$dock-height - 5;
+  padding-top: $dock-trigger-height;
 
   &:hover {
-    bottom: 0; 
-    opacity: 1;   
+    bottom: 0;
+    opacity: 1;
   }
 }
 
@@ -28,8 +29,8 @@ $dock-height: 70px;
 .dock-body {
   display: flex;
   min-width: 50%;
-  height: $dock-height;
   align-items: center;
+  height: $dock-height;
   box-sizing: border-box;
   justify-content: center;
   border-radius: $radius $radius 0 0;
@@ -49,11 +50,11 @@ $dock-height: 70px;
 
     // 设置倒影
     -webkit-box-reflect: below 2px -webkit-gradient(
-      linear, 
-      left top, 
-      left bottom, 
-      from(transparent), 
-      color-stop(0.7, transparent), 
+      linear,
+      left top,
+      left bottom,
+      from(transparent),
+      color-stop(0.7, transparent),
       to(rgba(255, 255, 255, .5))
     );
   }
@@ -70,7 +71,7 @@ $dock-height: 70px;
     bottom: $dock-height;
     background-color: #222;
   }
-  
+
   &:hover {
     .dock-icon {
       margin: 0 20px;
@@ -80,7 +81,7 @@ $dock-height: 70px;
     .dock-tooltip {
       color: #fff;
       display: block;
-    } 
+    }
   }
 }
 
