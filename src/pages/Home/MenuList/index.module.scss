@@ -1,18 +1,24 @@
+$height: 30px;                // 菜单栏高度
+$menu-trigger-height: 10px;   // 鼠标移动到顶部多少算触底
+
 .menu {
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
-  height: 30px;
   position: fixed;
+  transition: all 0.5s;
+  box-sizing: content-box;
 
-  backdrop-filter: blur(2px);
-  background: rgba($color: #fff, $alpha: 0.45);
-  box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.1);
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  .body {
+    display: flex;
+    height: $height;
+    align-items: center;
+    justify-content: flex-end;
+    backdrop-filter: blur(2px);
+    background: rgba($color: #fff, $alpha: 0.45);
+    box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.1);
+  }
 
   :global {
     .qyrc-icon {
@@ -27,5 +33,17 @@
         &:hover { color: #1890ff; }
       }
     }
+  }
+}
+
+// 开启自动隐藏: 鼠标移动到顶部才出来
+.menu.menu-auto-hiding {
+  opacity: 0;
+  top: -$height;
+  padding-bottom: $menu-trigger-height;
+
+  &:hover {
+    top: 0;
+    opacity: 1;
   }
 }

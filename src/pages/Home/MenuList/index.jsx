@@ -6,10 +6,12 @@ import User from './User';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss.menu}>
-    <Date/>
-    <Icon type="icon-wifi"/>
-    <Icon type="icon-dianliang"/>
-    <User/>
+  <div className={`${scss.menu} ${scss['menu-auto-hiding']}`}>
+    <div className={scss.body}>
+      <Date/>
+      <Icon type="icon-wifi"/>
+      <Icon type="icon-dianliang"/>
+      <User/>
+    </div>
   </div>
 );

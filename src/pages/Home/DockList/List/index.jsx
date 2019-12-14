@@ -17,7 +17,7 @@ export default props => {
   const state = useStateHook(props);
 
   return (
-    <div className={scss.dock}>
+    <div className={`${scss.dock} ${scss['dock-auto-hiding']}`}>
       <div className={scss['dock-body']}>
         {props.dataSource.map((v, index) => (
           <div
