@@ -10,7 +10,7 @@ export default () => {
 
   return useObserver(() => (
     <div className={scss.read}>
-      <Markdown>
+      <Markdown onTocParsed={store.article.setTocList}>
         {_.get(store, 'article.article.content')}
       </Markdown>
     </div>

@@ -1,0 +1,71 @@
+.wrapper {
+  display: flex;
+  max-height: 50%;
+  padding-bottom: 10px;
+  flex-direction: column;
+}
+
+.title {
+  color: #999;
+  display: flex;
+  line-height: 1;
+  padding: 16px 0;
+  font-size: 18px;
+  align-items: center;
+  :global {
+    .qyrc-icon {
+      color: #999;
+      font-size: 30px;
+      margin-left: 0px;
+    }
+  }
+}
+
+.scroll {
+  flex: 1;
+  padding: {
+    left: 8px;
+    right: 10px;
+  };
+}
+
+.toc {
+  $textIndent: 12px;
+
+  padding-left: $textIndent;
+  border-left: 1px solid rgb(221, 221, 221);
+
+  .level-0 {
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    // 圆点
+    &:after {
+      width: 8px;
+      content: '';
+      height: 8px;
+      z-index: 999;
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      background: #eb5055;
+      left: -($textIndent + 4);
+    }
+  }
+
+  @for $i from 0 through 6 {
+    .level-#{$i} {
+      padding-left: ($textIndent * $i);
+      color: rgba($color: #333, $alpha: 1 - (0.2 * $i));
+
+      > div {
+        cursor: pointer;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        &:hover { color: #eb5055; }
+      }
+    }
+  }
+}

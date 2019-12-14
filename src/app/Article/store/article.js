@@ -14,8 +14,15 @@ export default class Store {
   @observable list = [];             // 文章列表
   @observable tops = [];             // 热门
   @observable thumbs = [];           // 缩略图
-  @observable searchValue = void 0;  // 搜索词条
+  @observable tocList = [];          // 目录列表
   @observable article = null;        // 缩略图
+  @observable searchValue = void 0;  // 搜索词条
+
+  // 设置 tocList
+  @action
+  setTocList = ({ parseData } = {}) => {
+    this.tocList = parseData || [];
+  }
 
   // 阅读
   @action
@@ -23,16 +30,17 @@ export default class Store {
     this.article = { ... article };
   }
 
-  // 搜索
-  @action
-  search = value => {
-    this.searchValue = value;
-  }
-
   // 辍学: 取消阅读
   @action
   drop = () => {
     this.article = null;
+    this.setTocList();
+  }
+
+  // 搜索
+  @action
+  search = value => {
+    this.searchValue = value;
   }
 
   // 获取缩略图
