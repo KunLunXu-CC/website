@@ -21,8 +21,8 @@ const useStateHook = () => {
 
   useEffect(() => {
     resetData();
-    const cleard = setTimeout(resetData, 1000);
-    return clearImmediate.bind(null, cleard);
+    const cleard = setInterval(resetData, 1000);
+    return clearInterval.bind(null, cleard);
   }, [resetData]);
 
   return { data };
