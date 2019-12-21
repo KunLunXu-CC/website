@@ -3,8 +3,10 @@ import Footer from './Footer';
 import UserInfo from './UserInfo';
 import scss from './index.module.scss';
 
-export default () => (
-  <div className={scss.overlay}>
+export default props => (
+  <div
+    className={scss.overlay}
+    onMouseLeave={props.onVisibleChange.bind(null, false)}>
     <UserInfo/>
     <Footer/>
   </div>
