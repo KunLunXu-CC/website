@@ -11,12 +11,29 @@ export const getArticles = async ({
     data: {
       variables: { search, pagination, orderBy },
       query: `
-        query($search: ArticleSearch, $pagination: Pagination, $orderBy: OrderBy){
-          articles( search: $search, pagination: $pagination, orderBy: $orderBy ){
-            list { id name desc thumb content tags { id name } viewCount updateTime }
-            pagination
+        query(
+          $orderBy: OrderBy,
+          $search: ArticleSearch,
+          $pagination: Pagination,
+        ){
+          articles(
+            search: $search,
+            orderBy: $orderBy,
+            pagination: $pagination,
+          ){
+            list {
+              id
+              name
+              desc
+              thumb
+              content
+              viewCount
+              updateTime
+              tags { id name }
+            }
             rescode
             message
+            pagination
           }
         }`,
     },
@@ -24,7 +41,11 @@ export const getArticles = async ({
   return res.data.data.articles;
 };
 
-export const createArticles = async ({ body, search, pagination } = {}) => {
+export const createArticles = async ({
+  body,
+  search,
+  pagination,
+} = {}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
@@ -32,8 +53,8 @@ export const createArticles = async ({ body, search, pagination } = {}) => {
       variables: { body, search, pagination },
       query: `
         mutation(
-          $body: [AticleFields!]!,
           $search: ArticleSearch,
+          $body: [AticleFields!]!,
           $pagination: Pagination
         ){
           createArticles(
@@ -42,7 +63,15 @@ export const createArticles = async ({ body, search, pagination } = {}) => {
             pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
-            list { id name desc thumb content tags { id name } viewCount }
+            list {
+              id
+              name
+              desc
+              thumb
+              content
+              viewCount
+              tags { id name }
+            }
             pagination
             rescode
             message
@@ -53,7 +82,12 @@ export const createArticles = async ({ body, search, pagination } = {}) => {
   return res.data.data.createArticles;
 };
 
-export const updateArticles = async ({ conds, body, search, pagination } = {}) => {
+export const updateArticles = async ({
+  body,
+  conds,
+  search,
+  pagination,
+} = {}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
@@ -61,8 +95,8 @@ export const updateArticles = async ({ conds, body, search, pagination } = {}) =
       variables: { conds, body, search, pagination },
       query: `
         mutation(
-          $conds: ArticleSearch!,
           $body: AticleFields!,
+          $conds: ArticleSearch!,
           $search: ArticleSearch,
           $pagination: Pagination
         ){
@@ -73,7 +107,15 @@ export const updateArticles = async ({ conds, body, search, pagination } = {}) =
             pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
-            list { id name desc thumb content tags { id name } viewCount }
+            list {
+              id
+              name
+              desc
+              thumb
+              content
+              viewCount
+              tags { id name }
+            }
             pagination
             rescode
             message
@@ -84,7 +126,12 @@ export const updateArticles = async ({ conds, body, search, pagination } = {}) =
   return res.data.data.updateArticles;
 };
 
-export const removeArticles = async ({ conds, body, search, pagination } = {}) => {
+export const removeArticles = async ({
+  body,
+  conds,
+  search,
+  pagination,
+} = {}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
@@ -102,7 +149,15 @@ export const removeArticles = async ({ conds, body, search, pagination } = {}) =
             pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
-            list { id name desc thumb content tags { id name } viewCount }
+            list {
+              id
+              name
+              desc
+              thumb
+              content
+              viewCount
+              tags { id name }
+            }
             pagination
             rescode
             message

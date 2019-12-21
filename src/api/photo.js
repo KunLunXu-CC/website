@@ -1,19 +1,36 @@
 
 import axios from '@utils/request';
 
-export const getPhotos = async ({ pagination, search }) => {
+export const getPhotos = async ({
+  search,
+  pagination,
+}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { search, pagination },
       query: `
-        query($search: PhotoSearch, $pagination: Pagination){
-          photos( search: $search, pagination: $pagination, orderBy: { creationTime: -1 } ){
-            list { id name sourceFileName url type creationTime }
-            pagination
+        query(
+          $search: PhotoSearch,
+          $pagination: Pagination,
+        ){
+          photos(
+            search: $search,
+            pagination: $pagination,
+            orderBy: { creationTime: -1 },
+          ){
+            list {
+              id
+              url
+              name
+              type
+              creationTime
+              sourceFileName
+            }
             rescode
             message
+            pagination
           }
         }`,
     },
@@ -21,7 +38,11 @@ export const getPhotos = async ({ pagination, search }) => {
   return res.data.data.photos;
 };
 
-export const uploadPhotos = async ({ files, type, payload }) => {
+export const uploadPhotos = async ({
+  type,
+  files,
+  payload,
+}) => {
   const formData = new FormData();
   payload && formData.append('payload', payload);
   _.isFinite(type) && formData.append('type', type);
@@ -37,7 +58,11 @@ export const uploadPhotos = async ({ files, type, payload }) => {
   return res.data.data;
 };
 
-export const removePhotos = async ({ conds, search, pagination }) => {
+export const removePhotos = async ({
+  conds,
+  search,
+  pagination,
+}) => {
   const res = await axios({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
@@ -55,7 +80,14 @@ export const removePhotos = async ({ conds, search, pagination }) => {
             pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
-            list { id name sourceFileName url type creationTime }
+            list {
+              id
+              url
+              type
+              name
+              creationTime
+              sourceFileName
+            }
             pagination
             rescode
             message

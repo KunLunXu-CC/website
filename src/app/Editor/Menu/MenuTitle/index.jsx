@@ -2,6 +2,7 @@ import React, {
   useRef,
   useMemo,
   useEffect,
+  useCallback,
 } from 'react';
 import { Icon } from 'qyrc';
 import classNames from 'classnames';
@@ -10,56 +11,56 @@ import { Dropdown, Menu, Input } from 'antd';
 import { useStore } from '../../store';
 import scss from './index.module.scss';
 
+// 阻止事件冒泡
+const stopPropagation = e => {
+  e.stopPropagation();
+};
+
+// 创建文件夹
+const createFolder = (props, store) => {
+  if (props.data.type === 'tag') {
+    store.menu.onOpenChange(props.data.id);
+    store.tag.createFictitiousTag(props.data);
+  } else {
+    store.tag.createFictitiousTag(props.data.tags[0]);
+  }
+};
+
+// 编辑文件夹
+const editorFolder = (props, store) => {
+  store.tag.editorFolder(props.data);
+};
+
+// 删除文件夹
+const deleteFolder = (props, store) => {
+  store.tag.removeTags({ id: props.data.id });
+};
+
+// 创建文章
+const createArticle = (props, store) => {
+  if (props.data.type === 'tag') {
+    store.menu.onOpenChange(props.data.id);
+    store.article.createFictitiousArticle(props.data);
+  } else {
+    store.article.createFictitiousArticle(props.data.tags[0]);
+  }
+};
+
+// 编辑文章
+const editorArticle = (props, store) => {
+  store.article.editorArticle(props.data);
+};
+
+// 删除文章
+const deleteArticle = (props, store) => {
+  store.article.removeArticle({ id: props.data.id });
+};
+
 const useStateHook = (props, store) => {
   const editorInputRef = useRef(null);
 
-  // 阻止事件冒泡
-  const stopPropagation = e => {
-    e.stopPropagation();
-  };
-
-  // 创建文件夹
-  const createFolder = () => {
-    if (props.data.type === 'tag') {
-      store.menu.onOpenChange(props.data.id);
-      store.tag.createFictitiousTag(props.data);
-    } else {
-      store.tag.createFictitiousTag(props.data.tags[0]);
-    }
-  };
-
-  // 编辑文件夹
-  const editorFolder = () => {
-    store.tag.editorFolder(props.data);
-  };
-
-  // 删除文件夹
-  const deleteFolder = () => {
-    store.tag.removeTags({ id: props.data.id });
-  };
-
-  // 创建文章
-  const createArticle = () => {
-    if (props.data.type === 'tag') {
-      store.menu.onOpenChange(props.data.id);
-      store.article.createFictitiousArticle(props.data);
-    } else {
-      store.article.createFictitiousArticle(props.data.tags[0]);
-    }
-  };
-
-  // 编辑文章
-  const editorArticle = () => {
-    store.article.editorArticle(props.data);
-  };
-
-  // 删除文章
-  const deleteArticle = () => {
-    store.article.removeArticle({ id: props.data.id });
-  };
-
   // 点击操作菜单: 根据 key 分发到不同处理函数
-  const onClickOperationMenu = ({ key, domEvent }) => {
+  const onClickOperationMenu = useCallback(({ key, domEvent }) => {
     stopPropagation(domEvent);
     const handler = {
       createFolder,
@@ -69,8 +70,8 @@ const useStateHook = (props, store) => {
       editorArticle,
       deleteArticle,
     };
-    handler[key]();
-  };
+    handler[key](props, store);
+  }, [props, store]);
 
   // 编辑数据： 根据 id 判断是编辑还是创建，根据 type 值来判断操作对象
   const onEditor = e => {
@@ -101,17 +102,45 @@ const useStateHook = (props, store) => {
     return map[props.data.type];
   }, [props.data.type]);
 
+  // 下拉菜单
+  const menu = useMemo(() => {
+    const editKey = props.type === 'subMenu'
+      ? 'editorFolder'
+      : 'editorArticle';
+    const deleeKey = props.type === 'subMenu'
+      ? 'deleteFolder'
+      : 'deleteArticle';
+    const menuSetting = [
+      { title: '创建文件夹', key: 'createFolder', icon: 'icon-wenjianjia' },
+      { title: '创建文章', key: 'createArticle', icon: 'icon-24' },
+      { title: '编辑', key: editKey, icon: 'icon-baocun' },
+      { title: '删除', key: deleeKey, icon: 'icon-shanchu' },
+    ];
+    return (
+      <Menu
+        className={scss['operation-menu']}
+        onClick={onClickOperationMenu}>
+        {menuSetting.map(v => (
+          <Menu.Item key={v.key}>
+            <Icon type={v.icon}/>
+            {v.title}
+          </Menu.Item>
+        ))}
+      </Menu>
+    );
+  }, [props.type, onClickOperationMenu]);
+
   useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
   });
 
   return {
+    menu,
     menuIcon,
     onEditor,
     arrowClass,
     editorInputRef,
     stopPropagation,
-    onClickOperationMenu,
   };
 };
 
@@ -119,29 +148,6 @@ const useStateHook = (props, store) => {
 export default props => {
   const store = useStore();
   const state = useStateHook(props, store);
-
-  const menu = (
-    <Menu
-      className={scss['operation-menu']}
-      onClick={state.onClickOperationMenu}>
-      <Menu.Item key="createFolder">
-        <Icon type="icon-wenjianjia"/>
-        创建文件夹
-      </Menu.Item>
-      <Menu.Item key="createArticle">
-        <Icon type="icon-24"/>
-        创建文章
-      </Menu.Item>
-      <Menu.Item key={props.type === 'subMenu' ? 'editorFolder' : 'editorArticle'}>
-        <Icon type="icon-baocun"/>
-        编辑
-      </Menu.Item>
-      <Menu.Item key={props.type === 'subMenu' ? 'deleteFolder' : 'deleteArticle'}>
-        <Icon type="icon-shanchu" />
-        删除
-      </Menu.Item>
-    </Menu>
-  );
 
   return (
     <div className={scss['menu-title']}>
@@ -161,8 +167,8 @@ export default props => {
       {!props.data.editor ?
         <div className={scss['menu-title-more']}>
           <Dropdown
-            overlay={menu}
             trigger={['click']}
+            overlay={state.menu}
             placement="bottomRight"
             onClick={state.stopPropagation} >
             <Icon type="icon-gengduo" onClick={state.onMore}/>

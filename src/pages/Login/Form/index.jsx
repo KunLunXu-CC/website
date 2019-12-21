@@ -1,10 +1,10 @@
 import React, {
   useMemo,
 } from 'react';
-import { Image } from 'qyrc';
 import { useStore } from '@store';
+import { Image, Icon } from 'qyrc';
 import { withRouter } from 'react-router-dom';
-import { Input, Form, Button, Icon, message } from 'antd';
+import { Input, Form, Button, message } from 'antd';
 
 import scss from './index.module.scss';
 
@@ -52,7 +52,7 @@ export default Form.create()(withRouter(props => {
               <Input
                 size="large"
                 placeholder="请输入账号"
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
+                prefix={<Icon type="user"/>}/>
             )}
           </Form.Item>
           <Form.Item>
@@ -62,11 +62,17 @@ export default Form.create()(withRouter(props => {
               <Input.Password
                 size="large"
                 placeholder="请输入密码"
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}/>
+                prefix={<Icon type="lock"/>}/>
             )}
           </Form.Item>
           <Form.Item>
-            <Button size="large" type="primary" block onClick={state.onLogin}>登录</Button>
+            <Button
+              block
+              size="large"
+              type="primary"
+              onClick={state.onLogin}>
+              登录
+            </Button>
           </Form.Item>
         </Form>
       </div>

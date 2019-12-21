@@ -21,7 +21,10 @@ const useStateHook = (props, store) => {
           title={<MenuTitle data={item} type="subMenu"/>}>
           {item.children.length !== 0 ?
             item.children.map(v => (recursion(v, index + 1))) :
-            <Menu.Item className={scss['menu-item-empty']} key={`${item.id}-empty`} />
+            <Menu.Item
+              key={`${item.id}-empty`}
+              className={scss['menu-item-empty']}
+            />
           }
           <div
             className={scss['menu-dividing']}

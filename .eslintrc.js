@@ -34,7 +34,7 @@ module.exports = {
 
     // 个性化定制
     'indent': [1, 2],                                                 // 缩进: 2个空格
-    'max-len': [1, { 'code': 100 }],                                  // 单行不超过 100
+    'max-len': [1, { 'code': 80 }],                                   // 单行不超过 80
     'keyword-spacing': [1],                                           // 强制关键字周围空格的一致性
     'rest-spread-spacing': [1, 'always'],                             // 扩展运算符及其表达式之间要求有空格
     'comma-spacing': [1, { 'before': false, 'after': true }],         // 强制在逗号周围使用空格

@@ -40,7 +40,9 @@ export default class Message {
         const { type, ... config } = this.message;
         return { type, config };
       },
-      effect: ({ config, type }) => (notification[type] && notification[type](config)),
+      effect: ({ config, type }) => (
+        notification[type] && notification[type](config)
+      ),
     },
   };
 }

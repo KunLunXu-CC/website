@@ -17,6 +17,7 @@ export default () => useObserver(() => {
             isMin={isMin}
             onClose={store.app.close.bind(null, v)}
             onMin={store.app.minimize.bind(null, v)}
+            onMax={store.app.maximization.bind(null, v)}
             onMouseDown={store.app.toggle.bind(null, v)}
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
             {...modalProps}

@@ -10,8 +10,10 @@ const instance = axios.create({
 
 /**
  * 添加 axios 拦截器中间件 (记得方法中需要返回 config 或者 response 否则请求会被中止)
- * @param   {Array}  request     请求拦截器[请求成功处理函数 function(config)， 请求失败处理函数 function(error)]
- * @param   {Array}  response    响应拦截器[响应成功处理函数 function(response), 响应失败处理函数 function(error)]
+ * @param   {Array}  request     请求拦截器
+ *   格式： [请求成功处理函数 function(config)， 请求失败处理函数 function(error)]
+ * @param   {Array}  response    响应拦截器
+ *  格式： [响应成功处理函数 function(response), 响应失败处理函数 function(error)]
  * @return  {Object} { request: '移除请求拦截器 || null', response '移除响应拦截器 || null' }
  *
  * @example
