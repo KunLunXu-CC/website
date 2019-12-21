@@ -10,6 +10,7 @@ import { useObserver } from 'mobx-react-lite';
 import Date from './Date';
 import User from './User';
 import Github from './Github';
+import Juejin from './Juejin';
 import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
@@ -32,7 +33,8 @@ export default props => {
       <div className={state.menuClassName}>
         <div className={scss.body}>
           <Date/>
-          <Github />
+          <Github/>
+          <Juejin/>
           <Icon type="icon-wifi"/>
           <Icon type="icon-dianliang"/>
           <User/>

@@ -7,7 +7,6 @@ import scss from './index.module.scss';
 const useStateHook = props => {
   // 退出
   const signOut = () => {
-    console.log('退出');
     props.history.push('/login');
   };
 
