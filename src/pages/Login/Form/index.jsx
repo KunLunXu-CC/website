@@ -52,7 +52,7 @@ export default Form.create()(withRouter(props => {
               <Input
                 size="large"
                 placeholder="请输入账号"
-                prefix={<Icon type="user"/>}/>
+                prefix={<Icon type="icon-jenkins"/>}/>
             )}
           </Form.Item>
           <Form.Item>
@@ -62,7 +62,7 @@ export default Form.create()(withRouter(props => {
               <Input.Password
                 size="large"
                 placeholder="请输入密码"
-                prefix={<Icon type="lock"/>}/>
+                prefix={<Icon type="icon-suoping"/>}/>
             )}
           </Form.Item>
           <Form.Item>
