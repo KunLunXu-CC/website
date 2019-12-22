@@ -31,6 +31,7 @@ export default props => {
     <div className={scss.work}>
       {store.article.works.length > 0 ?
         <Tabs
+          type="card"
           onChange={state.onTabsChange}
           activeKey={store.menu.selected}>
           {store.article.works.map(v => (
