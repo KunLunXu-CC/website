@@ -10,5 +10,12 @@ export default () => (
     <Icon
       type="icon-genghuanfengmian"
       className={scss['icon-thumbnail']}/>
+    <Icon
+      type="icon-fabu"
+      className={scss['icon-release']}/>
+    {/* 下架图标 */}
+    {/* <Icon
+      type="icon-xiajia"
+      className={scss['icon-lower-shelf']}/> */}
   </div>
 );

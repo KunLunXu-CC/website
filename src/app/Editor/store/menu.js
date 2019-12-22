@@ -13,7 +13,12 @@ export default class Store {
   // 选择子项
   @action
   toggleSelected = key => {
-    this.selected = this.selected === key ? null : key;
+    if (this.selected === key){
+      const last = _.last(this.parent.article.openList) || { article: null };
+      this.selected = last.article;
+    } else {
+      this.selected = key;
+    }
   }
 
   // SubMenu 展开/关闭的回调

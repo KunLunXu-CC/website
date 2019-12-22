@@ -5,11 +5,13 @@
   padding-right: 10px;
   color: rgba($color: #fff, $alpha: 0.4);
 
-  .icon-preview {
+  .icon-preview,
+  .icon-lower-shelf {
     font-size: 20px;
   }
 
-  .icon-thumbnail {
+  .icon-thumbnail,
+  .icon-release {
     font-size: 22px;
   }
 
