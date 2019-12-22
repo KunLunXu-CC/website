@@ -1,0 +1,22 @@
+.extra {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  color: rgba($color: #fff, $alpha: 0.4);
+
+  .icon-preview {
+    font-size: 20px;
+  }
+
+  .icon-thumbnail {
+    font-size: 22px;
+  }
+
+  :global {
+    .qyrc-icon {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+}

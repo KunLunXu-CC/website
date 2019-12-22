@@ -1,12 +1,14 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import { Icon } from 'qyrc';
 import { Tabs } from 'antd';
-import classNames from 'classnames';
+import { useStore } from '../store';
 import { useObserver } from 'mobx-react-lite';
 
-import { useStore } from '../store';
-import scss from './index.module.scss';
 import Editor from './Editor';
+import TabBarExtra from './TabBarExtra';
+import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
   // 移除
@@ -33,7 +35,8 @@ export default props => {
         <Tabs
           type="card"
           onChange={state.onTabsChange}
-          activeKey={store.menu.selected}>
+          activeKey={store.menu.selected}
+          tabBarExtraContent={<TabBarExtra/>}>
           {store.article.works.map(v => (
             <Tabs.TabPane
               key={v.article.id}
