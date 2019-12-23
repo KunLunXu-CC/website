@@ -1,5 +1,5 @@
 import React from 'react';
-import { Markdown } from 'qyrc';
+import { Markdown, Scroll } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 
 import { useStore } from '../../store';
@@ -9,10 +9,13 @@ export default () => {
   const store = useStore();
 
   return useObserver(() => (
-    <div className={scss.read}>
+    <Scroll
+      className={scss.scroll}
+      onScroll={store.article.setScrollHeight}
+      scrollHeight={store.article.scrollHeight}>
       <Markdown onTocParsed={store.article.setTocList}>
-        {_.get(store, 'article.article.content')}
+        {_.get(store, 'article.article.content') || ''}
       </Markdown>
-    </div>
+    </Scroll>
   ));
 };

@@ -17,6 +17,13 @@ export default class Store {
   @observable tocList = [];          // 目录列表
   @observable article = null;        // 缩略图
   @observable searchValue = void 0;  // 搜索词条
+  @observable scrollHeight = 0;      // 滚动(卷起)高度
+
+  // 设置 scrollHeight
+  @action
+  setScrollHeight = scrollHeight => {
+    this.scrollHeight = scrollHeight;
+  }
 
   // 设置 tocList
   @action

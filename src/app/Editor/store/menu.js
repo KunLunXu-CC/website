@@ -13,7 +13,7 @@ export default class Store {
   // 选择子项
   @action
   toggleSelected = key => {
-    if (this.selected === key){
+    if (this.selected === key) {
       const last = _.last(this.parent.article.openList) || { article: null };
       this.selected = last.article;
     } else {
