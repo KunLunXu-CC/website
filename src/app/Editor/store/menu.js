@@ -10,10 +10,11 @@ export default class Store {
 
   @observable selected = null;  // 当前选中 key
 
-  // 选择子项
+  // 切换当前选中的菜单： 如果要选中的 key 不存在则选择最后一个
   @action
   toggleSelected = key => {
-    if (this.selected === key) {
+    const find = this.parent.article.openList.find(v => v.article === key);
+    if (!find) {
       const last = _.last(this.parent.article.openList) || { article: null };
       this.selected = last.article;
     } else {

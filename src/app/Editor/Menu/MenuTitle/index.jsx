@@ -53,6 +53,8 @@ const editorArticle = (props, store) => {
 
 // 删除文章
 const deleteArticle = (props, store) => {
+  store.article.close(props.data.id);
+  store.menu.toggleSelected(props.data.id);
   store.article.removeArticle({ id: props.data.id });
 };
 
