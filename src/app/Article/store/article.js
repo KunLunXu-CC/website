@@ -1,6 +1,6 @@
 import * as api from '@api';
 import { observable, action, reaction } from 'mobx';
-import { PHOTO_TYPE, TAG_ALL } from '@config/consts';
+import { PHOTO_TYPE, TAG_ALL, ARTICLE_STATUS } from '@config/consts';
 
 export default class Store {
   constructor (parent) {
@@ -8,6 +8,7 @@ export default class Store {
     this.getThumbs();
     this.getList();
     this.getTopList();
+    console.log('----------->>> ARTICLE_STATUS', ARTICLE_STATUS);
     _.forIn(this.reactionList, v => reaction(v.data, v.effect));
   }
 

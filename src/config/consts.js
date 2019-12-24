@@ -27,11 +27,18 @@ export const TAG_ICONS = {
   UBUNTU: { VALUE: '#icon-ubuntu', DESC: 'ubuntu' },
 };
 
-// [状态] 模型基本状态
+// [状态] 模型基本状态 (0: 禁用， 1： 启用， -11： 删除)
+export const STATUS = {
+  DISABLE: 0,     // 禁用
+  ENABLE: 1,      // 启用
+  DELETE: -11,    // 删除
+};
+
+// [状态] 文章状态： 基础状态 + 保存 + 发布
 export const ARTICLE_STATUS = {
-  SAVE: { VALUE: 6, DESC: '已保存' },
-  RELEASE: { VALUE: 9, DESC: '已发布' },
-  DELETE: { VALUE: -11, DESC: '已删除' },
+  ... STATUS,       // 基础状态
+  SAVE: 6,          // 保存(未发布)
+  RELEASE: 9,       // 发布(已发布)
 };
 
 // [状态]响应状态
@@ -43,7 +50,7 @@ export const RESCODE = {
 // 图片类型(使用场景)
 export const PHOTO_TYPE = {
   UNKNOWN: { VALUE: 0, DESC: '未知' },         // 未知
-  ARTICLE: { VALUE: 1, DESC: '文章' },         // 文章
+  ARTICLE: { VALUE: 1, DESC: '文章' },         // 文章(包括专用缩略图)
   DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
   THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
   AVATAR: { VALUE: 4, DESC: '头像' },           // 头像
