@@ -1,7 +1,7 @@
 import React from 'react';
 import { useObserver } from 'mobx-react-lite';
 
-import { Modal } from 'qyrc';
+import { Window } from 'qyrc';
 import { useStore } from '@store';
 import scss from './index.module.scss';
 
@@ -12,7 +12,7 @@ export default () => useObserver(() => {
       {store.app.list.map(v => {
         const { component: Component, isMin, key, modalProps } = v;
         return (
-          <Modal
+          <Window
             key={key}
             isMin={isMin}
             onClose={store.app.close.bind(null, v)}
@@ -23,7 +23,7 @@ export default () => useObserver(() => {
             {...modalProps}
           >
             <Component/>
-          </Modal>
+          </Window>
         );
       })}
     </div>
