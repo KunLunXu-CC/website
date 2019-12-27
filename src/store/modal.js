@@ -10,11 +10,13 @@ export default class Photos {
   @action
   open = ({ code, ... rest }) => {
     const find = this.list.find(v => v.code === code) || { code };
-    list.push({ ... find, ... rest });
+    this.list.push({ ... find, ... rest });
   }
 
   @action
-  close = (code) => {
-    this.list = this.list.filter(v => v.code !== code);
+  close = code => {
+    this.list = code
+      ? this.list.filter(v => v.code !== code)
+      : [];
   }
 }

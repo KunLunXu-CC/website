@@ -5,4 +5,12 @@
   bottom: 0;
   z-index: -1;
   position: fixed !important;
+
+  > :global(.qyrc-image-body) {
+    background: radial-gradient(
+      ellipse at bottom,
+      rgba($color: #1b2735, $alpha: 0.05) 0,
+      rgba($color: #090a0f, $alpha: 0.2) 100%,
+    );
+  }
 }

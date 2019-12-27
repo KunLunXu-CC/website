@@ -5,6 +5,7 @@ import StoreProvider from './store';
 import Side from './Side';
 import Menu from './Menu';
 import Work from './Work';
+import Modal from './Modal';
 import Header from './Header';
 
 import scss from './index.module.scss';
@@ -33,6 +34,7 @@ export default () => (
           </div>
         </div>
       </div>
+      <Modal/>
     </div>
   </StoreProvider>
 );
