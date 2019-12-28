@@ -167,3 +167,93 @@ export const removeArticles = async ({
   });
   return res.data.data.removeArticles;
 };
+
+// 发布
+export const releaseArticle = async ({
+  conds,
+  search,
+  pagination,
+  orderBy = { creationTime: -1 },
+} = {}) => {
+  const res = await axios({
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { search, conds, pagination, orderBy },
+      query: `
+        mutation(
+          $orderBy: OrderBy,
+          $search: ArticleSearch,
+          $conds: ArticleSearch!,
+          $pagination: Pagination,
+        ){
+          releaseArticle(
+            conds: $conds,
+            search: $search,
+            orderBy: $orderBy,
+            pagination: $pagination,
+          ){
+            list {
+              id
+              name
+              desc
+              thumb
+              content
+              viewCount
+              updateTime
+              tags { id name }
+            }
+            rescode
+            message
+            pagination
+          }
+        }`,
+    },
+  });
+  return res.data.data.releaseArticle;
+};
+
+// 撤销(取消发布)
+export const revokeArticle = async ({
+  conds,
+  search,
+  pagination,
+  orderBy = { creationTime: -1 },
+} = {}) => {
+  const res = await axios({
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { search, conds, pagination, orderBy },
+      query: `
+        mutation(
+          $orderBy: OrderBy,
+          $search: ArticleSearch,
+          $conds: ArticleSearch!,
+          $pagination: Pagination,
+        ){
+          revokeArticle(
+            conds: $conds,
+            search: $search,
+            orderBy: $orderBy,
+            pagination: $pagination,
+          ){
+            list {
+              id
+              name
+              desc
+              thumb
+              content
+              viewCount
+              updateTime
+              tags { id name }
+            }
+            rescode
+            message
+            pagination
+          }
+        }`,
+    },
+  });
+  return res.data.data.revokeArticle;
+};

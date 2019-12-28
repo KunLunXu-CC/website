@@ -11,12 +11,19 @@ export default class Store {
 
   @observable openList = []; // 开启列表: { article： id, change }
 
-  // 获取工作窗口数据
+  // 获取工作窗口数据: 所有文章
   @computed get works () {
     return this.openList.map(v => ({
       ... v,
       article: this.articles.find(article => article.id === v.article),
     }));
+  }
+
+  // 当前活动窗口(当前窗口打开的文章)
+  @computed get action () {
+    return this.works.find(
+      v => v.article.id === this.parent.menu.selected
+    );
   }
 
   /** *** 处理菜单 *****/
@@ -87,6 +94,16 @@ export default class Store {
   @action
   removeArticle = async ({ id }) => {
     const res = await api.removeArticles({
+      search: {},
+      conds: { id },
+    });
+    this.articles = res.list.map(v => ({ ... v, editor: false }));
+  }
+
+  // 发布 文章
+  @action
+  releaseArticle = async ({ id }) => {
+    const res = await api.releaseArticle({
       search: {},
       conds: { id },
     });

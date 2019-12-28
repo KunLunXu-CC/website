@@ -36,9 +36,9 @@ export const STATUS = {
 
 // [状态] 文章状态： 基础状态 + 保存 + 发布
 export const ARTICLE_STATUS = {
-  ... STATUS,       // 基础状态
-  SAVE: 6,          // 保存(未发布)
-  RELEASE: 9,       // 发布(已发布)
+  ... STATUS,        // 基础状态
+  SAVE: 10,          // 保存(未发布)
+  RELEASE: 11,       // 发布(已发布)
 };
 
 // [状态]响应状态

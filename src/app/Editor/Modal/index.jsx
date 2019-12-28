@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import ReleaseConfirm from './ReleaseConfirm';
 
 export default () => (
-  <div>
-
-  </div>
+  <Fragment>
+    <ReleaseConfirm />
+  </Fragment>
 );

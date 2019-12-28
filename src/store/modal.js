@@ -5,18 +5,21 @@ export default class Photos {
     this.parent = parent;
   }
 
-  @observable list = [];
+  @observable modals = {};
 
   @action
   open = ({ code, ... rest }) => {
-    const find = this.list.find(v => v.code === code) || { code };
-    this.list.push({ ... find, ... rest });
+    this.modals = { ... this.modals, [code]: rest };
   }
 
   @action
   close = code => {
-    this.list = code
-      ? this.list.filter(v => v.code !== code)
-      : [];
+    if (!code) {
+      this.modals = {};
+    } else if (this.modals[code]) {
+      const modals = { ... this.modals };
+      delete modals[code];
+      this.modals = modals;
+    }
   }
 }
