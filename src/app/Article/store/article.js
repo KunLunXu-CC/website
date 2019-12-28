@@ -8,7 +8,6 @@ export default class Store {
     this.getThumbs();
     this.getList();
     this.getTopList();
-    console.log('----------->>> ARTICLE_STATUS', ARTICLE_STATUS);
     _.forIn(this.reactionList, v => reaction(v.data, v.effect));
   }
 
@@ -78,6 +77,7 @@ export default class Store {
       await api.getArticles({
         orderBy: { viewCount: -1 },
         pagination: { curent: 1, pageSize: 10 },
+        search: { status: ARTICLE_STATUS.RELEASE },
       })
     ));
     this.tops = list;
@@ -94,7 +94,10 @@ export default class Store {
 
   // 获取查询条件
   getSearch = () => {
-    const search = { name: this.searchValue };
+    const search = {
+      name: this.searchValue,
+      status: ARTICLE_STATUS.RELEASE,
+    };
     (this.parent.menu.tag !== TAG_ALL.id) &&
     (search.tags = [this.parent.menu.tag]);
     return search;
