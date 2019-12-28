@@ -110,6 +110,16 @@ export default class Store {
     this.articles = res.list.map(v => ({ ... v, editor: false }));
   }
 
+  // 撤销(下架) 文章
+  @action
+  revokeArticle = async ({ id }) => {
+    const res = await api.revokeArticle({
+      search: {},
+      conds: { id },
+    });
+    this.articles = res.list.map(v => ({ ... v, editor: false }));
+  }
+
   // 创建虚拟 article (占位符)
   @action
   createFictitiousArticle = parent => {

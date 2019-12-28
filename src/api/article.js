@@ -26,6 +26,7 @@ export const getArticles = async ({
               name
               desc
               thumb
+              status
               content
               viewCount
               updateTime
@@ -68,6 +69,7 @@ export const createArticles = async ({
               name
               desc
               thumb
+              status
               content
               viewCount
               tags { id name }
@@ -112,6 +114,7 @@ export const updateArticles = async ({
               name
               desc
               thumb
+              status
               content
               viewCount
               tags { id name }
@@ -154,6 +157,7 @@ export const removeArticles = async ({
               name
               desc
               thumb
+              status
               content
               viewCount
               tags { id name }
@@ -198,6 +202,7 @@ export const releaseArticle = async ({
               name
               desc
               thumb
+              status
               content
               viewCount
               updateTime
@@ -243,6 +248,7 @@ export const revokeArticle = async ({
               name
               desc
               thumb
+              status
               content
               viewCount
               updateTime
