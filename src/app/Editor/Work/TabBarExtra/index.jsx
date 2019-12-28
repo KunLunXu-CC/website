@@ -5,7 +5,11 @@ import _ from 'lodash';
 import { Icon } from 'qyrc';
 import { useStore } from '../../store';
 import { ARTICLE_STATUS } from '@config/consts';
-import { RELEASE_CONFIRM, REVOKE_CONFIRM } from '../../Modal/consts';
+import {
+  THUMB_SETTING,
+  REVOKE_CONFIRM,
+  RELEASE_CONFIRM,
+} from '../../Modal/consts';
 import scss from './index.module.scss';
 
 const useStateHook = store => {
@@ -23,12 +27,19 @@ const useStateHook = store => {
     });
   };
 
+  // 缩略图配置
+  const thumbSetting = () => {
+    store.global.modal.open({
+      code: THUMB_SETTING,
+    });
+  };
+
   // 当前文章是否是未发布状态
   const unpublished = useMemo(() => (
     _.get(store.article.action, 'article.status') !== ARTICLE_STATUS.RELEASE
   ), [store.article.action]);
 
-  return { onRelease, unpublished, onRevoke };
+  return { onRelease, unpublished, onRevoke, thumbSetting };
 };
 
 export default () => {
@@ -38,10 +49,13 @@ export default () => {
     <div className={scss.extra}>
       <Icon
         type="icon-yulan"
-        className={scss['icon-preview']}/>
+        className={scss['icon-preview']}
+      />
       <Icon
         type="icon-genghuanfengmian"
-        className={scss['icon-thumbnail']}/>
+        onClick={state.thumbSetting}
+        className={scss['icon-thumbnail']}
+      />
       {state.unpublished ?
         <Icon
           type="icon-fabu"
