@@ -1,13 +1,14 @@
 import React from 'react';
-import { VariableBlock } from 'qyrc';
-import StoreProvider from './store';
-
 import Side from './Side';
 import Menu from './Menu';
 import Work from './Work';
 import Modal from './Modal';
+import Spin from './Spin';
+import Message from './Message';
 import Header from './Header';
+import StoreProvider from './store';
 
+import { VariableBlock } from 'qyrc';
 import scss from './index.module.scss';
 
 export default () => (
@@ -23,18 +24,14 @@ export default () => (
             style={{ height: '100%' }}
             constraintSize={{ width: 4 }}
             className={scss['editor-body-middle-menu']} >
-            <div className={scss['editor-body-middle-menu-body']}>
-              <Menu/>
-            </div>
+            <Menu/>
           </VariableBlock>
-          <div className={scss['editor-body-middle-work']}>
-            <div className={scss['editor-body-middle-work-body']}>
-              <Work/>
-            </div>
-          </div>
+          <div className={scss['editor-body-middle-work']}><Work/></div>
         </div>
       </div>
       <Modal/>
+      <Spin/>
+      <Message/>
     </div>
   </StoreProvider>
 );
