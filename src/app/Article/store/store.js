@@ -2,8 +2,6 @@ import { observable, autorun, toJS } from 'mobx';
 
 import Menu from './menu';
 import Article from './article';
-import Spin from '@store/common/spin';
-import Message from '@store/common/message';
 
 export default class Store {
   constructor (global) {
@@ -11,10 +9,8 @@ export default class Store {
     _.forIn(this.autorun, v => autorun(v));
   }
 
-  @observable spin = new Spin(this);
   @observable menu = new Menu(this);
   @observable article = new Article(this);
-  @observable message = new Message(this);
 
   // 自动运行函数列表
   autorun = {

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import Store from './store';
 
 const StoreContext = React.createContext(null);
@@ -12,12 +12,12 @@ export const useStore = () => {
   return store;
 };
 
+// 导入 store 可以在任意地方导入控制 store
+export const store = new Store();
+
 // 导出 context.Provider
-export default props => {
-  const store = useMemo(() => new Store(), []);
-  return (
-    <StoreContext.Provider value={store}>
-      {props.children}
-    </StoreContext.Provider>
-  );
-};
+export default props => (
+  <StoreContext.Provider value={store}>
+    {props.children}
+  </StoreContext.Provider>
+);

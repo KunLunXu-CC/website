@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { store } from '@store';
 import { log } from '@utils';
 
 // 创建 axios 实例
@@ -83,4 +84,14 @@ use({
   ],
 });
 
-export default instance;
+
+/**
+ * 导出方法:
+ * 1. 处理 spin
+ */
+export default async ({ spin, ... options }) => {
+  spin && store.spin.open(spin);
+  const res = await instance({ ... options });
+  spin && store.spin.close(spin);
+  return res;
+};

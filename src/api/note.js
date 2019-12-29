@@ -1,10 +1,12 @@
 import axios from '@utils/request';
 
 export const getNotes = async ({
+  spin,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

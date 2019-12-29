@@ -4,6 +4,7 @@ import App from './app';
 import User from './user';
 import Dock from './dock';
 import Modal from './modal';
+import Spin from './spin';
 import Avatar from './avatar';
 import Desktop from './desktop';
 
@@ -14,6 +15,7 @@ export default class Store {
 
   @observable app = new App(this);
   @observable user = new User(this);
+  @observable spin = new Spin(this);
   @observable dock = new Dock(this);
   @observable modal = new Modal(this);
   @observable avatar = new Avatar(this);
@@ -27,8 +29,8 @@ export default class Store {
       console.log('avatar: ', toJS(this.avatar));
       console.log('modal: ', toJS(this.modal));
       console.log('user: ', toJS(this.user));
-      console.log('dock: ', toJS(this.dock));
-      console.log('dock: ', toJS(this.dock));
+      console.log('spin: ', toJS(this.spin));
+      console.log('app: ', toJS(this.app));
       console.groupEnd();
     },
   }

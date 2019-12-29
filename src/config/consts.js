@@ -49,8 +49,8 @@ export const RESCODE = {
 
 // 图片类型(使用场景)
 export const PHOTO_TYPE = {
-  UNKNOWN: { VALUE: 0, DESC: '未知' },         // 未知
-  ARTICLE: { VALUE: 1, DESC: '文章' },         // 文章(包括专用缩略图)
+  UNKNOWN: { VALUE: 0, DESC: '未知' },          // 未知
+  ARTICLE: { VALUE: 1, DESC: '文章' },          // 文章(包括专用缩略图)
   DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
   THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
   AVATAR: { VALUE: 4, DESC: '头像' },           // 头像
@@ -61,4 +61,18 @@ export const TAG_ALL = {
   id: 'all',
   name: '全部',
   icon: 'icon-all',
+};
+
+// 加载中 code 列表
+export const SPIN_CODE = {
+  APP_ALBUM: 'APP_ALBUM',         // 相册
+  APP_ARTICLE: 'APP_ARTICLE',     // 文章
+  APP_EDITOR: 'APP_EDITOR',       // 编辑器
+};
+
+// 提示信息 code
+export const MESSAGE_CODE = {
+  APP_ALBUM: 'MESSAGE_CODE_APP_ALBUM',         // 相册
+  APP_ARTICLE: 'MESSAGE_CODE_APP_ARTICLE',     // 文章
+  APP_EDITOR: 'MESSAGE_CODE_APP_EDITOR',       // 编辑器
 };

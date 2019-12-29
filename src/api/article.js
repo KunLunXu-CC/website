@@ -1,11 +1,13 @@
 import axios from '@utils/request';
 
 export const getArticles = async ({
+  spin,
   search,
   pagination,
   orderBy = { creationTime: -1 },
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -43,11 +45,13 @@ export const getArticles = async ({
 };
 
 export const createArticles = async ({
+  spin,
   body,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -85,12 +89,14 @@ export const createArticles = async ({
 };
 
 export const updateArticles = async ({
+  spin,
   body,
   conds,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -130,12 +136,14 @@ export const updateArticles = async ({
 };
 
 export const removeArticles = async ({
+  spin,
   body,
   conds,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -174,12 +182,14 @@ export const removeArticles = async ({
 
 // 发布
 export const releaseArticle = async ({
+  spin,
   conds,
   search,
   pagination,
   orderBy = { creationTime: -1 },
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -220,12 +230,14 @@ export const releaseArticle = async ({
 
 // 撤销(取消发布)
 export const revokeArticle = async ({
+  spin,
   conds,
   search,
   pagination,
   orderBy = { creationTime: -1 },
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

@@ -1,10 +1,12 @@
 import axios from '@utils/request';
 
 export const getTags = async ({
+  spin,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -39,11 +41,13 @@ export const getTags = async ({
 };
 
 export const createTags = async ({
+  spin,
   body,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -80,12 +84,14 @@ export const createTags = async ({
 };
 
 export const updateTags = async ({
+  spin,
   body,
   conds,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -124,12 +130,14 @@ export const updateTags = async ({
 };
 
 export const removeTags = async ({
+  spin,
   body,
   conds,
   search,
   pagination,
 } = {}) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

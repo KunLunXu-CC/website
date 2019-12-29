@@ -2,10 +2,12 @@
 import axios from '@utils/request';
 
 export const getPhotos = async ({
+  spin,
   search,
   pagination,
 }) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -39,6 +41,7 @@ export const getPhotos = async ({
 };
 
 export const uploadPhotos = async ({
+  spin,
   type,
   files,
   payload,
@@ -49,6 +52,7 @@ export const uploadPhotos = async ({
   files.forEach(v => (formData.append('file', v)));
 
   const res = await axios({
+    spin,
     data: formData,
     method: 'post',
     url: '/photo/upload',
@@ -59,11 +63,13 @@ export const uploadPhotos = async ({
 };
 
 export const removePhotos = async ({
+  spin,
   conds,
   search,
   pagination,
 }) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

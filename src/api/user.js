@@ -2,10 +2,12 @@ import axios from '@utils/request';
 import { rsa } from '@utils';
 
 export const login = async ({
+  spin,
   account,
   password,
 }) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

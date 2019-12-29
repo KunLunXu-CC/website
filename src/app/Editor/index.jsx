@@ -4,11 +4,12 @@ import Menu from './Menu';
 import Work from './Work';
 import Modal from './Modal';
 import Spin from './Spin';
-import Message from './Message';
 import Header from './Header';
 import StoreProvider from './store';
 
+import { MESSAGE_CODE } from '@config/consts';
 import { VariableBlock } from 'qyrc';
+
 import scss from './index.module.scss';
 
 export default () => (
@@ -29,9 +30,9 @@ export default () => (
           <div className={scss['editor-body-middle-work']}><Work/></div>
         </div>
       </div>
+      <div id={MESSAGE_CODE.APP_EDITOR}/>
       <Modal/>
       <Spin/>
-      <Message/>
     </div>
   </StoreProvider>
 );

@@ -1,6 +1,7 @@
 
+import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
 import { observable, action, reaction } from 'mobx';
-// import { PHOTO_TYPE } from '@config/consts';
+import { message } from '@utils';
 import * as api from '@api';
 
 export default class Photos {
@@ -24,9 +25,10 @@ export default class Photos {
   // 设置(查询)列表
   @action
   setList = async (search = this.getSearch()) => {
-    const { list } = await this.parent.spin.runTask(async () => (
-      await api.getPhotos({ search })
-    ));
+    const { list } = await api.getPhotos({
+      search,
+      spin: SPIN_CODE.APP_ALBUM,
+    });
     this.list = list;
   }
 
@@ -34,14 +36,13 @@ export default class Photos {
   @action
   removePhotos = async ({ id }) => {
     // 1. 删除图片
-    const res = await this.parent.spin.runTask(async () => (
-      await api.removePhotos({
-        conds: { id },
-        search: this.getSearch(),
-      })
-    ));
-    this.parent.message.setMessage({
-      type: 'success',
+    const res = await api.removePhotos({
+      conds: { id },
+      search: this.getSearch(),
+      spin: SPIN_CODE.APP_ALBUM,
+    });
+    message({
+      code: MESSAGE_CODE.APP_ALBUM,
       message: '文件删除成功!',
     });
     this.list = res.list;

@@ -1,6 +1,5 @@
-import { message } from 'antd';
+import { notification } from 'antd';
 import JSEncrypt from 'jsencrypt';
-import * as CONTS from '@config/consts';
 
 /**
  * 根据需要过滤的列表过滤指定对象
@@ -13,20 +12,6 @@ export const filterObject = (obj, filterVaslue = []) => {
     !filterVaslue.includes(value) && (filter[key] = value);
   });
   return filter;
-};
-
-/**
- * 请求错误信息处理函数
- * @param {Number} rescode   响应代码
- * @param {String} message   响应信息
- */
-export const handleMessage = ({ rescode, message: info }) => {
-  const map = {
-    [CONTS.RESCODE.FAIL.VALUE]: message.error,
-    [CONTS.RESCODE.SUCCESS.VALUE]: message.success,
-  };
-  const handler = map[rescode];
-  handler && handler(info);
 };
 
 /**
@@ -70,3 +55,23 @@ export const formatNum = num => [... `${num}`].reverse()
   .reduce((res, current, index) => (
     `${current}${index !== 0 && index % 3 === 0 ? ',' : ''}${res}`, '')
   );
+
+/**
+ * 提示
+ * @param {String} code 提示信息唯一值
+ * @param {String} type 提示信息类别, 参考 antd 文档
+ * @param {Object} options 参考 antd notification 组件参数
+ */
+export const message = ({
+  code,
+  type = 'success',
+  ... options
+}) => {
+  if (!code) {
+    return false;
+  }
+  notification[type]({
+    ... options,
+    getContainer: () => (document.getElementById(code)),
+  });
+};

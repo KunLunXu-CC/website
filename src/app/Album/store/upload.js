@@ -1,5 +1,6 @@
+import { message } from '@utils';
 import { observable, action, toJS } from 'mobx';
-import { PHOTO_TYPE } from '@config/consts';
+import { PHOTO_TYPE, SPIN_CODE, MESSAGE_CODE } from '@config/consts';
 import * as api from '@api';
 
 export default class Upload {
@@ -54,24 +55,24 @@ export default class Upload {
   upload = async () => {
     // 非空校验
     if (this.fileList.length === 0) {
-      this.parent.message.setMessage({
+      message({
         type: 'error',
+        code: MESSAGE_CODE.APP_ALBUM,
         message: '上传文件列表不能为空!',
       });
       return false;
     }
 
     // 上传文件
-    const res = await this.parent.spin.runTask(async () => (
-      await api.uploadPhotos({
-        type: this.type,
-        files: toJS(this.fileList),
-      })
-    ));
-
-    this.parent.message.setMessage({
-      type: 'success',
+    const res = await api.uploadPhotos({
+      type: this.type,
+      spin: SPIN_CODE.APP_ALBUM,
+      files: toJS(this.fileList),
+    });
+    message({
+      type: 'error',
       message: '文件上传成功!',
+      code: MESSAGE_CODE.APP_ALBUM,
     });
     this.show = false;
     this.clearFiles();

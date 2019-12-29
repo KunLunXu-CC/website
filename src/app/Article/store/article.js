@@ -1,6 +1,11 @@
 import * as api from '@api';
 import { observable, action, reaction } from 'mobx';
-import { PHOTO_TYPE, TAG_ALL, ARTICLE_STATUS } from '@config/consts';
+import {
+  TAG_ALL,
+  SPIN_CODE,
+  PHOTO_TYPE,
+  ARTICLE_STATUS,
+} from '@config/consts';
 
 export default class Store {
   constructor (parent) {
@@ -64,31 +69,32 @@ export default class Store {
   // 获取列表
   @action
   getList = async (search = this.getSearch()) => {
-    const { list } = await this.parent.spin.runTask(async () => (
-      await api.getArticles({ search })
-    ));
+    const { list } = await api.getArticles({
+      search,
+      spin: SPIN_CODE.APP_ARTICLE,
+    });
     this.list = list;
   }
 
   // 获取 TOP 列表
   @action
   getTopList = async () => {
-    const { list } = await this.parent.spin.runTask(async () => (
-      await api.getArticles({
-        orderBy: { viewCount: -1 },
-        pagination: { curent: 1, pageSize: 10 },
-        search: { status: ARTICLE_STATUS.RELEASE },
-      })
-    ));
+    const { list } = await api.getArticles({
+      orderBy: { viewCount: -1 },
+      spin: SPIN_CODE.APP_ARTICLE,
+      pagination: { curent: 1, pageSize: 10 },
+      search: { status: ARTICLE_STATUS.RELEASE },
+    });
     this.tops = list;
   }
 
   // 获取列表
   @action
   getList = async (search = this.getSearch()) => {
-    const { list } = await this.parent.spin.runTask(async () => (
-      await api.getArticles({ search })
-    ));
+    const { list } = await api.getArticles({
+      search,
+      spin: SPIN_CODE.APP_ARTICLE,
+    });
     this.list = list;
   }
 
