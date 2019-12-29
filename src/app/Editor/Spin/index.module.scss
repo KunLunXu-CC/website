@@ -9,4 +9,10 @@
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.01);
+
+  :global {
+    .ant-spin-dot-item {
+      background-color: rgba($color: #fff, $alpha: 0.6);
+    }
+  }
 }

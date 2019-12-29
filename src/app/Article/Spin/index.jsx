@@ -10,7 +10,7 @@ export default () => {
   const store = useStore();
   return useObserver(() => (
     store.global.spin.spinning[SPIN_CODE.APP_ARTICLE]
-      ? <Spin className={scss.spin}/>
+      ? <Spin className={scss.spin} size="large"/>
       : null
   ));
 };

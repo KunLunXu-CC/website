@@ -70,7 +70,6 @@ export default class Upload {
       files: toJS(this.fileList),
     });
     message({
-      type: 'error',
       message: '文件上传成功!',
       code: MESSAGE_CODE.APP_ALBUM,
     });

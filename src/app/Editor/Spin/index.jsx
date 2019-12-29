@@ -9,8 +9,8 @@ import scss from './index.module.scss';
 export default () => {
   const store = useStore();
   return useObserver(() => (
-    store.global.spin.spinning[SPIN_CODE.APP_ALBUM]
-      ? <Spin className={scss.spin}/>
+    store.global.spin.spinning[SPIN_CODE.APP_EDITOR]
+      ? <Spin className={scss.spin} size="large"/>
       : null
   ));
 };

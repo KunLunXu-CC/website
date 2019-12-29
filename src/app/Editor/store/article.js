@@ -1,5 +1,6 @@
 import { observable, action, computed } from 'mobx';
-import { PHOTO_TYPE } from '@config/consts';
+import { PHOTO_TYPE, SPIN_CODE, MESSAGE_CODE } from '@config/consts';
+import { message } from '@utils';
 import * as api from '@api';
 
 export default class Store {
@@ -150,6 +151,7 @@ export default class Store {
       files: [file],
       payload: article,
       type: PHOTO_TYPE.ARTICLE.VALUE,
+      spin: SPIN_CODE.APP_EDITOR,
     });
     return _.get(res, '[0].url', '');
   }
@@ -158,5 +160,10 @@ export default class Store {
   uploadThumb = async ({ file, article }) => {
     const thumb =  await this.uploadPhone({ file, article });
     await this.updateArticle({ body: { thumb }, id: article });
+    message({
+      message: '缩略图设置成功!',
+      placement: 'bottomRight',
+      code: MESSAGE_CODE.APP_EDITOR,
+    });
   }
 }
