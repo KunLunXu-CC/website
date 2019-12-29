@@ -153,4 +153,10 @@ export default class Store {
     });
     return _.get(res, '[0].url', '');
   }
+
+  // 上传缩略图
+  uploadThumb = async ({ file, article }) => {
+    const thumb =  await this.uploadPhone({ file, article });
+    await this.updateArticle({ body: { thumb }, id: article });
+  }
 }

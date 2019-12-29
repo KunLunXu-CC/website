@@ -5,7 +5,7 @@ import { useObserver } from 'mobx-react-lite';
 import scss from './index.module.scss';
 import { useStore } from '../../../../store';
 
-const useStateHooks = (props, store) => {
+const useStateHook = (props, store) => {
   // 添加文件
   const addFiles = e => {
     const { files } = e.target;
@@ -17,7 +17,7 @@ const useStateHooks = (props, store) => {
 
 export default props => {
   const store = useStore();
-  const state = useStateHooks(props, store);
+  const state = useStateHook(props, store);
 
   return useObserver(() => (
     <div className={scss['upload-list']}>

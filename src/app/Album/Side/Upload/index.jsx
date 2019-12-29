@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import scss from './index.module.scss';
 import { useStore } from '../../store';
 
-const useStateHooks = (props, store) => {
+const useStateHook = (props, store) => {
   const onClick = () => {
     store.upload.open();
   };
@@ -12,7 +12,7 @@ const useStateHooks = (props, store) => {
 
 export default props => {
   const store = useStore();
-  const state = useStateHooks(props, store);
+  const state = useStateHook(props, store);
 
   return (
     <div className={scss.upload}>
