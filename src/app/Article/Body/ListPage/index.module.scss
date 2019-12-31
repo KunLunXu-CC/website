@@ -1,4 +1,10 @@
 .scroll {
   flex: 1;
   padding: 10px;
+
+  :global {
+    .ant-empty {
+      padding-top: 200px;
+    }
+  }
 }
