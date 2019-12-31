@@ -1,8 +1,11 @@
-import React, { useMemo } from 'react';
+import React, {
+  useMemo,
+} from 'react';
+import scss from './index.module.scss';
+
 import { Select } from 'antd';
 import { PHOTO_TYPE } from '@config/consts';
 import { useStore } from '../../../../store';
-import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
   // select option 数据

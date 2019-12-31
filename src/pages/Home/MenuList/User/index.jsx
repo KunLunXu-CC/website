@@ -3,11 +3,11 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import { Icon } from 'qyrc';
-import { Dropdown } from 'antd';
-
 import Overlay from './Overlay';
 import scss from './index.module.scss';
+
+import { Icon } from 'qyrc';
+import { Dropdown } from 'antd';
 
 const useStateHook = () => {
   const [visible, setVisible] = useState(false);

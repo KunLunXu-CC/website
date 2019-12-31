@@ -1,6 +1,5 @@
-import React from 'react';
-
 import Toc from './Toc';
+import React from 'react';
 import Popular from './Popular';
 import scss from './index.module.scss';
 

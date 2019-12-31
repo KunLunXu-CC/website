@@ -2,10 +2,10 @@ import React from 'react';
 import ListPage from './ListPage';
 import ReadPage from './ReadPage';
 import SearchBar from './SearchBar';
-import { useObserver } from 'mobx-react-lite';
+import scss from './index.module.scss';
 
 import { useStore } from '../store';
-import scss from './index.module.scss';
+import { useObserver } from 'mobx-react-lite';
 
 export default () => {
   const store = useStore();

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Icon, Scroll } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
-import { useStore } from '../../store';
 import scss from './index.module.scss';
+
+import { Icon, Scroll } from 'qyrc';
+import { useStore } from '../../store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = store => {
   const onClick = item => {

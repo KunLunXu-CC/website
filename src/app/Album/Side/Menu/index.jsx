@@ -1,12 +1,13 @@
 import React, {
   useEffect,
 } from 'react';
+import scss from './index.module.scss';
+
 import { Menu } from 'antd';
 import { Icon } from 'qyrc';
 import { useObserver } from 'mobx-react-lite';
 import { PHOTO_TYPE } from '@config/consts';
 import { useStore } from '../../store';
-import scss from './index.module.scss';
 
 const DEFAULT_TYPE = 'all';
 

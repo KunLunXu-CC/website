@@ -1,11 +1,11 @@
 import React from 'react';
-import { Drawer } from 'antd';
-import { useObserver } from 'mobx-react-lite';
-
-import { useStore } from '../../store';
-import scss from './index.module.scss';
-import Footer from './Footer';
 import Form from './Form';
+import Footer from './Footer';
+import scss from './index.module.scss';
+
+import { Drawer } from 'antd';
+import { useStore } from '../../store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   const onClose = () => {

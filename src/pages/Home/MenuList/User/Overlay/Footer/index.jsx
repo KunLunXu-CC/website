@@ -1,8 +1,8 @@
 import React from 'react';
+import scss from './index.module.scss';
+
 import { Icon } from 'qyrc';
 import { withRouter } from 'react-router-dom';
-
-import scss from './index.module.scss';
 
 const useStateHook = props => {
   // 退出

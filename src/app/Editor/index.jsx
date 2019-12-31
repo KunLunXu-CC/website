@@ -6,11 +6,10 @@ import Modal from './Modal';
 import Spin from './Spin';
 import Header from './Header';
 import StoreProvider from './store';
-
-import { MESSAGE_CODE } from '@config/consts';
-import { VariableBlock } from 'qyrc';
-
 import scss from './index.module.scss';
+
+import { VariableBlock } from 'qyrc';
+import { MESSAGE_CODE } from '@config/consts';
 
 export default () => (
   <StoreProvider>

@@ -1,17 +1,16 @@
 import React, {
   useMemo,
 } from 'react';
-import classNames from 'classnames';
-
-import { Icon } from 'qyrc';
-import { useStore } from '@store';
-import { useObserver } from 'mobx-react-lite';
-
 import Date from './Date';
 import User from './User';
 import Github from './Github';
 import Juejin from './Juejin';
+import classNames from 'classnames';
 import scss from './index.module.scss';
+
+import { Icon } from 'qyrc';
+import { useStore } from '@store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   const menuClassName = useMemo(() => {

@@ -2,12 +2,13 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import scss from './index.module.scss';
+
 import { Icon, Image } from 'qyrc';
 import { Modal } from 'antd';
 import { useStore } from '../../store';
 import { THUMB_SETTING } from '../consts';
 import { useObserver } from 'mobx-react-lite';
-import scss from './index.module.scss';
 
 const useStateHook = store => {
   const [file, setFile] = useState(null);

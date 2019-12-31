@@ -1,9 +1,9 @@
 import React from 'react';
-import { Icon, Image } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
-
 import scss from './index.module.scss';
+
+import { Icon, Image } from 'qyrc';
 import { useStore } from '../../../../store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   // 添加文件

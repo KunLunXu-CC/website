@@ -1,4 +1,6 @@
-import React, { useMemo } from 'react';
+import React, {
+  useMemo,
+} from 'react';
 import scss from './index.module.scss';
 
 const useStateHook = () => {

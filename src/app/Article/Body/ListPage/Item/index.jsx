@@ -2,13 +2,13 @@ import React, {
   useMemo,
 } from 'react';
 import moment from 'moment';
-import { Image, Icon } from 'qyrc';
 import classNames from 'classnames';
-import { useObserver } from 'mobx-react-lite';
-
-import { formatNum } from '@utils';
 import scss from './index.module.scss';
+
+import { Image, Icon } from 'qyrc';
+import { formatNum } from '@utils';
 import { useStore } from '../../../store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   // 点击

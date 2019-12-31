@@ -1,13 +1,13 @@
 import React, {
   useEffect,
 } from 'react';
+import MenuTitle from './MenuTitle';
+import scss from './index.module.scss';
+
 import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
-
-import MenuTitle from './MenuTitle';
 import { useStore } from '../store';
-import scss from './index.module.scss';
+import { useObserver } from 'mobx-react-lite';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
 

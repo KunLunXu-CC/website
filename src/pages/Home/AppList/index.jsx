@@ -1,8 +1,9 @@
 import React from 'react';
-import { useObserver } from 'mobx-react-lite';
+import scss from './index.module.scss';
+
 import { Window } from 'qyrc';
 import { useStore } from '@store';
-import scss from './index.module.scss';
+import { useObserver } from 'mobx-react-lite';
 
 export default () => useObserver(() => {
   const store = useStore();

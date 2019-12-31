@@ -2,6 +2,8 @@ import React, {
   useMemo,
 } from 'react';
 import _ from 'lodash';
+import scss from './index.module.scss';
+
 import { Icon } from 'qyrc';
 import { useStore } from '../../store';
 import { ARTICLE_STATUS } from '@config/consts';
@@ -10,7 +12,6 @@ import {
   REVOKE_CONFIRM,
   RELEASE_CONFIRM,
 } from '../../Modal/consts';
-import scss from './index.module.scss';
 
 const useStateHook = store => {
   // 发布

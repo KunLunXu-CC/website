@@ -1,14 +1,13 @@
 import React, {
   useMemo,
 } from 'react';
-import { Image } from 'qyrc';
-
 import Error from './Error';
 import Loading from './Loading';
-
-import { useObserver } from 'mobx-react-lite';
-import { useStore } from '@store';
 import scss from './index.module.scss';
+
+import { Image } from 'qyrc';
+import { useStore } from '@store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = store => {
   const bg = useMemo(() => {

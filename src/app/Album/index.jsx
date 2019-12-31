@@ -3,10 +3,9 @@ import Body from './Body';
 import Side from './Side';
 import Spin from './Spin';
 import StoreProvider from './store';
+import scss from './index.module.scss';
 
 import { MESSAGE_CODE } from '@config/consts';
-
-import scss from './index.module.scss';
 
 export default () => (
   <StoreProvider>

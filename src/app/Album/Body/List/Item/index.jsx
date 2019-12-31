@@ -1,11 +1,11 @@
 import React, {
   useMemo,
 } from 'react';
-
 import moment from 'moment';
+import scss from './index.module.scss';
+
 import { Image, Icon } from 'qyrc';
 import { PHOTO_TYPE } from '@config/consts';
-import scss from './index.module.scss';
 
 const useStateHook = props => {
   // 计算描述信息

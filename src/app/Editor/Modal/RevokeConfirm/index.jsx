@@ -2,11 +2,12 @@ import React, {
   useMemo,
 } from 'react';
 import _ from 'lodash';
+import scss from './index.module.scss';
+
 import { Modal } from 'antd';
 import { useStore } from '../../store';
 import { REVOKE_CONFIRM } from '../consts';
 import { useObserver } from 'mobx-react-lite';
-import scss from './index.module.scss';
 
 const useStateHook = store => {
   const modal = useMemo(() => (

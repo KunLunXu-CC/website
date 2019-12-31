@@ -1,6 +1,7 @@
 import React from 'react';
-import { Icon } from 'qyrc';
 import scss from './index.module.scss';
+
+import { Icon } from 'qyrc';
 
 export default () => (
   <div className={scss.empty}>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Markdown, Scroll } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
+import scss from './index.module.scss';
 
 import { useStore } from '../../store';
-import scss from './index.module.scss';
+import { Markdown, Scroll } from 'qyrc';
+import { useObserver } from 'mobx-react-lite';
 
 export default () => {
   const store = useStore();

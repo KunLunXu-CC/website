@@ -1,11 +1,11 @@
 import React, {
   useMemo,
 } from 'react';
-import { Image } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
-
-import { useStore } from '@store';
 import scss from './index.module.scss';
+
+import { Image } from 'qyrc';
+import { useStore } from '@store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   // 随机头像

@@ -4,9 +4,10 @@ import React, {
   useEffect,
 } from 'react';
 import codeMirror from 'codemirror';
+import scss from './index.module.scss';
 
 import { useStore } from '../../store';
-import scss from './index.module.scss';
+
 import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
 import './theme';                                 // 引入 codemirror 主题(样式)
 

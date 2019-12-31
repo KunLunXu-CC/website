@@ -1,12 +1,12 @@
 import React, {
   useEffect,
 } from 'react';
+import scss from './index.module.scss';
+
 import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
-
 import { useStore } from '../store';
-import scss from './index.module.scss';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   // 点击菜单

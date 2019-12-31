@@ -22,7 +22,9 @@ export default () => {
         )) :
         <Empty/>
       }
-      <NoMore/>
+      {store.article.list.length > 0 ?
+        <NoMore/> : null
+      }
     </Scroll>
   ));
 };

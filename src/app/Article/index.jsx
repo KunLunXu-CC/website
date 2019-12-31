@@ -4,15 +4,24 @@ import Side from './Side';
 import Menu from './Menu';
 import Spin from './Spin';
 import StoreProvider from './store';
+import scss from './index.module.scss';
 
+import { VariableBlock } from 'qyrc';
 import { MESSAGE_CODE } from '@config/consts';
 
-import scss from './index.module.scss';
 
 export default () => (
   <StoreProvider>
     <div className={scss.layout}>
-      <div className={scss['layout-menu']}><Menu/></div>
+      <VariableBlock
+        margin={{ right: '80%' }}
+        operationList={['right']}
+        style={{ height: '100%' }}
+        defaultParams={{ width: 120 }}
+        constraintSize={{ width: 70 }}
+        className={scss['layout-menu']}>
+        <Menu/>
+      </VariableBlock>
       <div className={scss['layout-body']}><Body/></div>
       <div className={scss['layout-side']}><Side/></div>
       <div id={MESSAGE_CODE.APP_ARTICLE}/>

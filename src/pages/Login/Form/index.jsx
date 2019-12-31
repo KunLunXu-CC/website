@@ -1,12 +1,12 @@
 import React, {
   useMemo,
 } from 'react';
+import scss from './index.module.scss';
+
 import { useStore } from '@store';
 import { Image, Icon } from 'qyrc';
 import { withRouter } from 'react-router-dom';
 import { Input, Form, Button, message } from 'antd';
-
-import scss from './index.module.scss';
 
 const useStateHook = (props, store) => {
   // 随机头像

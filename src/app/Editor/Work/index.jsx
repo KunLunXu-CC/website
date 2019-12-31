@@ -1,14 +1,13 @@
-import React from 'react';
-
-import { Tabs } from 'antd';
-import { useStore } from '../store';
-import { useObserver } from 'mobx-react-lite';
-
 import Tab from './Tab';
+import React from 'react';
 import Empty from './Empty';
 import Editor from './Editor';
 import TabBarExtra from './TabBarExtra';
 import scss from './index.module.scss';
+
+import { Tabs } from 'antd';
+import { useStore } from '../store';
+import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   // 移除

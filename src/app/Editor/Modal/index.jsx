@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import ReleaseConfirm from './ReleaseConfirm';
-import RevokeConfirm from './RevokeConfirm';
 import ThumbSetting from './ThumbSetting';
+import RevokeConfirm from './RevokeConfirm';
+import ReleaseConfirm from './ReleaseConfirm';
 
 export default () => (
   <Fragment>

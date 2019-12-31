@@ -1,9 +1,7 @@
 import React from 'react';
-
 import Menu from './Menu';
 import Upload from './Upload';
 import Progress from './Progress';
-
 import scss from './index.module.scss';
 
 export default () => (
