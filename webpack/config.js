@@ -20,7 +20,7 @@ module.exports.alias = {
 
 /* 全局变量 */
 module.exports.globalConsts = {
-  // 生产
+  // 生产环境配置
   production: {
     _DEV_: false,
     PUBLICKEY: JSON.stringify(`-----BEGIN PUBLIC KEY-----
@@ -38,7 +38,7 @@ module.exports.globalConsts = {
     },
   },
 
-  // 开发
+  // 开发环境配置
   development: {
     _DEV_: true,
     PUBLICKEY: JSON.stringify(`-----BEGIN PUBLIC KEY-----
