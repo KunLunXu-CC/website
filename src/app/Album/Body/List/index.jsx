@@ -2,6 +2,7 @@ import React from 'react';
 import Item from './Item';
 import scss from './index.module.scss';
 
+import { Empty } from 'antd';
 import { Scroll } from 'qyrc';
 import { useStore } from '../../store';
 import { useObserver } from 'mobx-react-lite';
@@ -22,13 +23,16 @@ export default () => {
   return useObserver(() => (
     <Scroll>
       <div className={scss.list}>
-        {store.photos.list.map(v => (
-          <Item
-            data={v}
-            key={v.id}
-            onDelete={state.onDelete}
-          />
-        ))}
+        {store.photos.list.length > 0 ?
+          store.photos.list.map(v => (
+            <Item
+              data={v}
+              key={v.id}
+              onDelete={state.onDelete}
+            />
+          )) :
+          <Empty />
+        }
       </div>
     </Scroll>
   ));

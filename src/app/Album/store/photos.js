@@ -1,20 +1,22 @@
 
 import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
-import { observable, action, reaction } from 'mobx';
+import { observable, action, autorun } from 'mobx';
 import { message } from '@utils';
 import * as api from '@api';
+
+const DEFAULT_TYPE = 'all';
 
 export default class Photos {
   constructor (parent) {
     this.parent = parent;
-    _.forIn(this.reactionList, v => reaction(v.data, v.effect));
+    _.forIn(this.autorunList, v => autorun(v));
   }
 
   // 图片列表
   @observable list = [];
 
   // 当前查询 type
-  @observable type = null;
+  @observable type = DEFAULT_TYPE;
 
   // 切换 type
   @action
@@ -22,9 +24,9 @@ export default class Photos {
     this.type = type;
   }
 
-  // 设置(查询)列表
+  // 获取(查询)列表
   @action
-  setList = async (search = this.getSearch()) => {
+  getList = async search => {
     const { list } = await api.getPhotos({
       search,
       spin: SPIN_CODE.APP_ALBUM,
@@ -49,18 +51,12 @@ export default class Photos {
     return res;
   };
 
-  // 获取搜索条件
-  getSearch = () => {
-    const search = {};
-    _.isNumber(this.type) && (search.type = [this.type]);
-    return search;
-  }
-
   // 反应列表
-  reactionList = {
-    setList: {
-      data: this.getSearch,
-      effect: this.setList,
+  autorunList = {
+    getList: () => {
+      const search = {};
+      _.isNumber(this.type) && (search.type = [this.type]);
+      this.getList(search);
     },
   };
 }

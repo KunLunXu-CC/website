@@ -1,6 +1,4 @@
-import React, {
-  useEffect,
-} from 'react';
+import React from 'react';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
@@ -45,10 +43,6 @@ const useStateHook = (props, store) => {
   const onClick = ({ key }) => {
     store.photos.toggleType(key !== DEFAULT_TYPE ? Number(key) : key);
   };
-
-  useEffect(() => {
-    store.photos.toggleType(DEFAULT_TYPE);
-  }, [store.photos]);
 
   return { onClick };
 };
