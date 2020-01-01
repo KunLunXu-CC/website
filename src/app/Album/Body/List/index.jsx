@@ -31,7 +31,7 @@ export default () => {
               onDelete={state.onDelete}
             />
           )) :
-          <Empty />
+          <Empty className={scss.empty}/>
         }
       </div>
     </Scroll>
