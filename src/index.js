@@ -7,7 +7,6 @@ import zhCN from 'antd/es/locale/zh_CN';
 
 import { ConfigProvider } from 'antd';
 
-import '@assets/font/fonticon/iconfont';
 import 'moment/locale/zh-cn';
 import './console';
 
