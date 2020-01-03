@@ -12,7 +12,7 @@ import { Icon } from 'qyrc';
 import { useStore } from '@store';
 import { useObserver } from 'mobx-react-lite';
 
-const useStateHook = (props, store) => {
+const useStateHook = store => {
   const menuClassName = useMemo(() => {
     const hideMenu = store.app.list.find(v => v.isMax && v.isMin === false);
     return classNames(
@@ -24,10 +24,10 @@ const useStateHook = (props, store) => {
   return { menuClassName };
 };
 
-export default props => {
+export default () => {
   const store = useStore();
   return useObserver(() => {
-    const state = useStateHook(props, store);
+    const state = useStateHook(store);
     return (
       <div className={state.menuClassName}>
         <div className={scss.body}>
