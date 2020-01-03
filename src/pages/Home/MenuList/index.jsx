@@ -14,10 +14,10 @@ import { useObserver } from 'mobx-react-lite';
 
 const useStateHook = (props, store) => {
   const menuClassName = useMemo(() => {
-    const hasMaxApp = store.app.list.find(v => v.isMax);
+    const hideMenu = store.app.list.find(v => v.isMax && v.isMin === false);
     return classNames(
       scss.menu,
-      { [scss['menu-auto-hiding']]: hasMaxApp },
+      { [scss['menu-auto-hiding']]: hideMenu },
     );
   }, [store.app.list]);
 
