@@ -52,9 +52,9 @@ export default class Store {
     const { id, name } = parent;
     this.tags = [
       {
+        name: '',
         id: 'newTag',
         editor: true,
-        name: void 0,
         parent: { id, name },
       },
       ... this.tags,

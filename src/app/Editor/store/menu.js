@@ -35,14 +35,16 @@ export default class Store {
 
   // 菜单列表: 计算、处理 this.parent.tag.tags、this.parent.article.articles
   @computed get list () {
-    const tags = _.cloneDeep(this.parent.tag.tags).map(v => ({
+    const tags = _.sortBy(_.cloneDeep(this.parent.tag.tags).map(v => ({
       ... v,
       type: 'tag',
-    }));
-    const articles = _.cloneDeep(this.parent.article.articles).map(v => ({
+    })), ele => ele.name);
+
+    const articles = _.sortBy(_.cloneDeep(this.parent.article.articles).map(v => ({
       ... v,
       type: 'article',
-    }));
+    })), ele => ele.name);
+
     const parents = tags.filter(v => !v.parent.id);
     const children = tags.filter(v => !!v.parent.id);
 

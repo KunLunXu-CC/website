@@ -127,8 +127,8 @@ export default class Store {
     const { id, name } = parent;
     this.articles = [
       {
+        name: '',
         editor: true,
-        name: void 0,
         id: 'newArticle',
         tags: [{ id, name }],
       },
