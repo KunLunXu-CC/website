@@ -1,4 +1,5 @@
 // import Tag from './Tag';
+import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
 import Article from './Article';
@@ -35,6 +36,17 @@ export default [
       dragHeight: 40,
       toolPosition: { top: 10, left: 10 },
       toolClassName: 'article-modal-tool',
+      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
+    },
+  },
+  {
+    name: '日记',
+    key: 'diary',
+    component: Diary,
+    icon: 'icon-biji',
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 20, left: 20 },
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
