@@ -1,15 +1,18 @@
 import React from 'react';
-import List from './List';
-import Work from './Work';
+import Body from './Body';
 import Header from './Header';
+import Modal from './Modal';
+import StoreProvider from './store';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss.layout}>
-    <Header />
-    <div className={scss['layout-body']}>
-      <List/>
-      <Work/>
+  <StoreProvider>
+    <div className={scss.layout}>
+      <Header/>
+      <div className={scss.body}>
+        <Body/>
+        <Modal/>
+      </div>
     </div>
-  </div>
+  </StoreProvider>
 );

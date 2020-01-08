@@ -1,32 +1,5 @@
 /* 业务常量配置 */
 
-// [操作类型] 编辑 删除 新增
-export const OPERATING_TYPE = {
-  EDIT: { VALUE: 'edit', DESC: '编辑' },
-  DELETE: { VALUE: 'delete', DESC: '删除' },
-  CREATE: { VALUE: 'create', DESC: '创建' },
-};
-
-// [标签] 颜色列表
-export const TAG_COLORS = {
-  BLUE: { VALUE: '#108EE9', DESC: '蓝色' },
-  GREEN: { VALUE: '#87D068', DESC: '绿色' },
-  CORAL: { VALUE: '#FF7F50', DESC: '珊瑚' },
-  FUCHSIA: { VALUE: '#FF00FF', DESC: '紫红色' },
-  HOT_PINK: { VALUE: '#FF69B4', DESC: '火粉红' },
-  LIGHT_BLUE: { VALUE: '#2DB7F5', DESC: '淡蓝' },
-  ORANGE_RED: { VALUE: '#FF5500', DESC: '橙红色' },
-};
-
-// [标签] 图标列表
-export const TAG_ICONS = {
-  JS: { VALUE: '#icon-js', DESC: 'JS' },
-  CSS: { VALUE: '#icon-css', DESC: 'CSS' },
-  WEB: { VALUE: '#icon-qianduan', DESC: '前端' },
-  DOCKER: { VALUE: '#icon-docker', DESC: 'docker' },
-  UBUNTU: { VALUE: '#icon-ubuntu', DESC: 'ubuntu' },
-};
-
 // [状态] 模型基本状态 (0: 禁用， 1： 启用， -11： 删除)
 export const STATUS = {
   DISABLE: 0,     // 禁用
@@ -75,4 +48,44 @@ export const MESSAGE_CODE = {
   APP_ALBUM: 'MESSAGE_CODE_APP_ALBUM',         // 相册
   APP_ARTICLE: 'MESSAGE_CODE_APP_ARTICLE',     // 文章
   APP_EDITOR: 'MESSAGE_CODE_APP_EDITOR',       // 编辑器
+};
+
+// 饮食类型
+export const DIET_TYPE = {
+  BREAKFAST: { VALUE: 0, DESC: '早餐' },
+  AFTER_BREAKFAST: { VALUE: 1, DESC: '上午加餐' },
+
+  LUNCH: { VALUE: 2, DESC: '午餐' },
+  AFTER_LUNCH: { VALUE: 3, DESC: '下午加餐' },
+
+  DINNER: { VALUE: 4, DESC: '晚餐' },
+  AFTER_DINNER: { VALUE: 5, DESC: '晚上加餐(夜宵)' },
+
+  AFTER_FITNESS: { VALUE: 6, DESC: '健身加餐(健身之后)' },
+};
+
+// 健身运动类型
+export const FITNESS_TYPE = {
+  AEROBIC: { VALUE: 0, DESC: '有氧' },    // 有氧
+  ANAEROBIC: { VALUE: 1, DESC: '无氧' },  // 无氧
+};
+
+// 健身部位
+export const FITNESS_PLACE = {
+  BACK: { VALUE: 0, DESC: '背' },
+  CHEST: { VALUE: 1, DESC: '胸' },
+  SHOULDER: { VALUE: 2, DESC: '肩' },
+  TWO_HUMERUS: { VALUE: 3, DESC: '肱二头' },
+  THREE_HUMERUS: { VALUE: 4, DESC: '肱三头' },
+  ABDOMEN: { VALUE: 5, DESC: '腹' },
+  LEG: { VALUE: 6, DESC: '腿' },
+  SMALL_ARM: { VALUE: 7, DESC: '小臂' },
+};
+
+// 健身感受
+export const FITNESS_FEEL = {
+  VERY_BAD: { VALUE: 0, DESC: '很差' },
+  DIFFERENCE: { VALUE: 1, DESC: '差' },
+  COMMONLY: { VALUE: 2, DESC: '一般' },
+  GOOD_GRADE: { VALUE: 3, DESC: '极好' },
 };

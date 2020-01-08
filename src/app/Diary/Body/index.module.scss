@@ -1,0 +1,16 @@
+.body {
+ height: 100%;
+ display: flex;
+ flex-wrap: wrap;
+}
+
+.item {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0.8;
+  .icon {
+    font-size: 80px;
+  }
+}

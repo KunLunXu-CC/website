@@ -1,0 +1,43 @@
+.drawer {
+
+  :global {
+    .ant-drawer-wrapper-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ant-drawer-header {
+      flex: none;
+      padding: 0;
+    }
+
+    .ant-drawer-body {
+      flex: 1;
+      padding: 0;
+      position: relative;
+    }
+  }
+
+  &-content {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+  }
+}
+
+.scroll {
+  height: 100%;
+  padding: 14px;
+
+  :global {
+    .qyrc-sroll-bar {
+      opacity: 0.8;
+      right: 0;
+      .qyrc-sroll-bar-slider {
+        width: 2px;
+      }
+    }
+  }
+}
