@@ -168,10 +168,6 @@ export default props => {
       <Col span={8}>
         <Form.Item label="项目" className={scss['form-item']}>
           {props.form.getFieldDecorator(`fitness[${props.index}].project`, {
-            rules: [{
-              required: true,
-              message: '请选择项目!',
-            }],
             initialValue: _.get(
               props,
               `modal.data.fitness[${props.index}].project`
