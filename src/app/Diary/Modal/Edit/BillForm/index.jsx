@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
+import _ from 'lodash';
 import Form from './Form';
 import scss from './index.module.scss';
 
@@ -22,6 +25,14 @@ const useStateHook = props => {
     props.form.setFieldsValue({ billKeys: keys.filter(v => v !== value) });
   };
 
+  useEffect(() => {
+    const bill = _.get(props.modal, 'data.bill');
+    if (bill && props.modal && !useStateHook.setBillKeysed) {
+      useStateHook.setBillKeysed = true;
+      props.form.setFieldsValue({ billKeys: Object.keys(bill) });
+    }
+  }, [props.modal, props.form]);
+
   return { onAdd, onDelete };
 };
 
@@ -38,7 +49,7 @@ export default props => {
       {props.form.getFieldValue('billKeys').length > 0 ?
         props.form.getFieldValue('billKeys').map(v => (
           <div className={scss.item} key={v}>
-            <Form form={props.form} index={v}/>
+            <Form modal={props.modal} form={props.form} index={v} />
             <div
               className={scss.delete}
               onClick={state.onDelete.bind(null, v)}>

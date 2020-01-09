@@ -1,6 +1,7 @@
 import React, {
   useMemo,
 } from 'react';
+import _ from 'lodash';
 import scss from './index.module.scss';
 
 import {
@@ -37,6 +38,7 @@ export default props => {
               required: true,
               message: '请选择类型!',
             }],
+            initialValue: _.get(props, `modal.data.diet[${props.index}].type`),
           })(
             <Select style={{ width: '100%' }} placeholder="类型">
               {state.typeOptions}
@@ -51,6 +53,7 @@ export default props => {
               required: true,
               message: '请填写描述!',
             }],
+            initialValue: _.get(props, `modal.data.diet[${props.index}].desc`),
           })(
             <Input placeholder="饮食描述"/>
           )}

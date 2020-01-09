@@ -19,13 +19,39 @@ const useStateHook = (props, store) => {
     store.global.modal.close(DIARY_EDIT_FORM);
   };
 
+  // 获取参数
+  const getParams = values => {
+    const {
+      name,
+      getUp,
+      toRest,
+      bodyIndex,
+      bill = [],
+      diet = [],
+      fitness = [],
+    } = values;
+    return {
+      getUp,
+      toRest,
+      bodyIndex,
+      bill: bill.filter(v => v),
+      diet: diet.filter(v => v),
+      fitness: fitness.filter(v => v),
+      name: name.format('YYYY-MM-DD'),
+    };
+  };
+
   // 保存
   const onSave = () => {
     props.form.validateFieldsAndScroll((error, values) => {
       if (error) {
         return false;
       }
-      console.log('-------------->>>>>', values);
+      const id = _.get(modal, 'data.id');
+      const params = getParams(values);
+      id
+        ? store.diary.updateDiaries(id, params)
+        : store.diary.createDiarie(params);
     });
   };
 

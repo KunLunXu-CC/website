@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import scss from './index.module.scss';
 
@@ -18,6 +19,7 @@ export default props => (
             required: true,
             message: '请填写描述!',
           }],
+          initialValue: _.get(props, `modal.data.bill[${props.index}].desc`),
         })(
           <Input placeholder="账单描述"/>
         )}
@@ -25,7 +27,9 @@ export default props => (
     </Col>
     <Col span={8}>
       <Form.Item label="收入" className={scss['form-item']}>
-        {props.form.getFieldDecorator(`bill[${props.index}].income`)(
+        {props.form.getFieldDecorator(`bill[${props.index}].income`, {
+          initialValue: _.get(props, `modal.data.bill[${props.index}].income`),
+        })(
           <InputNumber
             min={0}
             placeholder="收入"
@@ -36,7 +40,9 @@ export default props => (
     </Col>
     <Col span={8}>
       <Form.Item label="支出" className={scss['form-item']}>
-        {props.form.getFieldDecorator(`bill[${props.index}].expend`)(
+        {props.form.getFieldDecorator(`bill[${props.index}].expend`, {
+          initialValue: _.get(props, `modal.data.bill[${props.index}].expend`),
+        })(
           <InputNumber
             min={0}
             placeholder="支出"
@@ -47,7 +53,12 @@ export default props => (
     </Col>
     <Col span={8}>
       <Form.Item label="结余" className={scss['form-item']}>
-        {props.form.getFieldDecorator(`bill[${props.index}].balance`)(
+        {props.form.getFieldDecorator(`bill[${props.index}].balance`, {
+          initialValue: _.get(
+            props,
+            `modal.data.bill[${props.index}].balance`
+          ),
+        })(
           <InputNumber
             min={0}
             placeholder="结余"

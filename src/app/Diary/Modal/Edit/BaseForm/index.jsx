@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import scss from './index.module.scss';
 
 import {
@@ -20,12 +21,17 @@ export default props => (
               required: true,
               message: '请填写日期',
             }],
+            initialValue: _.get(props, 'modal.data.name')
+              ? moment(_.get(props, 'modal.data.name'))
+              : void 0,
           })(<DatePicker style={{ width: '100%' }}/>)}
         </Form.Item>
       </Col>
       <Col span={12}>
         <Form.Item label="体重 (KG) " className={scss['form-item']}>
-          {props.form.getFieldDecorator('bodyIndex.weight')(
+          {props.form.getFieldDecorator('bodyIndex.weight', {
+            initialValue: _.get(props, 'modal.data.bodyIndex.weight'),
+          })(
             <InputNumber
               min={50}
               placeholder="体重"
@@ -36,14 +42,20 @@ export default props => (
       </Col>
       <Col span={12}>
         <Form.Item label="起居" className={scss['form-item']}>
-          {props.form.getFieldDecorator('getUp')(
+          {props.form.getFieldDecorator('getUp', {
+            initialValue: _.get(props, 'modal.data.getUp')
+              ? moment(_.get(props, 'modal.data.getUp'))
+              : void 0,
+          })(
             <DatePicker showTime style={{ width: '100%' }}/>
           )}
         </Form.Item>
       </Col>
       <Col span={12}>
         <Form.Item label="体脂 (%) " className={scss['form-item']}>
-          {props.form.getFieldDecorator('bodyIndex.bodyfat')(
+          {props.form.getFieldDecorator('bodyIndex.bodyfat', {
+            initialValue: _.get(props, 'modal.data.bodyIndex.bodyfat'),
+          })(
             <InputNumber
               min={8}
               max={100}
@@ -55,14 +67,20 @@ export default props => (
       </Col>
       <Col span={12}>
         <Form.Item label="歇息" className={scss['form-item']}>
-          {props.form.getFieldDecorator('toRest')(
+          {props.form.getFieldDecorator('toRest', {
+            initialValue: _.get(props, 'modal.data.toRest')
+              ? moment(_.get(props, 'modal.data.toRest'))
+              : void 0,
+          })(
             <DatePicker showTime style={{ width: '100%' }}/>
           )}
         </Form.Item>
       </Col>
       <Col span={12}>
         <Form.Item label="水分 (%) " className={scss['form-item']}>
-          {props.form.getFieldDecorator('bodyIndex.moistureContent')(
+          {props.form.getFieldDecorator('bodyIndex.moistureContent', {
+            initialValue: _.get(props, 'modal.data.bodyIndex.moistureContent'),
+          })(
             <InputNumber
               min={10}
               max={100}

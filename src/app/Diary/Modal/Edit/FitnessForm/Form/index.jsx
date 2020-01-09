@@ -1,6 +1,7 @@
 import React, {
   useMemo,
 } from 'react';
+import _ from 'lodash';
 import scss from './index.module.scss';
 import fitnessProjects from '@config/fitnessProjects';
 
@@ -9,6 +10,7 @@ import {
   Row,
   Form,
   Select,
+  InputNumber,
 } from 'antd';
 import { FITNESS_TYPE, FITNESS_PLACE, FITNESS_FEEL } from '@config/consts';
 
@@ -100,6 +102,10 @@ export default props => {
               required: true,
               message: '请选择类型!',
             }],
+            initialValue: _.get(
+              props,
+              `modal.data.fitness[${props.index}].type`
+            ),
           })(
             <Select
               placeholder="类型"
@@ -118,6 +124,10 @@ export default props => {
                 required: true,
                 message: '请选择训练部位!',
               }],
+              initialValue: _.get(
+                props,
+                `modal.data.fitness[${props.index}].place`
+              ),
             })(
               <Select
                 placeholder="训练部位"
@@ -136,6 +146,10 @@ export default props => {
               required: true,
               message: '请选择项目!',
             }],
+            initialValue: _.get(
+              props,
+              `modal.data.fitness[${props.index}].project`
+            ),
           })(
             <Select style={{ width: '100%' }} placeholder="锻炼项目">
               {state.projectOptions}
@@ -144,22 +158,29 @@ export default props => {
         </Form.Item>
       </Col>
       <Col span={8}>
-        <Form.Item label="时长" className={scss['form-item']}>
+        <Form.Item label="时长 (分钟) " className={scss['form-item']}>
           {props.form.getFieldDecorator(`fitness[${props.index}].duration`, {
-            rules: [{
-              required: true,
-              message: '请填写时长!',
-            }],
+            initialValue: _.get(
+              props,
+              `modal.data.fitness[${props.index}].duration`
+            ),
           })(
-            <Select style={{ width: '100%' }} placeholder="训练时长分钟">
-              {state.typeOptions}
-            </Select>
+            <InputNumber
+              min={0}
+              placeholder="时长"
+              style={{ width: '100%' }}
+            />
           )}
         </Form.Item>
       </Col>
       <Col span={8}>
         <Form.Item label="感受" className={scss['form-item']}>
-          {props.form.getFieldDecorator(`fitness[${props.index}].feel`)(
+          {props.form.getFieldDecorator(`fitness[${props.index}].feel`, {
+            initialValue: _.get(
+              props,
+              `modal.data.fitness[${props.index}].feel`
+            ),
+          })(
             <Select style={{ width: '100%' }} placeholder="感受">
               {state.feelOptions}
             </Select>

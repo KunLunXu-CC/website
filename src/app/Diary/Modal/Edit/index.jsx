@@ -44,10 +44,10 @@ export default Form.create()(props => {
       >
         <div className={scss['drawer-content']}>
           <Scroll className={scss.scroll}>
-            <BaseForm form={props.form}/>
-            <DietForm form={props.form}/>
-            <FitnessForm form={props.form}/>
-            <BillForm form={props.form}/>
+            <BaseForm modal={state.modal} form={props.form}/>
+            <DietForm modal={state.modal} form={props.form}/>
+            <FitnessForm modal={state.modal} form={props.form}/>
+            <BillForm modal={state.modal} form={props.form}/>
             <br/><br/>
           </Scroll>
         </div>

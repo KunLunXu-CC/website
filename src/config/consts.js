@@ -41,6 +41,7 @@ export const SPIN_CODE = {
   APP_ALBUM: 'APP_ALBUM',         // 相册
   APP_ARTICLE: 'APP_ARTICLE',     // 文章
   APP_EDITOR: 'APP_EDITOR',       // 编辑器
+  APP_DIARY: 'APP_DIARY',         // 日记
 };
 
 // 提示信息 code
