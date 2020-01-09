@@ -28,7 +28,7 @@ module.exports = {
   ],
   rules: {
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'react/prop-types': 0,         // 防止在React组件定义中丢失props验证:  'data' is missing in props validation
     'react/display-name': 0,       // 防止在React组件定义中丢失displayName: Component definition is missing display name
 

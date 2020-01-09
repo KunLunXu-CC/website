@@ -14,13 +14,14 @@ import { useStore } from '../../store';
 import { DIARY_EDIT_FORM } from '../consts';
 import { useObserver } from 'mobx-react-lite';
 
-const useStateHook = store => {
+const useStateHook = (props, store) => {
   const modal = useMemo(() => (
     store.global.modal.modals[DIARY_EDIT_FORM]
   ), [store.global.modal.modals]);
 
   const onCancel = () => {
     store.global.modal.close(DIARY_EDIT_FORM);
+    props.form.resetFields();
   };
 
   return { modal, onCancel };
@@ -29,7 +30,7 @@ const useStateHook = store => {
 export default Form.create()(props => {
   const store = useStore();
   return useObserver(() => {
-    const state = useStateHook(store);
+    const state = useStateHook(props, store);
     return (
       <Drawer
         width="90%"

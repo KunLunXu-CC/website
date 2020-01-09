@@ -9,6 +9,18 @@
   border-bottom: 1px solid #e6e6e6;
 }
 
-.icon-add {
-  font-size: 20px;
+.create {
+  cursor: pointer;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+
+  &-icon {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  &:hover {
+    color: #1890ff;
+  }
 }

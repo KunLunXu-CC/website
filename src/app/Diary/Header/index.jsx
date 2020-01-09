@@ -21,11 +21,13 @@ export default () => {
 
   return (
     <div className={scss.header}>
-      <Icon
-        type="icon-xinzeng"
-        onClick={state.onAdd}
-        className={scss['icon-add']}
-      />
+      <div className={scss.create} onClick={state.onAdd}>
+        <Icon
+          type="icon-xinzeng"
+          className={scss['create-icon']}
+        />
+        创建日记
+      </div>
     </div>
   );
 };

@@ -27,11 +27,10 @@ const useStateHook = props => {
 
   useEffect(() => {
     const bill = _.get(props.modal, 'data.bill');
-    if (bill && props.modal && !useStateHook.setBillKeysed) {
-      useStateHook.setBillKeysed = true;
+    if (bill && props.modal) {
       props.form.setFieldsValue({ billKeys: Object.keys(bill) });
     }
-  }, [props.modal, props.form]);
+  }, [props.modal]);
 
   return { onAdd, onDelete };
 };

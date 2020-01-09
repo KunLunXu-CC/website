@@ -1,5 +1,7 @@
 import React, {
   useMemo,
+  useState,
+  useEffect,
 } from 'react';
 import _ from 'lodash';
 import scss from './index.module.scss';
@@ -15,6 +17,9 @@ import {
 import { FITNESS_TYPE, FITNESS_PLACE, FITNESS_FEEL } from '@config/consts';
 
 const useStateHook = props => {
+  const [projects, setProjects] = useState([]);
+  const [showPlaceField, setShowPlaceField] = useState(false);
+
   // 类型下拉项
   const typeOptions = useMemo(() => (
     Object.values(FITNESS_TYPE).map(V => (
@@ -33,7 +38,6 @@ const useStateHook = props => {
     ))
   ), []);
 
-
   // 训练感受下拉项
   const feelOptions = useMemo(() => (
     Object.values(FITNESS_FEEL).map(V => (
@@ -44,25 +48,35 @@ const useStateHook = props => {
   ), []);
 
   // 训练项目下拉项
-  const projectOptions = useMemo(() => {
-    const type = props.form.getFieldValue(`fitness[${props.index}].type`);
-    const place = props.form.getFieldValue(`fitness[${props.index}].place`);
-    return (
-      fitnessProjects.filter(
-        v => v.type === type && v.place === place
-      ).map(v => (
-        <Select.Option value={v.value} key={v.value}>
-          {v.desc}
-        </Select.Option>
-      ))
+  const projectOptions = useMemo(() => (
+    projects.map(v => (
+      <Select.Option value={v.value} key={v.value}>
+        {v.desc}
+      </Select.Option>)
+    )
+  ), [projects]);
+
+  // 重置 projects
+  const resetProjects = (type, place) => {
+    const currentType =
+      type ||
+      props.form.getFieldValue(`fitness[${props.index}].type`);
+    const currentPlace =
+      place ||
+      props.form.getFieldValue(`fitness[${props.index}].place`);
+    const newProjects = fitnessProjects.filter(
+      v => v.type === currentType && v.place === currentPlace
     );
-  }, [props.form, props.index]);
+    setProjects(newProjects);
+  };
 
   // 是否显示 place 字段
-  const showPlaceField = useMemo(() => {
-    const type = props.form.getFieldValue(`fitness[${props.index}].type`);
-    return type === FITNESS_TYPE.ANAEROBIC.VALUE;
-  }, [props.form, props.index]);
+  const resetShowPlaceField = type => {
+    const currentType =
+      type ||
+      props.form.getFieldValue(`fitness[${props.index}].type`);
+    setShowPlaceField(currentType === FITNESS_TYPE.ANAEROBIC.VALUE);
+  };
 
   // place 修改
   const onPlaceChange = () => {
@@ -72,12 +86,23 @@ const useStateHook = props => {
   };
 
   // type 修改
-  const onTypeChange = () => {
+  const onTypeChange = type => {
     props.form.setFieldsValue({
       [`fitness[${props.index}].project`]: void 0,
       [`fitness[${props.index}].place`]: void 0,
     });
+    resetProjects(type);
+    resetShowPlaceField(type);
   };
+
+  useEffect(() => {
+    if (_.get(props.modal, 'data.id')) {
+      const type = props.form.getFieldValue(`fitness[${props.index}].type`);
+      const place = props.form.getFieldValue(`fitness[${props.index}].place`);
+      resetProjects(type, place);
+      resetShowPlaceField(type);
+    }
+  }, [props.modal]);
 
   return {
     typeOptions,

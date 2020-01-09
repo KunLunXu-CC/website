@@ -26,11 +26,10 @@ const useStateHook = props => {
 
   useEffect(() => {
     const diet = _.get(props.modal, 'data.diet');
-    if (diet && props.modal && !useStateHook.setBillKeysed) {
-      useStateHook.setBillKeysed = true;
+    if (diet && props.modal) {
       props.form.setFieldsValue({ dietKeys: Object.keys(diet) });
     }
-  }, [props.modal, props.form]);
+  }, [props.modal]);
 
   return { onAdd, onDelete };
 };

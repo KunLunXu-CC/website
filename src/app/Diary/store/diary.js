@@ -1,7 +1,8 @@
 import * as api from '@api';
 
-import { SPIN_CODE } from '@config/consts';
+import { message } from '@utils';
 import { observable, action } from 'mobx';
+import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
 
 export default class Store {
   constructor (parent) {
@@ -37,6 +38,10 @@ export default class Store {
       body: [body],
       spin: SPIN_CODE.APP_DIARY,
     });
+    message({
+      message: '创建成功!',
+      code: MESSAGE_CODE.APP_EDITOR,
+    });
     this.list = list;
   }
 
@@ -45,11 +50,15 @@ export default class Store {
   updateDiaries = async (id, body) => {
     const { search, pagination } = this.getSearchParams();
     const { list } = await api.updateDiaries({
+      body,
       search,
       pagination,
-      body: [body],
       conds: { id },
       spin: SPIN_CODE.APP_DIARY,
+    });
+    message({
+      message: '修改成功!',
+      code: MESSAGE_CODE.APP_EDITOR,
     });
     this.list = list;
   }

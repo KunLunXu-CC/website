@@ -17,6 +17,7 @@ const useStateHook = (props, store) => {
   // 取消亦或关闭
   const onCancel = () => {
     store.global.modal.close(DIARY_EDIT_FORM);
+    props.form.resetFields();
   };
 
   // 获取参数
@@ -43,15 +44,16 @@ const useStateHook = (props, store) => {
 
   // 保存
   const onSave = () => {
-    props.form.validateFieldsAndScroll((error, values) => {
+    props.form.validateFieldsAndScroll(async (error, values) => {
       if (error) {
         return false;
       }
       const id = _.get(modal, 'data.id');
       const params = getParams(values);
       id
-        ? store.diary.updateDiaries(id, params)
-        : store.diary.createDiarie(params);
+        ? await store.diary.updateDiaries(id, params)
+        : await store.diary.createDiarie(params);
+      onCancel();
     });
   };
 

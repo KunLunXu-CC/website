@@ -49,6 +49,7 @@ export const MESSAGE_CODE = {
   APP_ALBUM: 'MESSAGE_CODE_APP_ALBUM',         // 相册
   APP_ARTICLE: 'MESSAGE_CODE_APP_ARTICLE',     // 文章
   APP_EDITOR: 'MESSAGE_CODE_APP_EDITOR',       // 编辑器
+  APP_DIARY: 'MESSAGE_CODE_APP_DIARY',         // 日记
 };
 
 // 饮食类型
