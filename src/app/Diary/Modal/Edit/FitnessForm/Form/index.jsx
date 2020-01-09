@@ -58,12 +58,12 @@ const useStateHook = props => {
 
   // 重置 projects
   const resetProjects = (type, place) => {
-    const currentType =
-      type ||
-      props.form.getFieldValue(`fitness[${props.index}].type`);
-    const currentPlace =
-      place ||
-      props.form.getFieldValue(`fitness[${props.index}].place`);
+    const currentType = _.isNumber(type)
+      ? type
+      : props.form.getFieldValue(`fitness[${props.index}].type`);
+    const currentPlace = _.isNumber(place)
+      ? place
+      : props.form.getFieldValue(`fitness[${props.index}].place`);
     const newProjects = fitnessProjects.filter(
       v => v.type === currentType && v.place === currentPlace
     );
@@ -72,17 +72,18 @@ const useStateHook = props => {
 
   // 是否显示 place 字段
   const resetShowPlaceField = type => {
-    const currentType =
-      type ||
-      props.form.getFieldValue(`fitness[${props.index}].type`);
+    const currentType = _.isNumber(type)
+      ? type
+      : props.form.getFieldValue(`fitness[${props.index}].type`);
     setShowPlaceField(currentType === FITNESS_TYPE.ANAEROBIC.VALUE);
   };
 
   // place 修改
-  const onPlaceChange = () => {
+  const onPlaceChange = (place) => {
     props.form.setFieldsValue({
       [`fitness[${props.index}].project`]: void 0,
     });
+    resetProjects(void 0, place);
   };
 
   // type 修改
@@ -97,8 +98,8 @@ const useStateHook = props => {
 
   useEffect(() => {
     if (_.get(props.modal, 'data.id')) {
-      const type = props.form.getFieldValue(`fitness[${props.index}].type`);
-      const place = props.form.getFieldValue(`fitness[${props.index}].place`);
+      const type = _.get(props.modal, `data.fitness[${props.index}].type`);
+      const place = _.get(props.modal, `data.fitness[${props.index}].place`);
       resetProjects(type, place);
       resetShowPlaceField(type);
     }
