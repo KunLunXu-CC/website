@@ -1,5 +1,4 @@
 import axios from '@utils/request';
-import { rsa } from '@utils';
 
 export const login = async ({
   spin,
@@ -11,10 +10,7 @@ export const login = async ({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: {
-        account,
-        password: password ? rsa(password) : void 0,
-      },
+      variables: { account, password },
       query: `
         mutation(
           $account: String,

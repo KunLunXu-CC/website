@@ -39,11 +39,12 @@ export const debounce = (fn, wait) => {
 /**
  * RSA 加密
  * @param {String} data   待加密数据
+ * @param {String} publicKey 公钥
  * @returns {String}      加密后的数据
  */
-export const rsa = data => {
+export const rsa = (data, publicKey) => {
   const encrypt = new JSEncrypt();
-  encrypt.setPublicKey(PUBLICKEY);
+  encrypt.setPublicKey(publicKey);
   return encrypt.encrypt(data);
 };
 

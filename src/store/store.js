@@ -3,9 +3,10 @@ import { observable, autorun, toJS } from 'mobx';
 import App from './app';
 import User from './user';
 import Dock from './dock';
-import Modal from './modal';
 import Spin from './spin';
+import Modal from './modal';
 import Avatar from './avatar';
+import Common from './common';
 import Desktop from './desktop';
 
 export default class Store {
@@ -18,6 +19,7 @@ export default class Store {
   @observable spin = new Spin(this);
   @observable dock = new Dock(this);
   @observable modal = new Modal(this);
+  @observable common = new Common(this);
   @observable avatar = new Avatar(this);
   @observable desktop = new Desktop(this);
 

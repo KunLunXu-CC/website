@@ -79,7 +79,7 @@ const useStateHook = props => {
   };
 
   // place 修改
-  const onPlaceChange = (place) => {
+  const onPlaceChange = place => {
     props.form.setFieldsValue({
       [`fitness[${props.index}].project`]: void 0,
     });

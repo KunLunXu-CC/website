@@ -3,12 +3,18 @@ import React, {
 } from 'react';
 import scss from './index.module.scss';
 
+import { rsa } from '@utils';
 import { useStore } from '@store';
 import { Image, Icon } from 'qyrc';
 import { withRouter } from 'react-router-dom';
 import { Input, Form, Button, message } from 'antd';
 
 const useStateHook = (props, store) => {
+  // 公钥
+  const publicKey = useMemo(async () => (
+    await store.common.getPublicKey()
+  ), []);
+
   // 随机头像
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * store.avatar.list.length);
@@ -19,15 +25,18 @@ const useStateHook = (props, store) => {
 
   // 登录
   const onLogin = () => {
-    props.form.validateFieldsAndScroll((errors, { account, password }) => {
+    props.form.validateFieldsAndScroll(async (errors, values) => {
       if (!!errors) {
         return false;
       }
-      store.user.login({ account, password }).then(({ logined }) => {
-        logined
-          ? props.history.push('/')
-          : message.warning('登录失败, 账号或密码错误！');
+      const { account, password } = values;
+      const { logined } = await store.user.login({
+        account,
+        password: rsa(password, await publicKey),
       });
+      logined
+        ? props.history.push('/')
+        : message.warning('登录失败, 账号或密码错误！');
     });
   };
 
