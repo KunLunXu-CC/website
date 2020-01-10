@@ -29,7 +29,6 @@ export const getNotes = async ({
               content
               tags { id name }
             }
-            rescode
             message
             pagination
           }

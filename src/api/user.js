@@ -28,7 +28,6 @@ export const login = async ({
               account
               role { id desc auth name }
             }
-            rescode
             message
           }
         }`,

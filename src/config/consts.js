@@ -14,12 +14,6 @@ export const ARTICLE_STATUS = {
   RELEASE: 11,       // 发布(已发布)
 };
 
-// [状态]响应状态
-export const RESCODE = {
-  SUCCESS: { VALUE: 1, DESC: '成功' },
-  FAIL: { VALUE: 0, DESC: '失败' },
-};
-
 // 图片类型(使用场景)
 export const PHOTO_TYPE = {
   UNKNOWN: { VALUE: 0, DESC: '未知' },          // 未知

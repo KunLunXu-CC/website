@@ -30,7 +30,6 @@ export const getPhotos = async ({
               creationTime
               sourceFileName
             }
-            rescode
             message
             pagination
           }
@@ -95,7 +94,6 @@ export const removePhotos = async ({
               sourceFileName
             }
             pagination
-            rescode
             message
           }
         }`,

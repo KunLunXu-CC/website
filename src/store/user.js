@@ -1,8 +1,6 @@
 import { login } from '@api';
 import { observable, action } from 'mobx';
 
-import { RESCODE } from '@config/consts';
-
 export default class Store {
   constructor (parent) {
     this.parent = parent;
@@ -20,6 +18,6 @@ export default class Store {
     this.user = res.user;
     this.role = res.user.role;
     this.auth = res.user.role.auth;
-    return { res, logined: RESCODE.SUCCESS.VALUE === res.rescode };
+    return res;
   };
 }

@@ -31,7 +31,6 @@ export const getTags = async ({
               parent { id name }
             }
             pagination
-            rescode
             message
           }
         }`,
@@ -73,7 +72,6 @@ export const createTags = async ({
               updateTime
               parent { id name }
             }
-            rescode
             message
             pagination
           }
@@ -119,7 +117,6 @@ export const updateTags = async ({
               updateTime
               parent { id name }
             }
-            rescode
             message
             pagination
           }
@@ -163,7 +160,6 @@ export const removeTags = async ({
               updateTime
               parent { id name }
             }
-            rescode
             message
             pagination
           }

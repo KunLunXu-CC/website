@@ -33,7 +33,6 @@ export const getDiaries = async ({
               informalEssay
             }
             pagination
-            rescode
             message
           }
         }`,
@@ -77,7 +76,6 @@ export const createDiaries = async ({
               bodyIndex
               informalEssay
             }
-            rescode
             message
             pagination
           }
@@ -125,7 +123,6 @@ export const updateDiaries = async ({
               bodyIndex
               informalEssay
             }
-            rescode
             message
             pagination
           }
@@ -171,7 +168,6 @@ export const removeDiaries = async ({
               bodyIndex
               informalEssay
             }
-            rescode
             message
             pagination
           }

@@ -7,7 +7,7 @@ import { rsa } from '@utils';
 import { useStore } from '@store';
 import { Image, Icon } from 'qyrc';
 import { withRouter } from 'react-router-dom';
-import { Input, Form, Button, message } from 'antd';
+import { Input, Form, Button } from 'antd';
 
 const useStateHook = (props, store) => {
   // 公钥
@@ -30,13 +30,11 @@ const useStateHook = (props, store) => {
         return false;
       }
       const { account, password } = values;
-      const { logined } = await store.user.login({
+      await store.user.login({
         account,
         password: rsa(password, await publicKey),
       });
-      logined
-        ? props.history.push('/')
-        : message.warning('登录失败, 账号或密码错误！');
+      props.history.push('/');
     });
   };
 

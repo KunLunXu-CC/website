@@ -34,7 +34,6 @@ export const getArticles = async ({
               updateTime
               tags { id name }
             }
-            rescode
             message
             pagination
           }
@@ -79,7 +78,6 @@ export const createArticles = async ({
               tags { id name }
             }
             pagination
-            rescode
             message
           }
         }`,
@@ -126,7 +124,6 @@ export const updateArticles = async ({
               tags { id name }
             }
             pagination
-            rescode
             message
           }
         }`,
@@ -171,7 +168,6 @@ export const removeArticles = async ({
               tags { id name }
             }
             pagination
-            rescode
             message
           }
         }`,
@@ -218,7 +214,6 @@ export const releaseArticle = async ({
               updateTime
               tags { id name }
             }
-            rescode
             message
             pagination
           }
@@ -266,7 +261,6 @@ export const revokeArticle = async ({
               updateTime
               tags { id name }
             }
-            rescode
             message
             pagination
           }
