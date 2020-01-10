@@ -24,7 +24,7 @@ module.exports.globalConsts = {
   production: {
     _DEV_: false,
     GLOBAL_SERVICE: {
-      HOST: JSON.stringify('http://www.qianyin925.com:4000'),
+      HOST: JSON.stringify('https://www.qianyin925.com:4000'),
       GRAPHQL_URL: JSON.stringify('/graphql'),
     },
   },
