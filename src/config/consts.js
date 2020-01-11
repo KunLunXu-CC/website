@@ -2,9 +2,9 @@
 
 // [状态] 模型基本状态 (0: 禁用， 1： 启用， -11： 删除)
 export const STATUS = {
-  DISABLE: 0,     // 禁用
-  ENABLE: 1,      // 启用
-  DELETE: -11,    // 删除
+  DISABLE: 0,   // 禁用
+  ENABLE: 1,    // 启用
+  DELETE: -11,  // 删除
 };
 
 // [状态] 文章状态： 基础状态 + 保存 + 发布
