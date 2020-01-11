@@ -173,7 +173,10 @@ export default props => {
               `modal.data.fitness[${props.index}].project`
             ),
           })(
-            <Select style={{ width: '100%' }} placeholder="锻炼项目">
+            <Select
+              mode="multiple"
+              placeholder="锻炼项目"
+              style={{ width: '100%' }}>
               {state.projectOptions}
             </Select>
           )}
