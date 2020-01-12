@@ -39,6 +39,42 @@ export const getTags = async ({
   return res.data.data.tags;
 };
 
+// 查询所有标签下具有文章的标签列表
+export const getTagsWithArticles = async ({
+  spin,
+  search,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { search },
+      query: `
+        query(
+          $search: ArticleSearch,
+        ){
+          tagsWithArticles(
+            search: $search,
+            orderBy: { creationTime: -1 }
+          ){
+            list {
+              id
+              name
+              icon
+              color
+              status
+              updateTime
+              parent { id name }
+            }
+            message
+          }
+        }`,
+    },
+  });
+  return res.data.data.tagsWithArticles;
+};
+
 export const createTags = async ({
   spin,
   body,

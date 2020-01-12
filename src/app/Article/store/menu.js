@@ -1,6 +1,6 @@
+import { getTagsWithArticles } from '@api';
 import { observable, action, reaction } from 'mobx';
-import { TAG_ALL } from '@config/consts';
-import { getTags } from '@api';
+import { TAG_ALL, ARTICLE_STATUS, SPIN_CODE } from '@config/consts';
 
 export default class Store {
   constructor (parent) {
@@ -18,7 +18,10 @@ export default class Store {
 
   @action
   getList = async () => {
-    const { list } = await getTags();
+    const { list } = await getTagsWithArticles({
+      spin: SPIN_CODE.APP_ARTICLE,
+      search: { status: ARTICLE_STATUS.RELEASE },
+    });
     this.list = [TAG_ALL, ... list];
   }
 }
