@@ -6,7 +6,7 @@ import { log } from '@utils';
 const instance = axios.create({
   headers: { 'Content-Type': ' application/json' },
   baseURL: GLOBAL_SERVICE.HOST,
-  timeout: 10000,
+  timeout: 1000 * 60,
 });
 
 /**
