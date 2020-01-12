@@ -1,7 +1,7 @@
 
 .tags {
+  width: 100%;
   height: 100%;
-  max-width: 120px;
   overflow: hidden;
   padding: { top: 50px;}
 
@@ -19,7 +19,7 @@
       }
     }
   }
-  
+
   :global{
     $menu-bg: transparent;
     $menu-color: rgba($color: #fff, $alpha: 1);
@@ -27,33 +27,33 @@
     %default {
       background: $menu-bg;
     }
-  
+
     %selected {
       background: $menu-bg;
     }
-  
+
     // 菜单
     .ant-menu {
       border: none;
       @extend %default;
-  
+
       // 根菜单样式覆盖 - 正常状态
       .ant-menu-item {
         @extend %default;
-  
+
         &::after {
           right: initial;
           left: 0;
         }
       }
-  
+
       // 根菜单样式覆盖 - 停放状态
       .ant-menu-item.ant-menu-item-active,
       .ant-menu-item.ant-menu-item-selected {
         @extend %selected;
       }
     }
-  
+
     // 滚动条设置
     .qyrc-sroll-bar {
       opacity: 0.5;

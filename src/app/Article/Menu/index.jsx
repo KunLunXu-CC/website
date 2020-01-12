@@ -31,11 +31,10 @@ export default props => {
         <Menu
           mode="inline"
           onClick={state.onClickMenu}
-          selectedKeys={[store.menu.tag]}
-          inlineCollapsed={store.menu.collapsed}>
+          selectedKeys={[store.menu.tag]}>
           {store.menu.list.map(v => (
             <Menu.Item key={v.id}>
-              <Icon type={v.icon}  className="anticon"/>
+              <Icon type={v.icon || 'icon-weizhi'}  className="anticon"/>
               <span>{v.name}</span>
             </Menu.Item>
           ))}

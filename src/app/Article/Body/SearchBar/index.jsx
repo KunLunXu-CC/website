@@ -6,15 +6,10 @@ import { Input } from 'antd';
 import { useStore } from '../../store';
 import { useObserver } from 'mobx-react-lite';
 
-const useStateHook = (props, store) => {
+const useStateHook = store => {
   // 回退
   const onBack = () => {
     store.article.drop();
-  };
-
-  // 收缩 / 展开
-  const onToggleCollapsed = () => {
-    store.menu.toggleCollapsed();
   };
 
   // 搜索
@@ -22,20 +17,22 @@ const useStateHook = (props, store) => {
     store.article.search(event.target.value);
   };
 
-  return { onBack, onToggleCollapsed, onSearch };
+  return { onBack, onSearch };
 };
 
-export default props => {
+export default () => {
   const store = useStore();
-  const state = useStateHook(props, store);
+  const state = useStateHook(store);
 
   return useObserver(() => (
     <div className={scss['search-bar']}>
       <div className={scss['search-bar-prefix']}>
-        <Icon
-          onClick={state.onToggleCollapsed}
-          type={store.menu.collapsed ? 'icon-zhankai' : 'icon-shousuo1' }
-        />
+        {store.article.article ?
+          <Icon
+            onClick={state.onBack}
+            type="icon-huituishuikuansuoshuqi"
+          /> : null
+        }
       </div>
       <div className={scss['search-bar-input']}>
         <Input
@@ -46,12 +43,6 @@ export default props => {
         />
       </div>
       <div className={scss['search-bar-suffix']}>
-        {store.article.article ?
-          <Icon
-            onClick={state.onBack}
-            type="icon-huituishuikuansuoshuqi"
-          /> : null
-        }
       </div>
     </div>
   ));

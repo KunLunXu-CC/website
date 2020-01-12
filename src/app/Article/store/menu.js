@@ -8,14 +8,8 @@ export default class Store {
     _.forIn(this.reaction, v => reaction(v.data, v.effect));
   }
 
-  @observable collapsed = false;  // 菜单收缩状态
   @observable tag = TAG_ALL.id;  // 当前 tag
   @observable list = [];       // tag 列表
-
-  @action
-  toggleCollapsed= () => {
-    this.collapsed = !this.collapsed;
-  }
 
   @action
   setTag = value => {
