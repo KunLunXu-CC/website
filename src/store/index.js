@@ -1,23 +1,33 @@
-import React from 'react';
-import Store from './store';
+import React from 'react'
+import getReducer from './getReducer';
+import { Provider } from 'react-redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 
-const StoreContext = React.createContext(null);
+import photos from './global/model';
+import application from './application/model';
+import createSagaMiddleware from 'redux-saga';
+import { helloSaga } from './sagas';
 
-// 导出 hook 使用 hook 方法
-export const useStore = () => {
-  const store = React.useContext(StoreContext);
-  if (!store) {
-    throw new Error('You have forgot to use StoreProvider, shame on you.');
-  }
-  return store;
-};
+const sagaMiddleware = createSagaMiddleware();
 
-// 导入 store 可以在任意地方导入控制 store
-export const store = new Store();
+const middleware = [
+  sagaMiddleware,
+];
 
-// 导出 context.Provider
+const store = createStore(
+  getReducer([
+    photos,
+    application,
+  ]),
+  compose(
+    applyMiddleware(...middleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  )
+);
+sagaMiddleware.run(helloSaga);
+
 export default props => (
-  <StoreContext.Provider value={store}>
+  <Provider store={store}>
     {props.children}
-  </StoreContext.Provider>
+  </Provider>
 );

@@ -1,5 +1,21 @@
 import './console';
-import App from './App';
 import React from 'react';
+import Store from '@store';
+import moment from 'moment';
+import Router from './Router';
 import reactDom from 'react-dom';
-reactDom.render(<App/>, document.getElementById('root'));
+import zhCN from 'antd/es/locale/zh_CN';
+import 'moment/locale/zh-cn';
+
+import { ConfigProvider } from 'antd';
+moment.locale('zh-cn');
+
+reactDom.render(
+  <ConfigProvider
+    locale={zhCN}>
+    <Store>
+      <Router />
+    </Store>
+  </ConfigProvider>,
+  document.getElementById('root')
+);
