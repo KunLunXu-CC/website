@@ -1,24 +1,24 @@
 import React from 'react';
 import List from './List';
 
-import { useStore } from '@store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const app = useSelector(state => state.app);
+
   const onClick = dock => {
-    store.app.open(dock);
+    // store.app.open(dock);
   };
-  return { onClick };
+  return { onClick, app };
 };
 
 export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+  const state = useStateHook(props);
 
-  return useObserver(() => (
+  return (
     <List
       onClick={state.onClick}
-      dataSource={store.dock.list}
+      dataSource={state.app.docks}
     />
-  ));
+  );
 };

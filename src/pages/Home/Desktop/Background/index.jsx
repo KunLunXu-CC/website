@@ -2,34 +2,33 @@ import React, {
   useMemo,
   useEffect,
 } from 'react';
+import _ from 'lodash';
 import Error from './Error';
 import Loading from './Loading';
 import scss from './index.module.scss';
-import { useDispatch } from 'react-redux'
+
 import { Image } from 'qyrc';
+import { useDispatch, useSelector } from 'react-redux'
 
-const useStateHook = store => {
-  const dispatch = useDispatch();
-  useEffect(() => {
+const useStateHook = () => {
 
-    dispatch({ type: 'TO_LOGIN_OUT' });
+  const photos = useSelector(state => (
+    _.get(state, 'global.photos.desktop') || []
+  ));
 
-  }, []);
+  const bg = useMemo(() => {
+    const index = Math.floor(Math.random() * photos.length);
+    return photos.length > 0 ? _.get(photos, `[${index}].url`, '') : '';
+  }, [photos]);
 
-  // const bg = useMemo(() => {
-  //   const index = Math.floor(Math.random() * store.desktop.bgList.length);
-  //   return store.desktop.bgList.length > 0
-  //     ? _.get(store.desktop.bgList, `[${index}].url`, '')
-  //     : '';
-  // }, [store.desktop.bgList]);
-  // return { bg };
+  return { bg };
 };
 
 export default props => {
   const state = useStateHook();
   return (
     <Image
-      src={null}
+      src={state.bg}
       error={<Error/>}
       loading={<Loading/>}
       className={scss.background}>

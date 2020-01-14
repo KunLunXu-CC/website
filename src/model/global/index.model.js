@@ -1,3 +1,4 @@
+import * as effects from './effects';
 import * as reducers from './reducers';
 
 const initState = {
@@ -9,7 +10,8 @@ const initState = {
 };
 
 export default {
-  namespace: 'global',
-  state: initState,
+  effects,
   reducers,
+  state: initState,
+  namespace: 'global',
 }

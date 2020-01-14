@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { store } from '@store';
+// import { store } from '@store';
 import { log } from '@utils';
 
 // 创建 axios 实例
@@ -90,8 +90,8 @@ use({
  * 1. 处理 spin
  */
 export default async ({ spin, ... options }) => {
-  spin && store.spin.open(spin);
+  // spin && store.spin.open(spin);
   const res = await instance({ ... options });
-  spin && store.spin.close(spin);
+  // spin && store.spin.close(spin);
   return res;
 };
