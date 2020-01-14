@@ -35,3 +35,19 @@ export const login = async ({
   });
   return _.get(res, 'data.data.login.user');
 };
+
+export const getPublicKey = async () => {
+  const res = await axios({
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      query: `
+        query {
+          publicKey {
+            data
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.publicKey.data');
+};

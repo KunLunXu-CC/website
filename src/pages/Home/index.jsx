@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 
 import DockList from './DockList';
-// import MenuList from './MenuList';
-// import AppList from './AppList';
+import MenuList from './MenuList';
+import AppList from './AppList';
 import Desktop from './Desktop';
 
 /**
@@ -13,9 +13,9 @@ import Desktop from './Desktop';
  */
 export default () => (
   <Fragment>
-    {/* <AppList /> */}
-    {/* <MenuList/> */}
-    {/* <DockList/> */}
+    <AppList />
+    <MenuList/>
+    <DockList/>
     <Desktop/>
   </Fragment>
 );

@@ -1,4 +1,3 @@
-import { PHOTO_TYPE } from '@config/consts';
 
 /**
  * reducer: action = { type: 'global/getPhotos' }
@@ -12,3 +11,5 @@ export const setUser = (state, { payload }) => ({
   ... state,
   ... payload,
 });
+
+export const place = () => {};

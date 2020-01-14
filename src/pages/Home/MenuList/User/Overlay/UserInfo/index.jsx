@@ -4,36 +4,39 @@ import React, {
 import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
-import { useStore } from '@store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const { avatars, user  } = useSelector(state => ({
+    user: _.get(state, 'user'),
+    avatars: _.get(state, 'global.photos.avatar'),
+  }));
+
   // 随机头像
   const avatar = useMemo(() => {
-    const index = Math.floor(Math.random() * store.avatar.list.length);
-    return store.avatar.list.length > 0
-      ? _.get(store.avatar.list, `[${index}].url`, '')
+    const index = Math.floor(Math.random() * avatars.length);
+    return avatars.length > 0
+      ? _.get(avatars, `[${index}].url`, '')
       : '';
-  }, [store.avatar.list]);
+  }, [avatars]);
 
-  return { avatar };
+  return { avatar, user };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <div className={scss.userInfo}>
       <div className={scss.avatar}>
         <Image src={state.avatar}/>
       </div>
       <div className={scss.name}>
-        {_.get(store, 'user.user.name') || '---'}
+        { state.user.name || '---'}
       </div>
       <div className={scss.motto}>
-        { _.get(store, 'user.user.motto') || '这个人很懒什么都没写'}
+        { state.user.motto || '这个人很懒什么都没写'}
       </div>
     </div>
-  ));
+  );
 };

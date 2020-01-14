@@ -16,3 +16,5 @@ export const getPhotos = (state, { payload = [] }) => ({
     desktop: payload.filter(v => v.type === PHOTO_TYPE.DESKTOP.VALUE),
   },
 });
+
+export const place = () => {};

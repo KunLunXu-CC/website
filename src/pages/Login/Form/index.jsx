@@ -4,24 +4,33 @@ import React, {
 import scss from './index.module.scss';
 
 import { rsa } from '@utils';
-import { useStore } from '@store';
 import { Image, Icon } from 'qyrc';
-import { withRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { Input, Form, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { getPublicKey } from '../../../model/user/services';
 
-const useStateHook = (props, store) => {
+const useStateHook = props => {
+  const avatars = useSelector(
+    state => _.get(state, 'global.photos.avatar') || []
+  );
+
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+
   // 公钥
   const publicKey = useMemo(async () => (
-    await store.common.getPublicKey()
+    await getPublicKey()
   ), []);
 
   // 随机头像
   const avatar = useMemo(() => {
-    const index = Math.floor(Math.random() * store.avatar.list.length);
-    return store.avatar.list.length > 0
-      ? _.get(store.avatar.list, `[${index}].url`, '')
+    const index = Math.floor(Math.random() * avatars.length);
+    return avatars.length > 0
+      ? _.get(avatars, `[${index}].url`, '')
       : '';
-  }, [store.avatar.list]);
+  }, [avatars]);
 
   // 登录
   const onLogin = () => {
@@ -30,20 +39,20 @@ const useStateHook = (props, store) => {
         return false;
       }
       const { account, password } = values;
-      await store.user.login({
+      dispatch({
         account,
+        type: 'user/login',
         password: rsa(password, await publicKey),
       });
-      props.history.push('/');
+      history.push('/');
     });
   };
 
   return { onLogin, avatar };
 };
 
-export default Form.create()(withRouter(props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default Form.create()(props => {
+  const state = useStateHook(props);
 
   return (
     <div className={scss.login}>
@@ -85,4 +94,4 @@ export default Form.create()(withRouter(props => {
       </div>
     </div>
   );
-}));
+});

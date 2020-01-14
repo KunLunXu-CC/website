@@ -14,4 +14,4 @@ export default {
   reducers,
   state: initState,
   namespace: 'global',
-}
+};

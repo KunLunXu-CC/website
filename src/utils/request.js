@@ -89,7 +89,7 @@ use({
  * 导出方法:
  * 1. 处理 spin
  */
-export default async ({ spin, ... options }) => {
+export default async ({ ... options }) => {
   // spin && store.spin.open(spin);
   const res = await instance({ ... options });
   // spin && store.spin.close(spin);

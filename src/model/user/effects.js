@@ -1,6 +1,18 @@
 import _ from 'lodash';
 import * as services from './services';
-import { take, put,call } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
+
+const login = function * ({ account, password } = {}) {
+  const user = yield call(services.login, { account, password });
+  yield put({
+    payload: user,
+    type: 'user/setUser',
+  });
+  yield put({
+    type: 'app/setDocks',
+    auth: _.get(user, 'role.auth') || [],
+  });
+};
 
 /**
  * redux-saga effects
@@ -8,25 +20,14 @@ import { take, put,call } from 'redux-saga/effects';
  * 2. 请求数据
  * 3. 转发 action
  */
-export function * initUser() {
-  // yield take('user/setUser');
-  const user = yield call(services.login);
-  yield put({
-    payload: user,
-    type: 'user/setUser',
-  });
-  yield put({
-    type: 'app/setDocks',
-    payload: _.get(user, 'role.auth') || [],
-  });
+const init = function * () {
+  yield login();
 };
 
 // 登录
-export function * login() {
-  // yield take('user/login');
-  // const user = yield call(services.login);
-  // yield put({
-  //   payload: user,
-  //   type: 'user/setUser',
-  // });
+export const takeEveries = function * () {
+  yield init();
+  yield takeEvery('user/login', login);
 };
+
+export const place = function * () { };

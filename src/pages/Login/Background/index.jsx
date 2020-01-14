@@ -1,36 +1,36 @@
 import React, {
   useMemo,
 } from 'react';
+import _ from 'lodash';
 import Error from './Error';
 import Loading from './Loading';
 import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
-import { useStore } from '@store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector } from 'react-redux';
 
-const useStateHook = store => {
+const useStateHook = () => {
+  const photos = useSelector(state => (
+    _.get(state, 'global.photos.desktop') || []
+  ));
+
   const bg = useMemo(() => {
-    const index = Math.floor(Math.random() * store.desktop.bgList.length);
-    return store.desktop.bgList.length > 0
-      ? _.get(store.desktop.bgList, `[${index}].url`, '')
-      : '';
-  }, [store.desktop.bgList]);
+    const index = Math.floor(Math.random() * photos.length);
+    return photos.length > 0 ? _.get(photos, `[${index}].url`, '') : '';
+  }, [photos]);
+
   return { bg };
 };
 
 export default props => {
-  const store = useStore();
-  return useObserver(() => {
-    const state = useStateHook(store);
-    return (
-      <Image
-        src={state.bg}
-        error={<Error/>}
-        loading={<Loading/>}
-        className={scss.background}>
-        {props.children}
-      </Image>
-    );
-  });
+  const state = useStateHook();
+  return (
+    <Image
+      src={state.bg}
+      error={<Error/>}
+      loading={<Loading/>}
+      className={scss.background}>
+      {props.children}
+    </Image>
+  );
 };

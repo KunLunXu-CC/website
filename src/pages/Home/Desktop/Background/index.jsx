@@ -1,6 +1,5 @@
 import React, {
   useMemo,
-  useEffect,
 } from 'react';
 import _ from 'lodash';
 import Error from './Error';
@@ -8,10 +7,9 @@ import Loading from './Loading';
 import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
-
   const photos = useSelector(state => (
     _.get(state, 'global.photos.desktop') || []
   ));

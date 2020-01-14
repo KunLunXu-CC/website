@@ -30,3 +30,6 @@ export const getPhotos = async () => {
   });
   return _.get(res, 'data.data.photos.list') || [];
 };
+
+
+export const place = () => {};

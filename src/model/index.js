@@ -1,8 +1,8 @@
 import React from 'react';
 import createSagaMiddleware from 'redux-saga';
 
-import { Provider } from 'react-redux'
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
+import { Provider } from 'react-redux';
+import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 
 /**
  * 模型列表 { namespace, reducers, effects }
@@ -27,16 +27,16 @@ const reducers = models.reduce((total, ele) => {
       type === `${ele.namespace}/${key}`
     ));
     return hande ? hande(state, rest) : state;
-  }
+  };
   return { ... total, [ele.namespace]: reducer };
 }, {});
 
 /**
  * effects 列表 [Function]
  */
-const effects = models.reduce( (total, ele) => [
+const effects = models.reduce((total, ele) => [
   ... total,
-  ... Object.values(ele.effects || {})
+  ... Object.values(ele.effects || {}),
 ], []);
 
 /**
@@ -53,7 +53,8 @@ export const store = createStore(
   combineReducers(reducers),
   compose(
     applyMiddleware(... Object.values(middleware)),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
 );
 

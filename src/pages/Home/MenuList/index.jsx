@@ -1,6 +1,7 @@
 import React, {
   useMemo,
 } from 'react';
+import _ from 'lodash';
 import Date from './Date';
 import User from './User';
 import Github from './Github';
@@ -9,36 +10,33 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { useStore } from '@store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector }  from 'react-redux';
 
-const useStateHook = store => {
+const useStateHook = () => {
+  const opens = useSelector(state => _.get(state, 'app.opens'));
   const menuClassName = useMemo(() => {
-    const hideMenu = store.app.list.find(v => v.isMax && v.isMin === false);
+    const hideMenu = opens.find(v => v.isMax && v.isMin === false);
     return classNames(
       scss.menu,
       { [scss['menu-auto-hiding']]: hideMenu },
     );
-  }, [store.app.list]);
+  }, [opens]);
 
   return { menuClassName };
 };
 
 export default () => {
-  const store = useStore();
-  return useObserver(() => {
-    const state = useStateHook(store);
-    return (
-      <div className={state.menuClassName}>
-        <div className={scss.body}>
-          <Date/>
-          <Github/>
-          <Juejin/>
-          <Icon type="icon-wifi"/>
-          <Icon type="icon-dianliang"/>
-          <User/>
-        </div>
+  const state = useStateHook();
+  return (
+    <div className={state.menuClassName}>
+      <div className={scss.body}>
+        <Date/>
+        <Github/>
+        <Juejin/>
+        <Icon type="icon-wifi"/>
+        <Icon type="icon-dianliang"/>
+        <User/>
       </div>
-    );
-  });
+    </div>
+  );
 };

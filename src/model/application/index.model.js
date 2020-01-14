@@ -11,4 +11,4 @@ export default {
   reducers,
   state: initState,
   namespace: 'app',
-}
+};
