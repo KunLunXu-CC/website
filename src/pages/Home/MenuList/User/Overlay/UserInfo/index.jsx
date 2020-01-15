@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const useStateHook = () => {
   const { avatars, user  } = useSelector(state => ({
     user: _.get(state, 'user'),
-    avatars: _.get(state, 'global.photos.avatar'),
+    avatars: _.get(state, 'photos.avatar'),
   }));
 
   // 随机头像

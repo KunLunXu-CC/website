@@ -12,7 +12,7 @@ import { getPublicKey } from '../../../model/user/services';
 
 const useStateHook = props => {
   const avatars = useSelector(
-    state => _.get(state, 'global.photos.avatar') || []
+    state => _.get(state, 'photos.avatar') || []
   );
 
   const history = useHistory();

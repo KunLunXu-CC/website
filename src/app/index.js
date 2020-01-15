@@ -1,6 +1,5 @@
-// import Tag from './Tag';
 // import Diary from './Diary';
-// import Album from './Album';
+import Album from './Album';
 // import Editor from './Editor';
 // import Article from './Article';
 
@@ -8,7 +7,7 @@ export default {
   album: {
     name: '相册',
     code: 'album',
-    component: () => (11111111),
+    component: Album,
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
@@ -50,12 +49,4 @@ export default {
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
-  // {
-  //   name: '标签',
-  //   icon: 'icon-biaoqian1',
-  //   code: 'tag',
-  //   path: '/tag',
-  //   defaultUrl: '/tag',
-  //   component: Tag
-  // },
 };

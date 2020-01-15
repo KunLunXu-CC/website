@@ -11,7 +11,7 @@ const getPhotos = function * () {
   const photos = yield call(services.getPhotos);
   yield put({
     photos,
-    type: 'global/setPhotos',
+    type: 'photos/setPhotos',
   });
 };
 

@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const photos = useSelector(state => (
-    _.get(state, 'global.photos.desktop') || []
+    _.get(state, 'photos.desktop') || []
   ));
 
   const bg = useMemo(() => {

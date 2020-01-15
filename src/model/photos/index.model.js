@@ -2,16 +2,14 @@ import effects from './effects';
 import * as reducers from './reducers';
 
 const initState = {
-  photos: {
-    desktop: [],
-    avatar: [],
-    thumb: [],
-  },
+  desktop: [],
+  avatar: [],
+  thumb: [],
 };
 
 export default {
   effects,
   reducers,
   state: initState,
-  namespace: 'global',
+  namespace: 'photos',
 };
