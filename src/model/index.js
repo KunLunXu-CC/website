@@ -1,4 +1,6 @@
+import _ from 'lodash';
 import React from 'react';
+import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 
 import { Provider } from 'react-redux';
@@ -6,6 +8,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 
 /**
  * 模型列表 { namespace, reducers, effects }
+ * 所有模型入口文件格式为 *.model.js
  * 1. namespace 模型命名空间, 决定模型在 redux 中状态所对应的 key 值
  * 2. reducers 处理状态的纯函数, {函数名}/{namespace} 组成一一对应的 action.type
  * 3. effects redux-saga effects
@@ -34,15 +37,15 @@ const reducers = models.reduce((total, ele) => {
 /**
  * effects 列表 [Function]
  */
-const effects = models.reduce((total, ele) => [
-  ... total,
-  ... Object.values(ele.effects || {}),
-], []);
+const effects = models
+  .map(ele => ele.effects)
+  .filter(v => _.isFunction(v));
 
 /**
  * middleware 中间件列表
  */
 const middleware = {
+  logger,
   sagaMiddleware: createSagaMiddleware(),
 };
 

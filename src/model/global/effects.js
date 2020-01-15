@@ -2,19 +2,28 @@ import * as services from './services';
 import { put, call } from 'redux-saga/effects';
 
 /**
+ * 获取所有图片
  * redux-saga effects
- * 1. 默认初始化就会执行
- * 2. 请求数据
- * 3. 转发 action
+ * 1. 请求数据
+ * 2. 转发 action
  */
-export const getPhotos = function * getPhotos () {
+const getPhotos = function * () {
   const photos = yield call(services.getPhotos);
   yield put({
-    type: 'global/getPhotos',
-    payload: photos,
+    photos,
+    type: 'global/setPhotos',
   });
 };
 
-export const place = function * place () {
-
+/**
+ * 初始化数据: 在初始初始化 redux 就会被执行
+ * @return {undefined}
+ */
+const init = function * () {
+  yield getPhotos();
 };
+
+// 导出
+export default function * () {
+  yield init();
+}

@@ -1,4 +1,4 @@
-import * as effects from './effects';
+import effects from './effects';
 import * as reducers from './reducers';
 
 const initState = {

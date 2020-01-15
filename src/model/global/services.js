@@ -3,6 +3,11 @@ import _ from 'lodash';
 import axios from '@utils/request';
 import { PHOTO_TYPE } from '@config/consts';
 
+
+/**
+ * 获取所有图片: 桌面、缩略图、头像
+ * @return {Objject[]} 返回查询到的列表数据
+ */
 export const getPhotos = async () => {
   const search = {
     type: [
@@ -31,5 +36,5 @@ export const getPhotos = async () => {
   return _.get(res, 'data.data.photos.list') || [];
 };
 
-
+// 占位: 要不然 eslint 将会抛错
 export const place = () => {};

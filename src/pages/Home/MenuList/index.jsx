@@ -14,6 +14,7 @@ import { useSelector }  from 'react-redux';
 
 const useStateHook = () => {
   const opens = useSelector(state => _.get(state, 'app.opens'));
+
   const menuClassName = useMemo(() => {
     const hideMenu = opens.find(v => v.isMax && v.isMin === false);
     return classNames(

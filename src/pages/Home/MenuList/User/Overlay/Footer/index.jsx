@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {
+  useCallback,
+} from 'react';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const useStateHook = props => {
+const useStateHook = () => {
+  const history = useHistory();
+
   // 退出
-  const signOut = () => {
-    props.history.push('/login');
-  };
+  const signOut = useCallback(() => {
+    history.push('/login');
+  }, []);
 
   return { signOut };
 };
 
-export default withRouter(props => {
-  const state = useStateHook(props);
-
+export default () => {
+  const state = useStateHook();
   return (
     <div className={scss.footer}>
       <Icon type="icon-shezhi"/>
@@ -23,4 +26,4 @@ export default withRouter(props => {
       <Icon onClick={state.signOut} type="icon-tuichu"/>
     </div>
   );
-});
+};

@@ -1,6 +1,8 @@
-import apps from '@app';
-import React from 'react';
+import React, {
+  useCallback,
+} from 'react';
 import _ from 'lodash';
+import apps from '@app';
 import scss from './index.module.scss';
 
 import { Window } from 'qyrc';
@@ -10,21 +12,21 @@ const useStateHook = () => {
   const dispatch = useDispatch();
   const opens = useSelector(state => _.get(state, 'app.opens'));
 
-  const onClose = app => {
+  const onClose = useCallback(app => {
     dispatch({ type: 'app/onClose', app });
-  };
+  }, []);
 
-  const onMin = app => {
+  const onMin = useCallback(app => {
     dispatch({ type: 'app/onMin', app });
-  };
+  }, []);
 
-  const onMax = app => {
+  const onMax = useCallback(app => {
     dispatch({ type: 'app/onMax', app });
-  };
+  }, []);
 
-  const onMouseDown = app => {
+  const onMouseDown = useCallback(app => {
     dispatch({ type: 'app/onMouseDown', app });
-  };
+  }, []);
 
   return { opens, onClose, onMin, onMax, onMouseDown };
 };
@@ -33,20 +35,18 @@ export default () => {
   const state = useStateHook();
   return (
     <div className={scss['app-block']}>
-      {state.opens.map(v => {
-        const { code, isMin } = v;
-        const { component: Component, modalProps } = apps[code];
+      {state.opens.map(app => {
+        const { component: Component, modalProps } = apps[app.code];
         return (
           <Window
-            key={code}
-            isMin={isMin}
-            onMin={state.onMin.bind(null, v)}
-            onMax={state.onMax.bind(null, v)}
-            onClose={state.onClose.bind(null, v)}
-            onMouseDown={state.onMouseDown.bind(null, v)}
+            key={app.code}
+            isMin={app.isMin}
+            onMin={state.onMin.bind(null, app)}
+            onMax={state.onMax.bind(null, app)}
+            onClose={state.onClose.bind(null, app)}
+            onMouseDown={state.onMouseDown.bind(null, app)}
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
-            {...modalProps}
-          >
+            {...modalProps}>
             <Component/>
           </Window>
         );

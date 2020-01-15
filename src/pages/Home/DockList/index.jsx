@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useCallback,
+} from 'react';
 import List from './List';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,9 +9,9 @@ const useStateHook = () => {
   const dispatch = useDispatch();
   const app = useSelector(state => state.app);
 
-  const onClick = dock => {
+  const onClick = useCallback(dock => {
     dispatch({ type: 'app/openApp', app: dock });
-  };
+  }, []);
 
   return { onClick, app };
 };

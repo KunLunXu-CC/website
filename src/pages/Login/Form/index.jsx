@@ -5,9 +5,9 @@ import scss from './index.module.scss';
 
 import { rsa } from '@utils';
 import { Image, Icon } from 'qyrc';
-import { useSelector, useDispatch } from 'react-redux';
 import { Input, Form, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { getPublicKey } from '../../../model/user/services';
 
 const useStateHook = props => {
@@ -68,7 +68,8 @@ export default Form.create()(props => {
               <Input
                 size="large"
                 placeholder="请输入账号"
-                prefix={<Icon type="icon-jenkins"/>}/>
+                prefix={<Icon type="icon-jenkins"/>}
+              />
             )}
           </Form.Item>
           <Form.Item>
@@ -78,7 +79,8 @@ export default Form.create()(props => {
               <Input.Password
                 size="large"
                 placeholder="请输入密码"
-                prefix={<Icon type="icon-suoping"/>}/>
+                prefix={<Icon type="icon-suoping"/>}
+              />
             )}
           </Form.Item>
           <Form.Item>

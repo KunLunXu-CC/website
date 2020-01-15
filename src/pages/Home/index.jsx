@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 
-import DockList from './DockList';
-import MenuList from './MenuList';
 import AppList from './AppList';
 import Desktop from './Desktop';
+import DockList from './DockList';
+import MenuList from './MenuList';
 
 /**
  * 下面所有组件都使用 position: fixed 进行布局
