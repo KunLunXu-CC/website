@@ -3,31 +3,33 @@ import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
 import { Input } from 'antd';
-import { useStore } from '../../store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = store => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const article = useSelector(state => _.get(state, 'article.article'));
+
   // 回退
   const onBack = () => {
-    store.article.drop();
+    // store.article.drop();
   };
 
   // 搜索
   const onSearch = event => {
-    store.article.search(event.target.value);
+    // store.article.search(event.target.value);
   };
 
-  return { onBack, onSearch };
+  return { article, onBack, onSearch };
 };
 
 export default () => {
-  const store = useStore();
-  const state = useStateHook(store);
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <div className={scss['search-bar']}>
       <div className={scss['search-bar-prefix']}>
-        {store.article.article ?
+        {state.article ?
           <Icon
             onClick={state.onBack}
             type="icon-huituishuikuansuoshuqi"
@@ -45,5 +47,5 @@ export default () => {
       <div className={scss['search-bar-suffix']}>
       </div>
     </div>
-  ));
+  );
 };

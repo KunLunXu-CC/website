@@ -1,5 +1,5 @@
 import React from 'react';
-// import Body from './Body';
+import Body from './Body';
 // import Side from './Side';
 import Menu from './Menu';
 import Spin from './Spin';
@@ -20,7 +20,7 @@ export default () => (
       <Menu/>
     </VariableBlock>
     <div className={scss['layout-body']}>
-      {/* <Body/> */}
+      <Body/>
     </div>
     <div className={scss['layout-side']}>
       {/* <Side/> */}

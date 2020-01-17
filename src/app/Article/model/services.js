@@ -32,4 +32,45 @@ export const getTagsWithArticles = async ({
   return _.get(res, 'data.data.tagsWithArticles.list');
 };
 
-export const space = () => {};
+export const getArticles = async ({
+  spin,
+  search,
+  pagination,
+  orderBy = { creationTime: -1 },
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { search, pagination, orderBy },
+      query: `
+        query(
+          $orderBy: OrderBy,
+          $search: ArticleSearch,
+          $pagination: Pagination,
+        ){
+          articles(
+            search: $search,
+            orderBy: $orderBy,
+            pagination: $pagination,
+          ){
+            list {
+              id
+              name
+              desc
+              thumb
+              status
+              content
+              viewCount
+              updateTime
+              tags { id name }
+            }
+            message
+            pagination
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.articles.list');
+};

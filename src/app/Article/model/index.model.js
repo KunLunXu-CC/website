@@ -9,6 +9,9 @@ const initState = {
     name: void 0,
     tag: TAG_ALL.id,
   },
+  article: null,
+  articles: [],
+  articleTops: [],
 };
 
 export default {

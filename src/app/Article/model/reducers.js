@@ -30,3 +30,17 @@ export const setSearch = (state, { search }) => ({
     ... search,
   },
 });
+
+/**
+ * 设置文章列表数据
+ * 1. reducer: action = { type: 'article/setArticles', menus }
+ * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
+ *
+ * @param {Object} state 当前 state
+ * @param {String} action.articles 新的列表数据
+ * @return {Object} 更新后的状态
+ */
+export const setArticles = (state, { articles }) => ({
+  ... state,
+  articles,
+});
