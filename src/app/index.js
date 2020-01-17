@@ -1,4 +1,4 @@
-// import Diary from './Diary';
+import Diary from './Diary';
 import Album from './Album';
 // import Editor from './Editor';
 // import Article from './Article';
@@ -41,7 +41,7 @@ export default {
   diary: {
     name: '日记',
     code: 'diary',
-    component: () => ('Diary'),
+    component: Diary,
     icon: 'icon-biji',
     modalProps: {
       dragHeight: 40,

@@ -1,23 +1,24 @@
 import React from 'react';
 import scss from './index.module.scss';
 
-import { useStore } from '../store';
-import { DIARY_EDIT_FORM } from '../Modal/consts';
 import { Icon } from 'qyrc';
+import { useDispatch } from 'react-redux';
+import { DIARY_EDIT_FORM } from '../Modal/consts';
 
-const useStateHook = store => {
-  const onAdd = () => {
-    store.global.modal.open({
-      title: '新增日记',
-      code: DIARY_EDIT_FORM,
-    });
-  };
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const onAdd = () => dispatch({
+    type: 'modal/openModal',
+    code: DIARY_EDIT_FORM,
+    title: '新增日记',
+  });
+
   return { onAdd };
 };
 
 export default () => {
-  const store = useStore();
-  const state = useStateHook(store);
+  const state = useStateHook();
 
   return (
     <div className={scss.header}>

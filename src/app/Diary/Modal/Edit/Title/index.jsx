@@ -1,26 +1,27 @@
-import React, {
-  useMemo,
-} from 'react';
+import React from 'react';
 import scss from './index.module.scss';
 
 import { Button } from 'antd';
-import { useStore } from '../../../store';
 import { DIARY_EDIT_FORM } from '../../consts';
-import { useObserver } from 'mobx-react-lite';
+import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = (props, store) => {
-  const modal = useMemo(() => (
-    store.global.modal.modals[DIARY_EDIT_FORM]
-  ), [store.global.modal.modals]);
+const useStateHook = props => {
+  const dispatch = useDispatch();
 
-  // 取消亦或关闭
+  const modal = useSelector(
+    state => _.get(state, `modal.${DIARY_EDIT_FORM}`)
+  );
+
   const onCancel = () => {
-    store.global.modal.close(DIARY_EDIT_FORM);
+    dispatch({
+      type: 'modal/closeModal',
+      code: DIARY_EDIT_FORM,
+    });
     props.form.resetFields();
   };
 
-  // 获取参数
-  const getParams = values => {
+  // 获取 body
+  const getBody = values => {
     const {
       name,
       getUp,
@@ -48,10 +49,12 @@ const useStateHook = (props, store) => {
         return false;
       }
       const id = _.get(modal, 'data.id');
-      const params = getParams(values);
-      id
-        ? await store.diary.updateDiaries(id, params)
-        : await store.diary.createDiarie(params);
+      const body = getBody(values);
+      dispatch({
+        id,
+        body,
+        type: id ? 'diary/updateDiaries' : 'diary/createDiarie',
+      });
       onCancel();
     });
   };
@@ -60,17 +63,14 @@ const useStateHook = (props, store) => {
 };
 
 export default props => {
-  const store = useStore();
-  return useObserver(() => {
-    const state = useStateHook(props, store);
-    return (
-      <div className={scss.title}>
-        <div className={scss.text}>
-          {_.get(state, 'modal.title')}
-        </div>
-        <Button type="primary" onClick={state.onSave}>保存</Button>
-        <Button onClick={state.onCancel}>关闭</Button>
+  const state = useStateHook(props);
+  return (
+    <div className={scss.title}>
+      <div className={scss.text}>
+        {_.get(state, 'modal.title')}
       </div>
-    );
-  });
+      <Button type="primary" onClick={state.onSave}>保存</Button>
+      <Button onClick={state.onCancel}>关闭</Button>
+    </div>
+  );
 };
