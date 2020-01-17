@@ -6,6 +6,7 @@ import axios from '@utils/request';
  */
 export const uploadPhotos = async ({
   type,
+  spin,
   files,
   payload,
 }) => {
@@ -15,6 +16,7 @@ export const uploadPhotos = async ({
   files.forEach(v => (formData.append('file', v)));
 
   const res = await axios({
+    spin,
     data: formData,
     method: 'post',
     url: '/photo/upload',
@@ -29,8 +31,9 @@ export const uploadPhotos = async ({
  * 获取所有图片: 桌面、缩略图、头像
  * @return {Objject[]} 返回查询到的列表数据
  */
-export const getPhotos = async ({ search }) => {
+export const getPhotos = async ({ search, spin }) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
@@ -54,10 +57,12 @@ export const getPhotos = async ({ search }) => {
  * 移除图片
  */
 export const removePhotos = async ({
+  spin,
   conds,
   search,
 }) => {
   const res = await axios({
+    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {

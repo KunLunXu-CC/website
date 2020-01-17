@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { store } from '@store';
+import { store } from '../model';
 import { log } from '@utils';
 
 // 创建 axios 实例
@@ -84,14 +84,13 @@ use({
   ],
 });
 
-
 /**
  * 导出方法:
  * 1. 处理 spin
  */
-export default async ({ ... options }) => {
-  // spin && store.spin.open(spin);
+export default async ({ spin: code, ... options }) => {
+  store.dispatch({ type: 'spin/openSpin', code });
   const res = await instance({ ... options });
-  // spin && store.spin.close(spin);
+  store.dispatch({ type: 'spin/closeSpin', code });
   return res;
 };

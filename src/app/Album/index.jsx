@@ -1,7 +1,7 @@
 import React from 'react';
 import Body from './Body';
 import Side from './Side';
-// import Spin from './Spin';
+import Spin from './Spin';
 import scss from './index.module.scss';
 
 import { MESSAGE_CODE } from '@config/consts';
@@ -15,6 +15,6 @@ export default () => (
       <Body/>
     </div>
     <div id={MESSAGE_CODE.APP_ALBUM}/>
-    {/* <Spin/> */}
+    <Spin/>
   </div>
 );
