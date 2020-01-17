@@ -1,7 +1,6 @@
 import React, {
   useCallback,
 } from 'react';
-import _ from 'lodash';
 import apps from '@app';
 import scss from './index.module.scss';
 

@@ -1,7 +1,6 @@
 import React, {
   useMemo,
 } from 'react';
-import _ from 'lodash';
 import Date from './Date';
 import User from './User';
 import Github from './Github';

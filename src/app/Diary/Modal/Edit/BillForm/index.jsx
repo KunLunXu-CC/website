@@ -1,7 +1,6 @@
 import React, {
   useEffect,
 } from 'react';
-import _ from 'lodash';
 import Form from './Form';
 import scss from './index.module.scss';
 

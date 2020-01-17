@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import * as services from './services';
 import { put, call, takeEvery } from 'redux-saga/effects';
 

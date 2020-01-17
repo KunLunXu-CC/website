@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';

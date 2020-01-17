@@ -1,7 +1,6 @@
 import React, {
   useMemo,
 } from 'react';
-import _ from 'lodash';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';

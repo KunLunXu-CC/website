@@ -1,5 +1,3 @@
-
-import _ from 'lodash';
 import axios from '@utils/request';
 import { PHOTO_TYPE } from '@config/consts';
 

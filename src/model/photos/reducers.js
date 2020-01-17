@@ -16,4 +16,4 @@ export const setPhotos = (state, { photos }) => ({
   desktop: photos.filter(v => v.type === PHOTO_TYPE.DESKTOP.VALUE),
 });
 
-export const place = () => {}
+export const place = () => {};

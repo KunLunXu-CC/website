@@ -1,7 +1,6 @@
 import React, {
   useMemo,
 } from 'react';
-import _ from 'lodash';
 import Error from './Error';
 import Loading from './Loading';
 import scss from './index.module.scss';
