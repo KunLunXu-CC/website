@@ -1,7 +1,7 @@
 import Diary from './Diary';
 import Album from './Album';
 // import Editor from './Editor';
-// import Article from './Article';
+import Article from './Article';
 
 export default {
   album: {
@@ -29,7 +29,7 @@ export default {
   article: {
     name: '文章',
     code: 'article',
-    component: () => ('Article'),
+    component: Article,
     icon: 'icon-wenzhang',
     modalProps: {
       dragHeight: 40,
