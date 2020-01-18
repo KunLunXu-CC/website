@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 export default () => {
   const show = useSelector(
-    state => _.get(state, `spin.${SPIN_CODE.APP_ALBUM}`)
+    state => _.get(state, `spin.${SPIN_CODE.APP_ARTICLE}`)
   );
   return (
     show

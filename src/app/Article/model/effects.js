@@ -1,7 +1,7 @@
 import * as services from './services';
 
 import { put, call, takeEvery } from 'redux-saga/effects';
-import { SPIN_CODE, ARTICLE_STATUS } from '@config/consts';
+import { SPIN_CODE, ARTICLE_STATUS, TAG_ALL } from '@config/consts';
 
 /**
  * 获取菜单: 只查有已发布文章的 tag
@@ -28,6 +28,10 @@ const getArticles = function * ({ search }) {
     ... search,
     status: ARTICLE_STATUS.RELEASE,
   };
+
+  if (_search.tag === TAG_ALL.id) {
+    _search.tag = void 0;
+  }
 
   const articles = yield call(services.getArticles, {
     spin: SPIN_CODE.APP_ARTICLE,

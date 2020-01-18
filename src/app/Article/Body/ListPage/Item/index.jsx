@@ -14,7 +14,7 @@ const useStateHook = props => {
 
   // 点击
   const onClick = () => {
-    // dispatch({ type: 'read', id });
+    dispatch({ type: 'article/setRead', read: { article: props.data } });
   };
 
   const thumbs = useSelector(state => _.get(state, 'photos.thumb'));

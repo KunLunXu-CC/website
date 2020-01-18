@@ -12,11 +12,9 @@ const useStateHook = () => {
 
   // 点击菜单
   const onClickMenu = ({ key: tag }) => {
-    // store.menu.setTag(key);
-    dispatch({
-      type: 'article/setSearch',
-      search: { tag },
-    });
+    const search = { tag };
+    dispatch({ type: 'article/setSearch', search });
+    dispatch({ type: 'article/getArticles', search });
   };
 
   // 所有菜单

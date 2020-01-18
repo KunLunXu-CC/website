@@ -3,15 +3,19 @@ import * as reducers from './reducers';
 
 import { TAG_ALL } from '@config/consts';
 
-const initState = {
+export const initState = {
   menus: [],
   search: {
     name: void 0,
     tag: TAG_ALL.id,
   },
-  article: null,
   articles: [],
   articleTops: [],
+  read: {
+    toc: [],
+    article: null,
+    scrollHeight: 0,
+  },
 };
 
 export default {

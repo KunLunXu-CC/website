@@ -7,7 +7,7 @@ import scss from './index.module.scss';
 import { useSelector } from 'react-redux';
 
 export default () => {
-  const article = useSelector(state => _.get(state, 'article.article'));
+  const article = useSelector(state => _.get(state, 'article.read.article'));
   return (
     <div className={scss.body}>
       <SearchBar />

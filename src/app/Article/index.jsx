@@ -1,6 +1,6 @@
 import React from 'react';
 import Body from './Body';
-// import Side from './Side';
+import Side from './Side';
 import Menu from './Menu';
 import Spin from './Spin';
 import scss from './index.module.scss';
@@ -23,7 +23,7 @@ export default () => (
       <Body/>
     </div>
     <div className={scss['layout-side']}>
-      {/* <Side/> */}
+      <Side/>
     </div>
     <div id={MESSAGE_CODE.APP_ARTICLE}/>
     <Spin/>

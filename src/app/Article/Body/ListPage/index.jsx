@@ -12,7 +12,9 @@ import { useSelector, useDispatch } from 'react-redux';
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const articles = useSelector(state => _.get(state, 'article.articles'));
+  const articles = useSelector(
+    state => _.get(state, 'article.articles') || []
+  );
 
   useEffect(() => {
     dispatch({ type: 'article/getArticles' });
