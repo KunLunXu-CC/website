@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { store } from '../model';
+import { store } from '@model';
 import { log } from '@utils';
 
 // 创建 axios 实例

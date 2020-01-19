@@ -6,14 +6,14 @@ import { Icon } from 'qyrc';
 
 export default props => (
   <span className={scss.tab}>
-    {props.data.article.name}&nbsp;&nbsp;
+    {props.data.name}&nbsp;&nbsp;
     <Icon
       type="icon-guanbi6"
       className={classNames(
         scss['tab-icon'],
-        { [scss['tab-icon-change']]: props.data.change }
+        // { [scss['tab-icon-change']]: props.data.change }
       )}
-      onClick={props.onClose.bind(null, props.data.article.id)}
+      onClick={props.onClose.bind(null, props.data.id)}
     />
   </span>
 );

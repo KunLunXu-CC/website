@@ -1,6 +1,6 @@
 import Diary from './Diary';
 import Album from './Album';
-// import Editor from './Editor';
+import Editor from './Editor';
 import Article from './Article';
 
 export default {
@@ -18,7 +18,7 @@ export default {
   editor: {
     name: '编辑器',
     code: 'editor',
-    component: () => ('Editor'),
+    component: Editor,
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,

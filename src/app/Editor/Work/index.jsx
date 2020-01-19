@@ -1,44 +1,58 @@
 import Tab from './Tab';
-import React from 'react';
 import Empty from './Empty';
 import Editor from './Editor';
-import TabBarExtra from './TabBarExtra';
+import React, { useMemo } from 'react';
 import scss from './index.module.scss';
+import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
-import { useStore } from '../store';
-import { useObserver } from 'mobx-react-lite';
+import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const { selected, openList, articles } = useSelector(state => ({
+    selected: _.get(state, 'editor.menu.selected'),
+    openList: _.get(state, 'editor.openList'),
+    articles: _.get(state, 'editor.articles'),
+  }));
+
+  const works = useMemo(() => (
+    openList.map(v => ({
+      ... articles.find(article => article.id === v),
+    }))
+  ), [openList, articles]);
+
   // 移除
   const onClose = key => {
-    store.article.close(key);
-    store.menu.toggleSelected(key);
+    dispatch({ type: 'editor/removeOpenList', key });
   };
 
   // tabs change 事件
   const onTabsChange = activeKey => {
-    store.menu.toggleSelected(activeKey);
+    dispatch({
+      type: 'editor/setMenu',
+      menu: { selected: activeKey },
+    });
   };
 
-  return { onClose, onTabsChange };
+  return { onClose, onTabsChange, selected, openList, works };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
-
-  return useObserver(() => (
+export default () => {
+  const state = useStateHook();
+  return (
     <div className={scss.work}>
-      {store.article.works.length > 0 ?
+      {state.works.length > 0 ?
         <Tabs
           type="card"
           onChange={state.onTabsChange}
-          activeKey={store.menu.selected}
-          tabBarExtraContent={<TabBarExtra/>}>
-          {store.article.works.map(v => (
+          activeKey={state.selected}
+          tabBarExtraContent={<TabBarExtra/>}
+        >
+          {state.works.map(v => (
             <Tabs.TabPane
-              key={v.article.id}
+              key={v.id}
               tab={<Tab data={v} onClose={state.onClose}/>}>
               <Editor data={v}/>
             </Tabs.TabPane>
@@ -46,5 +60,5 @@ export default props => {
         </Tabs> : <Empty/>
       }
     </div>
-  ));
+  );
 };

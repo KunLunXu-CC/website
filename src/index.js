@@ -1,7 +1,7 @@
 import './console';
 import React from 'react';
+import Store from '@model';
 import moment from 'moment';
-import Store from './model';
 import Router from './Router';
 import reactDom from 'react-dom';
 import zhCN from 'antd/es/locale/zh_CN';

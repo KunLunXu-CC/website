@@ -8,7 +8,7 @@ import { Image, Icon } from 'qyrc';
 import { Input, Form, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getPublicKey } from '../../../model/user/services';
+import { getPublicKey } from '@model/user/services';
 
 const useStateHook = props => {
   const avatars = useSelector(

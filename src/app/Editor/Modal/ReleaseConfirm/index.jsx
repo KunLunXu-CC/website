@@ -1,54 +1,54 @@
-import React, {
-  useMemo,
-} from 'react';
+import React from 'react';
 import scss from './index.module.scss';
 
 import { Modal } from 'antd';
-import { useStore } from '../../store';
 import { RELEASE_CONFIRM } from '../consts';
-import { useObserver } from 'mobx-react-lite';
+import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = store => {
-  const modal = useMemo(() => (
-    store.global.modal.modals[RELEASE_CONFIRM]
-  ), [store.global.modal.modals]);
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const article = useSelector(state => {
+    const article = _.get(state, `modal[${RELEASE_CONFIRM}].article`);
+    return _.get(state, 'editor.articles').find(v => v.id === article);
+  });
 
   const onCancel = () => {
-    store.global.modal.close(RELEASE_CONFIRM);
+    dispatch({
+      code: RELEASE_CONFIRM,
+      type: 'modal/closeModal',
+    });
   };
 
   const onOk = async () => {
-    const id = _.get(store, 'article.action.article.id');
-    if (!id) {
-      return false;
-    }
-    await store.article.releaseArticle({ id });
+    dispatch({
+      id: article.id,
+      type: 'editor/releaseArticle',
+    });
     onCancel();
   };
 
-  return { modal, onCancel, onOk };
+  return { article, onCancel, onOk };
 };
 
 export default () => {
-  const store = useStore();
-  return useObserver(() => {
-    const state = useStateHook(store);
-    return (
-      <Modal
-        okText="发布"
-        closable={false}
-        cancelText="取消"
-        onOk={state.onOk}
-        getContainer={false}
-        className={scss.modal}
-        visible={!!state.modal}
-        onCancel={state.onCancel}>
-        发布文章:
-        <span className={scss['article-name']}>
-          {_.get(store, 'article.action.article.name') || '---'}
-        </span>
-        ？
-      </Modal>
-    );
-  });
+  const state = useStateHook();
+
+  return (
+    <Modal
+      okText="发布"
+      closable={false}
+      cancelText="取消"
+      onOk={state.onOk}
+      getContainer={false}
+      className={scss.modal}
+      visible={!!state.article}
+      onCancel={state.onCancel}>
+      发布文章:
+      <span className={scss['article-name']}>
+        {_.get(state, 'article.name') || '---'}
+      </span>
+      ？
+    </Modal>
+  );
 };

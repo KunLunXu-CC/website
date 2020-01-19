@@ -4,12 +4,11 @@
     "baseUrl": ".",
 
     "paths": {
-      "@api/*": ["src/api/*"],
       "@app/*": ["src/app/*"],
       "@hook/*": ["src/hook/*"],
       "@pages/*": ["src/pages/*"],
       "@utils/*": ["src/utils/*"],
-      "@store/*": ["src/store/*"],
+      "@model/*": ["src/model/*"],
       "@assets/*": ["src/assets/*"],
       "@config/*": ["src/config/*"]
     },
