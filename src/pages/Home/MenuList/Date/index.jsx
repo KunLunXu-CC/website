@@ -13,7 +13,7 @@ const useStateHook = () => {
   // 获取日期
   const resetData = useCallback(() => {
     const date = moment().format('MM 月 DD 日');
-    const time = moment().format('hh : mm : ss');
+    const time = moment().format('HH : mm : ss');
     const week = ['一', '二', '三', '四', '五', '六', '天'][moment().weekday() - 1];
     setData({ date, week, time });
   }, []);
