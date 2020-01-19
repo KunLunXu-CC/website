@@ -96,14 +96,15 @@ export const openApp = (state, { app }) => {
  * @return {Object} 更新后的状态
  */
 export const onMouseDown = (state, { app }) => {
-  if (state.opens[state.opens.length - 1].key === app.key) {
+  if (_.last(state.opens).code === app.code) {
     return state;
   }
+  const remove = _.remove(state.opens, v => (v.code === app.code));
   return {
     ... state,
     opens: [
       ... state.opens,
-      ... _.remove(state.opens, v => (v.code === app.code)),
+      ... remove,
     ],
   };
 };

@@ -24,8 +24,11 @@ const useStateHook = () => {
   }, []);
 
   const onMouseDown = useCallback(app => {
+    if (_.get(_.last(opens), 'code') === app.code) {
+      return false;
+    }
     dispatch({ type: 'app/onMouseDown', app });
-  }, []);
+  }, [opens]);
 
   return { opens, onClose, onMin, onMax, onMouseDown };
 };
