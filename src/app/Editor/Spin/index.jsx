@@ -7,7 +7,7 @@ import { SPIN_CODE } from '@config/consts';
 
 export default () => {
   const show = useSelector(
-    state => _.get(state, `spin.${SPIN_CODE.APP_ALBUM}`)
+    state => _.get(state, `spin.${SPIN_CODE.APP_EDITOR}`)
   );
 
   return (
