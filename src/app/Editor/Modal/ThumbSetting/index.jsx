@@ -13,10 +13,9 @@ const useStateHook = () => {
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
 
-  const article = useSelector(state => {
-    const article = _.get(state, `modal[${THUMB_SETTING}].article`);
-    return _.get(state, 'editor.articles').find(v => v.id === article);
-  });
+  const article = useSelector(
+    state => _.get(state, `modal[${THUMB_SETTING}].article`)
+  );
 
   const onCancel = () => {
     setFile(null);

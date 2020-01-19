@@ -15,26 +15,26 @@ import {
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const { articles, selected } = useSelector(state => ({
+  const { articles, works } = useSelector(state => ({
+    works: _.get(state, 'editor.works'),
     articles: _.get(state, 'editor.articles'),
-    selected: _.get(state, 'editor.menu.selected'),
   }));
 
-  const action = useMemo(
-    () => (articles.find(v => v.id === selected)),
-    [articles, selected]
-  );
+  const article = useMemo(() => {
+    const id = _.get(works.find(v => v.action), 'article');
+    return articles.find(v => v.id === id);
+  }, [articles, works]);
 
   // 当前文章是否是未发布状态
   const unpublished = useMemo(
-    () => (_.get(action, 'status') !== ARTICLE_STATUS.RELEASE),
-    [action]
+    () => (_.get(article, 'status') !== ARTICLE_STATUS.RELEASE),
+    [article]
   );
 
   // 发布
   const onRelease = () => {
     dispatch({
-      article: action.id,
+      article,
       type: 'modal/openModal',
       code: RELEASE_CONFIRM,
     });
@@ -43,7 +43,7 @@ const useStateHook = () => {
   // 撤销(下架)
   const onRevoke = () => {
     dispatch({
-      article: action.id,
+      article,
       type: 'modal/openModal',
       code: REVOKE_CONFIRM,
     });
@@ -52,7 +52,7 @@ const useStateHook = () => {
   // 缩略图配置
   const thumbSetting = () => {
     dispatch({
-      article: action.id,
+      article,
       type: 'modal/openModal',
       code: THUMB_SETTING,
     });

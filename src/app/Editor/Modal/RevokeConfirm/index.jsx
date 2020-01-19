@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const article = useSelector(state => {
-    const article = _.get(state, `modal[${REVOKE_CONFIRM}].article`);
-    return _.get(state, 'editor.articles').find(v => v.id === article);
-  });
+  const article = useSelector(
+    state => _.get(state, `modal[${REVOKE_CONFIRM}].article`)
+  );
 
   const onCancel = () => {
     dispatch({
