@@ -78,7 +78,7 @@ export const setUploadType = (state, { uploadType }) => ({
 });
 
 /**
- * 添加待上传文件类别
+ * 添加待上传文件
  * 1. reducer: action = { type: 'album/addUploadFiles' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *

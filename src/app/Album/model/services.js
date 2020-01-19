@@ -3,6 +3,7 @@ import axios from '@utils/request';
 
 /**
  * 上传文件
+ * @return {void 0}
  */
 export const uploadPhotos = async ({
   type,
@@ -55,6 +56,7 @@ export const getPhotos = async ({ search, spin }) => {
 
 /**
  * 移除图片
+ * @return {void 0}
  */
 export const removePhotos = async ({
   spin,
