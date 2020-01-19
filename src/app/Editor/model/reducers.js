@@ -28,7 +28,7 @@ export const setArticles = (state, { articles }) => ({
 });
 
 /**
- * 设置 menu
+ * 设置 menu: 替换式修改
  * 1. reducer: action = { type: 'editor/setMenu' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
@@ -42,32 +42,76 @@ export const setMenu = (state, { menu }) => ({
 });
 
 /**
- * 添加 openList
- * 1. reducer: action = { type: 'editor/addOpenList' }
+ * 插入工作窗口配置: works = [{ article, change: false }]
+ * 1. reducer: action = { type: 'editor/appendWorks' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {String} action.key 需要修改字段
+ * @param {String} action.article 文章 ID
  * @return {Object} 更新后的状态
  */
-export const addOpenList = (state, { key }) => ({
+export const appendWorks = (state, { article }) => (
+  state.works.find(v => v.article === article)
+    ? {
+      ... state,
+      works: state.works.map(v => ({
+        ... v,
+        action: v.article === article,
+      })),
+    }
+    : {
+      ... state,
+      works: [
+        ... state.works.map(v => ({ ... v, action: false })),
+        {
+          article,
+          change: false,
+          action: true,
+          content: state.articles.find(v => v.id === article).content,
+        },
+      ],
+    }
+);
+
+/**
+ * 设置某个工作区
+ * 1. reducer: action = { type: 'editor/setWork' }
+ * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
+ *
+ * @param {Object} state 当前 state
+ * @param {String} action.article 文章 ID
+ * @param {String} action.work 工作区需要修改的内容
+ * @return {Object} 更新后的状态
+ */
+export const setWork = (state, { article, work }) => ({
   ... state,
-  openList: [... state.openList, key],
+  works: state.works.map(v => (v.article === article
+    ? { ... v, ... work }
+    : v
+  )),
 });
 
 /**
- * 移除 openList
- * 1. reducer: action = { type: 'editor/addOpenList' }
+ * 移除工作窗口: 没传 article 则移除所有
+ * 1. reducer: action = { type: 'editor/removeWorks' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {String} action.key 需要修改字段
+ * @param {String} action.article 文章 ID
  * @return {Object} 更新后的状态
  */
-export const removeOpenList = (state, { key }) => ({
-  ... state,
-  openList: state.openList.filter(v => v !== key),
-});
+export const removeWorks = (state, { article }) => {
+  const works =  article
+    ? state.works.filter(v => v.article !== article)
+    : [];
+  const hasAction = works.find(v => v.action);
+
+  if (!hasAction && works.length > 0) {
+    works[works.length - 1].action = true;
+  }
+
+  return { ... state, works };
+};
 
 /**
  * 创建虚拟 tag (占位符)
@@ -75,6 +119,7 @@ export const removeOpenList = (state, { key }) => ({
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
+ * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
 export const createFictitiousTag = (state, { parent: { id, name } }) => ({
@@ -113,15 +158,15 @@ export const createFictitiousArticle = (state, { parent: { id, name } }) => ({
 });
 
 /**
- * 编辑文件夹: 找到数据设置 editor: true
- * 1. reducer: action = { type: 'editor/editorFolder' }
+ * 为 tag 添加编辑状态: 找到数据设置状态 editor = true
+ * 1. reducer: action = { type: 'editor/addEditorStatusWithTag' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {Object} action.id 父级节点
+ * @param {Object} action.id 要修改 tag id
  * @return {Object} 更新后的状态
  */
-export const editorFolder = (state, { id }) => ({
+export const addEditorStatusWithTag = (state, { id }) => ({
   ... state,
   tags: state.tags.map(v => ({
     ... v,
@@ -129,17 +174,16 @@ export const editorFolder = (state, { id }) => ({
   })),
 });
 
-
 /**
- * 编辑文章: 找到数据设置 editor: true
- * 1. reducer: action = { type: 'editor/editorArticle' }
+ * 为 article 添加编辑状态: 找到数据设置状态 editor = true
+ * 1. reducer: action = { type: 'editor/addEditorStatusWithArticle' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {Object} action.id 父级节点
+ * @param {Object} action.id 要修改 article id
  * @return {Object} 更新后的状态
  */
-export const editorArticle = (state, { id }) => ({
+export const addEditorStatusWithArticle = (state, { id }) => ({
   ... state,
   articles: state.articles.map(v => ({
     ... v,

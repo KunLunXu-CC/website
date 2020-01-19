@@ -7,8 +7,8 @@ import React, {
 import codeMirror from 'codemirror';
 import scss from './index.module.scss';
 
-import { useDispatch } from 'react-redux';
 import { uploadPhotos } from '../../model/services';
+import { useDispatch, useSelector } from 'react-redux';
 import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
 
 import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
@@ -24,16 +24,20 @@ const useStateHook = props => {
 
   const editorBodyRef = useRef(null);
 
+  const article = useSelector(state => {
+    const articles = _.get(state, 'editor.articles');
+    return articles.find(v => v.id === props.work.article);
+  });
+
   const immutable = useMemo(() => ({
     codeMirror: null,
   }), []);
 
   // 保存
   const onSave = async () => {
-    const { id } = props.data;
     const content = immutable.codeMirror.getValue();
     dispatch({
-      id,
+      id: article.id,
       body: { content },
       type: 'editor/updateArticle',
     });
@@ -53,7 +57,7 @@ const useStateHook = props => {
   const uploadPhone = async ({ file }) => {
     const data = await uploadPhotos({
       files: [file],
-      payload: props.data.id,
+      payload: article.id,
       spin: SPIN_CODE.APP_EDITOR,
       type: PHOTO_TYPE.ARTICLE.VALUE,
     });
@@ -89,8 +93,12 @@ const useStateHook = props => {
   // 内容改变
   const onChange = useCallback(() => {
     const content = immutable.codeMirror.getValue();
-    console.log('---------------->>>', content);
-  }, []);
+    dispatch({
+      work: { content },
+      type: 'editor/setWork',
+      article: props.work.article,
+    });
+  }, [props.work]);
 
   // 初始化 codeMirror
   useEffect(() => {
@@ -103,11 +111,11 @@ const useStateHook = props => {
         lineWrapping: true,
         theme: 'oceanic-next',
         cursorScrollMargin: 200, // 该参数受限于 .CodeMirror-lines padding 值
-        value: props.data.content || '',
+        value: article.content || '',
       });
       immutable.codeMirror.on('change', onChange);
     }
-  }, [props.data, immutable, onChange]);
+  }, [article, immutable, onChange]);
 
   return { editorBodyRef, onKeyDown, onPaste, onDrop };
 };

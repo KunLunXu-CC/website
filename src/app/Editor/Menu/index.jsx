@@ -14,11 +14,16 @@ const INLINE_INDENT = 14;  // 菜单缩进大小
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const { tags, articles, menu } = useSelector(state => ({
+  const { tags, articles, menu, works } = useSelector(state => ({
     tags: _.get(state, 'editor.tags'),
     menu: _.get(state, 'editor.menu'),
+    works: _.get(state, 'editor.works'),
     articles: _.get(state, 'editor.articles'),
   }));
+
+  const selectedKeys = useMemo(() => (
+    _.get(works.find(v => v.action), 'article')
+  ), [works]);
 
   // 菜单列表: 计算、处理 tags、articles
   const list = useMemo(() => {
@@ -91,9 +96,8 @@ const useStateHook = () => {
   };
 
   // 选择项时
-  const onSelect = ({ key }) => {
-    dispatch({ type: 'editor/setMenu', menu: { selected: key } });
-    dispatch({ type: 'editor/addOpenList', key });
+  const onSelect = ({ key: article }) => {
+    dispatch({ type: 'editor/appendWorks', article });
   };
 
   // 添加 tag
@@ -111,7 +115,14 @@ const useStateHook = () => {
     dispatch({ type: 'editor/getArticles' });
   }, []);
 
-  return { menu, renderMenuList, onSelect, onOpenChange, addTag };
+  return {
+    menu,
+    addTag,
+    onSelect,
+    selectedKeys,
+    onOpenChange,
+    renderMenuList,
+  };
 };
 
 export default () => {
@@ -127,7 +138,7 @@ export default () => {
           inlineIndent={INLINE_INDENT}
           openKeys={state.menu.openKeys}
           onOpenChange={state.onOpenChange}
-          selectedKeys={[state.menu.selected]}>
+          selectedKeys={[state.selectedKeys]}>
           {state.renderMenuList()}
         </Menu>
       </Scroll>

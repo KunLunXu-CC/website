@@ -6,9 +6,8 @@ const initState = {
   articles: [],
   menu: {
     openKeys: [],
-    selected: null,
   },
-  openList: [],
+  works: [],
 };
 
 export default {

@@ -35,10 +35,10 @@ const useStateHook = props => {
   };
 
   // 编辑文件夹
-  const editorFolder = () => {
+  const addEditorStatusWithTag = () => {
     dispatch({
       id: props.data.id,
-      type: 'editor/editorFolder',
+      type: 'editor/addEditorStatusWithTag',
     });
   };
 
@@ -64,10 +64,10 @@ const useStateHook = props => {
   };
 
   // 编辑文章
-  const editorArticle = () => {
+  const addEditorStatusWithArticle = () => {
     dispatch({
       id: props.data.id,
-      type: 'editor/editorArticle',
+      type: 'editor/addEditorStatusWithArticle',
     });
   };
 
@@ -81,10 +81,10 @@ const useStateHook = props => {
     stopPropagation(domEvent);
     const handler = {
       createFolder,
-      editorFolder,
+      addEditorStatusWithTag,
       deleteFolder,
       createArticle,
-      editorArticle,
+      addEditorStatusWithArticle,
       deleteArticle,
     };
     handler[key]();
@@ -136,8 +136,8 @@ const useStateHook = props => {
   // 下拉菜单
   const menu = useMemo(() => {
     const editKey = props.type === 'subMenu'
-      ? 'editorFolder'
-      : 'editorArticle';
+      ? 'addEditorStatusWithTag'
+      : 'addEditorStatusWithArticle';
     const deleeKey = props.type === 'subMenu'
       ? 'deleteFolder'
       : 'deleteArticle';

@@ -1,10 +1,10 @@
 import * as services from './services';
 
-import { put, call, takeEvery } from 'redux-saga/effects';
 import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
+import { put, call, takeEvery } from 'redux-saga/effects';
 
 /**
- * 获取热门文章
+ * 获取所有标签
  * @return {void 0}
  */
 const getTags = function * () {
@@ -19,7 +19,7 @@ const getTags = function * () {
 };
 
 /**
- * 获取热门文章
+ * 获取文章
  * @return {void 0}
  */
 const getArticles = function * () {
@@ -34,7 +34,7 @@ const getArticles = function * () {
 };
 
 /**
- * 获取热门文章
+ * 删除标签
  * @return {void 0}
  */
 const removeTags = function * ({ id }) {
@@ -51,7 +51,7 @@ const removeTags = function * ({ id }) {
 };
 
 /**
- * 获取热门文章
+ * 删除文章
  * @return {void 0}
  */
 const removeArticle = function * ({ id }) {
@@ -68,12 +68,12 @@ const removeArticle = function * ({ id }) {
 
   yield put({
     key: id,
-    type: 'editor/removeOpenList',
+    type: 'editor/removeWorks',
   });
 };
 
 /**
- * 获取热门文章
+ * 创建标签
  * @return {void 0}
  */
 const createTag = function * ({ body }) {
@@ -90,7 +90,7 @@ const createTag = function * ({ body }) {
 };
 
 /**
- * 获取热门文章
+ * 更新标签
  * @return {void 0}
  */
 const updateTag = function * ({ body, id }) {
@@ -108,7 +108,7 @@ const updateTag = function * ({ body, id }) {
 };
 
 /**
- * 获取热门文章
+ * 创建文章
  * @return {void 0}
  */
 const createArticle = function * ({ body }) {
@@ -126,7 +126,7 @@ const createArticle = function * ({ body }) {
 
 
 /**
- * 获取热门文章
+ * 更新文章
  * @return {void 0}
  */
 const updateArticle = function * ({ body, id }) {
@@ -144,7 +144,7 @@ const updateArticle = function * ({ body, id }) {
 };
 
 /**
- * 获取热门文章
+ * 撤销(取消发布)文章
  * @return {void 0}
  */
 const revokeArticle = function * ({ id }) {
@@ -161,7 +161,7 @@ const revokeArticle = function * ({ id }) {
 };
 
 /**
- * 获取热门文章
+ * 发布文章
  * @return {void 0}
  */
 const releaseArticle = function * ({ id }) {
@@ -178,7 +178,7 @@ const releaseArticle = function * ({ id }) {
 };
 
 /**
- * 获取热门文章
+ * 设置文章缩略图
  * @return {void 0}
  */
 const setArticleThumb = function * ({ file, id }) {

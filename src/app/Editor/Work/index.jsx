@@ -11,32 +11,21 @@ import { useDispatch, useSelector } from 'react-redux';
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const { selected, openList, articles } = useSelector(state => ({
-    selected: _.get(state, 'editor.menu.selected'),
-    openList: _.get(state, 'editor.openList'),
-    articles: _.get(state, 'editor.articles'),
-  }));
+  const works = useSelector(state => _.get(state, 'editor.works'));
 
-  const works = useMemo(() => (
-    openList.map(v => ({
-      ... articles.find(article => article.id === v),
-    }))
-  ), [openList, articles]);
-
-  // 移除
-  const onClose = key => {
-    dispatch({ type: 'editor/removeOpenList', key });
-  };
+  const selected = useMemo(() => (
+    _.get(works.find(v => v.action), 'article')
+  ), [works]);
 
   // tabs change 事件
-  const onTabsChange = activeKey => {
+  const onTabsChange = article => {
     dispatch({
-      type: 'editor/setMenu',
-      menu: { selected: activeKey },
+      article,
+      type: 'editor/appendWorks',
     });
   };
 
-  return { onClose, onTabsChange, selected, openList, works };
+  return { onTabsChange, selected, works };
 };
 
 export default () => {
@@ -46,15 +35,15 @@ export default () => {
       {state.works.length > 0 ?
         <Tabs
           type="card"
-          onChange={state.onTabsChange}
           activeKey={state.selected}
+          onChange={state.onTabsChange}
           tabBarExtraContent={<TabBarExtra/>}
         >
           {state.works.map(v => (
             <Tabs.TabPane
-              key={v.id}
-              tab={<Tab data={v} onClose={state.onClose}/>}>
-              <Editor data={v}/>
+              key={v.article}
+              tab={<Tab work={v}/>}>
+              <Editor work={v}/>
             </Tabs.TabPane>
           ))}
         </Tabs> : <Empty/>
