@@ -55,6 +55,11 @@ const removeTags = function * ({ id }) {
  * @return {void 0}
  */
 const removeArticle = function * ({ id }) {
+  yield put({
+    article: id,
+    type: 'editor/removeWorks',
+  });
+
   const articles = yield call(services.removeArticles, {
     spin: SPIN_CODE.APP_EDITOR,
     conds: { id },
@@ -64,11 +69,6 @@ const removeArticle = function * ({ id }) {
   yield put({
     articles,
     type: 'editor/setArticles',
-  });
-
-  yield put({
-    key: id,
-    type: 'editor/removeWorks',
   });
 };
 
