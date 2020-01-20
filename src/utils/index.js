@@ -61,7 +61,7 @@ export const formatNum = num => [... `${num}`].reverse()
  * 提示
  * @param {String} code 提示信息唯一值
  * @param {String} type 提示信息类别, 参考 antd 文档
- * @param {Object} options 参考 antd notification 组件参数
+ * @param {Object} options 参考 antd notification 组件参数, message description
  */
 export const message = ({
   code,

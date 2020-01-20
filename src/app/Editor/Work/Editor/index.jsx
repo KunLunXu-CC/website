@@ -2,11 +2,14 @@ import React, {
   useRef,
   useMemo,
   useEffect,
+  useCallback,
 } from 'react';
 import codeMirror from 'codemirror';
 import scss from './index.module.scss';
 
-import { useStore } from '../../store';
+import { uploadPhotos } from '../../model/services';
+import { useDispatch, useSelector } from 'react-redux';
+import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
 
 import 'codemirror/mode/markdown/markdown.js';    // 引入 codemirror 模式
 import './theme';                                 // 引入 codemirror 主题(样式)
@@ -16,21 +19,28 @@ const preventDefault = e => {
   e.preventDefault();
 };
 
-const useStateHook = (props, store) => {
+const useStateHook = props => {
+  const dispatch = useDispatch();
+
   const editorBodyRef = useRef(null);
+
+  const article = useSelector(state => {
+    const articles = _.get(state, 'editor.articles');
+    return articles.find(v => v.id === props.work.article);
+  });
+
   const immutable = useMemo(() => ({
     codeMirror: null,
   }), []);
 
   // 保存
   const onSave = async () => {
-    const { article: { id } } = props.data;
     const content = immutable.codeMirror.getValue();
-    await store.article.updateArticle({
-      id,
+    dispatch({
+      id: article.id,
       body: { content },
+      type: 'editor/updateArticle',
     });
-    store.article.toggleStatusWithChange(id, content);
   };
 
   // 监听 ctrl + s
@@ -45,10 +55,13 @@ const useStateHook = (props, store) => {
 
   // 上传图片
   const uploadPhone = async ({ file }) => {
-    const url = await store.article.uploadPhone({
-      article: props.data.article.id,
-      file,
+    const data = await uploadPhotos({
+      files: [file],
+      payload: article.id,
+      spin: SPIN_CODE.APP_EDITOR,
+      type: PHOTO_TYPE.ARTICLE.VALUE,
     });
+    const url = _.get(data, '[0].url', '');
     url && immutable.codeMirror.replaceSelection(`![插入图片](${url})`);
   };
 
@@ -77,6 +90,16 @@ const useStateHook = (props, store) => {
     file && onUpload(file);
   };
 
+  // 内容改变
+  const onChange = useCallback(() => {
+    const content = immutable.codeMirror.getValue();
+    dispatch({
+      work: { content },
+      type: 'editor/setWork',
+      article: props.work.article,
+    });
+  }, [props.work]);
+
   // 初始化 codeMirror
   useEffect(() => {
     if (!immutable.codeMirror) {
@@ -88,22 +111,18 @@ const useStateHook = (props, store) => {
         lineWrapping: true,
         theme: 'oceanic-next',
         cursorScrollMargin: 200, // 该参数受限于 .CodeMirror-lines padding 值
-        value: props.data.article.content || '',
+        value: article.content || '',
       });
-      immutable.codeMirror.on('change', () => {
-        const { id } = props.data.article;
-        const content = immutable.codeMirror.getValue();
-        store.article.toggleStatusWithChange(id, content);
-      });
+      immutable.codeMirror.on('change', onChange);
     }
-  }, [props.data.article, immutable, store]);
+  }, [article, immutable, onChange]);
 
   return { editorBodyRef, onKeyDown, onPaste, onDrop };
 };
 
 export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+  const state = useStateHook(props);
+
   return (
     <div
       onDrop={state.onDrop}

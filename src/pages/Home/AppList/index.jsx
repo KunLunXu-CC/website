@@ -1,31 +1,58 @@
-import React from 'react';
+import React, {
+  useCallback,
+} from 'react';
+import apps from '@app';
 import scss from './index.module.scss';
 
 import { Window } from 'qyrc';
-import { useStore } from '@store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector, useDispatch } from 'react-redux';
 
-export default () => useObserver(() => {
-  const store = useStore();
+const useStateHook = () => {
+  const dispatch = useDispatch();
+  const opens = useSelector(state => _.get(state, 'app.opens'));
+
+  const onClose = useCallback(app => {
+    dispatch({ type: 'app/onClose', app });
+  }, []);
+
+  const onMin = useCallback(app => {
+    dispatch({ type: 'app/onMin', app });
+  }, []);
+
+  const onMax = useCallback(app => {
+    dispatch({ type: 'app/onMax', app });
+  }, []);
+
+  const onMouseDown = useCallback(app => {
+    if (_.get(_.last(opens), 'code') === app.code) {
+      return false;
+    }
+    dispatch({ type: 'app/onMouseDown', app });
+  }, [opens]);
+
+  return { opens, onClose, onMin, onMax, onMouseDown };
+};
+
+export default () => {
+  const state = useStateHook();
   return (
     <div className={scss['app-block']}>
-      {store.app.list.map(v => {
-        const { component: Component, isMin, key, modalProps } = v;
+      {state.opens.map(app => {
+        const { component: Component, modalProps } = apps[app.code];
         return (
           <Window
-            key={key}
-            isMin={isMin}
-            onClose={store.app.close.bind(null, v)}
-            onMin={store.app.minimize.bind(null, v)}
-            onMax={store.app.maximization.bind(null, v)}
-            onMouseDown={store.app.toggle.bind(null, v)}
+            key={app.code}
+            isMin={app.isMin}
+            onMin={state.onMin.bind(null, app)}
+            onMax={state.onMax.bind(null, app)}
+            onClose={state.onClose.bind(null, app)}
+            onMouseDown={state.onMouseDown.bind(null, app)}
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
-            {...modalProps}
-          >
+            {...modalProps}>
             <Component/>
           </Window>
         );
       })}
     </div>
   );
-});
+};

@@ -2,92 +2,129 @@ import React, {
   useRef,
   useMemo,
   useEffect,
-  useCallback,
 } from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
 
 import { Icon } from 'qyrc';
-import { useStore } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Menu, Input } from 'antd';
-
 
 // 阻止事件冒泡
 const stopPropagation = e => {
   e.stopPropagation();
 };
 
-// 创建文件夹
-const createFolder = (props, store) => {
-  if (props.data.type === 'tag') {
-    store.menu.onOpenChange(props.data.id);
-    store.tag.createFictitiousTag(props.data);
-  } else {
-    store.tag.createFictitiousTag(props.data.tags[0]);
-  }
-};
-
-// 编辑文件夹
-const editorFolder = (props, store) => {
-  store.tag.editorFolder(props.data);
-};
-
-// 删除文件夹
-const deleteFolder = (props, store) => {
-  store.tag.removeTags({ id: props.data.id });
-};
-
-// 创建文章
-const createArticle = (props, store) => {
-  if (props.data.type === 'tag') {
-    store.menu.onOpenChange(props.data.id);
-    store.article.createFictitiousArticle(props.data);
-  } else {
-    store.article.createFictitiousArticle(props.data.tags[0]);
-  }
-};
-
-// 编辑文章
-const editorArticle = (props, store) => {
-  store.article.editorArticle(props.data);
-};
-
-// 删除文章
-const deleteArticle = (props, store) => {
-  store.article.close(props.data.id);
-  store.menu.toggleSelected(props.data.id);
-  store.article.removeArticle({ id: props.data.id });
-};
-
-const useStateHook = (props, store) => {
+const useStateHook = props => {
   const editorInputRef = useRef(null);
 
+  const dispatch = useDispatch();
+
+  const openKeys = useSelector(
+    state => _.get(state, 'editor.menu.openKeys')
+  );
+
+  // 创建文件夹
+  const createFolder = () => {
+    if (props.data.type === 'tag') {
+      dispatch({
+        type: 'editor/setMenu',
+        menu: { openKeys: [... openKeys, props.data.id] },
+      });
+      dispatch({ type: 'editor/createFictitiousTag', parent: props.data });
+    } else {
+      dispatch({
+        parent: props.data.tags[0],
+        type: 'editor/createFictitiousTag',
+      });
+    }
+  };
+
+  // 编辑文件夹
+  const addEditorStatusWithTag = () => {
+    dispatch({
+      id: props.data.id,
+      type: 'editor/addEditorStatusWithTag',
+    });
+  };
+
+  // 删除文件夹
+  const deleteFolder = () => {
+    dispatch({
+      id: props.data.id,
+      type: 'editor/removeTags',
+    });
+  };
+
+  // 创建文章
+  const createArticle = () => {
+    if (props.data.type === 'tag') {
+      dispatch({
+        type: 'editor/setMenu',
+        menu: { openKeys: [... openKeys, props.data.id] },
+      });
+      dispatch({ type: 'editor/createFictitiousArticle', parent: props.data });
+    } else {
+      dispatch({
+        parent: props.data.tags[0],
+        type: 'editor/createFictitiousArticle',
+      });
+    }
+  };
+
+  // 编辑文章
+  const addEditorStatusWithArticle = () => {
+    dispatch({
+      id: props.data.id,
+      type: 'editor/addEditorStatusWithArticle',
+    });
+  };
+
+  // 删除文章
+  const deleteArticle = () => {
+    dispatch({ type: 'editor/removeArticle', id: props.data.id });
+  };
+
   // 点击操作菜单: 根据 key 分发到不同处理函数
-  const onClickOperationMenu = useCallback(({ key, domEvent }) => {
+  const onClickOperationMenu = ({ key, domEvent }) => {
     stopPropagation(domEvent);
     const handler = {
       createFolder,
-      editorFolder,
+      addEditorStatusWithTag,
       deleteFolder,
       createArticle,
-      editorArticle,
+      addEditorStatusWithArticle,
       deleteArticle,
     };
-    handler[key](props, store);
-  }, [props, store]);
+    handler[key]();
+  };
 
   // 编辑数据： 根据 id 判断是编辑还是创建，根据 type 值来判断操作对象
   const onEditor = e => {
     const name = e.target.value;
     if (props.data.type === 'tag') {
       props.data.id === 'newTag'
-        ? store.tag.createTag({ name, parent: props.data.parent.id })
-        : store.tag.updateTag({ name, id: props.data.id });
+        ? dispatch({
+          type: 'editor/createTag',
+          body: { name, parent: props.data.parent.id },
+        })
+        : dispatch({
+          body: { name },
+          id: props.data.id,
+          type: 'editor/updateTag',
+        });
     } else {
       props.data.id === 'newArticle'
-        ? store.article.createArticle({ name, tags: [props.data.tags[0].id] })
-        : store.article.updateArticle({ body: { name }, id: props.data.id });
+        ? dispatch({
+          type: 'editor/createArticle',
+          body: { name, tags: [props.data.tags[0].id] },
+        })
+        : dispatch({
+          body: { name },
+          id: props.data.id,
+          type: 'editor/updateArticle',
+        });
     }
   };
 
@@ -109,8 +146,8 @@ const useStateHook = (props, store) => {
   // 下拉菜单
   const menu = useMemo(() => {
     const editKey = props.type === 'subMenu'
-      ? 'editorFolder'
-      : 'editorArticle';
+      ? 'addEditorStatusWithTag'
+      : 'addEditorStatusWithArticle';
     const deleeKey = props.type === 'subMenu'
       ? 'deleteFolder'
       : 'deleteArticle';
@@ -150,8 +187,7 @@ const useStateHook = (props, store) => {
 
 // props.type = 'subMenu | item ' props.data props.onMore
 export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+  const state = useStateHook(props);
 
   return (
     <div className={scss['menu-title']}>

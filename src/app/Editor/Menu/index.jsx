@@ -1,4 +1,5 @@
 import React, {
+  useMemo,
   useEffect,
 } from 'react';
 import MenuTitle from './MenuTitle';
@@ -6,12 +7,68 @@ import scss from './index.module.scss';
 
 import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
-import { useStore } from '../store';
-import { useObserver } from 'mobx-react-lite';
+import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const { tags, articles, menu, works } = useSelector(state => ({
+    tags: _.get(state, 'editor.tags'),
+    menu: _.get(state, 'editor.menu'),
+    works: _.get(state, 'editor.works'),
+    articles: _.get(state, 'editor.articles'),
+  }));
+
+  const selectedKeys = useMemo(() => (
+    _.get(works.find(v => v.action), 'article')
+  ), [works]);
+
+  // 菜单列表: 计算、处理 tags、articles
+  const list = useMemo(() => {
+    const _tags = _.sortBy(
+      _.cloneDeep(tags).map(v => ({
+        ... v,
+        type: 'tag',
+      })),
+      ele => ele.name
+    );
+
+    const _articles = _.sortBy(
+      _.cloneDeep(articles).map(v => ({
+        ... v,
+        type: 'article',
+      })),
+      ele => ele.name
+    );
+
+    const parents = _tags.filter(v => !v.parent.id);
+    const children = _tags.filter(v => !!v.parent.id);
+
+    const translator = (parents, children) => {
+      parents.forEach(parent => {
+        // eslint-disable-next-line no-param-reassign
+        parent.children = [];
+        children.forEach((current, index) => {
+          if (current.parent.id === parent.id) {
+            const temp = JSON.parse(JSON.stringify(children));
+            temp.splice(index, 1);
+            translator([current], temp);
+            parent.children.push(current);
+          }
+        });
+        // 挂载当前目录下所有文章: 默认按照第一个 tag 为准
+        parent.children.push(... _articles.filter(
+          article => (_.get(article, 'tags[0].id') === parent.id)
+        ));
+      });
+    };
+    translator(parents, children);
+    return parents;
+  }, [tags, articles]);
+
+
   // 渲染菜单列表
   const renderMenuList = () => {
     const recursion = (item, index) => (
@@ -35,38 +92,43 @@ const useStateHook = (props, store) => {
           <MenuTitle data={item} type="item"/>
         </Menu.Item>
     );
-    return store.menu.list.map(v => (recursion(v, 1)));
+    return list.map(v => (recursion(v, 1)));
   };
 
   // 选择项时
-  const onSelect = ({ key }) => {
-    store.article.open(key);
-    store.menu.toggleSelected(key);
+  const onSelect = ({ key: article }) => {
+    dispatch({ type: 'editor/appendWorks', article });
   };
 
   // 添加 tag
   const addTag = () => {
-    store.tag.createFictitiousTag();
+    dispatch({ type: 'editor/createFictitiousTag', parent: {} });
   };
 
   // SubMenu 展开/关闭的回调
   const onOpenChange = openKeys => {
-    store.menu.onOpenChange(openKeys);
+    dispatch({ type: 'editor/setMenu', menu: { openKeys } });
   };
 
   useEffect(() => {
-    store.tag.getTags();
-    store.article.getArticles();
-  }, [store]);
+    dispatch({ type: 'editor/getTags' });
+    dispatch({ type: 'editor/getArticles' });
+  }, []);
 
-  return { renderMenuList, onSelect, onOpenChange, addTag };
+  return {
+    menu,
+    addTag,
+    onSelect,
+    selectedKeys,
+    onOpenChange,
+    renderMenuList,
+  };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <div className={scss.menu}>
       <Scroll className={scss['menu-middle']}>
         <Menu
@@ -74,9 +136,9 @@ export default props => {
           inlineCollapsed={false}
           onSelect={state.onSelect}
           inlineIndent={INLINE_INDENT}
-          openKeys={store.menu.openKeys}
+          openKeys={state.menu.openKeys}
           onOpenChange={state.onOpenChange}
-          selectedKeys={[store.menu.selected]}>
+          selectedKeys={[state.selectedKeys]}>
           {state.renderMenuList()}
         </Menu>
       </Scroll>
@@ -86,5 +148,5 @@ export default props => {
         <Icon type="icon-xinzeng" />
       </div>
     </div>
-  ));
+  );
 };

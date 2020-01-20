@@ -2,18 +2,20 @@ import React from 'react';
 import scss from './index.module.scss';
 
 import { Button } from 'antd';
-import { useStore } from '../../store';
+import { useDispatch } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
   const onClick = () => {
-    store.upload.open();
+    dispatch({ type: 'album/openUploadForm' });
   };
+
   return { onClick };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
   return (
     <div className={scss.upload}>

@@ -1,9 +1,10 @@
 import React, {
   useCallback,
 } from 'react';
+import apps from '@app';
+import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import scss from './index.module.scss';
 
 const useStateHook = props => {
   // 点击事件
@@ -22,11 +23,16 @@ export default props => {
       <div className={scss['dock-body']}>
         {props.dataSource.map((v, index) => (
           <div
-            key={v.key || index}
+            key={v.code || index}
             className={scss['dock-app']}
             onClick={state.onClick.bind(null, v)}>
-            <div className={scss['dock-tooltip']}>{v.name}</div>
-            <Icon type={v.icon} className={scss['dock-icon']}/>
+            <div className={scss['dock-tooltip']}>
+              {apps[v.code].name}
+            </div>
+            <Icon
+              type={apps[v.code].icon}
+              className={scss['dock-icon']}
+            />
           </div>
         ))}
       </div>

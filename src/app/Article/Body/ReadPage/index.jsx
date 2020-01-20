@@ -1,21 +1,45 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import scss from './index.module.scss';
 
-import { useStore } from '../../store';
 import { Markdown, Scroll } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector, useDispatch } from 'react-redux';
+
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const read = useSelector(state => _.get(state, 'article.read'));
+
+  const onScroll = scrollHeight => {
+    dispatch({ type: 'article/setRead', read: { scrollHeight } });
+  };
+
+  const onTocParsed = ({ parseData }) => {
+    dispatch({ type: 'article/setRead', read: { toc: parseData } });
+  };
+
+  useEffect(() => {
+    dispatch({
+      type: 'article/setRead',
+      read: { scrollHeight: 0 },
+    });
+  }, [_.get(read, 'article.id')]);
+
+  return { read, onTocParsed, onScroll };
+};
 
 export default () => {
-  const store = useStore();
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <Scroll
       className={scss.scroll}
-      onScroll={store.article.setScrollHeight}
-      scrollHeight={store.article.scrollHeight}>
-      <Markdown onTocParsed={store.article.setTocList}>
-        {_.get(store, 'article.article.content') || ''}
+      onScroll={state.onScroll}
+      scrollHeight={_.get(state, 'read.scrollHeight') || 0}>
+      <Markdown onTocParsed={state.onTocParsed}>
+        {_.get(state, 'read.article.content') || ''}
       </Markdown>
     </Scroll>
-  ));
+  );
 };

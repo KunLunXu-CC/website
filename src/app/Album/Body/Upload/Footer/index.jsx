@@ -2,27 +2,26 @@ import React from 'react';
 import scss from './index.module.scss';
 
 import { Button } from 'antd';
-import { useStore } from '../../../store';
+import { useDispatch } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
   // 取消
   const onCancel = () => {
-    store.upload.close();
-    store.upload.clearFiles();
+    dispatch({ type: 'album/closeUploadForm' });
   };
 
   // 上传
   const onUpload = async () => {
-    await store.upload.upload();
-    store.photos.setList();
+    dispatch({ type: 'album/upload' });
   };
 
   return { onCancel, onUpload };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
   return (
     <div className={scss.footer}>

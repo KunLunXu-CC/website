@@ -1,13 +1,12 @@
-// import Tag from './Tag';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
 import Article from './Article';
 
-export default [
-  {
+export default {
+  album: {
     name: '相册',
-    key: 'album',
+    code: 'album',
     component: Album,
     icon: 'icon-banjixiangce',
     modalProps: {
@@ -16,9 +15,9 @@ export default [
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
-  {
+  editor: {
     name: '编辑器',
-    key: 'editor',
+    code: 'editor',
     component: Editor,
     icon: 'icon-daima',
     modalProps: {
@@ -27,9 +26,9 @@ export default [
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
-  {
+  article: {
     name: '文章',
-    key: 'article',
+    code: 'article',
     component: Article,
     icon: 'icon-wenzhang',
     modalProps: {
@@ -39,9 +38,9 @@ export default [
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
-  {
+  diary: {
     name: '日记',
-    key: 'diary',
+    code: 'diary',
     component: Diary,
     icon: 'icon-biji',
     modalProps: {
@@ -50,12 +49,4 @@ export default [
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
-  // {
-  //   name: '标签',
-  //   icon: 'icon-biaoqian1',
-  //   key: 'tag',
-  //   path: '/tag',
-  //   defaultUrl: '/tag',
-  //   component: Tag
-  // },
-];
+};

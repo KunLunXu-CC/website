@@ -4,21 +4,23 @@ import Footer from './Footer';
 import scss from './index.module.scss';
 
 import { Drawer } from 'antd';
-import { useStore } from '../../store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+  const show = useSelector(state => _.get(state, 'album.upload.show'));
+
   const onClose = () => {
-    store.upload.close();
+    dispatch({ type: 'album/closeUploadForm' });
   };
-  return { onClose };
+
+  return { show, onClose };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <Drawer
       width="420"
       title="文件上传"
@@ -26,10 +28,10 @@ export default props => {
       getContainer={false}
       className={scss.upload}
       onClose={state.onClose}
-      visible={store.upload.show}
+      visible={state.show}
     >
       <Form />
       <Footer />
     </Drawer>
-  ));
+  );
 };

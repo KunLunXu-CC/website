@@ -1,19 +1,35 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import Item from './Item';
 import NoMore from './NoMore';
 import scss from './index.module.scss';
 
 import { Empty } from 'antd';
 import { Scroll } from 'qyrc';
-import { useStore } from '../../store';
-import { useObserver } from 'mobx-react-lite';
+import { useSelector, useDispatch } from 'react-redux';
+
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const articles = useSelector(
+    state => _.get(state, 'article.articles') || []
+  );
+
+  useEffect(() => {
+    dispatch({ type: 'article/getArticles' });
+  }, []);
+
+  return { articles };
+};
 
 export default () => {
-  const store = useStore();
-  return useObserver(() => (
+  const state = useStateHook();
+
+  return (
     <Scroll className={scss.scroll}>
-      {store.article.list.length > 0 ?
-        store.article.list.map((value, index) => (
+      {state.articles.length > 0 ?
+        state.articles.map((value, index) => (
           <Item
             data={value}
             key={value.id}
@@ -22,10 +38,10 @@ export default () => {
         )) :
         <Empty/>
       }
-      {store.article.list.length > 0 ?
+      {state.articles.length > 0 ?
         <NoMore/> : null
       }
       <br/><br/>
     </Scroll>
-  ));
+  );
 };

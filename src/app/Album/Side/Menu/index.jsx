@@ -3,9 +3,8 @@ import scss from './index.module.scss';
 
 import { Menu } from 'antd';
 import { Icon } from 'qyrc';
-import { useObserver } from 'mobx-react-lite';
 import { PHOTO_TYPE } from '@config/consts';
-import { useStore } from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const DEFAULT_TYPE = 'all';
 
@@ -38,25 +37,35 @@ const listData = [
   },
 ];
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
+  const type = useSelector(state => _.get(state, 'album.search.type'));
+
   // 菜单点击事件
   const onClick = ({ key }) => {
-    store.photos.toggleType(key !== DEFAULT_TYPE ? Number(key) : key);
+    dispatch({
+      type: 'album/setSearch',
+      search: { type: key },
+    });
+    dispatch({
+      type: 'album/getPhotos',
+      search: { type: key },
+    });
   };
 
-  return { onClick };
+  return { onClick, type };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <div className={scss.menu}>
       <Menu
         mode="inline"
         onClick={state.onClick}
-        selectedKeys={[`${store.photos.type}`]}>
+        selectedKeys={[`${state.type}`]}>
         {listData.map(value => (
           <Menu.Item key={`${value.key}`}>
             <Icon type={value.icon}  className="anticon"/>
@@ -65,5 +74,5 @@ export default props => {
         ))}
       </Menu>
     </div>
-  ));
+  );
 };

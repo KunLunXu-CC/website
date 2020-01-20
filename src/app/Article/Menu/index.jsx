@@ -5,34 +5,44 @@ import scss from './index.module.scss';
 
 import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
-import { useStore } from '../store';
-import { useObserver } from 'mobx-react-lite';
+import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+
   // 点击菜单
-  const onClickMenu = ({ key }) => {
-    store.menu.setTag(key);
+  const onClickMenu = ({ key: tag }) => {
+    const search = { tag };
+    dispatch({ type: 'article/setSearch', search });
+    dispatch({ type: 'article/getArticles', search });
   };
 
-  useEffect(() => {
-    store.menu.getList();
-  }, [store]);
+  // 所有菜单
+  const { menus, tag } = useSelector(
+    state => ({
+      menus: _.get(state, 'article.menus'),
+      tag: _.get(state, 'article.search.tag'),
+    })
+  );
 
-  return { onClickMenu };
+  useEffect(() => {
+    dispatch({ type: 'article/getMenus' });
+  }, []);
+
+  return { onClickMenu, menus, tag };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <div className={scss.tags}>
       <Scroll className={scss['tags-middle']}>
         <Menu
           mode="inline"
-          onClick={state.onClickMenu}
-          selectedKeys={[store.menu.tag]}>
-          {store.menu.list.map(v => (
+          selectedKeys={[state.tag]}
+          onClick={state.onClickMenu}>
+          {state.menus.map(v => (
             <Menu.Item key={v.id}>
               <Icon type={v.icon || 'icon-weizhi'}  className="anticon"/>
               <span>{v.name}</span>
@@ -41,5 +51,5 @@ export default props => {
         </Menu>
       </Scroll>
     </div>
-  ));
+  );
 };

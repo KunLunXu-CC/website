@@ -2,34 +2,35 @@ import React from 'react';
 import scss from './index.module.scss';
 
 import { Icon, Image } from 'qyrc';
-import { useStore } from '../../../../store';
-import { useObserver } from 'mobx-react-lite';
+import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = (props, store) => {
+const useStateHook = () => {
+  const dispatch = useDispatch();
+  const files = useSelector(state => _.get(state, 'album.upload.files'));
+
   // 添加文件
   const addFiles = e => {
     const { files } = e.target;
-    store.upload.addFiles(files);
+    dispatch({ type: 'album/addUploadFiles', files });
   };
 
-  return { addFiles };
+  return { files, addFiles };
 };
 
-export default props => {
-  const store = useStore();
-  const state = useStateHook(props, store);
+export default () => {
+  const state = useStateHook();
 
-  return useObserver(() => (
+  return (
     <div className={scss['upload-list']}>
       <label className={scss.upload}>
         <Icon type="icon-tupianshangchuan"/>
         <input type="file" multiple="multiple" onChange={state.addFiles}/>
       </label>
-      {store.upload.fileList.map((file, index) => (
+      {state.files.map((file, index) => (
         <div key={index} className={scss.item}>
           <Image src={file} />
         </div>
       ))}
     </div>
-  ));
+  );
 };

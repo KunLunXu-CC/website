@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import scss from './index.module.scss';
 
