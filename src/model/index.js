@@ -53,11 +53,12 @@ const middleware = {
  */
 export const store = createStore(
   combineReducers(reducers),
-  compose(
+  compose(... [
     applyMiddleware(... Object.values(middleware).filter(v => v)),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__(),
-  ),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : void 0,
+  ].filter(v => v))
 );
 
 /**
