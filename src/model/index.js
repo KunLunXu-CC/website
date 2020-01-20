@@ -44,7 +44,7 @@ const effects = models
  * middleware 中间件列表
  */
 const middleware = {
-  logger,
+  logger: _DEV_ ? logger : void 0,
   sagaMiddleware: createSagaMiddleware(),
 };
 
@@ -54,8 +54,8 @@ const middleware = {
 export const store = createStore(
   combineReducers(reducers),
   compose(
-    applyMiddleware(... Object.values(middleware)),
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    applyMiddleware(... Object.values(middleware).filter(v => v)),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_ &&
     window.__REDUX_DEVTOOLS_EXTENSION__(),
   ),
 );
