@@ -31,7 +31,6 @@ const useStateHook = props => {
 
 export default Form.create()(props => {
   const state = useStateHook(props);
-  console.log('------->>>', state);
   return (
     <Drawer
       width="90%"
