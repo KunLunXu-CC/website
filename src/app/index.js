@@ -33,7 +33,7 @@ export default {
     icon: 'icon-wenzhang',
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 10, left: 10 },
+      toolPosition: { top: 16, left: 16 },
       toolClassName: 'article-modal-tool',
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },

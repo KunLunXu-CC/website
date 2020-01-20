@@ -60,13 +60,11 @@ export const getArticles = async ({
               name
               desc
               thumb
-              status
               content
               viewCount
               updateTime
               tags { id name }
             }
-            message
             pagination
           }
         }`,
