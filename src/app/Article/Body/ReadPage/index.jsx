@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useEffect,
+} from 'react';
 import scss from './index.module.scss';
 
 import { Markdown, Scroll } from 'qyrc';
@@ -16,6 +18,13 @@ const useStateHook = () => {
   const onTocParsed = ({ parseData }) => {
     dispatch({ type: 'article/setRead', read: { toc: parseData } });
   };
+
+  useEffect(() => {
+    dispatch({
+      type: 'article/setRead',
+      read: { scrollHeight: 0 },
+    });
+  }, [_.get(read, 'article.id')]);
 
   return { read, onTocParsed, onScroll };
 };
