@@ -31,10 +31,11 @@ const useStateHook = props => {
 
 export default Form.create()(props => {
   const state = useStateHook(props);
-
+  console.log('------->>>', state);
   return (
     <Drawer
       width="90%"
+      destroyOnClose
       closable={false}
       placement="right"
       getContainer={false}
@@ -42,8 +43,7 @@ export default Form.create()(props => {
       className={scss.drawer}
       onClose={state.onCancel}
       style={{ position: 'absolute' }}
-      title={<Title form={props.form} />}
-    >
+      title={<Title form={props.form} />}>
       <div className={scss['drawer-content']}>
         <Scroll className={scss.scroll}>
           <BaseForm modal={state.modal} form={props.form}/>
