@@ -8,7 +8,7 @@ import scss from './index.module.scss';
 
 
 import { Icon } from 'qyrc';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Menu, Input } from 'antd';
 
 // 阻止事件冒泡
@@ -21,10 +21,17 @@ const useStateHook = props => {
 
   const dispatch = useDispatch();
 
+  const openKeys = useSelector(
+    state => _.get(state, 'editor.menu.openKeys')
+  );
+
   // 创建文件夹
   const createFolder = () => {
     if (props.data.type === 'tag') {
-      dispatch({ type: 'editor/setMenu', menu: { openKeys: [props.data.id] } });
+      dispatch({
+        type: 'editor/setMenu',
+        menu: { openKeys: [... openKeys, props.data.id] },
+      });
       dispatch({ type: 'editor/createFictitiousTag', parent: props.data });
     } else {
       dispatch({
@@ -53,7 +60,10 @@ const useStateHook = props => {
   // 创建文章
   const createArticle = () => {
     if (props.data.type === 'tag') {
-      dispatch({ type: 'editor/setMenu', menu: { openKeys: [props.data.id] } });
+      dispatch({
+        type: 'editor/setMenu',
+        menu: { openKeys: [... openKeys, props.data.id] },
+      });
       dispatch({ type: 'editor/createFictitiousArticle', parent: props.data });
     } else {
       dispatch({
