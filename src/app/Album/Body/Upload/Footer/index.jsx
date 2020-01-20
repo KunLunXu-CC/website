@@ -15,6 +15,7 @@ const useStateHook = () => {
   // 上传
   const onUpload = async () => {
     dispatch({ type: 'album/upload' });
+    dispatch({ type: 'album/closeUploadForm' });
   };
 
   return { onCancel, onUpload };
