@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/qianyin925/blog_client/compare/v1.1.0...v1.2.0) (2020-01-20)
+
+
+### Features
+
+* 【client】【client】菜单栏、文章排序按照名称进行排序 ([72385a2](https://github.com/qianyin925/blog_client/commit/72385a24c689415ec9ef729ec40c6176962989d2))
+* 【client】【日记】健身记录允许多选 ([593cfb3](https://github.com/qianyin925/blog_client/commit/593cfb37d43bea0bc41a086ef1f525bb9ffe0010))
+* 【client】【日记】应用布局、页面设计、实现 ([0a89b02](https://github.com/qianyin925/blog_client/commit/0a89b02a494a6f167d606d840d1081a0781e9c68))
+* 【client】【日记】应用布局、页面设计、实现 ([cfa52a2](https://github.com/qianyin925/blog_client/commit/cfa52a2bd9ec2060c51c1e6c96ed4ade2156ad4f))
+* 【client】【阅读】只展示有文章的 tag ([93864db](https://github.com/qianyin925/blog_client/commit/93864dbdfb3a6f501417148b10266bdc91917cb0))
+* 【client】【阅读】菜单移除收起按钮 ([f3b99ca](https://github.com/qianyin925/blog_client/commit/f3b99ca1b7c82f3fe22e8ca13cde0f1877ff2858))
+* 【client】引入 iconfont cdn ([8331345](https://github.com/qianyin925/blog_client/commit/83313456e631ab5c00fcfacf8323c5c2deafa0a3))
+* 【client】设置超时时长 ([6370464](https://github.com/qianyin925/blog_client/commit/63704649d151b5b9d5bc8c38247ce3a96c8295df))
+* 【server】pm2 修改 ([111bd4a](https://github.com/qianyin925/blog_client/commit/111bd4abdd87e6d9629195e60a9d4e5938ac4279))
+* 【server】开启 HTTPS ([a832e9b](https://github.com/qianyin925/blog_client/commit/a832e9b05aa52b3d4e7a9b9577041ad8a96df0ad))
+* 【server】添加获取公钥 api ([af98de7](https://github.com/qianyin925/blog_client/commit/af98de7a865024ea33a4523b22fb22908ed87d1d))
+* 【server】请求错误返回 ([2b91e0e](https://github.com/qianyin925/blog_client/commit/2b91e0e165b04ac80e2d519fa16b6d46ecc900f9))
+
+
+### Bug Fixes
+
+* 【client】【阅读】没有更多数据显示有问题 ([c141961](https://github.com/qianyin925/blog_client/commit/c141961277e8b54badf36b88b9ceff62b0c6c2e8))
+* 【client】应用最大化再最小化顶部菜单栏无法显示 ([6166090](https://github.com/qianyin925/blog_client/commit/616609018d4ef86eb007b3339051ba66335b0e99))
+* 【client】生产环境下会先打印一条 store 信息 ([b18a9b8](https://github.com/qianyin925/blog_client/commit/b18a9b827aa26a2914e9eaeb49c5a4a9102414f0))
+
 ## 1.1.0 (2020-01-01)
 
 
