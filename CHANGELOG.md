@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/qianyin925/blog_client/compare/v1.2.0...v1.3.0) (2020-01-20)
+
+
+### Features
+
+* 【client】【编辑器】针对第二级目录选择创建文章、目录时出现 bug ([33e3186](https://github.com/qianyin925/blog_client/commit/33e3186910d959155170e8d8267c7fdaa446791f))
+* 【client】插件环境变量控制 ([7b1f85f](https://github.com/qianyin925/blog_client/commit/7b1f85f3fd81c03a31956b6f486ea13bf635bf43))
+* 【client】研究 antd-design-pro 设计 redux 架构 ([406744b](https://github.com/qianyin925/blog_client/commit/406744b2648d2e91981757a476443f38f6645bba))
+* console.log('------->>>', state); ([309ff63](https://github.com/qianyin925/blog_client/commit/309ff63e8f971dcc1481da61455707292e60e11e))
+
+
+### Bug Fixes
+
+* 【client】【编辑器】加载状态无效 ([f364ed4](https://github.com/qianyin925/blog_client/commit/f364ed41eb7e023c5865fbc641c4f1e5c87628f8))
+* 【client】【编辑器】点击发布、缩略图设置图标报错 ([23e6ca5](https://github.com/qianyin925/blog_client/commit/23e6ca5761e135d779fc4e8361a39f41ab5983d9))
+* 【client】点击最顶层应用，不应该调用 action: { type: "app/onMouseDown" } ([aa20e25](https://github.com/qianyin925/blog_client/commit/aa20e25d7337430f83ec4683c773672553293731))
+* 【client】系统时间格式化问题、小时是十二小时的,  下午 4 点应该显示 16 而不是 04 ([5db479e](https://github.com/qianyin925/blog_client/commit/5db479ef7b5b461a5597cf5ffa3eab7cfe0ec25a))
+
 ## [1.2.0](https://github.com/qianyin925/blog_client/compare/v1.1.0...v1.2.0) (2020-01-20)
 
 
