@@ -248,13 +248,16 @@ export const createArticles = async ({
               viewCount
               tags { id name }
             }
+            change {
+              id
+            }
             pagination
             message
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.createArticles.list');
+  return _.get(res, 'data.data.createArticles') || {};
 };
 
 export const updateArticles = async ({

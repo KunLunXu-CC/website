@@ -112,18 +112,22 @@ const updateTag = function * ({ body, id }) {
  * @return {void 0}
  */
 const createArticle = function * ({ body }) {
-  const articles = yield call(services.createArticles, {
+  const { list, change } = yield call(services.createArticles, {
     body,
     search: {},
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    articles,
+    articles: list,
     type: 'editor/setArticles',
   });
-};
 
+  yield put({
+    type: 'editor/appendWorks',
+    article: _.get(change, '[0].id'),
+  });
+};
 
 /**
  * 更新文章
