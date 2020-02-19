@@ -22,7 +22,7 @@ export default {
     icon: 'icon-daima',
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 15, right: 15 },
+      toolPosition: { top: 12, left: 10 },
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },

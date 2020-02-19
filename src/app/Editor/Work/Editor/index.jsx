@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { Editor } from 'qyrc';
+import { CodeEditor } from 'qyrc';
+import { uploadPhotos } from '../../model/services';
 import { useDispatch, useSelector } from 'react-redux';
+import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
 
 // 初始默认 options
 const OPTIONS = {
@@ -28,31 +30,29 @@ const useStateHook = props => {
     });
   };
 
-  // // 上传图片
-  // const uploadPhone = async ({ file }) => {
-  //   if (/^image\/.*/ig.test(file.type)) {
-  //     const data = await uploadPhotos({
-  //       files: [file],
-  //       payload: article.id,
-  //       spin: SPIN_CODE.APP_EDITOR,
-  //       type: PHOTO_TYPE.ARTICLE.VALUE,
-  //     });
-  //     return _.get(data, '[0].url', '');
-  //   }
-  //   return null;
-  // };
+  // 黏贴图片
+  const onPasteImage = async ({ file }) => {
+    const data = await uploadPhotos({
+      files: [file],
+      payload: article.id,
+      spin: SPIN_CODE.APP_EDITOR,
+      type: PHOTO_TYPE.ARTICLE.VALUE,
+    });
+    return `[图片备注](${_.get(data, '[0].url', '')})`;
+  };
 
-  return { article, onSave };
+  return { article, onSave, onPasteImage };
 };
 
 export default props => {
   const state = useStateHook(props);
 
   return (
-    <Editor
+    <CodeEditor
       options={OPTIONS}
       onSave={state.onSave}
-      onPaste={state.onPaste}
+      onChange={() => { console.log('---') }}
+      onPasteImage={state.onPasteImage}
       value={state.article.content}
     />
   );
