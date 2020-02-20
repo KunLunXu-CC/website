@@ -1,6 +1,4 @@
-import React, {
-  useMemo,
-} from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 

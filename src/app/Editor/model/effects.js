@@ -138,12 +138,17 @@ const updateArticle = function * ({ body, id }) {
     body,
     search: {},
     conds: { id },
-    spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
     articles,
     type: 'editor/setArticles',
+  });
+
+  yield put({
+    article: id,
+    type: 'editor/setWork',
+    work: { change: false },
   });
 };
 
