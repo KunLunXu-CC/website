@@ -24,25 +24,25 @@
       margin: 0;
       border: none;
       overflow: hidden;
-      background: #24303c;
+      background: #21252b;
 
       .ant-tabs-tab {
         margin: 0px !important;
         border: none !important;
         border-radius: 0px !important;
-        background: #24303c !important;
+        background: #21252b !important;
         border-right: 1px solid #070507 !important;
-        color: rgba($color: #fff, $alpha: 0.5) !important;
+        color: rgba($color: #fff, $alpha: 0.6) !important;
 
         &:hover {
-          background: #2e3a46 !important;
-          color: rgba($color: #fff, $alpha: 0.7) !important;
+          background: #282c34 !important;
+          color: rgba($color: #fff, $alpha: 0.8) !important;
         }
       }
 
       .ant-tabs-tab-active.ant-tabs-tab {
-        background: #2e3a46 !important;
-        color: rgba($color: #fff, $alpha: 0.7) !important;
+        background: #282c34 !important;
+        color: rgba($color: #fff, $alpha: 0.8) !important;
       }
 
       .ant-tabs.ant-tabs-card .ant-tabs-card-bar {

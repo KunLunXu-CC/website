@@ -35,7 +35,7 @@ export default props => {
 
   return (
     <span className={scss.tab}>
-      {state.article.name}&nbsp;&nbsp;
+      {state.article.name}
       <Icon
         type="icon-guanbi6"
         className={classNames(

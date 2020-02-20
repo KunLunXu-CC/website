@@ -26,8 +26,8 @@
     // antd - 菜单
     .ant-menu {
       $bg: transparent;
-      $color: #bec7ce;
-      $bg-selected: #2e3a46;
+      $bg-selected: #2c313a;
+      $color: rgba($color: #cccccc, $alpha: 0.8);
 
       border: none;
       color: $color;
@@ -42,7 +42,7 @@
           width: 1;
           bottom: 0;
           position: absolute;
-          border-right: 1px dashed #5d6b76;;
+          border-right: 1px dashed rgba($color: $color, $alpha: 0.1);
         }
       }
 

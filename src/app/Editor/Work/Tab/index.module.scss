@@ -5,6 +5,8 @@
 
   &-icon {
     margin: 0;
+    margin-left: 12px;
+
     width: 12px;
     height: 12px;
     opacity: 0.8;
@@ -14,16 +16,20 @@
 
 
   &-icon-change {
-    width: 8px;
-    height: 8px;
     margin: 2px;
+    margin-left: 12px;
+
+    width: 10px;
+    height: 10px;
     color: #C5C5C5;
     background: rgba($color: #C5C5C5, $alpha: 1);
 
     &:hover {
-      margin: 0;
-      width: 12px;
-      height: 12px;
+      margin: 2px;
+      margin-left: 12px;
+
+      width: 10px;
+      height: 10px;
       color: inherit;
       background: inherit;
     }
