@@ -45,8 +45,6 @@ const useStateHook = props => {
 
   // 内容改变
   const onChange = useCallback(({ value: content }) => {
-    console.log('-------------->>>', props.work);
-
     const change = article.content !== content;
     if (props.work.change === change) {
       return false;
@@ -56,7 +54,7 @@ const useStateHook = props => {
       type: 'editor/setWork',
       article: props.work.article,
     });
-  }, [props.work.article, props.work.change]);
+  }, [article.content, props.work.article, props.work.change]);
 
   return { article, onSave, onPasteImage, onChange };
 };
@@ -69,8 +67,8 @@ export default props => {
       options={OPTIONS}
       onSave={state.onSave}
       onChange={state.onChange}
-      onPasteImage={state.onPasteImage}
       value={state.article.content}
+      onPasteImage={state.onPasteImage}
     />
   );
 };
