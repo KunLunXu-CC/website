@@ -65,9 +65,8 @@ export const appendWorks = (state, { article }) => (
         ... state.works.map(v => ({ ... v, action: false })),
         {
           article,
-          change: false,
           action: true,
-          content: state.articles.find(v => v.id === article).content,
+          change: false,
         },
       ],
     }

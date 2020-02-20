@@ -20,10 +20,6 @@ const useStateHook = props => {
     return articles.find(v => v.id === props.work.article);
   });
 
-  const change = useMemo(() => (
-    article.content !== props.work.content
-  ), [article.content, props.work.content]);
-
   // 移除
   const onClose = e => {
     stopPropagation(e);
@@ -33,7 +29,7 @@ const useStateHook = props => {
     });
   };
 
-  return { article, onClose, change };
+  return { article, onClose };
 };
 
 export default props => {
@@ -46,7 +42,7 @@ export default props => {
         type="icon-guanbi6"
         className={classNames(
           scss['tab-icon'],
-          { [scss['tab-icon-change']]: state.change }
+          { [scss['tab-icon-change']]: props.work.change }
         )}
         onClick={state.onClose}
       />

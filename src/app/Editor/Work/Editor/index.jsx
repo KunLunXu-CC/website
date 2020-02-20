@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+  useCallback,
+} from 'react';
 
 import { CodeEditor } from 'qyrc';
 import { uploadPhotos } from '../../model/services';
@@ -41,7 +43,22 @@ const useStateHook = props => {
     return `[图片备注](${_.get(data, '[0].url', '')})`;
   };
 
-  return { article, onSave, onPasteImage };
+  // 内容改变
+  const onChange = useCallback(({ value: content }) => {
+    console.log('-------------->>>', props.work);
+
+    const change = article.content !== content;
+    if (props.work.change === change) {
+      return false;
+    }
+    dispatch({
+      work: { change },
+      type: 'editor/setWork',
+      article: props.work.article,
+    });
+  }, [props.work.article, props.work.change]);
+
+  return { article, onSave, onPasteImage, onChange };
 };
 
 export default props => {
@@ -51,7 +68,7 @@ export default props => {
     <CodeEditor
       options={OPTIONS}
       onSave={state.onSave}
-      onChange={() => { console.log('---') }}
+      onChange={state.onChange}
       onPasteImage={state.onPasteImage}
       value={state.article.content}
     />
