@@ -351,7 +351,7 @@ export const removeArticles = async ({
 };
 
 // 发布
-export const releaseArticle = async ({
+export const releaseArticles = async ({
   spin,
   conds,
   search,
@@ -371,7 +371,7 @@ export const releaseArticle = async ({
           $conds: ArticleSearch!,
           $pagination: Pagination,
         ){
-          releaseArticle(
+          releaseArticles(
             conds: $conds,
             search: $search,
             orderBy: $orderBy,
@@ -394,11 +394,11 @@ export const releaseArticle = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.releaseArticle.list');
+  return _.get(res, 'data.data.releaseArticles.list');
 };
 
 // 撤销(取消发布)
-export const revokeArticle = async ({
+export const revokeArticles = async ({
   spin,
   conds,
   search,
@@ -418,7 +418,7 @@ export const revokeArticle = async ({
           $conds: ArticleSearch!,
           $pagination: Pagination,
         ){
-          revokeArticle(
+          revokeArticles(
             conds: $conds,
             search: $search,
             orderBy: $orderBy,
@@ -441,7 +441,7 @@ export const revokeArticle = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.revokeArticle.list');
+  return _.get(res, 'data.data.revokeArticles.list');
 };
 
 // 图片上传

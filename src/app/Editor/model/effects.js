@@ -157,7 +157,7 @@ const updateArticle = function * ({ body, id }) {
  * @return {void 0}
  */
 const revokeArticle = function * ({ id }) {
-  const articles = yield call(services.revokeArticle, {
+  const articles = yield call(services.revokeArticles, {
     search: {},
     conds: { id },
     spin: SPIN_CODE.APP_EDITOR,
@@ -174,7 +174,7 @@ const revokeArticle = function * ({ id }) {
  * @return {void 0}
  */
 const releaseArticle = function * ({ id }) {
-  const articles = yield call(services.releaseArticle, {
+  const articles = yield call(services.releaseArticles, {
     search: {},
     conds: { id },
     spin: SPIN_CODE.APP_EDITOR,
