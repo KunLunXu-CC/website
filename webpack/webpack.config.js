@@ -1,11 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
 const config = require('./config');
-const DefinePlugin = webpack.DefinePlugin;
-const ProvidePlugin = webpack.ProvidePlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const { DefinePlugin, ProvidePlugin } = require('webpack');
+
 // const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
 /* ================== 插件 ================= */
 
@@ -17,7 +17,7 @@ const providePlugin = new ProvidePlugin(config.providePlugin);
 
 // 关联 html
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
-  template: path.resolve(__dirname, '../public/index.html')
+  template: path.resolve(__dirname, '../public/index.html'),
 });
 
 // 直接拷贝文件进行打包
@@ -31,7 +31,8 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
 });
 
 // 打包监测
-// const bundleAnalyzerPlugin = new WebpackBundleAnalyzer.BundleAnalyzerPlugin();
+// const bundleAnalyzerPlugin = new WebpackBundleAnalyzer
+// .BundleAnalyzerPlugin();
 
 const cssRegex = /\.(css|scss)$/;
 const cssModuleRegex = /\.module\.(css|scss)$/;
@@ -48,14 +49,14 @@ module.exports = {
     splitChunks: {
       maxSize: 30000,
       chunks: 'all',
-    }
+    },
   },
   module: {
     rules: [
       {
         test: /\.(mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'babel-loader',
       },
       {
         test: cssRegex,
@@ -70,8 +71,8 @@ module.exports = {
           },
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: cssModuleRegex,
@@ -85,13 +86,14 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[local]__[hash:base64]'
-            }
+              modules: {
+                localIdentName: '[local]__[hash:base64]',
+              },
+            },
           },
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
@@ -99,15 +101,15 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 10000,
-            name: 'assets/[hash].[ext]'
-          }
-        }]
+            name: 'assets/[hash].[ext]',
+          },
+        }],
       },
       {
         test: /\.(text|md)$/,
         use: 'raw-loader',
       },
-    ]
+    ],
   },
 
   plugins: [
@@ -126,5 +128,5 @@ module.exports = {
 
   devServer: {
     historyApiFallback: true,
-  }
-}
+  },
+};
