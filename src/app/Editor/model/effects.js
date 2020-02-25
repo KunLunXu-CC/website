@@ -1,20 +1,21 @@
 import * as services from './services';
 
 import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
-import { put, call, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery, select } from 'redux-saga/effects';
 
 /**
- * 获取所有标签
+ * 获取标签
  * @return {void 0}
  */
-const getTags = function * () {
+const getTags = function * ({ search }) {
+  const currentTags = yield select(state => state.editor.tags);
   const tags = yield call(services.getTags, {
     spin: SPIN_CODE.APP_EDITOR,
+    search,
   });
-
   yield put({
-    tags,
     type: 'editor/setTags',
+    tags: _.uniqBy([... currentTags, ... tags], 'id'),
   });
 };
 
@@ -22,14 +23,17 @@ const getTags = function * () {
  * 获取文章
  * @return {void 0}
  */
-const getArticles = function * () {
+const getArticles = function * ({ search }) {
+  const currentArticles = yield select(state => state.editor.articles);
+
   const articles = yield call(services.getArticles, {
+    search,
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    articles,
     type: 'editor/setArticles',
+    articles: _.uniqBy([... currentArticles, ... articles], 'id'),
   });
 };
 
@@ -38,15 +42,16 @@ const getArticles = function * () {
  * @return {void 0}
  */
 const removeTags = function * ({ id }) {
-  const tags = yield call(services.removeTags, {
+  const currentTags = yield select(state => state.editor.tags);
+
+  const { change } = yield call(services.removeTags, {
     spin: SPIN_CODE.APP_EDITOR,
     conds: { id },
-    search: {},
   });
 
   yield put({
-    tags,
     type: 'editor/setTags',
+    tags: currentTags.filter(v => !change.find(ele => ele.id === v.id)),
   });
 };
 
@@ -55,20 +60,20 @@ const removeTags = function * ({ id }) {
  * @return {void 0}
  */
 const removeArticle = function * ({ id }) {
+  const currentArticles = yield select(state => state.editor.articles);
+  const { change } = yield call(services.removeArticles, {
+    spin: SPIN_CODE.APP_EDITOR,
+    conds: { id },
+  });
+
   yield put({
     article: id,
     type: 'editor/removeWorks',
   });
 
-  const articles = yield call(services.removeArticles, {
-    spin: SPIN_CODE.APP_EDITOR,
-    conds: { id },
-    search: {},
-  });
-
   yield put({
-    articles,
     type: 'editor/setArticles',
+    articles: currentArticles.filter(v => !change.find(ele => ele.id === v.id)),
   });
 };
 
@@ -77,14 +82,18 @@ const removeArticle = function * ({ id }) {
  * @return {void 0}
  */
 const createTag = function * ({ body }) {
-  const tags = yield call(services.createTags, {
+  const currentTags = yield select(state => state.editor.tags);
+
+  const { change } = yield call(services.createTags, {
     body,
-    search: {},
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    tags,
+    tags: _.uniqBy([
+      ... change,
+      ... currentTags.filter(v => !v.editor),
+    ], 'id'),
     type: 'editor/setTags',
   });
 };
@@ -94,15 +103,19 @@ const createTag = function * ({ body }) {
  * @return {void 0}
  */
 const updateTag = function * ({ body, id }) {
-  const tags = yield call(services.updateTags, {
+  const currentTags = yield select(state => state.editor.tags);
+
+  const { change } = yield call(services.updateTags, {
     body,
-    search: {},
     conds: { id },
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    tags,
+    tags: _.uniqBy([
+      ... change,
+      ... currentTags.filter(v => v.id !== id),
+    ], 'id'),
     type: 'editor/setTags',
   });
 };
@@ -112,14 +125,18 @@ const updateTag = function * ({ body, id }) {
  * @return {void 0}
  */
 const createArticle = function * ({ body }) {
-  const { list, change } = yield call(services.createArticles, {
+  const currentArticles = yield select(state => state.editor.articles);
+
+  const { change } = yield call(services.createArticles, {
     body,
-    search: {},
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    articles: list,
+    articles: _.uniqBy([
+      ... change,
+      ... currentArticles.filter(v => !v.editor),
+    ], 'id'),
     type: 'editor/setArticles',
   });
 
@@ -134,14 +151,15 @@ const createArticle = function * ({ body }) {
  * @return {void 0}
  */
 const updateArticle = function * ({ body, id }) {
-  const articles = yield call(services.updateArticles, {
+  const currentArticles = yield select(state => state.editor.articles);
+
+  const { change } = yield call(services.updateArticles, {
     body,
-    search: {},
     conds: { id },
   });
 
   yield put({
-    articles,
+    articles: _.uniqBy([... change, ... currentArticles], 'id'),
     type: 'editor/setArticles',
   });
 
@@ -157,14 +175,15 @@ const updateArticle = function * ({ body, id }) {
  * @return {void 0}
  */
 const revokeArticle = function * ({ id }) {
-  const articles = yield call(services.revokeArticles, {
-    search: {},
+  const currentArticles = yield select(state => state.editor.articles);
+
+  const { change } = yield call(services.revokeArticles, {
     conds: { id },
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    articles,
+    articles: _.uniqBy([... change, ... currentArticles], 'id'),
     type: 'editor/setArticles',
   });
 };
@@ -174,14 +193,14 @@ const revokeArticle = function * ({ id }) {
  * @return {void 0}
  */
 const releaseArticle = function * ({ id }) {
-  const articles = yield call(services.releaseArticles, {
-    search: {},
+  const currentArticles = yield select(state => state.editor.articles);
+  const { change } = yield call(services.releaseArticles, {
     conds: { id },
     spin: SPIN_CODE.APP_EDITOR,
   });
 
   yield put({
-    articles,
+    articles: _.uniqBy([... change, ... currentArticles], 'id'),
     type: 'editor/setArticles',
   });
 };

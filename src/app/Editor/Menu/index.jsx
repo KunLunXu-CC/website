@@ -9,6 +9,9 @@ import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
 
+// 子菜单开启历史: 避免重复查询, 存储的是 key 值
+const SUBMENU_OPEN_HISTORY = [];
+
 const INLINE_INDENT = 14;  // 菜单缩进大小
 
 const useStateHook = () => {
@@ -107,12 +110,27 @@ const useStateHook = () => {
 
   // SubMenu 展开/关闭的回调
   const onOpenChange = openKeys => {
-    dispatch({ type: 'editor/setMenu', menu: { openKeys } });
+    dispatch({
+      type: 'editor/setMenu',
+      menu: { openKeys },
+    });
+
+    const openKey = openKeys.find(v => !SUBMENU_OPEN_HISTORY.includes(v));
+    if (openKey) {
+      SUBMENU_OPEN_HISTORY.push(openKey);
+      dispatch({
+        type: 'editor/getTags',
+        search: { parent: openKey },
+      });
+      dispatch({
+        type: 'editor/getArticles',
+        search: { tag: openKey },
+      });
+    }
   };
 
   useEffect(() => {
-    dispatch({ type: 'editor/getTags' });
-    dispatch({ type: 'editor/getArticles' });
+    dispatch({ type: 'editor/getTags', search: { parent: null } });
   }, []);
 
   return {

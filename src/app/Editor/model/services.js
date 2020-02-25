@@ -1,87 +1,70 @@
 import axios from '@utils/request';
 
+// 获取 tags
 export const getTags = async ({
   spin,
   search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, pagination },
+      variables: { search },
       query: `
         query(
           $search: TagSearch,
-          $pagination: Pagination
         ){
           tags(
             search: $search,
-            pagination: $pagination,
             orderBy: { creationTime: -1 }
           ){
             list {
               id
               name
-              icon
-              color
-              status
-              updateTime
               parent { id name }
             }
-            pagination
-            message
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.tags.list');
+  return _.get(res, 'data.data.tags.list') || [];
 };
 
+// 获取 文章
 export const getArticles = async ({
   spin,
   search,
-  pagination,
-  orderBy = { creationTime: -1 },
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, pagination, orderBy },
+      variables: { search },
       query: `
         query(
-          $orderBy: OrderBy,
           $search: ArticleSearch,
-          $pagination: Pagination,
         ){
           articles(
             search: $search,
-            orderBy: $orderBy,
-            pagination: $pagination,
           ){
             list {
               id
               name
-              desc
               thumb
               status
               content
-              viewCount
-              updateTime
               tags { id name }
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.articles.list');
+  return _.get(res, 'data.data.articles.list') || [];
 };
 
+// 移除 tag
 export const removeTags = async ({
   spin,
   body,
@@ -98,161 +81,107 @@ export const removeTags = async ({
       query: `
         mutation(
           $conds: TagSearch!,
-          $search: TagSearch,
-          $pagination: Pagination,
         ){
           removeTags(
             conds: $conds,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 },
           ){
-            list {
+            change {
               id
               name
-              icon
-              color
-              status
-              updateTime
-              parent { id name }
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.removeTags.list');
+  return _.get(res, 'data.data.removeTags') || {};
 };
 
-
+// 创建 tag
 export const createTags = async ({
   spin,
   body,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { body, search, pagination },
+      variables: { body },
       query: `
         mutation(
-          $search: TagSearch,
           $body: [TagFields!]!,
-          $pagination: Pagination,
         ){
           createTags(
             body: $body,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 },
           ){
-            list {
+            change {
               id
-              icon
               name
-              color
-              status
-              updateTime
               parent { id name }
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.createTags.list');
+  return _.get(res, 'data.data.createTags') || {};
 };
 
+// 编辑标签
 export const updateTags = async ({
   spin,
   body,
   conds,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: { conds, body },
       query: `
         mutation(
           $body: TagFields!,
           $conds: TagSearch!,
-          $search: TagSearch,
-          $pagination: Pagination,
         ){
           updateTags(
             body: $body,
             conds: $conds,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 },
           ){
-            list {
+            change {
               id
               name
-              icon
-              color
-              status
-              updateTime
               parent { id name }
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.updateTags.list');
+  return _.get(res, 'data.data.updateTags') || {};
 };
 
-
+// 创建文章
 export const createArticles = async ({
   spin,
   body,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { body, search, pagination },
+      variables: { body },
       query: `
         mutation(
-          $search: ArticleSearch,
           $body: [AticleFields!]!,
-          $pagination: Pagination
         ){
           createArticles(
             body: $body,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 }
           ){
-            list {
-              id
-              name
-              desc
-              thumb
-              status
-              content
-              viewCount
-              tags { id name }
-            }
             change {
               id
+              name
+              tags { id name }
             }
-            pagination
-            message
           }
         }`,
     },
@@ -260,188 +189,135 @@ export const createArticles = async ({
   return _.get(res, 'data.data.createArticles') || {};
 };
 
+// 更新文章
 export const updateArticles = async ({
   spin,
   body,
   conds,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: { conds, body },
       query: `
         mutation(
           $body: AticleFields!,
           $conds: ArticleSearch!,
-          $search: ArticleSearch,
-          $pagination: Pagination
         ){
           updateArticles(
             body: $body,
             conds: $conds,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 }
           ){
-            list {
+            change {
               id
               name
-              desc
+              content
               thumb
               status
-              content
-              viewCount
               tags { id name }
             }
-            pagination
-            message
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.updateArticles.list');
+  return _.get(res, 'data.data.updateArticles') || {};
 };
 
+// 删除文章
 export const removeArticles = async ({
   spin,
-  body,
   conds,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: { conds },
       query: `
         mutation(
-          $conds: ArticleSearch!,
-          $search: ArticleSearch,
-          $pagination: Pagination
+          $conds: ArticleSearch!
         ){
           removeArticles(
             conds: $conds,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 }
           ){
-            list {
+            change {
               id
               name
-              desc
-              thumb
-              status
-              content
-              viewCount
-              tags { id name }
             }
-            pagination
-            message
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.removeArticles.list');
+  return _.get(res, 'data.data.removeArticles') || {};
 };
 
 // 发布
 export const releaseArticles = async ({
   spin,
   conds,
-  search,
-  pagination,
-  orderBy = { creationTime: -1 },
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, conds, pagination, orderBy },
+      variables: { conds },
       query: `
         mutation(
-          $orderBy: OrderBy,
-          $search: ArticleSearch,
           $conds: ArticleSearch!,
-          $pagination: Pagination,
         ){
           releaseArticles(
             conds: $conds,
-            search: $search,
-            orderBy: $orderBy,
-            pagination: $pagination,
           ){
-            list {
+            change {
               id
               name
-              desc
+              content
               thumb
               status
-              content
-              viewCount
-              updateTime
               tags { id name }
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.releaseArticles.list');
+  return _.get(res, 'data.data.releaseArticles') || {};
 };
 
 // 撤销(取消发布)
 export const revokeArticles = async ({
   spin,
   conds,
-  search,
-  pagination,
-  orderBy = { creationTime: -1 },
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, conds, pagination, orderBy },
+      variables: { conds },
       query: `
         mutation(
-          $orderBy: OrderBy,
-          $search: ArticleSearch,
           $conds: ArticleSearch!,
-          $pagination: Pagination,
         ){
           revokeArticles(
             conds: $conds,
-            search: $search,
-            orderBy: $orderBy,
-            pagination: $pagination,
           ){
-            list {
+            change {
               id
               name
-              desc
+              content
               thumb
               status
-              content
-              viewCount
-              updateTime
               tags { id name }
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.revokeArticles.list');
+  return _.get(res, 'data.data.revokeArticles') || {};
 };
 
 // 图片上传
