@@ -9,6 +9,7 @@ import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
 
 // 初始默认 options
 const OPTIONS = {
+  wordWrap: 'on',             // 自动换行
   language: 'markdown',
   theme: 'one-dark-pro',
   fontFamily: 'monospace, \'Droid Sans Mono\', \'Droid Sans Fallback\'',

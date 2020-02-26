@@ -35,7 +35,7 @@ const useStateHook = () => {
         ... v,
         type: 'tag',
       })),
-      ele => ele.name
+      'name'
     );
 
     const _articles = _.sortBy(
@@ -43,7 +43,7 @@ const useStateHook = () => {
         ... v,
         type: 'article',
       })),
-      ele => ele.name
+      'name'
     );
 
     const parents = _tags.filter(v => !v.parent.id);
@@ -98,7 +98,7 @@ const useStateHook = () => {
     return list.map(v => (recursion(v, 1)));
   };
 
-  // 选择项时
+  // 点击菜单项
   const onSelect = ({ key: article }) => {
     dispatch({ type: 'editor/appendWorks', article });
   };
@@ -115,6 +115,7 @@ const useStateHook = () => {
       menu: { openKeys },
     });
 
+    // 如果展开一个从未展开过的菜单时:
     const openKey = openKeys.find(v => !SUBMENU_OPEN_HISTORY.includes(v));
     if (openKey) {
       SUBMENU_OPEN_HISTORY.push(openKey);

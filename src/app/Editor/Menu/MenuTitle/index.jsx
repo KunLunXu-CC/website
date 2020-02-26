@@ -91,16 +91,16 @@ const useStateHook = props => {
     stopPropagation(domEvent);
     const handler = {
       createFolder,
-      addEditorStatusWithTag,
       deleteFolder,
       createArticle,
-      addEditorStatusWithArticle,
       deleteArticle,
+      addEditorStatusWithTag,
+      addEditorStatusWithArticle,
     };
     handler[key]();
   };
 
-  // 编辑数据： 根据 id 判断是编辑还是创建，根据 type 值来判断操作对象
+  // 编辑数据： 根据 id 判断是编辑还是创建, 根据 type 值来判断是更新标签还是文章
   const onEditor = e => {
     const name = e.target.value;
     if (props.data.type === 'tag') {
@@ -128,7 +128,7 @@ const useStateHook = props => {
     }
   };
 
-  // 记得箭头小图标
+  // 每项前箭头小图标
   const arrowClass = useMemo(() => classNames(
     scss['menu-title-arrow'],
     { [scss['menu-title-arrow-article']]: props.data.type === 'article' }
@@ -185,7 +185,6 @@ const useStateHook = props => {
   };
 };
 
-// props.type = 'subMenu | item ' props.data props.onMore
 export default props => {
   const state = useStateHook(props);
 
