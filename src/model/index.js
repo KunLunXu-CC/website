@@ -44,21 +44,23 @@ const effects = models
  * middleware 中间件列表
  */
 const middleware = {
-  logger: _DEV_ ? logger : void 0,
   sagaMiddleware: createSagaMiddleware(),
+  logger: _DEV_ ? logger : void 0,
 };
+
+/**
+ * redux DevTools 开发工具
+ */
+const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_
+  ? window.__REDUX_DEVTOOLS_EXTENSION__()
+  : void 0;
 
 /**
  * 创建 store
  */
 export const store = createStore(
   combineReducers(reducers),
-  compose(... [
-    applyMiddleware(... Object.values(middleware).filter(v => v)),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : void 0,
-  ].filter(v => v))
+  compose(applyMiddleware(... Object.values(middleware)), reduxDevTools),
 );
 
 /**
