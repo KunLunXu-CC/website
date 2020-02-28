@@ -85,3 +85,10 @@ export const FITNESS_FEEL = {
   COMMONLY: { VALUE: 2, DESC: '一般' },
   GOOD_GRADE: { VALUE: 3, DESC: '极好' },
 };
+
+// 菜单配置
+export const DIARY_MENU = {
+  CALENDAR: { VALUE: 'calendar', DESC: '日历', ICON: 'icon-rili' },
+  STATS: { VALUE: 'stats', DESC: '统计', ICON: 'icon-tongji' },
+  EXPORT: { VALUE: 'export', DESC: '导出', ICON: 'icon-daochu' },
+};

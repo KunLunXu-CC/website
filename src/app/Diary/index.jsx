@@ -1,20 +1,38 @@
-import React from 'react';
-import Body from './Body';
-import Spin from './Spin';
-import Modal from './Modal';
-import Header from './Header';
+import React, {
+  useMemo,
+} from 'react';
+import Menu from './Menu';
 import scss from './index.module.scss';
+import Calendar from './Calendar';
 
-import { MESSAGE_CODE } from '@config/consts';
+import { useSelector } from 'react-redux';
+import { DIARY_MENU } from '@config/consts';
 
-export default () => (
-  <div className={scss.layout}>
-    <Header/>
-    <div className={scss.body}>
-      <Body/>
-      <Modal/>
+// 菜单和组件的映射关系
+const MEN_MAP_TO_COMPONENT_ = {
+  [DIARY_MENU.CALENDAR.VALUE]: Calendar,
+};
+
+const useStateHook = () => {
+  const { menu } = useSelector(state => state.diary);
+
+  // 构建 body element
+  const body = useMemo(() => {
+    const Body = MEN_MAP_TO_COMPONENT_[menu.selectedKey];
+    return (<Body />);
+  }, [menu.selectedKey]);
+
+  return { body };
+};
+
+export default () => {
+  const state = useStateHook();
+  return (
+    <div className={scss.layout}>
+      <Menu/>
+      <div className={scss['layout-body']}>
+        {state.body}
+      </div>
     </div>
-    <div id={MESSAGE_CODE.APP_DIARY}/>
-    <Spin/>
-  </div>
-);
+  );
+};

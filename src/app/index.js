@@ -45,7 +45,7 @@ export default {
     icon: 'icon-biji',
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 20, left: 20 },
+      toolPosition: { top: 11, left: 11 },
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
