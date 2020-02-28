@@ -3,6 +3,7 @@ import scss from './index.module.scss';
 
 import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
+import { UploadOutlined } from '@ant-design/icons';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ export default () => {
     <div className={scss.upload}>
       <Button
         block
-        icon="upload"
         type="primary"
+        icon={<UploadOutlined />}
         onClick={state.onClick}>
         上传
       </Button>

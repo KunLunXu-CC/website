@@ -5,6 +5,7 @@
 
 .search {
   flex: 1;
+
   :global {
     %clear-style {
       border: none;
@@ -12,14 +13,15 @@
       box-shadow: none;
     }
 
-    .ant-input-affix-wrapper .ant-input:not(:first-child) {
-      padding-left: 40px;
+    .ant-input-affix-wrapper {
+      border: none;
+      background: #f8f8f8;
     }
 
     .ant-input {
       width: 80%;
-      background: #f8f8f8;
       @extend %clear-style;
+      background: #f8f8f8;
 
       &:hover, &:focus {
         @extend %clear-style;

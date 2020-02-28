@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPublicKey } from '@model/user/services';
 
-const useStateHook = props => {
+const useStateHook = () => {
   const avatars = useSelector(
     state => _.get(state, 'photos.avatar') || []
   );
@@ -18,6 +18,8 @@ const useStateHook = props => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+
+  const [form] = Form.useForm();
 
   // 公钥
   const publicKey = useMemo(async () => (
@@ -33,25 +35,20 @@ const useStateHook = props => {
   }, [avatars]);
 
   // 登录
-  const onLogin = () => {
-    props.form.validateFieldsAndScroll(async (errors, values) => {
-      if (!!errors) {
-        return false;
-      }
-      const { account, password } = values;
-      dispatch({
-        account,
-        type: 'user/login',
-        password: rsa(password, await publicKey),
-      });
-      history.push('/');
+  const onLogin = async () => {
+    const { account, password } = await form.validateFields();
+    dispatch({
+      account,
+      type: 'user/login',
+      password: rsa(password, await publicKey),
     });
+    history.push('/');
   };
 
-  return { onLogin, avatar };
+  return { onLogin, avatar, form };
 };
 
-export default Form.create()(props => {
+export default props => {
   const state = useStateHook(props);
 
   return (
@@ -60,28 +57,24 @@ export default Form.create()(props => {
         <Image src={state.avatar}/>
       </div>
       <div className={scss['login-form']}>
-        <Form>
-          <Form.Item>
-            {props.form.getFieldDecorator('account', {
-              rules: [{ required: true, message: '请输入账号!' }],
-            })(
-              <Input
-                size="large"
-                placeholder="请输入账号"
-                prefix={<Icon type="icon-jenkins"/>}
-              />
-            )}
+        <Form form={state.form}>
+          <Form.Item
+            name="account"
+            rules={[{ required: true, message: '请输入账号!' }]}>
+            <Input
+              size="large"
+              placeholder="请输入账号"
+              prefix={<Icon type="icon-jenkins"/>}
+            />
           </Form.Item>
-          <Form.Item>
-            {props.form.getFieldDecorator('password', {
-              rules: [{ required: true, message: '请输入密码!' }],
-            })(
-              <Input.Password
-                size="large"
-                placeholder="请输入密码"
-                prefix={<Icon type="icon-suoping"/>}
-              />
-            )}
+          <Form.Item
+            name="password"
+            rules = {[{ required: true, message: '请输入密码!' }]}>
+            <Input.Password
+              size="large"
+              placeholder="请输入密码"
+              prefix={<Icon type="icon-suoping"/>}
+            />
           </Form.Item>
           <Form.Item>
             <Button
@@ -96,4 +89,4 @@ export default Form.create()(props => {
       </div>
     </div>
   );
-});
+};

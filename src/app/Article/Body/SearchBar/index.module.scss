@@ -25,10 +25,15 @@
         outline: none;
         box-shadow: none;
       }
+
+      .ant-input-affix-wrapper {
+        border: none;
+        background: #f8f8f8;
+      }
+
       .ant-input {
         background: #f8f8f8;
         @extend %clear-style;
-        padding-left: 40px !important;
         &:hover, &:focus {
           @extend %clear-style;
         }
