@@ -1,7 +1,55 @@
 .calendar {
+  height: 100%;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
-  // :global {
 
-  // }
+  :global {
+    // 头部(日期布局)样式
+    .ant-picker-calendar-header {
+      flex: none;
+    }
+
+    // 移除 body 左边距
+    .ant-picker-body {
+      padding-left: 0px !important;
+    }
+
+    // 主体部分布局样式
+    .ant-picker-panel,
+    .ant-picker-date-panel,
+    .ant-picker-body,
+    .ant-picker-conten,
+    table,
+    tbody {
+      flex: 1;
+      outline: none;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      tr {
+        flex: 1;
+        display: flex;
+        td {
+          flex: 1;
+          display: flex;
+        }
+      }
+    }
+
+    // 每个单元格样式
+    .ant-picker-cell-inner.ant-picker-calendar-date {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .ant-picker-calendar-date-value {
+        flex: none;
+      }
+
+      .ant-picker-calendar-date-content {
+        flex: 1;
+      }
+    }
+  }
 }
