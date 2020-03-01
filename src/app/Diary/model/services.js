@@ -1,25 +1,22 @@
 import axios from '@utils/request';
 
+// 获取日记
 export const getDiaries = async ({
   spin,
   search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, pagination },
+      variables: { search },
       query: `
         query(
           $search: DiarySearch,
-          $pagination: Pagination
         ){
           diaries(
             search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 }
           ){
             list {
               id
@@ -32,8 +29,6 @@ export const getDiaries = async ({
               bodyIndex
               informalEssay
             }
-            pagination
-            message
           }
         }`,
     },

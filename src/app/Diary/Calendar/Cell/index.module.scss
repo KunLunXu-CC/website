@@ -11,6 +11,26 @@
   }
 }
 
+// 具有数据的单元格
+.cell-has-data {
+  .date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &::before {
+      content: ' ';
+
+      width: 10px;
+      height: 10px;
+      display: block;
+
+      border-radius: 50%;
+      background: #b7eb8f;
+    }
+  }
+}
+
 // 非本月
 :global(.ant-picker-cell:not(.ant-picker-cell-in-view)){
   .cell {

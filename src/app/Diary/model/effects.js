@@ -9,9 +9,9 @@ import { put, call, takeEvery } from 'redux-saga/effects';
  *
  * @return {void 0}
  */
-const getDiaries = function * () {
+const getDiaries = function * ({ date: name }) {
   const diaries = yield call(services.getDiaries, {
-    search: {},
+    search: { name },
     spin: SPIN_CODE.APP_DIARY,
   });
 

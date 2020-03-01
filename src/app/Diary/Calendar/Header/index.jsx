@@ -7,9 +7,28 @@ import scss from './index.module.scss';
 
 import { Input } from 'antd';
 import { Icon } from 'qyrc';
+import { useDispatch } from 'react-redux';
+
+// 获取区间内所有时间
+const getFullDate = value => {
+  const start = moment(value)
+    .startOf('month')
+    .subtract(6, 'day');
+  const end = moment(value)
+    .endOf('month')
+    .add(6, 'day');
+  const res = [];
+  const current = start.clone();
+  while (moment(current).isBefore(end)) {
+    current.add(1, 'day');
+    res.push(current.format('YYYY-MM-DD'));
+  }
+  return res;
+};
 
 const useStateHook = props => {
   const [value, setValue] = useState(props.value.format('YYYY-MM'));
+  const dispatch = useDispatch();
 
   // 切换面板: 1 下一个月, -1 上一个月, event 读取输入框值
   const onChange = value => {
@@ -34,7 +53,10 @@ const useStateHook = props => {
   }, [props.value.format('YYYY-MM')]);
 
   useEffect(() => {
-    console.log('--------------->>>', value);
+    dispatch({
+      type: 'diary/getDiaries',
+      date: getFullDate(value),
+    });
   }, [value]);
 
   return { onChange, value, onChangeValue };
