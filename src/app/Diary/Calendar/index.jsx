@@ -1,15 +1,14 @@
 import React from 'react';
+import Cell from './Cell';
+import Header from './Header';
 import scss from './index.module.scss';
 
 import { Calendar } from 'antd';
 
-const onPanelChange = (value, mode) => {
-  console.log(value.format('YYYY-MM-DD'), mode);
-};
-
 export default () => (
   <Calendar
     className={scss.calendar}
-    onPanelChange={onPanelChange}
+    dateFullCellRender={date => <Cell date={date}/>}
+    headerRender={params => (<Header {... params}/>)}
   />
 );

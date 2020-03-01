@@ -33,23 +33,35 @@
         td {
           flex: 1;
           display: flex;
+          &:nth-last-child(1),
+          &:nth-last-child(2) {
+            color: #ff7875;
+          }
         }
       }
     }
 
-    // 每个单元格样式
-    .ant-picker-cell-inner.ant-picker-calendar-date {
-      flex: 1;
+    // 日历主体头部(星期)
+    .ant-picker-content thead {
       display: flex;
-      flex-direction: column;
-
-      .ant-picker-calendar-date-value {
-        flex: none;
+      tr {
+        display: flex;
+        th {
+          flex: 1;
+          text-align: right;
+          padding: 0 12px 10px 0 !important;
+          &:nth-last-child(1),
+          &:nth-last-child(2) {
+            color: #ff7875;
+          }
+        }
       }
+    }
 
-      .ant-picker-calendar-date-content {
-        flex: 1;
-      }
+    // 设置边框
+    tbody {
+      border-top: 1px solid rgba($color: #dbdbdb, $alpha: 0.2);
+      border-left: 1px solid rgba($color: #dbdbdb, $alpha: 0.2);
     }
   }
 }

@@ -1,0 +1,44 @@
+// ant-picker-cell ant-picker-cell-in-view ant-picker-cell-today ant-picker-cell-selected
+.cell {
+  flex: 1;
+  cursor: pointer;
+  padding: 5px 12px;
+  border-right: 1px solid rgba($color: #dbdbdb, $alpha: 0.2);
+  border-bottom: 1px solid rgba($color: #dbdbdb, $alpha: 0.2);
+
+  &:hover {
+    background: #e6f7ff !important;
+  }
+}
+
+// 非本月
+:global(.ant-picker-cell:not(.ant-picker-cell-in-view)){
+  .cell {
+    div { opacity: 0.3; }
+    background: rgba($color: #dbdbdb, $alpha: 0.1);
+  }
+}
+
+// 今天
+:global(.ant-picker-cell.ant-picker-cell-today){
+  .cell {
+    background: #e6f7ff;
+  }
+}
+
+// 选中
+:global(.ant-picker-cell.ant-picker-cell-selected){
+  .cell {
+    background: #bae7ff;
+  }
+}
+
+// // ant-picker-cell ant-picker-cell-in-view ant-picker-cell-today ant-picker-cell-selected
+
+// .ant-picker-cell:not(.ant-picker-cell-in-view) {
+//   background: rgba($color: #dbdbdb, $alpha: 0.1);
+
+//   .ant-picker-calendar-date div {
+//     opacity: 0.4;
+//   }
+// }
