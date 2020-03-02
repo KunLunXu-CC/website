@@ -1,0 +1,47 @@
+.modal {
+  height: 80% !important;
+  :global{
+    .ant-modal-content {
+      height: 100%;
+      display: flex;
+      overflow: hidden;
+      border-radius: 10px;
+      flex-direction: column;
+    }
+    .ant-modal-body {
+      flex: 1;
+      padding: 0px;
+      overflow: hidden;
+    }
+
+    .ant-tabs-left {
+      height: 100%;
+      display: flex;
+
+      .ant-tabs-content {
+        flex: 1;
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
+  }
+
+  // 标题
+  .title {
+    display: flex;
+    justify-content: space-between;
+
+    .title-tool {
+      font-weight: 300;
+
+      :global {
+        .qyrc-icon {
+          &:hover {
+            color: #69c0ff;
+          }
+        }
+      }
+    }
+  }
+}
