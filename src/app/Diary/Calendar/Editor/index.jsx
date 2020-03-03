@@ -3,6 +3,7 @@ import React, {
   useMemo,
   useState,
   useCallback,
+  useEffect,
 } from 'react';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
@@ -98,17 +99,20 @@ const useStateHook = () => {
     setActiveTabKey(activeTabKey);
   };
 
-  const initialValues = useMemo(() => (
-    modal && modal.diary ? {
-      name: modal.diary.name ? moment(modal.diary.name) : void 0,
-      getUp: modal.diary.getUp ? moment(modal.diary.getUp) : void 0,
-      toRest: modal.diary.getUp ? moment(modal.diary.toRest) : void 0,
-      bill: modal.diary.bill,
-      diet: modal.diary.diet,
-      fitness: modal.diary.fitness,
-      bodyIndex: modal.diary.bodyIndex,
-    } : void 0
-  ), [modal]);
+  // 重新设置值
+  useEffect(() => {
+    form.setFieldsValue(
+      modal ? {
+        name: moment(_.get(modal, 'diary.name') || modal.date),
+        getUp: moment(_.get(modal, 'diary.getUp') || modal.date),
+        toRest: moment(_.get(modal, 'diary.toRest') || modal.date),
+        bill: _.get(modal, 'diary.bill') || [],
+        diet: _.get(modal, 'diary.diet') || [],
+        fitness: _.get(modal, 'diary.fitness') || [],
+        bodyIndex: _.get(modal, 'diary.bodyIndex') || [],
+      } : void 0
+    );
+  }, [modal]);
 
   return {
     onOk,
@@ -119,26 +123,25 @@ const useStateHook = () => {
     onCancel,
     onTabsChange,
     activeTabKey,
-    initialValues,
   };
 };
 
 export default () => {
   const state = useStateHook();
   return (
-    <Modal
-      width="80%"
-      okText="确定"
-      destroyOnClose
-      closable={false}
-      cancelText="取消"
-      onOk={state.onOk}
-      title={state.title}
-      getContainer={false}
-      className={scss.modal}
-      visible={!!state.modal}
-      onCancel={state.onCancel}>
-      <Form initialValues={state.initialValues} form={state.form}>
+    <Form form={state.form}>
+      <Modal
+        width="80%"
+        okText="确定"
+        destroyOnClose
+        closable={false}
+        cancelText="取消"
+        onOk={state.onOk}
+        title={state.title}
+        getContainer={false}
+        className={scss.modal}
+        visible={!!state.modal}
+        onCancel={state.onCancel}>
         <Tabs tabPosition="left" onChange={state.onTabsChange}>
           {TABS_SETTING.map(V => (
             <Tabs.TabPane
@@ -153,7 +156,7 @@ export default () => {
             </Tabs.TabPane>
           ))}
         </Tabs>
-      </Form>
-    </Modal>
+      </Modal>
+    </Form>
   );
 };

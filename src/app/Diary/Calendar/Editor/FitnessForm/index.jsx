@@ -5,6 +5,7 @@ import Item from './Item';
 
 import {
   Form,
+  Empty,
 } from 'antd';
 import { Icon } from 'qyrc';
 
@@ -23,6 +24,7 @@ export default props => {
               form={props.form}
             />
           ))}
+          {fields.length === 0 ? <Empty/> : null}
           {props.showTools ?
             <Tools>
               <Icon

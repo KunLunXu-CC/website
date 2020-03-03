@@ -4,7 +4,7 @@ import React, {
 import Item from './Item';
 
 import { Icon } from 'qyrc';
-import { Form } from 'antd';
+import { Form, Empty } from 'antd';
 
 export default props => {
   const { tools: Tools } = props;
@@ -21,6 +21,7 @@ export default props => {
               form={props.form}
             />
           ))}
+          {fields.length === 0 ? <Empty/> : null}
           {props.showTools ?
             <Tools>
               <Icon
