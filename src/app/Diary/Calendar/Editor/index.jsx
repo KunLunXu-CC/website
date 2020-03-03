@@ -30,9 +30,12 @@ const useStateHook = () => {
   const [form] = Form.useForm();
 
   // 弹窗
-  const model = useSelector(
-    state => _.get(state, `modal[${DIARY_EDITOR_DIARY}]`)
-  );
+  const model = useSelector(state => state.modal[DIARY_EDITOR_DIARY]);
+
+  // 初始值
+  const initialValues = useMemo(() => {
+    return null;
+  }, []);
 
   // 工具: 传送门
   const Tools = useCallback(({ children }) => (
@@ -56,11 +59,14 @@ const useStateHook = () => {
       code: DIARY_EDITOR_DIARY,
       type: 'modal/closeModal',
     });
+    form.resetFields();
   };
 
   // 确认
   const onOk = async () => {
-    onCancel();
+    const values = await form.validateFields();
+    console.log('--------------->>>', values);
+    // onCancel();
   };
 
   // tabs 切换
@@ -77,17 +83,20 @@ const useStateHook = () => {
     onCancel,
     onTabsChange,
     activeTabKey,
+    initialValues,
   };
 };
 
 export default () => {
   const state = useStateHook();
   return (
-    <Form form={state.form}>
-      {console.log('state.activeTabKey', state.activeTabKey)}
+    <Form
+      form={state.form}
+      initialValues={state.initialValues}>
       <Modal
         width="80%"
         okText="确定"
+        destroyOnClose
         closable={false}
         cancelText="取消"
         onOk={state.onOk}

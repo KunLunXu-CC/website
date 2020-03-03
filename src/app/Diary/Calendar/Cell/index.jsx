@@ -1,14 +1,17 @@
 import React, {
   useMemo,
+  useCallback,
 } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { useSelector } from 'react-redux';
+import { DIARY_EDITOR_DIARY } from '../../consts';
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = props => {
   const { diaries = [] } = useSelector(state => state.diary);
+  const dispatch = useDispatch();
 
   // 日期
   const date = useMemo(() => (
@@ -26,14 +29,26 @@ const useStateHook = props => {
     { [scss['cell-has-data']]: diary },
   ), [diary]);
 
-  return { date, className, diary };
+  // 点击单元格
+  const onClick = useCallback(() => {
+    dispatch({
+      diary,
+      date: props.date,
+      type: 'modal/openModal',
+      code: DIARY_EDITOR_DIARY,
+    });
+  }, [props.date, diary]);
+
+  return { date, className, diary, onClick };
 };
 
 export default props => {
   const state = useStateHook(props);
 
   return (
-    <div className={state.className}>
+    <div
+      onClick={state.onClick}
+      className={state.className}>
       <div className={scss.date}>
         {state.date}
       </div>

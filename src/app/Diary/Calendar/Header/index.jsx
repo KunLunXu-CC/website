@@ -55,7 +55,7 @@ const useStateHook = props => {
   useEffect(() => {
     dispatch({
       type: 'diary/getDiaries',
-      date: getFullDate(value),
+      search: { names: getFullDate(value) },
     });
   }, [value]);
 
