@@ -15,8 +15,6 @@ export const setMenu = (state, { menu }) => ({
   },
 });
 
-export const space = () => {};
-
 /**
  * 设置日记
  * 1. reducer: action = { type: 'diary/setDiaries' }

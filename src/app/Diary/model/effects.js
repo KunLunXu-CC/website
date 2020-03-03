@@ -32,8 +32,8 @@ const createDiarie = function * ({ body }) {
     body: [body],
     spin: SPIN_CODE.APP_DIARY,
   });
-  const currentDiaries = yield select(state => state.diary.diaries);
 
+  const currentDiaries = yield select(state => state.diary.diaries);
   yield put({
     type: 'diary/setDiaries',
     diaries: [... currentDiaries, ... change],
@@ -61,7 +61,6 @@ const updateDiaries = function * ({ id, body }) {
   });
 
   const currentDiaries = yield select(state => state.diary.diaries);
-
   yield put({
     type: 'diary/setDiaries',
     diaries: _.uniqBy([... change, ... currentDiaries], 'id'),

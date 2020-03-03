@@ -2,9 +2,9 @@ import React, {
   useMemo,
 } from 'react';
 import Menu from './Menu';
-import scss from './index.module.scss';
-import Calendar from './Calendar';
 import Tips from './Tips';
+import Calendar from './Calendar';
+import scss from './index.module.scss';
 
 import { useSelector } from 'react-redux';
 import { DIARY_MENU } from '@config/consts';
