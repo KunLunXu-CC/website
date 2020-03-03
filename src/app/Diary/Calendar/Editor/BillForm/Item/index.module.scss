@@ -1,6 +1,5 @@
 .row {
   flex: 1;
-  display: flex;
 
   margin: 0 0 20px 0 !important;
   padding: 20px 20px 0 20px !important;
@@ -14,7 +13,7 @@
     :global {
       .ant-form-item-label {
         flex: none;
-        width: 6em;
+        width: 4em;
       }
 
       .ant-form-item-control {

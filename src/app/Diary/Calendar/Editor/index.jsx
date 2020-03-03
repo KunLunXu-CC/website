@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import ReactDOM from 'react-dom';
 import BaseForm from './BaseForm';
+import BillForm from './BillForm';
 import DietForm from './DietForm';
 import FitnessForm from './FitnessForm';
 import scss from './index.module.scss';
@@ -19,7 +20,7 @@ const TABS_SETTING = [
   { tab: '基础设置', key: 'base', Component: BaseForm },
   { tab: '饮食记录', key: 'diet', Component: DietForm },
   { tab: '训练记录', key: 'fitness', Component: FitnessForm },
-  { tab: '账单记录', key: 'bill', Component: () => (4) },
+  { tab: '账单记录', key: 'bill', Component: BillForm },
 ];
 
 const useStateHook = () => {

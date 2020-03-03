@@ -15,7 +15,6 @@ import {
 } from 'antd';
 import { FITNESS_TYPE, FITNESS_PLACE, FITNESS_FEEL } from '@config/consts';
 import { Icon } from 'qyrc';
-import moment from 'moment';
 
 const useStateHook = props => {
   const [projects, setProjects] = useState([]);
@@ -61,10 +60,10 @@ const useStateHook = props => {
   const resetProjects = (type, place) => {
     const currentType = _.isNumber(type)
       ? type
-      : props.form.getFieldValue(`fitness[${props.field.fieldKey}].type`);
+      : props.form.getFieldValue(['fitness', props.field.fieldKey, 'type']);
     const currentPlace = _.isNumber(place)
       ? place
-      : props.form.getFieldValue(`fitness[${props.field.fieldKey}].place`);
+      : props.form.getFieldValue(['fitness', props.field.fieldKey, 'place']);
     const newProjects = fitnessProjects.filter(
       v => v.type === currentType && v.place === currentPlace
     );
@@ -75,24 +74,24 @@ const useStateHook = props => {
   const resetShowPlaceField = type => {
     const currentType = _.isNumber(type)
       ? type
-      : props.form.getFieldValue(`fitness[${props.field.fieldKey}].type`);
+      : props.form.getFieldValue(['fitness', props.field.fieldKey, 'type']);
     setShowPlaceField(currentType === FITNESS_TYPE.ANAEROBIC.VALUE);
   };
 
   // place 修改
   const onPlaceChange = place => {
-    props.form.setFieldsValue({
-      [`fitness[${props.field.fieldKey}].project`]: void 0,
-    });
+    const fitness = props.form.getFieldValue(['fitness']);
+    fitness[props.field.fieldKey].project = void 0;
+    props.form.setFieldsValue(fitness);
     resetProjects(void 0, place);
   };
 
   // type 修改
   const onTypeChange = type => {
-    props.form.setFieldsValue({
-      [`fitness[${props.field.fieldKey}].project`]: [1, 2, 3],
-      [`fitness[${props.field.fieldKey}].place`]: 11111,
-    });
+    const fitness = props.form.getFieldValue(['fitness']);
+    fitness[props.field.fieldKey].project = void 0;
+    fitness[props.field.fieldKey].place = void 0;
+    props.form.setFieldsValue({ fitness });
     resetProjects(type);
     resetShowPlaceField(type);
   };
@@ -110,13 +109,6 @@ const useStateHook = props => {
       resetProjects(type, place);
       resetShowPlaceField(type);
     }
-    // props.form.setFieldsValue({
-    //   [`fitness.${props.field.fieldKey}.project`]: [{ value: '1111' }],
-    //   [`fitness.${props.field.fieldKey}.place`]: 11111,
-    // });
-    // https://codesandbox.io/s/peaceful-shannon-dfn1v
-    props.form.setFieldsValue({ 'bodyIndex.weight': 80 });
-    console.log('--->>', props.field.fieldKey, props.form.getFieldsValue());
   }, [props.modal]);
 
   return {

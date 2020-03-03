@@ -10,7 +10,7 @@ export default props => {
   const { tools: Tools } = props;
 
   return (
-    <Form.List name="diet">
+    <Form.List name="bill">
       {(fields, { add, remove }) => (
         <Fragment>
           {fields.map(field => (
