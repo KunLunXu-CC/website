@@ -6,6 +6,9 @@ import React, {
 import scss from './index.module.scss';
 import fitnessProjects from '@config/fitnessProjects';
 
+import { useSelector } from 'react-redux';
+import { DIARY_EDITOR_DIARY } from '../../../../consts';
+
 import {
   Col,
   Row,
@@ -19,6 +22,9 @@ import { Icon } from 'qyrc';
 const useStateHook = props => {
   const [projects, setProjects] = useState([]);
   const [showPlaceField, setShowPlaceField] = useState(false);
+
+  // 弹窗
+  const modal = useSelector(state => state.modal[DIARY_EDITOR_DIARY]);
 
   // 类型下拉项
   const typeOptions = useMemo(() => (
@@ -97,19 +103,19 @@ const useStateHook = props => {
   };
 
   useEffect(() => {
-    if (_.get(props.modal, 'data.id')) {
+    if (_.get(modal, 'diary.id')) {
       const type = _.get(
-        props.modal,
-        `data.fitness[${props.field.fieldKey}].type`
+        modal,
+        `diary.fitness[${props.field.fieldKey}].type`
       );
       const place = _.get(
-        props.modal,
-        `data.fitness[${props.field.fieldKey}].place`
+        modal,
+        `diary.fitness[${props.field.fieldKey}].place`
       );
       resetProjects(type, place);
       resetShowPlaceField(type);
     }
-  }, [props.modal]);
+  }, [modal]);
 
   return {
     typeOptions,

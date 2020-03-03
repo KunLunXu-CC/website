@@ -68,7 +68,7 @@ export default () => (
       <Form.Item
         label="水分 (%) "
         className={scss['form-item']}
-        name={['bodyIndex', 'moistureConten']}>
+        name={['bodyIndex', 'moistureContent']}>
         <InputNumber
           min={10}
           max={100}

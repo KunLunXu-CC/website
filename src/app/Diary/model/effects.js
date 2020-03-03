@@ -2,7 +2,7 @@ import * as services from './services';
 
 import { message } from '@utils';
 import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
-import { put, call, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery, select } from 'redux-saga/effects';
 
 /**
  * 获取日记
@@ -28,15 +28,15 @@ const getDiaries = function * ({ search }) {
  * @return {void 0}
  */
 const createDiarie = function * ({ body }) {
-  const diaries = yield call(services.createDiaries, {
-    search: {},
+  const { change } = yield call(services.createDiaries, {
     body: [body],
     spin: SPIN_CODE.APP_DIARY,
   });
+  const currentDiaries = yield select(state => state.diary.diaries);
 
   yield put({
     type: 'diary/setDiaries',
-    diaries,
+    diaries: [... currentDiaries, ... change],
   });
 
   message({
@@ -54,16 +54,17 @@ const createDiarie = function * ({ body }) {
  * @return {void 0}
  */
 const updateDiaries = function * ({ id, body }) {
-  const diaries = yield call(services.updateDiaries, {
+  const { change } = yield call(services.updateDiaries, {
     body,
-    search: {},
     conds: { id },
     spin: SPIN_CODE.APP_DIARY,
   });
 
+  const currentDiaries = yield select(state => state.diary.diaries);
+
   yield put({
     type: 'diary/setDiaries',
-    diaries,
+    diaries: _.uniqBy([... change, ... currentDiaries], 'id'),
   });
 
   message({

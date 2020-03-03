@@ -36,31 +36,25 @@ export const getDiaries = async ({
   return _.get(res, 'data.data.diaries.list');
 };
 
+// 创建日记
 export const createDiaries = async ({
   spin,
   body,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { body, search, pagination },
+      variables: { body },
       query: `
         mutation(
-          $search: DiarySearch,
           $body: [DiaryFields!]!,
-          $pagination: Pagination,
         ){
           createDiaries(
             body: $body,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 },
           ){
-            list {
+            change {
               id
               name
               bill
@@ -71,43 +65,35 @@ export const createDiaries = async ({
               bodyIndex
               informalEssay
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.createDiaries.list');
+  return _.get(res, 'data.data.createDiaries') || {};
 };
 
+// 更新日记
 export const updateDiaries = async ({
   spin,
   body,
   conds,
-  search,
-  pagination,
 } = {}) => {
   const res = await axios({
     spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body, search, pagination },
+      variables: { conds, body },
       query: `
         mutation(
           $body: DiaryFields!,
           $conds: DiarySearch!,
-          $search: DiarySearch,
-          $pagination: Pagination,
         ){
           updateDiaries(
             body: $body,
             conds: $conds,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 },
           ){
-            list {
+            change {
               id
               name
               bill
@@ -118,56 +104,9 @@ export const updateDiaries = async ({
               bodyIndex
               informalEssay
             }
-            message
-            pagination
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.updateDiaries.list');
-};
-
-export const removeDiaries = async ({
-  spin,
-  body,
-  conds,
-  search,
-  pagination,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds, body, search, pagination },
-      query: `
-        mutation(
-          $conds: DiarySearch!,
-          $search: DiarySearch,
-          $pagination: Pagination,
-        ){
-          removeDiaries(
-            conds: $conds,
-            search: $search,
-            pagination: $pagination,
-            orderBy: { creationTime: -1 },
-          ){
-            list {
-              id
-              name
-              bill
-              diet
-              getUp
-              toRest
-              fitness
-              bodyIndex
-              informalEssay
-            }
-            message
-            pagination
-          }
-        }`,
-    },
-  });
-  return _.get(res, 'data.data.removeDiaries.list');
+  return _.get(res, 'data.data.updateDiaries') || {};
 };

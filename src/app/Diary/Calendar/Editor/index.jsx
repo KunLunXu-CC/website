@@ -2,8 +2,10 @@ import React, {
   useRef,
   useMemo,
   useState,
+  useEffect,
   useCallback,
 } from 'react';
+import moment from 'moment';
 import ReactDOM from 'react-dom';
 import BaseForm from './BaseForm';
 import BillForm from './BillForm';
@@ -23,6 +25,28 @@ const TABS_SETTING = [
   { tab: '账单记录', key: 'bill', Component: BillForm },
 ];
 
+// 获取 body
+const getBody = values => {
+  const {
+    name,
+    getUp,
+    toRest,
+    bodyIndex,
+    bill = [],
+    diet = [],
+    fitness = [],
+  } = values;
+  return {
+    getUp,
+    toRest,
+    bodyIndex,
+    bill: bill.filter(v => v),
+    diet: diet.filter(v => v),
+    fitness: fitness.filter(v => v),
+    name: name.format('YYYY-MM-DD'),
+  };
+};
+
 const useStateHook = () => {
   const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
   const titleToolRef = useRef();
@@ -30,12 +54,7 @@ const useStateHook = () => {
   const [form] = Form.useForm();
 
   // 弹窗
-  const model = useSelector(state => state.modal[DIARY_EDITOR_DIARY]);
-
-  // 初始值
-  const initialValues = useMemo(() => {
-    return null;
-  }, []);
+  const modal = useSelector(state => state.modal[DIARY_EDITOR_DIARY]);
 
   // 工具: 传送门
   const Tools = useCallback(({ children }) => (
@@ -51,7 +70,7 @@ const useStateHook = () => {
       <div className={scss['title-tool']} ref={titleToolRef}>
       </div>
     </div>
-  ), [model, titleToolRef]);
+  ), [modal, titleToolRef]);
 
   // 取消
   const onCancel = () => {
@@ -65,8 +84,14 @@ const useStateHook = () => {
   // 确认
   const onOk = async () => {
     const values = await form.validateFields();
-    console.log('--------------->>>', values);
-    // onCancel();
+    const id = _.get(modal, 'diary.id');
+    const body = getBody(values);
+    dispatch({
+      id,
+      body,
+      type: id ? 'diary/updateDiaries' : 'diary/createDiarie',
+    });
+    onCancel();
   };
 
   // tabs 切换
@@ -74,25 +99,35 @@ const useStateHook = () => {
     setActiveTabKey(activeTabKey);
   };
 
+  useEffect(() => {
+    const initialValues = modal && modal.diary ? {
+      name: modal.diary.name ? moment(modal.diary.name) : void 0,
+      getUp: modal.diary.getUp ? moment(modal.diary.getUp) : void 0,
+      toRest: modal.diary.getUp ? moment(modal.diary.toRest) : void 0,
+      bill: modal.diary.bill,
+      diet: modal.diary.diet,
+      fitness: modal.diary.fitness,
+      bodyIndex: modal.diary.bodyIndex,
+    } : void 0;
+    initialValues && form.setFieldsValue(initialValues);
+  }, [modal]);
+
   return {
     onOk,
     form,
     title,
     Tools,
-    model,
+    modal,
     onCancel,
     onTabsChange,
     activeTabKey,
-    initialValues,
   };
 };
 
 export default () => {
   const state = useStateHook();
   return (
-    <Form
-      form={state.form}
-      initialValues={state.initialValues}>
+    <Form form={state.form}>
       <Modal
         width="80%"
         okText="确定"
@@ -103,7 +138,7 @@ export default () => {
         title={state.title}
         getContainer={false}
         className={scss.modal}
-        visible={!!state.model}
+        visible={!!state.modal}
         onCancel={state.onCancel}>
         <Tabs tabPosition="left" onChange={state.onTabsChange}>
           {TABS_SETTING.map(V => (

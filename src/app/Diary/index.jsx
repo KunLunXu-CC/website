@@ -4,6 +4,7 @@ import React, {
 import Menu from './Menu';
 import scss from './index.module.scss';
 import Calendar from './Calendar';
+import Tips from './Tips';
 
 import { useSelector } from 'react-redux';
 import { DIARY_MENU } from '@config/consts';
@@ -33,6 +34,7 @@ export default () => {
       <div className={scss['layout-body']}>
         {state.body}
       </div>
+      <Tips/>
     </div>
   );
 };
