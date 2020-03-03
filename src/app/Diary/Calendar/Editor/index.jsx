@@ -2,7 +2,6 @@ import React, {
   useRef,
   useMemo,
   useState,
-  useEffect,
   useCallback,
 } from 'react';
 import moment from 'moment';
@@ -99,8 +98,8 @@ const useStateHook = () => {
     setActiveTabKey(activeTabKey);
   };
 
-  useEffect(() => {
-    const initialValues = modal && modal.diary ? {
+  const initialValues = useMemo(() => (
+    modal && modal.diary ? {
       name: modal.diary.name ? moment(modal.diary.name) : void 0,
       getUp: modal.diary.getUp ? moment(modal.diary.getUp) : void 0,
       toRest: modal.diary.getUp ? moment(modal.diary.toRest) : void 0,
@@ -108,9 +107,8 @@ const useStateHook = () => {
       diet: modal.diary.diet,
       fitness: modal.diary.fitness,
       bodyIndex: modal.diary.bodyIndex,
-    } : void 0;
-    initialValues && form.setFieldsValue(initialValues);
-  }, [modal]);
+    } : void 0
+  ), [modal]);
 
   return {
     onOk,
@@ -121,25 +119,26 @@ const useStateHook = () => {
     onCancel,
     onTabsChange,
     activeTabKey,
+    initialValues,
   };
 };
 
 export default () => {
   const state = useStateHook();
   return (
-    <Form form={state.form}>
-      <Modal
-        width="80%"
-        okText="确定"
-        destroyOnClose
-        closable={false}
-        cancelText="取消"
-        onOk={state.onOk}
-        title={state.title}
-        getContainer={false}
-        className={scss.modal}
-        visible={!!state.modal}
-        onCancel={state.onCancel}>
+    <Modal
+      width="80%"
+      okText="确定"
+      destroyOnClose
+      closable={false}
+      cancelText="取消"
+      onOk={state.onOk}
+      title={state.title}
+      getContainer={false}
+      className={scss.modal}
+      visible={!!state.modal}
+      onCancel={state.onCancel}>
+      <Form initialValues={state.initialValues} form={state.form}>
         <Tabs tabPosition="left" onChange={state.onTabsChange}>
           {TABS_SETTING.map(V => (
             <Tabs.TabPane
@@ -154,7 +153,7 @@ export default () => {
             </Tabs.TabPane>
           ))}
         </Tabs>
-      </Modal>
-    </Form>
+      </Form>
+    </Modal>
   );
 };

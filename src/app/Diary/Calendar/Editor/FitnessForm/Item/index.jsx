@@ -103,7 +103,7 @@ const useStateHook = props => {
   };
 
   useEffect(() => {
-    if (_.get(modal, 'diary.id')) {
+    if (modal && _.get(modal, 'diary.id')) {
       const type = _.get(
         modal,
         `diary.fitness[${props.field.fieldKey}].type`
