@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/qianyin925/blog_client/compare/v1.3.0...v2.0.0) (2020-03-04)
+
+
+### Features
+
+* 【client】【Editor】整体样式调整修改 ([5fdd010](https://github.com/qianyin925/blog_client/commit/5fdd0106806828faa4d5f96e91498f56e9db6cba))
+* 【client】【editor】缩小应用高度会将工作区域的  tab 部分隐藏调 ([3b4971d](https://github.com/qianyin925/blog_client/commit/3b4971ddab14cda7255db136ccd6f850910fa224))
+* 【client】【日记】引入 antv g2 ([03f3541](https://github.com/qianyin925/blog_client/commit/03f35417361bdfe389ff27c5dcb5ddac5f072506))
+* 【client】【相册】文件上传成功后抽屉未关闭 ([611507d](https://github.com/qianyin925/blog_client/commit/611507d58ee5379435f4fa7a90cace8c891cf2d7))
+* 【client】【编辑器】创建文章后应默认打开新建的文章 ([2bdc49d](https://github.com/qianyin925/blog_client/commit/2bdc49dfaf3e890008c641ce5662a5d38a7f3c22))
+* 【client】【阅读】样式调整 ([eb49709](https://github.com/qianyin925/blog_client/commit/eb49709ab9ae6c3d4f83a20e94ec5082cb80cd90))
+* 【client】antd 升级 ([c496ea9](https://github.com/qianyin925/blog_client/commit/c496ea98a01903527e8d5868c4495693bc068467))
+* 【client】css-loader 升级 ([0cc4e74](https://github.com/qianyin925/blog_client/commit/0cc4e742890496ef1258562cebc3ba6644dca94a))
+* 【client】创建 redux  相关代码调整 ([5ff0977](https://github.com/qianyin925/blog_client/commit/5ff09777e86c003293a544ba3a617edc05ccb710))
+* 【client】引入 qyrc editor ([34fe60a](https://github.com/qianyin925/blog_client/commit/34fe60a6b8b700fabbb8959f0b55b7b0bc55b12f))
+* 【client】日记重做 ([9cab8d3](https://github.com/qianyin925/blog_client/commit/9cab8d36429faca2dd4136db636a8462838a586c))
+* 【client】编辑器优化 ([b865c96](https://github.com/qianyin925/blog_client/commit/b865c966d79e30c32feeb233d0a4fc40d71c0f31))
+* 【client】编辑器优化 ([e2c4e5b](https://github.com/qianyin925/blog_client/commit/e2c4e5ba5e7219529639bbca7fc36d80cc7263c3))
+* 【serve】revokeArticle  releaseArticle api 名字修改为复数形式 ([d9e2998](https://github.com/qianyin925/blog_client/commit/d9e299812deda4cb13a5eb9837605bfa7cc30485))
+
+
+### Bug Fixes
+
+* 【client】redux 报错 ([1e22394](https://github.com/qianyin925/blog_client/commit/1e223946d848b30e5a94ddeb7af9ea393ebe88ef))
+
 ## [1.3.0](https://github.com/qianyin925/blog_client/compare/v1.2.0...v1.3.0) (2020-01-20)
 
 
