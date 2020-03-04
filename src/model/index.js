@@ -49,18 +49,23 @@ const middleware = {
 };
 
 /**
- * redux DevTools 开发工具
+ * compose 列表
  */
-const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_
-  ? window.__REDUX_DEVTOOLS_EXTENSION__()
-  : void 0;
+const composeList = [
+  // 加载插件
+  applyMiddleware(... Object.values(middleware).filter(v => v)),
+  // redux DevTools 开发工具
+  window.__REDUX_DEVTOOLS_EXTENSION__ && _DEV_
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()
+    : void 0,
+];
 
 /**
  * 创建 store
  */
 export const store = createStore(
   combineReducers(reducers),
-  compose(applyMiddleware(... Object.values(middleware)), reduxDevTools),
+  compose(... composeList.filter(v => v)),
 );
 
 /**

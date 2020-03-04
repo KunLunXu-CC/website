@@ -26,7 +26,7 @@ const copyWebpackPlugin = new CopyWebpackPlugin(
 );
 
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
-  filename:'style/[name].[hash].css',
+  filename: 'style/[name].[hash].css',
   chunkFilename: 'style/[id].[hash].css',
 });
 
