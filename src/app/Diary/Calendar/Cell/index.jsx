@@ -31,7 +31,7 @@ const useStateHook = props => {
   // 花销
   const expenses = useMemo(() => (_.get(diary, 'bill') || []).reduce(
     (total, ele) => (total + ele.expend || 0), 0
-  ), [diary]);
+  ).toFixed(1), [diary]);
 
   // 点击单元格
   const onClick = useCallback(() => {
