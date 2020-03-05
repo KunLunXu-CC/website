@@ -73,9 +73,27 @@ const updateDiaries = function * ({ id, body }) {
   });
 };
 
+/**
+ * 获取账单统计
+ *
+ * @param {String} action.search 查询条件
+ * @return {void 0}
+ */
+const getStatsBill = function * ({ search }) {
+  const statsBill = yield call(services.getStatsBill, {
+    search,
+    spin: SPIN_CODE.APP_DIARY,
+  });
+  yield put({
+    statsBill,
+    type: 'diary/setStatsBill',
+  });
+};
+
 // 导出
 export default function * () {
   yield takeEvery('diary/getDiaries', getDiaries);
   yield takeEvery('diary/createDiarie', createDiarie);
   yield takeEvery('diary/updateDiaries', updateDiaries);
+  yield takeEvery('diary/getStatsBill', getStatsBill);
 }

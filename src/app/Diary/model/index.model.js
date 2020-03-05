@@ -8,6 +8,9 @@ const initState = {
   menu: {
     selectedKey: DIARY_MENU.CALENDAR.VALUE,   // 当前菜单 key 值
   },
+  statsBill: {                                // 统计账单
+    groupWithName: [],                        // 统计账单 - 根据 name 分组查询
+  },
 };
 
 export default {

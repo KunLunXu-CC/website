@@ -110,3 +110,33 @@ export const updateDiaries = async ({
   });
   return _.get(res, 'data.data.updateDiaries') || {};
 };
+
+// 获取账单统计
+export const getStatsBill = async ({
+  spin,
+  search,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { search },
+      query: `
+        query(
+          $search: StatsSearch,
+        ){
+          statsBill(
+            search: $search,
+          ){
+            groupWithName {
+              name
+              income
+              expend
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.statsBill') || {};
+};

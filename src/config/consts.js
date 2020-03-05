@@ -92,3 +92,11 @@ export const DIARY_MENU = {
   STATS: { VALUE: 'stats', DESC: '统计', ICON: 'icon-tongji' },
   EXPORT: { VALUE: 'export', DESC: '导出', ICON: 'icon-daochu' },
 };
+
+// 统计跨度
+export const STATS_SAPN = {
+  DAY: { VALUE: 'day', DESC: '天' },      // 按天
+  WEEK: { VALUE: 'week', DESC: '周' },    // 按周
+  MONTH: { VALUE: 'month', DESC: '月' },  // 按月
+  YEAR: { VALUE: 'year', DESC: '年' },    // 按年
+};
