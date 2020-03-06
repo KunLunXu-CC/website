@@ -21,20 +21,29 @@ const SPAN_MAP_NAME = {
   [STATS_SAPN.WEEK.VALUE]: [
     moment()
       .subtract(15, 'weeks')
+      .startOf('week')
       .format('YYYY-MM-DD'),
-    moment().format('YYYY-MM-DD'),
+    moment()
+      .endOf('week')
+      .format('YYYY-MM-DD'),
   ],
   [STATS_SAPN.MONTH.VALUE]: [
     moment()
+      .startOf('month')
       .subtract(12, 'months')
       .format('YYYY-MM-DD'),
-    moment().format('YYYY-MM-DD'),
+    moment()
+      .endOf('month')
+      .format('YYYY-MM-DD'),
   ],
   [STATS_SAPN.YEAR.VALUE]: [
     moment()
       .subtract(10, 'years')
+      .startOf('years')
       .format('YYYY-MM-DD'),
-    moment().format('YYYY-MM-DD'),
+    moment()
+      .endOf('years')
+      .format('YYYY-MM-DD'),
   ],
 };
 
