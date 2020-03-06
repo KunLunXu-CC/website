@@ -109,7 +109,7 @@ const useStateHook = () => {
         bill: _.get(modal, 'diary.bill') || [],
         diet: _.get(modal, 'diary.diet') || [],
         fitness: _.get(modal, 'diary.fitness') || [],
-        bodyIndex: _.get(modal, 'diary.bodyIndex') || [],
+        bodyIndex: _.get(modal, 'diary.bodyIndex') || {},
       } : void 0
     );
   }, [modal]);
