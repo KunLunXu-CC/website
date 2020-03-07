@@ -16,13 +16,13 @@ const useStateHook = () => {
   const data = useMemo(() => (groupWithName.reduce((total, ele) => ([
     ... total,
     ... [{
+      type: '支出',
       xAxis: ele.name,
       yAxis: ele.expend,
-      name: '支出',
     }, {
+      type: '收入',
       xAxis: ele.name,
       yAxis: ele.income,
-      name: '收入',
     }],
   ]), [])), [groupWithName]);
 
@@ -63,7 +63,7 @@ const useStateHook = () => {
       chart
         .interval()
         .position('xAxis*yAxis')
-        .color('name', ['#ff7f0e', '#2ca02c']);
+        .color('type', ['#ff7f0e', '#2ca02c']);
 
       chart.interaction('active-region');
       chart.render();

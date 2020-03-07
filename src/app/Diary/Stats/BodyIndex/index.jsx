@@ -66,7 +66,7 @@ const useStateHook = () => {
   // 监听 span 的变化并查询数据
   useEffect(() => {
     dispatch({
-      type: 'diary/getStatsBill',
+      type: 'diary/getStatsBodyIndex',
       search: {
         span,
         name: SPAN_MAP_NAME[span],
@@ -84,7 +84,7 @@ export default () => {
     <div className={scss.card}>
       <div className={scss.header}>
         <div className={scss['header-title']}>
-          历史收入 / 支出
+          身体体征曲线图
         </div>
         <div className={scss['header-btns']}>
           {Object.values(STATS_SAPN).map(v => (

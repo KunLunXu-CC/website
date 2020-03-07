@@ -10,21 +10,25 @@ import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const containerRef = useRef(null);
-  const { groupWithName } = useSelector(state => state.diary.statsBill);
+  const statsBodyIndex = useSelector(state => state.diary.statsBodyIndex);
 
   // 处理数据
-  const data = useMemo(() => (groupWithName.reduce((total, ele) => ([
+  const data = useMemo(() => (statsBodyIndex.reduce((total, ele) => ([
     ... total,
     ... [{
+      type: '体重',
       xAxis: ele.name,
-      yAxis: ele.expend,
-      name: '支出',
+      yAxis: ele.bodyIndex.weight,
     }, {
+      type: '体脂',
       xAxis: ele.name,
-      yAxis: ele.income,
-      name: '收入',
+      yAxis: ele.bodyIndex.bodyfat,
+    }, {
+      type: '水分',
+      xAxis: ele.name,
+      yAxis: ele.bodyIndex.moistureContent,
     }],
-  ]), [])), [groupWithName]);
+  ]), [])), [statsBodyIndex]);
 
   // 实例化Chart
   const chart = useMemo(() => {
@@ -43,15 +47,10 @@ const useStateHook = () => {
       // 载入数据
       chart.data(data);
 
-      // 批量设置 scale 配置: 未数据字段(yAxis)进行 scale 配置
-      chart.scale('yAxis', {
-        nice: true,
-      });
-
       // 鼠标停放提示
       chart.tooltip({
         shared: true,
-        showMarkers: false,
+        showCrosshairs: true,
       });
 
       // 四周图示
@@ -61,11 +60,11 @@ const useStateHook = () => {
       });
 
       chart
-        .interval()
+        .line()
         .position('xAxis*yAxis')
-        .color('name', ['#ff7f0e', '#2ca02c']);
+        .color('type', ['#fadb14', '#13c2c2', '#722ed1'])
+        .shape('smooth');
 
-      chart.interaction('active-region');
       chart.render();
     }
   };

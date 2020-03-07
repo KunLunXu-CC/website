@@ -140,3 +140,32 @@ export const getStatsBill = async ({
   });
   return _.get(res, 'data.data.statsBill') || {};
 };
+
+// 获取 bodyIndex 统计
+export const getStatsBodyIndex = async ({
+  spin,
+  search,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { search },
+      query: `
+        query(
+          $search: StatsSearch,
+        ){
+          statsBodyIndex(
+            search: $search,
+          ){
+            list {
+              name
+              bodyIndex
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.statsBodyIndex') || {};
+};

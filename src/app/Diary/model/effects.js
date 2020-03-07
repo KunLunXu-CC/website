@@ -90,10 +90,29 @@ const getStatsBill = function * ({ search }) {
   });
 };
 
+/**
+ * 获取 bodyIndex 统计
+ *
+ * @param {String} action.search 查询条件
+ * @return {void 0}
+ */
+const getStatsBodyIndex = function * ({ search }) {
+  const { list: statsBodyIndex } = yield call(services.getStatsBodyIndex, {
+    search,
+    spin: SPIN_CODE.APP_DIARY,
+  });
+  yield put({
+    statsBodyIndex,
+    type: 'diary/setStatsBodyIndex',
+  });
+};
+
 // 导出
 export default function * () {
   yield takeEvery('diary/getDiaries', getDiaries);
   yield takeEvery('diary/createDiarie', createDiarie);
   yield takeEvery('diary/updateDiaries', updateDiaries);
+
   yield takeEvery('diary/getStatsBill', getStatsBill);
+  yield takeEvery('diary/getStatsBodyIndex', getStatsBodyIndex);
 }
