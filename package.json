@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack/webpack.config.dev.js --open",
     "build": "rm -rf build/* && webpack --config ./webpack/webpack.config.js",
+    "build:pro": "npm run build && rm -rf dist/* && cp -rf  build/* dist/",
     "commit": "git-cz",
     "release": "standard-version --release-as",
     "release:major": "npm run release -- major",
