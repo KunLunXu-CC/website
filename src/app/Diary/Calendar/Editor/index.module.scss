@@ -9,29 +9,51 @@
       flex-direction: column;
     }
 
+    // antd 弹窗
     .ant-modal-body {
       flex: 1;
       padding: 0px;
       overflow: hidden;
     }
 
+    // antd 表单
     .ant-form {
       height: 100%;
     }
 
+    // antd tabs 设置
     .ant-tabs-left {
       height: 100%;
       display: flex;
 
-      .ant-tabs-content {
+      .ant-tabs-left-content {
         flex: 1;
-        padding: 20px;
+        padding: 0px;
         height: 100%;
         overflow-y: auto;
+      }
 
-        .ant-empty {
-          margin-top: 40px;
+      .ant-tabs-tabpane.ant-tabs-tabpane-active {
+        height: 100%;
+        position: relative;
+      }
+
+      // qyrc 滚动条设置
+      .qyrc-sroll {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+
+        .qyrc-sroll-body {
+          padding: 20px;
         }
+      }
+
+      // antd 空状态
+      .ant-empty {
+        margin-top: 40px;
       }
     }
   }

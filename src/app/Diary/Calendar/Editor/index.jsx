@@ -13,6 +13,7 @@ import DietForm from './DietForm';
 import FitnessForm from './FitnessForm';
 import scss from './index.module.scss';
 
+import { Scroll } from 'qyrc';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -148,11 +149,13 @@ export default () => {
               forceRender
               tab={V.tab}
               key={V.key}>
-              <V.Component
-                form={state.form}
-                tools={state.Tools}
-                showTools={state.activeTabKey === V.key}
-              />
+              <Scroll>
+                <V.Component
+                  form={state.form}
+                  tools={state.Tools}
+                  showTools={state.activeTabKey === V.key}
+                />
+              </Scroll>
             </Tabs.TabPane>
           ))}
         </Tabs>
