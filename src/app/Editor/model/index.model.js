@@ -2,10 +2,10 @@ import effects from './effects';
 import * as reducers from './reducers';
 
 const initState = {
-  tags: [],
-  articles: [],
+  tags: {},       // {[id]: value}
+  articles: {},   // {[id]: value}
   menu: {
-    openKeys: [],
+    openKeys: [], // 打开的菜单项
   },
   works: [],
 };

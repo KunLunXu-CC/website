@@ -1,54 +1,21 @@
 import axios from '@utils/request';
 
-// 获取 tags
-export const getTags = async ({
-  spin,
-  search,
-} = {}) => {
+// 初始化: 一次性获取所有数据并在前端进行存储
+export const initData = async () => {
   const res = await axios({
-    spin,
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search },
       query: `
-        query(
-          $search: TagSearch,
-        ){
-          tags(
-            search: $search,
-            orderBy: { creationTime: -1 }
-          ){
+        query {
+          tags {
             list {
               id
               name
               parent { id name }
             }
           }
-        }`,
-    },
-  });
-  return _.get(res, 'data.data.tags.list') || [];
-};
-
-// 获取 文章
-export const getArticles = async ({
-  spin,
-  search,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { search },
-      query: `
-        query(
-          $search: ArticleSearch,
-        ){
-          articles(
-            search: $search,
-          ){
+          articles {
             list {
               id
               name
@@ -61,7 +28,10 @@ export const getArticles = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.articles.list') || [];
+  return {
+    tags: _.get(res, 'data.data.tags.list') || [],
+    articles: _.get(res, 'data.data.articles.list') || [],
+  };
 };
 
 // 移除 tag

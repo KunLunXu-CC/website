@@ -32,10 +32,13 @@ const useStateHook = props => {
         type: 'editor/setMenu',
         menu: { openKeys: [... openKeys, props.data.id] },
       });
-      dispatch({ type: 'editor/createFictitiousTag', parent: props.data });
+      dispatch({
+        parent: props.data.id,
+        type: 'editor/createFictitiousTag',
+      });
     } else {
       dispatch({
-        parent: props.data.tags[0],
+        parent: props.data.tag,
         type: 'editor/createFictitiousTag',
       });
     }
@@ -64,10 +67,13 @@ const useStateHook = props => {
         type: 'editor/setMenu',
         menu: { openKeys: [... openKeys, props.data.id] },
       });
-      dispatch({ type: 'editor/createFictitiousArticle', parent: props.data });
+      dispatch({
+        tag: props.data.id,
+        type: 'editor/createFictitiousArticle',
+      });
     } else {
       dispatch({
-        parent: props.data.tags[0],
+        tag: props.data.parent,
         type: 'editor/createFictitiousArticle',
       });
     }
@@ -145,10 +151,10 @@ const useStateHook = props => {
 
   // 下拉菜单
   const menu = useMemo(() => {
-    const editKey = props.type === 'subMenu'
+    const editKey = props.data.type === 'tag'
       ? 'addEditorStatusWithTag'
       : 'addEditorStatusWithArticle';
-    const deleeKey = props.type === 'subMenu'
+    const deleeKey = props.data.type === 'tag'
       ? 'deleteFolder'
       : 'deleteArticle';
     const menuSetting = [

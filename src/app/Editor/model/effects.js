@@ -4,36 +4,26 @@ import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 
 /**
- * 获取标签
+ * 初始化: 一次性获取所有数据并在前端进行存储
  * @return {void 0}
  */
-const getTags = function * ({ search }) {
-  const currentTags = yield select(state => state.editor.tags);
-  const tags = yield call(services.getTags, {
-    spin: SPIN_CODE.APP_EDITOR,
-    search,
-  });
+const initData = function * () {
+  const { tags, articles } = yield call(services.initData, {});
+
   yield put({
     type: 'editor/setTags',
-    tags: _.uniqBy([... currentTags, ... tags], 'id'),
-  });
-};
-
-/**
- * 获取文章
- * @return {void 0}
- */
-const getArticles = function * ({ search }) {
-  const currentArticles = yield select(state => state.editor.articles);
-
-  const articles = yield call(services.getArticles, {
-    search,
-    spin: SPIN_CODE.APP_EDITOR,
+    tags: tags.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), {}),
   });
 
   yield put({
     type: 'editor/setArticles',
-    articles: _.uniqBy([... currentArticles, ... articles], 'id'),
+    articles: articles.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), {}),
   });
 };
 
@@ -226,9 +216,8 @@ const setArticleThumb = function * ({ file, id }) {
 
 // 导出
 export default function * () {
-  yield takeEvery('editor/getTags', getTags);
+  yield takeEvery('editor/initData', initData);
   yield takeEvery('editor/removeTags', removeTags);
-  yield takeEvery('editor/getArticles', getArticles);
   yield takeEvery('editor/removeArticle', removeArticle);
 
   yield takeEvery('editor/createTag', createTag);

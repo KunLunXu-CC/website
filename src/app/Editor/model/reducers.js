@@ -121,17 +121,17 @@ export const removeWorks = (state, { article }) => {
  * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
-export const createFictitiousTag = (state, { parent: { id, name } }) => ({
+export const createFictitiousTag = (state, { parent }) => ({
   ... state,
-  tags: [
-    {
+  tags: {
+    ... state.tags,
+    newTag: {
+      parent,
       name: '',
       id: 'newTag',
       editor: true,
-      parent: { id, name },
     },
-    ... state.tags,
-  ],
+  },
 });
 
 /**
@@ -143,17 +143,17 @@ export const createFictitiousTag = (state, { parent: { id, name } }) => ({
  * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
-export const createFictitiousArticle = (state, { parent: { id, name } }) => ({
+export const createFictitiousArticle = (state, { tag }) => ({
   ... state,
-  articles: [
-    {
+  articles: {
+    ... state.articles,
+    newArticle: {
       name: '',
       editor: true,
       id: 'newArticle',
-      tags: [{ id, name }],
+      tags: [{ id: tag }],
     },
-    ... state.articles,
-  ],
+  },
 });
 
 /**
