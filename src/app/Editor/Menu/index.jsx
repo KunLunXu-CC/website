@@ -28,6 +28,7 @@ const useStateHook = () => {
       id: v.id,
       type: 'tag',
       name: v.name,
+      editor: v.editor,
       parent: v.parent.id,
     })), 'name');
     const loop = list => list.forEach(parent => {
@@ -39,6 +40,7 @@ const useStateHook = () => {
             id: v.id,
             type: 'tag',
             name: v.name,
+            editor: v.editor,
             parent: parent.id,
           })),
           ... (groupArticles[parent.id] || []).map(v => ({
@@ -46,6 +48,7 @@ const useStateHook = () => {
             name: v.name,
             tag: parent.id,
             type: 'article',
+            editor: v.editor,
             parent: parent.id,
           })),
         ], 'name');
@@ -93,7 +96,7 @@ const useStateHook = () => {
 
   // 添加 tag
   const addTag = () => {
-    dispatch({ type: 'editor/createFictitiousTag', parent: {} });
+    dispatch({ type: 'editor/createFictitiousTag', parent: null });
   };
 
   // SubMenu 展开/关闭的回调

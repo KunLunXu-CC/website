@@ -13,10 +13,10 @@ const stopPropagation = e => {
 const useStateHook = props => {
   const dispatch = useDispatch();
 
-  const article = useSelector(state => {
-    const articles = _.get(state, 'editor.articles');
-    return articles.find(v => v.id === props.work.article);
-  });
+  // 读取文章详细内容
+  const article = useSelector(state => (
+    _.get(state, 'editor.articles')[props.work.article]
+  ));
 
   // 移除
   const onClose = e => {

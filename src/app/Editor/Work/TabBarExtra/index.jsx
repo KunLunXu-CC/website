@@ -20,10 +20,10 @@ const useStateHook = () => {
     articles: _.get(state, 'editor.articles'),
   }));
 
-  const article = useMemo(() => {
-    const id = _.get(works.find(v => v.action), 'article');
-    return articles.find(v => v.id === id);
-  }, [articles, works]);
+  // 文章内容
+  const article = useMemo(() => (
+    articles[_.get(works.find(v => v.action), 'article')]
+  ));
 
   // 当前文章是否是未发布状态
   const unpublished = useMemo(

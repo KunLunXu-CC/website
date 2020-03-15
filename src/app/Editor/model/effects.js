@@ -39,9 +39,13 @@ const removeTags = function * ({ id }) {
     conds: { id },
   });
 
+  change.forEach(v => {
+    delete currentTags[v.id];
+  });
+
   yield put({
     type: 'editor/setTags',
-    tags: currentTags.filter(v => !change.find(ele => ele.id === v.id)),
+    tags: { ... currentTags },
   });
 };
 
@@ -56,6 +60,10 @@ const removeArticle = function * ({ id }) {
     conds: { id },
   });
 
+  change.forEach(v => {
+    delete currentArticles[v.id];
+  });
+
   yield put({
     article: id,
     type: 'editor/removeWorks',
@@ -63,7 +71,7 @@ const removeArticle = function * ({ id }) {
 
   yield put({
     type: 'editor/setArticles',
-    articles: currentArticles.filter(v => !change.find(ele => ele.id === v.id)),
+    articles: { ... currentArticles },
   });
 };
 
@@ -73,6 +81,7 @@ const removeArticle = function * ({ id }) {
  */
 const createTag = function * ({ body }) {
   const currentTags = yield select(state => state.editor.tags);
+  delete currentTags.newTag;
 
   const { change } = yield call(services.createTags, {
     body,
@@ -80,10 +89,10 @@ const createTag = function * ({ body }) {
   });
 
   yield put({
-    tags: _.uniqBy([
-      ... change,
-      ... currentTags.filter(v => !v.editor),
-    ], 'id'),
+    tags: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentTags),
     type: 'editor/setTags',
   });
 };
@@ -94,7 +103,6 @@ const createTag = function * ({ body }) {
  */
 const updateTag = function * ({ body, id }) {
   const currentTags = yield select(state => state.editor.tags);
-
   const { change } = yield call(services.updateTags, {
     body,
     conds: { id },
@@ -102,10 +110,10 @@ const updateTag = function * ({ body, id }) {
   });
 
   yield put({
-    tags: _.uniqBy([
-      ... change,
-      ... currentTags.filter(v => v.id !== id),
-    ], 'id'),
+    tags: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentTags),
     type: 'editor/setTags',
   });
 };
@@ -116,6 +124,7 @@ const updateTag = function * ({ body, id }) {
  */
 const createArticle = function * ({ body }) {
   const currentArticles = yield select(state => state.editor.articles);
+  delete currentArticles.newArticle;
 
   const { change } = yield call(services.createArticles, {
     body,
@@ -123,10 +132,10 @@ const createArticle = function * ({ body }) {
   });
 
   yield put({
-    articles: _.uniqBy([
-      ... change,
-      ... currentArticles.filter(v => !v.editor),
-    ], 'id'),
+    articles: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentArticles),
     type: 'editor/setArticles',
   });
 
@@ -149,7 +158,10 @@ const updateArticle = function * ({ body, id }) {
   });
 
   yield put({
-    articles: _.uniqBy([... change, ... currentArticles], 'id'),
+    articles: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentArticles),
     type: 'editor/setArticles',
   });
 
@@ -173,7 +185,10 @@ const revokeArticle = function * ({ id }) {
   });
 
   yield put({
-    articles: _.uniqBy([... change, ... currentArticles], 'id'),
+    articles: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentArticles),
     type: 'editor/setArticles',
   });
 };
@@ -190,7 +205,10 @@ const releaseArticle = function * ({ id }) {
   });
 
   yield put({
-    articles: _.uniqBy([... change, ... currentArticles], 'id'),
+    articles: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentArticles),
     type: 'editor/setArticles',
   });
 };

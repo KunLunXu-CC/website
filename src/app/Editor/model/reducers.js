@@ -126,10 +126,10 @@ export const createFictitiousTag = (state, { parent }) => ({
   tags: {
     ... state.tags,
     newTag: {
-      parent,
       name: '',
       id: 'newTag',
       editor: true,
+      parent: { id: parent },
     },
   },
 });
@@ -165,13 +165,11 @@ export const createFictitiousArticle = (state, { tag }) => ({
  * @param {Object} action.id 要修改 tag id
  * @return {Object} 更新后的状态
  */
-export const addEditorStatusWithTag = (state, { id }) => ({
-  ... state,
-  tags: state.tags.map(v => ({
-    ... v,
-    editor: v.id === id ? true : v.editor,
-  })),
-});
+export const addEditorStatusWithTag = (state, { id }) => {
+  const tags = { ... state.tags };
+  tags[id].editor = true;
+  return { ... state, tags };
+};
 
 /**
  * 为 article 添加编辑状态: 找到数据设置状态 editor = true
@@ -182,10 +180,8 @@ export const addEditorStatusWithTag = (state, { id }) => ({
  * @param {Object} action.id 要修改 article id
  * @return {Object} 更新后的状态
  */
-export const addEditorStatusWithArticle = (state, { id }) => ({
-  ... state,
-  articles: state.articles.map(v => ({
-    ... v,
-    editor: v.id === id ? true : v.editor,
-  })),
-});
+export const addEditorStatusWithArticle = (state, { id }) => {
+  const articles = { ... state.articles };
+  articles[id].editor = true;
+  return { ... state, articles };
+};

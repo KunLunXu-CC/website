@@ -113,7 +113,7 @@ const useStateHook = props => {
       props.data.id === 'newTag'
         ? dispatch({
           type: 'editor/createTag',
-          body: { name, parent: props.data.parent.id },
+          body: { name, parent: props.data.parent },
         })
         : dispatch({
           body: { name },
@@ -124,7 +124,7 @@ const useStateHook = props => {
       props.data.id === 'newArticle'
         ? dispatch({
           type: 'editor/createArticle',
-          body: { name, tags: [props.data.tags[0].id] },
+          body: { name, tags: [props.data.tag] },
         })
         : dispatch({
           body: { name },
