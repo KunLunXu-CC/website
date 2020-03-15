@@ -4,15 +4,13 @@ import React, {
 import Side from './Side';
 import Menu from './Menu';
 import Work from './Work';
-import Spin from './Spin';
-import Modal from './Modal';
+import Tips from './Tips';
 import Header from './Header';
 import Footer from './Footer';
 import scss from './index.module.scss';
 
 import { VariableBlock } from 'qyrc';
 import { useDispatch } from 'react-redux';
-import { MESSAGE_CODE } from '@config/consts';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -40,9 +38,7 @@ export default () => {
         <div className={scss['editor-body-work']}><Work/></div>
       </div>
       <div className={scss['editor-footer']}><Footer /></div>
-      <div id={MESSAGE_CODE.APP_EDITOR}/>
-      <Modal/>
-      <Spin/>
+      <Tips/>
     </div>
   );
 };
