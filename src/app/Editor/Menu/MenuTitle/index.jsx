@@ -56,7 +56,7 @@ const useStateHook = props => {
   const deleteFolder = () => {
     dispatch({
       id: props.data.id,
-      type: 'editor/removeTags',
+      type: 'editor/removeTag',
     });
   };
 

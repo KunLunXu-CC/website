@@ -23,7 +23,7 @@ const useStateHook = props => {
     stopPropagation(e);
     dispatch({
       article: article.id,
-      type: 'editor/removeWorks',
+      type: 'editor/removeWork',
     });
   };
 

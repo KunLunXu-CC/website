@@ -31,7 +31,7 @@ const initData = function * () {
  * 删除标签
  * @return {void 0}
  */
-const removeTags = function * ({ id }) {
+const removeTag = function * ({ id }) {
   const currentTags = yield select(state => state.editor.tags);
 
   const { change } = yield call(services.removeTags, {
@@ -66,7 +66,7 @@ const removeArticle = function * ({ id }) {
 
   yield put({
     article: id,
-    type: 'editor/removeWorks',
+    type: 'editor/removeWork',
   });
 
   yield put({
@@ -235,7 +235,7 @@ const setArticleThumb = function * ({ file, id }) {
 // 导出
 export default function * () {
   yield takeEvery('editor/initData', initData);
-  yield takeEvery('editor/removeTags', removeTags);
+  yield takeEvery('editor/removeTag', removeTag);
   yield takeEvery('editor/removeArticle', removeArticle);
 
   yield takeEvery('editor/createTag', createTag);

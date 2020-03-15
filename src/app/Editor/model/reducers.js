@@ -92,14 +92,14 @@ export const setWork = (state, { article, work }) => ({
 
 /**
  * 移除工作窗口: 没传 article 则移除所有
- * 1. reducer: action = { type: 'editor/removeWorks' }
+ * 1. reducer: action = { type: 'editor/removeWork' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
  * @param {String} action.article 文章 ID
  * @return {Object} 更新后的状态
  */
-export const removeWorks = (state, { article }) => {
+export const removeWork = (state, { article }) => {
   const works =  article
     ? state.works.filter(v => v.article !== article)
     : [];
