@@ -13,11 +13,12 @@ const useStateHook = () => {
 
   const works = useSelector(state => _.get(state, 'editor.works'));
 
+  // 当前选中项
   const selected = useMemo(() => (
     _.get(works.find(v => v.action), 'article')
   ), [works]);
 
-  // tabs change 事件
+  // 点击 tab 切换事件: 将当前窗口设置为活动窗口
   const onTabsChange = article => {
     dispatch({
       article,
@@ -37,8 +38,7 @@ export default () => {
           type="card"
           activeKey={state.selected}
           onChange={state.onTabsChange}
-          tabBarExtraContent={<TabBarExtra/>}
-        >
+          tabBarExtraContent={<TabBarExtra/>}>
           {state.works.map(v => (
             <Tabs.TabPane
               key={v.article}

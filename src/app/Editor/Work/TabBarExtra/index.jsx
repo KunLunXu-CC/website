@@ -38,8 +38,8 @@ const useStateHook = () => {
   const onRelease = () => {
     dispatch({
       article,
-      type: 'modal/openModal',
       code: RELEASE_CONFIRM,
+      type: 'modal/openModal',
     });
   };
 
@@ -47,8 +47,8 @@ const useStateHook = () => {
   const onRevoke = () => {
     dispatch({
       article,
-      type: 'modal/openModal',
       code: REVOKE_CONFIRM,
+      type: 'modal/openModal',
     });
   };
 
@@ -56,8 +56,8 @@ const useStateHook = () => {
   const thumbSetting = () => {
     dispatch({
       article,
-      type: 'modal/openModal',
       code: THUMB_SETTING,
+      type: 'modal/openModal',
     });
   };
 

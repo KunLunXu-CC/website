@@ -59,33 +59,33 @@ const useStateHook = () => {
     return parents;
   }, [articles, tags, menu.openKeys]);
 
+  // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = useMemo(() => (
     _.get(works.find(v => v.action), 'article')
   ), [works]);
 
   // 渲染菜单列表
   const renderMenuList = () => {
-    const recursion = (item, index) => (
-      item.type === 'tag' ?
-        <Menu.SubMenu
-          key={item.id}
-          title={<MenuTitle data={item}/>}>
-          {item.children.length !== 0 ?
-            item.children.map(v => (recursion(v, index + 1))) :
-            <Menu.Item
-              key={`${item.id}-empty`}
-              className={scss['menu-item-empty']}
+    const recursion = (item, index) => {
+      const title = <MenuTitle data={item}/>;
+      return (
+        item.type === 'tag' ?
+          <Menu.SubMenu key={item.id} title={title}>
+            {item.children.length !== 0 ?
+              item.children.map(v => (recursion(v, index + 1))) :
+              <Menu.Item
+                key={`${item.id}-empty`}
+                className={scss['menu-item-empty']}
+              />
+            }
+            <div
+              className={scss['menu-dividing']}
+              style={{ left: `${(index * INLINE_INDENT) + 12}px` }}
             />
-          }
-          <div
-            className={scss['menu-dividing']}
-            style={{ left: `${(index * INLINE_INDENT) + 12}px` }}
-          />
-        </Menu.SubMenu> :
-        <Menu.Item key={item.id}>
-          <MenuTitle data={item}/>
-        </Menu.Item>
-    );
+          </Menu.SubMenu> :
+          <Menu.Item key={item.id}>{title}</Menu.Item>
+      );
+    };
     return treeData.map(v => (recursion(v, 1)));
   };
 

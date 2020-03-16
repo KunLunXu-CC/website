@@ -13,10 +13,12 @@ const useStateHook = () => {
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
 
+  // 获取当前文章内容
   const article = useSelector(
     state => _.get(state, `modal[${THUMB_SETTING}].article`)
   );
 
+  // 点击取消
   const onCancel = () => {
     setFile(null);
     dispatch({
@@ -25,6 +27,7 @@ const useStateHook = () => {
     });
   };
 
+  // 点击确定
   const onOk = async () => {
     dispatch({
       file,
@@ -34,11 +37,13 @@ const useStateHook = () => {
     onCancel();
   };
 
+  // 前端上传文件
   const onUpload = event => {
     const { files: [file] } = event.target;
     file && setFile(file);
   };
 
+  // 获取缩略图 src
   const src = useMemo(
     () => (file || _.get(article, 'thumb')),
     [file, article]
@@ -57,6 +62,7 @@ export default () => {
       cancelText="取消"
       onOk={state.onOk}
       getContainer={false}
+      maskClosable={false}
       className={scss.modal}
       visible={!!state.article}
       onCancel={state.onCancel}>

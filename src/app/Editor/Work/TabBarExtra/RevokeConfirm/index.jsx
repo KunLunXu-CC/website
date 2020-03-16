@@ -12,6 +12,7 @@ const useStateHook = () => {
     state => _.get(state, `modal[${REVOKE_CONFIRM}].article`)
   );
 
+  // 点击取消按钮
   const onCancel = () => {
     dispatch({
       code: REVOKE_CONFIRM,
@@ -19,6 +20,7 @@ const useStateHook = () => {
     });
   };
 
+  // 点击撤销
   const onOk = async () => {
     dispatch({
       id: article.id,
@@ -39,6 +41,7 @@ export default () => {
       closable={false}
       cancelText="取消"
       onOk={state.onOk}
+      maskClosable={false}
       getContainer={false}
       className={scss.modal}
       visible={!!state.article}

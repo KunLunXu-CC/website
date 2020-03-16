@@ -25,7 +25,7 @@ const useStateHook = props => {
     state => _.get(state, 'editor.menu.openKeys')
   );
 
-  // 创建文件夹
+  // 创建文件夹: 在文件夹上下拉选择创建、在文章上下拉选择创建
   const createFolder = () => {
     if (props.data.type === 'tag') {
       dispatch({
@@ -60,7 +60,7 @@ const useStateHook = props => {
     });
   };
 
-  // 创建文章
+  // 创建文章: 在文件夹上下拉选择创建、在文章上下拉选择创建
   const createArticle = () => {
     if (props.data.type === 'tag') {
       dispatch({
@@ -106,7 +106,7 @@ const useStateHook = props => {
     handler[key]();
   };
 
-  // 编辑数据： 根据 id 判断是编辑还是创建, 根据 type 值来判断是更新标签还是文章
+  // 编辑数据：根据 id 判断是编辑还是创建, 根据 type 值来判断是更新标签还是文章
   const onEditor = e => {
     const name = e.target.value;
     if (props.data.type === 'tag') {

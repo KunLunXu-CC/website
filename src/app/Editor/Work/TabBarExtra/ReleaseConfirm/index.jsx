@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 const useStateHook = () => {
   const dispatch = useDispatch();
 
+  // 获取当前文章内容
   const article = useSelector(
     state => _.get(state, `modal[${RELEASE_CONFIRM}].article`)
   );
 
+  // 点击取消
   const onCancel = () => {
     dispatch({
       code: RELEASE_CONFIRM,
@@ -19,6 +21,7 @@ const useStateHook = () => {
     });
   };
 
+  // 点击发布
   const onOk = async () => {
     dispatch({
       id: article.id,
@@ -39,6 +42,7 @@ export default () => {
       closable={false}
       cancelText="取消"
       onOk={state.onOk}
+      maskClosable={false}
       getContainer={false}
       className={scss.modal}
       visible={!!state.article}
