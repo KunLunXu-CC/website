@@ -17,12 +17,12 @@ const useStateHook = () => {
     ... total,
     ... [{
       type: '支出',
-      xAxis: ele.name,
       yAxis: ele.expend,
+      xAxis: `${ele.name}.`,
     }, {
       type: '收入',
-      xAxis: ele.name,
       yAxis: ele.income,
+      xAxis: `${ele.name}.`,
     }],
   ]), [])), [groupWithName]);
 
@@ -31,7 +31,7 @@ const useStateHook = () => {
     if (containerRef.current) {
       return new Chart({
         autoFit: true,
-        padding: [60, 50, 40, 50],
+        padding: [60, 50, 65, 50],
         container: containerRef.current,
       });
     }
@@ -46,6 +46,13 @@ const useStateHook = () => {
       // 批量设置 scale 配置: 未数据字段(yAxis)进行 scale 配置
       chart.scale('yAxis', {
         nice: true,
+      });
+
+      // x 坐标设置
+      chart.axis('xAxis', {
+        label: {
+          formatter: label => label.slice(0, -1),
+        },
       });
 
       // 鼠标停放提示
@@ -63,7 +70,13 @@ const useStateHook = () => {
       chart
         .interval()
         .position('xAxis*yAxis')
-        .color('type', ['#ff7f0e', '#2ca02c']);
+        .color('type', ['#ff7f0e', '#2ca02c'])
+        .adjust([
+          {
+            type: 'dodge',
+            marginRatio: 0,
+          },
+        ]);
 
       chart.interaction('active-region');
       chart.render();
