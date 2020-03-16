@@ -23,12 +23,12 @@ const useStateHook = props => {
     _.get(state, 'editor.articles')[props.work.article]
   ));
 
-  // 保存: ctr + s
+  // 保存(ctr + s): 修改文章内容
   const onSave = async ({ value: content }) => {
     dispatch({
+      content,
       id: article.id,
-      body: { content },
-      type: 'editor/updateArticle',
+      type: 'editor/updateArticleContent',
     });
   };
 

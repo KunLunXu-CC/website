@@ -173,6 +173,32 @@ const updateArticle = function * ({ body, id }) {
 };
 
 /**
+ * 更新文章内容
+ * @return {void 0}
+ */
+const updateArticleContent = function * ({ content, id }) {
+  const currentArticles = yield select(state => state.editor.articles);
+  currentArticles[id].content = content;
+
+  yield put({
+    type: 'editor/setArticles',
+    articles: { ... currentArticles },
+  });
+
+  yield call(services.updateArticles, {
+    conds: { id },
+    body: { content },
+  });
+
+  yield put({
+    article: id,
+    type: 'editor/setWork',
+    work: { change: false },
+  });
+};
+
+
+/**
  * 撤销(取消发布)文章
  * @return {void 0}
  */
@@ -242,6 +268,7 @@ export default function * () {
   yield takeEvery('editor/updateTag', updateTag);
   yield takeEvery('editor/createArticle', createArticle);
   yield takeEvery('editor/updateArticle', updateArticle);
+  yield takeEvery('editor/updateArticleContent', updateArticleContent);
 
   yield takeEvery('editor/revokeArticle', revokeArticle);
   yield takeEvery('editor/releaseArticle', releaseArticle);
