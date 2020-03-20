@@ -6,9 +6,10 @@ import scss from './index.module.scss';
 import { rsa } from '@utils';
 import { Image, Icon } from 'qyrc';
 import { Input, Form, Button } from 'antd';
+import { PHOTO_CDN } from '@config/consts';
 import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { getPublicKey } from '@model/user/services';
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const avatars = useSelector(
@@ -30,7 +31,7 @@ const useStateHook = () => {
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
-      ? _.get(avatars, `[${index}].url`, '')
+      ? `${PHOTO_CDN}${avatars[index].name}`
       : '';
   }, [avatars]);
 

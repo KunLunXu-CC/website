@@ -7,6 +7,7 @@ import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
 import { useSelector } from 'react-redux';
+import { PHOTO_CDN } from '@config/consts';
 
 const useStateHook = () => {
   const photos = useSelector(state => (
@@ -15,7 +16,7 @@ const useStateHook = () => {
 
   const bg = useMemo(() => {
     const index = Math.floor(Math.random() * photos.length);
-    return photos.length > 0 ? _.get(photos, `[${index}].url`, '') : '';
+    return photos.length > 0 ? `${PHOTO_CDN}${photos[index].name}` : '';
   }, [photos]);
 
   return { bg };

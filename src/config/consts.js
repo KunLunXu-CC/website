@@ -8,6 +8,9 @@ export const APP_CODE = {
   ARTICLE: 'article', // 文章
 };
 
+// 七牛云 CDN
+export const PHOTO_CDN = 'https://qianyin.com/';
+
 // [状态] 模型基本状态 (0: 禁用， 1： 启用， -11： 删除)
 export const STATUS = {
   DISABLE: 0,   // 禁用
