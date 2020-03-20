@@ -1,6 +1,6 @@
 import * as services from './services';
 
-import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
+import { APP_CODE, PHOTO_TYPE } from '@config/consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 
 /**
@@ -35,7 +35,7 @@ const removeTag = function * ({ id }) {
   const currentTags = yield select(state => state.editor.tags);
 
   const { change } = yield call(services.removeTags, {
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
     conds: { id },
   });
 
@@ -56,7 +56,7 @@ const removeTag = function * ({ id }) {
 const removeArticle = function * ({ id }) {
   const currentArticles = yield select(state => state.editor.articles);
   const { change } = yield call(services.removeArticles, {
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
     conds: { id },
   });
 
@@ -85,7 +85,7 @@ const createTag = function * ({ body }) {
 
   const { change } = yield call(services.createTags, {
     body,
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
   });
 
   yield put({
@@ -106,7 +106,7 @@ const updateTag = function * ({ body, id }) {
   const { change } = yield call(services.updateTags, {
     body,
     conds: { id },
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
   });
 
   yield put({
@@ -128,7 +128,7 @@ const createArticle = function * ({ body }) {
 
   const { change } = yield call(services.createArticles, {
     body,
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
   });
 
   yield put({
@@ -207,7 +207,7 @@ const revokeArticle = function * ({ id }) {
 
   const { change } = yield call(services.revokeArticles, {
     conds: { id },
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
   });
 
   yield put({
@@ -227,7 +227,7 @@ const releaseArticle = function * ({ id }) {
   const currentArticles = yield select(state => state.editor.articles);
   const { change } = yield call(services.releaseArticles, {
     conds: { id },
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
   });
 
   yield put({
@@ -248,7 +248,7 @@ const setArticleThumb = function * ({ file, id }) {
     payload: id,
     files: [file],
     type: PHOTO_TYPE.ARTICLE.VALUE,
-    spin: SPIN_CODE.APP_EDITOR,
+    spin: APP_CODE.EDITOR,
   });
 
   yield put({

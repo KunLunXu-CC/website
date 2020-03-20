@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { DIARY_MENU } from '@config/consts';
+import { DIARY_MENU } from '../consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 // 菜单列表

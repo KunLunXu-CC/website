@@ -1,7 +1,7 @@
 import effects from './effects';
 import * as reducers from './reducers';
 
-import { DIARY_MENU } from '@config/consts';
+import { DIARY_MENU } from '../consts';
 
 const initState = {
   diaries: [],                                // 日记列表

@@ -2,12 +2,13 @@ import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
 import Article from './Article';
+import { APP_CODE } from '@config/consts';
 
 export default {
   album: {
     name: '相册',
-    code: 'album',
     component: Album,
+    code: APP_CODE.ALBUM,
     icon: 'icon-banjixiangce',
     modalProps: {
       dragHeight: 40,
@@ -17,9 +18,9 @@ export default {
   },
   editor: {
     name: '编辑器',
-    code: 'editor',
     component: Editor,
     icon: 'icon-daima',
+    code: APP_CODE.EDITOR,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 12, left: 10 },
@@ -28,9 +29,9 @@ export default {
   },
   article: {
     name: '文章',
-    code: 'article',
     component: Article,
     icon: 'icon-wenzhang',
+    code: APP_CODE.ARTICLE,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 16, left: 16 },
@@ -40,9 +41,9 @@ export default {
   },
   diary: {
     name: '日记',
-    code: 'diary',
     component: Diary,
     icon: 'icon-biji',
+    code: APP_CODE.DIARY,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 11, left: 11 },

@@ -1,5 +1,13 @@
 /* 业务常量配置 */
 
+// 应用 CODE
+export const APP_CODE = {
+  ALBUM: 'album',     // 相册
+  DIARY: 'diary',     // 日记
+  EDITOR: 'editor',   // 编辑器
+  ARTICLE: 'article', // 文章
+};
+
 // [状态] 模型基本状态 (0: 禁用， 1： 启用， -11： 删除)
 export const STATUS = {
   DISABLE: 0,   // 禁用
@@ -28,22 +36,6 @@ export const TAG_ALL = {
   id: 'all',
   name: '全部',
   icon: 'icon-all',
-};
-
-// 加载中 code 列表
-export const SPIN_CODE = {
-  APP_ALBUM: 'APP_ALBUM',         // 相册
-  APP_ARTICLE: 'APP_ARTICLE',     // 文章
-  APP_EDITOR: 'APP_EDITOR',       // 编辑器
-  APP_DIARY: 'APP_DIARY',         // 日记
-};
-
-// 提示信息 code
-export const MESSAGE_CODE = {
-  APP_ALBUM: 'MESSAGE_CODE_APP_ALBUM',         // 相册
-  APP_ARTICLE: 'MESSAGE_CODE_APP_ARTICLE',     // 文章
-  APP_EDITOR: 'MESSAGE_CODE_APP_EDITOR',       // 编辑器
-  APP_DIARY: 'MESSAGE_CODE_APP_DIARY',         // 日记
 };
 
 // 饮食类型
@@ -84,13 +76,6 @@ export const FITNESS_FEEL = {
   DIFFERENCE: { VALUE: 1, DESC: '差' },
   COMMONLY: { VALUE: 2, DESC: '一般' },
   GOOD_GRADE: { VALUE: 3, DESC: '极好' },
-};
-
-// 菜单配置
-export const DIARY_MENU = {
-  CALENDAR: { VALUE: 'calendar', DESC: '日历', ICON: 'icon-rili' },
-  STATS: { VALUE: 'stats', DESC: '统计', ICON: 'icon-tongji' },
-  EXPORT: { VALUE: 'export', DESC: '导出', ICON: 'icon-daochu' },
 };
 
 // 统计跨度

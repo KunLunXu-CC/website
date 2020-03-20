@@ -5,7 +5,7 @@ import React, {
 import { CodeEditor } from 'qyrc';
 import { uploadPhotos } from '../../model/services';
 import { useDispatch, useSelector } from 'react-redux';
-import { SPIN_CODE, PHOTO_TYPE } from '@config/consts';
+import { APP_CODE, PHOTO_TYPE } from '@config/consts';
 
 // 初始默认 options
 const OPTIONS = {
@@ -37,7 +37,7 @@ const useStateHook = props => {
     const data = await uploadPhotos({
       files: [file],
       payload: article.id,
-      spin: SPIN_CODE.APP_EDITOR,
+      spin: APP_CODE.EDITOR,
       type: PHOTO_TYPE.ARTICLE.VALUE,
     });
     return `[图片备注](${_.get(data, '[0].url', '')})`;

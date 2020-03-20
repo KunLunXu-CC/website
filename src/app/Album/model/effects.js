@@ -1,7 +1,7 @@
 import * as services from './services';
 
 import { message } from '@utils';
-import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
+import { APP_CODE } from '@config/consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 
 /**
@@ -16,7 +16,7 @@ const getPhotos = function * ({ search }) {
   };
 
   const photos = yield call(services.getPhotos, {
-    spin: SPIN_CODE.APP_ALBUM,
+    spin: APP_CODE.ALBUM,
     search: {
       sourceFileName: params.sourceFileName,
       type: params.type === 'all' ? void 0 : Number(params.type),
@@ -41,7 +41,7 @@ const upload = function * () {
 
   if (files.length < 1) {
     return message({
-      code: MESSAGE_CODE.APP_ALBUM,
+      code: APP_CODE.ALBUM,
       message: '请先添加要上传的图片!',
     });
   }
@@ -49,11 +49,11 @@ const upload = function * () {
   yield call(services.uploadPhotos, {
     type,
     files,
-    spin: SPIN_CODE.APP_ALBUM,
+    spin: APP_CODE.ALBUM,
   });
 
   message({
-    code: MESSAGE_CODE.APP_ALBUM,
+    code: APP_CODE.ALBUM,
     message: '上传成功!',
   });
 
@@ -73,7 +73,7 @@ const removePhotos = function * ({ id }) {
 
   const photos = yield call(services.removePhotos, {
     conds,
-    spin: SPIN_CODE.APP_ALBUM,
+    spin: APP_CODE.ALBUM,
     search: {
       sourceFileName,
       type: type === 'all' ? void 0 : Number(type),
@@ -81,7 +81,7 @@ const removePhotos = function * ({ id }) {
   });
 
   message({
-    code: MESSAGE_CODE.APP_ALBUM,
+    code: APP_CODE.ALBUM,
     message: '删除成功!',
   });
 

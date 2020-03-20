@@ -1,7 +1,7 @@
 import * as services from './services';
 
 import { message } from '@utils';
-import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
+import { APP_CODE } from '@config/consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 
 /**
@@ -12,7 +12,7 @@ import { put, call, takeEvery, select } from 'redux-saga/effects';
 const getDiaries = function * ({ search }) {
   const diaries = yield call(services.getDiaries, {
     search,
-    spin: SPIN_CODE.APP_DIARY,
+    spin: APP_CODE.DIARY,
   });
 
   yield put({
@@ -30,7 +30,7 @@ const getDiaries = function * ({ search }) {
 const createDiarie = function * ({ body }) {
   const { change } = yield call(services.createDiaries, {
     body: [body],
-    spin: SPIN_CODE.APP_DIARY,
+    spin: APP_CODE.DIARY,
   });
 
   const currentDiaries = yield select(state => state.diary.diaries);
@@ -40,7 +40,7 @@ const createDiarie = function * ({ body }) {
   });
 
   message({
-    code: MESSAGE_CODE.APP_DIARY,
+    code: APP_CODE.DIARY,
     placement: 'bottomRight',
     message: '日记创建成功!',
   });
@@ -57,7 +57,7 @@ const updateDiaries = function * ({ id, body }) {
   const { change } = yield call(services.updateDiaries, {
     body,
     conds: { id },
-    spin: SPIN_CODE.APP_DIARY,
+    spin: APP_CODE.DIARY,
   });
 
   const currentDiaries = yield select(state => state.diary.diaries);
@@ -67,7 +67,7 @@ const updateDiaries = function * ({ id, body }) {
   });
 
   message({
-    code: MESSAGE_CODE.APP_DIARY,
+    code: APP_CODE.DIARY,
     placement: 'bottomRight',
     message: '日记编辑成功!',
   });
@@ -82,7 +82,7 @@ const updateDiaries = function * ({ id, body }) {
 const getStatsBill = function * ({ search }) {
   const statsBill = yield call(services.getStatsBill, {
     search,
-    spin: SPIN_CODE.APP_DIARY,
+    spin: APP_CODE.DIARY,
   });
   yield put({
     statsBill,
@@ -99,7 +99,7 @@ const getStatsBill = function * ({ search }) {
 const getStatsBodyIndex = function * ({ search }) {
   const { list: statsBodyIndex } = yield call(services.getStatsBodyIndex, {
     search,
-    spin: SPIN_CODE.APP_DIARY,
+    spin: APP_CODE.DIARY,
   });
   yield put({
     statsBodyIndex,

@@ -5,11 +5,11 @@ import scss from './index.module.scss';
 
 import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
-import { SPIN_CODE, MESSAGE_CODE } from '@config/consts';
+import { APP_CODE } from '@config/consts';
 
 const useStateHook = () => {
   const showSpin = useSelector(
-    state => _.get(state, `spin.${SPIN_CODE.APP_DIARY}`)
+    state => _.get(state, `spin.${APP_CODE.DIARY}`)
   );
   return { showSpin };
 };
@@ -21,7 +21,7 @@ export default () => {
       {state.showSpin
         ? <Spin className={scss.spin} size="large"/>
         : null}
-      <div id={MESSAGE_CODE.APP_DIARY}/>
+      <div id={APP_CODE.DIARY}/>
     </Fragment>
   );
 };

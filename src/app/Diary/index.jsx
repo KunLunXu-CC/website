@@ -7,8 +7,8 @@ import Stats from './Stats';
 import Calendar from './Calendar';
 import scss from './index.module.scss';
 
+import { DIARY_MENU } from './consts';
 import { useSelector } from 'react-redux';
-import { DIARY_MENU } from '@config/consts';
 
 // 菜单和组件的映射关系
 const MEN_MAP_TO_COMPONENT_ = {
