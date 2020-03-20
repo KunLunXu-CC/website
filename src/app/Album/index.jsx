@@ -1,10 +1,8 @@
 import React from 'react';
 import Body from './Body';
 import Side from './Side';
-import Spin from './Spin';
+import Tips from './Tips';
 import scss from './index.module.scss';
-
-import { MESSAGE_CODE } from '@config/consts';
 
 export default () => (
   <div className={scss.layout}>
@@ -14,7 +12,6 @@ export default () => (
     <div className={scss['layout-body']}>
       <Body/>
     </div>
-    <div id={MESSAGE_CODE.APP_ALBUM}/>
-    <Spin/>
+    <Tips/>
   </div>
 );
