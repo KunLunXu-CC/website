@@ -4,7 +4,7 @@ import React, {
 import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
-import { PHOTO_CDN } from '@config/consts';
+import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = props => {
@@ -27,7 +27,7 @@ const useStateHook = props => {
     // 2. 获取随机缩略图
     const index = Math.floor(Math.random() * thumbs.length);
     return thumbs.length > 0
-      ?  `${PHOTO_CDN}${thumbs[index].name}`
+      ?  `${SERVICE_STATIC_IMAGE_URL}${thumbs[index].name}`
       : '';
   }, [props.data.thumb, thumbs]);
 

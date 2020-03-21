@@ -6,7 +6,7 @@ import scss from './index.module.scss';
 import { rsa } from '@utils';
 import { Image, Icon } from 'qyrc';
 import { Input, Form, Button } from 'antd';
-import { PHOTO_CDN } from '@config/consts';
+import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 import { useHistory } from 'react-router-dom';
 import { getPublicKey } from '@model/user/services';
 import { useSelector, useDispatch } from 'react-redux';
@@ -31,7 +31,7 @@ const useStateHook = () => {
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
-      ? `${PHOTO_CDN}${avatars[index].name}`
+      ? `${SERVICE_STATIC_IMAGE_URL}${avatars[index].name}`
       : '';
   }, [avatars]);
 

@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
 import { useSelector } from 'react-redux';
-import { PHOTO_CDN } from '@config/consts';
+import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
   const { avatars, user  } = useSelector(state => ({
@@ -17,7 +17,7 @@ const useStateHook = () => {
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
-      ? `${PHOTO_CDN}${avatar[index].name}`
+      ? `${SERVICE_STATIC_IMAGE_URL}${avatar[index].name}`
       : '';
   }, [avatars]);
 

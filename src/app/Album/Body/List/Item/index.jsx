@@ -5,7 +5,7 @@ import moment from 'moment';
 import scss from './index.module.scss';
 
 import { Image, Icon } from 'qyrc';
-import { PHOTO_TYPE, PHOTO_CDN } from '@config/consts';
+import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = props => {
   // 计算描述信息
@@ -31,7 +31,7 @@ export default props => {
     <div className={scss.item}>
       <div className={scss.preview}>
         <div className={scss['preview-body']}>
-          <Image src={`${PHOTO_CDN}${props.data.name}`}/>
+          <Image src={`${SERVICE_STATIC_IMAGE_URL}${props.data.name}`}/>
         </div>
         <div className={scss['preview-mask']}>
           <Icon type="icon-shanchu" onClick={state.onDelete}/>
