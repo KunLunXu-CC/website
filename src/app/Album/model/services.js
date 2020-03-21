@@ -44,7 +44,7 @@ export const getPhotos = async ({ search, spin }) => {
           photos(search: $search){
             list {
               id
-              url
+              name
               type
             }
           }
