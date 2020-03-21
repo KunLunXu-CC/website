@@ -24,8 +24,8 @@ export const getPhotos = async () => {
           photos(search: $search){
             list {
               id
-              url
               type
+              name
             }
           }
         }`,
