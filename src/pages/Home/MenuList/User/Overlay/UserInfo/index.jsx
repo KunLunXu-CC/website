@@ -17,7 +17,7 @@ const useStateHook = () => {
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
-      ? `${SERVICE_STATIC_IMAGE_URL}${avatar[index].name}`
+      ? `${SERVICE_STATIC_IMAGE_URL}${avatars[index].name}`
       : '';
   }, [avatars]);
 
