@@ -9,6 +9,7 @@ import { APP_CODE, PHOTO_TYPE } from '@config/consts';
 
 // 初始默认 options
 const OPTIONS = {
+  fontSize: 14,               // 字体大小
   wordWrap: 'on',             // 自动换行
   language: 'markdown',       // 语言设置
   theme: 'one-dark-pro',      // 主题设置
