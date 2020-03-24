@@ -8,6 +8,12 @@ import { put, call, takeEvery, select } from 'redux-saga/effects';
  * @return {void 0}
  */
 const initData = function * () {
+  // 如果已初始化则不再次初始化
+  const currentTags = yield select(state => state.editor.tags);
+  if (!_.isEmpty(currentTags)) {
+    return false;
+  }
+
   const { tags, articles } = yield call(services.initData, {});
 
   yield put({
