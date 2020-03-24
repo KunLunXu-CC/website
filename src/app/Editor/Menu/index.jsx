@@ -6,6 +6,7 @@ import scss from './index.module.scss';
 
 import { Menu } from 'antd';
 import { Icon, Scroll } from 'qyrc';
+import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
@@ -13,17 +14,31 @@ const INLINE_INDENT = 14;  // 菜单缩进大小
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const { articles, tags, menu, works } = useSelector(state => ({
-    menu: _.get(state, 'editor.menu'),
-    tags: _.get(state, 'editor.tags'),
-    works: _.get(state, 'editor.works'),
-    articles: _.get(state, 'editor.articles'),
+  const {
+    tags,
+    menu,
+    works,
+    articles,
+    selectMenuKey,
+  } = useSelector(state => ({
+    menu: state.editor.menu,
+    tags: state.editor.tags,
+    works: state.editor.works,
+    articles: state.editor.articles,
+    selectMenuKey: state.editor.side.selectMenuKey,
   }));
+
+  // 获取文章
+  const articleList = useMemo(() => (
+    Object.values(ARTICLE_STATUS).includes(selectMenuKey)
+      ? Object.values(articles).filter(v => v.status === selectMenuKey)
+      : Object.values(articles)
+  ), [articles, selectMenuKey]);
 
   // 菜单树形数据
   const treeData = useMemo(() => {
     const groupTags = _.groupBy(Object.values(tags), 'parent.id');
-    const groupArticles = _.groupBy(Object.values(articles), 'tags[0].id');
+    const groupArticles = _.groupBy(articleList, 'tags[0].id');
     const parents = _.sortBy((groupTags.null || []).map(v => ({
       id: v.id,
       type: 'tag',
@@ -57,7 +72,7 @@ const useStateHook = () => {
     });
     loop(parents);
     return parents;
-  }, [articles, tags, menu.openKeys]);
+  }, [articleList, tags, menu.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = useMemo(() => (

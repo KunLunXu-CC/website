@@ -1,4 +1,34 @@
 .side {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-menu {
+    $color: #a9abae;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 10px;
+
+    &-item {
+      display: flex;
+      justify-content: center;
+
+      padding: 15px;
+      font-size: 26px;
+      cursor: pointer;
+      color: rgba($color: $color, $alpha: 0.4);
+
+      &:hover {
+        color: rgba($color: $color, $alpha: 1);
+      }
+    }
+
+    &-item-action {
+      color: rgba($color: $color, $alpha: 1);
+    }
+  }
 }
