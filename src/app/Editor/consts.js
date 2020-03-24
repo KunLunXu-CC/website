@@ -10,20 +10,20 @@ export const REVOKE_CONFIRM = 'EDITOR_REVOKE_CONFIRM';
 export const THUMB_SETTING = 'EDITOR_THUMB_SETTING';
 
 // side 菜单配置
-export const SIDE_MENU = [
-  {
-    key: 'all',
-    title: '全部',
-    icon: 'icon-all',
+export const SIDE_MENU = {
+  ALL: {
+    KEY: 'all',
+    TITLE: '全部',
+    ICON: 'icon-all',
   },
-  {
-    title: '未发布',
-    icon: 'icon-xiajia',
-    key: ARTICLE_STATUS.SAVE,
+  SAVE: {
+    TITLE: '未发布',
+    ICON: 'icon-xiajia',
+    KEY: ARTICLE_STATUS.SAVE,
   },
-  {
-    title: '已发布',
-    icon: 'icon-fabu',
-    key: ARTICLE_STATUS.RELEASE,
+  RELEASE: {
+    TITLE: '已发布',
+    ICON: 'icon-fabu',
+    KEY: ARTICLE_STATUS.RELEASE,
   },
-];
+};

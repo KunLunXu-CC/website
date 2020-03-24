@@ -37,12 +37,12 @@ export default () => {
   return (
     <div className={scss.side}>
       <div className={scss['side-menu']}>
-        {SIDE_MENU.map(v => (
+        {Object.values(SIDE_MENU).map(V => (
           <div
-            key={v.key}
-            onClick={state.onClick.bind(null, v.key)}
-            className={state.getItemClassName(v.key)}>
-            <Icon key={v.key} type={v.icon}/>
+            key={V.KEY}
+            onClick={state.onClick.bind(null, V.KEY)}
+            className={state.getItemClassName(V.KEY)}>
+            <Icon key={V.KEY} type={V.ICON}/>
           </div>
         ))}
       </div>

@@ -10,7 +10,7 @@ const initState = {
     openKeys: [], // 打开的菜单项
   },
   side: {
-    selectMenuKey: SIDE_MENU[0].key,  // 当前选中菜单 key
+    selectMenuKey: SIDE_MENU.ALL.KEY,  // 当前选中菜单 key
   },
   works: [],
 };
