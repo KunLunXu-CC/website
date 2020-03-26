@@ -23,7 +23,7 @@ export default {
     code: APP_CODE.EDITOR,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 12, left: 10 },
+      toolPosition: { top: 8, left: 8 },
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
