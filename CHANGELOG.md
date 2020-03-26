@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/qianyin925/blog_client/compare/v2.0.0...v2.1.0) (2020-03-26)
+
+
+### Features
+
+* 【client】【日记】bodyIndex 统计模块开发 ([4f94347](https://github.com/qianyin925/blog_client/commit/4f943472c8a3af7975b8e40b2242ad7969ea7fdf))
+* 【client】【日记】bodyIndex 统计模块开发 ([ce1bcb0](https://github.com/qianyin925/blog_client/commit/ce1bcb0b620a56866863f946f0a3d175ef3dee6c))
+* 【client】【日记】引入  antv/g2 并实现历史账单模块 ([d20cefd](https://github.com/qianyin925/blog_client/commit/d20cefdc1720ba9e8e3dbc14c407fee97a1f08d6))
+* 【client】【日记】按周、月、年统计时间调整 ([5fcadad](https://github.com/qianyin925/blog_client/commit/5fcadadc68eb66e708a085840e6404621bb14301))
+* 【client】【日记】新增编辑弹窗引入 qyrc 滚动条 ([2543db7](https://github.com/qianyin925/blog_client/commit/2543db75bb3bb2e38a6208b496bf41c9466939a4))
+* 【client】【日记】账单统计将堆叠类型的图表修改为分组 ([4001098](https://github.com/qianyin925/blog_client/commit/400109845f969cec594c28707c23d9bcac8dcdb1))
+* 【client】【编辑器】side menu 常量调整 ([d025bf3](https://github.com/qianyin925/blog_client/commit/d025bf3f94d34cfcbe54d6f8369ac4ef890850a6))
+* 【client】【编辑器】tools 栏距离顶部位置调整 ([f484bfe](https://github.com/qianyin925/blog_client/commit/f484bfe09a1cfbccab1b2004160da815c018fec9))
+* 【client】【编辑器】代码审查、修改文章内容时修改redux无需等待请求响应 ([cd7b493](https://github.com/qianyin925/blog_client/commit/cd7b493297a4b276e2695ed68bf8d1c2df08c20d))
+* 【client】【编辑器】侧边览添加状态分类 ([6336610](https://github.com/qianyin925/blog_client/commit/63366109038ef6f34ef3ce50099d7aab218a1732))
+* 【client】【编辑器】如果已初始化数据则不进行初始化数据 ([e71def0](https://github.com/qianyin925/blog_client/commit/e71def047bb60dc7b823d024fc3fac92bc7a33c8))
+* 【client】【编辑器】工作区字体调大一点, 并支持放大 ([1a22942](https://github.com/qianyin925/blog_client/commit/1a22942e0964951a2a843a890af50d76abff1a72))
+* 【client】【编辑器】文件夹应该在最上面 ([a8a8d96](https://github.com/qianyin925/blog_client/commit/a8a8d96788ee8c61108014946e5a8c193e4e6a3d))
+* 【client】【编辑器】自动布局失效 ([2c23f2b](https://github.com/qianyin925/blog_client/commit/2c23f2bae8dde8d1bd9f6302fba5e4a5d0ebcf31))
+* 【client】【编辑器】菜单收缩到对小宽度时隐藏滚动条 ([b2049cc](https://github.com/qianyin925/blog_client/commit/b2049cc2c59b56831dc3a66ce9032132c2dc1e18))
+* 【client】【编辑器】重构 ([c0de698](https://github.com/qianyin925/blog_client/commit/c0de6987f4da9f142474b9371508bb7cf9b2dc30))
+* 【client】spin 和 message 挂载点 整合到组件  Tips ([dc572e0](https://github.com/qianyin925/blog_client/commit/dc572e09e6fb832a44850de4b713aa4b065ff889))
+* 【client】webpack 配置审查 ([21c6c8e](https://github.com/qianyin925/blog_client/commit/21c6c8e28b1b8d388f3932eae48c02c6c01cd546))
+* 【client】图片调用修改 ([baba8b3](https://github.com/qianyin925/blog_client/commit/baba8b3a15d576c6e6cec46e7049d33b620efa4b))
+* 【client】定义应用唯一code变量 ([e61f4d1](https://github.com/qianyin925/blog_client/commit/e61f4d196258d0f0696584e6915c882839897e71))
+* 【client】日记初始创建编辑体重后再填写体脂值被清空 ([49a60b6](https://github.com/qianyin925/blog_client/commit/49a60b65400bd566a2c29efe657a0c81c8556e12))
+* 【client】日记统计高度无法撑开 ([16427b8](https://github.com/qianyin925/blog_client/commit/16427b8157cdd603501931291313d7a416c0a2fc))
+* 【client】更新 qyrc 版本 ([daed276](https://github.com/qianyin925/blog_client/commit/daed27698bcd9531ce87bc6bc699fdc8e5490169))
+* 【client】生成环境下 build npm 脚本更新 ([9140d75](https://github.com/qianyin925/blog_client/commit/9140d75ca3d86ffc3d04af29dbb2e0751840baf1))
+* 【server】webhook 服务重新测试编写 ([4166eb0](https://github.com/qianyin925/blog_client/commit/4166eb069e75dc6c34fa5d6d160e93bb9f7abe83))
+* 【server】七牛云 cdn 问题处理 ([6cd4692](https://github.com/qianyin925/blog_client/commit/6cd4692bc0467245676f927200ae0fcffeb11d5d))
+
 ## [2.0.0](https://github.com/qianyin925/blog_client/compare/v1.3.0...v2.0.0) (2020-03-04)
 
 
