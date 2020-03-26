@@ -6,9 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { DefinePlugin, ProvidePlugin } = require('webpack');
 
-// const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
-/* ================== 插件 ================= */
-
 // 全局常量定义
 const definePlugin = new DefinePlugin(config.globalConsts.production);
 
@@ -25,14 +22,11 @@ const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
 );
 
+// 将样式文件单独拆分为独立的文件
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
   filename: 'style/[name].[hash].css',
   chunkFilename: 'style/[id].[hash].css',
 });
-
-// 打包监测
-// const bundleAnalyzerPlugin = new WebpackBundleAnalyzer
-// .BundleAnalyzerPlugin();
 
 const cssRegex = /\.(css|scss)$/;
 const cssModuleRegex = /\.module\.(css|scss)$/;

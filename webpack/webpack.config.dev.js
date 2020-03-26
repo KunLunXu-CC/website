@@ -25,6 +25,7 @@ const copyWebpackPlugin = new CopyWebpackPlugin(
   [{ from: path.resolve(__dirname, '../public') }]
 );
 
+// 将样式文件单独拆分为独立的文件
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
   filename: 'style/[name].[hash].css',
   chunkFilename: 'style/[id].[hash].css',
@@ -49,24 +50,9 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        include: [
-          path.resolve(__dirname, '../src'),
-        ],
-        exclude: [
-          path.resolve(__dirname, '../src/assets/font'),
-        ],
-
-        loader: 'eslint-loader',
-        options: {
-          formatter: require('eslint-friendly-formatter'),
-        },
-      },
-      {
         test: /\.(mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: cssRegex,
