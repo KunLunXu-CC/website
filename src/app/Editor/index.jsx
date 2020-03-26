@@ -1,5 +1,6 @@
 import React, {
   useEffect,
+  useCallback,
 } from 'react';
 import Side from './Side';
 import Menu from './Menu';
@@ -12,16 +13,28 @@ import scss from './index.module.scss';
 import { VariableBlock } from 'qyrc';
 import { useDispatch } from 'react-redux';
 
+// 菜单最小宽度
+const MENU_MIN_WIDTH = 4;
+
 const useStateHook = () => {
   const dispatch = useDispatch();
+
+  const onResize = useCallback(({ width }) => {
+    dispatch({
+      type: 'editor/setMenu',
+      menu: { collapsed: MENU_MIN_WIDTH === width },
+    });
+  }, []);
 
   useEffect(() => {
     dispatch({ type: 'editor/initData' });
   }, []);
+
+  return { onResize };
 };
 
 export default () => {
-  useStateHook();
+  const state = useStateHook();
   return (
     <div className={scss.editor}>
       <div className={scss['editor-header']}><Header/></div>
@@ -30,14 +43,15 @@ export default () => {
         <VariableBlock
           margin={{ right: '20%' }}
           operationList={['right']}
+          onResize={state.onResize}
           style={{ height: '100%' }}
-          constraintSize={{ width: 4 }}
-          className={scss['editor-body-menu']} >
+          className={scss['editor-body-menu']}
+          constraintSize={{ width: MENU_MIN_WIDTH }}>
           <Menu/>
         </VariableBlock>
         <div className={scss['editor-body-work']}><Work/></div>
       </div>
-      <div className={scss['editor-footer']}><Footer /></div>
+      <div className={scss['editor-footer']}><Footer/></div>
       <Tips/>
     </div>
   );

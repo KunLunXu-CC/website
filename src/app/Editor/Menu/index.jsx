@@ -136,24 +136,25 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <div className={scss.menu}>
-      <Scroll className={scss['menu-middle']}>
-        <Menu
-          mode="inline"
-          inlineCollapsed={false}
-          onSelect={state.onSelect}
-          inlineIndent={INLINE_INDENT}
-          openKeys={state.menu.openKeys}
-          onOpenChange={state.onOpenChange}
-          selectedKeys={[state.selectedKeys]}>
-          {state.renderMenuList()}
-        </Menu>
-      </Scroll>
-      <div
-        onClick={state.addTag}
-        className={scss['munu-new-tag']} >
-        <Icon type="icon-xinzeng" />
-      </div>
-    </div>
+    !state.menu.collapsed ?
+      <div className={scss.menu}>
+        <Scroll className={scss['menu-middle']}>
+          <Menu
+            mode="inline"
+            inlineCollapsed={false}
+            onSelect={state.onSelect}
+            inlineIndent={INLINE_INDENT}
+            openKeys={state.menu.openKeys}
+            onOpenChange={state.onOpenChange}
+            selectedKeys={[state.selectedKeys]}>
+            {state.renderMenuList()}
+          </Menu>
+        </Scroll>
+        <div
+          onClick={state.addTag}
+          className={scss['munu-new-tag']} >
+          <Icon type="icon-xinzeng" />
+        </div>
+      </div> : null
   );
 };

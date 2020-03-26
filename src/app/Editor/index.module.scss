@@ -15,7 +15,6 @@
     flex: 1;
     height: 100%;
     display: flex;
-    background: #21252b;
 
     &-side {
       width: 80px;
@@ -24,6 +23,7 @@
 
     &-menu {
       position: relative;
+      background: #282c34;
     }
 
     &-work {
