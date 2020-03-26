@@ -50,23 +50,23 @@ const useStateHook = () => {
       if (!menu.openKeys.includes(parent.id)) {
         parent.children = []; // eslint-disable-line
       } else {
-        parent.children = _.sortBy([ // eslint-disable-line
-          ... (groupTags[parent.id] || []).map(v => ({
+        parent.children = [ // eslint-disable-line
+          ... _.sortBy((groupTags[parent.id] || []).map(v => ({
             id: v.id,
             type: 'tag',
             name: v.name,
             editor: v.editor,
             parent: parent.id,
-          })),
-          ... (groupArticles[parent.id] || []).map(v => ({
+          })), 'name'),
+          ... _.sortBy((groupArticles[parent.id] || []).map(v => ({
             id: v.id,
             name: v.name,
             tag: parent.id,
             type: 'article',
             editor: v.editor,
             parent: parent.id,
-          })),
-        ], 'name');
+          })), 'name'),
+        ];
         parent.children.length !== 0 && loop(parent.children);
       }
     });
