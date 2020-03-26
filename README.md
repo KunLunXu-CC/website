@@ -2,14 +2,6 @@
 
 博客模拟 Mac 桌面系统，以应用的形式来展示博客的功能，系统集合博客客户端和后台管理的所有功能并通过用户权限来限制访问者的操作
 
-<!-- <div align="center">
-  
-  <br/><br/>
-
-  [![截图](./.github/2019061420:08:066.png)](https://qianyin925.github.io/notebook)
-  
-</div><br/><br/>
-
 - 预览: https://www.qianyin925.com -->
 
 ## 特性
