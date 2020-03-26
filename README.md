@@ -10,7 +10,7 @@
   
 </div><br/><br/>
 
-- 预览: https://qianyin925.github.io/notebook -->
+- 预览: https://www.qianyin925.com -->
 
 ## 特性
 
