@@ -42,7 +42,6 @@ module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, '../src/index.js'),
   output: {
-    publicPath: '/',
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[name].[hash].bundle.js',
   },
@@ -61,9 +60,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
+            options: { hmr: true },
           },
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
@@ -75,9 +72,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
+            options: { hmr: true },
           },
           {
             loader: 'css-loader',
@@ -120,10 +115,5 @@ module.exports = {
   resolve: {
     extensions: ['.mjs', '.js', '.jsx'],
     alias: config.alias || {},
-  },
-
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
   },
 };
