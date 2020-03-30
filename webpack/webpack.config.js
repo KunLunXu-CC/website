@@ -35,6 +35,7 @@ module.exports = {
   mode: 'production',
   entry: path.resolve(__dirname, '../src/index.js'),
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[name].[hash].bundle.js',
   },
