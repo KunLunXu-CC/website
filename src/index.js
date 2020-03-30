@@ -11,8 +11,7 @@ import { ConfigProvider } from 'antd';
 moment.locale('zh-cn');
 
 reactDom.render(
-  <ConfigProvider
-    locale={zhCN}>
+  <ConfigProvider locale={zhCN}>
     <Store>
       <Router />
     </Store>
