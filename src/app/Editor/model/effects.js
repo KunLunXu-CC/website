@@ -1,5 +1,7 @@
 import * as services from './services';
 
+import { message } from '@utils';
+import { MESSAGE_CONFIG } from '../consts';
 import { APP_CODE, PHOTO_TYPE } from '@config/consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 
@@ -31,6 +33,11 @@ const initData = function * () {
       [ele.id]: ele,
     }), {}),
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '数据初始化完成!',
+  });
 };
 
 /**
@@ -52,6 +59,11 @@ const removeTag = function * ({ id }) {
   yield put({
     type: 'editor/setTags',
     tags: { ... currentTags },
+  });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '成功移除标签!',
   });
 };
 
@@ -79,6 +91,11 @@ const removeArticle = function * ({ id }) {
     type: 'editor/setArticles',
     articles: { ... currentArticles },
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '成功删除文章!',
+  });
 };
 
 /**
@@ -101,6 +118,11 @@ const createTag = function * ({ body }) {
     }), currentTags),
     type: 'editor/setTags',
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '成功创建标签!',
+  });
 };
 
 /**
@@ -121,6 +143,11 @@ const updateTag = function * ({ body, id }) {
       [ele.id]: ele,
     }), currentTags),
     type: 'editor/setTags',
+  });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '成功更新标签!',
   });
 };
 
@@ -149,6 +176,11 @@ const createArticle = function * ({ body }) {
     type: 'editor/appendWorks',
     article: _.get(change, '[0].id'),
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '成功创建文章!',
+  });
 };
 
 /**
@@ -176,6 +208,11 @@ const updateArticle = function * ({ body, id }) {
     type: 'editor/setWork',
     work: { change: false },
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '成功修改文章信息!',
+  });
 };
 
 /**
@@ -201,6 +238,11 @@ const updateArticleContent = function * ({ content, id }) {
     type: 'editor/setWork',
     work: { change: false },
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '文章内容保存成功!',
+  });
 };
 
 
@@ -223,6 +265,11 @@ const revokeArticle = function * ({ id }) {
     }), currentArticles),
     type: 'editor/setArticles',
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '下架成功!',
+  });
 };
 
 /**
@@ -243,6 +290,11 @@ const releaseArticle = function * ({ id }) {
     }), currentArticles),
     type: 'editor/setArticles',
   });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '发布成功!',
+  });
 };
 
 /**
@@ -255,6 +307,11 @@ const setArticleThumb = function * ({ file, id }) {
     files: [file],
     type: PHOTO_TYPE.ARTICLE.VALUE,
     spin: APP_CODE.EDITOR,
+  });
+
+  message({
+    ... MESSAGE_CONFIG,
+    message: '缩略图上传成功!',
   });
 
   yield put({

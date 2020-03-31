@@ -1,4 +1,4 @@
-import { ARTICLE_STATUS } from '@config/consts';
+import { ARTICLE_STATUS, APP_CODE } from '@config/consts';
 
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';
@@ -26,4 +26,11 @@ export const SIDE_MENU = {
     ICON: 'icon-fabu',
     KEY: ARTICLE_STATUS.RELEASE,
   },
+};
+
+// message 配置
+export const MESSAGE_CONFIG = {
+  bottom: 10,
+  code: APP_CODE.EDITOR,
+  placement: 'bottomRight',
 };

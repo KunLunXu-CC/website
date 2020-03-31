@@ -36,22 +36,4 @@
     height: 20px;
     background: #21252b;
   }
-
-  :global {
-    .ant-notification-notice {
-      background: #2c343a;
-    }
-
-    .ant-notification-notice-message {
-      color: rgba($color: #fff, $alpha: 0.6);
-    }
-
-    .ant-notification-notice-description {
-      color: rgba($color: #fff, $alpha: 0.4);
-    }
-
-    .ant-notification-notice-close .anticon {
-      color: rgba($color: #fff, $alpha: 0.6);
-    }
-  }
 }
