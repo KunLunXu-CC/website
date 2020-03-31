@@ -22,7 +22,7 @@ export default props => (
             <Input placeholder="账单描述"/>
           </Form.Item>
         </Col>
-        <Col span={8}>
+        <Col span={12}>
           <Form.Item
             {... props.field}
             label="收入"
@@ -36,7 +36,7 @@ export default props => (
             />
           </Form.Item>
         </Col>
-        <Col span={8}>
+        <Col span={12}>
           <Form.Item
             {... props.field}
             label="支出"
@@ -46,20 +46,6 @@ export default props => (
             <InputNumber
               min={0}
               placeholder="支出"
-              style={{ width: '100%' }}
-            />
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item
-            {... props.field}
-            label="结余"
-            className={scss['form-item']}
-            name={[props.field.name, 'balance']}
-            fieldKey={[props.field.fieldKey, 'balance']}>
-            <InputNumber
-              min={0}
-              placeholder="结余"
               style={{ width: '100%' }}
             />
           </Form.Item>
