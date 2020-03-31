@@ -91,13 +91,13 @@ const getStatsBill = function * ({ search }) {
 };
 
 /**
- * 获取 bodyIndex 统计
+ * 获取 bodyIndex 数据
  *
  * @param {String} action.search 查询条件
  * @return {void 0}
  */
 const getStatsBodyIndex = function * ({ search }) {
-  const { list: statsBodyIndex } = yield call(services.getStatsBodyIndex, {
+  const statsBodyIndex = yield call(services.getStatsBodyIndex, {
     search,
     spin: APP_CODE.DIARY,
   });

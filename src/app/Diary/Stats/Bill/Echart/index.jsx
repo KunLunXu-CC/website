@@ -7,23 +7,31 @@ import scss from './index.module.scss';
 
 import { Chart } from '@antv/g2';
 import { useSelector } from 'react-redux';
+import { STATS_SAPN } from '@config/consts';
 
-const useStateHook = () => {
+const useStateHook = props => {
   const containerRef = useRef(null);
   const { groupWithName } = useSelector(state => state.diary.statsBill);
 
   // 处理数据
   const data = useMemo(() => (groupWithName.reduce((total, ele) => ([
     ... total,
-    ... [{
-      type: '支出',
-      yAxis: ele.expend,
-      xAxis: `${ele.name}.`,
-    }, {
-      type: '收入',
-      yAxis: ele.income,
-      xAxis: `${ele.name}.`,
-    }],
+    ... [
+      {
+        type: '支出',
+        yAxis: ele.expend,
+        xAxis: `${ele.name}.`,
+      }, {
+        type: '收入',
+        yAxis: ele.income,
+        xAxis: `${ele.name}.`,
+      },
+      [STATS_SAPN.MONTH.VALUE, STATS_SAPN.YEAR.VALUE].includes(props.span) ? {
+        type: '结余',
+        xAxis: `${ele.name}.`,
+        yAxis: ele.income - ele.expend,
+      } : null,
+    ],
   ]), [])), [groupWithName]);
 
   // 实例化Chart
@@ -41,7 +49,7 @@ const useStateHook = () => {
   const renderEchart = () => {
     if (chart) {
       // 载入数据
-      chart.data(data);
+      chart.data(data.filter(v => v));
 
       // 批量设置 scale 配置: 未数据字段(yAxis)进行 scale 配置
       chart.scale('yAxis', {
@@ -70,7 +78,7 @@ const useStateHook = () => {
       chart
         .interval()
         .position('xAxis*yAxis')
-        .color('type', ['#ff7f0e', '#2ca02c'])
+        .color('type', ['#ff7f0e', '#1890ff', '#2ca02c'])
         .adjust([
           {
             type: 'dodge',
@@ -90,8 +98,8 @@ const useStateHook = () => {
   return { containerRef };
 };
 
-export default () => {
-  const state = useStateHook();
+export default props => {
+  const state = useStateHook(props);
 
   return (
     <div

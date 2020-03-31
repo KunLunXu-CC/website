@@ -124,7 +124,7 @@ export const getStatsBill = async ({
       variables: { search },
       query: `
         query(
-          $search: StatsSearch,
+          $search: StatsBillSearch,
         ){
           statsBill(
             search: $search,
@@ -141,7 +141,7 @@ export const getStatsBill = async ({
   return _.get(res, 'data.data.statsBill') || {};
 };
 
-// 获取 bodyIndex 统计
+// 获取 bodyIndex 列表
 export const getStatsBodyIndex = async ({
   spin,
   search,
@@ -154,9 +154,9 @@ export const getStatsBodyIndex = async ({
       variables: { search },
       query: `
         query(
-          $search: StatsSearch,
+          $search: DiarySearch,
         ){
-          statsBodyIndex(
+          diaries(
             search: $search,
           ){
             list {
@@ -167,5 +167,5 @@ export const getStatsBodyIndex = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.statsBodyIndex') || {};
+  return _.get(res, 'data.data.diaries.list');
 };

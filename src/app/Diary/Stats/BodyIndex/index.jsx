@@ -1,80 +1,40 @@
 import React, {
-  useMemo,
-  useState,
   useEffect,
+  useCallback,
 } from 'react';
 import moment from 'moment';
 import Echart from './Echart';
-import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { STATS_SAPN } from '@config/consts';
+import { DatePicker } from 'antd';
 import { useDispatch } from 'react-redux';
 
+// 默认日期
+const DEFAULT_DATE = [
+  moment().subtract(365, 'days'),
+  moment(),
+];
+
 const useStateHook = () => {
-  const [span, setSpan] = useState('day');
   const dispatch = useDispatch();
 
-  // span 和 name 映射表
-  const SPAN_MAP_NAME = useMemo(() => ({
-    [STATS_SAPN.DAY.VALUE]: [
-      moment()
-        .subtract(30, 'days')
-        .format('YYYY-MM-DD'),
-      moment().format('YYYY-MM-DD'),
-    ],
-    [STATS_SAPN.WEEK.VALUE]: [
-      moment()
-        .subtract(15, 'weeks')
-        .startOf('week')
-        .format('YYYY-MM-DD'),
-      moment()
-        .endOf('week')
-        .format('YYYY-MM-DD'),
-    ],
-    [STATS_SAPN.MONTH.VALUE]: [
-      moment()
-        .startOf('month')
-        .subtract(12, 'months')
-        .format('YYYY-MM-DD'),
-      moment()
-        .endOf('month')
-        .format('YYYY-MM-DD'),
-    ],
-    [STATS_SAPN.YEAR.VALUE]: [
-      moment()
-        .subtract(10, 'years')
-        .startOf('years')
-        .format('YYYY-MM-DD'),
-      moment()
-        .endOf('years')
-        .format('YYYY-MM-DD'),
-    ],
-  }), []);
-
-  // 切换
-  const onToggleSpan = span => {
-    setSpan(span);
-  };
-
-  // 获取按钮 classNam
-  const getBtnClassName = value => classNames(
-    scss['header-btn'],
-    { [scss['header-btn-action']]: span === value }
-  );
-
-  // 监听 span 的变化并查询数据
-  useEffect(() => {
+  // 查询
+  const search = useCallback(date => {
     dispatch({
       type: 'diary/getStatsBodyIndex',
       search: {
-        span,
-        name: SPAN_MAP_NAME[span],
+        names: date && date[0]
+          ? [date[0].formart('YYYY-MM-DD'), date[1].formart('YYYY-MM-DD')]
+          : void 0,
       },
     });
-  }, [span]);
+  }, []);
 
-  return { span, onToggleSpan, getBtnClassName };
+  useEffect(() => {
+    search();
+  }, []);
+
+  return { search };
 };
 
 export default () => {
@@ -86,15 +46,11 @@ export default () => {
         <div className={scss['header-title']}>
           身体体征曲线图
         </div>
-        <div className={scss['header-btns']}>
-          {Object.values(STATS_SAPN).map(v => (
-            <div
-              key={v.VALUE}
-              className={state.getBtnClassName(v.VALUE)}
-              onClick={state.onToggleSpan.bind(null, v.VALUE)}>
-              {v.DESC}
-            </div>
-          ))}
+        <div className={scss['header-picker']}>
+          <DatePicker.RangePicker
+            onChange={state.search}
+            defaultValue={DEFAULT_DATE}
+          />
         </div>
       </div>
       <Echart/>
