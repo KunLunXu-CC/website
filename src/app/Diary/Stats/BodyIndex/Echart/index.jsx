@@ -13,22 +13,28 @@ const useStateHook = () => {
   const statsBodyIndex = useSelector(state => state.diary.statsBodyIndex);
 
   // 处理数据
-  const data = useMemo(() => (statsBodyIndex.reduce((total, ele) => ([
-    ... total,
-    ... [{
-      type: '体重',
-      xAxis: ele.name,
-      yAxis: ele.bodyIndex.weight,
-    }, {
-      type: '体脂',
-      xAxis: ele.name,
-      yAxis: ele.bodyIndex.bodyfat,
-    }, {
-      type: '水分',
-      xAxis: ele.name,
-      yAxis: ele.bodyIndex.moistureContent,
-    }],
-  ]), [])), [statsBodyIndex]);
+  const data = useMemo(() => (statsBodyIndex.filter(v => v.bodyIndex).reduce(
+    (total, ele) => ([
+      ... total,
+      ... [
+        {
+          type: '体重',
+          xAxis: ele.name,
+          yAxis: _.get(ele, 'bodyIndex.weight', 0),
+        },
+        {
+          type: '体脂',
+          xAxis: ele.name,
+          yAxis: _.get(ele, 'bodyIndex.bodyfat', 0),
+        },
+        {
+          type: '水分',
+          xAxis: ele.name,
+          yAxis: _.get(ele, 'bodyIndex.moistureContent', 0),
+        },
+      ],
+    ]), []
+  )), [statsBodyIndex]);
 
   // 实例化Chart
   const chart = useMemo(() => {
