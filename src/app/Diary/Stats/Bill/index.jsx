@@ -7,8 +7,9 @@ import Echart from './Echart';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { STATS_SAPN } from '@config/consts';
+import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
+import { STATS_SAPN } from '@config/consts';
 
 // span 和 name 映射表
 const SPAN_MAP_NAME = {
@@ -80,11 +81,11 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <div className={scss.card}>
-      <div className={scss.header}>
-        <div className={scss['header-title']}>
-          历史收入 / 支出
-        </div>
+    <Card
+      bordered={false}
+      title="历史收入 / 支出"
+      className={scss.card}
+      extra={
         <div className={scss['header-btns']}>
           {Object.values(STATS_SAPN).map(v => (
             <div
@@ -95,8 +96,8 @@ export default () => {
             </div>
           ))}
         </div>
-      </div>
+      }>
       <Echart span={state.span}/>
-    </div>
+    </Card>
   );
 };
