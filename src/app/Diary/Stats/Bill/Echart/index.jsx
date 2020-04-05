@@ -29,7 +29,7 @@ const useStateHook = props => {
       [STATS_SAPN.MONTH.VALUE, STATS_SAPN.YEAR.VALUE].includes(props.span) ? {
         type: '结余',
         xAxis: `${ele.name}.`,
-        yAxis: ele.income - ele.expend,
+        yAxis: (ele.income - ele.expend).toFixed(2),
       } : null,
     ],
   ]), [])), [groupWithName]);
