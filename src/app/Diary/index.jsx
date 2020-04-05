@@ -32,7 +32,9 @@ export default () => {
   const state = useStateHook();
   return (
     <div className={scss.layout}>
-      <Menu/>
+      <div className={scss['layout-menu']}>
+        <Menu/>
+      </div>
       <div className={scss['layout-body']}>
         {state.body}
       </div>

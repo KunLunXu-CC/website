@@ -1,7 +1,9 @@
 .calendar {
   height: 100%;
-  display: flex;
   overflow: hidden;
+  padding-left: 120px;
+
+  display: flex;
   flex-direction: column;
 
   :global {
