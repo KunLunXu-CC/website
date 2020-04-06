@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Card } from 'antd';
+import { formatNum } from '@utils';
 import { useDispatch } from 'react-redux';
 import { STATS_SAPN } from '@config/consts';
 
@@ -97,6 +98,20 @@ export default () => {
           ))}
         </div>
       }>
+      <div className={scss.list}>
+        <div className={scss.item}>
+          <div className={scss.label}>总收入</div>
+          <div className={scss.value}>¥ {formatNum(126560)}</div>
+        </div>
+        <div className={scss.item}>
+          <div className={scss.label}>总支出</div>
+          <div className={scss.value}>¥ {formatNum(126560)}</div>
+        </div>
+        <div className={scss.item}>
+          <div className={scss.label}>总盈余</div>
+          <div className={scss.value}>¥ {formatNum(126560)}</div>
+        </div>
+      </div>
       <Echart span={state.span}/>
     </Card>
   );

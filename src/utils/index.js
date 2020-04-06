@@ -52,10 +52,11 @@ export const rsa = (data, publicKey) => {
  * 格式化数字
  * @param {Number} num  待处理数据
  */
-export const formatNum = num => [... `${num}`].reverse()
-  .reduce((res, current, index) => (
-    `${current}${index !== 0 && index % 3 === 0 ? ',' : ''}${res}`, '')
-  );
+export const formatNum = num => [... `${num}`]
+  .reverse()
+  .reduce((total, ele, index) => `${ele}${
+    index !== 0 && index % 3 === 0 ? ',' : ''
+  }${total}`, '');
 
 /**
  * 提示
