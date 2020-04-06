@@ -47,6 +47,7 @@ export default () => {
       className={scss.card}
       extra={
         <DatePicker.RangePicker
+          bordered={false}
           onChange={state.search}
           defaultValue={DEFAULT_DATE}
         />
