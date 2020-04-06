@@ -129,6 +129,7 @@ export const getStatsBill = async ({
           statsBill(
             search: $search,
           ){
+            stats
             groupWithName {
               name
               income

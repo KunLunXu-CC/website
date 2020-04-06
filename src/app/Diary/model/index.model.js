@@ -10,6 +10,10 @@ const initState = {
   },
   statsBodyIndex: [],                         // 身体成分列表
   statsBill: {                                // 统计账单
+    stats: {                                  // 统计账单 - 统计总额
+      income: 0,                              // 收入
+      expend: 0,                              // 支出
+    },
     groupWithName: [],                        // 统计账单 - 根据 name 分组查询
   },
 };
