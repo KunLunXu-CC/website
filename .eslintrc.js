@@ -7,7 +7,8 @@ module.exports = {
   },
   env: {
     browser: true,              // 开发环境配置表示可以使用浏览器的方法
-    node: true                  //
+    node: true,                 // node 环境
+    es6: true,                  // es6 环境
   },
   globals: {
     _: true,
