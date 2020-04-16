@@ -89,3 +89,35 @@ export const STATS_SAPN = {
   MONTH: { VALUE: 'month', DESC: '月' },  // 按月
   YEAR: { VALUE: 'year', DESC: '年' },    // 按年
 };
+
+// 账单标签
+export const BILL_TAG = {
+  THREE_MEALS: { VALUE: 1, DESC: '三餐' },    // 早中晚三餐
+  MEAL_ADDITION: { VALUE: 2, DESC: '加餐' },  // 零食、夜宵
+  DINNER_PARTY: { VALUE: 3, DESC: '聚餐' },   // 聚餐
+  FRUITS: { VALUE: 1, DESC: '水果' },         // 水果
+  NECESSITY: { VALUE: 1, DESC: '生活必需品' },       // 生活必需品(牙膏、洗发水等等系列)
+  FIXED_EXPENDITURE: { VALUE: 1, DESC: '固定支出' }, // 话费、房租、服务器、视频会员
+  APPAREL_WEAR: { VALUE: 1, DESC: '服装穿戴' }, // 平时穿的衣服鞋子等
+  FITNESS: { VALUE: 1, DESC: '健身' },         // 运动相关的: 健身卡、补剂、护具
+  LARGE_SIZED: { VALUE: 1, DESC: '大件' },     // 大件: 电器、手机、电脑等
+
+  ACCIDENT: { VALUE: 1, DESC: '意外' },        // 意外花销
+};
+
+/*
+
+1、三餐
+2、加餐(零食、夜宵)
+3、聚餐
+4、水果
+
+2、生活必需品
+4、服装穿戴
+
+3、固定支出(话费、房租、服务器、视频会员)
+
+3、健身(服装、补剂)
+3、大件（耳机、手机、电脑）
+
+*/
