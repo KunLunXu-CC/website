@@ -2,7 +2,15 @@ import React from 'react';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { Row, Col, InputNumber, Input, Form } from 'antd';
+import { BILL_TAG } from '@config/consts';
+import { Row, Col, InputNumber, Input, Form, Select } from 'antd';
+
+// 下拉框
+const billTagOptions = Object.values(BILL_TAG).map(V => (
+  <Select.Option value={V.VALUE} key={V.VALUE}>
+    {V.DESC}
+  </Select.Option>
+));
 
 export default props => (
   <Row className={scss.row}>
@@ -16,13 +24,27 @@ export default props => (
               required: true,
               message: '请填写描述!',
             }]}
-            name={[props.field.name, 'desc']}
             className={scss['form-item']}
+            name={[props.field.name, 'desc']}
             fieldKey={[props.field.fieldKey, 'desc']}>
             <Input placeholder="账单描述"/>
           </Form.Item>
         </Col>
-        <Col span={12}>
+        <Col span={8}>
+          <Form.Item
+            {... props.field}
+            label="标签"
+            className={scss['form-item']}
+            name={[props.field.name, 'tag']}
+            fieldKey={[props.field.fieldKey, 'tag']}>
+            <Select
+              placeholder="标签"
+              style={{ width: '100%' }}>
+              {billTagOptions}
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={8}>
           <Form.Item
             {... props.field}
             label="收入"
@@ -36,7 +58,7 @@ export default props => (
             />
           </Form.Item>
         </Col>
-        <Col span={12}>
+        <Col span={8}>
           <Form.Item
             {... props.field}
             label="支出"
