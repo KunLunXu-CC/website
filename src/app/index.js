@@ -2,6 +2,7 @@ import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
 import Article from './Article';
+import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
 
 export default {
@@ -44,6 +45,17 @@ export default {
     component: Diary,
     icon: 'icon-biji',
     code: APP_CODE.DIARY,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 11, left: 11 },
+      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
+    },
+  },
+  datasetsfrom: {
+    name: '数据字典',
+    icon: 'icon-zidian',
+    component: Datasetsfrom,
+    code: APP_CODE.DATASETSFROM,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 11, left: 11 },

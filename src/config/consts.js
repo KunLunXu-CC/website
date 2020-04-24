@@ -2,10 +2,11 @@
 
 // 应用 CODE
 export const APP_CODE = {
-  ALBUM: 'album',     // 相册
-  DIARY: 'diary',     // 日记
-  EDITOR: 'editor',   // 编辑器
-  ARTICLE: 'article', // 文章
+  ALBUM: 'album',                // 相册
+  DIARY: 'diary',                // 日记
+  EDITOR: 'editor',              // 编辑器
+  ARTICLE: 'article',            // 文章
+  DATASETSFROM: 'datasetsfrom',  // 数据字典(数据集)
 };
 
 // 服务器静态资源-图片 url
