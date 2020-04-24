@@ -1,7 +1,11 @@
 import React from 'react';
+import Menu from './Menu';
+import Body from './Body';
+import scss from './index.module.scss';
 
 export default () => (
-  <div>
-    数据字典
+  <div className={scss.layout}>
+    <Menu/>
+    <Body/>
   </div>
 );

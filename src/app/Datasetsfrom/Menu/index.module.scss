@@ -1,0 +1,18 @@
+.menu {
+  width: 200px;
+  background: #6f51ff;
+  padding: 50px 0 0 20px;
+  border-radius: 0 10px 10px 0;
+
+  &-item {
+    color: #fff;
+    line-height: 3;
+    cursor: pointer;
+
+    :global {
+      .qyrc-icon {
+        margin: 0 10px;
+      }
+    }
+  }
+}
