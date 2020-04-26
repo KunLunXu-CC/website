@@ -1,18 +1,57 @@
 .menu {
+  $radius-size: 10px;
+
   width: 200px;
-  background: #6f51ff;
-  padding: 50px 0 0 20px;
-  border-radius: 0 10px 10px 0;
+  padding: 80px 0 0 20px;
+  border-radius: 0 $radius-size $radius-size 0;
+
+  background-image: radial-gradient(800px at right top, #7659ff 300px, #6f51ff 300px);
 
   &-item {
     color: #fff;
     line-height: 3;
+    margin: 10px 0;
     cursor: pointer;
+    padding-left: 10px;
 
     :global {
       .qyrc-icon {
         margin: 0 10px;
       }
+    }
+
+    &-action {
+      color: #6f51ff;
+      position: relative;
+      background: #f8f7fb;
+      font-weight: 300 !important;
+      border-radius: $radius-size 0 0 $radius-size;
+
+      &::after {
+        content: '';
+        width: $radius-size;
+        height: $radius-size;
+
+        right: 0;
+        top: -$radius-size;
+        position: absolute;
+        background-image: radial-gradient(20px at left top, transparent 10px, #fff 10px);
+      }
+
+      &::before {
+        content: '';
+        width: $radius-size;
+        height: $radius-size;
+
+        right: 0;
+        position: absolute;
+        bottom: -$radius-size;
+        background-image: radial-gradient(20px at left bottom, transparent 10px, #fff 10px);
+      }
+    }
+
+    &:hover {
+      font-weight: 500;
     }
   }
 }
