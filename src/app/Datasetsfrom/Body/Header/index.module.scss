@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  padding: 20px;
+
+  :global {
+    .ant-input-affix-wrapper {
+      box-shadow: none;
+      border-color: transparent;
+      outline-color: transparent;
+
+      line-height: 2;
+      border-radius: 30px;
+    }
+  }
+}
