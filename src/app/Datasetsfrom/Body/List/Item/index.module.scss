@@ -1,0 +1,22 @@
+.item {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+
+  &:nth-child(3n - 1) {
+    margin: {
+      left: 20px;
+      right: 20px;
+    };
+  }
+}
+
+.top {
+  padding: 20px;
+}
+
+.bottom {
+  padding: 20px;
+  border-top: 1px dashed #f2f5fc;
+}
