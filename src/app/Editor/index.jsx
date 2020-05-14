@@ -10,7 +10,7 @@ import Header from './Header';
 import Footer from './Footer';
 import scss from './index.module.scss';
 
-import { VariableBlock } from 'qyrc';
+import { VariableContainer } from 'qyrc';
 import { useDispatch } from 'react-redux';
 
 // 菜单最小宽度
@@ -40,7 +40,7 @@ export default () => {
       <div className={scss['editor-header']}><Header/></div>
       <div className={scss['editor-body']}>
         <div className={scss['editor-body-side']}><Side/></div>
-        <VariableBlock
+        <VariableContainer
           margin={{ right: '20%' }}
           operationList={['right']}
           onResize={state.onResize}
@@ -48,7 +48,7 @@ export default () => {
           className={scss['editor-body-menu']}
           constraintSize={{ width: MENU_MIN_WIDTH }}>
           <Menu/>
-        </VariableBlock>
+        </VariableContainer>
         <div className={scss['editor-body-work']}><Work/></div>
       </div>
       <div className={scss['editor-footer']}><Footer/></div>
