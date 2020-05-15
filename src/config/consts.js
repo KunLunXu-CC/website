@@ -105,3 +105,32 @@ export const BILL_TAG = {
 
   ACCIDENT: { VALUE: 10, DESC: '意外' },        // 意外花销(生病)
 };
+
+// 字典应用菜单配置中
+export const DATASETSFROM_MENU_LIST = [
+  {
+    key: 'all',
+    label: '全部',
+    icon: 'icon-all',
+  },
+  {
+    key: 'image',
+    label: '图片',
+    icon: 'icon-genghuanfengmian',
+  },
+  {
+    key: 'doc',
+    label: '云桌面',
+    icon: 'icon-yunzhuomian-shouye',
+  },
+  {
+    label: '浏览记录',
+    key: 'liulanliang',
+    icon: 'icon-liulanliang',
+  },
+  {
+    key: 'gongju',
+    label: '工具',
+    icon: 'icon-gongju',
+  },
+];

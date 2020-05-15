@@ -14,9 +14,43 @@
 
 .top {
   padding: 20px;
+
+  .title {
+    color: rgba(0, 0, 0, .45);
+  }
+
+  .desc {
+    color: rgba(0, 0, 0, .85);
+  }
 }
 
 .bottom {
-  padding: 20px;
+  padding: 10px 20px;
   border-top: 1px dashed #f2f5fc;
+
+  display: flex;
+  align-items: center;
+
+  .value {
+    color: rgba(0, 0, 0, .85);
+    flex: 1;
+  }
+
+  .tools {
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    font-size: 18px;
+    color: rgba(0, 0, 0, .85);
+
+    .icon-edit {
+      color: #40a9ff;
+    }
+
+    .icon-delete {
+      padding-left: 10;
+      color: #ff4d4f;
+    }
+  }
 }

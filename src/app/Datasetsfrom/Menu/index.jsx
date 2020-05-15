@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { MENU_LIST } from '../consts';
 import { useSelector, useDispatch } from 'react-redux';
+import { MENU_LIST, MODAL_CODE_DATASETSFROM_EDITOR } from '../consts';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -16,9 +16,23 @@ const useStateHook = () => {
       menu: { selectedKey },
       type: 'datasetsfrom/setMenu',
     });
+
+    dispatch({
+      type: 'datasetsfrom/getDatasetsfroms',
+      search: { code: selectedKey },
+    });
   };
 
-  return { selectedKey, onToggleMenu };
+  // 添加
+  const onAdd = () => {
+    dispatch({
+      title: '新增字典',
+      type: 'modal/openModal',
+      code: MODAL_CODE_DATASETSFROM_EDITOR,
+    });
+  };
+
+  return { selectedKey, onToggleMenu, onAdd };
 };
 
 export default () => {
@@ -26,17 +40,22 @@ export default () => {
 
   return (
     <div className={scss.menu}>
-      {MENU_LIST.map(v => (
-        <div
-          key={v.key}
-          onClick={state.onToggleMenu.bind(null, v)}
-          className={classNames(scss['menu-item'], {
-            [scss['menu-item-action']]: v.key === state.selectedKey,
-          })}>
-          <Icon type={v.icon}/>
-          {v.label}
-        </div>
-      ))}
+      <div className={scss['menu-body']}>
+        {MENU_LIST.map(v => (
+          <div
+            key={v.key}
+            onClick={state.onToggleMenu.bind(null, v)}
+            className={classNames(scss['menu-item'], {
+              [scss['menu-item-action']]: v.key === state.selectedKey,
+            })}>
+            <Icon type={v.icon}/>
+            {v.label}
+          </div>
+        ))}
+      </div>
+      <div className={scss['menu-add']} onClick={state.onAdd}>
+        <Icon type="icon-xinzeng"/>
+      </div>
     </div>
   );
 };

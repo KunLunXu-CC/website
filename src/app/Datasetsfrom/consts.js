@@ -26,4 +26,5 @@ export const MENU_LIST = [
   },
 ];
 
-export const space = {};
+// 编辑弹窗 code
+export const MODAL_CODE_DATASETSFROM_EDITOR = 'MODAL_CODE_DATASETSFROM_EDITOR';
