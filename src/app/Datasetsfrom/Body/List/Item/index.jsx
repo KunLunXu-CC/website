@@ -1,6 +1,8 @@
 import React from 'react';
 import scss from './index.module.scss';
+
 import { Icon } from 'qyrc';
+import { Popconfirm } from 'antd';
 
 export default props => (
   <div className={scss.item}>
@@ -22,11 +24,16 @@ export default props => (
           onClick={props.onEdit}
           className={scss['icon-edit']}
         />
-        <Icon
-          type="icon-shanchu"
-          onClick={props.onDelete}
-          className={scss['icon-delete']}
-        />
+        <Popconfirm
+          okText="是"
+          cancelText="否"
+          title="确实删除该字典？"
+          onConfirm={props.onDelete}>
+          <Icon
+            type="icon-shanchu"
+            className={scss['icon-delete']}
+          />
+        </Popconfirm>
       </div>
     </div>
   </div>

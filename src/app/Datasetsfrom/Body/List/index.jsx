@@ -29,8 +29,11 @@ const useStateHook = () => {
   };
 
   // 编辑
-  const onDelete = data => {
-
+  const onDelete = ({ id }) => {
+    dispatch({
+      id,
+      type: 'datasetsfrom/removeDatasetsfrom',
+    });
   };
 
   return { datasetsfroms, onEdit, onDelete };
