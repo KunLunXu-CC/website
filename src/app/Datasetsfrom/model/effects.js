@@ -1,7 +1,6 @@
 import * as services from './services';
 
 import { message } from '@utils';
-import { MENU_LIST } from '../consts';
 import { APP_CODE } from '@config/consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 
@@ -18,8 +17,12 @@ const createDatasetsfrom = function * ({ body }) {
   });
 
   const currentDatasetsfroms = yield select(
-    state => state.datasetsfrom.datasetsfroms
+    state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
+      ... total,
+      ... ele,
+    ]), [])
   );
+
   yield put({
     type: 'datasetsfrom/setDatasetsfroms',
     datasetsfroms: [... currentDatasetsfroms, ... change],
@@ -47,8 +50,12 @@ const updateDatasetsfrom = function * ({ body, id }) {
   });
 
   const currentDatasetsfroms = yield select(
-    state => state.datasetsfrom.datasetsfroms
+    state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
+      ... total,
+      ... ele,
+    ]), [])
   );
+
   yield put({
     type: 'datasetsfrom/setDatasetsfroms',
     datasetsfroms: _.uniqBy([... change, ... currentDatasetsfroms], 'id'),
@@ -74,7 +81,10 @@ const removeDatasetsfrom = function * ({ id }) {
   });
 
   const currentDatasetsfroms = yield select(
-    state => state.datasetsfrom.datasetsfroms
+    state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
+      ... total,
+      ... ele,
+    ]), [])
   );
 
   yield put({
@@ -91,36 +101,9 @@ const removeDatasetsfrom = function * ({ id }) {
   });
 };
 
-
-/**
- * 获取字典
- *
- * @return {void 0}
- */
-const getDatasetsfroms = function * ({ search }) {
-  const { selectedKey } = yield select(
-    state => state.datasetsfrom.menu
-  );
-  const code = search ?. code ?? selectedKey;
-
-  const { list: datasetsfroms } = yield call(services.getDatasetsfroms, {
-    search: {
-      ... search,
-      code: code === MENU_LIST[0].key ? void 0 : code,
-    },
-    spin: APP_CODE.DATASETSFROM,
-  });
-
-  yield put({
-    datasetsfroms,
-    type: 'datasetsfrom/setDatasetsfroms',
-  });
-};
-
 // 导出
 export default function * () {
-  yield takeEvery('datasetsfrom/createDatasetsfrom', createDatasetsfrom);
-  yield takeEvery('datasetsfrom/getDatasetsfroms', getDatasetsfroms);
-  yield takeEvery('datasetsfrom/updateDatasetsfrom', updateDatasetsfrom);
-  yield takeEvery('datasetsfrom/removeDatasetsfrom', removeDatasetsfrom);
+  yield takeEvery('datasetsfromManage/createDatasetsfrom', createDatasetsfrom);
+  yield takeEvery('datasetsfromManage/updateDatasetsfrom', updateDatasetsfrom);
+  yield takeEvery('datasetsfromManage/removeDatasetsfrom', removeDatasetsfrom);
 }

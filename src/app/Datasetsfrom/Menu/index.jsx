@@ -8,18 +8,15 @@ import { MENU_LIST, MODAL_CODE_DATASETSFROM_EDITOR } from '../consts';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const { selectedKey } = useSelector(state => state.datasetsfrom.menu);
+  const { selectedKey } = useSelector(
+    state => state.datasetsfromManage.menu
+  );
 
   // 切换菜单
   const onToggleMenu = ({ key: selectedKey }) => {
     dispatch({
       menu: { selectedKey },
-      type: 'datasetsfrom/setMenu',
-    });
-
-    dispatch({
-      type: 'datasetsfrom/getDatasetsfroms',
-      search: { code: selectedKey },
+      type: 'datasetsfromManage/setMenu',
     });
   };
 

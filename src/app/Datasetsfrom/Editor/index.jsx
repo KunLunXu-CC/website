@@ -37,8 +37,8 @@ const useStateHook = () => {
       id: modal.data ?. id,
       code: MODAL_CODE_DATASETSFROM_EDITOR,
       type: modal.data
-        ? 'datasetsfrom/updateDatasetsfrom'
-        : 'datasetsfrom/createDatasetsfrom',
+        ? 'datasetsfromManage/updateDatasetsfrom'
+        : 'datasetsfromManage/createDatasetsfrom',
     });
     onCancel();
   };
