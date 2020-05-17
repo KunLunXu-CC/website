@@ -2,11 +2,6 @@
   flex: 1;
   padding: 0 20px 20px 20px;
 
-  .row {
-    display: flex;
-    justify-content: space-between;
-  }
-
   // 滚动条设置
   &:hover {
     :global {
@@ -23,4 +18,9 @@
       }
     }
   }
+}
+
+.body {
+  display: flex;
+  justify-content: space-between;
 }

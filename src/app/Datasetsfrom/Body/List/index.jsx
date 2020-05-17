@@ -44,18 +44,16 @@ export default () => {
 
   return (
     <Scroll className={scss.list}>
-      {_.chunk(state.datasetsfroms, 3).map((children, index) => (
-        <div key={index} className={scss.row}>
-          {children.map((v, key) => (
-            <Item
-              data={v}
-              key={key}
-              onEdit={state.onEdit.bind(null, v)}
-              onDelete={state.onDelete.bind(null, v)}
-            />
-          ))}
-        </div>
-      ))}
+      <div className={scss.body}>
+        {state.datasetsfroms.map((v, key) => (
+          <Item
+            data={v}
+            key={key}
+            onEdit={state.onEdit.bind(null, v)}
+            onDelete={state.onDelete.bind(null, v)}
+          />
+        ))}
+      </div>
     </Scroll>
   );
 };

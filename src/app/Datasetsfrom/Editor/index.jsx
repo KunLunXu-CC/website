@@ -61,19 +61,19 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <Modal
-      width={600}
-      okText="确定"
-      destroyOnClose
-      closable={false}
-      cancelText="取消"
-      onOk={state.onOk}
-      getContainer={false}
-      className={scss.modal}
-      visible={!!state.modal}
-      onCancel={state.onCancel}
-      title={state.modal ?. title}>
-      <Form form={state.form} labelCol={{ span: 3 }}>
+    <Form form={state.form} labelCol={{ span: 3 }}>
+      <Modal
+        width={600}
+        okText="确定"
+        destroyOnClose
+        closable={false}
+        cancelText="取消"
+        onOk={state.onOk}
+        getContainer={false}
+        className={scss.modal}
+        visible={!!state.modal}
+        onCancel={state.onCancel}
+        title={state.modal ?. title}>
         <Form.Item
           label="名称"
           name="name"
@@ -95,7 +95,7 @@ export default () => {
         <Form.Item label="描述" name="desc">
           <Input.TextArea rows={4} placeholder="字典描述"/>
         </Form.Item>
-      </Form>
-    </Modal>
+      </Modal>
+    </Form>
   );
 };
