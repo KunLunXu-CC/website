@@ -1,12 +1,7 @@
 import React, {
   useMemo,
-  useState,
-  useEffect,
 } from 'react';
 import scss from './index.module.scss';
-
-import { useSelector } from 'react-redux';
-import { DIARY_EDITOR_DIARY } from '../../../../consts';
 
 import {
   Col,
@@ -14,65 +9,45 @@ import {
   Form,
   Select,
 } from 'antd';
-import { FITNESS_TYPE, FITNESS_PLACE } from '@config/consts';
 import { Icon } from 'qyrc';
+import { useSelector } from 'react-redux';
+import { DATASETSFROM_CODE } from '@config/consts';
 
 const useStateHook = props => {
-  const [showPlaceField, setShowPlaceField] = useState(false);
-
-  // 弹窗
-  const modal = useSelector(state => state.modal[DIARY_EDITOR_DIARY]);
+  const { fitnessTypes, fitnessPlaces } = useSelector(state => ({
+    fitnessTypes: state.datasetsfrom[DATASETSFROM_CODE.FITNESS_TYPE.VALUE],
+    fitnessPlaces: state.datasetsfrom[DATASETSFROM_CODE.FITNESS_PLACE.VALUE],
+  }));
 
   // 类型下拉项
   const typeOptions = useMemo(() => (
-    Object.values(FITNESS_TYPE).map(V => (
-      <Select.Option value={V.VALUE} key={V.VALUE}>
-        {V.DESC}
+    (fitnessTypes || []).map(v => (
+      <Select.Option value={v.value} key={v.value}>
+        {v.name}
       </Select.Option>
     ))
-  ), []);
+  ), [fitnessTypes]);
 
   // 训练部位下拉项
   const placeOptions = useMemo(() => (
-    Object.values(FITNESS_PLACE).map(V => (
-      <Select.Option value={V.VALUE} key={V.VALUE}>
-        {V.DESC}
+    (fitnessPlaces || []).map(v => (
+      <Select.Option value={v.value} key={v.value}>
+        {v.name}
       </Select.Option>
     ))
-  ), []);
-
-  // 是否显示 place 字段
-  const resetShowPlaceField = type => {
-    const currentType = _.isNumber(type)
-      ? type
-      : props.form.getFieldValue(['fitness', props.field.fieldKey, 'type']);
-    setShowPlaceField(currentType === FITNESS_TYPE.ANAEROBIC.VALUE);
-  };
+  ), [fitnessPlaces]);
 
   // type 修改
-  const onTypeChange = type => {
+  const onTypeChange = () => {
     const fitness = props.form.getFieldValue(['fitness']);
-    fitness[props.field.fieldKey].project = void 0;
     fitness[props.field.fieldKey].place = void 0;
     props.form.setFieldsValue({ fitness });
-    resetShowPlaceField(type);
   };
-
-  useEffect(() => {
-    if (modal && _.get(modal, 'diary.id')) {
-      const type = _.get(
-        modal,
-        `diary.fitness[${props.field.fieldKey}].type`
-      );
-      resetShowPlaceField(type);
-    }
-  }, [modal]);
 
   return {
     typeOptions,
     placeOptions,
     onTypeChange,
-    showPlaceField,
   };
 };
 
@@ -84,7 +59,7 @@ export default props => {
     <Row className={scss.row}>
       <Col span={22} >
         <Row gutter={16}>
-          <Col span={8}>
+          <Col span={11}>
             <Form.Item
               {... field}
               label="类型"
@@ -103,26 +78,24 @@ export default props => {
               </Select>
             </Form.Item>
           </Col>
-          {state.showPlaceField ?
-            <Col span={8}>
-              <Form.Item
-                {... field}
-                label="部位"
-                rules={[{
-                  required: true,
-                  message: '请选择训练部位!',
-                }]}
-                name={[field.name, 'place']}
-                className={scss['form-item']}
-                fieldKey={[field.fieldKey, 'place']}>
-                <Select
-                  placeholder="训练部位"
-                  style={{ width: '100%' }}>
-                  {state.placeOptions}
-                </Select>
-              </Form.Item>
-            </Col> : null
-          }
+          <Col span={11}>
+            <Form.Item
+              {... field}
+              label="部位"
+              rules={[{
+                required: true,
+                message: '请选择训练部位!',
+              }]}
+              name={[field.name, 'place']}
+              className={scss['form-item']}
+              fieldKey={[field.fieldKey, 'place']}>
+              <Select
+                placeholder="训练部位"
+                style={{ width: '100%' }}>
+                {state.placeOptions}
+              </Select>
+            </Form.Item>
+          </Col>
         </Row>
       </Col>
       <Col
