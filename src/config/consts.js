@@ -84,18 +84,3 @@ export const FITNESS_FEEL = {
   COMMONLY: { VALUE: 2, DESC: '一般' },
   GOOD_GRADE: { VALUE: 3, DESC: '极好' },
 };
-
-
-// 饮食类型
-export const DIET_TYPE = {
-  BREAKFAST: { VALUE: 0, DESC: '早餐' },
-  AFTER_BREAKFAST: { VALUE: 1, DESC: '上午加餐' },
-
-  LUNCH: { VALUE: 2, DESC: '午餐' },
-  AFTER_LUNCH: { VALUE: 3, DESC: '下午加餐' },
-
-  DINNER: { VALUE: 4, DESC: '晚餐' },
-  AFTER_DINNER: { VALUE: 5, DESC: '晚上加餐(夜宵)' },
-
-  AFTER_FITNESS: { VALUE: 6, DESC: '健身加餐(健身之后)' },
-};

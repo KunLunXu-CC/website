@@ -4,18 +4,23 @@ import React, {
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { DIET_TYPE } from '@config/consts';
+import { useSelector } from 'react-redux';
+import { DATASETSFROM_CODE } from '@config/consts';
 import { Row, Col, Select, Input, Form } from 'antd';
 
 const useStateHook = () => {
+  const dietTags = useSelector(
+    state => state.datasetsfrom[DATASETSFROM_CODE.DIET_TAG.VALUE] || []
+  );
+
   // 类型下拉项
   const typeOptions = useMemo(() => (
-    Object.values(DIET_TYPE).map(V => (
-      <Select.Option value={V.VALUE} key={V.VALUE}>
-        {V.DESC}
+    dietTags.map(v => (
+      <Select.Option value={v.value} key={v.value}>
+        {v.name}
       </Select.Option>
     ))
-  ), []);
+  ), [dietTags]);
 
   return { typeOptions };
 };
