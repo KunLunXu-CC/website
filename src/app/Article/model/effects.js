@@ -1,7 +1,8 @@
 import * as services from './services';
 
+import { TAG_ALL } from '../consts';
 import { put, call, takeEvery } from 'redux-saga/effects';
-import { APP_CODE, ARTICLE_STATUS, TAG_ALL } from '@config/consts';
+import { APP_CODE, ARTICLE_STATUS } from '@config/consts';
 
 /**
  * 获取菜单: 只查有已发布文章的 tag

@@ -1,4 +1,4 @@
-import { TAG_ALL } from '@config/consts';
+import { TAG_ALL } from '../consts';
 import { initState } from './index.model';
 
 /**

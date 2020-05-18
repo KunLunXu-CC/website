@@ -1,7 +1,7 @@
 import effects from './effects';
 import * as reducers from './reducers';
 
-import { TAG_ALL } from '@config/consts';
+import { TAG_ALL } from '../consts';
 
 export const initState = {
   menus: [],

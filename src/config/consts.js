@@ -36,13 +36,6 @@ export const PHOTO_TYPE = {
   AVATAR: { VALUE: 4, DESC: '头像' },           // 头像
 };
 
-// tag 默认状态(所有)
-export const TAG_ALL = {
-  id: 'all',
-  name: '全部',
-  icon: 'icon-all',
-};
-
 // 字典类型
 export const DATASETSFROM_CODE = {
   BILL_TAG: { VALUE: 1, DESC: '账单(标签)', icon: 'icon-dingdanjine' },
