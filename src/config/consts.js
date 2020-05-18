@@ -43,24 +43,25 @@ export const TAG_ALL = {
   icon: 'icon-all',
 };
 
-// 饮食类型
-export const DIET_TYPE = {
-  BREAKFAST: { VALUE: 0, DESC: '早餐' },
-  AFTER_BREAKFAST: { VALUE: 1, DESC: '上午加餐' },
-
-  LUNCH: { VALUE: 2, DESC: '午餐' },
-  AFTER_LUNCH: { VALUE: 3, DESC: '下午加餐' },
-
-  DINNER: { VALUE: 4, DESC: '晚餐' },
-  AFTER_DINNER: { VALUE: 5, DESC: '晚上加餐(夜宵)' },
-
-  AFTER_FITNESS: { VALUE: 6, DESC: '健身加餐(健身之后)' },
+// 字典类型
+export const DATASETSFROM_CODE = {
+  BILL_TAG: { VALUE: 1, DESC: '账单(标签)', icon: 'icon-dingdanjine' },
+  DIET_TAG: { VALUE: 2, DESC: '饮食(标签)', icon: 'icon-yinshi' },
+  FITNESS_PLACE: { VALUE: 3, DESC: '健身部位', icon: 'icon-buwei' },
+  FITNESS_TYPE: { VALUE: 4, DESC: '健身类型', icon: 'icon-leixing' },
 };
 
-// 健身运动类型
-export const FITNESS_TYPE = {
-  AEROBIC: { VALUE: 0, DESC: '有氧' },    // 有氧
-  ANAEROBIC: { VALUE: 1, DESC: '无氧' },  // 无氧
+// 统计跨度
+export const STATS_SAPN = {
+  DAY: { VALUE: 'day', DESC: '天' },      // 按天
+  WEEK: { VALUE: 'week', DESC: '周' },    // 按周
+  MONTH: { VALUE: 'month', DESC: '月' },  // 按月
+  YEAR: { VALUE: 'year', DESC: '年' },    // 按年
+};
+
+// 账单标签
+export const BILL_TAG = {
+
 };
 
 // 健身部位
@@ -75,6 +76,12 @@ export const FITNESS_PLACE = {
   SMALL_ARM: { VALUE: 7, DESC: '小臂' },
 };
 
+// 健身运动类型
+export const FITNESS_TYPE = {
+  AEROBIC: { VALUE: 0, DESC: '有氧' },    // 有氧
+  ANAEROBIC: { VALUE: 1, DESC: '无氧' },  // 无氧
+};
+
 // 健身感受
 export const FITNESS_FEEL = {
   VERY_BAD: { VALUE: 0, DESC: '很差' },
@@ -83,25 +90,17 @@ export const FITNESS_FEEL = {
   GOOD_GRADE: { VALUE: 3, DESC: '极好' },
 };
 
-// 统计跨度
-export const STATS_SAPN = {
-  DAY: { VALUE: 'day', DESC: '天' },      // 按天
-  WEEK: { VALUE: 'week', DESC: '周' },    // 按周
-  MONTH: { VALUE: 'month', DESC: '月' },  // 按月
-  YEAR: { VALUE: 'year', DESC: '年' },    // 按年
-};
 
-// 账单标签
-export const BILL_TAG = {
-  THREE_MEALS: { VALUE: 1, DESC: '三餐' },    // 早中晚三餐
-  MEAL_ADDITION: { VALUE: 2, DESC: '加餐' },  // 零食、夜宵
-  DINNER_PARTY: { VALUE: 3, DESC: '聚餐' },   // 聚餐
-  FRUITS: { VALUE: 4, DESC: '水果' },         // 水果
-  NECESSITY: { VALUE: 5, DESC: '生活必需品' },       // 生活必需品(牙膏、洗发水等等系列)
-  FIXED_EXPENDITURE: { VALUE: 6, DESC: '固定支出' }, // 话费、房租、服务器、视频会员
-  APPAREL_WEAR: { VALUE: 7, DESC: '服装穿戴' }, // 平时穿的衣服鞋子等
-  FITNESS: { VALUE: 8, DESC: '健身' },         // 运动相关的: 健身卡、补剂、护具
-  LARGE_SIZED: { VALUE: 9, DESC: '大件' },     // 大件: 电器、手机、电脑等
+// 饮食类型
+export const DIET_TYPE = {
+  BREAKFAST: { VALUE: 0, DESC: '早餐' },
+  AFTER_BREAKFAST: { VALUE: 1, DESC: '上午加餐' },
 
-  ACCIDENT: { VALUE: 10, DESC: '意外' },        // 意外花销(生病)
+  LUNCH: { VALUE: 2, DESC: '午餐' },
+  AFTER_LUNCH: { VALUE: 3, DESC: '下午加餐' },
+
+  DINNER: { VALUE: 4, DESC: '晚餐' },
+  AFTER_DINNER: { VALUE: 5, DESC: '晚上加餐(夜宵)' },
+
+  AFTER_FITNESS: { VALUE: 6, DESC: '健身加餐(健身之后)' },
 };

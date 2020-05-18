@@ -1,14 +1,15 @@
 import React from 'react';
 import scss from './index.module.scss';
 
+import { DATASETSFROM_CODE } from '@config/consts';
 import { useSelector, useDispatch } from 'react-redux';
+import { MODAL_CODE_DATASETSFROM_EDITOR } from '../consts';
 import { Form, Modal, Input, InputNumber, Select } from 'antd';
-import { MODAL_CODE_DATASETSFROM_EDITOR, MENU_LIST } from '../consts';
 
 // 类型下拉选项
-const CODE_OPTIONS = MENU_LIST.filter(v => v.key !== 'all').map(v => (
-  <Select.Option key={v.key} value={v.key}>
-    {v.label}
+const CODE_OPTIONS = Object.values(DATASETSFROM_CODE).map(v => (
+  <Select.Option key={v.VALUE} value={v.VALUE}>
+    {v.DESC}
   </Select.Option>
 ));
 
