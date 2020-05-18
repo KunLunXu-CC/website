@@ -59,11 +59,6 @@ export const STATS_SAPN = {
   YEAR: { VALUE: 'year', DESC: '年' },    // 按年
 };
 
-// 账单标签
-export const BILL_TAG = {
-
-};
-
 // 健身部位
 export const FITNESS_PLACE = {
   BACK: { VALUE: 0, DESC: '背' },
