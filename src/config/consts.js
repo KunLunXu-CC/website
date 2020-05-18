@@ -58,29 +58,3 @@ export const STATS_SAPN = {
   MONTH: { VALUE: 'month', DESC: '月' },  // 按月
   YEAR: { VALUE: 'year', DESC: '年' },    // 按年
 };
-
-// 健身部位
-export const FITNESS_PLACE = {
-  BACK: { VALUE: 0, DESC: '背' },
-  CHEST: { VALUE: 1, DESC: '胸' },
-  SHOULDER: { VALUE: 2, DESC: '肩' },
-  TWO_HUMERUS: { VALUE: 3, DESC: '肱二头' },
-  THREE_HUMERUS: { VALUE: 4, DESC: '肱三头' },
-  ABDOMEN: { VALUE: 5, DESC: '腹' },
-  LEG: { VALUE: 6, DESC: '腿' },
-  SMALL_ARM: { VALUE: 7, DESC: '小臂' },
-};
-
-// 健身运动类型
-export const FITNESS_TYPE = {
-  AEROBIC: { VALUE: 0, DESC: '有氧' },    // 有氧
-  ANAEROBIC: { VALUE: 1, DESC: '无氧' },  // 无氧
-};
-
-// 健身感受
-export const FITNESS_FEEL = {
-  VERY_BAD: { VALUE: 0, DESC: '很差' },
-  DIFFERENCE: { VALUE: 1, DESC: '差' },
-  COMMONLY: { VALUE: 2, DESC: '一般' },
-  GOOD_GRADE: { VALUE: 3, DESC: '极好' },
-};
