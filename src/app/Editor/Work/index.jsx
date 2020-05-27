@@ -6,12 +6,18 @@ import scss from './index.module.scss';
 import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
+import { APP_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const works = useSelector(state => _.get(state, 'editor.works'));
+  const { works, showWork } = useSelector(state => ({
+    works: state.editor ?. works,
+    showWork: state.app.opens.find(
+      v => v.code === APP_CODE.EDITOR && !v.isMin
+    ),
+  }));
 
   // 当前选中项
   const selected = useMemo(() => (
@@ -26,14 +32,14 @@ const useStateHook = () => {
     });
   };
 
-  return { onTabsChange, selected, works };
+  return { onTabsChange, selected, works, showWork };
 };
 
 export default () => {
   const state = useStateHook();
   return (
     <div className={scss.work}>
-      {state.works.length > 0 ?
+      {state.works.length > 0 && state.showWork ?
         <Tabs
           type="card"
           activeKey={state.selected}
