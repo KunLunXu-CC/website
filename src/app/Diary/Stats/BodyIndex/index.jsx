@@ -15,6 +15,17 @@ const DEFAULT_DATE = [
   moment(),
 ];
 
+// 获取区间内所有时间
+const getFullDate = ([start, end]) => {
+  const res = [];
+  const current = start.clone();
+  while (moment(current).isBefore(end)) {
+    current.add(1, 'day');
+    res.push(current.format('YYYY-MM-DD'));
+  }
+  return res;
+};
+
 const useStateHook = () => {
   const dispatch = useDispatch();
 
@@ -22,11 +33,7 @@ const useStateHook = () => {
   const search = useCallback(date => {
     dispatch({
       type: 'diary/getStatsBodyIndex',
-      search: {
-        names: date && date[0]
-          ? [date[0].format('YYYY-MM-DD'), date[1].format('YYYY-MM-DD')]
-          : void 0,
-      },
+      search: { names: getFullDate(date ?? DEFAULT_DATE) },
     });
   }, []);
 
