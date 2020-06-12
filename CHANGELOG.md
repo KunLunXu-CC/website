@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/qianyin925/blog_client/compare/v2.1.0...v2.2.0) (2020-06-12)
+
+
+### Features
+
+* 【client】【应用】首次启动位置随机、大小调整 ([48b0a12](https://github.com/qianyin925/blog_client/commit/48b0a12bcb7631ec03989db0a61f0d568198f00d))
+* 【client】【日记】布局修改 ([b8af905](https://github.com/qianyin925/blog_client/commit/b8af9054cabb695fc68c0dff1605b020998d97cb))
+* 【client】【日记】当未填写任何值时直接保存打开统计模块报错 ([b3819ae](https://github.com/qianyin925/blog_client/commit/b3819aec00c83052b20c9497f89f4eb06c956599))
+* 【client】【日记】移除账单结余字段 ([0d7a831](https://github.com/qianyin925/blog_client/commit/0d7a831e8c5a566e4df41a88c62a15d212534a45))
+* 【client】【日记】统计根据逻辑上的调整对交互做出相应调整 ([0990875](https://github.com/qianyin925/blog_client/commit/0990875e878e73ccb4e91911fff2d3cb3db46d50))
+* 【client】【日记】账单统计模块调整，并添加总支出收入结余的展示 ([6e7688e](https://github.com/qianyin925/blog_client/commit/6e7688ec6c8e3ee855aabe9c3ce5f2050d281cdf))
+* 【client】【日记】账单统计结余部分计算保留两位小数 ([cda1a32](https://github.com/qianyin925/blog_client/commit/cda1a32297fb18bb95a083efef379a627afca3d3))
+* 【client】【编辑器】tab 缩进改为 2 个空格 ([afae14a](https://github.com/qianyin925/blog_client/commit/afae14a27f685f5e3ea9f867eac404a7e0ca7c47))
+* 【client】【编辑器】创建文章时, 未填写任何内容点击桌面报错 ([e8e9408](https://github.com/qianyin925/blog_client/commit/e8e94083af232b89229918451834aa9fa461d274))
+* 【client】【编辑器】当打开一篇文章后， 最小化窗口页面崩溃 ([aecc3ce](https://github.com/qianyin925/blog_client/commit/aecc3ce5263f09d0fc968ebb7309c6fda1e3deaf))
+* 【client】【编辑器】添加 message 提示 ([4390388](https://github.com/qianyin925/blog_client/commit/4390388051e8ecde9fcb55db632e7aa725434998))
+* 【client】常量调整 ([f6ac72c](https://github.com/qianyin925/blog_client/commit/f6ac72c847208948cf13ceed332eda3226332fd6))
+* 【client】支出类别添加 ([ad6ed5b](https://github.com/qianyin925/blog_client/commit/ad6ed5b279b3ef3a13a030cff0e0141cd6827d52))
+* 【client】支出类别添加 ([bd2e249](https://github.com/qianyin925/blog_client/commit/bd2e2492cd153d94fbde51b6ec0e40939fc8b4de))
+* 【client】数字字典应用绘制 ([87c703d](https://github.com/qianyin925/blog_client/commit/87c703db16810805ccd12518ea5f1374896550fa))
+* 【client】添加数据字典应用 ([bafae29](https://github.com/qianyin925/blog_client/commit/bafae29bb1d1e302b9b9a74361aa73d3d5b8232a))
+* 【client】编辑器插入图片错误 ([7f7ebf1](https://github.com/qianyin925/blog_client/commit/7f7ebf1b9c47d3a984e9272c9109766aae47b633))
+* 【server】webhook 测试 ([4e8635d](https://github.com/qianyin925/blog_client/commit/4e8635d03e6d5eae8d2420279997e6d389157d7f))
+* eslint 添加 ES6 环境 ([0448e3f](https://github.com/qianyin925/blog_client/commit/0448e3f671cc21bb465a402c02687f2a9afe93da))
+
+
+### Bug Fixes
+
+* 【client】【日记】统计模块、身体成分曲线切换时间查询不到数据 ([c714edc](https://github.com/qianyin925/blog_client/commit/c714edc9a4724ecf161c5125d98e1ff7faf7d89e))
+
 ## [2.1.0](https://github.com/qianyin925/blog_client/compare/v2.0.0...v2.1.0) (2020-03-26)
 
 
