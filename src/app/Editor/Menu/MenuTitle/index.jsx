@@ -106,32 +106,40 @@ const useStateHook = props => {
     handler[key]();
   };
 
+  // 编辑标签
+  const onEditorTag = name => {
+    props.data.id === 'newTag'
+      ? dispatch({
+        type: 'editor/createTag',
+        body: { name, parent: props.data.parent },
+      })
+      : dispatch({
+        body: { name },
+        id: props.data.id,
+        type: 'editor/updateTag',
+      });
+  };
+
+  // 编辑文章
+  const onEditorArticle = name => {
+    props.data.id === 'newArticle'
+      ? dispatch({
+        type: 'editor/createArticle',
+        body: { name, tags: [props.data.tag] },
+      })
+      : dispatch({
+        body: { name },
+        id: props.data.id,
+        type: 'editor/updateArticle',
+      });
+  };
+
   // 编辑数据：根据 id 判断是编辑还是创建, 根据 type 值来判断是更新标签还是文章
   const onEditor = e => {
     const name = e.target.value;
-    if (props.data.type === 'tag') {
-      props.data.id === 'newTag'
-        ? dispatch({
-          type: 'editor/createTag',
-          body: { name, parent: props.data.parent },
-        })
-        : dispatch({
-          body: { name },
-          id: props.data.id,
-          type: 'editor/updateTag',
-        });
-    } else {
-      props.data.id === 'newArticle'
-        ? dispatch({
-          type: 'editor/createArticle',
-          body: { name, tags: [props.data.tag] },
-        })
-        : dispatch({
-          body: { name },
-          id: props.data.id,
-          type: 'editor/updateArticle',
-        });
-    }
+    props.data.type === 'tag'
+      ? onEditorTag(name)
+      : onEditorArticle(name);
   };
 
   // 每项前箭头小图标

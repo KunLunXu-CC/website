@@ -50,27 +50,32 @@ export const setMenu = (state, { menu }) => ({
  * @param {String} action.article 文章 ID
  * @return {Object} 更新后的状态
  */
-export const appendWorks = (state, { article }) => (
-  state.works.find(v => v.article === article)
-    ? {
-      ... state,
-      works: state.works.map(v => ({
-        ... v,
-        action: v.article === article,
-      })),
-    }
-    : {
-      ... state,
-      works: [
-        ... state.works.map(v => ({ ... v, action: false })),
-        {
-          article,
-          action: true,
-          change: false,
-        },
-      ],
-    }
-);
+export const appendWorks = (state, { article }) => {
+  if (!article) {
+    return state;
+  }
+  return (
+    state.works.find(v => v.article === article)
+      ? {
+        ... state,
+        works: state.works.map(v => ({
+          ... v,
+          action: v.article === article,
+        })),
+      }
+      : {
+        ... state,
+        works: [
+          ... state.works.map(v => ({ ... v, action: false })),
+          {
+            article,
+            action: true,
+            change: false,
+          },
+        ],
+      }
+  );
+};
 
 /**
  * 设置某个工作区

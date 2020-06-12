@@ -106,22 +106,25 @@ const createTag = function * ({ body }) {
   const currentTags = yield select(state => state.editor.tags);
   delete currentTags.newTag;
 
-  const { change } = yield call(services.createTags, {
-    body,
-    spin: APP_CODE.EDITOR,
-  });
+  const { change } = body.name
+    ? yield call(services.createTags, {
+      body,
+      spin: APP_CODE.EDITOR,
+    })
+    : { change: [] };
 
   yield put({
     tags: change.reduce((total, ele) => ({
       ... total,
       [ele.id]: ele,
-    }), currentTags),
+    }), { ... currentTags }),
     type: 'editor/setTags',
   });
 
   message({
     ... MESSAGE_CONFIG,
-    message: '成功创建标签!',
+    type: body.name ? 'success' : 'error',
+    message: body.name ? '成功创建标签!' : '名称不能为空!',
   });
 };
 
@@ -159,16 +162,18 @@ const createArticle = function * ({ body }) {
   const currentArticles = yield select(state => state.editor.articles);
   delete currentArticles.newArticle;
 
-  const { change } = yield call(services.createArticles, {
-    body,
-    spin: APP_CODE.EDITOR,
-  });
+  const { change } = body.name
+    ? yield call(services.createArticles, {
+      body,
+      spin: APP_CODE.EDITOR,
+    })
+    : { change: [] };
 
   yield put({
     articles: change.reduce((total, ele) => ({
       ... total,
       [ele.id]: ele,
-    }), currentArticles),
+    }), { ... currentArticles }),
     type: 'editor/setArticles',
   });
 
@@ -179,7 +184,8 @@ const createArticle = function * ({ body }) {
 
   message({
     ... MESSAGE_CONFIG,
-    message: '成功创建文章!',
+    type: body.name ? 'success' : 'error',
+    message: body.name ? '成功创建文章!' : '名称不能为空!',
   });
 };
 
