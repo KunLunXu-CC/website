@@ -25,7 +25,7 @@ export default {
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 8, left: 8 },
-      defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
+      defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 100 },
     },
   },
   article: {
@@ -37,7 +37,7 @@ export default {
       dragHeight: 40,
       toolPosition: { top: 16, left: 16 },
       toolClassName: 'article-modal-tool',
-      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
+      defaultParams: { width: 1220, height: 630, offsetX: 60, offsetY: 60 },
     },
   },
   diary: {
@@ -59,7 +59,7 @@ export default {
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 11, left: 11 },
-      defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
+      defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },
 };
