@@ -1,4 +1,17 @@
 .header {
-  height: 80px;
+  display: flex;
   background: #f6f6f6;
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+  &-item {
+    cursor: pointer;
+    font-size: 28px;
+    padding: 10px 20px;
+    color: rgba(0, 0, 0, 0.2);
+  }
 }

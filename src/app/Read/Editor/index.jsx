@@ -4,9 +4,10 @@ import { VariableContainer } from 'qyrc';
 
 export default () => (
   <VariableContainer
-    operationList={['right', 'top']}
     margin={{ top: 20 }}
-    constraintSize={{  }}>
+    operationList={['top']}
+    constraintSize={{ height: 100 }}
+    style={{ width: '100%', transform: 'translate(0px, 0px)' }}>
     <div className={scss.editor}>
 
     </div>
