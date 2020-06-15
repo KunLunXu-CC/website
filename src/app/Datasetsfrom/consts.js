@@ -8,7 +8,7 @@ export const MENU_LIST = [
   },
   ... Object.values(DATASETSFROM_CODE).map(v => ({
     key: v.VALUE,
-    icon: v.icon,
+    icon: v.ICON,
     label: v.DESC,
   })),
 ];

@@ -13,5 +13,9 @@
     font-size: 28px;
     padding: 10px 20px;
     color: rgba(0, 0, 0, 0.2);
+
+    &.active {
+      color: #00b1ff;
+    }
   }
 }

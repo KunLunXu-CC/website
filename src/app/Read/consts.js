@@ -1,24 +1,9 @@
+import { DATASETSFROM_CODE } from '@config/consts';
+
 export const MENU_LIST = [
-  {
-    title: '拾遗',
-    icon: 'icon-baocun',
-    key: 'note',
-  },
-  {
-    title: '代码块',
-    icon: 'icon-daimakuai',
-    key: 'snippets',
-  },
-  {
-    title: '面试题',
-    icon: 'icon-mianshitiku',
-    key: 'interview',
-  },
-  {
-    title: '算法',
-    icon: 'icon-suanfa',
-    key: 'algorithm',
-  },
+  DATASETSFROM_CODE.SNIPPETS_TAG,
+  DATASETSFROM_CODE.INTERVIEW_TAG,
+  DATASETSFROM_CODE.ALGORITHM_TAG,
 ];
 
 export const space = {};

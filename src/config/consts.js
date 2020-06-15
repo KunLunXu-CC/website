@@ -38,10 +38,14 @@ export const PHOTO_TYPE = {
 
 // 字典类型
 export const DATASETSFROM_CODE = {
-  BILL_TAG: { VALUE: 1, DESC: '账单(标签)', icon: 'icon-dingdanjine' },
-  DIET_TAG: { VALUE: 2, DESC: '饮食(标签)', icon: 'icon-yinshi' },
-  FITNESS_PLACE: { VALUE: 3, DESC: '健身部位', icon: 'icon-buwei' },
-  FITNESS_TYPE: { VALUE: 4, DESC: '健身类型', icon: 'icon-leixing' },
+  BILL_TAG: { VALUE: 1, DESC: '账单(标签)', ICON: 'icon-dingdanjine' },
+  DIET_TAG: { VALUE: 2, DESC: '饮食(标签)', ICON: 'icon-yinshi' },
+  FITNESS_PLACE: { VALUE: 3, DESC: '健身部位', ICON: 'icon-buwei' },
+  FITNESS_TYPE: { VALUE: 4, DESC: '健身类型', ICON: 'icon-leixing' },
+
+  SNIPPETS_TAG: { VALUE: 6, DESC: '代码块', ICON: 'icon-daimakuai' },
+  INTERVIEW_TAG: { VALUE: 7, DESC: '面试题', ICON: 'icon-mianshitiku' },
+  ALGORITHM_TAG: { VALUE: 8, DESC: '算法', ICON: 'icon-suanfa' },
 };
 
 // 统计跨度
