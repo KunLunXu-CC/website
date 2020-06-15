@@ -6,7 +6,10 @@ const initState = {
     firstActiveKey: null,  // 一级菜单 activeKey
     secondActiveKey: null,  // 二级菜单 activeKey
   },
-  editor: null,            // 待编辑数据(不进行数据的双向绑定)
+  editor: {
+    show: false,   // 是否开启
+    current: null, // 当前数据
+  },
 };
 
 export default {
