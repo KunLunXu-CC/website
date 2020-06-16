@@ -1,8 +1,8 @@
 import React from 'react';
 import scss from './index.module.scss';
 
-// import { useDispatch } from 'react-redux';
 import { VariableContainer, CodeEditor } from 'qyrc';
+import { useDispatch, useSelector } from 'react-redux';
 
 // 初始默认 options
 const OPTIONS = {
@@ -15,25 +15,35 @@ const OPTIONS = {
 };
 
 const useStateHook = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const editor = useSelector(state => state.read.editor);
+
 
   // 保存(ctr + s): 提交修改、发布
-  const onSave = async ({ value }) => {
-    console.log('----------->>>', value);
-    // dispatch({
-    //   content,
-    //   id: article.id,
-    //   type: 'editor/updateArticleContent',
-    // });
+  const onSave = async ({ value: content  }) => {
+    if (!content) {
+      return false;
+    }
+    dispatch({ type: 'read/onSave' });
   };
 
-  return { onSave };
+  const onChange = ({ value: content }) => {
+    dispatch({
+      type: 'read/setEditor',
+      editor: { current: {
+        ... editor.current,
+        content,
+      } },
+    });
+  };
+
+  return { onSave, editor, onChange };
 };
 
 export default () => {
   const state = useStateHook();
 
-  return (
+  return state.editor.show ? (
     <VariableContainer
       margin={{ top: 20 }}
       operationList={['top']}
@@ -43,8 +53,10 @@ export default () => {
         <CodeEditor
           options={OPTIONS}
           onSave={state.onSave}
+          onChange={state.onChange}
+          value={state.editor.current ?. content ?? ''}
         />
       </div>
     </VariableContainer>
-  );
+  ) : null;
 };

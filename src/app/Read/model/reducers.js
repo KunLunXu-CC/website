@@ -18,7 +18,7 @@ export const setMenu = (state, { menu }) => ({
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {Object} editor 需要修改的数据
+ * @param {Object} action.editor 需要修改的数据
  * @return {Object} 更新后的状态
  */
 export const setEditor = (state, { editor }) => ({
@@ -28,3 +28,23 @@ export const setEditor = (state, { editor }) => ({
     ... editor,
   },
 });
+
+/**
+ * 设备列表数据
+ * 1. reducer: action = { type: 'read/setListData' }
+ * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
+ *
+ * @param {Object} state 当前 state
+ * @param {Object[]} action.data 待更新数据
+ * @return {Object} 更新后的状态
+ */
+export const setListData = (state, { data }) => {
+  const key = state.menu.firstActiveKey;
+  return {
+    ... state,
+    listData: {
+      ... state.listData,
+      [key]: _.uniqBy([... data, ... state.listData[key]], 'id'),
+    },
+  };
+};

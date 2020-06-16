@@ -1,5 +1,6 @@
 import effects from './effects';
 import * as reducers from './reducers';
+import { DATASETSFROM_CODE } from '@config/consts';
 
 const initState = {
   menu: {
@@ -9,6 +10,11 @@ const initState = {
   editor: {
     show: false,   // 是否开启
     current: null, // 当前数据
+  },
+  listData: {
+    [DATASETSFROM_CODE.SNIPPETS_TAG.VALUE]: [],
+    [DATASETSFROM_CODE.INTERVIEW_TAG.VALUE]: [],
+    [DATASETSFROM_CODE.ALGORITHM_TAG.VALUE]: [],
   },
 };
 
