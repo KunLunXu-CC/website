@@ -128,7 +128,6 @@ const getListData = function * ({ append = false }) {
   const data = yield call(map[firstActiveKey], {
     search: { tags: [secondActiveKey] },
   });
-  console.log('---------------------', data);
   yield put({
     type: 'read/setListData',
     listData: {
