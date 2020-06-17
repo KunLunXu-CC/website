@@ -16,7 +16,10 @@ const useStateHook = () => {
     }
     dispatch({
       type: 'read/setEditor',
-      editor: { show: !editor.show },
+      editor: {
+        current: null,
+        show: !editor.show,
+      },
     });
   }, [editor.show]);
 
