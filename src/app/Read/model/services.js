@@ -92,6 +92,196 @@ export const createAlgorithm = async ({
   return _.get(res, 'data.data.createAlgorithms') || {};
 };
 
+// 修改片段
+export const updateSnippet = async ({
+  spin,
+  body,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { body, conds },
+      query: `
+        mutation(
+          $body: SnippetFields!,
+          $conds: SnippetSearch!
+        ){
+          updateSnippets(
+            body: $body,
+            conds: $conds,
+          ){
+            change {
+              id
+              tags
+              content
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.updateSnippets.change[0]') || {};
+};
+
+// 修改面试题
+export const updateInterview = async ({
+  spin,
+  body,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { body, conds },
+      query: `
+        mutation(
+          $body: InterviewFields!,
+          $conds: InterviewSearch!
+        ){
+          updateInterviews(
+            body: $body,
+            conds: $conds,
+          ){
+            change {
+              id
+              tags
+              content
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.updateInterviews.change[0]') || {};
+};
+
+
+// 修改算法题
+export const updateAlgorithm = async ({
+  spin,
+  body,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { body, conds },
+      query: `
+        mutation(
+          $body: AlgorithmFields!,
+          $conds: AlgorithmSearch!
+        ){
+          updateAlgorithms(
+            body: $body,
+            conds: $conds,
+          ){
+            change {
+              id
+              tags
+              content
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.updateAlgorithms.change[0]') || {};
+};
+
+// 修改片段
+export const removeSnippet = async ({
+  spin,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { conds },
+      query: `
+        mutation(
+          $conds: SnippetSearch!
+        ){
+          removeSnippets(
+            conds: $conds,
+          ){
+            change {
+              id
+              tags
+              content
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.removeSnippets.change[0]') || {};
+};
+
+// 修改面试题
+export const removeInterview = async ({
+  spin,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { conds },
+      query: `
+        mutation(
+          $conds: InterviewSearch!
+        ){
+          removeInterviews(
+            conds: $conds,
+          ){
+            change {
+              id
+              tags
+              content
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.removeInterviews.change[0]') || {};
+};
+
+// 修改算法题
+export const removeAlgorithm = async ({
+  spin,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { conds },
+      query: `
+        mutation(
+          $conds: AlgorithmSearch!
+        ){
+          removeAlgorithms(
+            conds: $conds,
+          ){
+            change {
+              id
+              tags
+              content
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.removeAlgorithms.change[0]') || {};
+};
+
 /**
  * 获取片段
  * @return {Objject[]} 返回查询到的列表数据

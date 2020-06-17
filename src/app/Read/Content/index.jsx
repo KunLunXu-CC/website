@@ -1,5 +1,8 @@
 import React from 'react';
+import Item from './Item';
 import scss from './index.module.scss';
+
+import { Scroll } from 'qyrc';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
@@ -30,11 +33,11 @@ export default () => {
   const state = useStateHook();
   return (
     <div className={scss.content}>
-      {state.data.map(v => (
-        <div key={v.id} className={scss.item}>
-          {v.content}
-        </div>
-      ))}
+      <Scroll className={scss.body}>
+        {state.data.map(v => (
+          <Item data={v} key={v.id}/>
+        ))}
+      </Scroll>
     </div>
   );
 };

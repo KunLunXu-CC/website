@@ -27,9 +27,11 @@ const toggleFirstActiveKey = function * ({
 const onCreate = function * () {
   const {
     content,
+    listData,
     firstActiveKey,
     secondActiveKey,
   } = yield select(state => ({
+    listData: state.read.listData,
     id: state.read.editor.current ?. id,
     content: state.read.editor.current ?. content,
     firstActiveKey: state.read.menu.firstActiveKey,
@@ -44,7 +46,50 @@ const onCreate = function * () {
   const { change } = yield call(map[firstActiveKey], {
     body: { content, tags: [secondActiveKey] },
   });
-  yield put({ type: 'read/setListData', data: change });
+  yield put({
+    type: 'read/setListData',
+    listData: {
+      ... listData,
+      [firstActiveKey]: [... listData[firstActiveKey], ... change],
+    },
+  });
+};
+
+/**
+ * 修改数据
+ * @return {void 0}
+ */
+const onUpdate = function * () {
+  const {
+    id,
+    content,
+    listData,
+    firstActiveKey,
+  } = yield select(state => ({
+    listData: state.read.listData,
+    id: state.read.editor.current ?. id,
+    content: state.read.editor.current ?. content,
+    firstActiveKey: state.read.menu.firstActiveKey,
+  }));
+
+  const map = {
+    [DATASETSFROM_CODE.SNIPPETS_TAG.VALUE]: services.updateSnippet,
+    [DATASETSFROM_CODE.INTERVIEW_TAG.VALUE]: services.updateInterview,
+    [DATASETSFROM_CODE.ALGORITHM_TAG.VALUE]: services.updateAlgorithm,
+  };
+  const change = yield call(map[firstActiveKey], {
+    conds: { id },
+    body: { content },
+  });
+  yield put({
+    type: 'read/setListData',
+    listData: {
+      ... listData,
+      [firstActiveKey]: listData[firstActiveKey].map(v => (
+        v.id === change.id ? change : v
+      )),
+    },
+  });
 };
 
 /**
@@ -53,8 +98,7 @@ const onCreate = function * () {
  */
 const onSave = function * () {
   const id = yield select(state => (state.read.editor.current ?. id));
-  !id && (yield onCreate());
-
+  yield (id ? onUpdate : onCreate)();
   yield put({
     type: 'read/setEditor',
     editor: { current: null },
@@ -64,9 +108,12 @@ const onSave = function * () {
 // 获取列表数据
 const getListData = function * () {
   const {
-    firstActiveKey,
-    secondActiveKey,
-  } = yield select(state => (state.read.menu));
+    menu: {
+      firstActiveKey,
+      secondActiveKey,
+    },
+    listData,
+  } = yield select(state => (state.read));
   if (!firstActiveKey || !secondActiveKey) {
     return false;
   }
@@ -76,14 +123,50 @@ const getListData = function * () {
     [DATASETSFROM_CODE.ALGORITHM_TAG.VALUE]: services.getAlgorithms,
   };
   const data = yield call(map[firstActiveKey], {
-    searcj: { ags: [secondActiveKey] },
+    search: { tags: [secondActiveKey] },
   });
-  console.log('--------------', data);
+  yield put({
+    type: 'read/setListData',
+    listData: {
+      ... listData,
+      [firstActiveKey]: [... listData[firstActiveKey], ... data],
+    },
+  });
+};
+
+// 删除数据
+const onDelete = function * ({ id }) {
+  const {
+    menu: {
+      firstActiveKey,
+      secondActiveKey,
+    },
+    listData,
+  } = yield select(state => (state.read));
+  if (!firstActiveKey || !secondActiveKey) {
+    return false;
+  }
+  const map = {
+    [DATASETSFROM_CODE.SNIPPETS_TAG.VALUE]: services.removeSnippet,
+    [DATASETSFROM_CODE.INTERVIEW_TAG.VALUE]: services.removeInterview,
+    [DATASETSFROM_CODE.ALGORITHM_TAG.VALUE]: services.removeAlgorithm,
+  };
+  const change = yield call(map[firstActiveKey], { conds: { id } });
+  yield put({
+    type: 'read/setListData',
+    listData: {
+      ... listData,
+      [firstActiveKey]: listData[firstActiveKey].filter(
+        v => v.id !== change.id
+      ),
+    },
+  });
 };
 
 // 导出
 export default function * () {
   yield takeEvery('read/toggleFirstActiveKey', toggleFirstActiveKey);
   yield takeEvery('read/getListData', getListData);
+  yield takeEvery('read/onDelete', onDelete);
   yield takeEvery('read/onSave', onSave);
 }

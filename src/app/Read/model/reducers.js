@@ -35,16 +35,10 @@ export const setEditor = (state, { editor }) => ({
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {Object[]} action.data 待更新数据
+ * @param {Object[]} action.listData 待更新数据
  * @return {Object} 更新后的状态
  */
-export const setListData = (state, { data }) => {
-  const key = state.menu.firstActiveKey;
-  return {
-    ... state,
-    listData: {
-      ... state.listData,
-      [key]: _.uniqBy([... data, ... state.listData[key]], 'id'),
-    },
-  };
-};
+export const setListData = (state, { listData }) => ({
+  ... state,
+  listData,
+});
