@@ -1,6 +1,7 @@
 import React from 'react';
 import scss from './index.module.scss';
 
+import { Popconfirm } from 'antd';
 import { Markdown, Icon } from 'qyrc';
 import { useDispatch } from 'react-redux';
 
@@ -41,10 +42,16 @@ export default props => {
         <div className={scss.tools}>
           <Icon
             type="icon-editor"
-            onClick={state.onEditor}/>
-          <Icon
-            type="icon-guanbi6"
-            onClick={state.onDelete} />
+            onClick={state.onEditor}
+          />
+          <Popconfirm
+            okText="是"
+            cancelText="否"
+            title="确认删除该数据?"
+            placement="bottomRight"
+            onConfirm={state.onDelete}>
+            <Icon type="icon-guanbi6" />
+          </Popconfirm>
         </div>
       </div>
       <div className={scss.body}>

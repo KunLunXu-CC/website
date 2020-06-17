@@ -105,8 +105,11 @@ const onSave = function * () {
   });
 };
 
-// 获取列表数据
-const getListData = function * () {
+/**
+ * 获取列表数据
+ * @param {Boolean} append 是否进行数据的追加
+ */
+const getListData = function * ({ append = false }) {
   const {
     menu: {
       firstActiveKey,
@@ -125,11 +128,15 @@ const getListData = function * () {
   const data = yield call(map[firstActiveKey], {
     search: { tags: [secondActiveKey] },
   });
+  console.log('---------------------', data);
   yield put({
     type: 'read/setListData',
     listData: {
       ... listData,
-      [firstActiveKey]: [... listData[firstActiveKey], ... data],
+      [firstActiveKey]: [
+        ... (append ? listData[firstActiveKey] : []),
+        ... data,
+      ],
     },
   });
 };

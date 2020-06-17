@@ -347,7 +347,7 @@ export const getAlgorithms = async ({ search, spin }) => {
       variables: { search },
       query: `
         query($search: AlgorithmSearch){
-          algorithm(search: $search){
+          algorithms(search: $search){
             list {
               id
               tags
@@ -357,5 +357,5 @@ export const getAlgorithms = async ({ search, spin }) => {
         }`,
     },
   });
-  return _.get(res, 'data.data.algorithm.list') || [];
+  return _.get(res, 'data.data.algorithms.list') || [];
 };
