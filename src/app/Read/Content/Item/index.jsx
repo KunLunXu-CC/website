@@ -37,7 +37,11 @@ export default props => {
     <div className={scss.item}>
       <div className={scss.header}>
         <div className={scss.title}>
-          这只是一个标题
+          {props.data.content
+            ?. match(/^#{1}\s+(?<title>.*)/)
+            ?. groups.title
+            ?? '---'
+          }
         </div>
         <div className={scss.tools}>
           <Icon
@@ -56,7 +60,7 @@ export default props => {
       </div>
       <div className={scss.body}>
         <Markdown>
-          {props.data.content}
+          {props.data.content ?. replace(/^#{1}\s+(?<title>.*)/, '')}
         </Markdown>
       </div>
     </div>
