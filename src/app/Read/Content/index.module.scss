@@ -1,0 +1,25 @@
+.content {
+  flex: 1;
+  position: relative;
+  background: #eff3f5;
+  border-bottom: 1px solid #e4e5e7;
+}
+
+.body {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+
+  :global {
+    // 滚动条设置
+    .qyrc-sroll-bar {
+      opacity: 0.5;
+      right: 0;
+      .qyrc-sroll-bar-slider {
+        width: 4px;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.menu {
+  width: 150px;
+  padding: 10px 0;
+  border-right: 1px solid #e4e5e7;
+
+  &-item {
+    color: rgba($color: #000, $alpha: 0.8);
+    cursor: pointer;
+    padding: 10px 20px;
+
+    &.active {
+      background: rgba($color: #000, $alpha: 0.03);
+    }
+  }
+}

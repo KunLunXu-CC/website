@@ -1,0 +1,32 @@
+.item {
+  overflow: hidden;
+  border-radius: 8px;
+  background: #ffffff;
+  margin: 20px 20px 40px 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 20px;
+  border: 1px solid #eff3f5;
+
+  .title {
+    flex: 1;
+    font-size: 20px;
+    color: #2c3e50;
+    font-weight: bold;
+  }
+
+  .tools {
+    font-size: 18px;
+    color: rgba($color: #000, $alpha: 0.3);
+
+    > * {
+      cursor: pointer;
+      margin-left: 20px;
+    }
+  }
+}

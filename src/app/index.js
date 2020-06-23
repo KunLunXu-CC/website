@@ -1,7 +1,8 @@
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
-import Article from './Article';
+// import Article from './Article';
+import Read from './Read';
 import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
 
@@ -30,7 +31,7 @@ export default {
   },
   article: {
     name: '文章',
-    component: Article,
+    component: Read,
     icon: 'icon-wenzhang',
     code: APP_CODE.ARTICLE,
     modalProps: {
