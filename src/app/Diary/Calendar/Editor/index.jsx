@@ -145,10 +145,7 @@ export default () => {
         onCancel={state.onCancel}>
         <Tabs tabPosition="left" onChange={state.onTabsChange}>
           {TABS_SETTING.map(V => (
-            <Tabs.TabPane
-              forceRender
-              tab={V.tab}
-              key={V.key}>
+            <Tabs.TabPane forceRender tab={V.tab} key={V.key}>
               <Scroll>
                 <V.Component
                   form={state.form}

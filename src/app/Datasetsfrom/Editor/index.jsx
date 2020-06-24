@@ -18,9 +18,10 @@ const useStateHook = () => {
 
   const [form] = Form.useForm();
 
-  const modal = useSelector(
-    state => state.modal[MODAL_CODE_DATASETSFROM_EDITOR]
-  );
+  const { modal, menuSelectedKey } = useSelector(state => ({
+    modal: state.modal[MODAL_CODE_DATASETSFROM_EDITOR],
+    menuSelectedKey: state.datasetsfromManage.menu.selectedKey,
+  }));
 
   // 取消: 关闭弹窗
   const onCancel = () => {
@@ -49,8 +50,11 @@ const useStateHook = () => {
       ? form.setFieldsValue({
         name: modal.data ?. name ?? void 0,
         value: modal.data ?. value ?? void 0,
-        code: modal.data ?. code ?? void 0,
         desc: modal.data ?. desc ?? void 0,
+        icon: modal.data ?. icon ?? void 0,
+        code: modal.data
+          ?. code
+          ?? (_.isNumber(menuSelectedKey) ? menuSelectedKey : void 0),
       })
       : form.resetFields();
   }, [modal]);
@@ -92,6 +96,9 @@ export default () => {
           label="类型"
           rules={[{ required: true, message: '请选择字典类型!' }]}>
           <Select placeholder="字典类型">{CODE_OPTIONS}</Select>
+        </Form.Item>
+        <Form.Item label="图标" name="icon">
+          <Input placeholder="图标"/>
         </Form.Item>
         <Form.Item label="描述" name="desc">
           <Input.TextArea rows={4} placeholder="字典描述"/>

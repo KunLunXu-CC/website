@@ -27,6 +27,7 @@ export const getDatasetsfroms = async ({
               value
               code
               desc
+              icon
               name
             }
           }

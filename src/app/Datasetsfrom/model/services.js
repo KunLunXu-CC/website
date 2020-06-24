@@ -24,6 +24,7 @@ export const createDatasetsfroms = async ({
               code
               desc
               name
+              icon
             }
           }
         }`,
@@ -59,6 +60,7 @@ export const updateDatasetsfroms = async ({
               code
               desc
               name
+              icon
             }
           }
         }`,
@@ -90,6 +92,7 @@ export const removeDatasetsfroms = async ({
               value
               code
               desc
+              icon
               name
             }
           }
