@@ -10,7 +10,7 @@ export const getDatasetsfroms = async ({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { search, OrderBy: { value: -1 } },
+      variables: { search, orderBy: { value: -1 } },
       query: `
         query(
           $orderBy: OrderBy
