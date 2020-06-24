@@ -29,15 +29,14 @@ export default {
       defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 100 },
     },
   },
-  article: {
-    name: '文章',
+  read: {
+    name: '阅读',
     component: Read,
     icon: 'icon-wenzhang',
-    code: APP_CODE.ARTICLE,
+    code: APP_CODE.READ,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 16, left: 16 },
-      toolClassName: 'article-modal-tool',
       defaultParams: { width: 1220, height: 630, offsetX: 60, offsetY: 60 },
     },
   },

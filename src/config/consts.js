@@ -2,6 +2,7 @@
 
 // 应用 CODE
 export const APP_CODE = {
+  READ: 'read',                  // 阅读
   ALBUM: 'album',                // 相册
   DIARY: 'diary',                // 日记
   EDITOR: 'editor',              // 编辑器
