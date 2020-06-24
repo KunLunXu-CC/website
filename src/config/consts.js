@@ -10,6 +10,12 @@ export const APP_CODE = {
   DATASETSFROM: 'datasetsfrom',  // 数据字典(数据集)
 };
 
+// 布尔值
+export const BOOLEAN = {
+  TRUE: 1,
+  FALSE: 0,
+};
+
 // 服务器静态资源-图片 url
 export const SERVICE_STATIC_IMAGE_URL
   = 'https://www.qianyin925.com/service/static/images/';
