@@ -24,27 +24,15 @@
     // antd tabs 设置
     .ant-tabs-left {
       height: 100%;
-      display: flex;
 
-      .ant-tabs-left-content {
-        flex: 1;
-        padding: 0px;
-        height: 100%;
-        overflow-y: auto;
-      }
-
+      .ant-tabs-content.ant-tabs-content-left,
       .ant-tabs-tabpane.ant-tabs-tabpane-active {
         height: 100%;
-        position: relative;
       }
 
       // qyrc 滚动条设置
       .qyrc-sroll {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        position: absolute;
+        height: 100%;
 
         .qyrc-sroll-body {
           padding: 20px;
