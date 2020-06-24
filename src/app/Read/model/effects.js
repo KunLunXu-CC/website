@@ -43,7 +43,7 @@ const onCreate = function * () {
     [DATASETSFROM_CODE.INTERVIEW_TAG.VALUE]: services.createInterview,
     [DATASETSFROM_CODE.ALGORITHM_TAG.VALUE]: services.createAlgorithm,
   };
-  const { change } = yield call(map[firstActiveKey], {
+  const change = yield call(map[firstActiveKey], {
     body: { content, tags: [secondActiveKey] },
   });
   yield put({

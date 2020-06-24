@@ -28,7 +28,7 @@ export const createSnippet = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createSnippets') || {};
+  return _.get(res, 'data.data.createSnippets.change') || [];
 };
 
 // 创建面试题
@@ -58,7 +58,7 @@ export const createInterview = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createInterviews') || {};
+  return _.get(res, 'data.data.createInterviews.change') || [];
 };
 
 
@@ -89,7 +89,7 @@ export const createAlgorithm = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createAlgorithms') || {};
+  return _.get(res, 'data.data.createAlgorithms.change') || [];
 };
 
 // 修改片段
