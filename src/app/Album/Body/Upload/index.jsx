@@ -26,10 +26,9 @@ export default () => {
       title="文件上传"
       placement="left"
       getContainer={false}
-      className={scss.upload}
-      onClose={state.onClose}
       visible={state.show}
-    >
+      className={scss.upload}
+      onClose={state.onClose}>
       <Form />
       <Footer />
     </Drawer>

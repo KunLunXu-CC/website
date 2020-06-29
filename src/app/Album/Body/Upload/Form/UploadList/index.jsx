@@ -24,7 +24,12 @@ export default () => {
     <div className={scss['upload-list']}>
       <label className={scss.upload}>
         <Icon type="icon-tupianshangchuan"/>
-        <input type="file" multiple="multiple" onChange={state.addFiles}/>
+        <input
+          type="file"
+          accept="image/*"
+          multiple="multiple"
+          onChange={state.addFiles}
+        />
       </label>
       {state.files.map((file, index) => (
         <div key={index} className={scss.item}>

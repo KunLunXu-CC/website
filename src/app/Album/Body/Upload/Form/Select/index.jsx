@@ -35,8 +35,7 @@ export default () => {
         allowClear
         onChange={state.onChange}
         style={{ width: '100%' }}
-        placeholder="选择上传图片类型"
-      >
+        placeholder="选择上传图片类型">
         {state.options.map(v => (
           <Select.Option key={v.key} value={v.value}>
             {v.title}
