@@ -20,9 +20,8 @@
     }
 
     // tabs tab部分(上部分)
-    .ant-tabs-bar {
+    .ant-tabs-nav {
       margin: 0;
-      border: none;
       background: #21252b;
 
       .ant-tabs-tab {
@@ -39,19 +38,23 @@
         }
       }
 
-      .ant-tabs-tab-active.ant-tabs-tab {
+      .ant-tabs-tab.ant-tabs-tab-active {
         background: #282c34 !important;
         color: rgba($color: #fff, $alpha: 0.8) !important;
       }
 
-      .ant-tabs.ant-tabs-card .ant-tabs-card-bar {
-        margin: 0 !important;
+      &::before {
+        display: none;
       }
     }
 
     // tabs 内容部分(中间部分)
-    .ant-tabs-content {
+    .ant-tabs-content-holder {
       flex: 1;
+
+      .ant-tabs-content.ant-tabs-content-top {
+        height: 100%;
+      }
     }
 
     // tabpane
