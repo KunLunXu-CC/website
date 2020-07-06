@@ -34,6 +34,14 @@ const useStateHook = () => {
     [article]
   );
 
+  // 预览
+  const onPreview = () => {
+    dispatch({
+      preview: article.id,
+      type: 'editor/setPreview',
+    });
+  };
+
   // 发布
   const onRelease = () => {
     dispatch({
@@ -61,7 +69,13 @@ const useStateHook = () => {
     });
   };
 
-  return { onRelease, unpublished, onRevoke, thumbSetting };
+  return {
+    onRevoke,
+    onRelease,
+    onPreview,
+    unpublished,
+    thumbSetting,
+  };
 };
 
 export default () => {
@@ -71,6 +85,7 @@ export default () => {
     <div className={scss.extra}>
       <Icon
         type="icon-yulan"
+        onClick={state.onPreview}
         className={scss['icon-preview']}
       />
       <Icon
