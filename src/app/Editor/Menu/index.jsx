@@ -1,15 +1,17 @@
 import React, {
   useMemo,
+  useCallback,
 } from 'react';
 import MenuTitle from './MenuTitle';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { Icon, Scroll } from 'qyrc';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
+import { Icon, Scroll, VariableContainer } from 'qyrc';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
+const MENU_MIN_WIDTH = 4; // 菜单最小宽度
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -109,6 +111,14 @@ const useStateHook = () => {
     dispatch({ type: 'editor/appendWorks', article });
   };
 
+
+  const onResize = useCallback(({ width }) => {
+    dispatch({
+      type: 'editor/setMenu',
+      menu: { collapsed: MENU_MIN_WIDTH === width },
+    });
+  }, []);
+
   // 添加 tag
   const addTag = () => {
     dispatch({ type: 'editor/createFictitiousTag', parent: null });
@@ -125,6 +135,7 @@ const useStateHook = () => {
   return {
     menu,
     addTag,
+    onResize,
     onSelect,
     selectedKeys,
     onOpenChange,
@@ -136,25 +147,34 @@ export default () => {
   const state = useStateHook();
 
   return (
-    !state.menu.collapsed ?
-      <div className={scss.menu}>
-        <Scroll className={scss['menu-middle']}>
-          <Menu
-            mode="inline"
-            inlineCollapsed={false}
-            onSelect={state.onSelect}
-            inlineIndent={INLINE_INDENT}
-            openKeys={state.menu.openKeys}
-            onOpenChange={state.onOpenChange}
-            selectedKeys={[state.selectedKeys]}>
-            {state.renderMenuList()}
-          </Menu>
-        </Scroll>
-        <div
-          onClick={state.addTag}
-          className={scss['munu-new-tag']} >
-          <Icon type="icon-xinzeng" />
-        </div>
-      </div> : null
+    <VariableContainer
+      className={scss.menu}
+      margin={{ right: '20%' }}
+      operationList={['right']}
+      onResize={state.onResize}
+      style={{ height: '100%' }}
+      constraintSize={{ width: MENU_MIN_WIDTH }}>
+      {!state.menu.collapsed ?
+        <div className={scss.body}>
+          <Scroll className={scss['menu-middle']}>
+            <Menu
+              mode="inline"
+              inlineCollapsed={false}
+              onSelect={state.onSelect}
+              inlineIndent={INLINE_INDENT}
+              openKeys={state.menu.openKeys}
+              onOpenChange={state.onOpenChange}
+              selectedKeys={[state.selectedKeys]}>
+              {state.renderMenuList()}
+            </Menu>
+          </Scroll>
+          <div
+            onClick={state.addTag}
+            className={scss['munu-new-tag']} >
+            <Icon type="icon-xinzeng" />
+          </div>
+        </div> : null
+      }
+    </VariableContainer >
   );
 };

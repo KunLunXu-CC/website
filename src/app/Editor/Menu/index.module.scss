@@ -1,17 +1,19 @@
-.menu {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  position: absolute;
 
-  display: flex;
-  flex-direction: column;
-  background: #21252b;
+.menu {
+  overflow: hidden;
+  position: relative;
+
+  .body {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background: #21252b;
+  }
 
   &-middle {
-    flex: 1;
+    height: 100%;
   }
 
   .menu-item-empty {

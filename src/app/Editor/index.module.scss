@@ -6,34 +6,10 @@
 
   position: relative;
 
-  &-header {
-    height: 44px;
-    background: #282c34;
-  }
-
   &-body {
     flex: 1;
     height: 100%;
     display: flex;
-
-    &-side {
-      width: 80px;
-      background: #282c34;
-    }
-
-    &-menu {
-      position: relative;
-      background: #282c34;
-    }
-
-    &-work {
-      flex: 1;
-      position: relative;
-    }
-  }
-
-  &-footer {
-    height: 20px;
-    background: #21252b;
+    background: #282c34;
   }
 }
