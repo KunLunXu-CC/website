@@ -70,7 +70,7 @@ export default {
     code: APP_CODE.DRAW,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 11, right: 11 },
+      toolPosition: { top: 17, right: 11 },
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },
