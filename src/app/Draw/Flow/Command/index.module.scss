@@ -1,0 +1,30 @@
+.body {
+  height: 58px;
+  display: flex;
+  align-items: center;
+
+  padding: 0 24px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+
+.command {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  margin-right: 20px;
+
+  &:hover {
+    border-radius: 2px;
+    border: 1px dashed rgba($color: #000, $alpha: 0.1);
+  }
+}
+
+.command-disabled {
+  opacity: 0.4;
+}

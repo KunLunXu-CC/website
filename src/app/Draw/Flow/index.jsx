@@ -1,5 +1,6 @@
 import React from 'react';
 import Panel from './Panel';
+import Command from './Command';
 import scss from './index.module.scss';
 import GGEditor, { Flow } from 'gg-editor';
 
@@ -29,9 +30,12 @@ const data = {
 
 export default () => (
   <GGEditor className={scss.flow}>
-    <Flow
-      data={data}
-      className={scss.work}/>
+    <div className={scss.main}>
+      <Command/>
+      <div className={scss.work}>
+        <Flow data={data} className={scss.content}/>
+      </div>
+    </div>
     <Panel/>
   </GGEditor>
 );
