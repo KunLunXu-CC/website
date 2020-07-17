@@ -127,11 +127,16 @@ import scss from './index.module.scss';
 // const MultiPanel = DetailPanel.create('multi')(() => 'multi');
 // const CanvasPanel = DetailPanel.create('canvas')(() => 'canvas');
 
-export default () => (
+export default props => (
   <div className={scss.panel}>
-    <Node></Node>
-    <Edge></Edge>
-    <Multi></Multi>
-    <Canvas></Canvas>
+    <div className={scss.main}>
+      <Node></Node>
+      <Edge></Edge>
+      <Multi></Multi>
+      <Canvas></Canvas>
+    </div>
+    <div className={scss.extend}>
+      {props.children}
+    </div>
   </div>
 );

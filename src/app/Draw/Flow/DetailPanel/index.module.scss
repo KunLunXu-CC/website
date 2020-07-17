@@ -3,6 +3,13 @@
   background: #fff;
   box-shadow: 0 0 10px darken($color: #f5f6fa, $amount: 5%);
 
+  display: flex;
+  flex-direction: column;
+
+  .main {
+    flex: 1;
+  }
+
   :global {
     .ant-card {
       height: 100%;
