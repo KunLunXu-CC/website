@@ -3,7 +3,6 @@ import Node from './Node';
 import Edge from './Edge';
 import Multi from './Multi';
 import Canvas from './Canvas';
-import scss from './index.module.scss';
 
 // import upperFirst from 'lodash/upperFirst';
 // import { Card, Form, Input } from 'antd';
@@ -127,16 +126,11 @@ import scss from './index.module.scss';
 // const MultiPanel = DetailPanel.create('multi')(() => 'multi');
 // const CanvasPanel = DetailPanel.create('canvas')(() => 'canvas');
 
-export default props => (
-  <div className={scss.panel}>
-    <div className={scss.main}>
-      <Node></Node>
-      <Edge></Edge>
-      <Multi></Multi>
-      <Canvas></Canvas>
-    </div>
-    <div className={scss.extend}>
-      {props.children}
-    </div>
-  </div>
+export default () => (
+  <React.Fragment>
+    <Node></Node>
+    <Edge></Edge>
+    <Multi></Multi>
+    <Canvas></Canvas>
+  </React.Fragment>
 );

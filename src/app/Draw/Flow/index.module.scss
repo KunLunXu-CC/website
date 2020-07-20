@@ -22,3 +22,33 @@
     position: absolute;
   }
 }
+
+
+.detail {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  background: #fff;
+  box-shadow: 0 0 10px darken($color: #f5f6fa, $amount: 5%);
+
+  :global {
+    .ant-card {
+      display: flex;
+      flex-direction: column;
+
+      &:nth-child(1) {
+        flex: 1;
+      }
+
+      &:nth-child(2) {
+        border-top: 1px solid #f0f0f0;
+      }
+    }
+
+    .ant-card-body {
+      flex: 1;
+      position: relative;
+    }
+  }
+}
