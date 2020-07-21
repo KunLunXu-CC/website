@@ -3,6 +3,7 @@ import Command from './Command';
 import ItemPanel from './ItemPanel';
 import scss from './index.module.scss';
 import DetailPanel from './DetailPanel';
+import RegisterNode from './RegisterNode';
 import GGEditor, { Flow } from 'gg-editor';
 
 const data = {
@@ -19,12 +20,15 @@ export default () => (
     <div className={scss.main}>
       <Command/>
       <div className={scss.work}>
-        <Flow data={data} className={scss.content}/>
+        <Flow
+          data={data}
+          className={scss.content}/>
       </div>
     </div>
     <div className={scss.detail}>
       <DetailPanel/>
       <ItemPanel/>
     </div>
+    <RegisterNode/>
   </GGEditor>
 );

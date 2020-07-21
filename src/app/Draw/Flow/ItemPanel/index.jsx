@@ -8,12 +8,12 @@ import { Item, ItemPanel } from 'gg-editor';
 export default () => (
   <Card title="节点选择" bordered={false}>
     <ItemPanel className={scss['item-panel']}>
-      {config.map(({ icon, ... rest }, index) => (
+      {config.map(({ img, ... rest }, index) => (
         <Item
           {... rest}
           key={index}
           className={scss.item}>
-          <img src={icon} draggable={false}/>
+          <img src={img} draggable={false}/>
         </Item>
       ))}
     </ItemPanel>
