@@ -1,16 +1,11 @@
-.swatch {
-  padding: 5px;
-  cursor: pointer;
-  background: #fff;
-  border-radius: 1px;
-  display: inline-block;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-};
-
 .color {
+  border: 5px solid #fff;
+  box-shadow: 0 0 0 1px rgba($color: #000, $alpha: 0.08);
+
   width: 36px;
   height: 14px;
   border-radius: 2px;
+  box-sizing: content-box;
 };
 
 .popover {
