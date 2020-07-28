@@ -40,7 +40,9 @@ const cssModuleRegex = /\.module\.(css|scss)$/;
 
 module.exports = {
   mode: 'development',
+  devtool: 'inline-source-map', // 移除控制台的部分警告
   entry: path.resolve(__dirname, '../src/index.js'),
+
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, '../build'),

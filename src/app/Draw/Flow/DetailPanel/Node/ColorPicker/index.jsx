@@ -4,6 +4,14 @@ import scss from './index.module.scss';
 
 import { SketchPicker } from 'react-color';
 
+// 色块
+const PRESET_COLORS = [
+  '#ff4d4f', '#ff7a45', '#ffa940', '#ffc53d',
+  '#ffec3d', '#bae637', '#73d13d', '#36cfc9',
+  '#40a9ff', '#597ef7', '#9254de', '#f759ab',
+  '#1d39c4', '#08979c', '#c41d7f', '#8c8c8c',
+];
+
 const useStateHook = props => {
   const [displayColorPicker, setDisplayColorPicker] = React.useState(false);
   const [color, setColor] = React.useState(props.defaultColor);
@@ -53,6 +61,7 @@ export default props => {
           <SketchPicker
             color={state.color}
             onChange={state.onChange}
+            presetColors={PRESET_COLORS}
           />
         </div> : null }
     </div>

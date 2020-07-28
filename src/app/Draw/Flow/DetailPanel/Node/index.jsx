@@ -1,14 +1,13 @@
 import React from 'react';
 import ColorPicker from './ColorPicker';
 
-import { Card, Input } from 'antd';
+import { Card, Input, Form, Slider } from 'antd';
 import { DetailPanel, withEditorContext } from 'gg-editor';
 
 const useStateHook = props => {
   // 修改 model
   const onUpdateModel = model => {
     const { nodes, executeCommand } = props;
-    console.log(nodes)
     executeCommand('update', {
       id: nodes[0].get('id'),
       updateModel: model,
@@ -25,18 +24,45 @@ const useStateHook = props => {
     onUpdateModel({ color });
   };
 
-  return { onChangeLabel, onChangeColor };
+  // 修改大小
+  const onChangeSize = (key, value) => {
+    onUpdateModel({ [key]: value });
+  };
+
+  return { onChangeLabel, onChangeColor, onChangeSize };
 };
 
 export default DetailPanel.create('node')(withEditorContext(props => {
   const state = useStateHook(props);
+  const model = props.nodes[0]?._cfg.model ?? {};
 
   return (
     <Card title="节点设置" bordered={false}>
-      <Input onBlur={state.onChangeLabel}/>
-      <ColorPicker
-        onChange={state.onChangeColor}
-        defaultColor={props.nodes[0]?._cfg.model.color}/>
+      <Form.Item label="宽度">
+        <Slider
+          min={20}
+          max={300}
+          defaultValue={model.width}
+          onChange={state.onChangeSize.bind(null, 'width')}
+        />
+      </Form.Item>
+      <Form.Item label="高度">
+        <Slider
+          min={20}
+          max={300}
+          defaultValue={model.height}
+          onChange={state.onChangeSize.bind(null, 'height')}
+        />
+      </Form.Item>
+      <Form.Item label="文字">
+        <Input onBlur={state.onChangeLabel}/>
+      </Form.Item>
+      <Form.Item label="颜色">
+        <ColorPicker
+          defaultColor={model.color}
+          onChange={state.onChangeColor}
+        />
+      </Form.Item>
     </Card>
   );
 }));

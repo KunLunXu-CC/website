@@ -7,22 +7,16 @@ const setAnchorPoints = (ctx, name, value, item) => {
     value,
     item,
     (item, anchorPoint) => {
+      const { color } = item._cfg?.model ?? {};
       const { width, height } = item.getKeyShape().getBBox();
       const [x, y] = anchorPoint;
       return {
+        r: 4,
+        stroke: color,
         x: (width * x) - (width / 2),
         y: (height * y) - (height / 2),
       };
-    },
-
-    (item, anchorPoint) => {
-      const { width, height } = item.getKeyShape().getBBox();
-      const [x, y] = anchorPoint;
-      return {
-        x: (width * x) - (width / 2),
-        y: (height * y) - (height / 2),
-      };
-    },
+    }
   );
 };
 
