@@ -1,13 +1,18 @@
 import { setAnchorPointsState } from 'gg-editor';
-
-const setAnchorPoints = (ctx, name, value, item) => {
+/**
+ * https://www.yuque.com/antv/g6/xp4nym
+ * https://www.yuque.com/antv/g6/xp4nym
+ * https://www.yuque.com/antv/g6/s?q=setState
+ */
+// 设置锚点
+const setAnchorPoints = ({ ctx, name, value, item }) => {
   setAnchorPointsState.call(
     ctx,
     name,
     value,
     item,
     (item, anchorPoint) => {
-      const { color } = item._cfg?.model ?? {};
+      const { color } = item._cfg ?. model ?? {};
       const { width, height } = item.getKeyShape().getBBox();
       const [x, y] = anchorPoint;
       return {
@@ -20,12 +25,18 @@ const setAnchorPoints = (ctx, name, value, item) => {
   );
 };
 
+// 设置节点选中状态
+const setSelectedState = ({ ctx, name, value, item }) => {
+  console.log('ctx, name, value, item', ctx, name, value, item);
+};
+
 const config = {
   draw (model, group) {
     const {
-      width = 160,
-      height = 100,
-      color = '#1890ff',
+      width,
+      height,
+      color,
+      label,
     } = model;
 
     const keyShape = group.addShape('rect', {
@@ -41,6 +52,22 @@ const config = {
         radius: 3,
         lineWidth: 1,
         stroke: color,
+
+        select: {
+          fillOpacity: 0.6,
+        },
+      },
+    });
+
+    group.addShape('text', {
+      attrs: {
+        x: 0,
+        y: 0,
+        text: label,
+        fontSize: 14,
+        textAlign: 'center',
+        textBaseline: 'middle',
+        fill: 'rgba(0, 0, 0, 0.5)',
       },
     });
 
@@ -48,7 +75,8 @@ const config = {
   },
 
   setState (name, value, item) {
-    setAnchorPoints(this, name, value, item);
+    setAnchorPoints({ ctx: this, name, value, item });
+    setSelectedState({ ctx: this, name, value, item });
   },
 
   getAnchorPoints () {
@@ -63,5 +91,5 @@ const config = {
 
 export default {
   config,
-  name: 'flow-node',
+  name: 'flow-rect',
 };

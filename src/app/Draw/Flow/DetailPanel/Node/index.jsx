@@ -15,8 +15,8 @@ const useStateHook = props => {
   };
 
   // 修改 label
-  const onChangeLabel = () => {
-    onUpdateModel({ label: 'user' });
+  const onChangeLabel = event => {
+    onUpdateModel({ label: event.target.value });
   };
 
   // 修改颜色
@@ -34,10 +34,9 @@ const useStateHook = props => {
 
 export default DetailPanel.create('node')(withEditorContext(props => {
   const state = useStateHook(props);
-  const model = props.nodes[0]?._cfg.model ?? {};
-
+  const { model = {}, id } = props.nodes[0] ?. _cfg ?? {};
   return (
-    <Card title="节点设置" bordered={false}>
+    <Card title="节点设置" bordered={false} key={id}>
       <Form.Item label="宽度">
         <Slider
           min={20}
@@ -55,7 +54,10 @@ export default DetailPanel.create('node')(withEditorContext(props => {
         />
       </Form.Item>
       <Form.Item label="文字">
-        <Input onBlur={state.onChangeLabel}/>
+        <Input
+          defaultValue={model.label}
+          onBlur={state.onChangeLabel}
+        />
       </Form.Item>
       <Form.Item label="颜色">
         <ColorPicker
