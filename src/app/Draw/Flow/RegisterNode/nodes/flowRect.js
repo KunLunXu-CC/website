@@ -1,9 +1,5 @@
 import { setAnchorPointsState } from 'gg-editor';
-/**
- * https://www.yuque.com/antv/g6/xp4nym
- * https://www.yuque.com/antv/g6/xp4nym
- * https://www.yuque.com/antv/g6/s?q=setState
- */
+
 // 设置锚点
 const setAnchorPoints = ({ ctx, name, value, item }) => {
   setAnchorPointsState.call(
@@ -25,9 +21,26 @@ const setAnchorPoints = ({ ctx, name, value, item }) => {
   );
 };
 
-// 设置节点选中状态
-const setSelectedState = ({ ctx, name, value, item }) => {
-  console.log('ctx, name, value, item', ctx, name, value, item);
+// 设置节点选中以及激活(鼠标停放)状态
+const setSelectedOrActiveState = ({ name, value, item }) => {
+  if (!['selected', 'active'].includes(name)) {
+    return false;
+  }
+  const FILL_OPACITY_ACTIVE = 0.3;
+  const group = item.getContainer();
+  const [shape] = group.get('children');
+
+  if (
+    !setSelectedOrActiveState.fillOpacity &&
+    shape.attrs.fillOpacity !== FILL_OPACITY_ACTIVE
+  ) {
+    setSelectedOrActiveState.fillOpacity = shape.attrs.fillOpacity;
+  }
+
+  shape.attr(
+    'fillOpacity',
+    value ? 0.3 : setSelectedOrActiveState.fillOpacity
+  );
 };
 
 const config = {
@@ -52,10 +65,6 @@ const config = {
         radius: 3,
         lineWidth: 1,
         stroke: color,
-
-        select: {
-          fillOpacity: 0.6,
-        },
       },
     });
 
@@ -67,7 +76,7 @@ const config = {
         fontSize: 14,
         textAlign: 'center',
         textBaseline: 'middle',
-        fill: 'rgba(0, 0, 0, 0.5)',
+        fill: 'rgba(0, 0, 0, 0.4)',
       },
     });
 
@@ -76,7 +85,7 @@ const config = {
 
   setState (name, value, item) {
     setAnchorPoints({ ctx: this, name, value, item });
-    setSelectedState({ ctx: this, name, value, item });
+    setSelectedOrActiveState({ ctx: this, name, value, item });
   },
 
   getAnchorPoints () {

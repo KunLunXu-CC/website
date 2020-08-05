@@ -23,7 +23,6 @@ export default () => (
       <div className={scss.work}>
         <Flow
           data={data}
-          grid="line"
           graphConfig={{
             plugins: [new G6.Grid()],
           }}

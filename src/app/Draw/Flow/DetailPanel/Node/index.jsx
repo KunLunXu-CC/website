@@ -1,5 +1,5 @@
 import React from 'react';
-import ColorPicker from './ColorPicker';
+import ColorPicker from '../../../ColorPicker';
 
 import { Card, Input, Form, Slider } from 'antd';
 import { DetailPanel, withEditorContext } from 'gg-editor';
