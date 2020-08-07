@@ -1,23 +1,29 @@
 const config = {
-  afterDraw(item) {
-    const model = item.getModel();
-    const group = item.getGraphicGroup();
-    model.label = "ceshi";
-    console.log(model, group);
-    const shape = group.get("children")[0];
-
-    shape.attr({
-      stroke: "red",
-      lineWidth: 2,
-      lineDash: [5, 5]
+  draw (cfg, group) {
+    const { startPoint, endPoint } = cfg;
+    const keyShape = group.addShape('path', {
+      attrs: {
+        path: [
+          ['M', startPoint.x, startPoint.y],
+          ['L', endPoint.x, endPoint.y],
+        ],
+        stroke: 'steelblue',
+        lineWidth: 3,
+        startArrow: {
+          path: 'M 10,0 L -10,-10 L -10,10 Z',
+          d: 10,
+        },
+        endArrow: {
+          path: 'M 10,0 L -10,-10 L -10,10 Z',
+          d: 10,
+        },
+      },
     });
-
-    console.log(group.get("children")[0]);
-  }
+    return keyShape;
+  },
 };
 
 export default {
   config,
   name: 'custom-edge',
-  extend: 'flow-smooth',
 };

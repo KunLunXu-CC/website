@@ -4,6 +4,7 @@ import ItemPanel from './ItemPanel';
 import scss from './index.module.scss';
 import DetailPanel from './DetailPanel';
 import RegisterNode from './RegisterNode';
+import RegisterEdge from './RegisterEdge';
 import GGEditor, { Flow } from 'gg-editor';
 import G6 from '@antv/g6';
 
@@ -25,6 +26,9 @@ export default () => (
           data={data}
           graphConfig={{
             plugins: [new G6.Grid()],
+            defaultEdge: {
+              shape: 'custom-edge',
+            },
           }}
           className={scss.content}/>
       </div>
@@ -34,5 +38,6 @@ export default () => (
       <ItemPanel/>
     </div>
     <RegisterNode/>
+    <RegisterEdge/>
   </GGEditor>
 );

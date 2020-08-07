@@ -1,7 +1,7 @@
 import React from 'react';
 import { RegisterEdge } from 'gg-editor';
 
-const files = require.context('./nodes/', true, /.*\.js/);
+const files = require.context('./edges/', true, /.*\.js/);
 const configs = files.keys().reduce((total, key) => [
   ... total,
   files(key).default,
