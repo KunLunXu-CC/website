@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const MENU_LIST = [
   DIARY_MENU.CALENDAR,
   DIARY_MENU.STATS,
-  DIARY_MENU.EXPORT,
+  DIARY_MENU.PROJECT,
 ];
 
 const useStateHook = () => {
