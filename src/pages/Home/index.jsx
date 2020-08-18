@@ -13,7 +13,6 @@ import MenuList from './MenuList';
  */
 export default () => (
   <Fragment>
-    111
     <AppList />
     <MenuList/>
     <DockList/>
