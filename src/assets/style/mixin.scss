@@ -27,3 +27,48 @@
     -webkit-box-orient: vertical;
   }
 }
+
+/**
+ * 滚动条设置
+ * 使用:
+ * div {
+ *   @include scrollbar($thumb-bg: red);
+ * }
+**/
+@mixin scrollbar (
+  $width: 6px,                         // 宽度
+  $radius: $width / 2,                 // 圆角大小
+  $init-alpha: 0,                      // 初始透明度、鼠标停放在元素上才变为 1
+  $thumb-bg: #bfbfbf,                // 滑块背景
+  $track-bg: rgba(255, 255, 255, 0), // 轨道背景
+){
+  $hover-alpha: 1;          // 鼠标停放时透明度
+
+  // 滚动条整体样式
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  // 滚动条里面轨道
+  &::-webkit-scrollbar-track {
+    border-radius: $radius;
+    background: rgba($color: $track-bg, $alpha: $init-alpha);
+  }
+
+  // 滚动条里面滑块
+  &::-webkit-scrollbar-thumb {
+    border-radius: $width;
+    background: rgba($color: $thumb-bg, $alpha: $init-alpha);
+  }
+
+  // 鼠标停放处理
+  &:hover {
+    &::-webkit-scrollbar-track {
+      background: rgba($color: $track-bg, $alpha: $hover-alpha);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($color: $thumb-bg, $alpha: $hover-alpha);
+    }
+  }
+}

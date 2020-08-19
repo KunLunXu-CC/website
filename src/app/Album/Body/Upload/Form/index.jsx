@@ -3,11 +3,9 @@ import Select from './Select';
 import UploadList from './UploadList';
 import scss from './index.module.scss';
 
-import { Scroll } from 'qyrc';
-
 export default () => (
-  <Scroll className={scss.form}>
+  <div className={scss.form}>
     <Select />
     <UploadList />
-  </Scroll>
+  </div>
 );

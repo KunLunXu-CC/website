@@ -1,1 +1,6 @@
+@import './mixin.scss';
 
+* {
+  // 设置默认滚动条
+  @include scrollbar;
+}

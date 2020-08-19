@@ -6,6 +6,7 @@ import Router from './Router';
 import reactDom from 'react-dom';
 import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
+import '@assets/style';
 
 import { ConfigProvider } from 'antd';
 moment.locale('zh-cn');

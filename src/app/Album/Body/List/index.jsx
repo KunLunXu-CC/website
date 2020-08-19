@@ -5,7 +5,6 @@ import Item from './Item';
 import scss from './index.module.scss';
 
 import { Empty } from 'antd';
-import { Scroll } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
@@ -28,19 +27,17 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <Scroll>
-      <div className={scss.list}>
-        {state.photos.length > 0 ?
-          state.photos.map(v => (
-            <Item
-              data={v}
-              key={v.id}
-              onDelete={state.onDelete}
-            />
-          )) :
-          <Empty className={scss.empty}/>
-        }
-      </div>
-    </Scroll>
+    <div className={scss.list}>
+      {state.photos.length > 0 ?
+        state.photos.map(v => (
+          <Item
+            data={v}
+            key={v.id}
+            onDelete={state.onDelete}
+          />
+        )) :
+        <Empty className={scss.empty}/>
+      }
+    </div>
   );
 };
