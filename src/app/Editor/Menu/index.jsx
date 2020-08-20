@@ -6,9 +6,9 @@ import MenuTitle from './MenuTitle';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
+import { Icon, VariableContainer } from 'qyrc';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { Icon, Scroll, VariableContainer } from 'qyrc';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
 const MENU_MIN_WIDTH = 4; // 菜单最小宽度
@@ -156,18 +156,16 @@ export default () => {
       constraintSize={{ width: MENU_MIN_WIDTH }}>
       {!state.menu.collapsed ?
         <div className={scss.body}>
-          <Scroll className={scss['menu-middle']}>
-            <Menu
-              mode="inline"
-              inlineCollapsed={false}
-              onSelect={state.onSelect}
-              inlineIndent={INLINE_INDENT}
-              openKeys={state.menu.openKeys}
-              onOpenChange={state.onOpenChange}
-              selectedKeys={[state.selectedKeys]}>
-              {state.renderMenuList()}
-            </Menu>
-          </Scroll>
+          <Menu
+            mode="inline"
+            inlineCollapsed={false}
+            onSelect={state.onSelect}
+            inlineIndent={INLINE_INDENT}
+            openKeys={state.menu.openKeys}
+            onOpenChange={state.onOpenChange}
+            selectedKeys={[state.selectedKeys]}>
+            {state.renderMenuList()}
+          </Menu>
           <div
             onClick={state.addTag}
             className={scss['munu-new-tag']} >

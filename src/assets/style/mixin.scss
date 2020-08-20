@@ -64,7 +64,11 @@
   // 鼠标停放处理
   &:hover {
     &::-webkit-scrollbar-track {
-      background: rgba($color: $track-bg, $alpha: $hover-alpha);
+      background: if(
+        alpha($track-bg) == 0,
+        $track-bg,
+        rgba($color: $track-bg, $alpha: $hover-alpha)
+      );
     }
 
     &::-webkit-scrollbar-thumb {

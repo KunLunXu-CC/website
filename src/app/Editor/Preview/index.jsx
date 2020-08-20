@@ -1,8 +1,8 @@
 import React from 'react';
 import scss from './index.module.scss';
 
+import { VariableContainer, Markdown } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
-import { VariableContainer, Markdown, Scroll } from 'qyrc';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -43,11 +43,9 @@ export default () => {
           <div className={scss['preview-header']}>
             {state.article.name}
           </div>
-          <Scroll  className={scss['preview-body']}>
-            <Markdown>
-              {state.article.content || ''}
-            </Markdown>
-          </Scroll>
+          <Markdown className={scss['preview-body']}>
+            {state.article.content || ''}
+          </Markdown>
         </div>
       </VariableContainer> : null
   );

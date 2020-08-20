@@ -1,3 +1,4 @@
+@import '@assets/style/mixin.scss';
 
 .menu {
   overflow: hidden;
@@ -10,10 +11,6 @@
     bottom: 0;
     position: absolute;
     background: #21252b;
-  }
-
-  &-middle {
-    height: 100%;
   }
 
   .menu-item-empty {
@@ -32,7 +29,16 @@
       $bg-selected: #2c313a;
       $color: rgba($color: #cccccc, $alpha: 0.8);
 
+      @include scrollbar(
+        $width: 2px,
+        $thumb-bg: lighten($color: $bg-selected, $amount: 5%)
+      );
+
+      height: 100%;
       border: none;
+      overflow-y: auto;
+      overflow-x: hidden;
+
       color: $color;
       background: $bg;
 
@@ -90,15 +96,6 @@
       // 箭头
       .ant-menu-submenu-arrow {
         display: none;
-      }
-    }
-
-    // 滚动条设置
-    .qyrc-sroll-bar {
-      opacity: 0.5;
-      right: 0;
-      .qyrc-sroll-bar-slider {
-        width: 2px;
       }
     }
   }
