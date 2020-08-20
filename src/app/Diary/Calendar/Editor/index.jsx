@@ -13,7 +13,6 @@ import DietForm from './DietForm';
 import FitnessForm from './FitnessForm';
 import scss from './index.module.scss';
 
-import { Scroll } from 'qyrc';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -145,14 +144,16 @@ export default () => {
         onCancel={state.onCancel}>
         <Tabs tabPosition="left" onChange={state.onTabsChange}>
           {TABS_SETTING.map(V => (
-            <Tabs.TabPane forceRender tab={V.tab} key={V.key}>
-              <Scroll>
-                <V.Component
-                  form={state.form}
-                  tools={state.Tools}
-                  showTools={state.activeTabKey === V.key}
-                />
-              </Scroll>
+            <Tabs.TabPane
+              tab={V.tab}
+              key={V.key}
+              forceRender
+              className={scss.body}>
+              <V.Component
+                form={state.form}
+                tools={state.Tools}
+                showTools={state.activeTabKey === V.key}
+              />
             </Tabs.TabPane>
           ))}
         </Tabs>

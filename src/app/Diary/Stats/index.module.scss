@@ -8,13 +8,6 @@
   padding-left: 126px;
   background: rgba($color: #e6f7ff, $alpha: 0.5);
 
-  :global {
-    .qyrc-sroll-bar-slider {
-      width: 4px;
-    }
-
-    .qyrc-sroll-bar {
-      right: 0;
-    }
-  }
+  overflow-y: auto;
+  overflow-x: hidden;
 }

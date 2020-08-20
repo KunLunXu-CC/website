@@ -48,7 +48,7 @@ export default {
     code: APP_CODE.DIARY,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 11, left: 11 },
+      toolPosition: { top: 11, left: 18 },
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },

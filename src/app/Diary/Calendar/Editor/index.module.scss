@@ -30,15 +30,6 @@
         height: 100%;
       }
 
-      // qyrc 滚动条设置
-      .qyrc-sroll {
-        height: 100%;
-
-        .qyrc-sroll-body {
-          padding: 20px;
-        }
-      }
-
       // antd 空状态
       .ant-empty {
         margin-top: 40px;
@@ -62,5 +53,12 @@
         }
       }
     }
+  }
+
+  // 主题
+  .body {
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }
