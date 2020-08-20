@@ -1,7 +1,6 @@
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
-// import Article from './Article';
 import Read from './Read';
 import Draw from './Draw';
 import Datasetsfrom from './Datasetsfrom';
