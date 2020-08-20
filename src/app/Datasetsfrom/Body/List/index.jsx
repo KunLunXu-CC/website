@@ -2,7 +2,6 @@ import React from 'react';
 import Item from './Item';
 import scss from './index.module.scss';
 
-import { Scroll } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
 import { MODAL_CODE_DATASETSFROM_EDITOR, MENU_LIST } from '../../consts';
 
@@ -45,17 +44,15 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <Scroll className={scss.list}>
-      <div className={scss.body}>
-        {state.datasetsfroms.map((v, key) => (
-          <Item
-            data={v}
-            key={key}
-            onEdit={state.onEdit.bind(null, v)}
-            onDelete={state.onDelete.bind(null, v)}
-          />
-        ))}
-      </div>
-    </Scroll>
+    <div className={scss.body}>
+      {state.datasetsfroms.map((v, key) => (
+        <Item
+          data={v}
+          key={key}
+          onEdit={state.onEdit.bind(null, v)}
+          onDelete={state.onDelete.bind(null, v)}
+        />
+      ))}
+    </div>
   );
 };

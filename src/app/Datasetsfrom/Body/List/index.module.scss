@@ -1,27 +1,14 @@
 .list {
   flex: 1;
   padding: 0 20px 20px 20px;
-
-  // 滚动条设置
-  &:hover {
-    :global {
-      .qyrc-sroll-bar {
-        right: 0;
-      }
-
-      .qyrc-sroll-bar-slider {
-        width: 4px;
-      }
-
-      .qyrc-sroll-bar-slider {
-        background: rgba(152, 152, 152, 0.1);
-      }
-    }
-  }
 }
 
 .body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 20px 20px 20px;
 }
