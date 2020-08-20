@@ -12,14 +12,6 @@
   bottom: 0;
   position: absolute;
 
-  :global {
-    // 滚动条设置
-    .qyrc-sroll-bar {
-      opacity: 0.5;
-      right: 0;
-      .qyrc-sroll-bar-slider {
-        width: 4px;
-      }
-    }
-  }
+  overflow-y: auto;
+  overflow-x: hidden;
 }
