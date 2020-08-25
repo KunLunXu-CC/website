@@ -38,7 +38,7 @@ export default () => {
         className={scss.container}
         constraintSize={{ width: 0 }}
         defaultParams={{ width: 560 }}
-        style={{ height: '100%', transform: 'translate(0px, 0px)' }}>
+        style={{ height: '100%', left: 0 }}>
         <div className={scss.preview}>
           <div className={scss['preview-header']}>
             {state.article.name}

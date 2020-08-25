@@ -48,7 +48,7 @@ export default () => {
       margin={{ top: 20 }}
       operationList={['top']}
       constraintSize={{ height: 100 }}
-      style={{ width: '100%', transform: 'translate(0px, 0px)' }}>
+      style={{ width: '100%', top: 0 }}>
       <div className={scss.editor}>
         <CodeEditor
           options={OPTIONS}
