@@ -17,7 +17,7 @@ export default () => {
         ? <Spin className={scss.spin} size="large"/>
         : null
       }
-      <div id={APP_CODE.ALBUM}/>
+      <div id={APP_CODE.ALBUM} className={scss.notification}/>
     </Fragment>
   );
 };

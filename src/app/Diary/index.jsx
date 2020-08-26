@@ -4,6 +4,7 @@ import React, {
 import Menu from './Menu';
 import Tips from './Tips';
 import Stats from './Stats';
+import Modal from './Modal';
 import Calendar from './Calendar';
 import Project from './Project';
 import scss from './index.module.scss';
@@ -41,6 +42,7 @@ export default () => {
         {state.body}
       </div>
       <Tips/>
+      <Modal/>
     </div>
   );
 };

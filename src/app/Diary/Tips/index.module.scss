@@ -10,3 +10,11 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.01);
 }
+
+.notification {
+  :global {
+    .ant-notification {
+      position: absolute;
+    }
+  }
+}
