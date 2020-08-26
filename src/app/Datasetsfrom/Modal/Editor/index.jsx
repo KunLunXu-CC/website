@@ -3,7 +3,7 @@ import scss from './index.module.scss';
 
 import { DATASETSFROM_CODE } from '@config/consts';
 import { useSelector, useDispatch } from 'react-redux';
-import { MODAL_CODE_DATASETSFROM_EDITOR } from '../consts';
+import { MODAL_CODE_DATASETSFROM_EDITOR } from '../../consts';
 import { Form, Modal, Input, InputNumber, Select } from 'antd';
 
 // 类型下拉选项

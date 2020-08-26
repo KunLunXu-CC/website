@@ -21,7 +21,7 @@ export default () => {
       {state.showSpin
         ? <Spin className={scss.spin} size="large"/>
         : null}
-      <div id={APP_CODE.DATASETSFROM}/>
+      <div id={APP_CODE.DATASETSFROM} className={scss.notification}/>
     </Fragment>
   );
 };
