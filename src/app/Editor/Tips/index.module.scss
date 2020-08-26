@@ -19,6 +19,10 @@
 
 .notification {
   :global {
+    .ant-notification {
+      position: absolute;
+    }
+
     .ant-notification-notice {
       background: #2c343a;
     }

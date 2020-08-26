@@ -2,9 +2,6 @@ import React, {
   useMemo,
 } from 'react';
 import scss from './index.module.scss';
-import ThumbSetting from './ThumbSetting';
-import RevokeConfirm from './RevokeConfirm';
-import ReleaseConfirm from './ReleaseConfirm';
 
 import { Icon } from 'qyrc';
 import { ARTICLE_STATUS } from '@config/consts';
@@ -105,9 +102,6 @@ export default () => {
           className={scss['icon-lower-shelf']}
         />
       }
-      <ThumbSetting/>
-      <RevokeConfirm/>
-      <ReleaseConfirm/>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Side from './Side';
 import Menu from './Menu';
 import Work from './Work';
 import Tips from './Tips';
+import Modal from './Modal';
 import Header from './Header';
 import Footer from './Footer';
 import Preview from './Preview';
@@ -33,6 +34,7 @@ export default () => {
       </div>
       <Footer/>
       <Tips/>
+      <Modal/>
     </div>
   );
 };
