@@ -46,7 +46,7 @@ export default {
     icon: 'icon-biji',
     code: APP_CODE.DIARY,
     modalProps: {
-      dragHeight: 40,
+      dragHeight: 20,
       toolPosition: { top: 11, left: 18 },
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },

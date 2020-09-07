@@ -1,3 +1,6 @@
+@import '@assets/style/mixin.scss';
+$bg: #f2f5fc;
+
 .project {
   top: 0;
   left: 0;
@@ -5,15 +8,46 @@
   bottom: 0;
   position: absolute;
 
-  padding-left: 126px;
-  background: rgba($color: #e6f7ff, $alpha: 0.5);
+  display: flex;
+  padding: 20px 0px;
+  margin-left: 116px;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  overflow-x: auto;
+
+  @include scrollbar(
+    $height: 4px,
+    $thumb-bg: darken($color: $bg, $amount: 8%)
+  );
 }
 
+.column {
+  flex: none;
+  width: 260px;
+  border-radius: 8px;
+  margin: { right: 12px; };
 
-.content {
-  width: 500px;
+  display: flex;
+  flex-direction: column;
 
-  height: 500px;
+  background: $bg;
 
-  overflow: hidden;
+  &.dragging {
+    box-shadow: 0 0 10px #e6f7ff;
+  }
+}
+
+.items {
+  flex: 1;
+  overflow-y: auto;
+
+  padding: {
+    left: 12px;
+    right: 8px;
+  };
+
+  @include scrollbar(
+    $width: 4px,
+    $thumb-bg: darken($color: $bg, $amount: 2%)
+  );
 }

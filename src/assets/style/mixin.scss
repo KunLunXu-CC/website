@@ -36,7 +36,8 @@
  * }
 **/
 @mixin scrollbar (
-  $width: 6px,                         // 宽度
+  $height: 6px,                        // 高度(x 轴方向上滚动时有效)
+  $width: 6px,                         // 宽度(y 轴方向上滚动时有效)
   $radius: $width / 2,                 // 圆角大小
   $init-alpha: 0,                      // 初始透明度、鼠标停放在元素上才变为 1
   $thumb-bg: #bfbfbf,                // 滑块背景
@@ -47,6 +48,7 @@
   // 滚动条整体样式
   &::-webkit-scrollbar {
     width: $width;
+    height: $height;
   }
 
   // 滚动条里面轨道

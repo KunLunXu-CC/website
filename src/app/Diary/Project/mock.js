@@ -9,7 +9,6 @@ export default [
       },
     ],
   },
-
   {
     id: 'row-2',
     name: '列2',
@@ -28,7 +27,6 @@ export default [
       },
     ],
   },
-
   {
     id: 'row-3',
     name: '列3',
@@ -36,6 +34,26 @@ export default [
       {
         id: 'task-3-1',
         name: '任务-3-1',
+      },
+    ],
+  },
+  {
+    id: 'row-4',
+    name: '列4',
+    tasks: [
+      {
+        id: 'task-4-1',
+        name: '任务-4-1',
+      },
+    ],
+  },
+  {
+    id: 'row-5',
+    name: '列5',
+    tasks: [
+      {
+        id: 'task-5-1',
+        name: '任务-5-1',
       },
     ],
   },

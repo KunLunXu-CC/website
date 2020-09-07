@@ -1,0 +1,10 @@
+.item {
+  height: 200px;
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 12px;
+
+  &.dragging {
+    box-shadow: 0 0 10px #e6f7ff;
+  }
+}
