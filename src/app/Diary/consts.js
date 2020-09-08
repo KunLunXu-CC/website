@@ -9,5 +9,5 @@ export const REVOKE_SPACE = 'REVOKE_SPACE';
 export const DIARY_MENU = {
   CALENDAR: { VALUE: 'calendar', DESC: '日历', ICON: 'icon-rili' },
   STATS: { VALUE: 'stats', DESC: '统计', ICON: 'icon-tongji' },
-  PROJECT: { VALUE: 'project', DESC: '项目', ICON: 'icon-daochu' },
+  PROJECT: { VALUE: 'kanban', DESC: '看板', ICON: 'icon-daochu' },
 };
