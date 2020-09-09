@@ -11,8 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 // 菜单列表
 const MENU_LIST = [
   DIARY_MENU.CALENDAR,
-  DIARY_MENU.STATS,
   DIARY_MENU.PROJECT,
+  DIARY_MENU.STATS,
 ];
 
 const useStateHook = () => {

@@ -1,19 +1,21 @@
 @import '@assets/style/mixin.scss';
 $bg: #f2f5fc;
 
-.project {
+.kanban {
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   position: absolute;
 
-  display: flex;
+  // display: flex;
   padding: 20px 0px;
   margin-left: 116px;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
+
   overflow-x: auto;
+  // border-left: 12px solid transparent;
+  // border-right: 12px solid transparent;
+  // overflow-x: auto;
 
   @include scrollbar(
     $height: 4px,
@@ -21,8 +23,14 @@ $bg: #f2f5fc;
   );
 }
 
+.main {
+  display: flex;
+}
+
 .column {
+  height: 100%;
   flex: none;
+  display: inline-block;
   width: 260px;
   border-radius: 8px;
   margin: { right: 12px; };
