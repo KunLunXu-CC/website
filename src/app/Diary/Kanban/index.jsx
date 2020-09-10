@@ -22,7 +22,7 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <div className={scss.kanban}>
+    <React.Fragment>
       <DragDropContext onDragEnd={state.onDragEnd}>
         <Droppable
           type="COLUMN"
@@ -30,7 +30,7 @@ export default () => {
           direction="horizontal">
           {provided => (
             <div
-              className={scss.main}
+              className={scss.kanban}
               ref={provided.innerRef}
               {...provided.droppableProps}>
               {state.data.map((v, index) => (
@@ -80,6 +80,7 @@ export default () => {
           )}
         </Droppable>
       </DragDropContext>
-    </div>
+      <List/>
+    </React.Fragment>
   );
 };

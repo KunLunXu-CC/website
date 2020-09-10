@@ -1,0 +1,46 @@
+
+.list {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #40a9ff;
+  width: 400px;
+  height: 400px;
+  z-index: 0;
+}
+
+.btn {
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  position: absolute;
+
+  width: 30px;
+  height: 30px;
+
+  cursor: pointer;
+  border-radius: 50%;
+  background: rgba($color: #000, $alpha: 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  &::after,
+  &::before {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    background: #47d0ff;
+  }
+
+  &::after {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::before {
+    width: 10px;
+    height: 10px;
+  }
+}
