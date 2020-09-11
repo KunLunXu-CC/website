@@ -1,12 +1,10 @@
 
-.list {
+.wrapper {
+  width: 30px;
+  height: 30px;
+  top: 0px;
+  right: 0px;
   position: absolute;
-  right: 0;
-  top: 0;
-  background: #40a9ff;
-  width: 400px;
-  height: 400px;
-  z-index: 0;
 }
 
 .btn {
@@ -43,4 +41,53 @@
     width: 10px;
     height: 10px;
   }
+}
+
+.body {
+  top: 5px;
+  right: 5px;
+  z-index: 0;
+  position: absolute;
+
+  width: 440px;
+  height: 280px;
+  border-radius: 12px;
+
+  background: rgba($color: #40a9ff, $alpha: 0.5);
+  border: 1px solid rgba($color: #40a9ff, $alpha: 0.4);
+
+  opacity: 0;
+  transform: scale(0);
+  transform-origin: 430px 10px;
+
+  transition: all 0.3s;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  .body {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.list {
+  flex: 1;
+  overflow: hidden;
+  overflow-y: auto;
+
+  padding: 20px;
+}
+
+.footer {
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 36px;
+  text-align: center;
+  border-top: 1px solid #40a9ff;
+
+  margin: 0 20px;
 }
