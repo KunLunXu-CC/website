@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
     "baseUrl": ".",
-
     "paths": {
       "@app/*": ["src/app/*"],
       "@hook/*": ["src/hook/*"],
@@ -12,10 +10,5 @@
       "@assets/*": ["src/assets/*"],
       "@config/*": ["src/config/*"]
     },
-    "target": "ES6",
-    "module": "es6",
-    "allowSyntheticDefaultImports": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  }
 }
