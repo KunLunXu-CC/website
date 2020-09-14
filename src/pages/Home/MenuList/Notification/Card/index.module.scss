@@ -1,0 +1,44 @@
+.card {
+  border: none;
+  overflow: hidden;
+  border-radius:8px;
+  background: rgba($color: #000, $alpha: 0.1);
+
+  :global {
+    .ant-card-head {
+      padding: 0;
+      border: none;
+      min-height: initial;
+    }
+
+    .ant-card-head-wrapper {
+      height: 28px;
+      color: rgba($color: #fff, $alpha: 0.6);
+      padding: 0 8px;
+      font-size: 12px;
+      background: rgba($color: #000, $alpha: 0.1);
+    }
+
+    .ant-card-head-title {
+      display: flex;
+      align-items: center;
+    }
+
+    .ant-card-extra {
+      padding: 0;
+      color: rgba($color: #fff, $alpha: 0.4);
+      .qyrc-icon {
+        margin-right: 0;
+      }
+    }
+
+    .ant-card-body {
+      padding: 16px;
+      color: rgba($color: #fff, $alpha: 0.6);
+    }
+
+    .qyrc-icon {
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+.notification {
+  top: 22px;
+
+  :global {
+    .ant-drawer-header {
+      display: none;
+    }
+
+    .ant-drawer-content {
+      backdrop-filter: blur(40px);
+      border-left: 1px solid rgba($color: #fff, $alpha: 0.4);
+      box-shadow: -1px 1px 0 1px rgba(0, 0, 0, 0.5);
+      background: rgba($color: #232323, $alpha: 0.45);
+    }
+
+    .ant-drawer-body {
+      padding: 0px;
+    }
+  }
+}
+
+.body {
+  height: 100%;
+  padding: 10px;
+  cursor: initial;
+}
