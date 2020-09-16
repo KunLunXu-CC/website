@@ -3,6 +3,7 @@ const config = require('./config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const { DefinePlugin, ProvidePlugin } = require('webpack');
 
@@ -30,6 +31,9 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
   filename: 'style/[name].[hash].css',
   chunkFilename: 'style/[id].[hash].css',
 });
+
+// monaco-editor 插件
+const monacoWebpackPlugin = new MonacoWebpackPlugin();
 
 // 打包监测
 // const bundleAnalyzerPlugin = new WebpackBundleAnalyzer
@@ -113,6 +117,7 @@ module.exports = {
     htmlWebpackPlugin,
     // bundleAnalyzerPlugin,
     miniCssExtractPlugin,
+    monacoWebpackPlugin,
   ],
 
   resolve: {
