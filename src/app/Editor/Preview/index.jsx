@@ -1,19 +1,22 @@
 import React from 'react';
 import scss from './index.module.scss';
 
-import { VariableContainer, Markdown } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
+import { VariableContainer, Markdown, Icon } from 'qyrc';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  // 预览内容
+  // 预览文章
   const article = useSelector(state => {
-    const { preview, articles } = state.editor;
-    return articles[preview] ?? {};
+    const { preview, articles, works } = state.editor;
+    return works.find(v => v.article === preview)
+      ? ({ ... articles[preview] } ?? {})
+      : {};
   });
 
+  // 关闭
   const onClose = () => {
     dispatch({
       type: 'editor/setPreview',
@@ -21,6 +24,7 @@ const useStateHook = () => {
     });
   };
 
+  // 当缩小到 50 则关闭
   const onResize = ({ width }) => {
     width < 50 && onClose();
   };
@@ -37,7 +41,7 @@ const useStateHook = () => {
     },
   }), []);
 
-  return { onResize, article, options };
+  return { onResize, article, options, onClose };
 };
 
 export default () => {
@@ -55,6 +59,7 @@ export default () => {
         <div className={scss.preview}>
           <div className={scss['preview-header']}>
             {state.article.name}
+            <Icon type="icon-guanbi6" onClick={state.onClose}/>
           </div>
           <Markdown className={scss['preview-body']} options={state.options}>
             {state.article.content || ''}

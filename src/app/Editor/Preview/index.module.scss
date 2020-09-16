@@ -23,6 +23,19 @@
     line-height: 38px;
     background: #21252b;
     color: rgba($color: #fff, $alpha: 0.6);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    :global {
+      .qyrc-icon {
+        color: rgba($color: #fff, $alpha: 0.3);
+        &:hover {
+          color: #40a9ff;
+        }
+      }
+    }
   }
 
   &-body {
