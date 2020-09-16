@@ -42,7 +42,7 @@ const useStateHook = props => {
       spin: APP_CODE.EDITOR,
       type: PHOTO_TYPE.ARTICLE.VALUE,
     });
-    return `[图片备注](${_.get(data, '[0].fileName', '')})`;
+    return `![图片备注](${_.get(data, '[0].fileName', '')})`;
   };
 
   // 内容改变

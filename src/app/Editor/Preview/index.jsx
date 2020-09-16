@@ -3,6 +3,7 @@ import scss from './index.module.scss';
 
 import { VariableContainer, Markdown } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
+import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,19 @@ const useStateHook = () => {
     width < 50 && onClose();
   };
 
-  return { onResize, article };
+  // Markdown 配置参数
+  const options = React.useMemo(() => ({
+    overrides: {
+      img: {
+        component: props => (<img src={ /http/.test(props.src)
+          ? props.src
+          : `${SERVICE_STATIC_IMAGE_URL}${props.src}`
+        }/>),
+      },
+    },
+  }), []);
+
+  return { onResize, article, options };
 };
 
 export default () => {
@@ -43,7 +56,7 @@ export default () => {
           <div className={scss['preview-header']}>
             {state.article.name}
           </div>
-          <Markdown className={scss['preview-body']}>
+          <Markdown className={scss['preview-body']} options={state.options}>
             {state.article.content || ''}
           </Markdown>
         </div>
