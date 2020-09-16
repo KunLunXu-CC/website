@@ -5,22 +5,13 @@ import styled from 'styled-components';
 import { Icon } from 'qyrc';
 
 const DockApp = styled.div`
-  --margin: ${({ index, currentIndex }) => {
-    const defaultValue = '10px';
-    if (!_.isNumber(currentIndex)) {
-      return defaultValue;
-    }
-    const mapIndex = 2 - Math.abs(currentIndex - index);
-    return ['20px', '30px', '40px'] ?. [mapIndex] || defaultValue;
-  }};
-
   --scale: ${({ index, currentIndex }) => {
     const defaultValue = 1;
     if (!_.isNumber(currentIndex)) {
       return defaultValue;
     }
     const mapIndex = 2 - Math.abs(currentIndex - index);
-    return [1.3, 1.6, 1.9] ?. [mapIndex] || defaultValue;
+    return [1.1, 1.2, 1.3] ?. [mapIndex] || defaultValue;
   }};
 `;
 
