@@ -41,12 +41,13 @@ const useStateHook = () => {
   const treeData = useMemo(() => {
     const groupTags = _.groupBy(Object.values(tags), 'parent.id');
     const groupArticles = _.groupBy(articleList, 'tags[0].id');
-    const parents = _.sortBy((groupTags.null || []).map(v => ({
+    console.log('groupTags', groupTags);
+    const parents = _.sortBy((groupTags.undefined || []).map(v => ({
       id: v.id,
       type: 'tag',
       name: v.name,
       editor: v.editor,
-      parent: v.parent.id,
+      parent: v.parent?.id,
     })), 'name');
     const loop = list => list.forEach(parent => {
       if (!menu.openKeys.includes(parent.id)) {
