@@ -21,6 +21,21 @@ const useStateHook = () => {
     fulled && requestFullscreen(document.getElementById('root'));
   }, [fulled]);
 
+  // 监听 ctrl + shift + f 切换全屏
+  React.useEffect(() => {
+    const listener = event => {
+      const { shiftKey, ctrlKey, metaKey, keyCode } = event;
+      if (shiftKey && (ctrlKey || metaKey) && keyCode === 70) {
+        event.preventDefault();
+        event.stopPropagation();
+        setFulled(!fulled);
+      }
+    };
+
+    document.addEventListener('keydown', listener);
+    return () => document.removeEventListener('keydown', listener);
+  }, [fulled]);
+
   return { fulled, onToggle };
 };
 
