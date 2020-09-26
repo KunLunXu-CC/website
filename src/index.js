@@ -9,7 +9,8 @@ import 'moment/locale/zh-cn';
 import '@assets/style';
 
 import { ConfigProvider } from 'antd';
-moment.locale('zh-cn');
+
+moment.locale('zh-cn'); // 时区设置
 
 reactDom.render(
   <ConfigProvider locale={zhCN}>

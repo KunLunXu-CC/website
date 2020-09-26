@@ -1,10 +1,9 @@
-import React, {
-  useMemo,
-} from 'react';
+import React from 'react';
 import Date from './Date';
 import Github from './Github';
 import Juejin from './Juejin';
 import classNames from 'classnames';
+import Fullscreen from './Fullscreen';
 import scss from './index.module.scss';
 import Notification from './Notification';
 
@@ -14,7 +13,8 @@ import { useSelector }  from 'react-redux';
 const useStateHook = () => {
   const opens = useSelector(state => _.get(state, 'app.opens'));
 
-  const menuClassName = useMemo(() => {
+  // 菜单 className
+  const menuClassName = React.useMemo(() => {
     const hideMenu = opens.find(v => v.isMax && v.isMin === false);
     return classNames(
       scss.menu,
@@ -30,11 +30,12 @@ export default () => {
   return (
     <div className={state.menuClassName}>
       <div className={scss.body}>
-        <Date/>
         <Github/>
         <Juejin/>
         <Icon type="icon-wifi"/>
         <Icon type="icon-dianliang"/>
+        <Fullscreen/>
+        <Date/>
         <Notification/>
       </div>
     </div>
