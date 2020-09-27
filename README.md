@@ -17,3 +17,142 @@
 npm install
 npm run start
 ```
+
+
+```json
+{
+  "level": [
+      [
+          {
+              "keyWords": [
+                  {
+                      "keys": [
+                          "k1",
+                          "k2",
+                          "k3"
+                      ],
+                      "type": [
+                          1,
+                          2,between
+                          3
+                      ],
+                      "between": 0,
+                  },
+                  {
+                      "keys": [
+                          "k4",
+                          "k6"
+                      ],
+                      "type": [
+                          2,
+                          3
+                      ],
+                      "": [
+                          0
+                      ]
+                  }
+              ],
+              "betweenWords": [
+                  1
+              ]
+          }
+      ],
+      [
+        {
+          "keyWords": [
+              {
+                  "keys": [
+                      "k5"  // 关键字
+                  ],
+                  "type": [
+                      1   // 关键字类型
+                  ],
+                  "between": null  // 关系
+              }
+          ],
+          "betweenWords": null   // 
+        }
+      ]
+  ],
+  "betweenLevel": 0
+}
+
+
+k5 && ((k1 && k2 || k3) || (k4 && k6))
+```
+
+
+```js
+// 0 与 1 或
+// k1 && k2
+[
+  {
+    value: 'k1',
+    type: 1,
+    between: 0
+  },
+  {
+    value: 'k1',
+    type: 1,
+    between: 0
+  },
+]
+
+// k1 && (k2 && k3)
+[
+  {
+    value: 'k1',
+    type: 1,
+    between: 0
+  },
+  {
+    between: 0,
+    children: [
+      {
+        value: 'k2',
+        type: 1,
+        between: 0
+      },
+      {
+        value: 'k3',
+        type: 1,
+        between: 0
+      },
+    ]
+  },
+]
+
+// k1 && ((k2 && k3) && k4)
+[
+  {
+    value: 'k1',
+    type: 1,
+    between: 0
+  },
+  {
+    between: 0,
+    children: [
+      {
+        between: 0
+        children: [
+          { 
+            value: 'k2',
+            type: 1,
+            between: 0
+          },
+          { 
+            value: 'k3',
+            type: 1,
+            between: 0
+          },
+        ]
+      },
+      {
+        value: 'k4',
+        type: 1,
+        between: 0
+      },
+    ]
+  },
+]
+```

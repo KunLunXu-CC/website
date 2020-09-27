@@ -1,6 +1,6 @@
 import React from 'react';
+import Title from './Title';
 import Footer from './Footer';
-import MenuTitle from './MenuTitle';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
@@ -71,21 +71,18 @@ const useStateHook = () => {
 
   // 渲染菜单列表
   const renderMenuList = () => {
-    const recursion = (item, index) => {
-      const title = <MenuTitle data={item}/>;
+    const recursion = (item, level) => {
+      const title = <Title data={item}/>;
       return (
         item.type === 'tag' ?
           <Menu.SubMenu key={item.id} title={title}>
             {item.children.length !== 0 ?
-              item.children.map(v => (recursion(v, index + 1))) :
-              <Menu.Item
-                key={`${item.id}-empty`}
-                className={scss['menu-item-empty']}
-              />
+              item.children.map(v => (recursion(v, level + 1))) :
+              <Menu.Item className={scss['menu-item-empty']}/>
             }
             <div
               className={scss['menu-dividing']}
-              style={{ left: `${(index * INLINE_INDENT) + 12}px` }}
+              style={{ left: `${(level * INLINE_INDENT) + 12}px` }}
             />
           </Menu.SubMenu> :
           <Menu.Item key={item.id}>{title}</Menu.Item>
@@ -107,11 +104,6 @@ const useStateHook = () => {
     });
   }, []);
 
-  // 添加 tag
-  const addTag = () => {
-    dispatch({ type: 'editor/createFictitiousTag', parent: null });
-  };
-
   // SubMenu 展开/关闭的回调
   const onOpenChange = openKeys => {
     dispatch({
@@ -122,7 +114,6 @@ const useStateHook = () => {
 
   return {
     menu,
-    addTag,
     onResize,
     onSelect,
     selectedKeys,
