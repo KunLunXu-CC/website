@@ -9,8 +9,8 @@ export const REVOKE_CONFIRM = 'EDITOR_REVOKE_CONFIRM';
 // 弹窗类型常量 - 缩略图配置
 export const THUMB_SETTING = 'EDITOR_THUMB_SETTING';
 
-// side 菜单配置
-export const SIDE_MENU = {
+// Activity 配置
+export const ACTIVITY_LIST = {
   ALL: {
     KEY: 'all',
     TITLE: '全部',

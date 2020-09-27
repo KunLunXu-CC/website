@@ -1,0 +1,17 @@
+.footer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+  color: #bec7ce;
+  line-height: 30px;
+  position: absolute;
+  text-align: center;
+  transition: all 0.5s;
+  background: rgba($color: #2e3a46, $alpha: 0.5);
+
+  &:hover {
+    opacity: 1;
+  }
+}

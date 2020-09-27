@@ -192,17 +192,17 @@ export const addEditorStatusWithArticle = (state, { id }) => {
 };
 
 /**
- * 设置 side 状态
- * 1. reducer: action = { type: 'editor/setSide', side }
+ * 设置 activity 状态
+ * 1. reducer: action = { type: 'editor/setActivity', activity }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {Object} action.side 要修改 side
+ * @param {Object} action.activity 要修改 activity
  * @return {Object} 更新后的状态
  */
-export const setSide = (state, { side }) => ({
+export const setActivity = (state, { activity }) => ({
   ... state,
-  side: { ... state.side, ... side },
+  activity: { ... state.activity, ... activity },
 });
 
 /**

@@ -1,32 +1,30 @@
-import React, {
-  useCallback,
-} from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { SIDE_MENU } from '../consts';
+import { ACTIVITY_LIST } from '../consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const { selectMenuKey } = useSelector(state => ({
-    selectMenuKey: state.editor.side.selectMenuKey,
+  const { selectKey } = useSelector(state => ({
+    selectKey: state.editor.activity.selectKey,
   }));
 
   // 点击菜单
-  const onClick = selectMenuKey => {
+  const onClick = selectKey => {
     dispatch({
-      type: 'editor/setSide',
-      side: { selectMenuKey },
+      type: 'editor/setActivity',
+      activity: { selectKey },
     });
   };
 
   // 菜单项 className
-  const getItemClassName = useCallback(key => classNames(
-    scss['side-menu-item'],
-    { [scss['side-menu-item-action']]: key === selectMenuKey }
-  ), [selectMenuKey]);
+  const getItemClassName = React.useCallback(key => classNames(
+    scss['activity-menu-item'],
+    { [scss['activity-menu-item-action']]: key === selectKey }
+  ), [selectKey]);
 
   return { onClick, getItemClassName };
 };
@@ -35,9 +33,9 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <div className={scss.side}>
-      <div className={scss['side-menu']}>
-        {Object.values(SIDE_MENU).map(V => (
+    <div className={scss.activity}>
+      <div className={scss['activity-menu']}>
+        {Object.values(ACTIVITY_LIST).map(V => (
           <div
             key={V.KEY}
             onClick={state.onClick.bind(null, V.KEY)}
@@ -46,7 +44,7 @@ export default () => {
           </div>
         ))}
       </div>
-      <div className={scss['side-footer']}>
+      <div className={scss['activity-footer']}>
       </div>
     </div>
   );

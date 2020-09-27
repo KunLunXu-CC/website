@@ -1,8 +1,8 @@
 import React, {
   useEffect,
 } from 'react';
-import Side from './Side';
-import Menu from './Menu';
+import ActivityBar from './ActivityBar';
+import SideBar from './SideBar';
 import Work from './Work';
 import Tips from './Tips';
 import Modal from './Modal';
@@ -12,6 +12,8 @@ import Preview from './Preview';
 import scss from './index.module.scss';
 
 import { useDispatch } from 'react-redux';
+
+// activity bar、 side bar
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -27,8 +29,8 @@ export default () => {
     <div className={scss.editor}>
       <Header/>
       <div className={scss['editor-body']}>
-        <Side/>
-        <Menu/>
+        <ActivityBar/>
+        <SideBar/>
         <Work/>
         <Preview/>
       </div>

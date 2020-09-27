@@ -1,17 +1,15 @@
-import React, {
-  useMemo,
-  useCallback,
-} from 'react';
+import React from 'react';
+import Footer from './Footer';
 import MenuTitle from './MenuTitle';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { Icon, VariableContainer } from 'qyrc';
+import { VariableContainer } from 'qyrc';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
-const MENU_MIN_WIDTH = 4; // 菜单最小宽度
+const MENU_MIN_WIDTH = 4;  // 菜单最小宽度
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -21,27 +19,26 @@ const useStateHook = () => {
     menu,
     works,
     articles,
-    selectMenuKey,
+    selectKey,
   } = useSelector(state => ({
     menu: state.editor.menu,
     tags: state.editor.tags,
     works: state.editor.works,
     articles: state.editor.articles,
-    selectMenuKey: state.editor.side.selectMenuKey,
+    selectKey: state.editor.activity.selectKey,
   }));
 
   // 获取文章
-  const articleList = useMemo(() => (
-    Object.values(ARTICLE_STATUS).includes(selectMenuKey)
-      ? Object.values(articles).filter(v => v.status === selectMenuKey)
+  const articleList = React.useMemo(() => (
+    Object.values(ARTICLE_STATUS).includes(selectKey)
+      ? Object.values(articles).filter(v => v.status === selectKey)
       : Object.values(articles)
-  ), [articles, selectMenuKey]);
+  ), [articles, selectKey]);
 
   // 菜单树形数据
-  const treeData = useMemo(() => {
+  const treeData = React.useMemo(() => {
     const groupTags = _.groupBy(Object.values(tags), 'parent.id');
     const groupArticles = _.groupBy(articleList, 'tags[0].id');
-    console.log('groupTags', groupTags);
     const parents = _.sortBy((groupTags.undefined || []).map(v => ({
       id: v.id,
       type: 'tag',
@@ -78,7 +75,7 @@ const useStateHook = () => {
   }, [articleList, tags, menu.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
-  const selectedKeys = useMemo(() => (
+  const selectedKeys = React.useMemo(() => (
     _.get(works.find(v => v.action), 'article')
   ), [works]);
 
@@ -112,8 +109,8 @@ const useStateHook = () => {
     dispatch({ type: 'editor/appendWorks', article });
   };
 
-
-  const onResize = useCallback(({ width }) => {
+  // 工作区尺寸变化
+  const onResize = React.useCallback(({ width }) => {
     dispatch({
       type: 'editor/setMenu',
       menu: { collapsed: MENU_MIN_WIDTH === width },
@@ -167,11 +164,7 @@ export default () => {
             selectedKeys={[state.selectedKeys]}>
             {state.renderMenuList()}
           </Menu>
-          <div
-            onClick={state.addTag}
-            className={scss['munu-new-tag']} >
-            <Icon type="icon-xinzeng" />
-          </div>
+          <Footer/>
         </div> : null
       }
     </VariableContainer >
