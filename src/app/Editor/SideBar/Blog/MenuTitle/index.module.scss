@@ -1,4 +1,4 @@
-@import '../../../../assets/style/mixin.scss';
+@import '@assets/style/mixin.scss';
 
 .menu-title {
   display: flex;
@@ -8,7 +8,7 @@
     flex: 1;
     height: 40px;
     @include line-clamp(1);
-    
+
     &-input {
       padding: 2px;
       border: none;
@@ -17,7 +17,7 @@
       height: initial;
       border-radius: 0px;
       background: rgba($color: #fff, $alpha: 0.1);
-  
+
       &:hover,
       &:focus,
       &:active {
@@ -50,7 +50,7 @@
   // 子菜单 - 展开 - 旋转箭头
   .ant-menu-submenu-open > .ant-menu-submenu-title {
     :local(.menu-title-arrow) {
-      transform: rotate(90deg); 
+      transform: rotate(90deg);
     }
   }
 
