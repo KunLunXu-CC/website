@@ -1,6 +1,6 @@
 import React from 'react';
-import Blog from './Blog';
+import Resource from './Resource';
 
 export default () => (
-  <Blog/>
+  <Resource/>
 );

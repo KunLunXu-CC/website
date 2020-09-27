@@ -12,7 +12,7 @@ export const THUMB_SETTING = 'EDITOR_THUMB_SETTING';
 // Activity 配置
 export const ACTIVITY_LIST = {
   ALL: {
-    KEY: 'blog',
+    KEY: 'resource',
     TITLE: '全部',
     ICON: 'icon-all',
   },
