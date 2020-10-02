@@ -118,15 +118,15 @@ export const removeWork = (state, { article }) => {
 };
 
 /**
- * 创建虚拟 tag (占位符)
- * 1. reducer: action = { type: 'editor/createFictitiousTag' }
+ * 创建临时文件夹(占位符)
+ * 1. reducer: action = { type: 'editor/createTemFolder' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
  * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
-export const createFictitiousTag = (state, { parent }) => ({
+export const createTemFolder = (state, { parent }) => ({
   ... state,
   tags: {
     ... state.tags,
@@ -140,15 +140,15 @@ export const createFictitiousTag = (state, { parent }) => ({
 });
 
 /**
- * 创建虚拟 article (占位符)
- * 1. reducer: action = { type: 'editor/createFictitiousArticle' }
+ * 创建临时 article (占位符)
+ * 1. reducer: action = { type: 'editor/createTmpArticle' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
  * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
-export const createFictitiousArticle = (state, { tag }) => ({
+export const createTmpArticle = (state, { tag }) => ({
   ... state,
   articles: {
     ... state.articles,

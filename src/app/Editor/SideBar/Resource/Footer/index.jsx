@@ -9,7 +9,7 @@ const useStateHook = () => {
 
   // 添加 tag
   const addTag = () => {
-    dispatch({ type: 'editor/createFictitiousTag', parent: null });
+    dispatch({ type: 'editor/createTemFolder', parent: null });
   };
 
   return { addTag };

@@ -34,12 +34,12 @@ const useStateHook = props => {
       });
       dispatch({
         parent: props.data.id,
-        type: 'editor/createFictitiousTag',
+        type: 'editor/createTemFolder',
       });
     } else {
       dispatch({
         parent: props.data.tag,
-        type: 'editor/createFictitiousTag',
+        type: 'editor/createTemFolder',
       });
     }
   };
@@ -69,12 +69,12 @@ const useStateHook = props => {
       });
       dispatch({
         tag: props.data.id,
-        type: 'editor/createFictitiousArticle',
+        type: 'editor/createTmpArticle',
       });
     } else {
       dispatch({
         tag: props.data.parent,
-        type: 'editor/createFictitiousArticle',
+        type: 'editor/createTmpArticle',
       });
     }
   };
