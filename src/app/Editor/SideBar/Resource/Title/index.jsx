@@ -34,12 +34,12 @@ const useStateHook = props => {
       });
       dispatch({
         parent: props.data.id,
-        type: 'editor/createTemFolder',
+        type: 'editor/createTemTag',
       });
     } else {
       dispatch({
         parent: props.data.tag,
-        type: 'editor/createTemFolder',
+        type: 'editor/createTemTag',
       });
     }
   };

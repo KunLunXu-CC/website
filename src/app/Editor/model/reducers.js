@@ -118,15 +118,15 @@ export const removeWork = (state, { article }) => {
 };
 
 /**
- * 创建临时文件夹(占位符)
- * 1. reducer: action = { type: 'editor/createTemFolder' }
+ * 创建临时 tag (占位符)
+ * 1. reducer: action = { type: 'editor/createTemTag' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
  * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
-export const createTemFolder = (state, { parent }) => ({
+export const createTemTag = (state, { parent }) => ({
   ... state,
   tags: {
     ... state.tags,
