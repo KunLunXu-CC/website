@@ -1,11 +1,11 @@
 import Tab from './Tab';
-import Empty from './Empty';
+import React from 'react';
 import Editor from './Editor';
-import React, { useMemo } from 'react';
 import scss from './index.module.scss';
 import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
+import { Icon } from 'qyrc';
 import { APP_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,7 +20,7 @@ const useStateHook = () => {
   }));
 
   // 当前选中项
-  const selected = useMemo(() => (
+  const selected = React.useMemo(() => (
     _.get(works.find(v => v.action), 'article')
   ), [works]);
 
@@ -52,7 +52,10 @@ export default () => {
               <Editor work={v}/>
             </Tabs.TabPane>
           ))}
-        </Tabs> : <Empty/>
+        </Tabs> :
+        <div className={scss.empty}>
+          <Icon type="icon-kong"/>
+        </div>
       }
     </div>
   );
