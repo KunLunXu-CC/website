@@ -6,14 +6,10 @@ import SideBar from './SideBar';
 import Work from './Work';
 import Tips from './Tips';
 import Modal from './Modal';
-import Header from './Header';
-import Footer from './Footer';
 import Preview from './Preview';
 import scss from './index.module.scss';
 
 import { useDispatch } from 'react-redux';
-
-// activity bar、 side bar
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -27,14 +23,14 @@ export default () => {
   useStateHook();
   return (
     <div className={scss.editor}>
-      <Header/>
+      <div className={scss.header}/>
       <div className={scss['editor-body']}>
         <ActivityBar/>
         <SideBar/>
         <Work/>
         <Preview/>
       </div>
-      <Footer/>
+      <div className={scss.footer}/>
       <Tips/>
       <Modal/>
     </div>
