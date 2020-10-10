@@ -22,8 +22,8 @@ const useStateHook = () => {
 
   // 菜单项 className
   const getItemClassName = React.useCallback(key => classNames(
-    scss['activity-menu-item'],
-    { [scss['activity-menu-item-action']]: key === selectKey }
+    scss['activity-item'],
+    { [scss['activity-item-action']]: key === selectKey }
   ), [selectKey]);
 
   return { onClick, getItemClassName };
@@ -34,18 +34,14 @@ export default () => {
 
   return (
     <div className={scss.activity}>
-      <div className={scss['activity-menu']}>
-        {Object.values(ACTIVITY_LIST).map(V => (
-          <div
-            key={V.KEY}
-            onClick={state.onClick.bind(null, V.KEY)}
-            className={state.getItemClassName(V.KEY)}>
-            <Icon key={V.KEY} type={V.ICON}/>
-          </div>
-        ))}
-      </div>
-      <div className={scss['activity-footer']}>
-      </div>
+      {Object.values(ACTIVITY_LIST).map(V => (
+        <div
+          key={V.KEY}
+          onClick={state.onClick.bind(null, V.KEY)}
+          className={state.getItemClassName(V.KEY)}>
+          <Icon key={V.KEY} type={V.ICON}/>
+        </div>
+      ))}
     </div>
   );
 };
