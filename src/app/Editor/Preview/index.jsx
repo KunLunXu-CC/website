@@ -17,12 +17,10 @@ const useStateHook = () => {
   });
 
   // 关闭
-  const onClose = () => {
-    dispatch({
-      type: 'editor/setPreview',
-      preview: void 0,
-    });
-  };
+  const onClose = () => dispatch({
+    type: 'editor/setPreview',
+    preview: void 0,
+  });
 
   // 当缩小到 50 则关闭
   const onResize = ({ width }) => {

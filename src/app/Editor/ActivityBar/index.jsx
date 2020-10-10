@@ -29,7 +29,6 @@ const useStateHook = () => {
 
 export default () => {
   const state = useStateHook();
-
   return (
     <div className={scss.activity}>
       {Object.values(ACTIVITY_LIST).map(V => (

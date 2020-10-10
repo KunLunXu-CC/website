@@ -1,102 +1,80 @@
-@import '@assets/style/mixin.scss';
+.menu-item-empty {
+  height: 0 !important;
+  overflow: hidden !important;
+}
 
-.side {
-  overflow: hidden;
-  position: relative;
+.menu {
+  $bg: transparent;
+  $bg-selected: #2c313a;
+  $color: rgba($color: #cccccc, $alpha: 0.8);
 
-  .body {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    background: #21252b;
-  }
+  height: 100%;
+  border: none;
+  color: $color;
+  background: $bg;
+  padding-bottom: 50px;
 
-  .menu-item-empty {
-    height: 0 !important;
-    overflow: hidden !important;
-  }
-
-  :global{
-    .ant-menu-root {
-      padding-bottom: 50px;
-    }
-
-    // antd - 菜单
-    .ant-menu {
-      $bg: transparent;
-      $bg-selected: #2c313a;
-      $color: rgba($color: #cccccc, $alpha: 0.8);
-
-      @include scrollbar(
-        $width: 2px,
-        $thumb-bg: lighten($color: $bg-selected, $amount: 5%)
-      );
-
-      height: 100%;
+  :global {
+    .ant-menu-sub {
       border: none;
-      overflow-y: auto;
-      overflow-x: hidden;
-
       color: $color;
       background: $bg;
+    }
 
-      // 设置分割线(虚线)
-      .ant-menu-sub {
-        position: relative;
+    // 设置分割线(虚线)
+    .ant-menu-sub {
+      position: relative;
 
-        :local(.menu-dividing){
-          top: 0;
-          width: 1;
-          bottom: 0;
-          position: absolute;
-          border-right: 1px dashed rgba($color: $color, $alpha: 0.1);
-        }
+      :local(.menu-dividing){
+        top: 0;
+        width: 1;
+        bottom: 0;
+        position: absolute;
+        border-right: 1px dashed rgba($color: $color, $alpha: 0.1);
       }
+    }
 
-      // 子菜单 - 活动或者选中
-      .ant-menu-submenu-active,
-      .ant-menu-submenu-selected {
-        > .ant-menu-submenu-title {
-          color: $color !important;
-          background: $bg-selected !important;
-        }
+    // 子菜单 - 活动或者选中
+    .ant-menu-submenu-active,
+    .ant-menu-submenu-selected {
+      > .ant-menu-submenu-title {
+        color: $color !important;
+        background: $bg-selected !important;
       }
+    }
 
-      // 子菜单 - 正常
+    // 子菜单 - 正常
+    .ant-menu-submenu-title {
+      padding-right: 0px !important;
+    }
+
+    // 子菜单 - 选中但是被打开则不显示任何样式
+    .ant-menu-submenu-selected.ant-menu-submenu-open {
       .ant-menu-submenu-title {
-        padding-right: 0px !important;
+        color: $color !important;
+        background: $bg !important;
       }
+    }
 
-      // 子菜单 - 选中但是被打开则不显示任何样式
-      .ant-menu-submenu-selected.ant-menu-submenu-open {
-        .ant-menu-submenu-title {
-          color: $color !important;
-          background: $bg !important;
-        }
-      }
+    // 根菜单样式覆盖 - 正常状态
+    .ant-menu-item {
+      border: none;
+      background: $bg;
+      margin: 0px !important;
+      padding-right: 5px !important;
+      &::after { display: none; }
+    }
 
-      // 根菜单样式覆盖 - 正常状态
-      .ant-menu-item {
-        border: none;
-        background: $bg;
-        margin: 0px !important;
-        padding-right: 5px !important;
-        &::after { display: none; }
-      }
+    // 根菜单样式覆盖 - 停放状态
+    .ant-menu-item.ant-menu-item-active,
+    .ant-menu-item.ant-menu-item-selected {
+      color: $color;
+      background: $bg-selected;
+    }
 
-      // 根菜单样式覆盖 - 停放状态
-      .ant-menu-item.ant-menu-item-active,
-      .ant-menu-item.ant-menu-item-selected {
-        color: $color;
-        background: $bg-selected;
-      }
-
-      // 箭头
-      .ant-menu-submenu-arrow {
-        display: none;
-      }
+    // 箭头
+    .ant-menu-submenu-arrow {
+      display: none;
     }
   }
 }

@@ -1,18 +1,14 @@
 import React from 'react';
 import Title from './Title';
-import Footer from './Footer';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { VariableContainer } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
-const MENU_MIN_WIDTH = 4;  // 菜单最小宽度
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-
   const {
     tags,
     side,
@@ -96,14 +92,6 @@ const useStateHook = () => {
     dispatch({ type: 'editor/appendWorks', article });
   };
 
-  // 工作区尺寸变化
-  const onResize = React.useCallback(({ width }) => {
-    dispatch({
-      type: 'editor/setSide',
-      side: { collapsed: MENU_MIN_WIDTH === width },
-    });
-  }, []);
-
   // SubMenu 展开/关闭的回调
   const onOpenChange = openKeys => {
     dispatch({
@@ -114,7 +102,6 @@ const useStateHook = () => {
 
   return {
     side,
-    onResize,
     onSelect,
     selectedKeys,
     onOpenChange,
@@ -124,30 +111,17 @@ const useStateHook = () => {
 
 export default () => {
   const state = useStateHook();
-
   return (
-    <VariableContainer
-      className={scss.side}
-      margin={{ right: '20%' }}
-      operationList={['right']}
-      onResize={state.onResize}
-      style={{ height: '100%' }}
-      constraintSize={{ width: MENU_MIN_WIDTH }}>
-      {!state.side.collapsed ?
-        <div className={scss.body}>
-          <Menu
-            mode="inline"
-            inlineCollapsed={false}
-            onSelect={state.onSelect}
-            inlineIndent={INLINE_INDENT}
-            openKeys={state.side.openKeys}
-            onOpenChange={state.onOpenChange}
-            selectedKeys={[state.selectedKeys]}>
-            {state.renderMenuList()}
-          </Menu>
-          <Footer/>
-        </div> : null
-      }
-    </VariableContainer >
+    <Menu
+      mode="inline"
+      className={scss.menu}
+      inlineCollapsed={false}
+      onSelect={state.onSelect}
+      inlineIndent={INLINE_INDENT}
+      openKeys={state.side.openKeys}
+      onOpenChange={state.onOpenChange}
+      selectedKeys={[state.selectedKeys]}>
+      {state.renderMenuList()}
+    </Menu>
   );
 };

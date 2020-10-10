@@ -1,0 +1,23 @@
+@import '@assets/style/mixin.scss';
+
+.side {
+  overflow: hidden;
+  position: relative;
+
+  .body {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background: #21252b;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @include scrollbar(
+      $width: 2px,
+      $thumb-bg: lighten($color: #2c313a, $amount: 5%)
+    );
+  }
+}
