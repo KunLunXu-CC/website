@@ -104,7 +104,7 @@ const removeArticle = function * ({ id }) {
  */
 const createTag = function * ({ body }) {
   const currentTags = yield select(state => state.editor.tags);
-  delete currentTags.newTag;
+  delete currentTags.new;
 
   const { change } = body.name
     ? yield call(services.createTags, {
@@ -160,7 +160,7 @@ const updateTag = function * ({ body, id }) {
  */
 const createArticle = function * ({ body }) {
   const currentArticles = yield select(state => state.editor.articles);
-  delete currentArticles.newArticle;
+  delete currentArticles.new;
 
   const { change } = body.name
     ? yield call(services.createArticles, {

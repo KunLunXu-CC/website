@@ -1,33 +1,24 @@
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-} from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
-
 
 import { Icon } from 'qyrc';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Menu, Input } from 'antd';
 
 // 阻止事件冒泡
-const stopPropagation = e => {
-  e.stopPropagation();
-};
+const stopPropagation = e => e.stopPropagation();
 
 const useStateHook = props => {
-  const editorInputRef = useRef(null);
-
   const dispatch = useDispatch();
+  const editorInputRef = React.useRef(null);
+  const { openKeys } = useSelector(state => ({
+    openKeys: state.editor.side.openKeys,
+  }));
 
-  const openKeys = useSelector(
-    state => _.get(state, 'editor.side.openKeys')
-  );
-
-  // 创建文件夹: 在文件夹上下拉选择创建、在文章上下拉选择创建
-  const createFolder = () => {
-    if (props.data.type === 'tag') {
+  // 下拉菜单点击事件: 点击创建文件夹
+  const onClickCreateFolderMenu = () => {
+    if (props.data.type === 'tag') { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
         side: { openKeys: [... openKeys, props.data.id] },
@@ -36,7 +27,7 @@ const useStateHook = props => {
         parent: props.data.id,
         type: 'editor/createTemTag',
       });
-    } else {
+    } else { // 在文章上触发下拉框
       dispatch({
         parent: props.data.tag,
         type: 'editor/createTemTag',
@@ -44,25 +35,9 @@ const useStateHook = props => {
     }
   };
 
-  // 编辑文件夹
-  const addEditorStatusWithTag = () => {
-    dispatch({
-      id: props.data.id,
-      type: 'editor/addEditorStatusWithTag',
-    });
-  };
-
-  // 删除文件夹
-  const deleteFolder = () => {
-    dispatch({
-      id: props.data.id,
-      type: 'editor/removeTag',
-    });
-  };
-
-  // 创建文章: 在文件夹上下拉选择创建、在文章上下拉选择创建
-  const createArticle = () => {
-    if (props.data.type === 'tag') {
+  // 下拉菜单点击事件: 点击创建文章
+  const onClickCreateArticleMenu = () => {
+    if (props.data.type === 'tag') { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
         side: { openKeys: [... openKeys, props.data.id] },
@@ -71,7 +46,7 @@ const useStateHook = props => {
         tag: props.data.id,
         type: 'editor/createTmpArticle',
       });
-    } else {
+    } else { // 在文章上触发下拉框
       dispatch({
         tag: props.data.parent,
         type: 'editor/createTmpArticle',
@@ -79,36 +54,60 @@ const useStateHook = props => {
     }
   };
 
-  // 编辑文章
-  const addEditorStatusWithArticle = () => {
+  // 下拉菜单点击事件: 点击编辑
+  const onClickEditMenu = () => {
+    const type = props.data.type === 'tag'
+      ? 'editor/addEditorStatusWithTag'
+      : 'editor/addEditorStatusWithArticle';
     dispatch({
+      type,
       id: props.data.id,
-      type: 'editor/addEditorStatusWithArticle',
     });
   };
 
-  // 删除文章
-  const deleteArticle = () => {
-    dispatch({ type: 'editor/removeArticle', id: props.data.id });
+  // 下拉菜单点击事件: 点击删除
+  const onClickDeleteMenu = () => {
+    const type = props.data.type === 'tag'
+      ? 'editor/removeTag'
+      : 'editor/removeArticle';
+    dispatch({
+      type,
+      id: props.data.id,
+    });
   };
 
-  // 点击操作菜单: 根据 key 分发到不同处理函数
-  const onClickOperationMenu = ({ key, domEvent }) => {
-    stopPropagation(domEvent);
-    const handler = {
-      createFolder,
-      deleteFolder,
-      createArticle,
-      deleteArticle,
-      addEditorStatusWithTag,
-      addEditorStatusWithArticle,
-    };
-    handler[key]();
-  };
+  // 下拉菜单配置
+  const dropdownMenuSetting = React.useMemo(() => ([
+    {
+      title: '创建文件夹',
+      icon: 'icon-wenjianjia',
+      onClick: onClickCreateFolderMenu,
+    },
+    {
+      title: '创建文章',
+      icon: 'icon-24',
+      onClick: onClickCreateArticleMenu,
+    },
+    {
+      title: '编辑',
+      icon: 'icon-baocun',
+      onClick: onClickEditMenu,
+    },
+    {
+      title: '删除',
+      icon: 'icon-shanchu',
+      onClick: onClickDeleteMenu,
+    },
+  ]), [
+    onClickEditMenu,
+    onClickDeleteMenu,
+    onClickCreateFolderMenu,
+    onClickCreateArticleMenu,
+  ]);
 
   // 编辑标签
-  const onEditorTag = name => {
-    props.data.id === 'newTag'
+  const onEditTag = name => {
+    props.data.id === 'new'
       ? dispatch({
         type: 'editor/createTag',
         body: { name, parent: props.data.parent },
@@ -121,8 +120,8 @@ const useStateHook = props => {
   };
 
   // 编辑文章
-  const onEditorArticle = name => {
-    props.data.id === 'newArticle'
+  const onEditArticle = name => {
+    props.data.id === 'new'
       ? dispatch({
         type: 'editor/createArticle',
         body: { name, tags: [props.data.tag] },
@@ -135,93 +134,71 @@ const useStateHook = props => {
   };
 
   // 编辑数据：根据 id 判断是编辑还是创建, 根据 type 值来判断是更新标签还是文章
-  const onEditor = e => {
+  const onEdit = e => {
     const name = e.target.value;
     props.data.type === 'tag'
-      ? onEditorTag(name)
-      : onEditorArticle(name);
+      ? onEditTag(name)
+      : onEditArticle(name);
   };
 
-  // 每项前箭头小图标
-  const arrowClass = useMemo(() => classNames(
+  // 标题前箭头 - className
+  const classNameWithArrow = React.useMemo(() => classNames(
     scss['menu-title-arrow'],
     { [scss['menu-title-arrow-article']]: props.data.type === 'article' }
   ), [props.data.type]);
 
-  // 菜单图标
-  const menuIcon = useMemo(() => {
-    const map = {
-      article: 'icon-24',
-      tag: 'icon-wenjianjia',
-    };
-    return map[props.data.type];
-  }, [props.data.type]);
+  // 标题前图标
+  const menuIcon = React.useMemo(() => ({
+    article: 'icon-24',
+    tag: 'icon-wenjianjia',
+  }[props.data.type]), [props.data.type]);
 
-  // 下拉菜单
-  const menu = useMemo(() => {
-    const editKey = props.data.type === 'tag'
-      ? 'addEditorStatusWithTag'
-      : 'addEditorStatusWithArticle';
-    const deleeKey = props.data.type === 'tag'
-      ? 'deleteFolder'
-      : 'deleteArticle';
-    const menuSetting = [
-      { title: '创建文件夹', key: 'createFolder', icon: 'icon-wenjianjia' },
-      { title: '创建文章', key: 'createArticle', icon: 'icon-24' },
-      { title: '编辑', key: editKey, icon: 'icon-baocun' },
-      { title: '删除', key: deleeKey, icon: 'icon-shanchu' },
-    ];
-    return (
-      <Menu
-        className={scss['operation-menu']}
-        onClick={onClickOperationMenu}>
-        {menuSetting.map(v => (
-          <Menu.Item key={v.key}>
-            <Icon type={v.icon}/>
-            {v.title}
-          </Menu.Item>
-        ))}
-      </Menu>
-    );
-  }, [props.type, onClickOperationMenu]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
   });
 
   return {
-    menu,
+    onEdit,
     menuIcon,
-    onEditor,
-    arrowClass,
     editorInputRef,
     stopPropagation,
+    classNameWithArrow,
+    dropdownMenuSetting,
   };
 };
 
 export default props => {
   const state = useStateHook(props);
-
   return (
     <div className={scss['menu-title']}>
-      <Icon type="icon-jiantou" className={state.arrowClass}/>
+      <Icon type="icon-jiantou" className={state.classNameWithArrow}/>
       <Icon type={state.menuIcon}/>
       <div className={scss['menu-title-content']}>
         {props.data.editor ?
           <Input
-            onBlur={state.onEditor}
+            onBlur={state.onEdit}
             ref={state.editorInputRef}
-            onPressEnter={state.onEditor}
+            onPressEnter={state.onEdit}
             defaultValue={props.data.name}
             onClick={state.stopPropagation}
             className={scss['menu-title-content-input']}
-          /> : props.data.name}
+          /> : props.data.name
+        }
       </div>
       {!props.data.editor ?
         <div className={scss['menu-title-more']}>
           <Dropdown
             trigger={['click']}
-            overlay={state.menu}
+            overlay={
+              <Menu className={scss['operation-menu']}>
+                {state.dropdownMenuSetting.map(v => (
+                  <Menu.Item key={v.key} onClick={v.onClick}>
+                    <Icon type={v.icon}/>
+                    {v.title}
+                  </Menu.Item>
+                ))}
+              </Menu>
+            }
             placement="bottomRight"
             onClick={state.stopPropagation} >
             <Icon type="icon-gengduo" onClick={state.onMore}/>
