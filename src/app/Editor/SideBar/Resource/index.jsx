@@ -26,10 +26,8 @@ const useStateHook = () => {
     const groupTags = _.groupBy(Object.values(tags), 'parent.id');
     const groupArticles = _.groupBy(articles, 'tags[0].id');
     const parents = _.sortBy((groupTags.undefined || []).map(v => ({
-      id: v.id,
+      ... v,
       type: 'tag',
-      name: v.name,
-      editor: v.editor,
       parent: v.parent?.id,
     })), 'name');
     const loop = list => list.forEach(parent => {
@@ -38,18 +36,14 @@ const useStateHook = () => {
       } else {
         parent.children = [ // eslint-disable-line
           ... _.sortBy((groupTags[parent.id] || []).map(v => ({
-            id: v.id,
+            ... v,
             type: 'tag',
-            name: v.name,
-            editor: v.editor,
             parent: parent.id,
           })), 'name'),
           ... _.sortBy((groupArticles[parent.id] || []).map(v => ({
-            id: v.id,
-            name: v.name,
+            ... v,
             tag: parent.id,
             type: 'article',
-            editor: v.editor,
             parent: parent.id,
           })), 'name'),
         ];
@@ -88,17 +82,16 @@ const useStateHook = () => {
   };
 
   // 点击菜单项
-  const onSelect = ({ key: article }) => {
-    dispatch({ type: 'editor/appendWorks', article });
-  };
+  const onSelect = ({ key: article }) => dispatch({
+    article,
+    type: 'editor/appendWorks',
+  });
 
   // SubMenu 展开/关闭的回调
-  const onOpenChange = openKeys => {
-    dispatch({
-      type: 'editor/setSide',
-      side: { openKeys },
-    });
-  };
+  const onOpenChange = openKeys => dispatch({
+    type: 'editor/setSide',
+    side: { openKeys },
+  });
 
   return {
     side,
