@@ -13,12 +13,10 @@ const useStateHook = () => {
   }));
 
   // 点击菜单
-  const onClick = selectKey => {
-    dispatch({
-      type: 'editor/setActivity',
-      activity: { selectKey },
-    });
-  };
+  const onClick = selectKey => dispatch({
+    type: 'editor/setActivity',
+    activity: { selectKey },
+  });
 
   // 菜单项 className
   const getItemClassName = React.useCallback(key => classNames(
