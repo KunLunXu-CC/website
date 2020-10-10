@@ -22,15 +22,15 @@ const useStateHook = props => {
   const dispatch = useDispatch();
 
   const openKeys = useSelector(
-    state => _.get(state, 'editor.menu.openKeys')
+    state => _.get(state, 'editor.side.openKeys')
   );
 
   // 创建文件夹: 在文件夹上下拉选择创建、在文章上下拉选择创建
   const createFolder = () => {
     if (props.data.type === 'tag') {
       dispatch({
-        type: 'editor/setMenu',
-        menu: { openKeys: [... openKeys, props.data.id] },
+        type: 'editor/setSide',
+        side: { openKeys: [... openKeys, props.data.id] },
       });
       dispatch({
         parent: props.data.id,
@@ -64,8 +64,8 @@ const useStateHook = props => {
   const createArticle = () => {
     if (props.data.type === 'tag') {
       dispatch({
-        type: 'editor/setMenu',
-        menu: { openKeys: [... openKeys, props.data.id] },
+        type: 'editor/setSide',
+        side: { openKeys: [... openKeys, props.data.id] },
       });
       dispatch({
         tag: props.data.id,

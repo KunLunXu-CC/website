@@ -7,7 +7,7 @@ const initState = {
   tags: {},        // {[id]: value}
   articles: {},    // {[id]: value}
   preview: void 0, // 预览文章(文章 id)
-  menu: {
+  side: {
     openKeys: [],     // 打开的菜单项
     collapsed: false, // 菜单折叠状态, 是否收缩到最小
   },

@@ -15,11 +15,11 @@ const useStateHook = () => {
 
   const {
     tags,
-    menu,
+    side,
     works,
     articles,
   } = useSelector(state => ({
-    menu: state.editor.menu,
+    side: state.editor.side,
     tags: state.editor.tags,
     works: state.editor.works,
     articles: state.editor.articles,
@@ -37,7 +37,7 @@ const useStateHook = () => {
       parent: v.parent?.id,
     })), 'name');
     const loop = list => list.forEach(parent => {
-      if (!menu.openKeys.includes(parent.id)) {
+      if (!side.openKeys.includes(parent.id)) {
         parent.children = []; // eslint-disable-line
       } else {
         parent.children = [ // eslint-disable-line
@@ -62,7 +62,7 @@ const useStateHook = () => {
     });
     loop(parents);
     return parents;
-  }, [articles, tags, menu.openKeys]);
+  }, [articles, tags, side.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = React.useMemo(() => (
@@ -99,21 +99,21 @@ const useStateHook = () => {
   // 工作区尺寸变化
   const onResize = React.useCallback(({ width }) => {
     dispatch({
-      type: 'editor/setMenu',
-      menu: { collapsed: MENU_MIN_WIDTH === width },
+      type: 'editor/setSide',
+      side: { collapsed: MENU_MIN_WIDTH === width },
     });
   }, []);
 
   // SubMenu 展开/关闭的回调
   const onOpenChange = openKeys => {
     dispatch({
-      type: 'editor/setMenu',
-      menu: { openKeys },
+      type: 'editor/setSide',
+      side: { openKeys },
     });
   };
 
   return {
-    menu,
+    side,
     onResize,
     onSelect,
     selectedKeys,
@@ -127,20 +127,20 @@ export default () => {
 
   return (
     <VariableContainer
-      className={scss.menu}
+      className={scss.side}
       margin={{ right: '20%' }}
       operationList={['right']}
       onResize={state.onResize}
       style={{ height: '100%' }}
       constraintSize={{ width: MENU_MIN_WIDTH }}>
-      {!state.menu.collapsed ?
+      {!state.side.collapsed ?
         <div className={scss.body}>
           <Menu
             mode="inline"
             inlineCollapsed={false}
             onSelect={state.onSelect}
             inlineIndent={INLINE_INDENT}
-            openKeys={state.menu.openKeys}
+            openKeys={state.side.openKeys}
             onOpenChange={state.onOpenChange}
             selectedKeys={[state.selectedKeys]}>
             {state.renderMenuList()}

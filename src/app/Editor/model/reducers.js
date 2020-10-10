@@ -28,17 +28,17 @@ export const setArticles = (state, { articles }) => ({
 });
 
 /**
- * 设置 menu: 替换式修改
- * 1. reducer: action = { type: 'editor/setMenu' }
+ * 设置 side: 替换式修改
+ * 1. reducer: action = { type: 'editor/setSide' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
- * @param {String} action.menu 需要修改字段
+ * @param {String} action.side 需要修改字段
  * @return {Object} 更新后的状态
  */
-export const setMenu = (state, { menu }) => ({
+export const setSide = (state, { side }) => ({
   ... state,
-  menu: { ... state.menu, ... menu },
+  side: { ... state.side, ... side },
 });
 
 /**
