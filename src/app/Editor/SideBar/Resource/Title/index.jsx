@@ -105,40 +105,43 @@ const useStateHook = props => {
     onClickCreateArticleMenu,
   ]);
 
-  // 编辑标签
-  const onEditTag = name => {
-    props.data.id === 'new'
-      ? dispatch({
-        type: 'editor/createTag',
-        body: { name, parent: props.data.parent },
-      })
-      : dispatch({
-        body: { name },
-        id: props.data.id,
-        type: 'editor/updateTag',
-      });
-  };
-
-  // 编辑文章
-  const onEditArticle = name => {
-    props.data.id === 'new'
-      ? dispatch({
-        type: 'editor/createArticle',
-        body: { name, tags: [props.data.tag] },
-      })
-      : dispatch({
-        body: { name },
-        id: props.data.id,
-        type: 'editor/updateArticle',
-      });
-  };
-
-  // 编辑数据：根据 id 判断是编辑还是创建, 根据 type 值来判断是更新标签还是文章
+  // 编辑数据: 根据不同 id、type 设置不同 dispatch 参数
   const onEdit = e => {
     const name = e.target.value;
-    props.data.type === 'tag'
-      ? onEditTag(name)
-      : onEditArticle(name);
+    const isNew = props.data.id === 'new';
+    const isFolder = props.data.type === 'tag';
+    dispatch([
+      {
+        filter: isFolder && isNew,
+        dispatchParams: {
+          type: 'editor/createTag',
+          body: { name, parent: props.data.parent },
+        },
+      },
+      {
+        filter: isFolder && !isNew,
+        dispatchParams: {
+          body: { name },
+          id: props.data.id,
+          type: 'editor/updateTag',
+        },
+      },
+      {
+        filter: !isFolder && isNew,
+        dispatchParams: {
+          type: 'editor/createArticle',
+          body: { name, tags: [props.data.tag] },
+        },
+      },
+      {
+        filter: !isFolder && !isNew,
+        dispatchParams: {
+          body: { name },
+          id: props.data.id,
+          type: 'editor/updateArticle',
+        },
+      },
+    ].find(v => v.filter).dispatchParams);
   };
 
   // 标题前箭头 - className
@@ -192,7 +195,7 @@ export default props => {
             overlay={
               <Menu className={scss['operation-menu']}>
                 {state.dropdownMenuSetting.map(v => (
-                  <Menu.Item key={v.key} onClick={v.onClick}>
+                  <Menu.Item key={v.title} onClick={v.onClick}>
                     <Icon type={v.icon}/>
                     {v.title}
                   </Menu.Item>
