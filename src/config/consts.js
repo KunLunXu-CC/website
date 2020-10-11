@@ -54,6 +54,9 @@ export const DATASETSFROM_CODE = {
   SNIPPETS_TAG: { VALUE: 6, DESC: '代码块', ICON: 'icon-daimakuai' },
   INTERVIEW_TAG: { VALUE: 7, DESC: '面试题', ICON: 'icon-mianshitiku' },
   ALGORITHM_TAG: { VALUE: 8, DESC: '算法', ICON: 'icon-suanfa' },
+
+  ARTICLE_TYPE: { VALUE: 9, DESC: '文章类型', ICON: 'icon-suanfa' },
+  ARTICLE_TAG: { VALUE: 10, DESC: '文章标签', ICON: 'icon-suanfa' },
 };
 
 // 统计跨度

@@ -3,6 +3,7 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
+import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
@@ -19,6 +20,7 @@ const useStateHook = () => {
     tags: state.editor.tags,
     works: state.editor.works,
     articles: state.editor.articles,
+    types: state.datasetsfrom[DATASETSFROM_CODE.ARTICLE_TYPE.VALUE],
   }));
 
   // 菜单树形数据
