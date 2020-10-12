@@ -1,4 +1,4 @@
-import { APP_CODE } from '@config/consts';
+import { APP_CODE, DATASETSFROM_CODE } from '@config/consts';
 
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';
@@ -16,6 +16,15 @@ export const ACTIVITY_LIST = {
     TITLE: '全部',
     ICON: 'icon-all',
   },
+};
+
+// 未定义 tag: 存储那些未设置 tag 或者 tag 已删除的文章
+export const UNDEFINED_TAG = {
+  name: '未定义',
+  parent: null,
+  value: -99999,
+  id: 'undefinedTag',
+  code: DATASETSFROM_CODE.ARTICLE_TYPE.VALUE,
 };
 
 // message 配置

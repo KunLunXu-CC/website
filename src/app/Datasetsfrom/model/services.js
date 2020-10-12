@@ -25,9 +25,6 @@ export const createDatasetsfroms = async ({
               ${BASE_FIELD}
               parent {
                 ${BASE_FIELD}
-                parent {
-                  ${BASE_FIELD}
-                }
               }
             }
           }
@@ -62,9 +59,6 @@ export const updateDatasetsfroms = async ({
               ${BASE_FIELD}
               parent {
                 ${BASE_FIELD}
-                parent {
-                  ${BASE_FIELD}
-                }
               }
             }
           }
@@ -96,9 +90,6 @@ export const removeDatasetsfroms = async ({
               ${BASE_FIELD}
               parent {
                 ${BASE_FIELD}
-                parent {
-                  ${BASE_FIELD}
-                }
               }
             }
           }

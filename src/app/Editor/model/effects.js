@@ -1,9 +1,9 @@
 import * as services from './services';
 
 import { message } from '@utils';
-import { MESSAGE_CONFIG } from '../consts';
-import { APP_CODE, PHOTO_TYPE } from '@config/consts';
+import { MESSAGE_CONFIG, UNDEFINED_TAG } from '../consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
+import { APP_CODE, PHOTO_TYPE, DATASETSFROM_CODE } from '@config/consts';
 
 /**
  * 初始化: 一次性获取所有数据并在前端进行存储
@@ -23,21 +23,79 @@ const initData = function * () {
     tags: tags.reduce((total, ele) => ({
       ... total,
       [ele.id]: ele,
-    }), {}),
+    }), { [UNDEFINED_TAG.id]: UNDEFINED_TAG }),
   });
 
   yield put({
     type: 'editor/setArticles',
     articles: articles.reduce((total, ele) => ({
       ... total,
-      [ele.id]: ele,
+      [ele.id]: {
+        ... ele,
+        // 文章 tags 不存在已删除的 tag: 后端会保证返回的 tag 一定时存在的
+        tags: (ele.tags?.[0]) ? ele.tags : [UNDEFINED_TAG],
+      },
     }), {}),
+  });
+
+  message({ ... MESSAGE_CONFIG, message: '数据初始化完成!' });
+};
+
+/**
+ * 创建标签
+ * @return {void 0}
+ */
+const createTag = function * ({ body }) {
+  const currentTags = yield select(state => state.editor.tags);
+  delete currentTags.new;
+
+  const { change } = body.name ?
+    yield call(services.createDatasetsfroms, {
+      spin: APP_CODE.EDITOR,
+      body: {
+        ... body,
+        value: 0,
+        code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
+      },
+    }) : { change: [] };
+
+  yield put({
+    tags: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), { ... currentTags }),
+    type: 'editor/setTags',
   });
 
   message({
     ... MESSAGE_CONFIG,
-    message: '数据初始化完成!',
+    type: body.name ? 'success' : 'error',
+    message: body.name ? '操作成功!' : '名称不能为空!',
   });
+};
+
+/**
+ * 更新标签
+ * @return {void 0}
+ */
+const updateTag = function * ({ body, id }) {
+  const currentTags = yield select(state => state.editor.tags);
+
+  const { change } = yield call(services.updateDatasetsfroms, {
+    body,
+    conds: { id },
+    spin: APP_CODE.EDITOR,
+  });
+
+  yield put({
+    tags: change.reduce((total, ele) => ({
+      ... total,
+      [ele.id]: ele,
+    }), currentTags),
+    type: 'editor/setTags',
+  });
+
+  message({ ... MESSAGE_CONFIG, message: '成功更新标签!' });
 };
 
 /**
@@ -47,7 +105,7 @@ const initData = function * () {
 const removeTag = function * ({ id }) {
   const currentTags = yield select(state => state.editor.tags);
 
-  const { change } = yield call(services.removeTags, {
+  const { change } = yield call(services.removeDatasetsfroms, {
     spin: APP_CODE.EDITOR,
     conds: { id },
   });
@@ -61,10 +119,7 @@ const removeTag = function * ({ id }) {
     tags: { ... currentTags },
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '成功移除标签!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '成功移除标签!' });
 };
 
 /**
@@ -92,66 +147,7 @@ const removeArticle = function * ({ id }) {
     articles: { ... currentArticles },
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '成功删除文章!',
-  });
-};
-
-/**
- * 创建标签
- * @return {void 0}
- */
-const createTag = function * ({ body }) {
-  const currentTags = yield select(state => state.editor.tags);
-  delete currentTags.new;
-
-  const { change } = body.name
-    ? yield call(services.createTags, {
-      body,
-      spin: APP_CODE.EDITOR,
-    })
-    : { change: [] };
-
-  yield put({
-    tags: change.reduce((total, ele) => ({
-      ... total,
-      [ele.id]: ele,
-    }), { ... currentTags }),
-    type: 'editor/setTags',
-  });
-
-  message({
-    ... MESSAGE_CONFIG,
-    type: body.name ? 'success' : 'error',
-    message: body.name ? '成功创建标签!' : '名称不能为空!',
-  });
-};
-
-/**
- * 更新标签
- * @return {void 0}
- */
-const updateTag = function * ({ body, id }) {
-  const currentTags = yield select(state => state.editor.tags);
-  const { change } = yield call(services.updateTags, {
-    body,
-    conds: { id },
-    spin: APP_CODE.EDITOR,
-  });
-
-  yield put({
-    tags: change.reduce((total, ele) => ({
-      ... total,
-      [ele.id]: ele,
-    }), currentTags),
-    type: 'editor/setTags',
-  });
-
-  message({
-    ... MESSAGE_CONFIG,
-    message: '成功更新标签!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '成功删除文章!' });
 };
 
 /**
@@ -162,12 +158,11 @@ const createArticle = function * ({ body }) {
   const currentArticles = yield select(state => state.editor.articles);
   delete currentArticles.new;
 
-  const { change } = body.name
-    ? yield call(services.createArticles, {
+  const { change } = body.name ?
+    yield call(services.createArticles, {
       body,
       spin: APP_CODE.EDITOR,
-    })
-    : { change: [] };
+    }) : { change: [] };
 
   yield put({
     articles: change.reduce((total, ele) => ({
@@ -185,7 +180,7 @@ const createArticle = function * ({ body }) {
   message({
     ... MESSAGE_CONFIG,
     type: body.name ? 'success' : 'error',
-    message: body.name ? '成功创建文章!' : '名称不能为空!',
+    message: body.name ? '操作成功!' : '名称不能为空!',
   });
 };
 
@@ -215,10 +210,7 @@ const updateArticle = function * ({ body, id }) {
     work: { change: false },
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '成功修改文章信息!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '成功修改文章信息!' });
 };
 
 /**
@@ -245,12 +237,8 @@ const updateArticleContent = function * ({ content, id }) {
     work: { change: false },
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '文章内容保存成功!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '文章内容保存成功!' });
 };
-
 
 /**
  * 撤销(取消发布)文章
@@ -272,10 +260,7 @@ const revokeArticle = function * ({ id }) {
     type: 'editor/setArticles',
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '下架成功!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '下架成功!' });
 };
 
 /**
@@ -297,10 +282,7 @@ const releaseArticle = function * ({ id }) {
     type: 'editor/setArticles',
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '发布成功!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '发布成功!' });
 };
 
 /**
@@ -315,10 +297,7 @@ const setArticleThumb = function * ({ file, id }) {
     spin: APP_CODE.EDITOR,
   });
 
-  message({
-    ... MESSAGE_CONFIG,
-    message: '缩略图上传成功!',
-  });
+  message({ ... MESSAGE_CONFIG, message: '缩略图上传成功!' });
 
   yield put({
     id,
@@ -330,15 +309,15 @@ const setArticleThumb = function * ({ file, id }) {
 // 导出
 export default function * () {
   yield takeEvery('editor/initData', initData);
-  yield takeEvery('editor/removeTag', removeTag);
-  yield takeEvery('editor/removeArticle', removeArticle);
 
   yield takeEvery('editor/createTag', createTag);
   yield takeEvery('editor/updateTag', updateTag);
+  yield takeEvery('editor/removeTag', removeTag);
+
   yield takeEvery('editor/createArticle', createArticle);
   yield takeEvery('editor/updateArticle', updateArticle);
+  yield takeEvery('editor/removeArticle', removeArticle);
   yield takeEvery('editor/updateArticleContent', updateArticleContent);
-
   yield takeEvery('editor/revokeArticle', revokeArticle);
   yield takeEvery('editor/releaseArticle', releaseArticle);
   yield takeEvery('editor/setArticleThumb', setArticleThumb);

@@ -1,4 +1,5 @@
 import axios from '@utils/request';
+import { DATASETSFROM_CODE } from '@config/consts';
 
 // 初始化: 一次性获取所有数据并在前端进行存储
 export const initData = async () => {
@@ -8,11 +9,17 @@ export const initData = async () => {
     data: {
       query: `
         query {
-          tags {
+          datasetsfroms(
+            search: { code: [
+              ${DATASETSFROM_CODE.ARTICLE_TAG.VALUE},
+              ${DATASETSFROM_CODE.ARTICLE_TYPE.VALUE},
+            ]},
+          ){
             list {
-              id
-              name
-              parent { id name }
+              id value code desc icon name
+              parent {
+                id value code desc icon name
+              }
             }
           }
           articles {
@@ -29,45 +36,13 @@ export const initData = async () => {
     },
   });
   return {
-    tags: _.get(res, 'data.data.tags.list') || [],
+    tags: _.get(res, 'data.data.datasetsfroms.list') || [],
     articles: _.get(res, 'data.data.articles.list') || [],
   };
 };
 
-// 移除 tag
-export const removeTags = async ({
-  spin,
-  body,
-  conds,
-  search,
-  pagination,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds, body, search, pagination },
-      query: `
-        mutation(
-          $conds: TagSearch!,
-        ){
-          removeTags(
-            conds: $conds,
-          ){
-            change {
-              id
-              name
-            }
-          }
-        }`,
-    },
-  });
-  return _.get(res, 'data.data.removeTags') || {};
-};
-
-// 创建 tag
-export const createTags = async ({
+// 创建字典
+export const createDatasetsfroms = async ({
   spin,
   body,
 } = {}) => {
@@ -79,25 +54,26 @@ export const createTags = async ({
       variables: { body },
       query: `
         mutation(
-          $body: [TagFields!]!,
+          $body: [DatasetsfromFields!]!,
         ){
-          createTags(
+          createDatasetsfroms(
             body: $body,
           ){
             change {
-              id
-              name
-              parent { id name }
+              id value code desc icon name
+              parent {
+                id value code desc icon name
+              }
             }
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.createTags') || {};
+  return _.get(res, 'data.data.createDatasetsfroms') || {};
 };
 
-// 编辑标签
-export const updateTags = async ({
+// 更新字典
+export const updateDatasetsfroms = async ({
   spin,
   body,
   conds,
@@ -107,26 +83,58 @@ export const updateTags = async ({
     url: GLOBAL_SERVICE.GRAPHQL_URL,
     method: 'post',
     data: {
-      variables: { conds, body },
+      variables: { body, conds },
       query: `
         mutation(
-          $body: TagFields!,
-          $conds: TagSearch!,
+          $body: DatasetsfromFields!
+          $conds: DatasetsfromSearch!
         ){
-          updateTags(
+          updateDatasetsfroms(
             body: $body,
             conds: $conds,
           ){
             change {
-              id
-              name
-              parent { id name }
+              id value code desc icon name
+              parent {
+                id value code desc icon name
+              }
             }
           }
         }`,
     },
   });
-  return _.get(res, 'data.data.updateTags') || {};
+  return _.get(res, 'data.data.updateDatasetsfroms') || {};
+};
+
+// 删除字典
+export const removeDatasetsfroms = async ({
+  spin,
+  conds,
+} = {}) => {
+  const res = await axios({
+    spin,
+    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    method: 'post',
+    data: {
+      variables: { conds },
+      query: `
+        mutation(
+          $conds: DatasetsfromSearch!
+        ){
+          removeDatasetsfroms(
+            conds: $conds,
+          ){
+            change {
+              id value code desc icon name
+              parent {
+                id value code desc icon name
+              }
+            }
+          }
+        }`,
+    },
+  });
+  return _.get(res, 'data.data.removeDatasetsfroms') || {};
 };
 
 // 创建文章

@@ -172,6 +172,7 @@ const useStateHook = props => {
 
 export default props => {
   const state = useStateHook(props);
+  console.log('this.props', props);
   return (
     <div className={scss['menu-title']}>
       <Icon type="icon-jiantou" className={state.classNameWithArrow}/>

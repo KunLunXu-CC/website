@@ -29,9 +29,6 @@ export const getDatasetsfroms = async ({
               ${BASE_FIELD}
               parent {
                 ${BASE_FIELD}
-                parent {
-                  ${BASE_FIELD}
-                }
               }
             }
           }

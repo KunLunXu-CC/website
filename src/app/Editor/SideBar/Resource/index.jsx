@@ -3,7 +3,6 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
@@ -16,22 +15,30 @@ const useStateHook = () => {
     works,
     articles,
   } = useSelector(state => ({
-    side: state.editor.side,
     tags: state.editor.tags,
+    side: state.editor.side,
     works: state.editor.works,
     articles: state.editor.articles,
-    types: state.datasetsfrom[DATASETSFROM_CODE.ARTICLE_TYPE.VALUE],
   }));
 
   // 菜单树形数据
   const treeData = React.useMemo(() => {
-    const groupTags = _.groupBy(Object.values(tags), 'parent.id');
-    const groupArticles = _.groupBy(articles, 'tags[0].id');
+    const groupTags = _.groupBy(tags, 'parent.id');
+
     const parents = _.sortBy((groupTags.undefined || []).map(v => ({
       ... v,
       type: 'tag',
       parent: v.parent?.id,
     })), 'name');
+
+    const groupArticles = _.groupBy(articles, 'tags[0].id');
+    console.log('parents', parents);
+    console.log('groupTags', groupTags);
+    console.log('groupArticles', groupArticles);
+
+    // console.log('scattered', scattered);
+    // console.log('configured', configured);
+
     const loop = list => list.forEach(parent => {
       if (!side.openKeys.includes(parent.id)) {
         parent.children = []; // eslint-disable-line
@@ -120,3 +127,35 @@ export default () => {
     </Menu>
   );
 };
+
+
+/**
+const groupTags = _.groupBy(Object.values(tags), 'parent.id');
+    const groupArticles = _.groupBy(articles, 'tags[0].id');
+    const parents = _.sortBy((groupTags.undefined || []).map(v => ({
+      ... v,
+      type: 'tag',
+      parent: v.parent?.id,
+    })), 'name');
+    const loop = list => list.forEach(parent => {
+      if (!side.openKeys.includes(parent.id)) {
+        parent.children = []; // eslint-disable-line
+      } else {
+        parent.children = [ // eslint-disable-line
+          ... _.sortBy((groupTags[parent.id] || []).map(v => ({
+            ... v,
+            type: 'tag',
+            parent: parent.id,
+          })), 'name'),
+          ... _.sortBy((groupArticles[parent.id] || []).map(v => ({
+            ... v,
+            tag: parent.id,
+            type: 'article',
+            parent: parent.id,
+          })), 'name'),
+        ];
+        parent.children.length !== 0 && loop(parent.children);
+      }
+    });
+    loop(parents);
+ */
