@@ -53,11 +53,11 @@ const useStateHook = () => {
 
   // 确认
   const onOk = async () => {
-    const body = await form.validateFields();
+    const { parent, ... rest } = await form.validateFields();
     dispatch({
-      body,
       id: modal.data ?. id,
       code: MODAL_CODE_DATASETSFROM_EDITOR,
+      body: { ... rest, parent: parent?.[1] },
       type: modal.data
         ? 'datasetsfromManage/updateDatasetsfrom'
         : 'datasetsfromManage/createDatasetsfrom',
@@ -72,7 +72,10 @@ const useStateHook = () => {
         value: modal.data ?. value ?? void 0,
         desc: modal.data ?. desc ?? void 0,
         icon: modal.data ?. icon ?? void 0,
-        parent: modal.data ?. parent ?? void 0,
+        parent: modal.data ?. parent ? [
+          modal.data.parent.code,
+          modal.data.parent.id,
+        ] : [],
         code: modal.data
           ?. code
           ?? (_.isNumber(menuSelectedKey) ? menuSelectedKey : void 0),
@@ -126,11 +129,8 @@ export default () => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              name="parent"
-              label="父级"
-              rules={[{ required: true, message: '请选择字典类型!' }]}>
-              <Cascader placeholder="字典类型" options={state.options}/>
+            <Form.Item name="parent" label="父级">
+              <Cascader placeholder="选择父级" options={state.options}/>
             </Form.Item>
           </Col>
         </Row>

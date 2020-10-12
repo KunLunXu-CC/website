@@ -1,5 +1,8 @@
 import axios from '@utils/request';
 
+// 基础字段: 请返回数据基础字段
+const BASE_FIELD = 'id value code desc icon name';
+
 // 创建字典
 export const createDatasetsfroms = async ({
   spin,
@@ -19,12 +22,13 @@ export const createDatasetsfroms = async ({
             body: $body,
           ){
             change {
-              id
-              value
-              code
-              desc
-              name
-              icon
+              ${BASE_FIELD}
+              parent {
+                ${BASE_FIELD}
+                parent {
+                  ${BASE_FIELD}
+                }
+              }
             }
           }
         }`,
@@ -55,12 +59,13 @@ export const updateDatasetsfroms = async ({
             conds: $conds,
           ){
             change {
-              id
-              value
-              code
-              desc
-              name
-              icon
+              ${BASE_FIELD}
+              parent {
+                ${BASE_FIELD}
+                parent {
+                  ${BASE_FIELD}
+                }
+              }
             }
           }
         }`,
@@ -88,12 +93,13 @@ export const removeDatasetsfroms = async ({
             conds: $conds,
           ){
             change {
-              id
-              value
-              code
-              desc
-              icon
-              name
+              ${BASE_FIELD}
+              parent {
+                ${BASE_FIELD}
+                parent {
+                  ${BASE_FIELD}
+                }
+              }
             }
           }
         }`,

@@ -1,5 +1,8 @@
 import axios from '@utils/request';
 
+// 基础字段: 请返回数据基础字段
+const BASE_FIELD = 'id value code desc icon name';
+
 // 获取字典
 export const getDatasetsfroms = async ({
   spin,
@@ -23,12 +26,13 @@ export const getDatasetsfroms = async ({
             pagination: $pagination,
           ){
             list {
-              id
-              value
-              code
-              desc
-              icon
-              name
+              ${BASE_FIELD}
+              parent {
+                ${BASE_FIELD}
+                parent {
+                  ${BASE_FIELD}
+                }
+              }
             }
           }
         }`,
