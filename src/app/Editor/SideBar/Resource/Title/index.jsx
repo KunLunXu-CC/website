@@ -18,7 +18,7 @@ const useStateHook = props => {
 
   // 下拉菜单点击事件: 点击创建文件夹
   const onClickCreateFolderMenu = () => {
-    if (props.data.type === 'tag') { // 在文件夹上触发下拉框
+    if (['tag', 'rootTag'].includes(props.data.dataType)) { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
         side: { openKeys: [... openKeys, props.data.id] },
@@ -37,7 +37,7 @@ const useStateHook = props => {
 
   // 下拉菜单点击事件: 点击创建文章
   const onClickCreateArticleMenu = () => {
-    if (props.data.type === 'tag') { // 在文件夹上触发下拉框
+    if (props.data.dataType === 'tag') { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
         side: { openKeys: [... openKeys, props.data.id] },
@@ -56,24 +56,18 @@ const useStateHook = props => {
 
   // 下拉菜单点击事件: 点击编辑
   const onClickEditMenu = () => {
-    const type = props.data.type === 'tag'
+    const type = props.data.dataType === 'tag'
       ? 'editor/addEditorStatusWithTag'
       : 'editor/addEditorStatusWithArticle';
-    dispatch({
-      type,
-      id: props.data.id,
-    });
+    dispatch({ type, id: props.data.id });
   };
 
   // 下拉菜单点击事件: 点击删除
   const onClickDeleteMenu = () => {
-    const type = props.data.type === 'tag'
+    const type = props.data.dataType === 'tag'
       ? 'editor/removeTag'
       : 'editor/removeArticle';
-    dispatch({
-      type,
-      id: props.data.id,
-    });
+    dispatch({ type, id: props.data.id });
   };
 
   // 下拉菜单配置
@@ -109,13 +103,13 @@ const useStateHook = props => {
   const onEdit = e => {
     const name = e.target.value;
     const isNew = props.data.id === 'new';
-    const isFolder = props.data.type === 'tag';
+    const isFolder = props.data.dataType === 'tag';
     dispatch([
       {
         filter: isFolder && isNew,
         dispatchParams: {
           type: 'editor/createTag',
-          body: { name, parent: props.data.parent },
+          body: { name, parent: props.data.parent.id },
         },
       },
       {
@@ -130,7 +124,7 @@ const useStateHook = props => {
         filter: !isFolder && isNew,
         dispatchParams: {
           type: 'editor/createArticle',
-          body: { name, tags: [props.data.tag] },
+          body: { name, tags: [props.data.tag.id], type: props.data.type },
         },
       },
       {
@@ -147,14 +141,15 @@ const useStateHook = props => {
   // 标题前箭头 - className
   const classNameWithArrow = React.useMemo(() => classNames(
     scss['menu-title-arrow'],
-    { [scss['menu-title-arrow-article']]: props.data.type === 'article' }
-  ), [props.data.type]);
+    { [scss['menu-title-arrow-article']]: props.data.dataType === 'article' }
+  ), [props.data.dataType]);
 
   // 标题前图标
   const menuIcon = React.useMemo(() => ({
     article: 'icon-24',
     tag: 'icon-wenjianjia',
-  }[props.data.type]), [props.data.type]);
+    rootTag: 'icon-wenjianjia',
+  }[props.data.dataType]), [props.data.dataType]);
 
   React.useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
@@ -172,7 +167,6 @@ const useStateHook = props => {
 
 export default props => {
   const state = useStateHook(props);
-  console.log('this.props', props);
   return (
     <div className={scss['menu-title']}>
       <Icon type="icon-jiantou" className={state.classNameWithArrow}/>

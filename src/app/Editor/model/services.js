@@ -29,7 +29,7 @@ export const initData = async () => {
               thumb
               status
               content
-              tags
+              tags { id name }
             }
           }
         }`,

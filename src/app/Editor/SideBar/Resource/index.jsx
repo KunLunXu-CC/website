@@ -24,36 +24,33 @@ const useStateHook = () => {
   // 菜单树形数据
   const treeData = React.useMemo(() => {
     const groupTags = _.groupBy(tags, 'parent.id');
-
     const parents = _.sortBy((groupTags.undefined || []).map(v => ({
       ... v,
-      type: 'tag',
+      dataType: 'rootTag',
       parent: v.parent?.id,
     })), 'name');
-
     const groupArticles = _.groupBy(articles, 'tags[0].id');
-    console.log('parents', parents);
-    console.log('groupTags', groupTags);
-    console.log('groupArticles', groupArticles);
-
-    // console.log('scattered', scattered);
-    // console.log('configured', configured);
+    let type = null;
 
     const loop = list => list.forEach(parent => {
+      parent.dataType === 'rootTag' && (type = parent.value);
+
       if (!side.openKeys.includes(parent.id)) {
         parent.children = []; // eslint-disable-line
       } else {
         parent.children = [ // eslint-disable-line
           ... _.sortBy((groupTags[parent.id] || []).map(v => ({
             ... v,
-            type: 'tag',
-            parent: parent.id,
+            type,
+            parent,
+            dataType: 'tag',
           })), 'name'),
           ... _.sortBy((groupArticles[parent.id] || []).map(v => ({
             ... v,
-            tag: parent.id,
-            type: 'article',
+            type,
+            tag: parent,
             parent: parent.id,
+            dataType: 'article',
           })), 'name'),
         ];
         parent.children.length !== 0 && loop(parent.children);
@@ -73,7 +70,7 @@ const useStateHook = () => {
     const recursion = (item, level) => {
       const title = <Title data={item}/>;
       return (
-        item.type === 'tag' ?
+        ['tag', 'rootTag'].includes(item.dataType) ?
           <Menu.SubMenu key={item.id} title={title}>
             {item.children.length !== 0 ?
               item.children.map(v => (recursion(v, level + 1))) :
@@ -127,7 +124,6 @@ export default () => {
     </Menu>
   );
 };
-
 
 /**
 const groupTags = _.groupBy(Object.values(tags), 'parent.id');

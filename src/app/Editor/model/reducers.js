@@ -134,6 +134,7 @@ export const createTemTag = (state, { parent }) => ({
       name: '',
       id: 'new',
       editor: true,
+      dataType: 'tag',
       parent: { id: parent },
     },
   },
@@ -154,8 +155,9 @@ export const createTmpArticle = (state, { tag }) => ({
     ... state.articles,
     new: {
       name: '',
-      editor: true,
       id: 'new',
+      editor: true,
+      dataType: 'article',
       tags: [{ id: tag }],
     },
   },
