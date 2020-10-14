@@ -149,6 +149,12 @@ const useStateHook = props => {
     ].find(v => v.filter).dispatchParams);
   };
 
+  // 点击下拉菜单
+  const onClickMenu = React.useCallback(({ item, domEvent }) => {
+    stopPropagation(domEvent);
+    item.props.data.onClick();
+  }, []);
+
   // 标题前箭头 - className
   const classNameWithArrow = React.useMemo(() => classNames(
     scss['menu-title-arrow'],
@@ -178,6 +184,7 @@ const useStateHook = props => {
   return {
     onEdit,
     menuIcon,
+    onClickMenu,
     editorInputRef,
     stopPropagation,
     classNameWithArrow,
@@ -208,9 +215,11 @@ export default props => {
           <Dropdown
             trigger={['click']}
             overlay={
-              <Menu className={scss['operation-menu']}>
+              <Menu
+                onClick={state.onClickMenu}
+                className={scss['operation-menu']}>
                 {state.dropdownMenuSetting.map(v => (
-                  <Menu.Item key={v.title} onClick={v.onClick}>
+                  <Menu.Item key={v.title} data={v}>
                     <Icon type={v.icon}/>
                     {v.title}
                   </Menu.Item>
@@ -218,8 +227,8 @@ export default props => {
               </Menu>
             }
             placement="bottomRight"
-            onClick={state.stopPropagation} >
-            <Icon type="icon-gengduo" onClick={state.onMore}/>
+            onClick={state.stopPropagation}>
+            <Icon type="icon-gengduo"/>
           </Dropdown>
         </div> : null
       }
