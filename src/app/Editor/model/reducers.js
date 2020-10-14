@@ -1,3 +1,4 @@
+import { DATASETSFROM_CODE } from '@config/consts';
 
 /**
  * 设置 tags
@@ -119,14 +120,14 @@ export const removeWork = (state, { article }) => {
 
 /**
  * 创建临时 tag (占位符)
- * 1. reducer: action = { type: 'editor/createTemTag' }
+ * 1. reducer: action = { type: 'editor/createTmpTag' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
  * @param {Object} state 当前 state
  * @param {Object} action.parent 父级节点
  * @return {Object} 更新后的状态
  */
-export const createTemTag = (state, { parent }) => ({
+export const createTmpTag = (state, { parent }) => ({
   ... state,
   tags: {
     ... state.tags,
@@ -134,8 +135,8 @@ export const createTemTag = (state, { parent }) => ({
       name: '',
       id: 'new',
       editor: true,
-      dataType: 'tag',
       parent: { id: parent },
+      code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
     },
   },
 });
@@ -157,7 +158,6 @@ export const createTmpArticle = (state, { tag }) => ({
       name: '',
       id: 'new',
       editor: true,
-      dataType: 'article',
       tags: [{ id: tag }],
     },
   },

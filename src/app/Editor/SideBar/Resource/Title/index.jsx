@@ -3,8 +3,9 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
-import { useDispatch, useSelector } from 'react-redux';
 import { Dropdown, Menu, Input } from 'antd';
+import { DATASETSFROM_CODE } from '@config/consts';
+import { useDispatch, useSelector } from 'react-redux';
 
 // 阻止事件冒泡
 const stopPropagation = e => e.stopPropagation();
@@ -18,26 +19,26 @@ const useStateHook = props => {
 
   // 下拉菜单点击事件: 点击创建文件夹
   const onClickCreateFolderMenu = () => {
-    if (['tag', 'rootTag'].includes(props.data.dataType)) { // 在文件夹上触发下拉框
+    if (!props.data.tags) { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
         side: { openKeys: [... openKeys, props.data.id] },
       });
       dispatch({
         parent: props.data.id,
-        type: 'editor/createTemTag',
+        type: 'editor/createTmpTag',
       });
     } else { // 在文章上触发下拉框
       dispatch({
-        parent: props.data.tag,
-        type: 'editor/createTemTag',
+        type: 'editor/createTmpTag',
+        parent: props.data.tags?.[0].id,
       });
     }
   };
 
   // 下拉菜单点击事件: 点击创建文章
   const onClickCreateArticleMenu = () => {
-    if (props.data.dataType === 'tag') { // 在文件夹上触发下拉框
+    if (!props.data.tags) { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
         side: { openKeys: [... openKeys, props.data.id] },
@@ -48,7 +49,7 @@ const useStateHook = props => {
       });
     } else { // 在文章上触发下拉框
       dispatch({
-        tag: props.data.parent,
+        tag: props.data.tags?.[0].id,
         type: 'editor/createTmpArticle',
       });
     }
@@ -56,7 +57,7 @@ const useStateHook = props => {
 
   // 下拉菜单点击事件: 点击编辑
   const onClickEditMenu = () => {
-    const type = props.data.dataType === 'tag'
+    const type = !props.data.tags
       ? 'editor/addEditorStatusWithTag'
       : 'editor/addEditorStatusWithArticle';
     dispatch({ type, id: props.data.id });
@@ -64,7 +65,7 @@ const useStateHook = props => {
 
   // 下拉菜单点击事件: 点击删除
   const onClickDeleteMenu = () => {
-    const type = props.data.dataType === 'tag'
+    const type = !props.data.tags
       ? 'editor/removeTag'
       : 'editor/removeArticle';
     dispatch({ type, id: props.data.id });
@@ -73,26 +74,32 @@ const useStateHook = props => {
   // 下拉菜单配置
   const dropdownMenuSetting = React.useMemo(() => ([
     {
+      conds: true,
       title: '创建文件夹',
       icon: 'icon-wenjianjia',
       onClick: onClickCreateFolderMenu,
     },
     {
+      // 第一级不能创建文章, 第二层文章不能创建
       title: '创建文章',
       icon: 'icon-24',
       onClick: onClickCreateArticleMenu,
+      conds: !(props.level === 1 || (props.data.tags && props.level === 2)),
     },
     {
+      conds: true,
       title: '编辑',
       icon: 'icon-baocun',
       onClick: onClickEditMenu,
     },
     {
+      // 顶级不允许删除
       title: '删除',
       icon: 'icon-shanchu',
+      conds: props.level !== 1,
       onClick: onClickDeleteMenu,
     },
-  ]), [
+  ].filter(v => v.conds)), [
     onClickEditMenu,
     onClickDeleteMenu,
     onClickCreateFolderMenu,
@@ -103,13 +110,13 @@ const useStateHook = props => {
   const onEdit = e => {
     const name = e.target.value;
     const isNew = props.data.id === 'new';
-    const isFolder = props.data.dataType === 'tag';
+    const isFolder = !props.data.tags;
     dispatch([
       {
         filter: isFolder && isNew,
         dispatchParams: {
           type: 'editor/createTag',
-          body: { name, parent: props.data.parent.id },
+          body: { name, parent: props.data.parent?.id },
         },
       },
       {
@@ -124,7 +131,11 @@ const useStateHook = props => {
         filter: !isFolder && isNew,
         dispatchParams: {
           type: 'editor/createArticle',
-          body: { name, tags: [props.data.tag.id], type: props.data.type },
+          body: {
+            name,
+            type: props.root?.value,
+            tags: [props.data.tags?.[0].id],
+          },
         },
       },
       {
@@ -141,15 +152,24 @@ const useStateHook = props => {
   // 标题前箭头 - className
   const classNameWithArrow = React.useMemo(() => classNames(
     scss['menu-title-arrow'],
-    { [scss['menu-title-arrow-article']]: props.data.dataType === 'article' }
-  ), [props.data.dataType]);
+    { [scss['menu-title-arrow-article']]: props.data.tags }
+  ), [props.data.tags]);
 
   // 标题前图标
-  const menuIcon = React.useMemo(() => ({
-    article: 'icon-24',
-    tag: 'icon-wenjianjia',
-    rootTag: 'icon-wenjianjia',
-  }[props.data.dataType]), [props.data.dataType]);
+  const menuIcon = React.useMemo(() => [
+    { // 文章
+      icon: 'icon-24',
+      conds: props.data.tags,
+    },
+    { // 文件夹
+      icon: 'icon-wenjianjia',
+      conds: props.data.code === DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
+    },
+    { // 顶级文件夹(文件类型)
+      icon: 'icon-wenjianjia',
+      conds: props.data.code === DATASETSFROM_CODE.ARTICLE_TYPE.VALUE,
+    },
+  ].find(v => v.conds)?.icon, [props.data.tags, props.data.code]);
 
   React.useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();

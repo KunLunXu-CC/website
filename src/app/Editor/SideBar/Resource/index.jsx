@@ -3,6 +3,7 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
+import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
@@ -21,43 +22,20 @@ const useStateHook = () => {
     articles: state.editor.articles,
   }));
 
-  // 菜单树形数据
+  // 菜单
   const treeData = React.useMemo(() => {
-    const groupTags = _.groupBy(tags, 'parent.id');
-    const parents = _.sortBy((groupTags.undefined || []).map(v => ({
-      ... v,
-      dataType: 'rootTag',
-      parent: v.parent?.id,
-    })), 'name');
+    const cloneTags = _.cloneDeep(Object.values(tags));
+    const groupTags = _.groupBy(cloneTags, 'parent.id');
     const groupArticles = _.groupBy(articles, 'tags[0].id');
-    let type = null;
-
-    const loop = list => list.forEach(parent => {
-      parent.dataType === 'rootTag' && (type = parent.value);
-
-      if (!side.openKeys.includes(parent.id)) {
-        parent.children = []; // eslint-disable-line
-      } else {
-        parent.children = [ // eslint-disable-line
-          ... _.sortBy((groupTags[parent.id] || []).map(v => ({
-            ... v,
-            type,
-            parent,
-            dataType: 'tag',
-          })), 'name'),
-          ... _.sortBy((groupArticles[parent.id] || []).map(v => ({
-            ... v,
-            type,
-            tag: parent,
-            parent: parent.id,
-            dataType: 'article',
-          })), 'name'),
-        ];
-        parent.children.length !== 0 && loop(parent.children);
-      }
-    });
-    loop(parents);
-    return parents;
+    cloneTags.forEach(v => (
+      v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
+        ... (groupTags[v.id] || []),
+        ... (groupArticles[v.id] || []),
+      ] : []
+    ));
+    return cloneTags.filter(
+      v => v.code === DATASETSFROM_CODE.ARTICLE_TYPE.VALUE
+    );
   }, [articles, tags, side.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
@@ -66,11 +44,13 @@ const useStateHook = () => {
   ), [works]);
 
   // 渲染菜单列表
-  const renderMenuList = () => {
+  const menu = React.useMemo(() => {
+    let root = null;   // 根节点
     const recursion = (item, level) => {
-      const title = <Title data={item}/>;
+      level === 1 && (root = item);
+      const title = <Title data={item} root={root} level={level}/>;
       return (
-        ['tag', 'rootTag'].includes(item.dataType) ?
+        !item.tags ?  // 非文章
           <Menu.SubMenu key={item.id} title={title}>
             {item.children.length !== 0 ?
               item.children.map(v => (recursion(v, level + 1))) :
@@ -85,7 +65,7 @@ const useStateHook = () => {
       );
     };
     return treeData.map(v => (recursion(v, 1)));
-  };
+  }, [treeData]);
 
   // 点击菜单项
   const onSelect = ({ key: article }) => dispatch({
@@ -101,10 +81,10 @@ const useStateHook = () => {
 
   return {
     side,
+    menu,
     onSelect,
     selectedKeys,
     onOpenChange,
-    renderMenuList,
   };
 };
 
@@ -120,7 +100,7 @@ export default () => {
       openKeys={state.side.openKeys}
       onOpenChange={state.onOpenChange}
       selectedKeys={[state.selectedKeys]}>
-      {state.renderMenuList()}
+      {state.menu}
     </Menu>
   );
 };
