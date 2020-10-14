@@ -29,8 +29,8 @@ const useStateHook = () => {
     const groupArticles = _.groupBy(articles, 'tags[0].id');
     cloneTags.forEach(v => (
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
-        ... (groupTags[v.id] || []),
-        ... (groupArticles[v.id] || []),
+        ... _.sortBy(groupTags[v.id] || [], 'name'),
+        ... _.sortBy(groupArticles[v.id] || [], 'name'),
       ] : []
     ));
     return cloneTags.filter(
@@ -104,34 +104,3 @@ export default () => {
     </Menu>
   );
 };
-
-/**
-const groupTags = _.groupBy(Object.values(tags), 'parent.id');
-    const groupArticles = _.groupBy(articles, 'tags[0].id');
-    const parents = _.sortBy((groupTags.undefined || []).map(v => ({
-      ... v,
-      type: 'tag',
-      parent: v.parent?.id,
-    })), 'name');
-    const loop = list => list.forEach(parent => {
-      if (!side.openKeys.includes(parent.id)) {
-        parent.children = []; // eslint-disable-line
-      } else {
-        parent.children = [ // eslint-disable-line
-          ... _.sortBy((groupTags[parent.id] || []).map(v => ({
-            ... v,
-            type: 'tag',
-            parent: parent.id,
-          })), 'name'),
-          ... _.sortBy((groupArticles[parent.id] || []).map(v => ({
-            ... v,
-            tag: parent.id,
-            type: 'article',
-            parent: parent.id,
-          })), 'name'),
-        ];
-        parent.children.length !== 0 && loop(parent.children);
-      }
-    });
-    loop(parents);
- */
