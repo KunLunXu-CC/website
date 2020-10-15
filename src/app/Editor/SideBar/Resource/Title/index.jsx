@@ -4,6 +4,7 @@ import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
 import { Dropdown, Menu, Input } from 'antd';
+import { MOVE_ARTICLE } from '../../../consts';
 import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -63,6 +64,13 @@ const useStateHook = props => {
     dispatch({ type, id: props.data.id });
   };
 
+  // 下拉菜单点击事件: 移动
+  const onClickMoveMenu = () => dispatch({
+    data: props.data,
+    code: MOVE_ARTICLE,
+    type: 'modal/openModal',
+  });
+
   // 下拉菜单点击事件: 点击删除
   const onClickDeleteMenu = () => {
     const type = !props.data.tags
@@ -80,7 +88,7 @@ const useStateHook = props => {
       onClick: onClickCreateFolderMenu,
     },
     {
-      // 第一级不能创建文章, 第二层文章不能创建
+      // 第一级不能创建文章, 第二层文章上不能创建
       title: '创建文章',
       icon: 'icon-24',
       onClick: onClickCreateArticleMenu,
@@ -91,6 +99,12 @@ const useStateHook = props => {
       title: '编辑',
       icon: 'icon-baocun',
       onClick: onClickEditMenu,
+    },
+    {
+      title: '移动',
+      icon: 'icon-baocun',
+      conds: props.data.tags,
+      onClick: onClickMoveMenu,
     },
     {
       // 顶级不允许删除
@@ -172,7 +186,7 @@ const useStateHook = props => {
       conds: props.data.code === DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
     },
     { // 顶级文件夹(文件类型)
-      icon: 'icon-wenjianjia',
+      icon: 'icon-xuanzhong',
       conds: props.data.code === DATASETSFROM_CODE.ARTICLE_TYPE.VALUE,
     },
   ].find(v => v.conds)?.icon, [props.data.tags, props.data.code]);

@@ -2,26 +2,10 @@
   width: 420px !important;
 
   :global {
-    .ant-modal-content {
-      background: #2c343a;
-    }
-
-    .ant-modal-header {
-      border: none;
-      background: transparent;
-      .ant-modal-title {
-        color: rgba($color: #fff, $alpha: 0.6);
-      }
-    }
-
     .ant-modal-body {
       padding: 10px;
       border-radius: 4px;
       border: 1px dashed rgba($color: #fff, $alpha: 0.2);
-    }
-
-    .ant-modal-footer {
-      border: none;
     }
   }
 }
