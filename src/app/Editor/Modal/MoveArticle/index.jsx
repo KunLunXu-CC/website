@@ -38,12 +38,15 @@ const useStateHook = () => {
 
   // 点击确定
   const onOk = async () => {
-    const { id, tags } = modal.data;
+    const { data: { id, tags }, root } = modal;
     const { paths } = await form.validateFields();
     dispatch({
       id,
       type: 'editor/updateArticle',
-      body: { tags: [_.last(paths), ... tags.splice(1).map(v => v.id)] },
+      body: {
+        type: root.value,
+        tags: [_.last(paths), ... tags.splice(1).map(v => v.id)]
+      },
     });
     onCancel();
   };

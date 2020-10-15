@@ -1,9 +1,0 @@
-import { DATASETSFROM_CODE } from '@config/consts';
-
-export const MENU_LIST = [
-  DATASETSFROM_CODE.SNIPPETS_TAG,
-  DATASETSFROM_CODE.INTERVIEW_TAG,
-  DATASETSFROM_CODE.ALGORITHM_TAG,
-];
-
-export const space = {};

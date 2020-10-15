@@ -67,6 +67,7 @@ const useStateHook = props => {
   // 下拉菜单点击事件: 移动
   const onClickMoveMenu = () => dispatch({
     data: props.data,
+    root: props.root,
     code: MOVE_ARTICLE,
     type: 'modal/openModal',
   });
