@@ -107,11 +107,11 @@ const useStateHook = props => {
       onClick: onClickMoveMenu,
     },
     {
-      // 顶级不允许删除
+      // 顶级不允许删除、文件夹下有东西也不让删
       title: '删除',
       icon: 'icon-shanchu',
-      conds: props.level !== 1,
       onClick: onClickDeleteMenu,
+      conds: props.level !== 1 && !props.data.children?.length > 0,
     },
   ].filter(v => v.conds)), [
     onClickEditMenu,
