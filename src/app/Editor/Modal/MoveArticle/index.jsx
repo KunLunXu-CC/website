@@ -45,7 +45,7 @@ const useStateHook = () => {
       type: 'editor/updateArticle',
       body: {
         type: root.value,
-        tags: [_.last(paths), ... tags.splice(1).map(v => v.id)]
+        tags: [_.last(paths), ... tags.splice(1).map(v => v.id)],
       },
     });
     onCancel();
