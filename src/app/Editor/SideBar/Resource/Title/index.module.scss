@@ -40,10 +40,6 @@
       }
     }
   }
-
-  .menu-title-arrow-article {
-    opacity: 0;
-  }
 }
 
 :global{
@@ -73,5 +69,16 @@
         background-color: rgba($color: #fff, $alpha: 0.1)
       }
     }
+  }
+}
+
+// 已发布文章
+.menu-title-release {
+  color: #68bf22;
+}
+
+.menu-title-article {
+  .menu-title-arrow {
+    opacity: 0;
   }
 }

@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 import { Icon } from 'qyrc';
 import { Dropdown, Menu, Input } from 'antd';
 import { MOVE_ARTICLE } from '../../../consts';
-import { DATASETSFROM_CODE } from '@config/consts';
+import { DATASETSFROM_CODE, ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 // 阻止事件冒泡
@@ -170,12 +170,6 @@ const useStateHook = props => {
     item.props.data.onClick();
   }, []);
 
-  // 标题前箭头 - className
-  const classNameWithArrow = React.useMemo(() => classNames(
-    scss['menu-title-arrow'],
-    { [scss['menu-title-arrow-article']]: props.data.tags }
-  ), [props.data.tags]);
-
   // 标题前图标
   const menuIcon = React.useMemo(() => [
     { // 文章
@@ -192,6 +186,12 @@ const useStateHook = props => {
     },
   ].find(v => v.conds)?.icon, [props.data.tags, props.data.code]);
 
+  // 最外层 className
+  const className = React.useMemo(() => (classNames(scss['menu-title'], {
+    [scss['menu-title-article']]: props.data.tags,
+    [scss['menu-title-release']]: props.data.status === ARTICLE_STATUS.RELEASE,
+  })), [props.data]);
+
   React.useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
   });
@@ -199,10 +199,10 @@ const useStateHook = props => {
   return {
     onEdit,
     menuIcon,
+    className,
     onClickMenu,
     editorInputRef,
     stopPropagation,
-    classNameWithArrow,
     dropdownMenuSetting,
   };
 };
@@ -210,8 +210,8 @@ const useStateHook = props => {
 export default props => {
   const state = useStateHook(props);
   return (
-    <div className={scss['menu-title']}>
-      <Icon type="icon-jiantou" className={state.classNameWithArrow}/>
+    <div className={state.className}>
+      <Icon type="icon-jiantou" className={scss['menu-title-arrow']}/>
       <Icon type={state.menuIcon}/>
       <div className={scss['menu-title-content']}>
         {props.data.editor ?
