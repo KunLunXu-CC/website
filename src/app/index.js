@@ -1,7 +1,7 @@
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
-import Read from './Read';
+import Reader from './Reader';
 import Draw from './Draw';
 import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
@@ -31,7 +31,7 @@ export default {
   },
   read: {
     name: '阅读',
-    component: Read,
+    component: Reader,
     icon: 'icon-wenzhang',
     code: APP_CODE.READ,
     modalProps: {
