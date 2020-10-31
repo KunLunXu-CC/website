@@ -1,8 +1,9 @@
+import Draw from './Draw';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
 import Reader from './Reader';
-import Draw from './Draw';
+import Logger from './Logger';
 import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
 
@@ -67,6 +68,17 @@ export default {
     icon: 'icon-huitu',
     component: Draw,
     code: APP_CODE.DRAW,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 17, right: 11 },
+      defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
+    },
+  },
+  logger: {
+    name: '日志',
+    icon: 'icon-rizhichaxun',
+    component: Logger,
+    code: APP_CODE.LOGGER,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 17, right: 11 },

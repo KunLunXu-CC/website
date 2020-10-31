@@ -7,6 +7,7 @@ export const APP_CODE = {
   ALBUM: 'album',                // 相册
   DIARY: 'diary',                // 日记
   EDITOR: 'editor',              // 编辑器
+  LOGGER: 'logger',              // 日志
   ARTICLE: 'article',            // 文章
   DATASETSFROM: 'datasetsfrom',  // 数据字典(数据集)
 };
