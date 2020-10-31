@@ -5,7 +5,7 @@ import { log } from '@utils';
 // 创建 axios 实例
 const instance = axios.create({
   headers: { 'Content-Type': ' application/json' },
-  baseURL: GLOBAL_SERVICE.HOST,
+  baseURL: GLOBAL_SERVICER.HOST,
   timeout: 1000 * 60,
 });
 

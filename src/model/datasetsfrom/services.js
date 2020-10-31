@@ -10,7 +10,7 @@ export const getDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { search, orderBy: { value: -1 } },

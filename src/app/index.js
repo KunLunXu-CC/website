@@ -81,7 +81,7 @@ export default {
     code: APP_CODE.LOGGER,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 17, right: 11 },
+      toolPosition: { top: 10, left: 10 },
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },

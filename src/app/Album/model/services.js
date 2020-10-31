@@ -35,7 +35,7 @@ export const uploadPhotos = async ({
 export const getPhotos = async ({ search, spin }) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { search },
@@ -65,7 +65,7 @@ export const removePhotos = async ({
 }) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds, search },

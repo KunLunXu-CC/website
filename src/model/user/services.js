@@ -5,7 +5,7 @@ export const login = async ({
   password,
 } = {}) => {
   const res = await axios({
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { account, password },
@@ -36,7 +36,7 @@ export const login = async ({
 
 export const getPublicKey = async () => {
   const res = await axios({
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       query: `

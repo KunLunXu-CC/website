@@ -4,7 +4,7 @@ import { DATASETSFROM_CODE } from '@config/consts';
 // 初始化: 一次性获取所有数据并在前端进行存储
 export const initData = async () => {
   const res = await axios({
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       query: `
@@ -49,7 +49,7 @@ export const createDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { body },
@@ -81,7 +81,7 @@ export const updateDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { body, conds },
@@ -114,7 +114,7 @@ export const removeDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds },
@@ -145,7 +145,7 @@ export const createArticles = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { body },
@@ -176,7 +176,7 @@ export const updateArticles = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds, body },
@@ -211,7 +211,7 @@ export const removeArticles = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds },
@@ -240,7 +240,7 @@ export const releaseArticles = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds },
@@ -273,7 +273,7 @@ export const revokeArticles = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds },

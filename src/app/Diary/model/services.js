@@ -7,7 +7,7 @@ export const getDiaries = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { search },
@@ -43,7 +43,7 @@ export const createDiaries = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { body },
@@ -80,7 +80,7 @@ export const updateDiaries = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds, body },
@@ -118,7 +118,7 @@ export const getStatsBill = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { search },
@@ -149,7 +149,7 @@ export const getStatsBodyIndex = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { search },

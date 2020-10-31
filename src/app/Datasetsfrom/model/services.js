@@ -10,7 +10,7 @@ export const createDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { body },
@@ -42,7 +42,7 @@ export const updateDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { body, conds },
@@ -75,7 +75,7 @@ export const removeDatasetsfroms = async ({
 } = {}) => {
   const res = await axios({
     spin,
-    url: GLOBAL_SERVICE.GRAPHQL_URL,
+    url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
       variables: { conds },

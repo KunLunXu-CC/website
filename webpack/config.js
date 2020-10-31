@@ -22,18 +22,20 @@ module.exports.globalConsts = {
   // 生产环境配置
   production: {
     _DEV_: false,
-    GLOBAL_SERVICE: {
+    GLOBAL_SERVICER: {
       HOST: JSON.stringify('https://www.qianyin925.com:4000'),
       GRAPHQL_URL: JSON.stringify('/graphql'),
     },
+    WS_SERVICER: JSON.stringify('ws://www.qianyin925.com:4000'),
   },
 
   // 开发环境配置
   development: {
     _DEV_: true,
-    GLOBAL_SERVICE: {
+    GLOBAL_SERVICER: {
       HOST: JSON.stringify('http://localhost:4000'),
       GRAPHQL_URL: JSON.stringify('/graphql'),
     },
+    WS_SERVICER: JSON.stringify('ws://localhost:4000'),
   },
 };

@@ -1,0 +1,18 @@
+.logger {
+  height: 100%;
+  position: relative;
+  background: #0b122e;
+
+  &::after {
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+
+    opacity: 0.09;
+    background: url('./img/bg.jpg') no-repeat center center;
+    background-size: cover;
+  }
+}
