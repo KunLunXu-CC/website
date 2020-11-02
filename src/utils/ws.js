@@ -1,4 +1,4 @@
-export default pathname => {
-  const ws = new WebSocket(`${WS_SERVICER}${pathname}`);
-  return ws;
-};
+export default pathname => new WebSocket(
+  `${WS_SERVICER}${pathname}`,
+  localStorage.getItem('authorization')
+);
