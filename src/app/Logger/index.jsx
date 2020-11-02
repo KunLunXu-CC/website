@@ -2,8 +2,6 @@ import React from 'react';
 import scss from './index.module.scss';
 import ws from '@utils/ws';
 
-const wss = ws('/ws/logger');
-
 const useStateHook = () => {
   const [logger, setLogger] = React.useState([]);
   const mainRef = React.useRef();
@@ -18,6 +16,7 @@ const useStateHook = () => {
   }, [mainRef.current]);
 
   React.useEffect(() => {
+    const wss = ws('/ws/logger');
     const tmp = [];
     onScrollEnd();
     wss.onmessage = event => {
@@ -28,6 +27,7 @@ const useStateHook = () => {
       scrollTop + clientHeight === scrollHeight &&
       setTimeout(onScrollEnd, 1000);
     };
+    return () => wss.close();
   }, []);
 
   return { logger, mainRef };
