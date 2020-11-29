@@ -1,5 +1,4 @@
 import React from 'react';
-import Date from './Date';
 import Github from './Github';
 import Juejin from './Juejin';
 import classNames from 'classnames';
@@ -35,7 +34,6 @@ export default () => {
         <Icon type="icon-wifi"/>
         <Icon type="icon-dianliang"/>
         <Fullscreen/>
-        <Date/>
         <Notification/>
       </div>
     </div>

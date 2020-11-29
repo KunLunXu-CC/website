@@ -1,13 +1,12 @@
 import React from 'react';
 import User from './User';
+import Target from './Target';
 import scss from './index.module.scss';
 
 import { Drawer } from 'antd';
-import { Icon } from 'qyrc';
 
 const useStateHook = () => {
   const [visible, setVisible] = React.useState(false);
-  const drawerRef = React.useRef(null);
 
   // 关闭
   const onClose = React.useCallback(setVisible.bind(null, false), []);
@@ -18,20 +17,11 @@ const useStateHook = () => {
     [visible]
   );
 
-  React.useEffect(() => {
-    if (visible) {
-      const onClose = event => {
-        if (drawerRef.current.contains(event.target)) {
-          return false;
-        }
-        setVisible(false);
-      };
-      window.addEventListener('click', onClose);
-      return () => window.removeEventListener('click', onClose);
-    }
-  }, [visible]);
+  // // 点击抽屉
+  // const onCloseDrawer = React.useCallback(() => {
+  // }, []);
 
-  return { visible, onClose, onToogle, drawerRef };
+  return { visible, onClose, onToogle };
 };
 
 export default () => {
@@ -39,18 +29,16 @@ export default () => {
 
   return (
     <React.Fragment>
-      <Icon type="icon-caidan" onClick={state.onToogle}/>
+      <Target onClick={state.onToogle}/>
       <Drawer
         width={300}
-        mask={false}
         closable={false}
         placement="right"
+        // getContainer={false}
         onClose={state.onClose}
         visible={state.visible}
         className={scss.notification}>
-        <div ref={state.drawerRef} className={scss.body}>
-          <User/>
-        </div>
+        <User/>
       </Drawer>
     </React.Fragment>
   );
