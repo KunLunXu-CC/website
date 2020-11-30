@@ -1,5 +1,6 @@
 import React from 'react';
 import User from './User';
+import Card from './Card';
 import Target from './Target';
 import scss from './index.module.scss';
 
@@ -31,14 +32,18 @@ export default () => {
     <React.Fragment>
       <Target onClick={state.onToogle}/>
       <Drawer
-        width={300}
+        width={374}
         closable={false}
         placement="right"
         // getContainer={false}
         onClose={state.onClose}
         visible={state.visible}
         className={scss.notification}>
-        <User/>
+        {/* <User/> */}
+        <Card size="middle"/>
+        <Card size="small"/>
+        <Card size="small"/>
+        <Card size="large"/>
       </Drawer>
     </React.Fragment>
   );

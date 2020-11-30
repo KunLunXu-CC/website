@@ -1,44 +1,25 @@
 .card {
-  border: none;
-  overflow: hidden;
-  border-radius:8px;
-  background: rgba($color: #000, $alpha: 0.1);
+  border-radius: 20px;
+  box-shadow: 0 0 10px red;
+  background: linear-gradient(45deg, #12D8FA, #12D8FA, #A6FFCB);
 
-  :global {
-    .ant-card-head {
-      padding: 0;
-      border: none;
-      min-height: initial;
-    }
+  margin: 0 8px 16px 8px;
 
-    .ant-card-head-wrapper {
-      height: 28px;
-      color: rgba($color: #fff, $alpha: 0.6);
-      padding: 0 8px;
-      font-size: 12px;
-      background: rgba($color: #000, $alpha: 0.1);
-    }
+  &:global(.small) {
+    background: red;
+    width: calc(50% - 8px);
+    height: 200px;
+  }
 
-    .ant-card-head-title {
-      display: flex;
-      align-items: center;
-    }
+  &:global(.middle) {
+    width: 100%;
+    background: blue;
+    height: 200px;
+  }
 
-    .ant-card-extra {
-      padding: 0;
-      color: rgba($color: #fff, $alpha: 0.4);
-      .qyrc-icon {
-        margin-right: 0;
-      }
-    }
-
-    .ant-card-body {
-      padding: 16px;
-      color: rgba($color: #fff, $alpha: 0.6);
-    }
-
-    .qyrc-icon {
-      margin-left: 0;
-    }
+  &:global(.large) {
+    width: 100%;
+    background: green;
+    height: 200px;
   }
 }

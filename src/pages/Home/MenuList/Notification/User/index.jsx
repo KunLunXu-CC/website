@@ -1,5 +1,4 @@
 import React from 'react';
-import Card from '../Card';
 import scss from './index.module.scss';
 
 import { Image } from 'qyrc';
@@ -35,13 +34,8 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <Card
-      title="用户信息"
-      icon="icon-icon_yonghuguanli"
-      className={scss.user}
-      extraIcon="icon-tuichu"
-      onClickExtra={state.signOut}>
-      <div className={scss.avatar}>
+    <div className={scss.user}>
+      {/* <div className={scss.avatar}>
         <Image src={state.avatar}/>
       </div>
       <div className={scss.name}>
@@ -49,7 +43,7 @@ export default () => {
       </div>
       <div className={scss.motto}>
         { state.user.motto || '这个人很懒什么都没写'}
-      </div>
-    </Card>
+      </div> */}
+    </div>
   );
 };
