@@ -2,12 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-// 大(345 354)、小(165 163)、中(346, 166)
+const DEFAULT_SIZE = 'middle'; // 默认尺寸
+
 // size: large | middle | small
 export default props => (
-  <div className={classNames(scss.card, props.size)}>
-    {/* <div className={scss['card-body']}>
-
-    </div> */}
+  <div className={classNames(
+    scss.card,
+    props.className,
+    props.size || DEFAULT_SIZE)}>
+    {props.children}
   </div>
 );

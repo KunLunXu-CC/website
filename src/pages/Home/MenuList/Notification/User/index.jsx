@@ -1,7 +1,8 @@
 import React from 'react';
+import Card from '../Card';
 import scss from './index.module.scss';
 
-import { Image } from 'qyrc';
+import { Image, Icon } from 'qyrc';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
@@ -32,10 +33,9 @@ const useStateHook = () => {
 
 export default () => {
   const state = useStateHook();
-
   return (
-    <div className={scss.user}>
-      {/* <div className={scss.avatar}>
+    <Card className={scss.user}>
+      <div className={scss.avatar}>
         <Image src={state.avatar}/>
       </div>
       <div className={scss.name}>
@@ -43,7 +43,12 @@ export default () => {
       </div>
       <div className={scss.motto}>
         { state.user.motto || '这个人很懒什么都没写'}
-      </div> */}
-    </div>
+      </div>
+      <Icon
+        type="icon-tuichu"
+        onClick={state.signOut}
+        className={scss['sign-out']}
+      />
+    </Card>
   );
 };
