@@ -93,8 +93,8 @@ export default {
     code: APP_CODE.SETTING,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 10, left: 10 },
-      defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
+      toolPosition: { top: 14, left: 14 },
+      defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
     },
   },
 };
