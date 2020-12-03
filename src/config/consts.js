@@ -8,6 +8,7 @@ export const APP_CODE = {
   DIARY: 'diary',                // 日记
   EDITOR: 'editor',              // 编辑器
   LOGGER: 'logger',              // 日志
+  SETTING: 'setting',            // 系统偏好设置
   ARTICLE: 'article',            // 文章
   DATASETSFROM: 'datasetsfrom',  // 数据字典(数据集)
 };

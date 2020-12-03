@@ -4,6 +4,7 @@ import Album from './Album';
 import Editor from './Editor';
 import Reader from './Reader';
 import Logger from './Logger';
+import Setting from './Setting';
 import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
 
@@ -79,6 +80,17 @@ export default {
     icon: 'icon-rizhichaxun',
     component: Logger,
     code: APP_CODE.LOGGER,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 10, left: 10 },
+      defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
+    },
+  },
+  setting: {
+    name: '系统偏好设置',
+    icon: 'icon-renwucopy',
+    component: Setting,
+    code: APP_CODE.SETTING,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 10, left: 10 },
