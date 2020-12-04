@@ -1,6 +1,14 @@
 .body {
   flex: 1;
+  padding: 20px;
+
   border-radius: 0 0 10px 10px;
   border: 2px solid #3f3f3e;
   border-top: none;
+
+  :global {
+    .ant-checkbox-wrapper {
+      color: rgba($color: #fff, $alpha: 0.8);
+    }
+  }
 }
