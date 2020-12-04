@@ -1,8 +1,11 @@
 import React from 'react';
 import apps from '@app';
+import classNames from 'classnames';
 import scss from './index.module.scss';
 import styled from 'styled-components';
+
 import { Icon } from 'qyrc';
+import { useSelector } from 'react-redux';
 
 const DockApp = styled.div`
   --scale: ${({ index, currentIndex }) => {
@@ -17,20 +20,27 @@ const DockApp = styled.div`
 
 const useStateHook = props => {
   const [currentIndex, setCurrentIndex] = React.useState(null);
+  const setting = useSelector(state => state.setting);
 
   // 点击事件
   const onClick = React.useCallback(dock => {
     _.isFunction(props.onClick) && props.onClick(dock);
   }, [props]);
 
-  return { onClick, currentIndex, setCurrentIndex };
+  // 最外层容器 className
+  const className = React.useMemo(() => classNames(
+    scss.dock,
+    { [scss['dock-auto-hiding']]: setting.hideDock },
+  ), [setting.hideDock]);
+
+  return { onClick, currentIndex, setCurrentIndex, className };
 };
 
 export default props => {
   const state = useStateHook(props);
 
   return (
-    <div className={`${scss.dock} ${scss['dock-auto-hiding']}`}>
+    <div className={state.className}>
       <div
         className={scss['dock-body']}>
         {props.dataSource.map((v, index) => (
