@@ -1,18 +1,19 @@
 
 /* Dock 样式 */
 $radius: 10px;                 // 容器圆角大小
-$dock-height: 60px;            // 高度
+$dock-height: 54px;            // 高度
+$margin-bottom: 6px;           // dock 距离底部间距
 $dock-trigger-height: 12px;    // 鼠标距离底部多少显示 dock
 
 // dock 样式
 .dock {
   left: 0;
   right: 0;
-  bottom: 0;
   z-index: 9;
   display: flex;
   position: fixed;
   height: $dock-height;
+  bottom: $margin-bottom;
   transition: all 0.5s;
   box-sizing: content-box;
   justify-content: center;
@@ -27,13 +28,12 @@ $dock-trigger-height: 12px;    // 鼠标距离底部多少显示 dock
   min-width: 50%;
   height: $dock-height;
 
+  border-radius: $radius;
   box-sizing: border-box;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(40px);
   background: rgba(0, 0, 0, 0.2);
-  border-radius: $radius $radius 0 0;
   border: 2px solid rgba($color: #fff, $alpha: 0.06);
   box-shadow: 0 0 0 1px rgba($color: #000, $alpha: 0.3);
-  border-bottom: none;
 }
 
 // 应用设置
@@ -95,10 +95,12 @@ $dock-trigger-height: 12px;    // 鼠标距离底部多少显示 dock
 // 开启自动隐藏 dock 当鼠标距离底部一定距离才显示
 .dock.dock-auto-hiding {
   opacity: 0;
+  cursor: auto;
   bottom: -$dock-height;
-  padding-top: $dock-trigger-height;
+  padding: $dock-trigger-height 0;
+
   &:hover {
-    bottom: 0;
     opacity: 1;
+    bottom: $margin-bottom - $dock-trigger-height;
   }
 }
