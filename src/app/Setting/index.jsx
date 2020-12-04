@@ -1,11 +1,16 @@
 import React from 'react';
-import Body from './Body';
+import Menu from './Menu';
 import Header from './Header';
 import scss from './index.module.scss';
 
 export default () => (
   <div className={scss.setting}>
     <Header/>
-    <Body/>
+    <div className={scss.main}>
+      <Menu/>
+      <div className={scss.body}>
+
+      </div>
+    </div>
   </div>
 );

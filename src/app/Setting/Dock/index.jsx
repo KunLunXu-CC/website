@@ -1,5 +1,4 @@
 import React from 'react';
-import scss from './index.module.scss';
 
 import { Checkbox } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,12 +23,12 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <div className={scss.body}>
+    <React.Fragment>
       <Checkbox
         checked={state.setting.hideDock}
         onChange={state.onChange.bind(null, 'hideDock')}>
         自动隐藏和显示程序坞
       </Checkbox>
-    </div>
+    </React.Fragment>
   );
 };

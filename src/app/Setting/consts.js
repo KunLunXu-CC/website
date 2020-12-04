@@ -1,5 +1,11 @@
+import Dock from './Dock';
+
 export const LOCALSTORAGE_KEY = 'setting';  // 本地存储 key 值
 
-export const space = {};
-
-
+export const MENUS = [
+  {
+    title: '程序坞', // 标题
+    key: 'dock',    // redux 中对应 key 值
+    component: Dock,
+  },
+];
