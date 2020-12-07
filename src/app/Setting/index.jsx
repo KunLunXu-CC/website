@@ -12,7 +12,7 @@ const useStateHook = () => {
   // 获取 body 组件
   const Body = React.useMemo(() => MENUS.find(
     v => v.key === selectedMenuKey
-  ).component, selectedMenuKey);
+  ).component, [selectedMenuKey]);
 
   return { Body };
 };
