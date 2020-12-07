@@ -1,11 +1,15 @@
+import effects from './effects';
+import * as reducers from './reducers';
+
+import { MENUS } from '../consts';
+
 const initState = {
-  desktopBg: null,   // 桌面背景
-  hideDock: false,   // 是否隐藏 dock
+  selectedMenuKey: MENUS[0].key,
 };
 
 export default {
-  effects: {},
-  reducers: {},
+  effects,
+  reducers,
   state: initState,
   namespace: 'settingManage',
 };

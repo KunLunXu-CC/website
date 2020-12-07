@@ -1,9 +1,15 @@
 .menu {
   width: 200px;
-  padding: 18px;
+  padding: 10px;
   border-right: 2px solid rgba($color: #fff, $alpha: 0.04);
 }
 
 .item {
-  line-height: 32px;
+  padding: 10px;
+  line-height: 22px;
+  border-radius: 6px;
+}
+
+.selected {
+  background: #363536;
 }
