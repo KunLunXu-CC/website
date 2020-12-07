@@ -29,6 +29,11 @@ export default () => {
         onChange={state.onChange.bind(null, 'autoFullScreen')}>
         进入系统自动全屏进行展示
       </Checkbox>
+      <Checkbox
+        checked={state.setting.showFullScreenOnMenu}
+        onChange={state.onChange.bind(null, 'showFullScreenOnMenu')}>
+        在菜单栏显示全屏切换图标
+      </Checkbox>
     </React.Fragment>
   );
 };

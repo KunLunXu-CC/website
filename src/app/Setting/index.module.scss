@@ -26,6 +26,8 @@
 
   :global {
     .ant-checkbox-wrapper {
+      padding-bottom: 10px;
+      display: inline-block;
       color: rgba($color: #fff, $alpha: 0.8);
     }
   }

@@ -6,7 +6,8 @@ export const initState = {
     hideDock: false,   // 是否隐藏 dock
   },
   desktop: { // 桌面相关配置
-    autoFullScreen: false,  // 自动全屏
+    autoFullScreen: false,       // 自动全屏
+    showFullScreenOnMenu: true,  // 在菜单栏显示全屏图标
   },
 };
 
