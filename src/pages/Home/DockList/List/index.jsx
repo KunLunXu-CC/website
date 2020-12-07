@@ -20,7 +20,7 @@ const DockApp = styled.div`
 
 const useStateHook = props => {
   const [currentIndex, setCurrentIndex] = React.useState(null);
-  const setting = useSelector(state => state.setting);
+  const setting = useSelector(state => state.setting.dock);
 
   // 点击事件
   const onClick = React.useCallback(dock => {

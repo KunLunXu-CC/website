@@ -8,7 +8,7 @@
  * @return {Object} 更新后的状态
  */
 export const setValue = (state, { setting }) => {
-  const newState = { ... state, ... setting };
+  const newState = _.cloneDeep(_.merge(state, setting));
   localStorage.setItem('setting', JSON.stringify(newState));
   return newState;
 };

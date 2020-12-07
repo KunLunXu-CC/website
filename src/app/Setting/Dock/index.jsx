@@ -5,14 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const setting = useSelector(state => state.setting);
+  const setting = useSelector(state => state.setting.dock);
 
   // 修改值
   const onChange = React.useCallback((key, event) => {
     const value = event.target.checked;
     dispatch({
       type: 'setting/setValue',
-      setting: { [key]: value },
+      setting: { dock: { [key]: value } },
     });
   }, []);
 
