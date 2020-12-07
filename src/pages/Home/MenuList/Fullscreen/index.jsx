@@ -6,9 +6,11 @@ import {
   exitFullscreen,
   requestFullscreen,
 } from '@utils/fullscreen';
+import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const [fulled, setFulled] = React.useState(false);
+  const setting = useSelector(state => state.setting.desktop);
 
   // 切换状态
   const onToggle = React.useCallback(() => {
@@ -36,15 +38,16 @@ const useStateHook = () => {
     return () => document.removeEventListener('keydown', listener);
   }, [fulled]);
 
-  return { fulled, onToggle };
+  return { fulled, onToggle, setting };
 };
 
 export default props => {
   const state = useStateHook(props);
-  return (
+
+  return state.setting.showFullScreenOnMenu ? (
     <Icon
       onClick={state.onToggle}
       type={state.fulled ? 'icon-compress' :  'icon-shipinquanping'}
     />
-  );
+  ) : null;
 };
