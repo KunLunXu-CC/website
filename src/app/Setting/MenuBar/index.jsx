@@ -5,14 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const setting = useSelector(state => state.setting.desktop);
+  const setting = useSelector(state => state.setting.menuBar);
 
   // 修改值
   const onChange = React.useCallback((key, event) => {
     const value = event.target.checked;
     dispatch({
       type: 'setting/setValue',
-      setting: { desktop: { [key]: value } },
+      setting: { menuBar: { [key]: value } },
     });
   }, []);
 
@@ -24,11 +24,6 @@ export default () => {
 
   return (
     <React.Fragment>
-      <Checkbox
-        checked={state.setting.autoFullScreen}
-        onChange={state.onChange.bind(null, 'autoFullScreen')}>
-        进入系统自动全屏进行展示
-      </Checkbox>
       <Checkbox
         checked={state.setting.showFullScreenOnMenu}
         onChange={state.onChange.bind(null, 'showFullScreenOnMenu')}>

@@ -1,5 +1,5 @@
 import Dock from './Dock';
-import Desktop from './Desktop';
+import MenuBar from './MenuBar';
 
 export const LOCALSTORAGE_KEY = 'setting';  // 本地存储 key 值
 
@@ -10,8 +10,8 @@ export const MENUS = [
     component: Dock,
   },
   {
-    title: '系统桌面', // 标题
-    key: 'desktop',    // redux 中对应 key 值
-    component: Desktop,
+    title: '菜单栏',    // 标题
+    key: 'menuBar',    // redux 中对应 key 值
+    component: MenuBar,
   },
 ];
