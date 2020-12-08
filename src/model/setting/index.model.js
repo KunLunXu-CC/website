@@ -6,7 +6,9 @@ export const initState = {
     hideDock: false,   // 是否隐藏 dock
   },
   menuBar: { // 菜单栏
-    showFullScreenOnMenu: true,  // 在菜单栏显示全屏图标
+    showFullScreenOnMenu: true,        // 在菜单栏显示全屏图标
+    showWeek: true,                    // 显示星期
+    formatDate: 'YYYY-MM-DD HH:mm:ss', // 格式化日期
   },
 };
 

@@ -1,0 +1,11 @@
+.format-date {
+  padding-bottom: 10px;
+
+  :global {
+    .ant-input {
+      width: 200px;
+      margin-left: 12px;
+      display: inline-block;
+    }
+  }
+}
