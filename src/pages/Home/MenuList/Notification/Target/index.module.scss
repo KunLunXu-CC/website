@@ -5,5 +5,9 @@
 
   .week {
     padding: 0 6px;
+
+    &:empty {
+      display: none;
+    }
   }
 }
