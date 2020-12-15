@@ -38,7 +38,7 @@ export default {
     code: APP_CODE.READ,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 16, left: 16 },
+      toolPosition: { top: 14, left: 12 },
       defaultParams: { width: 1220, height: 630, offsetX: 60, offsetY: 60 },
     },
   },
