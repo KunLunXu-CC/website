@@ -1,13 +1,31 @@
 import React from 'react';
-import Menu from './Menu';
-import Header from './Header';
-import Article from './Article';
+import Side from './Side';
+import Articles from './Articles';
+import Recommend from './Recommend';
 import scss from './index.module.scss';
 
-export default () => (
-  <div className={scss.reader}>
-    <Header/>
-    <Menu/>
-    <Article/>
-  </div>
-);
+import { DEFAULT_MENU } from './consts';
+import { useSelector } from 'react-redux';
+
+const useStateHook = () => {
+  // 菜单 selectedKey
+  const selectedKey = useSelector(state => state.reader.menu.selectedKey);
+
+  // 获取 Body 组件
+  const Body = React.useMemo(() => ({
+    [DEFAULT_MENU.id]: Recommend,
+  }[selectedKey] || Articles), [selectedKey]);
+
+  return { Body };
+};
+
+export default () => {
+  const { Body } = useStateHook();
+
+  return (
+    <div className={scss.reader}>
+      <Side/>
+      <Body/>
+    </div>
+  );
+};

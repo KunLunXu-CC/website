@@ -2,7 +2,7 @@ import React from 'react';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss.article}>
-
+  <div className={scss.recommend}>
+    推送
   </div>
 );
