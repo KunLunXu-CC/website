@@ -3,9 +3,9 @@
 // 应用 CODE
 export const APP_CODE = {
   DRAW: 'draw',                  // 绘图
-  READ: 'read',                  // 阅读
   ALBUM: 'album',                // 相册
   DIARY: 'diary',                // 日记
+  READER: 'reader',              // 阅读
   EDITOR: 'editor',              // 编辑器
   LOGGER: 'logger',              // 日志
   SETTING: 'setting',            // 系统偏好设置

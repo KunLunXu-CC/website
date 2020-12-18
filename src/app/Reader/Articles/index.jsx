@@ -12,7 +12,7 @@ const useStateHook = () => {
 
   React.useEffect(() => {
     console.log('---------');
-    dispatch({});
+    // dispatch({});
   }, [selectedKey]);
 
   return {};

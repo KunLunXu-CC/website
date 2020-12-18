@@ -31,7 +31,7 @@ export default {
       defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 40 },
     },
   },
-  read: {
+  reader: {
     name: '阅读',
     component: Reader,
     icon: 'icon-wenzhang',
