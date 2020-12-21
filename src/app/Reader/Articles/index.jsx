@@ -12,14 +12,16 @@ const useStateHook = () => {
 
   React.useEffect(() => {
     console.log('---------');
-    // dispatch({});
+    dispatch({
+      type: '',
+    });
   }, [selectedKey]);
 
   return {};
 };
 
 export default () => {
-  const state = useStateHook();
+  useStateHook();
 
   return  (
     <div className={scss.articles}>
