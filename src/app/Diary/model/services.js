@@ -1,5 +1,28 @@
 import axios from '@utils/request';
 
+const DIARY = `{
+  id
+  name
+  getUp
+  toRest
+  informalEssay
+  diet {
+    type { value name desc }
+    desc
+  }
+  fitness {
+    type { value name desc }
+    place { value name desc }
+  }
+  bill {
+    desc
+    income
+    expend
+    tag { value name desc }
+  }
+  bodyIndex { weight muscle moistureContent bodyfat bim }
+}`;
+
 // 获取日记
 export const getDiaries = async ({
   spin,
@@ -12,23 +35,9 @@ export const getDiaries = async ({
     data: {
       variables: { search },
       query: `
-        query(
-          $search: DiarySearch,
-        ){
-          diaries(
-            search: $search,
-          ){
-            list {
-              id
-              name
-              bill
-              diet
-              getUp
-              toRest
-              fitness
-              bodyIndex
-              informalEssay
-            }
+        query($search: DiarySearch){
+          diaries(search: $search){
+            list ${DIARY}
           }
         }`,
     },
@@ -48,23 +57,9 @@ export const createDiaries = async ({
     data: {
       variables: { body },
       query: `
-        mutation(
-          $body: [DiaryFields!]!,
-        ){
-          createDiaries(
-            body: $body,
-          ){
-            change {
-              id
-              name
-              bill
-              diet
-              getUp
-              toRest
-              fitness
-              bodyIndex
-              informalEssay
-            }
+        mutation($body: [DiaryFields!]!){
+          createDiaries(body: $body){
+            change ${DIARY}
           }
         }`,
     },
@@ -85,25 +80,9 @@ export const updateDiaries = async ({
     data: {
       variables: { conds, body },
       query: `
-        mutation(
-          $body: DiaryFields!,
-          $conds: DiarySearch!,
-        ){
-          updateDiaries(
-            body: $body,
-            conds: $conds,
-          ){
-            change {
-              id
-              name
-              bill
-              diet
-              getUp
-              toRest
-              fitness
-              bodyIndex
-              informalEssay
-            }
+        mutation($body: DiaryFields!, $conds: DiarySearch!){
+          updateDiaries(body: $body, conds: $conds){
+            change ${DIARY}
           }
         }`,
     },
@@ -123,18 +102,22 @@ export const getStatsBill = async ({
     data: {
       variables: { search },
       query: `
-        query(
-          $search: StatsBillSearch,
-        ){
-          statsBill(
-            search: $search,
-          ){
-            stats
+        query($search: StatsBillSearch){
+          statsBill(search: $search){
+            stats { income expend }
             groupWithName {
               name
               income
               expend
-              diaries { name bill }
+              diaries {
+                name
+                bill {
+                  desc
+                  income
+                  expend
+                  tag { value name desc }
+                }
+              }
             }
           }
         }`,
@@ -155,15 +138,11 @@ export const getStatsBodyIndex = async ({
     data: {
       variables: { search },
       query: `
-        query(
-          $search: DiarySearch,
-        ){
-          diaries(
-            search: $search,
-          ){
+        query($search: DiarySearch){
+          diaries(search: $search){
             list {
               name
-              bodyIndex
+              bodyIndex { weight muscle moistureContent bodyfat bim }
             }
           }
         }`,

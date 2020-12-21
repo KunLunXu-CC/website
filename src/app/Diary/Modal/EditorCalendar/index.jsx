@@ -103,13 +103,19 @@ const useStateHook = () => {
   useEffect(() => {
     form.setFieldsValue(
       modal ? {
+        diet: _.get(modal, 'diary.diet', []).map(
+          v => ({ ... v, type: v.type.value })
+        ),
+        fitness: _.get(modal, 'diary.fitness', []).map(
+          v => ({ type: v.type.value, place: v.place.value })
+        ),
+        bill: _.get(modal, 'diary.bill', []).map(
+          v => ({ ... v, tag: v.tag.value })
+        ),
+        bodyIndex: _.get(modal, 'diary.bodyIndex') || {},
         name: moment(_.get(modal, 'diary.name') || modal.date),
         getUp: moment(_.get(modal, 'diary.getUp') || modal.date),
         toRest: moment(_.get(modal, 'diary.toRest') || modal.date),
-        bill: _.get(modal, 'diary.bill') || [],
-        diet: _.get(modal, 'diary.diet') || [],
-        fitness: _.get(modal, 'diary.fitness') || [],
-        bodyIndex: _.get(modal, 'diary.bodyIndex') || {},
       } : void 0
     );
   }, [modal]);
