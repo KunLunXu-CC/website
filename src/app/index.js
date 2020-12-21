@@ -35,7 +35,7 @@ export default {
     name: '阅读',
     component: Reader,
     icon: 'icon-wenzhang',
-    code: APP_CODE.READ,
+    code: APP_CODE.READER,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 14, left: 12 },
