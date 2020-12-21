@@ -1,41 +1,44 @@
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-} from 'react';
+import React from 'react';
 import scss from './index.module.scss';
 
 import { Chart } from '@antv/g2';
-import { useSelector } from 'react-redux';
 import { STATS_SAPN } from '@config/consts';
+import { STATS_BILL_DETAIL } from '../../../consts';
+import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = props => {
-  const containerRef = useRef(null);
+  const dispatch = useDispatch();
+  const containerRef = React.useRef(null);
   const { groupWithName } = useSelector(state => state.diary.statsBill);
 
   // 处理数据
-  const data = useMemo(() => (groupWithName.reduce((total, ele) => ([
+  const data = React.useMemo(() => (groupWithName.reduce((total, ele) => ([
     ... total,
     ... [
       {
         type: '支出',
         yAxis: ele.expend,
         xAxis: `${ele.name}.`,
-      }, {
+        diaries: ele.diaries,
+      },
+      {
         type: '收入',
         yAxis: ele.income,
         xAxis: `${ele.name}.`,
+        diaries: ele.diaries,
       },
+      // 只有按照 周、月、年进行统计时才显示结余
       [STATS_SAPN.MONTH.VALUE, STATS_SAPN.YEAR.VALUE].includes(props.span) ? {
         type: '结余',
         xAxis: `${ele.name}.`,
+        diaries: ele.diaries,
         yAxis: (ele.income - ele.expend).toFixed(2),
       } : null,
     ],
   ]), [])), [groupWithName]);
 
   // 实例化Chart
-  const chart = useMemo(() => {
+  const chart = React.useMemo(() => {
     if (containerRef.current) {
       return new Chart({
         autoFit: true,
@@ -49,13 +52,11 @@ const useStateHook = props => {
   const renderEchart = () => {
     if (chart) {
       // 绑定事件
-      chart.on('element:click', event => {
-        console.log('event: ', event);
-        // const { shape } = event;
-        // const element = shape.get('element');
-        // const { data } = element.getModel();
-        // console.log('------>>>', element, data);
-      });
+      chart.on('element:click', ({ data: { data } }) => dispatch({
+        diaries: data.diaries,
+        type: 'modal/openModal',
+        code: STATS_BILL_DETAIL,
+      }));
 
       // 载入数据
       chart.data(data.filter(v => v));
@@ -100,7 +101,7 @@ const useStateHook = props => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     renderEchart();
   }, [containerRef.current, data]);
 
