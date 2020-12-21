@@ -6,9 +6,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-
   // 弹窗
   const modal = useSelector(state => state.modal[STATS_BILL_DETAIL]);
+
+  // 数据
+  const data = React.useMemo(() => {
+    const bill = modal?.diaries.reduce((total, ele) => ([
+      ... total,
+      ... ele.bill,
+    ]), []);
+    console.log('bill ---------->>>>', bill);
+  }, [modal]);
 
   // 取消
   const onCancel = () => dispatch({
@@ -16,15 +24,7 @@ const useStateHook = () => {
     type: 'modal/closeModal',
   });
 
-  // 确认
-  const onOk = async () => {
-  };
-
-  return {
-    onOk,
-    modal,
-    onCancel,
-  };
+  return { modal, onCancel, data };
 };
 
 export default () => {
