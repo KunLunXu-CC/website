@@ -48,6 +48,15 @@ const useStateHook = props => {
   // 渲染图表
   const renderEchart = () => {
     if (chart) {
+      // 绑定事件
+      chart.on('element:click', event => {
+        console.log('event: ', event);
+        // const { shape } = event;
+        // const element = shape.get('element');
+        // const { data } = element.getModel();
+        // console.log('------>>>', element, data);
+      });
+
       // 载入数据
       chart.data(data.filter(v => v));
 

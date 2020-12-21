@@ -134,6 +134,7 @@ export const getStatsBill = async ({
               name
               income
               expend
+              diaries { name bill }
             }
           }
         }`,
