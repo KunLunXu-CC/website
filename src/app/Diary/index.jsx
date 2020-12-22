@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Menu from './Menu';
 import Tips from './Tips';
-import Stats from './Stats';
+// import Stats from './Stats';
 import Modal from './Modal';
 import Calendar from './Calendar';
 import Kanban from './Kanban';
@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 
 // 菜单和组件的映射关系
 const MEN_MAP_TO_COMPONENT = {
-  [DIARY_MENU.STATS.VALUE]: Stats,
+  // [DIARY_MENU.STATS.VALUE]: Stats,
   [DIARY_MENU.CALENDAR.VALUE]: Calendar,
   [DIARY_MENU.PROJECT.VALUE]: Kanban,
 };

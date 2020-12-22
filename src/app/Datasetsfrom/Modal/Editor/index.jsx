@@ -55,7 +55,7 @@ const useStateHook = () => {
   const onOk = async () => {
     const { parent, ... rest } = await form.validateFields();
     dispatch({
-      id: modal.data ?. id,
+      id: modal.data?.id,
       code: MODAL_CODE_DATASETSFROM_EDITOR,
       body: { ... rest, parent: parent?.[1] },
       type: modal.data
@@ -68,16 +68,16 @@ const useStateHook = () => {
   React.useEffect(() => {
     modal
       ? form.setFieldsValue({
-        name: modal.data ?. name ?? void 0,
-        value: modal.data ?. value ?? void 0,
-        desc: modal.data ?. desc ?? void 0,
-        icon: modal.data ?. icon ?? void 0,
-        parent: modal.data ?. parent ? [
+        name: modal.data?.name ?? void 0,
+        value: modal.data?.value ?? void 0,
+        desc: modal.data?.desc ?? void 0,
+        icon: modal.data?.icon ?? void 0,
+        parent: modal.data?.parent ? [
           modal.data.parent.code,
           modal.data.parent.id,
         ] : [],
         code: modal.data
-          ?. code
+          ?.code
           ?? (_.isNumber(menuSelectedKey) ? menuSelectedKey : void 0),
       })
       : form.resetFields();
@@ -102,7 +102,7 @@ export default () => {
         className={scss.modal}
         visible={!!state.modal}
         onCancel={state.onCancel}
-        title={state.modal ?. title}>
+        title={state.modal?.title}>
         <Row gutter={40}>
           <Col span={12}>
             <Form.Item

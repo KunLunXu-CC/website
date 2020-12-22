@@ -14,7 +14,7 @@ const DockApp = styled.div`
       return defaultValue;
     }
     const mapIndex = 2 - Math.abs(currentIndex - index);
-    return [1.1, 1.2, 1.3] ?. [mapIndex] || defaultValue;
+    return [1.1, 1.2, 1.3]?.[mapIndex] || defaultValue;
   }};
 `;
 

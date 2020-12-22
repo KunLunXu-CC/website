@@ -1,4 +1,3 @@
-import Draw from './Draw';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
@@ -61,17 +60,6 @@ export default {
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 11, left: 11 },
-      defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
-    },
-  },
-  draw: {
-    name: '绘图',
-    icon: 'icon-huitu',
-    component: Draw,
-    code: APP_CODE.DRAW,
-    modalProps: {
-      dragHeight: 40,
-      toolPosition: { top: 17, right: 11 },
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },

@@ -13,7 +13,7 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   const { works, showWork } = useSelector(state => ({
-    works: state.editor ?. works,
+    works: state.editor?.works,
     showWork: state.app.opens.find(
       v => v.code === APP_CODE.EDITOR && !v.isMin
     ),

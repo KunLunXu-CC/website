@@ -8,15 +8,15 @@ export default props => (
   <div className={scss.item}>
     <div className={scss.top}>
       <div className={scss.title}>
-        {props.data ?. name ?? '--'}
+        {props.data?.name ?? '--'}
       </div>
       <div className={scss.desc}>
-        {props.data ?. desc ?? '---'}
+        {props.data?.desc ?? '---'}
       </div>
     </div>
     <div className={scss.bottom}>
       <div className={scss.value}>
-        {props.data ?. value ?? '---'}
+        {props.data?.value ?? '---'}
       </div>
       <div className={scss.tools}>
         <Icon
