@@ -1,11 +1,10 @@
 import React from 'react';
 import { Echart } from 'qyrc';
-// import { STATS_SAPN } from '@config/consts';
-// import { STATS_BILL_DETAIL } from '../../../consts';
+import { STATS_BILL_DETAIL } from '../../../consts';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = props => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { groupWithName } = useSelector(state => state.diary.statsBill);
 
   // 处理数据
@@ -67,8 +66,13 @@ const useStateHook = props => {
   // 绑定事件
   const on = React.useMemo(() => ([{
     eventName: 'click',
-    handler: (... args) => {
-      console.log(... args);
+    handler: (... event) => {
+      console.log('event', ... event);
+      // diaries && dispatch({
+      //   diaries,
+      //   type: 'modal/openModal',
+      //   code: STATS_BILL_DETAIL,
+      // });
     },
   }]), []);
   return { option, on };
