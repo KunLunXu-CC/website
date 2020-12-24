@@ -54,11 +54,3 @@ export const DATASETSFROM_CODE = {
   ARTICLE_TYPE: { VALUE: 5, DESC: '文章类型', ICON: 'icon-suanfa' },
   ARTICLE_TAG: { VALUE: 6, DESC: '文章标签', ICON: 'icon-suanfa' },
 };
-
-// 统计跨度
-export const STATS_SAPN = {
-  DAY: { VALUE: 'day', DESC: '天' },      // 按天
-  WEEK: { VALUE: 'week', DESC: '周' },    // 按周
-  MONTH: { VALUE: 'month', DESC: '月' },  // 按月
-  YEAR: { VALUE: 'year', DESC: '年' },    // 按年
-};

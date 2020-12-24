@@ -10,25 +10,10 @@ import scss from './index.module.scss';
 
 import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
-import { STATS_SAPN } from '@config/consts';
+import { STATS_SAPN } from '../../consts';
 
 // span 和 name 映射表
 const SPAN_MAP_NAME = {
-  [STATS_SAPN.DAY.VALUE]: [
-    moment()
-      .subtract(30, 'days')
-      .format('YYYY-MM-DD'),
-    moment().format('YYYY-MM-DD'),
-  ],
-  [STATS_SAPN.WEEK.VALUE]: [
-    moment()
-      .subtract(15, 'weeks')
-      .startOf('week')
-      .format('YYYY-MM-DD'),
-    moment()
-      .endOf('week')
-      .format('YYYY-MM-DD'),
-  ],
   [STATS_SAPN.MONTH.VALUE]: [
     moment()
       .startOf('month')
@@ -50,7 +35,7 @@ const SPAN_MAP_NAME = {
 };
 
 const useStateHook = () => {
-  const [span, setSpan] = useState('day');
+  const [span, setSpan] = useState(STATS_SAPN.MONTH.VALUE);
   const dispatch = useDispatch();
 
   // 切换
@@ -80,7 +65,6 @@ const useStateHook = () => {
 
 export default () => {
   const state = useStateHook();
-
   return (
     <Card
       bordered={false}

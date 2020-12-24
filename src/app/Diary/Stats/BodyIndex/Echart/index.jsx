@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import scss from './index.module.scss';
 
-import { Chart } from '@antv/g2';
+import { Echart } from 'qyrc';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
@@ -36,59 +36,70 @@ const useStateHook = () => {
     ]), []
   )), [statsBodyIndex]);
 
-  // 实例化Chart
-  const chart = useMemo(() => {
-    if (containerRef.current) {
-      return new Chart({
-        autoFit: true,
-        padding: [60, 50, 40, 50],
-        container: containerRef.current,
-      });
-    }
-  }, [containerRef.current]);
+  // echarts 配置
+  const option = React.useMemo(() => {
+    return {
+      tooltip: {
+        trigger: 'axis',
+      },
+      legend: {
+        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      },
+      yAxis: {
+        type: 'value',
+      },
+      series: [
+        {
+          name: '邮件营销',
+          type: 'line',
+          stack: '总量',
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: '联盟广告',
+          type: 'line',
+          stack: '总量',
+          data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+          name: '视频广告',
+          type: 'line',
+          stack: '总量',
+          data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+          name: '直接访问',
+          type: 'line',
+          stack: '总量',
+          data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+          name: '搜索引擎',
+          type: 'line',
+          stack: '总量',
+          data: [820, 932, 901, 934, 1290, 1330, 1320]
+        },
+      ],
+    };
+  }, []);
 
-  // 渲染图表
-  const renderEchart = () => {
-    if (chart) {
-      // 载入数据
-      chart.data(data);
-
-      // 鼠标停放提示
-      chart.tooltip({
-        shared: true,
-        showCrosshairs: true,
-      });
-
-      // 四周图示
-      chart.legend({
-        offsetY: 20,
-        position: 'top-right',
-      });
-
-      chart
-        .line()
-        .position('xAxis*yAxis')
-        .color('type', ['#fadb14', '#13c2c2', '#722ed1'])
-        .shape('smooth');
-
-      chart.render();
-    }
-  };
-
-  useEffect(() => {
-    renderEchart();
-  }, [containerRef.current, data]);
-
-  return { containerRef };
+  return { option };
 };
 
-export default () => {
-  const state = useStateHook();
+export default props => {
+  const state = useStateHook(props);
 
   return (
-    <div
-      className={scss.echart}
-      ref={state.containerRef}
-    />
+    <Echart option={state.option} height={300}/>
   );
 };
