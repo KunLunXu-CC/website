@@ -1,97 +1,65 @@
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-} from 'react';
-import scss from './index.module.scss';
+import React from 'react';
 
 import { Echart } from 'qyrc';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
-  const containerRef = useRef(null);
   const statsBodyIndex = useSelector(state => state.diary.statsBodyIndex);
 
   // 处理数据
-  const data = useMemo(() => (statsBodyIndex.filter(v => v.bodyIndex).reduce(
-    (total, ele) => ([
-      ... total,
-      ... [
-        {
-          type: '体重',
-          xAxis: ele.name,
-          yAxis: _.get(ele, 'bodyIndex.weight', 0),
-        },
-        {
-          type: '体脂',
-          xAxis: ele.name,
-          yAxis: _.get(ele, 'bodyIndex.bodyfat', 0),
-        },
-        {
-          type: '水分',
-          xAxis: ele.name,
-          yAxis: _.get(ele, 'bodyIndex.moistureContent', 0),
-        },
-      ],
-    ]), []
-  )), [statsBodyIndex]);
+  const data = React.useMemo(
+    () => (statsBodyIndex.reduce((total, { name, bodyIndex }) => ({
+      xAxis: [... total.xAxis, name],
+      weight: [... total.weight, bodyIndex.weight],
+      bodyfat: [... total.bodyfat, bodyIndex.bodyfat],
+      moistureContent: [... total.moistureContent, bodyIndex.moistureContent],
+    }), { xAxis: [], bodyfat: [], weight: [], moistureContent: [] })),
+    [statsBodyIndex]
+  );
 
   // echarts 配置
-  const option = React.useMemo(() => {
-    return {
-      tooltip: {
-        trigger: 'axis',
+  const option = React.useMemo(() => ({
+    tooltip: {
+      trigger: 'axis',
+    },
+    legend: {
+      right: 0,
+      data: ['体重', '体脂', '水分'],
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+    },
+    xAxis: {
+      type: 'category',
+      data: data.xAxis,
+    },
+    yAxis: {
+      type: 'value',
+      min: 'dataMin',
+    },
+    series: [
+      {
+        name: '体重',
+        type: 'line',
+        color: '#f8d613',
+        data: data.weight,
       },
-      legend: {
-        data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎'],
+      {
+        name: '体脂',
+        type: 'line',
+        color: '#1db7b5',
+        data: data.bodyfat,
       },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
+      {
+        name: '水分',
+        type: 'line',
+        color: '#5e0ac7',
+        data: data.moistureContent,
       },
-      xAxis: {
-        type: 'category',
-        boundaryGap: false,
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-      },
-      yAxis: {
-        type: 'value',
-      },
-      series: [
-        {
-          name: '邮件营销',
-          type: 'line',
-          stack: '总量',
-          data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name: '联盟广告',
-          type: 'line',
-          stack: '总量',
-          data: [220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name: '视频广告',
-          type: 'line',
-          stack: '总量',
-          data: [150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name: '直接访问',
-          type: 'line',
-          stack: '总量',
-          data: [320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name: '搜索引擎',
-          type: 'line',
-          stack: '总量',
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        },
-      ],
-    };
-  }, []);
+    ],
+  }), [data]);
 
   return { option };
 };
@@ -100,6 +68,9 @@ export default props => {
   const state = useStateHook(props);
 
   return (
-    <Echart option={state.option} height={300}/>
+    <Echart
+      height={300}
+      option={state.option}
+    />
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Echart } from 'qyrc';
 // import { STATS_SAPN } from '@config/consts';
 // import { STATS_BILL_DETAIL } from '../../../consts';
