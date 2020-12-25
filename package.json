@@ -53,7 +53,7 @@
     "redux-logger": "^3.0.6",
     "sass": "^1.26.10",
     "sass-loader": "^7.1.0",
-    "standard-version": "^7.0.0",
+    "standard-version": "^8.0.1",
     "style-loader": "^0.23.1",
     "url-loader": "^2.1.0",
     "webpack": "^4.26.0",
