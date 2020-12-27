@@ -1,25 +1,22 @@
-// import * as services from './services';
+import * as services from './services';
 
 // import { message } from '@utils';
 // import { APP_CODE } from '@config/consts';
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery, call, select } from 'redux-saga/effects';
 
 /**
  * 获取文章
  * @return {void 0}
  */
 const getArticles = function * () {
-  // const { change } = yield call(services.createDatasetsfroms, {
-  //   body: [body],
-  //   spin: APP_CODE.READER,
-  // });
+  const { menu } = yield select(state => state.reader);
 
-  // const currentDatasetsfroms = yield select(
-  //   state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
-  //     ... total,
-  //     ... ele,
-  //   ]), [])
-  // );
+  const articles = yield call(services.getArticles, {
+    search: { type: [menu.selectedKey] },
+    pagination: { current: 1, pageSize: 10 },
+  });
+
+  console.log('--->>> articles', articles);
 
   // yield put({
   //   type: 'datasetsfrom/setDatasetsfroms',

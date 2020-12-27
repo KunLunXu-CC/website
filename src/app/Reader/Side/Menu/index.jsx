@@ -32,12 +32,12 @@ export default () => {
     <div className={scss.menu}>
       {[DEFAULT_MENU, ... state.list].map(v => (
         <div
-          key={v.id}
+          key={v.value}
           className={classNames(
             scss.item,
-            { [scss.selected]: v.id === state.selectedKey }
+            { [scss.selected]: v.value === state.selectedKey }
           )}
-          onClick={state.onToggle.bind(null, v.id)}>
+          onClick={state.onToggle.bind(null, v.value)}>
           {v.name}
         </div>
       ))}

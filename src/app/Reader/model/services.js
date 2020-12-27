@@ -1,10 +1,11 @@
 import axios from '@utils/request';
 
-export const getArticles = async () => {
+export const getArticles = async ({ search, pagination }) => {
   const res = await axios({
     url: GLOBAL_SERVICER.GRAPHQL_URL,
     method: 'post',
     data: {
+      variables: { search, pagination },
       query: `
         query (
           $pagination: Pagination

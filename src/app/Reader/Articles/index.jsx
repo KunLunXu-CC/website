@@ -13,7 +13,7 @@ const useStateHook = () => {
   React.useEffect(() => {
     console.log('---------');
     dispatch({
-      type: '',
+      type: 'reader/getArticles',
     });
   }, [selectedKey]);
 
