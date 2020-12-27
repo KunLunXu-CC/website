@@ -1,7 +1,6 @@
 import * as services from './services';
 
-// import { message } from '@utils';
-// import { APP_CODE } from '@config/consts';
+import { ARTICLE_STATUS } from '@config/consts';
 import { takeEvery, call, select } from 'redux-saga/effects';
 
 /**
@@ -12,7 +11,10 @@ const getArticles = function * () {
   const { menu } = yield select(state => state.reader);
 
   const articles = yield call(services.getArticles, {
-    search: { type: [menu.selectedKey] },
+    search: {
+      type: [menu.selectedKey],
+      status: [ARTICLE_STATUS.RELEASE],
+    },
     pagination: { current: 1, pageSize: 10 },
   });
 
