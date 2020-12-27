@@ -21,15 +21,6 @@ export const ACTIVITY_LIST = {
   },
 };
 
-// 未定义 tag: 存储那些未设置 tag 或者 tag 已删除的文章
-export const UNDEFINED_TAG = {
-  name: '未定义',
-  parent: null,
-  value: -99999,
-  id: 'undefinedTag',
-  code: DATASETSFROM_CODE.ARTICLE_TYPE.VALUE,
-};
-
 // message 配置
 export const MESSAGE_CONFIG = {
   bottom: 10,

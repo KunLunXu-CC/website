@@ -1,7 +1,7 @@
 import * as services from './services';
 
 import { message } from '@utils';
-import { MESSAGE_CONFIG, UNDEFINED_TAG } from '../consts';
+import { MESSAGE_CONFIG } from '../consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
 import { APP_CODE, PHOTO_TYPE, DATASETSFROM_CODE } from '@config/consts';
 
@@ -20,22 +20,15 @@ const initData = function * () {
 
   yield put({
     type: 'editor/setTags',
-    tags: tags.reduce((total, ele) => ({
-      ... total,
-      [ele.id]: ele,
-    }), { [UNDEFINED_TAG.id]: UNDEFINED_TAG }),
+    tags: tags.reduce((total, ele) => ({ ... total, [ele.id]: ele }), {}),
   });
 
   yield put({
     type: 'editor/setArticles',
-    articles: articles.reduce((total, ele) => ({
-      ... total,
-      [ele.id]: {
-        ... ele,
-        // 文章 tags 不存在已删除的 tag: 后端会保证返回的 tag 一定时存在的
-        tags: (ele.tags?.[0]) ? ele.tags : [UNDEFINED_TAG],
-      },
-    }), {}),
+    articles: articles.reduce(
+      (total, ele) => ({ ... total, [ele.id]: ele }),
+      {}
+    ),
   });
 
   message({ ... MESSAGE_CONFIG, message: '数据初始化完成!' });
