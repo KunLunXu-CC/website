@@ -12,4 +12,17 @@ export const setMenu = (state, { menu }) => ({
   menu: { ... state.menu, ... menu },
 });
 
-export const space = {};
+/**
+ * 设置文章列表数据
+ * 1. reducer: action = { type: 'reader/setArticles' }
+ * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
+ *
+ * @param {Object} state 当前 state
+ * @param {String} action.articles 要修改数据(追加、替换)
+ * @param {Boolean} [action.append = false] 是否是追加
+ * @return {Object} 更新后的状态
+ */
+export const setArticles = (state, { articles, append = false }) => ({
+  ... state,
+  articles: [... (append ? articles : []), ... articles],
+});

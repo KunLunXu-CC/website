@@ -1,7 +1,7 @@
 import * as services from './services';
 
 import { ARTICLE_STATUS } from '@config/consts';
-import { takeEvery, call, select } from 'redux-saga/effects';
+import { takeEvery, call, select, put } from 'redux-saga/effects';
 
 /**
  * 获取文章
@@ -18,18 +18,10 @@ const getArticles = function * () {
     pagination: { current: 1, pageSize: 10 },
   });
 
-  console.log('--->>> articles', articles);
-
-  // yield put({
-  //   type: 'datasetsfrom/setDatasetsfroms',
-  //   datasetsfroms: [... currentDatasetsfroms, ... change],
-  // });
-
-  // message({
-  //   placement: 'bottomRight',
-  //   message: '字典创建成功!',
-  //   code: APP_CODE.READER,
-  // });
+  yield put({
+    articles,
+    type: 'reader/setArticles',
+  });
 };
 
 // 导出
