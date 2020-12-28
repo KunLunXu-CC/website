@@ -1,4 +1,4 @@
-import { APP_CODE, DATASETSFROM_CODE } from '@config/consts';
+import { APP_CODE } from '@config/consts';
 
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';

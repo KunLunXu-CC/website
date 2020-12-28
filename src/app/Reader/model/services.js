@@ -22,6 +22,7 @@ export const getArticles = async ({ search, pagination }) => {
               thumb
               status
               content
+              updateTime
               tags { id name }
             }
           }

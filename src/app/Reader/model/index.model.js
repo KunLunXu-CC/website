@@ -4,8 +4,8 @@ import * as reducers from './reducers';
 import { DEFAULT_MENU } from '../consts';
 
 const initState = {
+  articles: [],                  // 文章
   menu: {
-    articles: [],                  // 文章
     selectedKey: DEFAULT_MENU.id,  // 当前菜单 key 值
   },
 };
