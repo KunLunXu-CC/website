@@ -1,5 +1,6 @@
 import React from 'react';
 import Side from './Side';
+import Detail from './Detail';
 import Articles from './Articles';
 import Recommend from './Recommend';
 import scss from './index.module.scss';
@@ -26,6 +27,7 @@ export default () => {
     <div className={scss.reader}>
       <Side/>
       <Body/>
+      <Detail/>
     </div>
   );
 };
