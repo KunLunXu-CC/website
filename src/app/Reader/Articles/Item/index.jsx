@@ -3,10 +3,11 @@ import moment from 'moment';
 import scss from './index.module.scss';
 
 import { Image, Icon } from 'qyrc';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = props => {
+  const dispatch = useDispatch();
   // 缩略图列表, 当文章未设置缩略图则需要从该列表中随机获取一张作为缩略图
   const thumbs = useSelector(state => (
     _.get(state, 'photos.thumb') || []
@@ -23,7 +24,15 @@ const useStateHook = props => {
       : '';
   }, [props.data, thumbs]);
 
-  return { thumb };
+  // 打开
+  const onOpen = React.useCallback(() => {
+    dispatch({
+      article: props.data,
+      type: 'reader/openArticle',
+    });
+  }, [props.data]);
+
+  return { thumb, onOpen };
 };
 
 /**
@@ -35,7 +44,7 @@ export default props => {
   console.log(props.data);
   return (
     <div
-      onClick={() => {}}
+      onClick={state.onOpen}
       className={`${scss.item} ${scss[`thumb-${props.thumbPosition}`]}`}>
       <div className={scss.thumb}>
         <Image src={state.thumb}/>

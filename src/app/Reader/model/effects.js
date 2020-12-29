@@ -24,7 +24,31 @@ const getArticles = function * () {
   });
 };
 
+/**
+ * 打开文章
+ * @return {void 0}
+ */
+const openArticle = function * ({ article }) {
+  yield put({
+    detail: { article },
+    type: 'reader/setDetail',
+  });
+};
+
+/**
+ * 关闭文章
+ * @return {void 0}
+ */
+const closeArticle = function * () {
+  yield put({
+    detail: { article: null },
+    type: 'reader/setDetail',
+  });
+};
+
 // 导出
 export default function * () {
   yield takeEvery('reader/getArticles', getArticles);
+  yield takeEvery('reader/openArticle', openArticle);
+  yield takeEvery('reader/closeArticle', closeArticle);
 }

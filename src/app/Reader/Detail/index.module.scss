@@ -1,9 +1,22 @@
 .detail {
   top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 100%;
   position: absolute;
 
   background: #fff;
+  transition: all 0.5s;
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &.show {
+    left: 0;
+  }
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
 }
