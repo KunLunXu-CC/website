@@ -104,13 +104,13 @@ const useStateHook = () => {
     form.setFieldsValue(
       modal ? {
         diet: _.get(modal, 'diary.diet', []).map(
-          v => ({ ... v, type: v.type.value })
+          v => ({ ... v, type: v.type?.value })
         ),
         fitness: _.get(modal, 'diary.fitness', []).map(
-          v => ({ type: v.type.value, place: v.place.value })
+          v => ({ type: v.type?.value, place: v.place?.value })
         ),
         bill: _.get(modal, 'diary.bill', []).map(
-          v => ({ ... v, tag: v.tag.value })
+          v => ({ ... v, tag: v.tag?.value })
         ),
         bodyIndex: _.get(modal, 'diary.bodyIndex') || {},
         name: moment(_.get(modal, 'diary.name') || modal.date),
