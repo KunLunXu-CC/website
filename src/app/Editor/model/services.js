@@ -11,8 +11,7 @@ export const initData = async () => {
         query {
           datasetsfroms(
             search: { code: [
-              ${DATASETSFROM_CODE.ARTICLE_TAG.VALUE},
-              ${DATASETSFROM_CODE.ARTICLE_TYPE.VALUE},
+              ${DATASETSFROM_CODE.ARTICLE_TAG.VALUE}
             ]},
           ){
             list {

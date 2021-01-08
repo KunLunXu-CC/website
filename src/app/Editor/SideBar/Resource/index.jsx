@@ -3,8 +3,10 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
+import { MENU_OUTER_SETTING } from '../../consts';
 import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
+import { Object } from 'core-js';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
 
@@ -23,20 +25,24 @@ const useStateHook = () => {
   }));
 
   // 菜单
-  const treeData = React.useMemo(() => {
+  const treeData = React.useMemo(() => MENU_OUTER_SETTING.map(outer => {
     const cloneTags = _.cloneDeep(Object.values(tags));
+
     const groupTags = _.groupBy(cloneTags, 'parent.id');
-    const groupArticles = _.groupBy(articles, 'tags[0].id');
+    const groupArticles = _.groupBy(Object
+      .values(articles)
+      .filter(v => v.status === outer.id), 'tags[0].id'
+    );
+
     cloneTags.forEach(v => (
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
         ... _.sortBy(groupTags[v.id] || [], 'name'),
         ... _.sortBy(groupArticles[v.id] || [], 'name'),
       ] : []
     ));
-    return cloneTags.filter(
-      v => v.code === DATASETSFROM_CODE.ARTICLE_TYPE.VALUE
-    );
-  }, [articles, tags, side.openKeys]);
+
+    return { ... outer, children: cloneTags };
+  }), [articles, tags, side.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = React.useMemo(() => (

@@ -1,4 +1,4 @@
-import { APP_CODE } from '@config/consts';
+import { APP_CODE, ARTICLE_STATUS } from '@config/consts';
 
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';
@@ -27,3 +27,9 @@ export const MESSAGE_CONFIG = {
   code: APP_CODE.EDITOR,
   placement: 'bottomRight',
 };
+
+// 菜单配置
+export const MENU_OUTER_SETTING = [
+  { id: ARTICLE_STATUS.SAVE, name: '未发布' },
+  { id: ARTICLE_STATUS.RELEASE, name: '已发布' },
+];
