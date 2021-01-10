@@ -27,9 +27,3 @@ export const MESSAGE_CONFIG = {
   code: APP_CODE.EDITOR,
   placement: 'bottomRight',
 };
-
-// 菜单配置
-export const MENU_OUTER_SETTING = [
-  { id: ARTICLE_STATUS.SAVE, name: '未发布' },
-  { id: ARTICLE_STATUS.RELEASE, name: '已发布' },
-];

@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 import { Icon } from 'qyrc';
 import { Dropdown, Menu, Input } from 'antd';
 import { MOVE_ARTICLE } from '../../../consts';
-import { DATASETSFROM_CODE, ARTICLE_STATUS } from '@config/consts';
+import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 // 阻止事件冒泡
@@ -67,7 +67,6 @@ const useStateHook = props => {
   // 下拉菜单点击事件: 移动
   const onClickMoveMenu = () => dispatch({
     data: props.data,
-    root: props.root,
     code: MOVE_ARTICLE,
     type: 'modal/openModal',
   });
@@ -89,11 +88,10 @@ const useStateHook = props => {
       onClick: onClickCreateFolderMenu,
     },
     {
-      // 第一级不能创建文章, 第二层文章上不能创建
+      conds: true,
       title: '创建文章',
       icon: 'icon-24',
       onClick: onClickCreateArticleMenu,
-      conds: !(props.level === 1 || (props.data.tags && props.level === 2)),
     },
     {
       conds: true,
@@ -108,11 +106,11 @@ const useStateHook = props => {
       onClick: onClickMoveMenu,
     },
     {
-      // 顶级不允许删除、文件夹下有东西也不让删
+      // 文件夹下有东西也不让删
       title: '删除',
       icon: 'icon-shanchu',
       onClick: onClickDeleteMenu,
-      conds: props.level !== 1 && !props.data.children?.length > 0,
+      conds: !props.data.children?.length > 0, // TODO： 文件夹未展开, 是无效的
     },
   ].filter(v => v.conds)), [
     onClickEditMenu,
@@ -128,6 +126,7 @@ const useStateHook = props => {
     const isFolder = !props.data.tags;
     dispatch([
       {
+        // 新建文件夹
         filter: isFolder && isNew,
         dispatchParams: {
           type: 'editor/createTag',
@@ -135,6 +134,7 @@ const useStateHook = props => {
         },
       },
       {
+        // 编辑文件夹
         filter: isFolder && !isNew,
         dispatchParams: {
           body: { name },
@@ -143,17 +143,18 @@ const useStateHook = props => {
         },
       },
       {
+        // 新建文件
         filter: !isFolder && isNew,
         dispatchParams: {
           type: 'editor/createArticle',
           body: {
             name,
-            type: props.root?.value,
             tags: [props.data.tags?.[0].id],
           },
         },
       },
       {
+        // 编辑文章
         filter: !isFolder && !isNew,
         dispatchParams: {
           body: { name },
@@ -170,22 +171,6 @@ const useStateHook = props => {
     item.props.data.onClick();
   }, []);
 
-  // 标题前图标
-  const menuIcon = React.useMemo(() => [
-    { // 文章
-      icon: 'icon-24',
-      conds: props.data.tags,
-    },
-    { // 文件夹
-      icon: 'icon-wenjianjia',
-      conds: props.data.code === DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
-    },
-    { // 顶级文件夹(文件类型)
-      icon: 'icon-xuanzhong',
-      conds: props.data.code === DATASETSFROM_CODE.ARTICLE_TYPE.VALUE,
-    },
-  ].find(v => v.conds)?.icon, [props.data.tags, props.data.code]);
-
   // 最外层 className
   const className = React.useMemo(() => (classNames(scss['menu-title'], {
     [scss['menu-title-article']]: props.data.tags,
@@ -198,7 +183,6 @@ const useStateHook = props => {
 
   return {
     onEdit,
-    menuIcon,
     className,
     onClickMenu,
     editorInputRef,
@@ -212,7 +196,7 @@ export default props => {
   return (
     <div className={state.className}>
       <Icon type="icon-jiantou" className={scss['menu-title-arrow']}/>
-      <Icon type={state.menuIcon}/>
+      <Icon type={props.data.tags ? 'icon-24' : 'icon-wenjianjia'}/>
       <div className={scss['menu-title-content']}>
         {props.data.editor ?
           <Input

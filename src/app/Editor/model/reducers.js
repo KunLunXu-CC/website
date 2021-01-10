@@ -1,5 +1,3 @@
-import { DATASETSFROM_CODE } from '@config/consts';
-
 /**
  * 设置 tags
  * 1. reducer: action = { type: 'editor/setTags' }
@@ -136,7 +134,6 @@ export const createTmpTag = (state, { parent }) => ({
       id: 'new',
       editor: true,
       parent: { id: parent },
-      code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
     },
   },
 });

@@ -24,7 +24,6 @@ export const initData = async () => {
           articles {
             list {
               id
-              type
               name
               thumb
               status

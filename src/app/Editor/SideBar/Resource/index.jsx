@@ -3,10 +3,7 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { MENU_OUTER_SETTING } from '../../consts';
-import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { Object } from 'core-js';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
 
@@ -25,24 +22,20 @@ const useStateHook = () => {
   }));
 
   // 菜单
-  const treeData = React.useMemo(() => MENU_OUTER_SETTING.map(outer => {
+  const treeData = React.useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(tags));
-
     const groupTags = _.groupBy(cloneTags, 'parent.id');
-    const groupArticles = _.groupBy(Object
-      .values(articles)
-      .filter(v => v.status === outer.id), 'tags[0].id'
-    );
+    const groupArticles = _.groupBy(articles, 'tags[0].id');
+    const data = cloneTags.filter(v => !v.parent.id);
 
-    cloneTags.forEach(v => (
+    data.forEach(v => (
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
         ... _.sortBy(groupTags[v.id] || [], 'name'),
         ... _.sortBy(groupArticles[v.id] || [], 'name'),
       ] : []
     ));
-
-    return { ... outer, children: cloneTags };
-  }), [articles, tags, side.openKeys]);
+    return data;
+  }, [articles, tags, side.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = React.useMemo(() => (
@@ -51,14 +44,12 @@ const useStateHook = () => {
 
   // 渲染菜单列表
   const menu = React.useMemo(() => {
-    let root = null;   // 根节点
     const recursion = (item, level) => {
-      level === 1 && (root = item);
-      const title = <Title data={item} root={root} level={level}/>;
+      const title = <Title data={item} level={level}/>;
       return (
         !item.tags ?  // 非文章
           <Menu.SubMenu key={item.id} title={title}>
-            {item.children.length !== 0 ?
+            {item.children?.length !== 0 ?
               item.children.map(v => (recursion(v, level + 1))) :
               <Menu.Item className={scss['menu-item-empty']}/>
             }
