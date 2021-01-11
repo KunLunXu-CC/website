@@ -26,15 +26,15 @@ const useStateHook = () => {
     const cloneTags = _.cloneDeep(Object.values(tags));
     const groupTags = _.groupBy(cloneTags, 'parent.id');
     const groupArticles = _.groupBy(articles, 'tags[0].id');
-    const data = cloneTags.filter(v => !v.parent.id);
 
-    data.forEach(v => (
+    cloneTags.forEach(v => (
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
         ... _.sortBy(groupTags[v.id] || [], 'name'),
         ... _.sortBy(groupArticles[v.id] || [], 'name'),
       ] : []
     ));
-    return data;
+
+    return cloneTags.filter(v => !v.parent?.id);
   }, [articles, tags, side.openKeys]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
@@ -49,7 +49,7 @@ const useStateHook = () => {
       return (
         !item.tags ?  // 非文章
           <Menu.SubMenu key={item.id} title={title}>
-            {item.children?.length !== 0 ?
+            {item?.children?.length !== 0 ?
               item.children.map(v => (recursion(v, level + 1))) :
               <Menu.Item className={scss['menu-item-empty']}/>
             }
