@@ -31,12 +31,12 @@ export default () => {
   const state = useStateHook();
   return (
     <div className={scss.activity}>
-      {Object.values(ACTIVITY_LIST).map(V => (
+      {ACTIVITY_LIST.map(v => (
         <div
-          key={V.KEY}
-          onClick={state.onClick.bind(null, V.KEY)}
-          className={state.getItemClassName(V.KEY)}>
-          <Icon key={V.KEY} type={V.ICON}/>
+          key={v.key}
+          onClick={state.onClick.bind(null, v.key)}
+          className={state.getItemClassName(v.key)}>
+          <Icon type={v.icon}/>
         </div>
       ))}
     </div>

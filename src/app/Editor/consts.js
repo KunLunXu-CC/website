@@ -13,13 +13,24 @@ export const THUMB_SETTING = 'EDITOR_THUMB_SETTING';
 export const MOVE_ARTICLE = 'EDITOR_MOVE_ARTICLE';
 
 // Activity 配置
-export const ACTIVITY_LIST = {
-  ALL: {
-    KEY: 'resource',
-    TITLE: '全部',
-    ICON: 'icon-all',
+export const ACTIVITY_LIST = [
+  {
+    key: 'all',
+    title: '全部',
+    icon: 'icon-all',
+    status: null,
   },
-};
+  {
+    title: '未发布',
+    icon: 'icon-editor',
+    key: ARTICLE_STATUS.SAVE,
+  },
+  {
+    title: '已发布',
+    icon: 'icon-fabu',
+    key: ARTICLE_STATUS.RELEASE,
+  },
+];
 
 // message 配置
 export const MESSAGE_CONFIG = {

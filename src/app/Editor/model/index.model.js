@@ -12,7 +12,7 @@ const initState = {
     collapsed: false, // 菜单折叠状态, 是否收缩到最小
   },
   activity: {
-    selectKey: ACTIVITY_LIST.ALL.KEY,  // 当前选中 key
+    selectKey: ACTIVITY_LIST[0].key,  // 当前选中 key
   },
   works: [],
 };

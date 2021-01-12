@@ -14,8 +14,9 @@ const stopPropagation = e => e.stopPropagation();
 const useStateHook = props => {
   const dispatch = useDispatch();
   const editorInputRef = React.useRef(null);
-  const { openKeys } = useSelector(state => ({
+  const { openKeys, activity } = useSelector(state => ({
     openKeys: state.editor.side.openKeys,
+    activity: state.editor.activity,
   }));
 
   // 下拉菜单点击事件: 点击创建文件夹
@@ -174,8 +175,10 @@ const useStateHook = props => {
   // 最外层 className
   const className = React.useMemo(() => (classNames(scss['menu-title'], {
     [scss['menu-title-article']]: props.data.tags,
-    [scss['menu-title-release']]: props.data.status === ARTICLE_STATUS.RELEASE,
-  })), [props.data]);
+    [scss['menu-title-release']]:
+      !_.isNumber(activity.selectKey) &&
+      props.data.status === ARTICLE_STATUS.RELEASE,
+  })), [props.data, activity.selectKey]);
 
   React.useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
