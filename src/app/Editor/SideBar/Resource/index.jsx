@@ -14,22 +14,30 @@ const useStateHook = () => {
     side,
     works,
     articles,
-    activity,
+    selectKey,
   } = useSelector(state => ({
     tags: state.editor.tags,
     side: state.editor.side,
     works: state.editor.works,
     articles: state.editor.articles,
-    activity: state.editor.activity,
+    selectKey: state.editor.activity.selectKey,
   }));
 
   // 菜单
   const treeData = React.useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(tags));
     const groupTags = _.groupBy(cloneTags, 'parent.id');
-    const groupArticles = _.groupBy(Object.values(articles).filter(
-      v => !_.isNumber(activity.selectKey) || v.status === activity.selectKey
-    ), 'tags[0].id');
+    const groupArticles = _.groupBy(
+      Object.values(articles).reduce((total, ele) => {
+        // 根据状态来过滤数据
+        (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
+          ... ele,
+          tags: ele.tags.reverse(),
+        });
+        return total;
+      }, []),
+      'tags[0].id'
+    );
 
     cloneTags.forEach(v => (
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
@@ -39,7 +47,7 @@ const useStateHook = () => {
     ));
 
     return cloneTags.filter(v => !v.parent?.id);
-  }, [articles, tags, side.openKeys, activity.selectKey]);
+  }, [articles, tags, side.openKeys, selectKey]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = React.useMemo(() => (

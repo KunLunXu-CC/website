@@ -3,7 +3,6 @@ import scss from './index.module.scss';
 
 import { MOVE_ARTICLE } from '../../consts';
 import { Modal, Cascader, Form } from 'antd';
-import { DATASETSFROM_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
@@ -24,10 +23,7 @@ const useStateHook = () => {
     }));
     const groupTags = _.groupBy(cloneTags, 'parent.id');
     cloneTags.forEach(v => (v.children = groupTags[v.id])); // eslint-disable-line
-    return cloneTags.filter(
-      v => v.code === DATASETSFROM_CODE.ARTICLE_TYPE.VALUE &&
-      v.children?.length > 0
-    );
+    return cloneTags.filter(v => !v.parent?.id);
   }, [tags]);
 
   // 点击取消
@@ -38,15 +34,12 @@ const useStateHook = () => {
 
   // 点击确定
   const onOk = async () => {
-    const { data: { id, tags }, root } = modal;
-    const { paths } = await form.validateFields();
+    const { data: { id } } = modal;
+    const { paths: tags } = await form.validateFields();
     dispatch({
       id,
       type: 'editor/updateArticle',
-      body: {
-        type: root.value,
-        tags: [_.last(paths), ... tags.splice(1).map(v => v.id)],
-      },
+      body: { tags },
     });
     onCancel();
   };
@@ -73,10 +66,9 @@ export default () => {
           label="移动到"
           className={scss.item}
           rules={[{
-            min: 2,
             type: 'array',
             required: true,
-            message: '移动路径必填, 且需要选择 2 个以上!',
+            message: '移动路径必填!',
           }]}>
           <Cascader
             changeOnSelect
