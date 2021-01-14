@@ -10,7 +10,7 @@ export const REVOKE_CONFIRM = 'EDITOR_REVOKE_CONFIRM';
 export const THUMB_SETTING = 'EDITOR_THUMB_SETTING';
 
 // 弹窗类型常量 - 移动文章
-export const MOVE_ARTICLE = 'EDITOR_MOVE_ARTICLE';
+export const MOVE = 'EDITOR_MOVE';
 
 // Activity 配置
 export const ACTIVITY_LIST = [

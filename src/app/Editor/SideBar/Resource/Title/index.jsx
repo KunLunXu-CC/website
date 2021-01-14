@@ -4,7 +4,7 @@ import scss from './index.module.scss';
 
 import { Icon } from 'qyrc';
 import { Dropdown, Menu, Input } from 'antd';
-import { MOVE_ARTICLE } from '../../../consts';
+import { MOVE } from '../../../consts';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -68,7 +68,7 @@ const useStateHook = props => {
   // 下拉菜单点击事件: 移动
   const onClickMoveMenu = () => dispatch({
     data: props.data,
-    code: MOVE_ARTICLE,
+    code: MOVE,
     type: 'modal/openModal',
   });
 
@@ -101,13 +101,13 @@ const useStateHook = props => {
       onClick: onClickEditMenu,
     },
     {
+      conds: true,
       title: '移动',
       icon: 'icon-baocun',
-      conds: props.data.tags,
       onClick: onClickMoveMenu,
     },
     {
-      // 文件夹下有东西也不让删
+      // TODO: 文件夹下有东西也不让删
       title: '删除',
       icon: 'icon-shanchu',
       onClick: onClickDeleteMenu,

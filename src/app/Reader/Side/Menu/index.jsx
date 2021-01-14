@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { DEFAULT_MENU } from '../../consts';
-import { DATASETSFROM_CODE } from '@config/consts';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
@@ -11,7 +10,7 @@ const useStateHook = () => {
 
   const { list, selectedKey } = useSelector(state => ({
     ... state.reader.menu,
-    list: state.datasetsfrom[DATASETSFROM_CODE.ARTICLE_TYPE.VALUE],
+    list: [], // TODO： 删除了文件类型
   }));
 
   // 切换

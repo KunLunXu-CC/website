@@ -1,5 +1,5 @@
 import React from 'react';
-import MoveArticle from './MoveArticle';
+import Move from './Move';
 import ThumbSetting from './ThumbSetting';
 import RevokeConfirm from './RevokeConfirm';
 import ReleaseConfirm from './ReleaseConfirm';
@@ -10,6 +10,6 @@ export default () => (
     <ThumbSetting/>
     <RevokeConfirm/>
     <ReleaseConfirm/>
-    <MoveArticle/>
+    <Move/>
   </div>
 );

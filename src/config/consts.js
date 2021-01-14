@@ -51,6 +51,5 @@ export const DATASETSFROM_CODE = {
   DIET_TAG: { VALUE: 2, DESC: '饮食(标签)', ICON: 'icon-yinshi' },
   FITNESS_PLACE: { VALUE: 3, DESC: '健身部位', ICON: 'icon-buwei' },
   FITNESS_TYPE: { VALUE: 4, DESC: '健身类型', ICON: 'icon-leixing' },
-  ARTICLE_TYPE: { VALUE: 5, DESC: '文章类型', ICON: 'icon-suanfa' },
   ARTICLE_TAG: { VALUE: 6, DESC: '文章标签', ICON: 'icon-suanfa' },
 };

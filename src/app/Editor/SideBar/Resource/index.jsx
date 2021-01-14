@@ -26,18 +26,17 @@ const useStateHook = () => {
   // 菜单
   const treeData = React.useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(tags));
+    const cloneArticles = _.cloneDeep(Object.values(articles));
+
     const groupTags = _.groupBy(cloneTags, 'parent.id');
-    const groupArticles = _.groupBy(
-      Object.values(articles).reduce((total, ele) => {
-        // 根据状态来过滤数据
-        (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
-          ... ele,
-          tags: ele.tags.reverse(),
-        });
-        return total;
-      }, []),
-      'tags[0].id'
-    );
+    const groupArticles = _.groupBy(cloneArticles.reduce((total, ele) => {
+      // 根据状态来过滤数据
+      (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
+        ... ele,
+        tags: ele.tags.reverse(),
+      });
+      return total;
+    }, []), 'tags[0].id');
 
     cloneTags.forEach(v => (
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
@@ -56,6 +55,7 @@ const useStateHook = () => {
 
   // 渲染菜单列表
   const menu = React.useMemo(() => {
+    console.log('treeData', treeData);
     const recursion = (item, level) => {
       const title = <Title data={item} level={level}/>;
       return (

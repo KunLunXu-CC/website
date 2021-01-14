@@ -1,7 +1,7 @@
 import React from 'react';
 import scss from './index.module.scss';
 
-import { MOVE_ARTICLE } from '../../consts';
+import { MOVE } from '../../consts';
 import { Modal, Cascader, Form } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +11,7 @@ const useStateHook = () => {
 
   const { modal, tags } = useSelector(state => ({
     tags: state.editor.tags,
-    modal: state.modal[MOVE_ARTICLE],
+    modal: state.modal[MOVE],
   }));
 
   // Cascader 组件 options 配置
@@ -28,7 +28,7 @@ const useStateHook = () => {
 
   // 点击取消
   const onCancel = () => dispatch({
-    code: MOVE_ARTICLE,
+    code: MOVE,
     type: 'modal/closeModal',
   });
 
@@ -36,6 +36,7 @@ const useStateHook = () => {
   const onOk = async () => {
     const { data: { id } } = modal;
     const { paths: tags } = await form.validateFields();
+    // TODO: 移动文件夹
     dispatch({
       id,
       type: 'editor/updateArticle',
