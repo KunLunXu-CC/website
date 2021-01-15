@@ -77,7 +77,7 @@ const useStateHook = props => {
     const type = !props.data.tags
       ? 'editor/removeTag'
       : 'editor/removeArticle';
-    dispatch({ type, id: props.data.id });
+    dispatch({ ... props.data, type, id: props.data.id });
   };
 
   // 下拉菜单配置

@@ -38,12 +38,15 @@ const useStateHook = () => {
       return total;
     }, []), 'tags[0].id');
 
-    cloneTags.forEach(v => (
+    cloneTags.forEach(v => {
+      const tagLength = groupTags[v.id]?.length ?? 0;
+      const articleLength = groupArticles[v.id]?.length ?? 0;
+      v.childrenLength = tagLength + articleLength; // eslint-disable-line
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
         ... _.sortBy(groupTags[v.id] || [], 'name'),
         ... _.sortBy(groupArticles[v.id] || [], 'name'),
-      ] : []
-    ));
+      ] : [];
+    });
 
     return cloneTags.filter(v => !v.parent?.id);
   }, [articles, tags, side.openKeys, selectKey]);

@@ -95,9 +95,17 @@ const updateTag = function * ({ body, id }) {
  * 删除标签
  * @return {void 0}
  */
-const removeTag = function * ({ id }) {
-  const currentTags = yield select(state => state.editor.tags);
+const removeTag = function * ({ id, childrenLength }) {
+  if (childrenLength > 0) {
+    message({
+      ... MESSAGE_CONFIG,
+      type: 'error',
+      message: '不允许删除非空目录!',
+    });
+    return false;
+  }
 
+  const currentTags = yield select(state => state.editor.tags);
   const { change } = yield call(services.removeDatasetsfroms, {
     spin: APP_CODE.EDITOR,
     conds: { id },
