@@ -16,15 +16,20 @@ const useStateHook = () => {
 
   // Cascader 组件 options 配置
   const options = React.useMemo(() => {
-    const cloneTags = _.cloneDeep(Object.values(tags)).map(v => ({
-      ... v,
-      value: v.id,
-      label: v.name,
-    }));
+    const cloneTags = _.cloneDeep(Object.values(tags)).reduce((total, ele) => {
+      // 移动目录时, 移除当前目录
+      (modal?.data?.tags || ele.id !== modal?.data?.id) && total.push({
+        ... ele,
+        value: ele.id,
+        label: ele.name,
+      });
+      return total;
+    }, []);
     const groupTags = _.groupBy(cloneTags, 'parent.id');
+
     cloneTags.forEach(v => (v.children = groupTags[v.id])); // eslint-disable-line
     return cloneTags.filter(v => !v.parent?.id);
-  }, [tags]);
+  }, [tags, modal]);
 
   // 点击取消
   const onCancel = () => dispatch({
@@ -34,13 +39,11 @@ const useStateHook = () => {
 
   // 点击确定
   const onOk = async () => {
-    const { data: { id } } = modal;
-    const { paths: tags } = await form.validateFields();
-    // TODO: 移动文件夹
+    const { paths } = await form.validateFields();
     dispatch({
-      id,
-      type: 'editor/updateArticle',
-      body: { tags },
+      id: modal.data.id,
+      type: modal.data.tags ? 'editor/updateArticle' : 'editor/updateTag',
+      body: modal.data.tags ? { tags: paths } : { parent: _.last(paths) },
     });
     onCancel();
   };
