@@ -1,3 +1,4 @@
+import Add from './Add';
 import React from 'react';
 import Title from './Title';
 import scss from './index.module.scss';
@@ -113,6 +114,7 @@ export default () => {
       onOpenChange={state.onOpenChange}
       selectedKeys={[state.selectedKeys]}>
       {state.menu}
+      <Add/>
     </Menu>
   );
 };

@@ -1,0 +1,26 @@
+$bg-selected: #2c313a;
+$color: rgba($color: #cccccc, $alpha: 0.8);
+
+.add {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  position: absolute;
+
+  font-size: 20px;
+  color: rgba($color: #cccccc, $alpha: 0.8);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  cursor: pointer;
+  background: #2c313a;
+  transition: all 0.5s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
