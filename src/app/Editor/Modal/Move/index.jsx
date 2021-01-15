@@ -28,7 +28,7 @@ const useStateHook = () => {
     const groupTags = _.groupBy(cloneTags, 'parent.id');
 
     cloneTags.forEach(v => (v.children = groupTags[v.id])); // eslint-disable-line
-    return cloneTags.filter(v => !v.parent?.id);
+    return _.sortBy(cloneTags.filter(v => !v.parent?.id), 'name');
   }, [tags, modal]);
 
   // 点击取消
