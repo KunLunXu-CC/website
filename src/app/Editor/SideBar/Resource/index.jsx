@@ -49,7 +49,7 @@ const useStateHook = () => {
       ] : [];
     });
 
-    return cloneTags.filter(v => !v.parent?.id);
+    return _.sortBy(cloneTags.filter(v => !v.parent?.id), 'name');
   }, [articles, tags, side.openKeys, selectKey]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
