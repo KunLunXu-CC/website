@@ -59,7 +59,6 @@ const useStateHook = () => {
 
   // 渲染菜单列表
   const menu = React.useMemo(() => {
-    console.log('treeData', treeData);
     const recursion = (item, level) => {
       const title = <Title data={item} level={level}/>;
       return (

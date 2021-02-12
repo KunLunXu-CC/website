@@ -2,6 +2,7 @@
 
 // 应用 CODE
 export const APP_CODE = {
+  FUND: 'fund',                  // 基金
   ALBUM: 'album',                // 相册
   DIARY: 'diary',                // 日记
   READER: 'reader',              // 阅读

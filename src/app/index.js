@@ -1,3 +1,4 @@
+import Fund from './Fund';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
@@ -79,6 +80,17 @@ export default {
     icon: 'icon-renwucopy',
     component: Setting,
     code: APP_CODE.SETTING,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 14, left: 14 },
+      defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
+    },
+  },
+  fund: {
+    name: '基金管理',
+    icon: 'icon-jijinbijiao',
+    component: Fund,
+    code: APP_CODE.FUND,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 14, left: 14 },
