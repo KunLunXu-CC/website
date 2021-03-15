@@ -1,158 +1,119 @@
-<h1 align="center">个人博客系统（搭建中）</h1>
 
-博客模拟 Mac 桌面系统，以应用的形式来展示博客的功能，系统集合博客客户端和后台管理的所有功能并通过用户权限来限制访问者的操作
+![预览.gif](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7f3e7b5a538f471c94ac86253e1f19a1~tplv-k3u1fbpfcp-watermark.image)
 
-- [预览]: https://www.qianyin925.com
+## 一、前言
 
-## 特性
+### 1.1 灵感来源
 
-- 以应用的形式展示系统的功能，展示出系统强大的扩展性
-- 使用 React@16.8.0+ 新特性并配合 Redux + Antd 编写搭建前端基础页面
-- 引入 Graphql 并配合 Koa 构建后端系统， 同时选用非关系型数据库 Mongo
-- 基本配置: React 开发环境配置、eslint 配置、git commit 规范校验配置、版本发布配置......
+早年有幸看到国外大佬做的一个 [基于 Web 的 Windows XP 桌面娱乐系统](https://winxp.now.sh/), 那时刚好有搭建一个个人博客的想法, 所以就想是否可以基于 WEB 实现一个仿 Mac UI 的个人博客, 以应用的形式来展示博客各个功能! 
 
-## 运行开发环境
+### 1.2 相关链接
 
-```shell
-npm install
-npm run start
-```
+1. 前端开源代码: https://github.com/qianyin925/blog-client  
+2. 后端开源代码: https://github.com/qianyin925/blog-service  
+3. 组件库(项目开发过程中抽离出独立的组件库): https://github.com/qianyin925/qyrc  
+4. 在线预览(游客权限有限无法查看所有应用): https://www.qianyin925.com/   
 
+## 二、为什么要写这个项目
 
-```json
-{
-  "level": [
-      [
-          {
-              "keyWords": [
-                  {
-                      "keys": [
-                          "k1",
-                          "k2",
-                          "k3"
-                      ],
-                      "type": [
-                          1,
-                          2,between
-                          3
-                      ],
-                      "between": 0,
-                  },
-                  {
-                      "keys": [
-                          "k4",
-                          "k6"
-                      ],
-                      "type": [
-                          2,
-                          3
-                      ],
-                      "": [
-                          0
-                      ]
-                  }
-              ],
-              "betweenWords": [
-                  1
-              ]
-          }
-      ],
-      [
-        {
-          "keyWords": [
-              {
-                  "keys": [
-                      "k5"  // 关键字
-                  ],
-                  "type": [
-                      1   // 关键字类型
-                  ],
-                  "between": null  // 关系
-              }
-          ],
-          "betweenWords": null   // 
-        }
-      ]
-  ],
-  "betweenLevel": 0
-}
+1. 将自己所学应用到具体项目, 同时项目所有依赖、框架版本都尽可能保持最新, 以求能够及时掌握最新知识
+2. 个人感觉只有不断思考、头脑风暴才能更好的促进成长, 通过在项目对产品、架构、UI、交互、项目部署、需求管理等进行深入思考, 从而扩展自己的能力
+3. 体验后端(node)开发, 了解每个功能模块整体运行的流程
+4. 将自己的一些奇思妙想, 在具体项目中实现出来, 能够给自己带来满满成就感, 让自己对技术时刻保持着热情
+……
+
+## 三 技术栈
+
+### 3.1 前端
+
+1. 使用 `React Hooks` 以函数式组件来进行编码, 并使用新版 `Antd` 来进行开发
+2. 使用个人组件库 `qyrc` 进行项目开发, 并将项目中部分组件封装到 `qyrc` 并进行发布
+2. 使用 `Redux` 来管理状态, 并使用 `redux-saga` 解决异步问题
+3. 使用 `Sass` 预处理器来编写样式
+4. 使用 `Webpack` 从零搭建项目, 完成基本的项目配置
+5. 使用 `Eslint` 规范代码语法、风格
+6. 使用 `husky` + `commitlint` 规范 `git commit` 提交信息
+
+### 3.2 后端
+
+1. 使用 `Graphql` + `Koa` 构建后端系统
+2. 使用 `Mongo` + `mongoose` 来存储后端数据
+3. 使用 `node-rsa` 对用户登录密码进行 `rsa` 加解密
+4. 使用 `jsonwebtoken` 对用户身份进行验证（`JWT`）
+5. 使用 `tinify` 对上传的图片进行压缩
+6. 使用 `cron` 来管理系统定时任务(目前已实现系统数据的每日定时备份)
+7. 使用 `nodemailer` 实现邮件发送功能(主要用于数据备份, 将备份数据发送指定邮箱)
+8. 使用 `pm2` 来部署后端主项目以及定时任务
+9. 使用 `boxen` + `inquirer` + `ora` + `shelljs` + `chalk` 来实现交互式 `npm` 脚本, 可选脚本有: 数据备份、数据恢复、角色授权、创建秘钥、创建临时 `Token` ……
+10. 使用 `winston` 记录日志, 包括日志文件的生成、终端日志的打印输出、 配合 `websocket` 将日志在前端进行可视化展示
+11. 使用 `docker` + `docker-compose` 以容器的方式来部署项目
+
+## 四、系统截图
+
+### 4.1 编辑器
 
 
-k5 && ((k1 && k2 || k3) || (k4 && k6))
-```
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a973c2225a0f4b28bf1899e8a0af6b04~tplv-k3u1fbpfcp-watermark.image)
 
+> 用于管理个人文章, 左侧目录就相当于文件 `tag`  
+> 已完成功能: 文章以及目录(`tag`) 增删改查、文章发布、缩略图设置、预览……
 
-```js
-// 0 与 1 或
-// k1 && k2
-[
-  {
-    value: 'k1',
-    type: 1,
-    between: 0
-  },
-  {
-    value: 'k1',
-    type: 1,
-    between: 0
-  },
-]
+### 4.2 日记(下图数据为模拟数据)
 
-// k1 && (k2 && k3)
-[
-  {
-    value: 'k1',
-    type: 1,
-    between: 0
-  },
-  {
-    between: 0,
-    children: [
-      {
-        value: 'k2',
-        type: 1,
-        between: 0
-      },
-      {
-        value: 'k3',
-        type: 1,
-        between: 0
-      },
-    ]
-  },
-]
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0974429b796d4cd3a85c575a7b5ac496~tplv-k3u1fbpfcp-watermark.image)
 
-// k1 && ((k2 && k3) && k4)
-[
-  {
-    value: 'k1',
-    type: 1,
-    between: 0
-  },
-  {
-    between: 0,
-    children: [
-      {
-        between: 0
-        children: [
-          { 
-            value: 'k2',
-            type: 1,
-            between: 0
-          },
-          { 
-            value: 'k3',
-            type: 1,
-            between: 0
-          },
-        ]
-      },
-      {
-        value: 'k4',
-        type: 1,
-        between: 0
-      },
-    ]
-  },
-]
-```
+> 用于记录每天起居、体重、体脂、饮食、运动、账单    
+> 已完成功能: 数据的增删改查、历史收支统计、每日账单统计图、身体体征(体征、体脂)统计图……
+
+### 4.3  Mac Touchbar 扩展功能(下图数据为模拟数据)
+
+![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0093b7ec32cd4a3faea8b70238a3b839~tplv-k3u1fbpfcp-watermark.image)
+
+> 在 Mac Touchbar 上展示每日体重以及本月开销
+
+### 4.4 图片管理
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5366b5aea66441258a8ce1beefaf718c~tplv-k3u1fbpfcp-watermark.image)
+
+> 用于管理系统图片资源, 包括文章插图、缩略图、默认头像、桌面壁纸……    
+> 已完成功能: 图片的批量上传、删除、图片压缩(后端实现)
+
+### 4.5 系统偏好设置
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e66eee998663425d997e3eca594a1fac~tplv-k3u1fbpfcp-watermark.image)
+
+> 用于对系统的偏好进行设置    
+> 以实现功能: 程序坞自动隐藏设置、菜单栏全屏图标显示、菜单栏是否显示星期、自定义菜单栏日期格式
+
+### 4.6 数据字典管理
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/808b37b260ad48a4b36eafadba110b24~tplv-k3u1fbpfcp-watermark.image)
+
+> 用于管理系统数据字段数据
+> 已实现功能: 数据的增、删、改、查……
+
+### 4.7 系统通知栏
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b8a4894a13b4432387d910bafe7cc85a~tplv-k3u1fbpfcp-watermark.image)
+
+> 仿 Mac 通知栏, 展示用户信息(包含登出功能)、天气预报……
+> 已实现功能: 用户信息展示(包含登出功能)
+
+### 4.8 日志监控
+
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2e066721f03d40a4a9b7454c77c31028~tplv-k3u1fbpfcp-watermark.image)
+
+> 用于实时查看后台服务输出的日志信息(websocket 实现)
+> 已实现功能: 日志的获取、展示
+
+## 五、ToDo List
+
+- [ ] 阅读器: 用于博客文章展示、查询、阅读
+- [ ] 权限管理: 用角色设置权限(目前通过脚本设置)
+- [ ] 脚本管理: 在线脚本指定的增删改查、可设置定时运行、可通过以聊天窗口方式发送指定来实现
+- [ ] 音乐播发器: 播放音乐(尝试接入网易云)
+- [ ] 评论留言模块: 在通知栏添加留言功能、文章添加评论功能、后台添加评论留言回复功能、桌面可开启弹幕(留言)功能
+- [ ] 图形功能: 在线编辑流程图、思维导图……
+- [ ] 系统配置: 桌面壁纸设置、动态壁纸实现(`canvas`、`webGL`)……
+- [ ] 系统监控: 日志监控、系统资源监控、前后端埋点……
+……
