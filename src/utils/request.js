@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { store } from '@model';
+import { message } from 'antd';
 import { log } from '@utils';
+import { store } from '@model';
 
 // 创建 axios 实例
 const instance = axios.create({
@@ -90,7 +91,9 @@ use({
  */
 export default async ({ spin: code, ... options }) => {
   store.dispatch({ type: 'spin/openSpin', code });
-  const res = await instance({ ... options });
+  const res = await instance({ ... options }).catch(err => {
+    message.error(`API 请求错误: ${err}`);
+  });
   store.dispatch({ type: 'spin/closeSpin', code });
   return res;
 };

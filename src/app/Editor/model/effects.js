@@ -220,16 +220,27 @@ const updateArticle = function * ({ body, id }) {
  */
 const updateArticleContent = function * ({ content, id }) {
   const currentArticles = yield select(state => state.editor.articles);
-  currentArticles[id].content = content;
 
+  const { change = [] } = yield call(services.updateArticles, {
+    conds: { id },
+    body: { content },
+  });
+
+  // 是否更新成功
+  if (change[0]?.content !== content) {
+    message({
+      ... MESSAGE_CONFIG,
+      type: 'error',
+      message: '文章内容保存失败!',
+    });
+    return false;
+  }
+
+  // 更新 redux 中对应文章内容
+  currentArticles[id].content = content;
   yield put({
     type: 'editor/setArticles',
     articles: { ... currentArticles },
-  });
-
-  yield call(services.updateArticles, {
-    conds: { id },
-    body: { content },
   });
 
   yield put({
