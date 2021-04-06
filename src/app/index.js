@@ -1,4 +1,3 @@
-import Fund from './Fund';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
@@ -9,7 +8,7 @@ import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
 
 export default {
-  album: {
+  [APP_CODE.ALBUM]: {
     name: '相册',
     component: Album,
     code: APP_CODE.ALBUM,
@@ -20,7 +19,7 @@ export default {
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
-  editor: {
+  [APP_CODE.EDITOR]: {
     name: '编辑器',
     component: Editor,
     icon: 'icon-daima',
@@ -31,7 +30,7 @@ export default {
       defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 40 },
     },
   },
-  reader: {
+  [APP_CODE.READER]: {
     name: '阅读',
     component: Reader,
     icon: 'icon-wenzhang',
@@ -42,7 +41,7 @@ export default {
       defaultParams: { width: 1020, height: 530, offsetX: 60, offsetY: 60 },
     },
   },
-  diary: {
+  [APP_CODE.DIARY]: {
     name: '日记',
     component: Diary,
     icon: 'icon-biji',
@@ -53,7 +52,7 @@ export default {
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
-  datasetsfrom: {
+  [APP_CODE.DATASETSFROM]: {
     name: '数据字典',
     icon: 'icon-zidian',
     component: Datasetsfrom,
@@ -64,7 +63,7 @@ export default {
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },
-  logger: {
+  [APP_CODE.LOGGER]: {
     name: '日志',
     icon: 'icon-rizhichaxun',
     component: Logger,
@@ -75,22 +74,11 @@ export default {
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },
-  setting: {
+  [APP_CODE.SETTING]: {
     name: '系统偏好设置',
     icon: 'icon-renwucopy',
     component: Setting,
     code: APP_CODE.SETTING,
-    modalProps: {
-      dragHeight: 40,
-      toolPosition: { top: 14, left: 14 },
-      defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
-    },
-  },
-  fund: {
-    name: '基金管理',
-    icon: 'icon-jijinbijiao',
-    component: Fund,
-    code: APP_CODE.FUND,
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 14, left: 14 },
