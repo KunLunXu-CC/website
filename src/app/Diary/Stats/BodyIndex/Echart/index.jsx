@@ -10,9 +10,9 @@ const useStateHook = () => {
   const data = React.useMemo(
     () => (statsBodyIndex.reduce((total, { name, bodyIndex }) => ({
       xAxis: [... total.xAxis, name],
-      weight: [... total.weight, bodyIndex.weight],
-      bodyfat: [... total.bodyfat, bodyIndex.bodyfat],
-      moistureContent: [... total.moistureContent, bodyIndex.moistureContent],
+      weight: [... total.weight, bodyIndex?.weight ?? 0],
+      bodyfat: [... total.bodyfat, bodyIndex?.bodyfat ?? 0],
+      moistureContent: [... total.moistureContent, bodyIndex?.moistureContent ?? 0],
     }), { xAxis: [], bodyfat: [], weight: [], moistureContent: [] })),
     [statsBodyIndex]
   );
