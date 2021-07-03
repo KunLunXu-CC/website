@@ -32,6 +32,7 @@ export default () => {
   const state = useStateHook();
   return (
     <VariableContainer
+      layout
       margin={{ right: '20%' }}
       operationList={['right']}
       onResize={state.onResize}

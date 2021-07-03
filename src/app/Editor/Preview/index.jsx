@@ -47,13 +47,14 @@ export default () => {
   return (
     state.article.name ?
       <VariableContainer
+        layout
         operationList={['left']}
         margin={{ right: '20%' }}
         onResize={state.onResize}
         className={scss.container}
+        style={{ height: '100%' }}
         constraintSize={{ width: 0 }}
-        defaultParams={{ width: 560 }}
-        style={{ height: '100%', left: 0 }}>
+        defaultParams={{ width: 560 }}>
         <div className={scss.preview}>
           <div className={scss['preview-header']}>
             {state.article.name}

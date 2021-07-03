@@ -1,10 +1,10 @@
 const path = require('path');
 const config = require('./config');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-
 const { DefinePlugin, ProvidePlugin } = require('webpack');
 
 // const WebpackBundleAnalyzer = require('webpack-bundle-analyzer');
@@ -21,10 +21,13 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../public/index.html'),
 });
 
-// 直接拷贝文件进行打包
-const copyWebpackPlugin = new CopyWebpackPlugin(
-  [{ from: path.resolve(__dirname, '../public') }]
-);
+// 拷贝 public 内除 index.html 的所以文件
+const copyWebpackPlugin = new CopyWebpackPlugin({
+  patterns: [{
+    from: path.resolve(__dirname, '../public'),
+    globOptions: { ignore: ['**/index.html'] },
+  }],
+});
 
 // 将样式文件单独拆分为独立的文件
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
@@ -34,6 +37,9 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
 
 // monaco-editor 插件
 const monacoWebpackPlugin = new MonacoWebpackPlugin();
+
+// Eslint
+const eslintPlugin = new ESLintPlugin();
 
 // 打包监测
 // const bundleAnalyzerPlugin = new WebpackBundleAnalyzer
@@ -58,7 +64,7 @@ module.exports = {
       {
         test: /\.(mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader'],
+        use: ['babel-loader'],
       },
       {
         test: cssRegex,
@@ -67,7 +73,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
           },
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
@@ -79,7 +84,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
           },
           {
             loader: 'css-loader',
@@ -111,6 +115,7 @@ module.exports = {
   },
 
   plugins: [
+    eslintPlugin,
     definePlugin,
     providePlugin,
     copyWebpackPlugin,
@@ -126,6 +131,13 @@ module.exports = {
   },
 
   devServer: {
+    // webpack-dev-server 相关配置
+    contentBase: path.resolve(__dirname, '../build'),
+    compress: true,
+    port: 9000,
+
+    hot: true,
+
     // 该选项配置  output.publicPath: '/' 解决: BrowserRouter 路由刷新时找不到页面 BUG
     historyApiFallback: true,
   },

@@ -1,0 +1,28 @@
+module.exports = {
+  'plugins': [
+    // 按需加载 - antd
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      "style": "css"
+    }, "antd"],
+    // 按需加载 - qyrc
+    ["import", {
+      "libraryName": "qyrc",
+      "libraryDirectory": "es",
+      "style": true
+    }, "qyrc"],
+
+    // 为api提供沙箱的垫片方案，不会污染全局的 api
+    ['@babel/plugin-transform-runtime'],
+    // 修饰器
+    ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+    ['@babel/plugin-proposal-class-properties'],
+    // asyn await 支持
+    '@babel/plugin-transform-async-to-generator',
+  ],
+  'presets': [
+    '@babel/preset-react',
+    '@babel/preset-env'
+  ]
+}

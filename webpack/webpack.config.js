@@ -18,10 +18,13 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../public/index.html'),
 });
 
-// 直接拷贝文件进行打包
-const copyWebpackPlugin = new CopyWebpackPlugin(
-  [{ from: path.resolve(__dirname, '../public') }]
-);
+// 拷贝 public 内除 index.html 的所以文件
+const copyWebpackPlugin = new CopyWebpackPlugin({
+  patterns: [{
+    from: path.resolve(__dirname, '../public'),
+    globOptions: { ignore: ['**/index.html'] },
+  }],
+});
 
 // monaco-editor 插件
 const monacoWebpackPlugin = new MonacoWebpackPlugin();
@@ -65,7 +68,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: false },
           },
           { loader: 'css-loader', options: { importLoaders: 1 } },
           'postcss-loader',
@@ -77,7 +79,6 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { hmr: false },
           },
           {
             loader: 'css-loader',
