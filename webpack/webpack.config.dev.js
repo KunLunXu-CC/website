@@ -36,7 +36,9 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
 });
 
 // monaco-editor 插件
-const monacoWebpackPlugin = new MonacoWebpackPlugin();
+const monacoWebpackPlugin = new MonacoWebpackPlugin({
+  languages: ['javascript'],
+});
 
 // Eslint
 const eslintPlugin = new ESLintPlugin();

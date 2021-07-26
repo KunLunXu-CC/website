@@ -27,7 +27,9 @@ const copyWebpackPlugin = new CopyWebpackPlugin({
 });
 
 // monaco-editor 插件
-const monacoWebpackPlugin = new MonacoWebpackPlugin();
+const monacoWebpackPlugin = new MonacoWebpackPlugin({
+  languages: ['javascript'],
+});
 
 // 将样式文件单独拆分为独立的文件
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
