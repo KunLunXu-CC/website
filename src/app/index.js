@@ -1,3 +1,4 @@
+import IDE from './IDE';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
@@ -17,6 +18,17 @@ export default {
       dragHeight: 40,
       toolPosition: { top: 8, left: 10 },
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
+    },
+  },
+  [APP_CODE.IDE]: {
+    name: 'IDE',
+    component: IDE,
+    icon: 'icon-daima',
+    code: APP_CODE.IDE,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 8, left: 2 },
+      defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 40 },
     },
   },
   [APP_CODE.EDITOR]: {
