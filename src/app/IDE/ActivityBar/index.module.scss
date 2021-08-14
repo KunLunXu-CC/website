@@ -1,0 +1,23 @@
+.activity {
+  width: 80px;
+  background: #282c34;
+
+  $color: #a9abae;
+
+  &-item {
+    padding: 15px;
+    font-size: 26px;
+    text-align: center;
+
+    cursor: pointer;
+    color: rgba($color: $color, $alpha: 0.4);
+
+    &:hover {
+      color: rgba($color: $color, $alpha: 1);
+    }
+  }
+
+  &-item-action {
+    color: rgba($color: $color, $alpha: 1);
+  }
+}

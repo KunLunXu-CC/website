@@ -1,0 +1,24 @@
+.modal {
+  :global {
+    .ant-modal-mask,
+    .ant-modal-wrap {
+      position: absolute;
+    }
+
+    .ant-modal-content {
+      background: #2c343a;
+    }
+
+    .ant-modal-header {
+      border: none;
+      background: transparent;
+      .ant-modal-title {
+        color: rgba($color: #fff, $alpha: 0.6);
+      }
+    }
+
+    .ant-modal-footer {
+      border: none;
+    }
+  }
+}

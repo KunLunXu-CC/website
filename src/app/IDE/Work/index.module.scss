@@ -1,0 +1,82 @@
+.work {
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // position: absolute;
+  flex: 1;
+  background: #282c34;
+
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+
+  :global {
+
+    // tabs 最外层
+    .ant-tabs {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    // tabs tab部分(上部分)
+    .ant-tabs-nav {
+      margin: 0;
+      background: #21252b;
+
+      .ant-tabs-tab {
+        margin: 0px !important;
+        border: none !important;
+        border-radius: 0px !important;
+        background: #21252b !important;
+        border-right: 1px solid #070507 !important;
+        color: rgba($color: #fff, $alpha: 0.6) !important;
+
+        &:hover {
+          background: #282c34 !important;
+          color: rgba($color: #fff, $alpha: 0.8) !important;
+        }
+      }
+
+      .ant-tabs-tab.ant-tabs-tab-active {
+        background: #282c34 !important;
+        color: rgba($color: #fff, $alpha: 0.8) !important;
+      }
+
+      &::before {
+        display: none;
+      }
+    }
+
+    // tabs 内容部分(中间部分)
+    .ant-tabs-content-holder {
+      flex: 1;
+
+      .ant-tabs-content.ant-tabs-content-top {
+        height: 100%;
+      }
+    }
+
+    // tabpane
+    .ant-tabs-tabpane {
+      height: 100%;
+      position: relative;
+    }
+
+    // 附加内容容器
+    .ant-tabs-extra-content {
+      height: 100%;
+    }
+  }
+}
+
+.empty {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 150px;
+  color: rgba($color: #21252b, $alpha: 0.6);
+}

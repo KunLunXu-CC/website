@@ -1,0 +1,84 @@
+@import '@assets/style/mixin.scss';
+
+.menu-title {
+  display: flex;
+  align-items: center;
+
+  &-content {
+    flex: 1;
+    height: 40px;
+    @include line-clamp(1);
+
+    &-input {
+      padding: 2px;
+      border: none;
+      color: #Fff;
+      outline: none;
+      height: initial;
+      border-radius: 0px;
+      background: rgba($color: #fff, $alpha: 0.1);
+
+      &:hover,
+      &:focus,
+      &:active {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-more {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :global {
+      .qyrc-icon {
+        box-sizing: content-box;
+        padding: 10px 5px;
+      }
+    }
+  }
+}
+
+:global{
+  // 子菜单 - 展开 - 旋转箭头
+  .ant-menu-submenu-open > .ant-menu-submenu-title {
+    :local(.menu-title-arrow) {
+      transform: rotate(90deg);
+    }
+  }
+
+  // 鼠标停放显示 ...
+  .ant-menu-item-active,
+  .ant-menu-submenu-active > .ant-menu-submenu-title {
+    :local(.menu-title-more) {
+      opacity: 1;
+    }
+  }
+}
+
+// 操作菜单
+.operation-menu {
+  background: #2c343a;
+  :global {
+    .ant-dropdown-menu-item {
+      color: rgba($color: #fff, $alpha: 0.5);
+      &:hover{
+        background-color: rgba($color: #fff, $alpha: 0.1)
+      }
+    }
+  }
+}
+
+// 已发布文章
+.menu-title-release {
+  color: #68bf22;
+}
+
+.menu-title-article {
+  .menu-title-arrow {
+    opacity: 0;
+  }
+}
