@@ -17,8 +17,8 @@ export const filterObject = (obj, filterVaslue = []) => {
 /**
  * 通用打印: 当前为开发环境下才允许打印
  */
-export const log = (... args) => {
-  _DEV_ && console.log(... args);
+export const log = (...args) => {
+  _DEV_ && console.log(...args);
 };
 
 /**
@@ -28,10 +28,12 @@ export const log = (... args) => {
  */
 export const debounce = (fn, wait) => {
   let timeout = null;
+
   return () => {
     if (timeout !== null) {
       clearTimeout(timeout);
     }
+
     timeout = setTimeout(fn.bind(null, escape), wait);
   };
 };
@@ -52,7 +54,7 @@ export const rsa = (data, publicKey) => {
  * 格式化数字
  * @param {Number} num  待处理数据
  */
-export const formatNum = num => [... `${num}`]
+export const formatNum = (num) => [...`${num}`]
   .reverse()
   .reduce((total, ele, index) => `${ele}${
     index !== 0 && index % 3 === 0 ? ',' : ''
@@ -67,13 +69,14 @@ export const formatNum = num => [... `${num}`]
 export const message = ({
   code,
   type = 'success',
-  ... options
+  ...options
 }) => {
   if (!code) {
     return false;
   }
+
   notification[type]({
-    ... options,
+    ...options,
     getContainer: () => (document.getElementById(code)),
   });
 };

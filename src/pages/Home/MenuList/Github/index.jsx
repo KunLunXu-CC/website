@@ -7,6 +7,6 @@ export default () => (
     target="_blank"
     rel="noopener noreferrer"
     href="https://github.com/qianyin925">
-    <Icon type="icon-github"/>
+    <Icon type="icon-github" />
   </a>
 );

@@ -9,7 +9,7 @@
  * @return {Object} 更新后的状态
  */
 export const openSpin = (state, { code }) => (
-  code ? { ... state, [code]: true } : state
+  code ? { ...state, [code]: true } : state
 );
 
 /**
@@ -22,5 +22,5 @@ export const openSpin = (state, { code }) => (
  * @return {Object} 更新后的状态
  */
 export const closeSpin = (state, { code }) => (
-  code ? { ... state, [code]: false } : {}
+  code ? { ...state, [code]: false } : {}
 );

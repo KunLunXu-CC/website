@@ -7,11 +7,11 @@ import scss from './index.module.scss';
 export default () => (
   <div className={scss.layout}>
     <div className={scss['layout-side']}>
-      <Side/>
+      <Side />
     </div>
     <div className={scss['layout-body']}>
-      <Body/>
+      <Body />
     </div>
-    <Tips/>
+    <Tips />
   </div>
 );

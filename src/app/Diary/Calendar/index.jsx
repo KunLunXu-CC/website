@@ -8,7 +8,7 @@ import { Calendar } from 'antd';
 export default () => (
   <Calendar
     className={scss.calendar}
-    dateFullCellRender={date => <Cell date={date}/>}
-    headerRender={params => (<Header {... params}/>)}
+    dateFullCellRender={(date) => <Cell date={date} />}
+    headerRender={(params) => (<Header {... params} />)}
   />
 );

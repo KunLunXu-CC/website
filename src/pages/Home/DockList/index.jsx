@@ -7,16 +7,16 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const app = useSelector(state => state.app);
+  const app = useSelector((state) => state.app);
 
-  const onClick = useCallback(dock => {
+  const onClick = useCallback((dock) => {
     dispatch({ type: 'app/openApp', app: dock });
   }, []);
 
   return { onClick, app };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
   return (
     <List

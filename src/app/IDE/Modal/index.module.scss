@@ -10,15 +10,16 @@
     }
 
     .ant-modal-header {
-      border: none;
+      border: unset;
       background: transparent;
+
       .ant-modal-title {
         color: rgba($color: #fff, $alpha: 0.6);
       }
     }
 
     .ant-modal-footer {
-      border: none;
+      border: unset;
     }
   }
 }

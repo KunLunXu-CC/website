@@ -10,7 +10,7 @@ import { initState } from './index.model';
  * @return {Object} 更新后的状态
  */
 export const setPhotos = (state, { photos }) => ({
-  ... state,
+  ...state,
   photos,
 });
 
@@ -24,10 +24,10 @@ export const setPhotos = (state, { photos }) => ({
  * @return {Object} 更新后的状态
  */
 export const setSearch = (state, { search }) => ({
-  ... state,
+  ...state,
   search: {
-    ... state.search,
-    ... search,
+    ...state.search,
+    ...search,
   },
 });
 
@@ -39,10 +39,10 @@ export const setSearch = (state, { search }) => ({
  * @param {Object} state 当前 state
  * @return {Object} 更新后的状态
  */
-export const openUploadForm = state => ({
-  ... state,
+export const openUploadForm = (state) => ({
+  ...state,
   upload: {
-    ... state.upload,
+    ...state.upload,
     show: true,
   },
 });
@@ -55,8 +55,8 @@ export const openUploadForm = state => ({
  * @param {Object} state 当前 state
  * @return {Object} 更新后的状态
  */
-export const closeUploadForm = state => ({
-  ... state,
+export const closeUploadForm = (state) => ({
+  ...state,
   upload: initState.upload,
 });
 
@@ -70,9 +70,9 @@ export const closeUploadForm = state => ({
  * @return {Object} 更新后的状态
  */
 export const setUploadType = (state, { uploadType }) => ({
-  ... state,
+  ...state,
   upload: {
-    ... state.upload,
+    ...state.upload,
     type: uploadType,
   },
 });
@@ -87,9 +87,9 @@ export const setUploadType = (state, { uploadType }) => ({
  * @return {Object} 更新后的状态
  */
 export const addUploadFiles = (state, { files }) => ({
-  ... state,
+  ...state,
   upload: {
-    ... state.upload,
-    files: [... state.upload.files, ... files],
+    ...state.upload,
+    files: [...state.upload.files, ...files],
   },
 });

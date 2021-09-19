@@ -9,7 +9,7 @@ import { APP_CODE } from '@config/consts';
 
 const useStateHook = () => {
   const showSpin = useSelector(
-    state => _.get(state, `spin.${APP_CODE.DATASETSFROM}`)
+    (state) => _.get(state, `spin.${APP_CODE.DATASETSFROM}`),
   );
   return { showSpin };
 };
@@ -19,9 +19,17 @@ export default () => {
   return (
     <Fragment>
       {state.showSpin
-        ? <Spin className={scss.spin} size="large"/>
+        ? (
+          <Spin
+            className={scss.spin}
+            size="large"
+          />
+        )
         : null}
-      <div id={APP_CODE.DATASETSFROM} className={scss.notification}/>
+      <div
+        id={APP_CODE.DATASETSFROM}
+        className={scss.notification}
+      />
     </Fragment>
   );
 };

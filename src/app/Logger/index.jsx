@@ -11,6 +11,7 @@ const useStateHook = () => {
     if (!mainRef.current) {
       return false;
     }
+
     const { scrollHeight, clientHeight } = mainRef.current;
     mainRef.current.scrollTop = scrollHeight - clientHeight;
   }, [mainRef.current]);
@@ -19,14 +20,16 @@ const useStateHook = () => {
     const wss = ws('/ws/logger');
     const tmp = [];
     onScrollEnd();
-    wss.onmessage = event => {
+
+    wss.onmessage = (event) => {
       const { scrollTop, scrollHeight, clientHeight } = mainRef.current;
       tmp.push(JSON.parse(event.data));
-      setLogger([... tmp]);
+      setLogger([...tmp]);
       // 只有在滚动条位于底部时, 才在每次加载数据时自动滚动
       scrollTop + clientHeight === scrollHeight &&
       setTimeout(onScrollEnd, 1000);
     };
+
     return () => wss.close();
   }, []);
 
@@ -41,7 +44,10 @@ export default () => {
         ref={state.mainRef}
         className={scss.main}>
         {state.logger.map(((v, index) => (
-          <pre key={index}> {v.message}</pre>
+          <pre key={index}>
+            {' '}
+            {v.message}
+          </pre>
         )))}
       </div>
     </div>

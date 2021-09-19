@@ -40,7 +40,7 @@ const listData = [
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const type = useSelector(state => _.get(state, 'album.search.type'));
+  const type = useSelector((state) => _.get(state, 'album.search.type'));
 
   // 菜单点击事件
   const onClick = ({ key }) => {
@@ -66,10 +66,15 @@ export default () => {
         mode="inline"
         onClick={state.onClick}
         selectedKeys={[`${state.type}`]}>
-        {listData.map(value => (
+        {listData.map((value) => (
           <Menu.Item key={`${value.key}`}>
-            <Icon type={value.icon}  className="anticon"/>
-            <span>{value.name}</span>
+            <Icon
+              type={value.icon}
+              className="anticon"
+            />
+            <span>
+              {value.name}
+            </span>
           </Menu.Item>
         ))}
       </Menu>

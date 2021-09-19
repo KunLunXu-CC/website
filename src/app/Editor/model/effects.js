@@ -11,7 +11,8 @@ import { APP_CODE, PHOTO_TYPE, DATASETSFROM_CODE } from '@config/consts';
  */
 const initData = function * () {
   // 如果已初始化则不再次初始化
-  const currentTags = yield select(state => state.editor.tags);
+  const currentTags = yield select((state) => state.editor.tags);
+
   if (!_.isEmpty(currentTags)) {
     return false;
   }
@@ -20,18 +21,18 @@ const initData = function * () {
 
   yield put({
     type: 'editor/setTags',
-    tags: tags.reduce((total, ele) => ({ ... total, [ele.id]: ele }), {}),
+    tags: tags.reduce((total, ele) => ({ ...total, [ele.id]: ele }), {}),
   });
 
   yield put({
     type: 'editor/setArticles',
     articles: articles.reduce(
-      (total, ele) => ({ ... total, [ele.id]: ele }),
-      {}
+      (total, ele) => ({ ...total, [ele.id]: ele }),
+      {},
     ),
   });
 
-  message({ ... MESSAGE_CONFIG, message: '数据初始化完成!' });
+  message({ ...MESSAGE_CONFIG, message: '数据初始化完成!' });
 };
 
 /**
@@ -39,14 +40,14 @@ const initData = function * () {
  * @return {void 0}
  */
 const createTag = function * ({ body }) {
-  const currentTags = yield select(state => state.editor.tags);
+  const currentTags = yield select((state) => state.editor.tags);
   delete currentTags.new;
 
   const { change } = body.name ?
     yield call(services.createDatasetsfroms, {
       spin: APP_CODE.EDITOR,
       body: {
-        ... body,
+        ...body,
         value: 0,
         code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
       },
@@ -54,14 +55,14 @@ const createTag = function * ({ body }) {
 
   yield put({
     tags: change.reduce((total, ele) => ({
-      ... total,
+      ...total,
       [ele.id]: ele,
-    }), { ... currentTags }),
+    }), { ...currentTags }),
     type: 'editor/setTags',
   });
 
   message({
-    ... MESSAGE_CONFIG,
+    ...MESSAGE_CONFIG,
     type: body.name ? 'success' : 'error',
     message: body.name ? '操作成功!' : '名称不能为空!',
   });
@@ -72,7 +73,7 @@ const createTag = function * ({ body }) {
  * @return {void 0}
  */
 const updateTag = function * ({ body, id }) {
-  const currentTags = yield select(state => state.editor.tags);
+  const currentTags = yield select((state) => state.editor.tags);
 
   const { change } = yield call(services.updateDatasetsfroms, {
     body,
@@ -82,13 +83,13 @@ const updateTag = function * ({ body, id }) {
 
   yield put({
     tags: change.reduce((total, ele) => ({
-      ... total,
+      ...total,
       [ele.id]: ele,
     }), currentTags),
     type: 'editor/setTags',
   });
 
-  message({ ... MESSAGE_CONFIG, message: '成功更新标签!' });
+  message({ ...MESSAGE_CONFIG, message: '成功更新标签!' });
 };
 
 /**
@@ -98,29 +99,29 @@ const updateTag = function * ({ body, id }) {
 const removeTag = function * ({ id, childrenLength }) {
   if (childrenLength > 0) {
     message({
-      ... MESSAGE_CONFIG,
+      ...MESSAGE_CONFIG,
       type: 'error',
       message: '不允许删除非空目录!',
     });
     return false;
   }
 
-  const currentTags = yield select(state => state.editor.tags);
+  const currentTags = yield select((state) => state.editor.tags);
   const { change } = yield call(services.removeDatasetsfroms, {
     spin: APP_CODE.EDITOR,
     conds: { id },
   });
 
-  change.forEach(v => {
+  change.forEach((v) => {
     delete currentTags[v.id];
   });
 
   yield put({
     type: 'editor/setTags',
-    tags: { ... currentTags },
+    tags: { ...currentTags },
   });
 
-  message({ ... MESSAGE_CONFIG, message: '成功移除标签!' });
+  message({ ...MESSAGE_CONFIG, message: '成功移除标签!' });
 };
 
 /**
@@ -128,13 +129,13 @@ const removeTag = function * ({ id, childrenLength }) {
  * @return {void 0}
  */
 const removeArticle = function * ({ id }) {
-  const currentArticles = yield select(state => state.editor.articles);
+  const currentArticles = yield select((state) => state.editor.articles);
   const { change } = yield call(services.removeArticles, {
     spin: APP_CODE.EDITOR,
     conds: { id },
   });
 
-  change.forEach(v => {
+  change.forEach((v) => {
     delete currentArticles[v.id];
   });
 
@@ -145,10 +146,10 @@ const removeArticle = function * ({ id }) {
 
   yield put({
     type: 'editor/setArticles',
-    articles: { ... currentArticles },
+    articles: { ...currentArticles },
   });
 
-  message({ ... MESSAGE_CONFIG, message: '成功删除文章!' });
+  message({ ...MESSAGE_CONFIG, message: '成功删除文章!' });
 };
 
 /**
@@ -156,7 +157,7 @@ const removeArticle = function * ({ id }) {
  * @return {void 0}
  */
 const createArticle = function * ({ body }) {
-  const currentArticles = yield select(state => state.editor.articles);
+  const currentArticles = yield select((state) => state.editor.articles);
   delete currentArticles.new;
 
   const { change } = body.name ?
@@ -167,9 +168,9 @@ const createArticle = function * ({ body }) {
 
   yield put({
     articles: change.reduce((total, ele) => ({
-      ... total,
+      ...total,
       [ele.id]: ele,
-    }), { ... currentArticles }),
+    }), { ...currentArticles }),
     type: 'editor/setArticles',
   });
 
@@ -179,7 +180,7 @@ const createArticle = function * ({ body }) {
   });
 
   message({
-    ... MESSAGE_CONFIG,
+    ...MESSAGE_CONFIG,
     type: body.name ? 'success' : 'error',
     message: body.name ? '操作成功!' : '名称不能为空!',
   });
@@ -190,7 +191,7 @@ const createArticle = function * ({ body }) {
  * @return {void 0}
  */
 const updateArticle = function * ({ body, id }) {
-  const currentArticles = yield select(state => state.editor.articles);
+  const currentArticles = yield select((state) => state.editor.articles);
 
   const { change } = yield call(services.updateArticles, {
     body,
@@ -199,7 +200,7 @@ const updateArticle = function * ({ body, id }) {
 
   yield put({
     articles: change.reduce((total, ele) => ({
-      ... total,
+      ...total,
       [ele.id]: ele,
     }), currentArticles),
     type: 'editor/setArticles',
@@ -211,7 +212,7 @@ const updateArticle = function * ({ body, id }) {
     work: { change: false },
   });
 
-  message({ ... MESSAGE_CONFIG, message: '成功修改文章信息!' });
+  message({ ...MESSAGE_CONFIG, message: '成功修改文章信息!' });
 };
 
 /**
@@ -219,7 +220,7 @@ const updateArticle = function * ({ body, id }) {
  * @return {void 0}
  */
 const updateArticleContent = function * ({ content, id }) {
-  const currentArticles = yield select(state => state.editor.articles);
+  const currentArticles = yield select((state) => state.editor.articles);
 
   const { change = [] } = yield call(services.updateArticles, {
     conds: { id },
@@ -229,7 +230,7 @@ const updateArticleContent = function * ({ content, id }) {
   // 是否更新成功
   if (change[0]?.content !== content) {
     message({
-      ... MESSAGE_CONFIG,
+      ...MESSAGE_CONFIG,
       type: 'error',
       message: '文章内容保存失败!',
     });
@@ -240,7 +241,7 @@ const updateArticleContent = function * ({ content, id }) {
   currentArticles[id].content = content;
   yield put({
     type: 'editor/setArticles',
-    articles: { ... currentArticles },
+    articles: { ...currentArticles },
   });
 
   yield put({
@@ -249,7 +250,7 @@ const updateArticleContent = function * ({ content, id }) {
     work: { change: false },
   });
 
-  message({ ... MESSAGE_CONFIG, message: '文章内容保存成功!' });
+  message({ ...MESSAGE_CONFIG, message: '文章内容保存成功!' });
 };
 
 /**
@@ -257,7 +258,7 @@ const updateArticleContent = function * ({ content, id }) {
  * @return {void 0}
  */
 const revokeArticle = function * ({ id }) {
-  const currentArticles = yield select(state => state.editor.articles);
+  const currentArticles = yield select((state) => state.editor.articles);
 
   const { change } = yield call(services.revokeArticles, {
     conds: { id },
@@ -266,13 +267,13 @@ const revokeArticle = function * ({ id }) {
 
   yield put({
     articles: change.reduce((total, ele) => ({
-      ... total,
+      ...total,
       [ele.id]: ele,
     }), currentArticles),
     type: 'editor/setArticles',
   });
 
-  message({ ... MESSAGE_CONFIG, message: '下架成功!' });
+  message({ ...MESSAGE_CONFIG, message: '下架成功!' });
 };
 
 /**
@@ -280,7 +281,7 @@ const revokeArticle = function * ({ id }) {
  * @return {void 0}
  */
 const releaseArticle = function * ({ id }) {
-  const currentArticles = yield select(state => state.editor.articles);
+  const currentArticles = yield select((state) => state.editor.articles);
   const { change } = yield call(services.releaseArticles, {
     conds: { id },
     spin: APP_CODE.EDITOR,
@@ -288,13 +289,13 @@ const releaseArticle = function * ({ id }) {
 
   yield put({
     articles: change.reduce((total, ele) => ({
-      ... total,
+      ...total,
       [ele.id]: ele,
     }), currentArticles),
     type: 'editor/setArticles',
   });
 
-  message({ ... MESSAGE_CONFIG, message: '发布成功!' });
+  message({ ...MESSAGE_CONFIG, message: '发布成功!' });
 };
 
 /**
@@ -309,7 +310,7 @@ const setArticleThumb = function * ({ file, id }) {
     spin: APP_CODE.EDITOR,
   });
 
-  message({ ... MESSAGE_CONFIG, message: '缩略图上传成功!' });
+  message({ ...MESSAGE_CONFIG, message: '缩略图上传成功!' });
 
   yield put({
     id,

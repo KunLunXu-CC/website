@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const files = useSelector(state => _.get(state, 'album.upload.files'));
+  const files = useSelector((state) => _.get(state, 'album.upload.files'));
 
   // 添加文件
-  const addFiles = e => {
+  const addFiles = (e) => {
     const { files } = e.target;
     dispatch({ type: 'album/addUploadFiles', files });
   };
@@ -23,7 +23,7 @@ export default () => {
   return (
     <div className={scss['upload-list']}>
       <label className={scss.upload}>
-        <Icon type="icon-tupianshangchuan"/>
+        <Icon type="icon-tupianshangchuan" />
         <input
           type="file"
           accept="image/*"
@@ -32,7 +32,9 @@ export default () => {
         />
       </label>
       {state.files.map((file, index) => (
-        <div key={index} className={scss.item}>
+        <div
+          key={index}
+          className={scss.item}>
           <Image src={file} />
         </div>
       ))}

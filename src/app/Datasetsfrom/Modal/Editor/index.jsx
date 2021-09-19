@@ -16,8 +16,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { MODAL_CODE_DATASETSFROM_EDITOR } from '../../consts';
 
 // 类型下拉选项
-const CODE_OPTIONS = Object.values(DATASETSFROM_CODE).map(v => (
-  <Select.Option key={v.VALUE} value={v.VALUE}>
+const CODE_OPTIONS = Object.values(DATASETSFROM_CODE).map((v) => (
+  <Select.Option
+    key={v.VALUE}
+    value={v.VALUE}>
     {v.DESC}
   </Select.Option>
 ));
@@ -25,7 +27,7 @@ const CODE_OPTIONS = Object.values(DATASETSFROM_CODE).map(v => (
 const useStateHook = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const { modal, menuSelectedKey, datasetsfrom } = useSelector(state => ({
+  const { modal, menuSelectedKey, datasetsfrom } = useSelector((state) => ({
     datasetsfrom: state.datasetsfrom,
     modal: state.modal[MODAL_CODE_DATASETSFROM_EDITOR],
     menuSelectedKey: state.datasetsfromManage.menu.selectedKey,
@@ -33,16 +35,16 @@ const useStateHook = () => {
 
   // antd Cascader 配置
   const options = React.useMemo(() => Object.values(DATASETSFROM_CODE)
-    .filter(v => datasetsfrom[v.VALUE])
+    .filter((v) => datasetsfrom[v.VALUE])
     .map(
-      v => ({
+      (v) => ({
         value: v.VALUE,
         label: v.DESC,
-        children: datasetsfrom[v.VALUE].map(ele => ({
+        children: datasetsfrom[v.VALUE].map((ele) => ({
           value: ele.id,
           label: ele.name,
         })),
-      })
+      }),
     ), [datasetsfrom]);
 
   // 取消: 关闭弹窗
@@ -53,11 +55,11 @@ const useStateHook = () => {
 
   // 确认
   const onOk = async () => {
-    const { parent, ... rest } = await form.validateFields();
+    const { parent, ...rest } = await form.validateFields();
     dispatch({
       id: modal.data?.id,
       code: MODAL_CODE_DATASETSFROM_EDITOR,
-      body: { ... rest, parent: parent?.[1] },
+      body: { ...rest, parent: parent?.[1] },
       type: modal.data
         ? 'datasetsfromManage/updateDatasetsfrom'
         : 'datasetsfromManage/createDatasetsfrom',
@@ -109,7 +111,7 @@ export default () => {
               label="名称"
               name="name"
               rules={[{ required: true, message: '请填写字典名称!' }]}>
-              <Input placeholder="字典名称"/>
+              <Input placeholder="字典名称" />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -117,7 +119,10 @@ export default () => {
               label="数值"
               name="value"
               rules={[{ required: true, message: '请填写字典值!' }]}>
-              <InputNumber placeholder="字典值" style={{ width: '100%' }}/>
+              <InputNumber
+                placeholder="字典值"
+                style={{ width: '100%' }}
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -125,20 +130,34 @@ export default () => {
               name="code"
               label="类型"
               rules={[{ required: true, message: '请选择字典类型!' }]}>
-              <Select placeholder="字典类型">{CODE_OPTIONS}</Select>
+              <Select placeholder="字典类型">
+                {CODE_OPTIONS}
+              </Select>
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item name="parent" label="父级">
-              <Cascader placeholder="选择父级" options={state.options}/>
+            <Form.Item
+              name="parent"
+              label="父级">
+              <Cascader
+                placeholder="选择父级"
+                options={state.options}
+              />
             </Form.Item>
           </Col>
         </Row>
-        <Form.Item label="图标" name="icon">
-          <Input placeholder="图标"/>
+        <Form.Item
+          label="图标"
+          name="icon">
+          <Input placeholder="图标" />
         </Form.Item>
-        <Form.Item label="描述" name="desc">
-          <Input.TextArea rows={4} placeholder="字典描述"/>
+        <Form.Item
+          label="描述"
+          name="desc">
+          <Input.TextArea
+            rows={4}
+            placeholder="字典描述"
+          />
         </Form.Item>
       </Modal>
     </Form>

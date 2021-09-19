@@ -10,20 +10,22 @@ import { useSelector } from 'react-redux';
 const DockApp = styled.div`
   --scale: ${({ index, currentIndex }) => {
     const defaultValue = 1;
+
     if (!_.isNumber(currentIndex)) {
       return defaultValue;
     }
+
     const mapIndex = 2 - Math.abs(currentIndex - index);
     return [1.1, 1.2, 1.3]?.[mapIndex] || defaultValue;
   }};
 `;
 
-const useStateHook = props => {
+const useStateHook = (props) => {
   const [currentIndex, setCurrentIndex] = React.useState(null);
-  const setting = useSelector(state => state.setting.dock);
+  const setting = useSelector((state) => state.setting.dock);
 
   // 点击事件
-  const onClick = React.useCallback(dock => {
+  const onClick = React.useCallback((dock) => {
     _.isFunction(props.onClick) && props.onClick(dock);
   }, [props]);
 
@@ -36,7 +38,7 @@ const useStateHook = props => {
   return { onClick, currentIndex, setCurrentIndex, className };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return (

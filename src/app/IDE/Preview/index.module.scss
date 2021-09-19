@@ -31,9 +31,10 @@
     :global {
       .qyrc-icon {
         color: rgba($color: #fff, $alpha: 0.3);
-        &:hover {
-          color: #40a9ff;
-        }
+      }
+
+      .qyrc-icon:hover {
+        color: #40a9ff;
       }
     }
   }

@@ -14,7 +14,7 @@ const useStateHook = () => {
   // 切换状态(显示/关闭)
   const onToogle = React.useCallback(
     setVisible.bind(null, !visible),
-    [visible]
+    [visible],
   );
 
   // // 点击抽屉
@@ -29,7 +29,7 @@ export default () => {
 
   return (
     <React.Fragment>
-      <Target onClick={state.onToogle}/>
+      <Target onClick={state.onToogle} />
       <Drawer
         width={374}
         closable={false}
@@ -38,7 +38,7 @@ export default () => {
         onClose={state.onClose}
         visible={state.visible}
         className={scss.notification}>
-        <User/>
+        <User />
       </Drawer>
     </React.Fragment>
   );

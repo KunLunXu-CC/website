@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const setting = useSelector(state => state.setting.menuBar);
+  const setting = useSelector((state) => state.setting.menuBar);
 
   // 修改值
   const onChange = React.useCallback((key, valuePath, event) => {

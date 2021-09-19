@@ -1,3 +1,4 @@
+/* eslint-disable */
 // 来自 [腾讯前端博客](http://www.alloyteam.com/)
 !
 function (t) {
@@ -12,6 +13,7 @@ function (t) {
     l.loaded = !0,
     l.exports;
   }
+
   var e = {};
   o.m = t,
   o.c = e,
@@ -23,6 +25,7 @@ function (t) {
 function (t, o) {},,  ,
   function (t, o, e) {
     'use strict';
+
     function a () {
       s.info('%c小样，你打开Console是想窃取情报吗？那就如你所愿 @!@', 'color: #3498DB;font-weight: 600;'),
       setTimeout(() => {
@@ -39,11 +42,13 @@ function (t, o) {},,  ,
       2e3),
       window._start;
     }
+
     function l () {
       const t = new Audio;
       t.src = 'http://pub.idqqimg.com/tfc/home/mp3/music/song.mp3',
       t.play();
     }
+
     function c () {
       let t = 0;
       p('yes',
@@ -87,17 +92,19 @@ function (t, o) {},,  ,
             '那么，请以%c★代码的名义★%c告诉我，你愿意加入这个帅气逼人的AlloyTeam团队吗(%cyes or no)%c?',
             'color:#fd6a7f;font-weight:bold;',
             '',
-            'color:#fd6a7f', ''
+            'color:#fd6a7f', '',
           );
         },
         2500),
         ''));
     }
+
     function p (t, o) {
       Object.defineProperty(window, t, {
         get: o,
       });
     }
+
     function n () {
       const t = new Image;
       Object.defineProperty(t, 'id', {
@@ -108,6 +115,7 @@ function (t, o) {},,  ,
       }),
       s.log('%c', t);
     }
+
     var r = [e(12), e(13), e(11)];
     var i = e(9);
     var m = e(10);
@@ -120,7 +128,7 @@ function (t, o) {},,  ,
   function (t, o) {
     'use strict';
     t.exports = {
-      channel: {
+      'channel': {
         title: 'AlloyTeam',
         link: [{
           '@href': 'http://www.alloyteam.com/feed/?jsonp=callback',
@@ -366,24 +374,30 @@ function (t, o) {},,  ,
   },
   function (t, o, e) {
     'use strict';
+
     function a (t) {
       return t && t.__esModule ? t : {
         default:
             t,
       };
     }
+
     function l () {
       $(window).scrollTop() > 0 ? $('#header').addClass('header-scrolled') : $('#header').removeClass('header-scrolled');
     }
+
     function c () {
       function t (t) {
         let o = 0;
+
         for (t.length; o < 5; o++) {
           const a = t[o];
           e.push(`<li><a target="_blank" href="${a.link}"><h4>${a.title}</h4><span class="i-author">${a.creator}</span></a></li>`);
         }
+
         $('#post_container').html(e.join(''));
       }
+
       let o = [];
       var e = [];
       $.ajax({
@@ -410,6 +424,7 @@ function (t, o) {},,  ,
         },
       });
     }
+
     function p (t) {
       const o = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       const e = '2017-4-17';
@@ -420,6 +435,7 @@ function (t, o) {},,  ,
       return p = 1 === l || 21 === l || 31 === l ? `${l}st` : 2 === l || 22 === l ? `${l}nd` : 3 === l || 23 === l ? `${l}rd` : `${l}th`,
       `${c} ${p}`;
     }
+
     function n () {
       $.ajax({
         url: 'http://www.alloyteam.com/alloyshare/admin/cgi-bin/get_last_period',
@@ -429,6 +445,7 @@ function (t, o) {},,  ,
         },
       });
     }
+
     e(1),
     e(4);
     const r = e(5);

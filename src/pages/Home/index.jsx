@@ -14,8 +14,8 @@ import MenuList from './MenuList';
 export default () => (
   <Fragment>
     <AppList />
-    <MenuList/>
-    <DockList/>
-    <Desktop/>
+    <MenuList />
+    <DockList />
+    <Desktop />
   </Fragment>
 );

@@ -1,4 +1,4 @@
-@import '@assets/style/mixin.scss';
+@import '@assets/style/mixin';
 
 .menu-item-empty {
   height: 0 !important;
@@ -8,40 +8,41 @@
 .menu {
   $bg: transparent;
   $bg-selected: #2c313a;
-  $color: rgba($color: #cccccc, $alpha: 0.8);
-
-  height: 100%;
-  border: none;
-  color: $color;
-  background: $bg;
-  padding-bottom: 40px;
-
-  overflow-y: auto;
-  overflow-x: hidden;
+  $color: rgba($color: #ccc, $alpha: 0.8,);
 
   @include scrollbar(
     $width: 2px,
     $thumb-bg: lighten($color: #2c313a, $amount: 5%)
   );
 
-  :global {
-    .ant-menu-sub {
-      border: none;
-      color: $color;
-      background: $bg;
-    }
+  height: 100%;
+  border: unset;
+  color: $color;
+  background: $bg;
+  padding-bottom: 40px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
+  :global {
     // 设置分割线(虚线)
     .ant-menu-sub {
       position: relative;
+      border: unset;
+      color: $color;
+      background: $bg;
 
-      :local(.menu-dividing){
+      :local(.menu-dividing) {
         top: 0;
         width: 1;
         bottom: 0;
         position: absolute;
         border-right: 1px dashed rgba($color: $color, $alpha: 0.1);
       }
+    }
+
+    // 子菜单 - 正常
+    .ant-menu-submenu-title {
+      padding-right: 0 !important;
     }
 
     // 子菜单 - 活动或者选中
@@ -51,11 +52,6 @@
         color: $color !important;
         background: $bg-selected !important;
       }
-    }
-
-    // 子菜单 - 正常
-    .ant-menu-submenu-title {
-      padding-right: 0px !important;
     }
 
     // 子菜单 - 选中但是被打开则不显示任何样式
@@ -68,11 +64,14 @@
 
     // 根菜单样式覆盖 - 正常状态
     .ant-menu-item {
-      border: none;
+      border: unset;
       background: $bg;
-      margin: 0px !important;
+      margin: 0 !important;
       padding-right: 5px !important;
-      &::after { display: none; }
+
+      &::after {
+        display: none;
+      }
     }
 
     // 根菜单样式覆盖 - 停放状态

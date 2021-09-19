@@ -11,7 +11,7 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
     }
 
     .ant-modal-header {
-      border: none;
+      border: unset;
       background: transparent;
 
       .ant-modal-title {
@@ -25,14 +25,14 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
     }
 
     .ant-modal-footer {
-      border: none;
+      border: unset;
     }
   }
 }
 
 .item {
   color: $color-light;
-  padding: 30px 10px 0 10px;
+  padding: 30px 10px 0;
 
   :global {
     .ant-cascader-picker {
@@ -45,11 +45,11 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
     }
 
     input {
-      border: none;
+      border: unset;
       color: $color;
       outline: none;
       height: initial;
-      border-radius: 0px;
+      border-radius: 0;
     }
 
     .ant-cascader-menu {
@@ -57,7 +57,7 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
       border-right: 1px solid $bg-light;
 
       &:last-child {
-        border-right: none;
+        border-right: unset;
       }
     }
 

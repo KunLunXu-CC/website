@@ -8,24 +8,26 @@ import { useDispatch, useSelector } from 'react-redux';
 const useStateHook = () => {
   const dispatch = useDispatch();
   // 弹窗
-  const modal = useSelector(state => state.modal[STATS_BILL_DETAIL]);
+  const modal = useSelector((state) => state.modal[STATS_BILL_DETAIL]);
 
   // 数据
   const data = React.useMemo(() => {
     const bill = modal?.diaries.reduce((total, ele) => ([
-      ... total,
-      ... ele.bill.filter(v => v.expend),
+      ...total,
+      ...ele.bill.filter((v) => v.expend),
     ]), []);
     const gloup = _.groupBy(bill, 'tag.name');
     const res = [];
+
     for (const name in gloup) {
       res.push({
         name,
         value: gloup[name].reduce(
-          (total, ele) => Math.round(total + ele.expend), 0
+          (total, ele) => Math.round(total + ele.expend), 0,
         ),
       });
     }
+
     return res;
   }, [modal]);
 
@@ -38,7 +40,7 @@ const useStateHook = () => {
     legend: {
       right: 10,
       orient: 'vertical',
-      data: data.map(v => v.name),
+      data: data.map((v) => v.name),
     },
     series: [
       {
@@ -95,8 +97,17 @@ export default () => {
       closable={false}
       getContainer={false}
       visible={!!state.modal}
-      footer={<Button onClick={state.onCancel} type="primary">关闭</Button>}>
-      <Echart height={300} option={state.option}/>
+      footer={(
+        <Button
+          onClick={state.onCancel}
+          type="primary">
+          关闭
+        </Button>
+      )}>
+      <Echart
+        height={300}
+        option={state.option}
+      />
     </Modal>
   );
 };

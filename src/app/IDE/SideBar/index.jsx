@@ -9,14 +9,14 @@ const SIDE_MIN_WIDTH = 4;  // 菜单最小宽度
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const { collapsed } = useSelector(state => ({
+  const { collapsed } = useSelector((state) => ({
     collapsed: state.editor.side.collapsed,
   }));
 
   // 顶层 className
   const className = React.useMemo(() => classNames(
     scss.side,
-    { [scss.collapsed]: collapsed }
+    { [scss.collapsed]: collapsed },
   ), [collapsed]);
 
   // 尺寸变化
@@ -39,7 +39,7 @@ export default () => {
       style={{ height: '100%' }}
       className={state.className}
       constraintSize={{ width: SIDE_MIN_WIDTH }}>
-      <Resource/>
+      <Resource />
     </VariableContainer >
   );
 };

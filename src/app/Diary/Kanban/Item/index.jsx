@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-export default props => (
+export default (props) => (
   <div
     ref={props.provided.innerRef}
     className={classNames(scss.item, {

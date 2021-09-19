@@ -10,7 +10,7 @@ const useStateHook = () => {
 
   // 获取当前文章内容
   const article = useSelector(
-    state => _.get(state, `modal[${RELEASE_CONFIRM}].article`)
+    (state) => _.get(state, `modal[${RELEASE_CONFIRM}].article`),
   );
 
   // 点击取消

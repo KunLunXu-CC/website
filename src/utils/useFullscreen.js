@@ -7,7 +7,7 @@ const exitFullscreen = () => [
   'exitFullscreen',
   'mozCancelFullScreen',
   'webkitExitFullscreen',
-].find(key => {
+].find((key) => {
   document[key] && document[key]();
   return document[key];
 });
@@ -16,12 +16,12 @@ const exitFullscreen = () => [
  * 全屏
  * @param {DOM} element 待全屏 dom
  */
-const requestFullscreen = element => [
+const requestFullscreen = (element) => [
   'requestFullscreen',
   'msRequestFullscreen',
   'mozRequestFullScreen',
   'webkitRequestFullscreen',
-].find(key => {
+].find((key) => {
   element[key] && element[key]();
   return element[key];
 });
@@ -34,9 +34,9 @@ const isFullscreen = () => [
   document.msFullscreenElement,
   document.mozFullScreenElement,
   document.webkitFullscreenElement,
-].find(v => v);
+].find((v) => v);
 
-export default dom => {
+export default (dom) => {
   const [fulled, setFulled] = React.useState(false);
 
   // 切换全屏状态
@@ -45,20 +45,22 @@ export default dom => {
   // 监听 fulled 触发事件
   React.useEffect(() => {
     dom.dispatchEvent(new CustomEvent(
-      fulled ? 'requestFullscreen' : 'exitFullscreen'
+      fulled ? 'requestFullscreen' : 'exitFullscreen',
     ));
   }, [fulled]);
 
   // 监听 ctrl + shift + f 切换全屏
   React.useEffect(() => {
-    const listener = event => {
+    const listener = (event) => {
       const { shiftKey, ctrlKey, metaKey, keyCode } = event;
+
       if (shiftKey && (ctrlKey || metaKey) && keyCode === 70) {
         event.preventDefault();
         event.stopPropagation();
         setFulled(!fulled);
       }
     };
+
     document.addEventListener('keydown', listener);
     return () => document.removeEventListener('keydown', listener);
   }, [fulled]);

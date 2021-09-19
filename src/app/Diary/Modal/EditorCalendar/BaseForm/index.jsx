@@ -15,12 +15,12 @@ export default () => (
       <Form.Item
         name="name"
         label="日期"
-        rules ={[{
+        rules={[{
           required: true,
           message: '请填写日期',
         }]}
         className={scss['form-item']}>
-        <DatePicker style={{ width: '100%' }}/>
+        <DatePicker style={{ width: '100%' }} />
       </Form.Item>
     </Col>
     <Col span={12}>
@@ -40,7 +40,10 @@ export default () => (
         label="起居"
         name="getUp"
         className={scss['form-item']}>
-        <DatePicker showTime style={{ width: '100%' }}/>
+        <DatePicker
+          showTime
+          style={{ width: '100%' }}
+        />
       </Form.Item>
     </Col>
     <Col span={12}>
@@ -61,7 +64,10 @@ export default () => (
         label="歇息"
         name="toRest"
         className={scss['form-item']}>
-        <DatePicker showTime style={{ width: '100%' }}/>
+        <DatePicker
+          showTime
+          style={{ width: '100%' }}
+        />
       </Form.Item>
     </Col>
     <Col span={12}>

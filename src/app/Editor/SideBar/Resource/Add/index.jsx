@@ -19,6 +19,10 @@ const useStateHook = () => {
 export default () => {
   const state = useStateHook();
   return (
-    <div onClick={state.onClick} className={scss.add}>+</div>
+    <div
+      onClick={state.onClick}
+      className={scss.add}>
+      +
+    </div>
   );
 };

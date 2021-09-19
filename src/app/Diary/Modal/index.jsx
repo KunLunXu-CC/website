@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 
 export default () => (
   <div className={scss.modal}>
-    <EditorCalendar/>
-    <BillDetail/>
+    <EditorCalendar />
+    <BillDetail />
   </div>
 );

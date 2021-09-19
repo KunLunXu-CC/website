@@ -8,37 +8,40 @@
 
   :global {
     %clear-style {
-      border: none;
+      border: unset;
       outline: none;
       box-shadow: none;
     }
 
     .ant-input-affix-wrapper {
-      border: none;
+      border: unset;
       background: #f8f8f8;
     }
 
     .ant-input {
-      width: 80%;
       @extend %clear-style;
+
+      width: 80%;
       background: #f8f8f8;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         @extend %clear-style;
       }
     }
-  }
 
-  :global {
     .qyrc-icon {
-      color: rgba(0,0,0,.25);
+      color: rgba(0, 0, 0, 0.25);
     }
   }
 }
 
 .notice {
-  padding: { left: 20px };
   line-height: 40px;
+  padding: {
+    left: 20px;
+  }
+
   :global {
     .qyrc-icon {
       font-size: 20px;

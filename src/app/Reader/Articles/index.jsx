@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const { selectedKey, articles } = useSelector(state => ({
-    ... state.reader.menu,
+  const { selectedKey, articles } = useSelector((state) => ({
+    ...state.reader.menu,
     articles: state.reader.articles,
   }));
 

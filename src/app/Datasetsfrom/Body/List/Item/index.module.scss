@@ -4,6 +4,10 @@
   border-radius: 10px;
   margin-top: 20px;
 
+  &:hover {
+    box-shadow: 0 0 10px rgba($color: #999, $alpha: 0.2);
+  }
+
   &:last-child:nth-child(4n - 2) {
     margin-right: calc(48% + 4% / 3 * 2);
   }
@@ -11,21 +15,17 @@
   &:last-child:nth-child(4n - 1) {
     margin-right: calc(24% + 4% / 3);
   }
-
-  &:hover {
-    box-shadow: 0 0 10px rgba($color: #999, $alpha: 0.2);
-  }
 }
 
 .top {
   padding: 20px;
 
   .title {
-    color: rgba(0, 0, 0, .85);
+    color: rgba(0, 0, 0, 0.85);
   }
 
   .desc {
-    color: rgba(0, 0, 0, .45);
+    color: rgba(0, 0, 0, 0.45);
   }
 }
 
@@ -37,7 +37,7 @@
   align-items: center;
 
   .value {
-    color: rgba(0, 0, 0, .85);
+    color: rgba(0, 0, 0, 0.85);
     flex: 1;
   }
 
@@ -47,7 +47,7 @@
 
     cursor: pointer;
     font-size: 18px;
-    color: rgba(0, 0, 0, .85);
+    color: rgba(0, 0, 0, 0.85);
 
     .icon-edit {
       color: #40a9ff;

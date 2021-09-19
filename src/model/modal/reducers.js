@@ -8,10 +8,10 @@
  * @param {Object} action.rest 弹窗数据
  * @return {Object} 更新后的状态
  */
-export const openModal = (state, { code, ... rest }) => {
-  const data = { ... rest };
+export const openModal = (state, { code, ...rest }) => {
+  const data = { ...rest };
   delete data.type;
-  return code ? { ... state, [code]: data } : state;
+  return code ? { ...state, [code]: data } : state;
 };
 
 /**
@@ -25,5 +25,5 @@ export const openModal = (state, { code, ... rest }) => {
  * @return {Object} 更新后的状态
  */
 export const closeModal = (state, { code }) => (
-  code ? { ... state, [code]: void 0 } : state
+  code ? { ...state, [code]: void 0 } : state
 );

@@ -15,7 +15,7 @@ const useStateHook = () => {
     history.push('/login');
   }, []);
 
-  const { avatars, user  } = useSelector(state => ({
+  const { avatars, user  } = useSelector((state) => ({
     user: _.get(state, 'user'),
     avatars: _.get(state, 'photos.avatar'),
   }));
@@ -36,7 +36,7 @@ export default () => {
   return (
     <Card className={scss.user}>
       <div className={scss.avatar}>
-        <Image src={state.avatar}/>
+        <Image src={state.avatar} />
       </div>
       <div className={scss.name}>
         { state.user.name || '---'}

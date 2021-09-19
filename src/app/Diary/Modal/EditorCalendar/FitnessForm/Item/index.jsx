@@ -13,16 +13,18 @@ import { Icon } from 'qyrc';
 import { useSelector } from 'react-redux';
 import { DATASETSFROM_CODE } from '@config/consts';
 
-const useStateHook = props => {
-  const { fitnessTypes, fitnessPlaces } = useSelector(state => ({
+const useStateHook = (props) => {
+  const { fitnessTypes, fitnessPlaces } = useSelector((state) => ({
     fitnessTypes: state.datasetsfrom[DATASETSFROM_CODE.FITNESS_TYPE.VALUE],
     fitnessPlaces: state.datasetsfrom[DATASETSFROM_CODE.FITNESS_PLACE.VALUE],
   }));
 
   // 类型下拉项
   const typeOptions = useMemo(() => (
-    (fitnessTypes || []).map(v => (
-      <Select.Option value={v.value} key={v.value}>
+    (fitnessTypes || []).map((v) => (
+      <Select.Option
+        value={v.value}
+        key={v.value}>
         {v.name}
       </Select.Option>
     ))
@@ -30,8 +32,10 @@ const useStateHook = props => {
 
   // 训练部位下拉项
   const placeOptions = useMemo(() => (
-    (fitnessPlaces || []).map(v => (
-      <Select.Option value={v.value} key={v.value}>
+    (fitnessPlaces || []).map((v) => (
+      <Select.Option
+        value={v.value}
+        key={v.value}>
         {v.name}
       </Select.Option>
     ))
@@ -51,7 +55,7 @@ const useStateHook = props => {
   };
 };
 
-export default props => {
+export default (props) => {
   const { field } = props;
   const state = useStateHook(props);
 
@@ -63,7 +67,7 @@ export default props => {
             <Form.Item
               {... field}
               label="类型"
-              rules = {[{
+              rules={[{
                 required: true,
                 message: '请选择类型!',
               }]}
@@ -102,7 +106,10 @@ export default props => {
         span={2}
         className={scss['col-delete']}
         onClick={props.remove.bind(null, field.name)}>
-        <Icon type="icon-shanchu" className={scss.delete}/>
+        <Icon
+          type="icon-shanchu"
+          className={scss.delete}
+        />
       </Col>
     </Row>
   );

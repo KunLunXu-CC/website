@@ -4,11 +4,16 @@
   cursor: pointer;
   overflow: hidden;
   border-radius: 8px;
+
   flex-direction: column;
   width: calc(50% - 10px);
-  margin: { bottom: 20px; };
+
+  box-shadow: 2px 0 8px rgba($color: #ddd, $alpha: 0.2);
   border: 1px solid #f9f9f9;
-  box-shadow: 2px 0 8px rgba($color: #ddd, $alpha: .2);
+
+  margin: {
+    bottom: 20px;
+  }
 }
 
 .preview {
@@ -33,6 +38,7 @@
     opacity: 0;
     display: flex;
     font-size: 40px;
+
     position: absolute;
     align-items: center;
     transition: all 0.5s;
@@ -52,10 +58,13 @@
   height: 70px;
   padding: 10px;
   display: flex;
+
   &-icon {
     color: #1890ff;
     font-size: 18px;
-    padding: {right: 10px;};
+    padding: {
+      right: 10px;
+    }
   }
 
   &-body {

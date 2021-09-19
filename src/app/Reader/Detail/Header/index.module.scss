@@ -3,12 +3,12 @@
   align-items: center;
 
   height: 40px;
+  border-bottom: 1px solid #ebebeb;
+  box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.08);
   padding: {
     left: 100px;
     right: 10px;
   };
-  border-bottom: 1px solid #ebebeb;
-  box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.08);
 }
 
 .title {

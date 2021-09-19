@@ -8,7 +8,7 @@
  * @return {Object} 更新后的状态
  */
 export const setDatasetsfroms = (state, { datasetsfroms }) => _.groupBy(
-  datasetsfroms, 'code'
+  datasetsfroms, 'code',
 );
 
 export const space = {};

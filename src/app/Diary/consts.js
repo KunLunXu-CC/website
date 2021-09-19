@@ -2,6 +2,7 @@
 
 // 弹窗类型常量 - 编辑日记
 export const DIARY_EDITOR_DIARY = 'DIARY_EDITOR_DIARY';
+
 export const STATS_BILL_DETAIL = 'STATS_BILL_DETAIL';
 
 export const REVOKE_SPACE = 'REVOKE_SPACE';

@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const { onToggle, fulled } = useFullscreen(document.body);
-  const setting = useSelector(state => state.setting.menuBar);
+  const setting = useSelector((state) => state.setting.menuBar);
 
   return { fulled, onToggle, setting };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return state.setting.showFullScreenOnMenu ? (

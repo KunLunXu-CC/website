@@ -10,12 +10,12 @@ import apps from '@app';
  * @return {Object} 更新后的状态
  */
 export const setDocks = (state, { auth }) => {
-  const docks = auth.map(v => {
+  const docks = auth.map((v) => {
     const { code, name } = apps[v.code] || {};
     return { code, name };
-  }).filter(v => v.code && v.name);
+  }).filter((v) => v.code && v.name);
 
-  return { ... state, docks };
+  return { ...state, docks };
 };
 
 /**
@@ -28,8 +28,8 @@ export const setDocks = (state, { auth }) => {
  * @return {Object} 更新后的状态
  */
 export const onClose = (state, { app }) => ({
-  ... state,
-  opens: state.opens.filter(v => v.code !== app.code),
+  ...state,
+  opens: state.opens.filter((v) => v.code !== app.code),
 });
 
 /**
@@ -42,9 +42,9 @@ export const onClose = (state, { app }) => ({
  * @return {Object} 更新后的状态
  */
 export const onMin = (state, { app }) => ({
-  ... state,
-  opens: state.opens.map(v => ({
-    ... v,
+  ...state,
+  opens: state.opens.map((v) => ({
+    ...v,
     isMin: v.code === app.code ? !v.isMin : v.isMin,
   })),
 });
@@ -59,9 +59,9 @@ export const onMin = (state, { app }) => ({
  * @return {Object} 更新后的状态
  */
 export const onMax = (state, { app }) => ({
-  ... state,
-  opens: state.opens.map(v => ({
-    ... v,
+  ...state,
+  opens: state.opens.map((v) => ({
+    ...v,
     isMax: v.code === app.code ? !v.isMax : v.isMax,
   })),
 });
@@ -76,13 +76,13 @@ export const onMax = (state, { app }) => ({
  * @return {Object} 更新后的状态
  */
 export const openApp = (state, { app }) => {
-  const current = state.opens.find(v => (v.code === app.code));
+  const current = state.opens.find((v) => (v.code === app.code));
 
   return current
     ? onMin(state, { app })
     : {
-      ... state,
-      opens: [... state.opens, { ... app, isMin: false, isMax: false }],
+      ...state,
+      opens: [...state.opens, { ...app, isMin: false, isMax: false }],
     };
 };
 
@@ -99,12 +99,13 @@ export const onMouseDown = (state, { app }) => {
   if (_.last(state.opens).code === app.code) {
     return state;
   }
-  const remove = _.remove(state.opens, v => (v.code === app.code));
+
+  const remove = _.remove(state.opens, (v) => (v.code === app.code));
   return {
-    ... state,
+    ...state,
     opens: [
-      ... state.opens,
-      ... remove,
+      ...state.opens,
+      ...remove,
     ],
   };
 };

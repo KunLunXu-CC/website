@@ -8,7 +8,7 @@
  * @return {Object} 更新后的状态
  */
 export const setTags = (state, { tags }) => ({
-  ... state,
+  ...state,
   tags,
 });
 
@@ -22,7 +22,7 @@ export const setTags = (state, { tags }) => ({
  * @return {Object} 更新后的状态
  */
 export const setArticles = (state, { articles }) => ({
-  ... state,
+  ...state,
   articles,
 });
 
@@ -36,8 +36,8 @@ export const setArticles = (state, { articles }) => ({
  * @return {Object} 更新后的状态
  */
 export const setSide = (state, { side }) => ({
-  ... state,
-  side: { ... state.side, ... side },
+  ...state,
+  side: { ...state.side, ...side },
 });
 
 /**
@@ -53,19 +53,20 @@ export const appendWorks = (state, { article }) => {
   if (!article) {
     return state;
   }
+
   return (
-    state.works.find(v => v.article === article)
+    state.works.find((v) => v.article === article)
       ? {
-        ... state,
-        works: state.works.map(v => ({
-          ... v,
+        ...state,
+        works: state.works.map((v) => ({
+          ...v,
           action: v.article === article,
         })),
       }
       : {
-        ... state,
+        ...state,
         works: [
-          ... state.works.map(v => ({ ... v, action: false })),
+          ...state.works.map((v) => ({ ...v, action: false })),
           {
             article,
             action: true,
@@ -87,9 +88,9 @@ export const appendWorks = (state, { article }) => {
  * @return {Object} 更新后的状态
  */
 export const setWork = (state, { article, work }) => ({
-  ... state,
-  works: state.works.map(v => (v.article === article
-    ? { ... v, ... work }
+  ...state,
+  works: state.works.map((v) => (v.article === article
+    ? { ...v, ...work }
     : v
   )),
 });
@@ -105,15 +106,15 @@ export const setWork = (state, { article, work }) => ({
  */
 export const removeWork = (state, { article }) => {
   const works =  article
-    ? state.works.filter(v => v.article !== article)
+    ? state.works.filter((v) => v.article !== article)
     : [];
-  const hasAction = works.find(v => v.action);
+  const hasAction = works.find((v) => v.action);
 
   if (!hasAction && works.length > 0) {
     works[works.length - 1].action = true;
   }
 
-  return { ... state, works };
+  return { ...state, works };
 };
 
 /**
@@ -126,9 +127,9 @@ export const removeWork = (state, { article }) => {
  * @return {Object} 更新后的状态
  */
 export const createTmpTag = (state, { parent }) => ({
-  ... state,
+  ...state,
   tags: {
-    ... state.tags,
+    ...state.tags,
     new: {
       name: '',
       id: 'new',
@@ -148,9 +149,9 @@ export const createTmpTag = (state, { parent }) => ({
  * @return {Object} 更新后的状态
  */
 export const createTmpArticle = (state, { tag }) => ({
-  ... state,
+  ...state,
   articles: {
-    ... state.articles,
+    ...state.articles,
     new: {
       name: '',
       id: 'new',
@@ -170,9 +171,9 @@ export const createTmpArticle = (state, { tag }) => ({
  * @return {Object} 更新后的状态
  */
 export const addEditorStatusWithTag = (state, { id }) => {
-  const tags = { ... state.tags };
+  const tags = { ...state.tags };
   tags[id].editor = true;
-  return { ... state, tags };
+  return { ...state, tags };
 };
 
 /**
@@ -185,9 +186,9 @@ export const addEditorStatusWithTag = (state, { id }) => {
  * @return {Object} 更新后的状态
  */
 export const addEditorStatusWithArticle = (state, { id }) => {
-  const articles = { ... state.articles };
+  const articles = { ...state.articles };
   articles[id].editor = true;
-  return { ... state, articles };
+  return { ...state, articles };
 };
 
 /**
@@ -200,8 +201,8 @@ export const addEditorStatusWithArticle = (state, { id }) => {
  * @return {Object} 更新后的状态
  */
 export const setActivity = (state, { activity }) => ({
-  ... state,
-  activity: { ... state.activity, ... activity },
+  ...state,
+  activity: { ...state.activity, ...activity },
 });
 
 /**
@@ -216,7 +217,7 @@ export const setActivity = (state, { activity }) => ({
 export const setPreview = (state, { preview }) => {
   const { preview: prePreview } = state;
   return {
-    ... state,
+    ...state,
     preview: prePreview === preview ? void 0 : preview,
   };
 };

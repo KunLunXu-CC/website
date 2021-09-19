@@ -2,6 +2,5 @@ import React from 'react';
 import scss from './index.module.scss';
 
 export default () => (
-  <div className={scss.header}>
-  </div>
+  <div className={scss.header} />
 );

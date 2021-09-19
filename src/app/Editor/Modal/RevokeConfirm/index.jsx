@@ -9,7 +9,7 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   const article = useSelector(
-    state => _.get(state, `modal[${REVOKE_CONFIRM}].article`)
+    (state) => _.get(state, `modal[${REVOKE_CONFIRM}].article`),
   );
 
   // 点击取消按钮

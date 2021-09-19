@@ -6,7 +6,7 @@ export const MENU_LIST = [
     label: '全部',
     icon: 'icon-all',
   },
-  ... Object.values(DATASETSFROM_CODE).map(v => ({
+  ...Object.values(DATASETSFROM_CODE).map((v) => ({
     key: v.VALUE,
     icon: v.ICON,
     label: v.DESC,

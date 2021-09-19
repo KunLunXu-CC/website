@@ -6,7 +6,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 export default () => (
   <Router>
     <Switch>
-      {config.map(v => (
+      {config.map((v) => (
         <Route
           key={v.path}
           path={v.path}

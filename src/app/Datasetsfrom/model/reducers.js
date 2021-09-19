@@ -8,10 +8,10 @@
  * @return {Object} 更新后的状态
  */
 export const setMenu = (state, { menu }) => ({
-  ... state,
+  ...state,
   menu: {
-    ... state.menu,
-    ... menu,
+    ...state.menu,
+    ...menu,
   },
 });
 

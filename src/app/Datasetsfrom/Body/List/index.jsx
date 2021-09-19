@@ -7,20 +7,20 @@ import { MODAL_CODE_DATASETSFROM_EDITOR, MENU_LIST } from '../../consts';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const datasetsfroms = useSelector(state => {
+  const datasetsfroms = useSelector((state) => {
     const {
       datasetsfrom,
       datasetsfromManage: { menu: { selectedKey } },
     } = state;
     return selectedKey === MENU_LIST[0].key
       ? Object.values(datasetsfrom).reduce(
-        (total, ele) => ([... total, ... ele]), []
+        (total, ele) => ([...total, ...ele]), [],
       )
       : (datasetsfrom[selectedKey] || []);
   });
 
   // 编辑
-  const onEdit = data => {
+  const onEdit = (data) => {
     dispatch({
       data,
       title: '编辑字典',

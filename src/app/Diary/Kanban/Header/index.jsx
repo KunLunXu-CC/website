@@ -1,7 +1,7 @@
 import React from 'react';
 import scss from './index.module.scss';
 
-export default props => (
+export default (props) => (
   <div
     className={scss.header}
     {... props.provided.dragHandleProps}>

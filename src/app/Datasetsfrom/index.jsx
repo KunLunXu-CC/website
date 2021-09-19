@@ -7,9 +7,9 @@ import scss from './index.module.scss';
 
 export default () => (
   <div className={scss.layout}>
-    <Menu/>
-    <Body/>
-    <Modal/>
-    <Tips/>
+    <Menu />
+    <Body />
+    <Modal />
+    <Tips />
   </div>
 );

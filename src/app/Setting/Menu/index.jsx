@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const { selectedMenuKey } = useSelector(state => state.settingManage);
+  const { selectedMenuKey } = useSelector((state) => state.settingManage);
 
   // 点击菜单项
-  const onClickMenuItem = React.useCallback(selectedMenuKey => {
+  const onClickMenuItem = React.useCallback((selectedMenuKey) => {
     dispatch({
       type: 'settingManage/toggleSelectedMenuKey',
       selectedMenuKey,
@@ -25,13 +25,13 @@ export default () => {
 
   return (
     <div className={scss.menu}>
-      {MENUS.map(v => (
+      {MENUS.map((v) => (
         <div
           key={v.key}
           onClick={state.onClickMenuItem.bind(null, v.key)}
           className={classNames(
             scss.item,
-            { [scss.selected]: state.selectedMenuKey === v.key }
+            { [scss.selected]: state.selectedMenuKey === v.key },
           )}>
           {v.title}
         </div>

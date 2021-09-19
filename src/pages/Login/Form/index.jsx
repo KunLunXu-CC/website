@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const avatars = useSelector(
-    state => _.get(state, 'photos.avatar') || []
+    (state) => _.get(state, 'photos.avatar') || [],
   );
 
   const history = useHistory();
@@ -49,13 +49,13 @@ const useStateHook = () => {
   return { onLogin, avatar, form };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return (
     <div className={scss.login}>
       <div className={scss['login-avatar']} >
-        <Image src={state.avatar}/>
+        <Image src={state.avatar} />
       </div>
       <div className={scss['login-form']}>
         <Form form={state.form}>
@@ -65,16 +65,16 @@ export default props => {
             <Input
               size="large"
               placeholder="请输入账号"
-              prefix={<Icon type="icon-jenkins"/>}
+              prefix={<Icon type="icon-jenkins" />}
             />
           </Form.Item>
           <Form.Item
             name="password"
-            rules = {[{ required: true, message: '请输入密码!' }]}>
+            rules={[{ required: true, message: '请输入密码!' }]}>
             <Input.Password
               size="large"
               placeholder="请输入密码"
-              prefix={<Icon type="icon-suoping"/>}
+              prefix={<Icon type="icon-suoping" />}
             />
           </Form.Item>
           <Form.Item>

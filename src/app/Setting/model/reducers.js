@@ -9,8 +9,8 @@
  * @return {Object} 更新后的状态
  */
 export const toggleSelectedMenuKey = (state, { selectedMenuKey }) => ({
-  ... state,
+  ...state,
   selectedMenuKey,
 });
 
-export const space = state => state;  // 占位
+export const space = (state) => state;  // 占位

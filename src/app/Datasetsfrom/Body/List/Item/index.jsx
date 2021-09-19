@@ -4,7 +4,7 @@ import scss from './index.module.scss';
 import { Icon } from 'qyrc';
 import { Popconfirm } from 'antd';
 
-export default props => (
+export default (props) => (
   <div className={scss.item}>
     <div className={scss.top}>
       <div className={scss.title}>

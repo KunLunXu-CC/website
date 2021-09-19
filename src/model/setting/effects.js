@@ -1,5 +1,6 @@
 import { put } from 'redux-saga/effects';
 import { initState } from './index.model';
+
 /**
  * 初始化数据: 在初始初始化 redux 就会被执行
  * @return {undefined}

@@ -20,7 +20,7 @@ const MEN_MAP_TO_COMPONENT = {
 };
 
 const useStateHook = () => {
-  const { menu } = useSelector(state => state.diary);
+  const { menu } = useSelector((state) => state.diary);
 
   // 构建 body element
   const body = useMemo(() => {
@@ -36,13 +36,13 @@ export default () => {
   return (
     <div className={scss.layout}>
       <div className={scss['layout-menu']}>
-        <Menu/>
+        <Menu />
       </div>
       <div className={scss['layout-body']}>
         {state.body}
       </div>
-      <Tips/>
-      <Modal/>
+      <Tips />
+      <Modal />
     </div>
   );
 };

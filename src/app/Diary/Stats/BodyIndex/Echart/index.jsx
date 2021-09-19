@@ -4,17 +4,20 @@ import { Echart } from 'qyrc';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
-  const statsBodyIndex = useSelector(state => state.diary.statsBodyIndex);
+  const statsBodyIndex = useSelector((state) => state.diary.statsBodyIndex);
 
   // 处理数据
   const data = React.useMemo(
     () => (statsBodyIndex.reduce((total, { name, bodyIndex }) => ({
-      xAxis: [... total.xAxis, name],
-      weight: [... total.weight, bodyIndex?.weight ?? 0],
-      bodyfat: [... total.bodyfat, bodyIndex?.bodyfat ?? 0],
-      moistureContent: [... total.moistureContent, bodyIndex?.moistureContent ?? 0],
+      xAxis: [...total.xAxis, name],
+      weight: [...total.weight, bodyIndex?.weight ?? 0],
+      bodyfat: [...total.bodyfat, bodyIndex?.bodyfat ?? 0],
+      moistureContent: [
+        ...total.moistureContent,
+        bodyIndex?.moistureContent ?? 0,
+      ],
     }), { xAxis: [], bodyfat: [], weight: [], moistureContent: [] })),
-    [statsBodyIndex]
+    [statsBodyIndex],
   );
 
   // echarts 配置
@@ -64,7 +67,7 @@ const useStateHook = () => {
   return { option };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return (

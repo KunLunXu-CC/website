@@ -17,11 +17,11 @@ const OPTIONS = {
   fontFamily: 'monospace, \'Droid Sans Mono\', \'Droid Sans Fallback\'',
 };
 
-const useStateHook = props => {
+const useStateHook = (props) => {
   const dispatch = useDispatch();
 
   // 读取文章详细内容
-  const article = useSelector(state => (
+  const article = useSelector((state) => (
     _.get(state, 'editor.articles')[props.work.article]
   ));
 
@@ -48,9 +48,11 @@ const useStateHook = props => {
   // 内容改变
   const onChange = useCallback(({ value: content }) => {
     const change = article.content !== content;
+
     if (props.work.change === change) {
       return false;
     }
+
     dispatch({
       work: { change },
       type: 'editor/setWork',
@@ -61,7 +63,7 @@ const useStateHook = props => {
   return { article, onSave, onPasteImage, onChange };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return (

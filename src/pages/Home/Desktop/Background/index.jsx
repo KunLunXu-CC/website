@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
-  const photos = useSelector(state => (
+  const photos = useSelector((state) => (
     _.get(state, 'photos.desktop') || []
   ));
 
@@ -24,13 +24,13 @@ const useStateHook = () => {
   return { bg };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook();
   return (
     <Image
       src={state.bg}
-      error={<Error/>}
-      loading={<Loading/>}
+      error={<Error />}
+      loading={<Loading />}
       className={scss.background}>
       {props.children}
     </Image>

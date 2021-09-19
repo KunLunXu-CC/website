@@ -26,7 +26,7 @@ const TABS_SETTING = [
 ];
 
 // 获取 body
-const getBody = values => {
+const getBody = (values) => {
   const {
     name,
     getUp,
@@ -40,9 +40,9 @@ const getBody = values => {
     getUp,
     toRest,
     bodyIndex,
-    bill: bill.filter(v => v),
-    diet: diet.filter(v => v),
-    fitness: fitness.filter(v => v),
+    bill: bill.filter((v) => v),
+    diet: diet.filter((v) => v),
+    fitness: fitness.filter((v) => v),
     name: name.format('YYYY-MM-DD'),
   };
 };
@@ -54,7 +54,7 @@ const useStateHook = () => {
   const [form] = Form.useForm();
 
   // 弹窗
-  const modal = useSelector(state => state.modal[DIARY_EDITOR_DIARY]);
+  const modal = useSelector((state) => state.modal[DIARY_EDITOR_DIARY]);
 
   // 工具: 传送门
   const Tools = useCallback(({ children }) => (
@@ -66,9 +66,13 @@ const useStateHook = () => {
   // 弹窗标题
   const title = useMemo(() => (
     <div className={scss.title}>
-      <div className={scss['title-text']}>添加数据</div>
-      <div className={scss['title-tool']} ref={titleToolRef}>
+      <div className={scss['title-text']}>
+        添加数据
       </div>
+      <div
+        className={scss['title-tool']}
+        ref={titleToolRef}
+      />
     </div>
   ), [modal, titleToolRef]);
 
@@ -95,7 +99,7 @@ const useStateHook = () => {
   };
 
   // tabs 切换
-  const onTabsChange = activeTabKey => {
+  const onTabsChange = (activeTabKey) => {
     setActiveTabKey(activeTabKey);
   };
 
@@ -104,19 +108,19 @@ const useStateHook = () => {
     form.setFieldsValue(
       modal ? {
         diet: _.get(modal, 'diary.diet', []).map(
-          v => ({ ... v, type: v.type?.value })
+          (v) => ({ ...v, type: v.type?.value }),
         ),
         fitness: _.get(modal, 'diary.fitness', []).map(
-          v => ({ type: v.type?.value, place: v.place?.value })
+          (v) => ({ type: v.type?.value, place: v.place?.value }),
         ),
         bill: _.get(modal, 'diary.bill', []).map(
-          v => ({ ... v, tag: v.tag?.value })
+          (v) => ({ ...v, tag: v.tag?.value }),
         ),
         bodyIndex: _.get(modal, 'diary.bodyIndex') || {},
         name: moment(_.get(modal, 'diary.name') || modal.date),
         getUp: moment(_.get(modal, 'diary.getUp') || modal.date),
         toRest: moment(_.get(modal, 'diary.toRest') || modal.date),
-      } : void 0
+      } : void 0,
     );
   }, [modal]);
 
@@ -148,8 +152,10 @@ export default () => {
         className={scss.modal}
         visible={!!state.modal}
         onCancel={state.onCancel}>
-        <Tabs tabPosition="left" onChange={state.onTabsChange}>
-          {TABS_SETTING.map(V => (
+        <Tabs
+          tabPosition="left"
+          onChange={state.onTabsChange}>
+          {TABS_SETTING.map((V) => (
             <Tabs.TabPane
               tab={V.tab}
               key={V.key}

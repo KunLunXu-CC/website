@@ -9,7 +9,7 @@ const useStateHook = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const { modal, tags } = useSelector(state => ({
+  const { modal, tags } = useSelector((state) => ({
     tags: state.editor.tags,
     modal: state.modal[MOVE],
   }));
@@ -19,7 +19,7 @@ const useStateHook = () => {
     const cloneTags = _.cloneDeep(Object.values(tags)).reduce((total, ele) => {
       // 移动目录时, 移除当前目录
       (modal?.data?.tags || ele.id !== modal?.data?.id) && total.push({
-        ... ele,
+        ...ele,
         value: ele.id,
         label: ele.name,
       });
@@ -28,7 +28,7 @@ const useStateHook = () => {
     const groupTags = _.groupBy(cloneTags, 'parent.id');
 
     cloneTags.forEach(v => (v.children = groupTags[v.id])); // eslint-disable-line
-    return _.sortBy(cloneTags.filter(v => !v.parent?.id), 'name');
+    return _.sortBy(cloneTags.filter((v) => !v.parent?.id), 'name');
   }, [tags, modal]);
 
   // 点击取消
@@ -78,7 +78,7 @@ export default () => {
             changeOnSelect
             options={state.options}
             placeholder="选择要移动位置"
-            getPopupContainer={triggerNode => triggerNode}
+            getPopupContainer={(triggerNode) => triggerNode}
           />
         </Form.Item>
       </Form>

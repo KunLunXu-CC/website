@@ -19,10 +19,12 @@ const DEFAULT_DATE = [
 const getFullDate = ([start, end]) => {
   const res = [];
   const current = start.clone();
+
   while (moment(current).isBefore(end)) {
     current.add(1, 'day');
     res.push(current.format('YYYY-MM-DD'));
   }
+
   return res;
 };
 
@@ -30,7 +32,7 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   // 查询
-  const search = useCallback(date => {
+  const search = useCallback((date) => {
     dispatch({
       type: 'diary/getStatsBodyIndex',
       search: { names: getFullDate(date ?? DEFAULT_DATE) },
@@ -52,14 +54,14 @@ export default () => {
       bordered={false}
       title="身体体征曲线图"
       className={scss.card}
-      extra={
+      extra={(
         <DatePicker.RangePicker
           bordered={false}
           onChange={state.search}
           defaultValue={DEFAULT_DATE}
         />
-      }>
-      <Echart/>
+      )}>
+      <Echart />
     </Card>
   );
 };

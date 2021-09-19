@@ -1,4 +1,4 @@
-export default pathname => new WebSocket(
+export default (pathname) => new WebSocket(
   `${WS_SERVICER}${pathname}`,
-  localStorage.getItem('authorization')
+  localStorage.getItem('authorization'),
 );

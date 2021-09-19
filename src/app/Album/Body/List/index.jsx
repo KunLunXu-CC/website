@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const photos = useSelector(state => _.get(state, 'album.photos'));
+  const photos = useSelector((state) => _.get(state, 'album.photos'));
 
   // 删除
-  const onDelete = data => {
+  const onDelete = (data) => {
     dispatch({ type: 'album/removePhotos', id: data.id });
   };
 
@@ -29,14 +29,14 @@ export default () => {
   return (
     <div className={scss.list}>
       {state.photos.length > 0 ?
-        state.photos.map(v => (
+        state.photos.map((v) => (
           <Item
             data={v}
             key={v.id}
             onDelete={state.onDelete}
           />
         )) :
-        <Empty className={scss.empty}/>
+        <Empty className={scss.empty} />
       }
     </div>
   );

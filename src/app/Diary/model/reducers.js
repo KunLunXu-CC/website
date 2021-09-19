@@ -8,10 +8,10 @@
  * @return {Object} 更新后的状态
  */
 export const setMenu = (state, { menu }) => ({
-  ... state,
+  ...state,
   menu: {
-    ... state.menu,
-    ... menu,
+    ...state.menu,
+    ...menu,
   },
 });
 
@@ -25,7 +25,7 @@ export const setMenu = (state, { menu }) => ({
  * @return {Object} 更新后的状态
  */
 export const setDiaries = (state, { diaries }) => ({
-  ... state,
+  ...state,
   diaries,
 });
 
@@ -39,7 +39,7 @@ export const setDiaries = (state, { diaries }) => ({
  * @return {Object} 更新后的状态
  */
 export const setStatsBill = (state, { statsBill }) => ({
-  ... state,
+  ...state,
   statsBill,
 });
 
@@ -53,6 +53,6 @@ export const setStatsBill = (state, { statsBill }) => ({
  * @return {Object} 更新后的状态
  */
 export const setStatsBodyIndex = (state, { statsBodyIndex }) => ({
-  ... state,
+  ...state,
   statsBodyIndex,
 });

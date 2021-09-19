@@ -9,10 +9,10 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   // 预览文章
-  const article = useSelector(state => {
+  const article = useSelector((state) => {
     const { preview, articles, works } = state.editor;
-    return works.find(v => v.article === preview)
-      ? ({ ... articles[preview] } ?? {})
+    return works.find((v) => v.article === preview)
+      ? ({ ...articles[preview] } ?? {})
       : {};
   });
 
@@ -31,10 +31,13 @@ const useStateHook = () => {
   const options = React.useMemo(() => ({
     overrides: {
       img: {
-        component: props => (<img src={ /http/.test(props.src)
-          ? props.src
-          : `${SERVICE_STATIC_IMAGE_URL}${props.src}`
-        }/>),
+        component: (props) => (
+          <img src={/http/.test(props.src)
+            ? props.src
+            : `${SERVICE_STATIC_IMAGE_URL}${props.src}`
+          }
+          />
+        ),
       },
     },
   }), []);
@@ -45,7 +48,7 @@ const useStateHook = () => {
 export default () => {
   const state = useStateHook();
   return (
-    state.article.name ?
+    state.article.name ? (
       <VariableContainer
         layout
         operationList={['left']}
@@ -58,12 +61,18 @@ export default () => {
         <div className={scss.preview}>
           <div className={scss['preview-header']}>
             {state.article.name}
-            <Icon type="icon-guanbi6" onClick={state.onClose}/>
+            <Icon
+              type="icon-guanbi6"
+              onClick={state.onClose}
+            />
           </div>
-          <Markdown className={scss['preview-body']} options={state.options}>
+          <Markdown
+            className={scss['preview-body']}
+            options={state.options}>
             {state.article.content || ''}
           </Markdown>
         </div>
-      </VariableContainer> : null
+      </VariableContainer>
+    ) : null
   );
 };

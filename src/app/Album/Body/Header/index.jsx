@@ -11,7 +11,7 @@ export default () => (
         size="large"
         placeholder="查询"
         onPressEnter={() => {}}
-        prefix={<Icon type="icon-search"/>}
+        prefix={<Icon type="icon-search" />}
       />
     </div>
     <div className={scss.notice}>

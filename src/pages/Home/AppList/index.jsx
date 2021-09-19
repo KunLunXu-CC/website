@@ -9,24 +9,25 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const opens = useSelector(state => _.get(state, 'app.opens'));
+  const opens = useSelector((state) => _.get(state, 'app.opens'));
 
-  const onClose = useCallback(app => {
+  const onClose = useCallback((app) => {
     dispatch({ type: 'app/onClose', app });
   }, []);
 
-  const onMin = useCallback(app => {
+  const onMin = useCallback((app) => {
     dispatch({ type: 'app/onMin', app });
   }, []);
 
-  const onMax = useCallback(app => {
+  const onMax = useCallback((app) => {
     dispatch({ type: 'app/onMax', app });
   }, []);
 
-  const onMouseDown = useCallback(app => {
+  const onMouseDown = useCallback((app) => {
     if (_.get(_.last(opens), 'code') === app.code) {
       return false;
     }
+
     dispatch({ type: 'app/onMouseDown', app });
   }, [opens]);
 
@@ -37,7 +38,7 @@ export default () => {
   const state = useStateHook();
   return (
     <div className={scss['app-block']}>
-      {state.opens.map(app => {
+      {state.opens.map((app) => {
         const { component: Component, modalProps } = apps[app.code];
         return (
           <Window
@@ -49,7 +50,7 @@ export default () => {
             onMouseDown={state.onMouseDown.bind(null, app)}
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
             {...modalProps}>
-            <Component/>
+            <Component />
           </Window>
         );
       })}

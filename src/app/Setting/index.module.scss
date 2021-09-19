@@ -1,13 +1,11 @@
-$color: rgba($color: #fff, $alpha: 0.8);
+$color: rgba($color: #fff, $alpha: 0.8,);
 
 .setting {
   width: 100%;
   height: 100%;
-
   border-radius: 10px;
   background: #181a1c;
   border: 1px solid #090909;
-
   display: flex;
   flex-direction: column;
   color: $color;
@@ -16,10 +14,9 @@ $color: rgba($color: #fff, $alpha: 0.8);
 .main {
   flex: 1;
   display: flex;
-
   border-radius: 0 0 10px 10px;
   border: 2px solid rgba($color: #fff, $alpha: 0.06);
-  border-top: none;
+  border-top: unset;
 }
 
 .body {
@@ -28,23 +25,22 @@ $color: rgba($color: #fff, $alpha: 0.8);
 
   // antd 样式覆盖
   :global {
-
     // 多选框
     .ant-checkbox-wrapper {
       margin: 0;
       display: block;
       padding-bottom: 10px;
       color: $color;
+    }
 
+    .ant-checkbox-inner {
+      border: unset;
+      outline: none;
+    }
+
+    .ant-checkbox:not(.ant-checkbox-checked) {
       .ant-checkbox-inner {
-        border: none;
-        outline: none;
-      }
-
-      .ant-checkbox:not(.ant-checkbox-checked) {
-        .ant-checkbox-inner {
-          background: #36383a;
-        }
+        background: #36383a;
       }
     }
 

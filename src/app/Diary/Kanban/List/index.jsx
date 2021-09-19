@@ -11,6 +11,7 @@ const useStateHook = () => {
     if (active) {
       return false;
     }
+
     setActive(true);
   }, [active]);
 
@@ -37,18 +38,27 @@ export default () => {
 
   return (
     <div className={state.className}>
-      <div className={scss.btn} onClick={state.onOpen}/>
+      <div
+        className={scss.btn}
+        onClick={state.onOpen}
+      />
       <div className={scss.body}>
         <div className={scss.list}>
           {Array.from({ length: 20 }).map((v, index) => (
-            <div className={scss.item} key={index}>
-              <div className={scss.title}>扫描结束!</div>
-              <div className={scss.desc}>继续并倾倒所有垃圾文件夹, 获得更多控件。</div>
+            <div
+              className={scss.item}
+              key={index}>
+              <div className={scss.title}>
+                扫描结束!
+              </div>
+              <div className={scss.desc}>
+                继续并倾倒所有垃圾文件夹, 获得更多控件。
+              </div>
             </div>
           ))}
         </div>
         <div className={scss.footer}>
-          <Icon type="icon-xinzeng"/>
+          <Icon type="icon-xinzeng" />
         </div>
       </div>
     </div>

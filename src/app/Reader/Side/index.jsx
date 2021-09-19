@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 
 export default () => (
   <div className={scss.side}>
-    <Search/>
-    <Menu/>
+    <Search />
+    <Menu />
   </div>
 );

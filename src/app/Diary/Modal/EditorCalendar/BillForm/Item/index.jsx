@@ -8,12 +8,14 @@ import { Row, Col, InputNumber, Input, Form, Select } from 'antd';
 
 const useStateHook = () => {
   const billTags = useSelector(
-    state => state.datasetsfrom[DATASETSFROM_CODE.BILL_TAG.VALUE] || []
+    (state) => state.datasetsfrom[DATASETSFROM_CODE.BILL_TAG.VALUE] || [],
   );
 
   // 下拉框
-  const billTagOptions = React.useMemo(() => billTags.map(v => (
-    <Select.Option value={v.value} key={v.value}>
+  const billTagOptions = React.useMemo(() => billTags.map((v) => (
+    <Select.Option
+      value={v.value}
+      key={v.value}>
       {v.name}
     </Select.Option>
   )), [billTags]);
@@ -21,7 +23,7 @@ const useStateHook = () => {
   return { billTagOptions };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook();
 
   return (
@@ -39,7 +41,7 @@ export default props => {
               className={scss['form-item']}
               name={[props.field.name, 'desc']}
               fieldKey={[props.field.fieldKey, 'desc']}>
-              <Input placeholder="账单描述"/>
+              <Input placeholder="账单描述" />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -90,7 +92,10 @@ export default props => {
         span={2}
         className={scss['col-delete']}
         onClick={props.remove.bind(null, props.field.name)}>
-        <Icon type="icon-shanchu" className={scss.delete}/>
+        <Icon
+          type="icon-shanchu"
+          className={scss.delete}
+        />
       </Col>
     </Row>
   );

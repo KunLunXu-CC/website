@@ -7,12 +7,12 @@ import scss from './index.module.scss';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
-  const { article } = useSelector(state => state.reader.detail);
+  const { article } = useSelector((state) => state.reader.detail);
 
   // 最外层 className
   const className = React.useMemo(() => classNames(
     scss.detail,
-    { [scss.show]: article }
+    { [scss.show]: article },
   ), [article]);
 
   return { className, article };
@@ -23,9 +23,9 @@ export default () => {
 
   return (
     <div className={state.className}>
-      <Header article={state.article}/>
+      <Header article={state.article} />
       <div className={scss.body}>
-        <Content data={state.article?.content}/>
+        <Content data={state.article?.content} />
       </div>
     </div>
   );

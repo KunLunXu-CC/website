@@ -1,6 +1,7 @@
 .modal {
   height: 80% !important;
-  :global{
+
+  :global {
     .ant-modal-content {
       height: 100%;
       display: flex;
@@ -12,7 +13,7 @@
     // antd 弹窗
     .ant-modal-body {
       flex: 1;
-      padding: 0px;
+      padding: 0;
       overflow: hidden;
     }
 
@@ -35,6 +36,10 @@
         margin-top: 40px;
       }
     }
+
+    .qyrc-icon:hover {
+      color: #69c0ff;
+    }
   }
 
   // 标题
@@ -44,14 +49,6 @@
 
     .title-tool {
       font-weight: 300;
-
-      :global {
-        .qyrc-icon {
-          &:hover {
-            color: #69c0ff;
-          }
-        }
-      }
     }
   }
 

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const setting = useSelector(state => state.setting.dock);
+  const setting = useSelector((state) => state.setting.dock);
 
   // 修改值
   const onChange = React.useCallback((key, event) => {
@@ -23,12 +23,10 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <React.Fragment>
-      <Checkbox
-        checked={state.setting.hideDock}
-        onChange={state.onChange.bind(null, 'hideDock')}>
-        自动隐藏和显示程序坞
-      </Checkbox>
-    </React.Fragment>
+    <Checkbox
+      checked={state.setting.hideDock}
+      onChange={state.onChange.bind(null, 'hideDock')}>
+      自动隐藏和显示程序坞
+    </Checkbox>
   );
 };

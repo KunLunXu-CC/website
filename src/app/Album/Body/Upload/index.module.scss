@@ -1,18 +1,19 @@
 .upload {
   position: absolute;
+
   :global {
     .ant-drawer-wrapper-body {
       display: flex;
       flex-direction: column;
-      
-      .ant-drawer-body {
-        flex : 1;
-        padding: 0;
-        height: 100%;
-        display: flex;
-        overflow: hidden;
-        flex-direction: column;
-      }
+    }
+
+    .ant-drawer-body {
+      flex: 1;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
     }
   }
 }

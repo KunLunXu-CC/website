@@ -8,7 +8,7 @@ import { takeEvery, call, select, put } from 'redux-saga/effects';
  * @return {void 0}
  */
 const getArticles = function * () {
-  const { menu } = yield select(state => state.reader);
+  const { menu } = yield select((state) => state.reader);
 
   const articles = yield call(services.getArticles, {
     search: {

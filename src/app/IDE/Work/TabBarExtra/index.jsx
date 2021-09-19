@@ -15,20 +15,20 @@ import {
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const { articles, works } = useSelector(state => ({
+  const { articles, works } = useSelector((state) => ({
     works: _.get(state, 'editor.works'),
     articles: _.get(state, 'editor.articles'),
   }));
 
   // 文章内容
   const article = useMemo(() => (
-    articles[_.get(works.find(v => v.action), 'article')]
+    articles[_.get(works.find((v) => v.action), 'article')]
   ));
 
   // 当前文章是否是未发布状态
   const unpublished = useMemo(
     () => (_.get(article, 'status') !== ARTICLE_STATUS.RELEASE),
-    [article]
+    [article],
   );
 
   // 预览
@@ -90,18 +90,19 @@ export default () => {
         onClick={state.thumbSetting}
         className={scss['icon-thumbnail']}
       />
-      {state.unpublished ?
+      {state.unpublished ? (
         <Icon
           type="icon-fabu"
           onClick={state.onRelease}
           className={scss['icon-release']}
-        /> :
+        />
+      ) : (
         <Icon
           type="icon-xiajia"
           onClick={state.onRevoke}
           className={scss['icon-lower-shelf']}
         />
-      }
+      )}
     </div>
   );
 };

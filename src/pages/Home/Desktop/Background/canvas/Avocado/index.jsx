@@ -18,12 +18,13 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <div className={scss['avocado']}>
+    <div className={scss.avocado}>
       <canvas
         width="490"
         height="400"
         ref={state.canvasRef}
-        className={scss.canvas} />
+        className={scss.canvas}
+      />
     </div>
   );
 };

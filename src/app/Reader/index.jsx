@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
   // 菜单 selectedKey
-  const selectedKey = useSelector(state => state.reader.menu.selectedKey);
+  const selectedKey = useSelector((state) => state.reader.menu.selectedKey);
 
   // 获取 Body 组件
   const Body = React.useMemo(() => ({
@@ -25,9 +25,9 @@ export default () => {
 
   return (
     <div className={scss.reader}>
-      <Side/>
-      <Body/>
-      <Detail/>
+      <Side />
+      <Body />
+      <Detail />
     </div>
   );
 };

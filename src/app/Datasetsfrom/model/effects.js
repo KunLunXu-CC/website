@@ -17,15 +17,15 @@ const createDatasetsfrom = function * ({ body }) {
   });
 
   const currentDatasetsfroms = yield select(
-    state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
-      ... total,
-      ... ele,
-    ]), [])
+    (state) => Object.values(state.datasetsfrom).reduce((total, ele) => ([
+      ...total,
+      ...ele,
+    ]), []),
   );
 
   yield put({
     type: 'datasetsfrom/setDatasetsfroms',
-    datasetsfroms: [... currentDatasetsfroms, ... change],
+    datasetsfroms: [...currentDatasetsfroms, ...change],
   });
 
   message({
@@ -49,15 +49,15 @@ const updateDatasetsfrom = function * ({ body, id }) {
   });
 
   const currentDatasetsfroms = yield select(
-    state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
-      ... total,
-      ... ele,
-    ]), [])
+    (state) => Object.values(state.datasetsfrom).reduce((total, ele) => ([
+      ...total,
+      ...ele,
+    ]), []),
   );
 
   yield put({
     type: 'datasetsfrom/setDatasetsfroms',
-    datasetsfroms: _.uniqBy([... change, ... currentDatasetsfroms], 'id'),
+    datasetsfroms: _.uniqBy([...change, ...currentDatasetsfroms], 'id'),
   });
 
   message({
@@ -80,16 +80,16 @@ const removeDatasetsfrom = function * ({ id }) {
   });
 
   const currentDatasetsfroms = yield select(
-    state => Object.values(state.datasetsfrom).reduce((total, ele) => ([
-      ... total,
-      ... ele,
-    ]), [])
+    (state) => Object.values(state.datasetsfrom).reduce((total, ele) => ([
+      ...total,
+      ...ele,
+    ]), []),
   );
 
   yield put({
     type: 'datasetsfrom/setDatasetsfroms',
     datasetsfroms: currentDatasetsfroms.filter(
-      v => !change.find(ele => ele.id === v.id)
+      (v) => !change.find((ele) => ele.id === v.id),
     ),
   });
 

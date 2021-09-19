@@ -10,11 +10,11 @@ import { Icon } from 'qyrc';
 import { useSelector }  from 'react-redux';
 
 const useStateHook = () => {
-  const opens = useSelector(state => _.get(state, 'app.opens'));
+  const opens = useSelector((state) => _.get(state, 'app.opens'));
 
   // 菜单 className
   const menuClassName = React.useMemo(() => {
-    const hideMenu = opens.find(v => v.isMax && v.isMin === false);
+    const hideMenu = opens.find((v) => v.isMax && v.isMin === false);
     return classNames(
       scss.menu,
       { [scss['menu-auto-hiding']]: hideMenu },
@@ -29,12 +29,12 @@ export default () => {
   return (
     <div className={state.menuClassName}>
       <div className={scss.body}>
-        <Github/>
-        <Juejin/>
-        <Icon type="icon-wifi"/>
-        <Icon type="icon-dianliang"/>
-        <Fullscreen/>
-        <Notification/>
+        <Github />
+        <Juejin />
+        <Icon type="icon-wifi" />
+        <Icon type="icon-dianliang" />
+        <Fullscreen />
+        <Notification />
       </div>
     </div>
   );

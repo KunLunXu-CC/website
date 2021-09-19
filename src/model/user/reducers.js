@@ -8,8 +8,8 @@
  * @return {Object} 更新后的状态
  */
 export const setUser = (state, { payload }) => ({
-  ... state,
-  ... payload,
+  ...state,
+  ...payload,
 });
 
 export const place = () => {};

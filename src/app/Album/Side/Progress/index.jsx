@@ -13,15 +13,20 @@ const useStateHook = () => {
   return { barStyle };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return (
     <div className={scss.progress}>
       <div className={scss['progress-wrapper']}>
-        <div className={scss['progress-bar']} style={state.barStyle} />
+        <div
+          className={scss['progress-bar']}
+          style={state.barStyle}
+        />
       </div>
-      <div className={scss.detail}>280.2G / 2055G</div>
+      <div className={scss.detail}>
+        280.2G / 2055G
+      </div>
     </div>
   );
 };

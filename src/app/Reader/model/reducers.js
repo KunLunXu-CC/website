@@ -8,8 +8,8 @@
  * @return {Object} 更新后的状态
  */
 export const setMenu = (state, { menu }) => ({
-  ... state,
-  menu: { ... state.menu, ... menu },
+  ...state,
+  menu: { ...state.menu, ...menu },
 });
 
 /**
@@ -23,8 +23,8 @@ export const setMenu = (state, { menu }) => ({
  * @return {Object} 更新后的状态
  */
 export const setArticles = (state, { articles, append = false }) => ({
-  ... state,
-  articles: [... (append ? articles : []), ... articles],
+  ...state,
+  articles: [...(append ? articles : []), ...articles],
 });
 
 /**
@@ -37,6 +37,6 @@ export const setArticles = (state, { articles, append = false }) => ({
  * @return {Object} 更新后的状态
  */
 export const setDetail = (state, { detail }) => ({
-  ... state,
-  detail: { ... state.detail, ... detail },
+  ...state,
+  detail: { ...state.detail, ...detail },
 });

@@ -39,14 +39,14 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   // 切换
-  const onToggleSpan = span => {
+  const onToggleSpan = (span) => {
     setSpan(span);
   };
 
   // 获取按钮 classNam
-  const getBtnClassName = value => classNames(
+  const getBtnClassName = (value) => classNames(
     scss['header-btn'],
-    { [scss['header-btn-action']]: span === value }
+    { [scss['header-btn-action']]: span === value },
   );
 
   // 监听 span 的变化并查询数据
@@ -70,9 +70,9 @@ export default () => {
       bordered={false}
       title="历史收入 / 支出"
       className={scss.card}
-      extra={
+      extra={(
         <div className={scss['header-btns']}>
-          {Object.values(STATS_SAPN).map(v => (
+          {Object.values(STATS_SAPN).map((v) => (
             <div
               key={v.VALUE}
               className={state.getBtnClassName(v.VALUE)}
@@ -81,9 +81,9 @@ export default () => {
             </div>
           ))}
         </div>
-      }>
-      <Cards/>
-      <Echart span={state.span}/>
+      )}>
+      <Cards />
+      <Echart span={state.span} />
     </Card>
   );
 };

@@ -52,13 +52,13 @@ export const eject = ({ request, response }) => {
 /* 添加拦截器: 打印数据 */
 use({
   request: [
-    config => {
+    (config) => {
       log('request:', config);
       return config;
     },
   ],
   response: [
-    response => {
+    (response) => {
       log('response:', response);
       return response;
     },
@@ -69,7 +69,7 @@ use({
 /* 存储/添加 token*/
 use({
   request: [
-    config => {
+    (config) => {
       const authorization = localStorage.getItem('authorization');
       // eslint-disable-next-line no-param-reassign
       authorization && (config.headers.Authorization = authorization);
@@ -77,7 +77,7 @@ use({
     },
   ],
   response: [
-    response => {
+    (response) => {
       response.headers.authorization &&
       localStorage.setItem('authorization', response.headers.authorization);
       return response;
@@ -89,9 +89,9 @@ use({
  * 导出方法:
  * 1. 处理 spin
  */
-export default async ({ spin: code, ... options }) => {
+export default async ({ spin: code, ...options }) => {
   store.dispatch({ type: 'spin/openSpin', code });
-  const res = await instance({ ... options }).catch(err => {
+  const res = await instance({ ...options }).catch((err) => {
     message.error(`API 请求错误: ${err}`);
   });
   store.dispatch({ type: 'spin/closeSpin', code });

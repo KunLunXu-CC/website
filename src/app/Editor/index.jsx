@@ -23,16 +23,16 @@ export default () => {
   useStateHook();
   return (
     <div className={scss.editor}>
-      <div className={scss.header}/>
+      <div className={scss.header} />
       <div className={scss['editor-body']}>
-        <ActivityBar/>
-        <SideBar/>
-        <Work/>
-        <Preview/>
+        <ActivityBar />
+        <SideBar />
+        <Work />
+        <Preview />
       </div>
-      <div className={scss.footer}/>
-      <Tips/>
-      <Modal/>
+      <div className={scss.footer} />
+      <Tips />
+      <Modal />
     </div>
   );
 };

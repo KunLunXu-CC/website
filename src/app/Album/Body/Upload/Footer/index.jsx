@@ -26,8 +26,14 @@ export default () => {
 
   return (
     <div className={scss.footer}>
-      <Button type="primary" onClick={state.onUpload}>上传</Button>
-      <Button onClick={state.onCancel}>取消</Button>
+      <Button
+        type="primary"
+        onClick={state.onUpload}>
+        上传
+      </Button>
+      <Button onClick={state.onCancel}>
+        取消
+      </Button>
     </div>
   );
 };

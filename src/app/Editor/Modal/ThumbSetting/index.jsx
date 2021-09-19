@@ -15,7 +15,7 @@ const useStateHook = () => {
 
   // 获取当前文章内容
   const article = useSelector(
-    state => _.get(state, `modal[${THUMB_SETTING}].article`)
+    (state) => _.get(state, `modal[${THUMB_SETTING}].article`),
   );
 
   // 点击取消
@@ -38,7 +38,7 @@ const useStateHook = () => {
   };
 
   // 前端上传文件
-  const onUpload = event => {
+  const onUpload = (event) => {
     const { files: [file] } = event.target;
     file && setFile(file);
   };
@@ -46,7 +46,7 @@ const useStateHook = () => {
   // 获取缩略图 src
   const src = useMemo(
     () => (file || _.get(article, 'thumb')),
-    [file, article]
+    [file, article],
   );
 
   return { article, onCancel, onOk, onUpload, src };
@@ -67,13 +67,17 @@ export default () => {
       visible={!!state.article}
       onCancel={state.onCancel}>
       <label className={scss.upload}>
-        {state.src ?
+        {state.src ? (
           <Image src={state.src}>
-            <Icon type="icon-editor"/>
-          </Image> :
-          <Icon type="icon-tupianshangchuan"/>
+            <Icon type="icon-editor" />
+          </Image>
+        ) :
+          <Icon type="icon-tupianshangchuan" />
         }
-        <input type="file" onChange={state.onUpload}/>
+        <input
+          type="file"
+          onChange={state.onUpload}
+        />
       </label>
     </Modal>
   );

@@ -1,27 +1,28 @@
-@import '@assets/style/mixin.scss';
+@import '@assets/style/mixin';
 
 .menu-title {
   display: flex;
   align-items: center;
 
   &-content {
+    @include line-clamp(1);
+
     flex: 1;
     height: 40px;
-    @include line-clamp(1);
 
     &-input {
       padding: 2px;
-      border: none;
-      color: #Fff;
+      border: unset;
+      color: #fff;
       outline: none;
       height: initial;
-      border-radius: 0px;
+      border-radius: 0;
       background: rgba($color: #fff, $alpha: 0.1);
 
       &:hover,
       &:focus,
       &:active {
-        border: none;
+        border: unset;
         box-shadow: none;
       }
     }
@@ -42,43 +43,43 @@
   }
 }
 
-:global{
-  // 子菜单 - 展开 - 旋转箭头
-  .ant-menu-submenu-open > .ant-menu-submenu-title {
-    :local(.menu-title-arrow) {
-      transform: rotate(90deg);
-    }
-  }
-
-  // 鼠标停放显示 ...
-  .ant-menu-item-active,
-  .ant-menu-submenu-active > .ant-menu-submenu-title {
-    :local(.menu-title-more) {
-      opacity: 1;
-    }
+.menu-title-article {
+  .menu-title-arrow {
+    opacity: 0;
   }
 }
 
 // 操作菜单
 .operation-menu {
   background: #2c343a;
+
   :global {
     .ant-dropdown-menu-item {
       color: rgba($color: #fff, $alpha: 0.5);
-      &:hover{
-        background-color: rgba($color: #fff, $alpha: 0.1)
+
+      &:hover {
+        background-color: rgba($color: #fff, $alpha: 0.1);
       }
     }
+  }
+}
+
+// 鼠标停放显示 ...
+:global(.ant-menu-item-active),
+:global(.ant-menu-submenu-active > .ant-menu-submenu-title) {
+  .menu-title-more {
+    opacity: 1;
+  }
+}
+
+// 子菜单 - 展开 - 旋转箭头
+:global(.ant-menu-submenu-open > .ant-menu-submenu-title) {
+  .menu-title-arrow {
+    transform: rotate(90deg);
   }
 }
 
 // 已发布文章
 .menu-title-release {
   color: #68bf22;
-}
-
-.menu-title-article {
-  .menu-title-arrow {
-    opacity: 0;
-  }
 }

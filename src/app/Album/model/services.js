@@ -14,7 +14,7 @@ export const uploadPhotos = async ({
   const formData = new FormData();
   payload && formData.append('payload', payload);
   _.isFinite(type) && formData.append('type', type);
-  files.forEach(v => (formData.append('file', v)));
+  files.forEach((v) => (formData.append('file', v)));
 
   const res = await axios({
     spin,

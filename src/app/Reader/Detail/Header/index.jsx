@@ -15,14 +15,19 @@ const useStateHook = () => {
   return { onClose };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook();
 
   return (
     <div className={scss.header}>
-      <div className={scss.title}>{props.article?.name}</div>
+      <div className={scss.title}>
+        {props.article?.name}
+      </div>
       <div className={scss.tools}>
-        <Icon type="icon-guanbi6" onClick={state.onClose}/>
+        <Icon
+          type="icon-guanbi6"
+          onClick={state.onClose}
+        />
       </div>
     </div>
   );

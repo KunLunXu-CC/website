@@ -6,7 +6,7 @@
   position: relative;
   border-radius: 4px;
   align-items: center;
-  transition: all .5s;
+  transition: all 0.5s;
   background: #fafafa;
   justify-content: center;
   border: 1px dashed #d9d9d9;
@@ -18,10 +18,9 @@
     }
   }
 
-
   input {
     width: 0;
-    height: 0;  
+    height: 0;
     opacity: 0;
   }
 
@@ -38,5 +37,5 @@
   margin: {
     top: 20px;
     bottom: 20px;
-  };
+  }
 }

@@ -28,13 +28,16 @@ export default () => {
           type="COLUMN"
           droppableId="columns"
           direction="horizontal">
-          {provided => (
+          {(provided) => (
             <div
               className={scss.kanban}
               ref={provided.innerRef}
               {...provided.droppableProps}>
               {state.data.map((v, index) => (
-                <Draggable key={index} draggableId={v.id} index={index}>
+                <Draggable
+                  key={index}
+                  draggableId={v.id}
+                  index={index}>
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -47,8 +50,10 @@ export default () => {
                         provided={provided}
                         snapshot={snapshot}
                       />
-                      <Droppable type="ITEM" droppableId={v.id}>
-                        {provided => (
+                      <Droppable
+                        type="ITEM"
+                        droppableId={v.id}>
+                        {(provided) => (
                           <div
                             className={scss.items}
                             ref={provided.innerRef}
@@ -80,7 +85,7 @@ export default () => {
           )}
         </Droppable>
       </DragDropContext>
-      <List/>
+      <List />
     </React.Fragment>
   );
 };

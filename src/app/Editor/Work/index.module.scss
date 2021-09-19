@@ -26,17 +26,17 @@
       background: #21252b;
 
       .ant-tabs-tab {
-        margin: 0px !important;
-        border: none !important;
-        border-radius: 0px !important;
+        margin: 0 !important;
+        border: unset !important;
+        border-radius: 0 !important;
         background: #21252b !important;
         border-right: 1px solid #070507 !important;
         color: rgba($color: #fff, $alpha: 0.6) !important;
+      }
 
-        &:hover {
-          background: #282c34 !important;
-          color: rgba($color: #fff, $alpha: 0.8) !important;
-        }
+      .ant-tabs-tab:hover {
+        background: #282c34 !important;
+        color: rgba($color: #fff, $alpha: 0.8) !important;
       }
 
       .ant-tabs-tab.ant-tabs-tab-active {

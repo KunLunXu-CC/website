@@ -18,5 +18,5 @@ reactDom.render(
       <Router />
     </Store>
   </ConfigProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

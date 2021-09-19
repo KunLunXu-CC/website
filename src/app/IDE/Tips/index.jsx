@@ -9,13 +9,18 @@ import { APP_CODE } from '@config/consts';
 
 export default () => {
   const show = useSelector(
-    state => _.get(state, `spin.${APP_CODE.EDITOR}`)
+    (state) => _.get(state, `spin.${APP_CODE.EDITOR}`),
   );
 
   return (
     <Fragment>
       {show
-        ? <Spin className={scss.spin} size="large"/>
+        ? (
+          <Spin
+            className={scss.spin}
+            size="large"
+          />
+        )
         : null}
       <div
         id={APP_CODE.EDITOR}

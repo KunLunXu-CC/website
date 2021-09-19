@@ -5,14 +5,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const { groupWithName } = useSelector(state => state.diary.statsBill);
+  const { groupWithName } = useSelector((state) => state.diary.statsBill);
 
   // 处理数据
   const data = React.useMemo(() => (groupWithName.reduce((total, ele) => ({
-    xAxis: [... total.xAxis, ele.name],
-    income: [... total.income, ele.income],
-    balance: [... total.balance, (ele.income - ele.expend).toFixed(2)],
-    expend: [... total.expend, { value: ele.expend, diaries: ele.diaries }],
+    xAxis: [...total.xAxis, ele.name],
+    income: [...total.income, ele.income],
+    balance: [...total.balance, (ele.income - ele.expend).toFixed(2)],
+    expend: [...total.expend, { value: ele.expend, diaries: ele.diaries }],
   }), { xAxis: [], expend: [], income: [], balance: [] })), [groupWithName]);
 
   // echarts 配置
@@ -70,6 +70,7 @@ const useStateHook = () => {
       if (!diaries) {
         return false;
       }
+
       echart.dispatchAction({ type: 'hideTip' });
       dispatch({
         diaries,
@@ -81,7 +82,7 @@ const useStateHook = () => {
   return { option, on };
 };
 
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
   return (
     <Echart

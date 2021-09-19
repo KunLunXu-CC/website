@@ -7,11 +7,11 @@ import scss from './index.module.scss';
 import { Image, Icon } from 'qyrc';
 import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
-const useStateHook = props => {
+const useStateHook = (props) => {
   // 计算描述信息
   const desc = useMemo(() => {
     const { type } = props.data;
-    const desc = _.find(PHOTO_TYPE, v => v.VALUE === type);
+    const desc = _.find(PHOTO_TYPE, (v) => v.VALUE === type);
     return desc && desc.DESC;
   }, [props.data]);
 
@@ -24,17 +24,20 @@ const useStateHook = props => {
 };
 
 // "https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.6/img/other/th%20(3).jpg"
-export default props => {
+export default (props) => {
   const state = useStateHook(props);
 
   return (
     <div className={scss.item}>
       <div className={scss.preview}>
         <div className={scss['preview-body']}>
-          <Image src={`${SERVICE_STATIC_IMAGE_URL}${props.data.name}`}/>
+          <Image src={`${SERVICE_STATIC_IMAGE_URL}${props.data.name}`} />
         </div>
         <div className={scss['preview-mask']}>
-          <Icon type="icon-shanchu" onClick={state.onDelete}/>
+          <Icon
+            type="icon-shanchu"
+            onClick={state.onDelete}
+          />
         </div>
       </div>
       <div className={scss.info}>

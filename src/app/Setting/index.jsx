@@ -7,11 +7,11 @@ import { MENUS } from './consts';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
-  const { selectedMenuKey } = useSelector(state => state.settingManage);
+  const { selectedMenuKey } = useSelector((state) => state.settingManage);
 
   // 获取 body 组件
   const Body = React.useMemo(() => MENUS.find(
-    v => v.key === selectedMenuKey
+    (v) => v.key === selectedMenuKey,
   ).component, [selectedMenuKey]);
 
   return { Body };
@@ -22,11 +22,11 @@ export default () => {
 
   return (
     <div className={scss.setting}>
-      <Header/>
+      <Header />
       <div className={scss.main}>
-        <Menu/>
+        <Menu />
         <div className={scss.body}>
-          <Body/>
+          <Body />
         </div>
       </div>
     </div>

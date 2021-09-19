@@ -18,45 +18,41 @@
     }
 
     // 主体部分布局样式
+    table,
+    tbody,
     .ant-picker-panel,
     .ant-picker-date-panel,
     .ant-picker-body,
-    .ant-picker-conten,
-    table,
-    tbody {
+    .ant-picker-content {
       flex: 1;
       outline: none;
       display: flex;
       overflow: hidden;
       flex-direction: column;
+
+      thead {
+        display: flex;
+      }
+
       tr {
         flex: 1;
         display: flex;
-        td {
-          flex: 1;
-          display: flex;
-          &:nth-last-child(1),
-          &:nth-last-child(2) {
-            color: #ff7875;
-          }
-        }
       }
-    }
 
-    // 日历主体头部(星期)
-    .ant-picker-content thead {
-      display: flex;
-      tr {
+      th {
+        flex: 1;
+        text-align: right;
+        padding: 0 12px 10px 0 !important;
+      }
+
+      td {
+        flex: 1;
         display: flex;
-        th {
-          flex: 1;
-          text-align: right;
-          padding: 0 12px 10px 0 !important;
-          &:nth-last-child(1),
-          &:nth-last-child(2) {
-            color: #ff7875;
-          }
-        }
+      }
+
+      td:nth-child(n+6),
+      th:nth-child(n+6) {
+        color: #ff4d4f;
       }
     }
 

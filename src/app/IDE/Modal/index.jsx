@@ -7,9 +7,9 @@ import scss from './index.module.scss';
 
 export default () => (
   <div className={scss.modal}>
-    <ThumbSetting/>
-    <RevokeConfirm/>
-    <ReleaseConfirm/>
-    <Move/>
+    <ThumbSetting />
+    <RevokeConfirm />
+    <ReleaseConfirm />
+    <Move />
   </div>
 );

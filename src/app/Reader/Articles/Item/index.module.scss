@@ -1,16 +1,26 @@
+.thumb {
+  width: 55%;
+  overflow: hidden;
+
+  > div {
+    transition: all 0.6s;
+    transform-origin: center center;
+  }
+}
+
 .item {
   height: 260px;
-  margin: {
-    top: 16px;
-    left: 16px;
-    right: 10px;
-  };
   cursor: pointer;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba($color: #000, $alpha: 0.2);
 
   display: flex;
+  margin: {
+    top: 16px;
+    left: 16px;
+    right: 10px;
+  };
 
   &.thumb-left {
     text-align: right;
@@ -28,16 +38,6 @@
     .thumb > div {
       transform: scale(1.5);
     }
-  }
-}
-
-.thumb {
-  width: 55%;
-  overflow: hidden;
-
-  > div {
-    transition: all 0.6s;
-    transform-origin: center center;
   }
 }
 
@@ -84,4 +84,3 @@
     }
   }
 }
-
