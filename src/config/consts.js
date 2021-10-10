@@ -2,7 +2,6 @@
 
 // 应用 CODE
 export const APP_CODE = {
-  IDE: 'ide',                    // 集成开发环境(编辑器)
   FUND: 'fund',                  // 基金
   ALBUM: 'album',                // 相册
   DIARY: 'diary',                // 日记
