@@ -50,7 +50,7 @@ export const setSide = (state, { side }) => ({
  * @return {Object} 更新后的状态
  */
 export const appendWorks = (state, { article }) => {
-  if (!article) {
+  if (!article || article === 'new') {
     return state;
   }
 

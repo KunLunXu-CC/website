@@ -149,7 +149,7 @@ export const createArticles = async ({
       variables: { body },
       query: `
         mutation(
-          $body: [AticleFields!]!,
+          $body: [ArticleFields!]!,
         ){
           createArticles(
             body: $body,
@@ -180,7 +180,7 @@ export const updateArticles = async ({
       variables: { conds, body },
       query: `
         mutation(
-          $body: AticleFields!,
+          $body: ArticleFields!,
           $conds: ArticleSearch!,
         ){
           updateArticles(
