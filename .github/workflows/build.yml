@@ -15,7 +15,7 @@ jobs:
     steps:                    # 工作流步骤
       # step1. 获取源码
       - name: chekcout
-        uses: actions/checkout@v2
+        uses: actions/checkout@master
 
       # step2. 安装依赖并打包
       - name: Install and Build 🔧
@@ -23,10 +23,11 @@ jobs:
           npm install
           npm run build
 
-      # step3. 项目部署
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.5.9
-        with:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}   # 当前项目 secrets: 在项目内 setting/Secrets 可进行添加
-          BRANCH: dist # 部署分支
-          FOLDER: dist # 当前打包目录
+      # step3. 发布
+      - name: Create Release
+        uses: actions/create-release@master
+
+      # step4. 发布
+      - name: upload Release
+        uses: actions/upload-release-asset@master
+
