@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --config ./webpack/webpack.config.dev.js --open",
-    "build": "rm -rf build/* && webpack --config ./webpack/webpack.config.js",
+    "build": "webpack --config ./webpack/webpack.config.js",
     "build:pro": "npm run build && cp -rf  build/* dist/",
     "eslint:fix": "eslint --fix src",
     "cz": "qy-cz",
