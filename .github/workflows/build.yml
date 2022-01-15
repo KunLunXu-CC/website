@@ -1,51 +1,54 @@
-# 1. 为工作流定义名字
-name: build & deploy
+# 1. 工作流名称
+name: Build & Create Release
 
-# 2. 触发条件修改为：当 master 分支，有 push 的时候，执行任务
+# 2. 触发该工作流条件: 推送 tags 为 v* 时
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 # 3. 创建工作流
 jobs:
-  build:
-    name: Create Release      # 工作流名称
-    runs-on: ubuntu-latest    # 依赖环境
+  build:                         # 构建环境
+    name: Build & Create Release # 工作流名称?
+    runs-on: ubuntu-latest       # 所依赖环境(ubuntu)
 
-    steps:                    # 工作流步骤
-      # step1. 获取源码
-      - name: chekcout
-        uses: actions/checkout@master
+    steps:  # 工作流步骤
+      # step 1. 下载源码(CI/CD 拉取代码到当前环境中)
+      - name: Checkout Code             # 步骤名
+        uses: actions/checkout@master   # 使用插件名
 
-      # step2. 安装依赖并打包
-      - name: Install and Build
-        run: |
+      # step 2. 安装依赖并打包项目
+      - name: Install & Build     # 步骤名
+        run: |                    # 执行命令(安装依赖、打包、压缩文件)
           npm install
           npm run build
           tar -zcvf release.tar.gz ./build/*
-          ls -a
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@master
+      # step 3. 创建 GitHub Release
+      - name: Create Release                # 步骤名
+        id: create_release                  # 步骤 ID, 后面的步骤可使用该 ID 获取当前步骤输出内容
+        uses: actions/create-release@master # 使用插件名 => https://github.com/actions/create-release
 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
+        env: # 环境变量设置
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 该 token 由 Actions 提供, 不需要自己创建(照着写就行)
+
+        with: # 插件参数传递
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
 
-      # step4. 发布
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+      # step 4. 上传 GitHub Release 资源
+      - name: Upload Release Asset                 # 步骤名
+        id: upload-release-asset                   # 步骤 ID, 后面的步骤可使用该 ID 获取当前步骤输出内容
+        uses: actions/upload-release-asset@master  # 使用插件名 => https://github.com/actions/upload-release-asset
+
+        env: # 环境变量设置
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 该 token 由 Actions 提供, 不需要自己创建(照着写就行)
+
+        with: # 插件参数传递
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # 通过 ID「create_release」来获取步骤「Create Release」, 输出的「upload_url」
           asset_path: ./release.tar.gz
           asset_name: release.tar.gz
           asset_content_type: application/x-tgz
