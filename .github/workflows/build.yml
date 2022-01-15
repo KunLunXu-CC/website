@@ -9,7 +9,8 @@ on:
 
 # 3. 创建工作流
 jobs:
-  build:                      # 工作流名称
+  build:
+    name: Create Release      # 工作流名称
     runs-on: ubuntu-latest    # 依赖环境
 
     steps:                    # 工作流步骤
@@ -23,9 +24,20 @@ jobs:
           npm install
           npm run build
 
-      # step3. 发布
       - name: Create Release
+        id: create_release
         uses: actions/create-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
 
       # step4. 发布
       - name: upload Release
