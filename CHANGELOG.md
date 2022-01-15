@@ -2,6 +2,72 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/qianyin925/blog-client/compare/v2.2.0...v3.0.0) (2022-01-15)
+
+
+### Features
+
+* 【client】【编辑器】侧边栏重新设计 ([ab5a8da](https://github.com/qianyin925/blog-client/commit/ab5a8daf066cac42cb3341766e81cc301008bae9))
+* 【client】【编辑器】代码整理 ([2ed0f9e](https://github.com/qianyin925/blog-client/commit/2ed0f9e8bf5911dc162765d44c2a3a4c29224f3a))
+* 【client】【编辑器】删除无用代码 ([d390a5e](https://github.com/qianyin925/blog-client/commit/d390a5ed5cadd7c0cf815eb4dca5a5e7ae49c6b0))
+* 【client】【编辑器】删除校验 ([71c49f5](https://github.com/qianyin925/blog-client/commit/71c49f5e30700839ccc95ad99ef2e76155737cfd))
+* 【client】【编辑器】数据格式修改、整体前后端联调 ([83e752a](https://github.com/qianyin925/blog-client/commit/83e752a6431c9c5a1f5593abb5c8982fcd7e43d2))
+* 【client】【编辑器】文章用字体颜色区分以发布文章 ([29786f6](https://github.com/qianyin925/blog-client/commit/29786f6e8de901f5201f38f1cc8da78975436632))
+* 【client】【编辑器】允许对文章进行移动 ([a374525](https://github.com/qianyin925/blog-client/commit/a3745258efd5fdead149bf9cba6f97a05f059a06))
+* 【client】【编辑器】tabs 布局错误 ([29e600e](https://github.com/qianyin925/blog-client/commit/29e600e38cb76f34cdcf7a4f8c5e5b85bf90af1c))
+* 【client】【绘图】添加应用并进行基本布局 ([ad47611](https://github.com/qianyin925/blog-client/commit/ad476119a91440b969f6abcf2e6cd869852663db))
+* 【client】【日记】根据类型对账单进行统计 ([b9178b4](https://github.com/qianyin925/blog-client/commit/b9178b42395e4a6a856d104c631d442ed28363b1))
+* 【client】【日记】计划 / 项目 前端页面布局 ([324fd02](https://github.com/qianyin925/blog-client/commit/324fd0283ed902b5f571d9943b859785e7287666))
+* **【client】【日记】计划 / 项目 前端页面布局:** 【client】【日记】计划 / 项目 前端页面布局 ([abacb00](https://github.com/qianyin925/blog-client/commit/abacb0029a393dc000e1baa61f1e02e67dc5ae8f))
+* 【client】【日记】antd 更新并修改样式 ([8716d8f](https://github.com/qianyin925/blog-client/commit/8716d8ff60b05156799c96792617c3d0be1aecfe))
+* 【client】【数据字典】菜单调整 ([b66f738](https://github.com/qianyin925/blog-client/commit/b66f738b9075d98026ab62ebb55b4fd5847890dd))
+* 【client】【数据字典】数据父级可配置 ([ea46a1b](https://github.com/qianyin925/blog-client/commit/ea46a1bbad0c21aedd38f0ee8370830970e8dedf))
+* 【client】【数据字典】数据父级可配置 ([3cbc1e2](https://github.com/qianyin925/blog-client/commit/3cbc1e216bb37aeac37870a37bf6f72c4d503162))
+* 【client】【相册】图片上传，文件校验 ([6ed4664](https://github.com/qianyin925/blog-client/commit/6ed466488805be157e0f651caaf1a33c83e53ee1))
+* 【client】【阅读】当用户无权限时创建数据页面报错 ([586b8c2](https://github.com/qianyin925/blog-client/commit/586b8c21d2645bd44eadd94391656ad488993c2c))
+* 【client】【阅读】对用户进行权限控制 ([8ea8451](https://github.com/qianyin925/blog-client/commit/8ea845173a3ab75af9ac538bcbe528becf73a450))
+* 【client】【阅读】内容和标题分离 ([4563773](https://github.com/qianyin925/blog-client/commit/4563773a100e382187f5cd64e8ee601dd3edebd0))
+* 【client】【阅读】应用配置修改 ([e46b21b](https://github.com/qianyin925/blog-client/commit/e46b21b8582d2c327f1f024e04f52c5a155cd40b))
+* 【client】【Fund】前端页面 ([3c01112](https://github.com/qianyin925/blog-client/commit/3c01112e40d883fe8c15c4ff142c74090d32615b))
+* 【client】编辑器 - 菜单栏出现滚动时无法拖拽 ([52f44d8](https://github.com/qianyin925/blog-client/commit/52f44d85573cf2d76266eeb23278f9fb2da2d093))
+* 【client】编辑器保存当网络断了, 保存失败时无法再次保存 ([7ec8761](https://github.com/qianyin925/blog-client/commit/7ec87610a1eaf139f9ba5d62d808b564cf35a073))
+* 【client】编辑器调整 ([fc92322](https://github.com/qianyin925/blog-client/commit/fc9232252d1af8334879d9192f6126e89283b74b))
+* 【client】编辑器文章发布下架字体颜色错误 ([115d393](https://github.com/qianyin925/blog-client/commit/115d3933df10dad51b5c79d7284bc61303f3debd))
+* 【client】编辑器预览模块调整 ([2cf53ac](https://github.com/qianyin925/blog-client/commit/2cf53aca2ad9e1482422616dde09c0f55b76e2e5))
+* 【client】编辑器支持文件夹移动、有内容的目录不允许删除 ([0a36a38](https://github.com/qianyin925/blog-client/commit/0a36a3858946b171e2c324995146ed6ff9dda8ec))
+* 【client】部分应用 modal 位置偏移 ([30bf422](https://github.com/qianyin925/blog-client/commit/30bf422d7266128efd7e2293094d86d3a52d4a73))
+* 【client】菜单栏样式重写 ([c9633c0](https://github.com/qianyin925/blog-client/commit/c9633c0618f7133c19b28d05c412d62ba17ba51d))
+* 【client】清除无效代码  width: 100% ([058d4a9](https://github.com/qianyin925/blog-client/commit/058d4a9626166e0f14d6e9d9516ee20816686261))
+* 【client】全屏功能实现, 对当前页面进行全屏不影响其他页面 ([31bf568](https://github.com/qianyin925/blog-client/commit/31bf56856175b0ebe8d71cb63bed64d5d6a47b1b))
+* 【client】日记编辑早期数据将报错 ([da8c353](https://github.com/qianyin925/blog-client/commit/da8c353cd4ab885402818dafa4854434c644e93d))
+* 【client】日志实时查看 ([ec864f7](https://github.com/qianyin925/blog-client/commit/ec864f7483dcba0d540f555caff898c5290a2c67))
+* 【client】日志实时查看 - 前后端打通 ([d807d25](https://github.com/qianyin925/blog-client/commit/d807d2543dc93f6f82f993dd2a619b7863d58f75))
+* 【client】数据字典按照字典进行排序 ([de38d01](https://github.com/qianyin925/blog-client/commit/de38d0169a60b74a4b8106810add7f4817ce988d))
+* 【client】系统偏好设置 ([a00f0af](https://github.com/qianyin925/blog-client/commit/a00f0af37e31236ad668615db748720a9d2739f3))
+* 【client】页面调整: 滚动条、应用工具栏 ([ebabef9](https://github.com/qianyin925/blog-client/commit/ebabef9c4d6a7cea20ab1f6e2772a4b18f926d3c))
+* 【client】允许添加最外层目录 ([99cedb5](https://github.com/qianyin925/blog-client/commit/99cedb544c709a4cb5177c980118be08bdbad38e))
+* 【client】字典允许配置 icon ([96c74f9](https://github.com/qianyin925/blog-client/commit/96c74f9107b5e517a0d0a6d38be669e486879f82))
+* 【client】dock 样式重写 ([a665caf](https://github.com/qianyin925/blog-client/commit/a665caf0389b2434bf1ddc915b80d4f86f1bce84))
+* 【client】Menu list 调整 ([ad0402e](https://github.com/qianyin925/blog-client/commit/ad0402ea5fcdc562d278862e57575d0b15851005))
+* 【qyrc】【日记】计划 / 项目 前端页面布局 ([7be914c](https://github.com/qianyin925/blog-client/commit/7be914c3edfef0bb3c5429ff3b9fc68e932a0523))
+* 【qyrc】阅读界面设计 ([e99cc07](https://github.com/qianyin925/blog-client/commit/e99cc077f454fed8f6605f1d6e7ab58b7875e468))
+* 🎸 【发布新版】 https://www.tapd.cn/58837035/prong/stories/view/1158837035001000736 ([44e55a9](https://github.com/qianyin925/blog-client/commit/44e55a967d67657d9777b5208f667fb6adfd9ef7))
+* 🎸 后端接口调整 ([4c8e9a3](https://github.com/qianyin925/blog-client/commit/4c8e9a32aa99cd48773573b2811e9b205de8ba5a))
+* 🎸 接入 qy-norm ([39c1908](https://github.com/qianyin925/blog-client/commit/39c1908d254473cd4e1b2b8e7162fa7e942b4951))
+* 🎸 add new app ide ([7ec0969](https://github.com/qianyin925/blog-client/commit/7ec0969f047a4f2e9f4b3c2341bb8f7c3ec53ea5))
+* 更新项目依赖 ([83ca8ce](https://github.com/qianyin925/blog-client/commit/83ca8ce4f9e5fd049698a79b78957b1b744bf903))
+* 应用配置修改、应用删除 ([b1cc929](https://github.com/qianyin925/blog-client/commit/b1cc92914acf6468623bf70d5368fd4d0973f264))
+* 阅读 app ([e2e2565](https://github.com/qianyin925/blog-client/commit/e2e256534a3e9a1f97ed6171f1876a25783adb5d))
+* innest 管理 ([11b61d2](https://github.com/qianyin925/blog-client/commit/11b61d2a0c44fc16b5ac73742095b6ddd755fbfe))
+* new app ide ([f374e8a](https://github.com/qianyin925/blog-client/commit/f374e8a6fda30cd1985a1bf21b07929dc59e8183))
+
+
+### Bug Fixes
+
+* 【client】编辑器图片粘贴错误、预览图片无法显示 ([8795f5d](https://github.com/qianyin925/blog-client/commit/8795f5d826dd1f1a0f1d8b27e0dae9201a3d26fd))
+* 【client】日记 - 未设置体重，打开统计报错 ([af768c0](https://github.com/qianyin925/blog-client/commit/af768c0ff77b18c554f1cbafa6aac258923a0a05))
+* 模块引入错误 ([df949ea](https://github.com/qianyin925/blog-client/commit/df949ea52ddae9e9eedc617534ceb1c791189bb5))
+
 ## [2.2.0](https://github.com/qianyin925/blog_client/compare/v2.1.0...v2.2.0) (2020-06-12)
 
 
