@@ -29,3 +29,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}   # 当前项目 secrets: 在项目内 setting/Secrets 可进行添加
           BRANCH: dist # 部署分支
+          FOLDER: dist # 当前打包目录
