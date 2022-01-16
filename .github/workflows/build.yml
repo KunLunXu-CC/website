@@ -27,7 +27,6 @@ jobs:
       # step 3. 安装依赖并打包项目
       - name: Install & Build     # 步骤名
         run: |                    # 执行命令(安装依赖、打包、压缩文件)
-          node -v
           npm install
           npm run build
           tar -zcvf release.tar.gz ./build/*
