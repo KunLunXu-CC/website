@@ -18,14 +18,21 @@ jobs:
       - name: Checkout Code             # 步骤名
         uses: actions/checkout@master   # 使用插件名
 
-      # step 2. 安装依赖并打包项目
+      # step 2. 安装指定 node
+      - name: Use Node                  # 步骤名
+      - uses: actions/setup-node@master # 使用插件名
+        with: # 插件携带参数
+          node-version: '16' # 指定 node 版本
+
+      # step 3. 安装依赖并打包项目
       - name: Install & Build     # 步骤名
         run: |                    # 执行命令(安装依赖、打包、压缩文件)
+          node -v
           npm install
           npm run build
           tar -zcvf release.tar.gz ./build/*
 
-      # step 3. 创建 GitHub Release
+      # step 4. 创建 GitHub Release
       - name: Create Release                # 步骤名
         id: create_release                  # 步骤 ID, 后面的步骤可使用该 ID 获取当前步骤输出内容
         uses: actions/create-release@master # 使用插件名 => https://github.com/actions/create-release
@@ -39,7 +46,7 @@ jobs:
           draft: false
           prerelease: false
 
-      # step 4. 上传 GitHub Release 资源
+      # step 5. 上传 GitHub Release 资源
       - name: Upload Release Asset                 # 步骤名
         id: upload-release-asset                   # 步骤 ID, 后面的步骤可使用该 ID 获取当前步骤输出内容
         uses: actions/upload-release-asset@master  # 使用插件名 => https://github.com/actions/upload-release-asset
