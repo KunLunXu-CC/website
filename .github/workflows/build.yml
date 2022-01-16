@@ -20,7 +20,7 @@ jobs:
 
       # step 2. 安装指定 node
       - name: Use Node                  # 步骤名
-      - uses: actions/setup-node@master # 使用插件名
+        uses: actions/setup-node@master # 使用插件名
         with: # 插件携带参数
           node-version: '16' # 指定 node 版本
 
