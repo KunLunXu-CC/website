@@ -16,11 +16,11 @@ jobs:
     steps:  # 工作流步骤
       # step 1. 下载源码(CI/CD 拉取代码到当前环境中)
       - name: Checkout Code             # 步骤名
-        uses: actions/checkout@master   # 使用插件名
+        uses: actions/checkout@master   # 使用插件名 => https://github.com/actions/checkout
 
       # step 2. 安装指定 node
       - name: Use Node                  # 步骤名
-        uses: actions/setup-node@master # 使用插件名
+        uses: actions/setup-node@master # 使用插件名 => https://github.com/actions/setup-node
         with: # 插件携带参数
           node-version: '16' # 指定 node 版本
 
