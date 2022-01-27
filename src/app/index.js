@@ -1,3 +1,4 @@
+import User from './User';
 import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
@@ -79,6 +80,18 @@ export default {
     icon: 'icon-renwucopy',
     component: Setting,
     code: APP_CODE.SETTING,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 14, left: 14 },
+      defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
+    },
+  },
+
+  [APP_CODE.USER]: {
+    name: '用户管理',
+    component: User,
+    code: APP_CODE.USER,
+    icon: 'icon-renwucopy',
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 14, left: 14 },
