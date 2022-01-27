@@ -51,7 +51,8 @@ export const getPhotos = async ({ search, spin }) => {
         }`,
     },
   });
-  return _.get(res, 'data.data.photos.list') || [];
+
+  return res?.data?.data?.photos?.list ?? [];
 };
 
 /**
@@ -91,5 +92,6 @@ export const removePhotos = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.removePhotos.list') || [];
+
+  return res?.data?.data?.removePhotos?.list ?? [];
 };

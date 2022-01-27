@@ -11,7 +11,7 @@ import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
   const photos = useSelector((state) => (
-    _.get(state, 'photos.desktop') || []
+    state.photos?.desktop ?? []
   ));
 
   const bg = useMemo(() => {

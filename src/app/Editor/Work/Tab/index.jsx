@@ -12,7 +12,7 @@ const useStateHook = (props) => {
 
   // 读取文章详细内容
   const article = useSelector((state) => (
-    _.get(state, 'editor.articles')[props.work.article]
+    state.editor?.articles?.[props.work.article]
   ));
 
   // 移除: 点击小叉叉

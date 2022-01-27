@@ -15,7 +15,7 @@ const useStateHook = () => {
 
   // 获取当前文章内容
   const article = useSelector(
-    (state) => _.get(state, `modal[${THUMB_SETTING}].article`),
+    (state) => state.modal?.[THUMB_SETTING]?.article,
   );
 
   // 点击取消
@@ -44,10 +44,7 @@ const useStateHook = () => {
   };
 
   // 获取缩略图 src
-  const src = useMemo(
-    () => (file || _.get(article, 'thumb')),
-    [file, article],
-  );
+  const src = useMemo(() => (file || article?.thumb), [file, article]);
 
   return { article, onCancel, onOk, onUpload, src };
 };

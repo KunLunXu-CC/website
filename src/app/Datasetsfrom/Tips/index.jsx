@@ -9,7 +9,7 @@ import { APP_CODE } from '@config/consts';
 
 const useStateHook = () => {
   const showSpin = useSelector(
-    (state) => _.get(state, `spin.${APP_CODE.DATASETSFROM}`),
+    (state) => state.spin?.[APP_CODE.DATASETSFROM],
   );
   return { showSpin };
 };

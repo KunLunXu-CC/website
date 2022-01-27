@@ -88,7 +88,7 @@ const useStateHook = () => {
   // 确认
   const onOk = async () => {
     const values = await form.validateFields();
-    const id = _.get(modal, 'diary.id');
+    const id = modal?.diary?.id;
     const body = getBody(values);
     dispatch({
       id,
@@ -107,19 +107,19 @@ const useStateHook = () => {
   useEffect(() => {
     form.setFieldsValue(
       modal ? {
-        diet: _.get(modal, 'diary.diet', []).map(
+        diet: (modal?.diary?.diet ?? []).map(
           (v) => ({ ...v, type: v.type?.value }),
         ),
-        fitness: _.get(modal, 'diary.fitness', []).map(
+        fitness: (modal?.diary?.fitness ?? []).map(
           (v) => ({ type: v.type?.value, place: v.place?.value }),
         ),
-        bill: _.get(modal, 'diary.bill', []).map(
+        bill: (modal?.diary?.bill ?? []).map(
           (v) => ({ ...v, tag: v.tag?.value }),
         ),
-        bodyIndex: _.get(modal, 'diary.bodyIndex') || {},
-        name: moment(_.get(modal, 'diary.name') || modal.date),
-        getUp: moment(_.get(modal, 'diary.getUp') || modal.date),
-        toRest: moment(_.get(modal, 'diary.toRest') || modal.date),
+        bodyIndex: modal?.diary?.bodyIndex ?? {},
+        name: moment(modal?.diary?.name ?? modal.date),
+        getUp: moment(modal?.diary?.getUp ?? modal.date),
+        toRest: moment(modal?.diary?.toRest ?? modal.date),
       } : void 0,
     );
   }, [modal]);

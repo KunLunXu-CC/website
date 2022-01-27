@@ -31,7 +31,8 @@ export const createDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createDatasetsfroms') || {};
+
+  return res?.data?.data?.createDatasetsfroms ?? {};
 };
 
 // 更新字典
@@ -65,7 +66,8 @@ export const updateDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.updateDatasetsfroms') || {};
+
+  return res?.data?.data?.updateDatasetsfroms ?? {};
 };
 
 // 删除字典
@@ -96,5 +98,6 @@ export const removeDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.removeDatasetsfroms') || {};
+
+  return res?.data?.data?.removeDatasetsfroms ?? {};
 };

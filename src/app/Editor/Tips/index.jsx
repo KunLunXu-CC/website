@@ -9,7 +9,7 @@ import { APP_CODE } from '@config/consts';
 
 export default () => {
   const show = useSelector(
-    (state) => _.get(state, `spin.${APP_CODE.EDITOR}`),
+    (state) => state.spin?.[APP_CODE.EDITOR],
   );
 
   return (

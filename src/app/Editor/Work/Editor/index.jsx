@@ -22,7 +22,7 @@ const useStateHook = (props) => {
 
   // 读取文章详细内容
   const article = useSelector((state) => (
-    _.get(state, 'editor.articles')[props.work.article]
+    state.editor?.articles?.[props.work.article]
   ));
 
   // 保存(ctr + s): 修改文章内容
@@ -42,7 +42,7 @@ const useStateHook = (props) => {
       spin: APP_CODE.EDITOR,
       type: PHOTO_TYPE.ARTICLE.VALUE,
     });
-    return `![图片备注](${_.get(data, '[0].fileName', '')})`;
+    return `![图片备注](${data?.[0]?.fileName})`;
   };
 
   // 内容改变

@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const opens = useSelector((state) => _.get(state, 'app.opens'));
+  const opens = useSelector((state) => state.app?.opens);
 
   const onClose = useCallback((app) => {
     dispatch({ type: 'app/onClose', app });
@@ -24,7 +24,7 @@ const useStateHook = () => {
   }, []);
 
   const onMouseDown = useCallback((app) => {
-    if (_.get(_.last(opens), 'code') === app.code) {
+    if (opens?.code === app.code) {
       return false;
     }
 

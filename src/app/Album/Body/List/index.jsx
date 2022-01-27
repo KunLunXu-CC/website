@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const photos = useSelector((state) => _.get(state, 'album.photos'));
+  const photos = useSelector((state) => state.album?.photos);
 
   // 删除
   const onDelete = (data) => {

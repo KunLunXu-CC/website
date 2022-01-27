@@ -29,7 +29,7 @@ export const getArticles = async ({ search, pagination }) => {
         }`,
     },
   });
-  return _.get(res, 'data.data.articles.list') || [];
+  return res?.data?.data?.articles?.list ?? [];
 };
 
 export const space = {};

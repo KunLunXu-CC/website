@@ -175,8 +175,8 @@ const createArticle = function * ({ body }) {
   });
 
   yield put({
+    article: change?.[0]?.id,
     type: 'editor/appendWorks',
-    article: _.get(change, '[0].id'),
   });
 
   message({
@@ -315,7 +315,7 @@ const setArticleThumb = function * ({ file, id }) {
   yield put({
     id,
     type: 'editor/updateArticle',
-    body: { thumb: _.get(res, '[0].url', '') },
+    body: { thumb: res?.[0]?.url },
   });
 };
 

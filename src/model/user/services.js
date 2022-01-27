@@ -31,7 +31,7 @@ export const login = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.login.user');
+  return res?.data?.data?.login?.user;
 };
 
 export const getPublicKey = async () => {
@@ -47,5 +47,5 @@ export const getPublicKey = async () => {
         }`,
     },
   });
-  return _.get(res, 'data.data.publicKey.data');
+  return res?.data?.data?.publicKey?.data;
 };

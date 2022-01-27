@@ -16,18 +16,18 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   const { articles, works } = useSelector((state) => ({
-    works: _.get(state, 'editor.works'),
-    articles: _.get(state, 'editor.articles'),
+    works: state.editor?.works,
+    articles: state.editor?.articles,
   }));
 
   // 文章内容
   const article = useMemo(() => (
-    articles[_.get(works.find((v) => v.action), 'article')]
+    articles[works.find((v) => v.action)?.article]
   ));
 
   // 当前文章是否是未发布状态
   const unpublished = useMemo(
-    () => (_.get(article, 'status') !== ARTICLE_STATUS.RELEASE),
+    () => article?.status !== ARTICLE_STATUS.RELEASE,
     [article],
   );
 

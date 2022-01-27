@@ -9,8 +9,9 @@ const useStateHook = () => {
   const setting = useSelector((state) => state.setting.menuBar);
 
   // 修改值
-  const onChange = React.useCallback((key, valuePath, event) => {
-    const value = _.get(event, valuePath, event);
+  const onChange = React.useCallback((key, { target }) => {
+    const value = target?.value ?? target?.checked;
+
     dispatch({
       type: 'setting/setValue',
       setting: { menuBar: { [key]: value } },
@@ -27,31 +28,19 @@ export default () => {
     <React.Fragment>
       <Checkbox
         checked={state.setting.showFullScreenOnMenu}
-        onChange={state.onChange.bind(
-          null,
-          'showFullScreenOnMenu',
-          'target.checked',
-        )}>
+        onChange={state.onChange.bind(null, 'showFullScreenOnMenu')}>
         在菜单栏显示全屏切换图标
       </Checkbox>
       <Checkbox
         checked={state.setting.showWeek}
-        onChange={state.onChange.bind(
-          null,
-          'showWeek',
-          'target.checked',
-        )}>
+        onChange={state.onChange.bind(null, 'showWeek')}>
         显示星期
       </Checkbox>
       <div className={scss['format-date']}>
         日期显示格式
         <Input
           value={state.setting.formatDate}
-          onChange={state.onChange.bind(
-            null,
-            'formatDate',
-            'target.value',
-          )}
+          onChange={state.onChange.bind(null, 'formatDate')}
         />
       </div>
     </React.Fragment>

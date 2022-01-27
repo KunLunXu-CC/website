@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const files = useSelector((state) => _.get(state, 'album.upload.files'));
+  const files = useSelector((state) => state.album?.upload?.files);
 
   // 添加文件
   const addFiles = (e) => {

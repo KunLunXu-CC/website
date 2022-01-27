@@ -11,7 +11,7 @@ import { put, call, takeEvery, select } from 'redux-saga/effects';
  */
 const getPhotos = function * ({ search }) {
   const params = {
-    ...yield select((state) => _.get(state, 'album.search')),
+    ...yield select((state) => state.album?.search),
     ...search,
   };
 
@@ -35,9 +35,7 @@ const getPhotos = function * ({ search }) {
  * 2. 重新查询数据
  */
 const upload = function * () {
-  const { type, files } = yield select((state) => (
-    _.get(state, 'album.upload')
-  ));
+  const { type, files } = yield select((state) => state.album?.upload);
 
   if (files.length < 1) {
     return message({
@@ -67,7 +65,7 @@ const upload = function * () {
  */
 const removePhotos = function * ({ id }) {
   const { sourceFileName, type } = yield select(
-    (state) => _.get(state, 'album.search'),
+    (state) => state.album?.search,
   );
   const conds = { id };
 

@@ -40,7 +40,7 @@ const listData = [
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const type = useSelector((state) => _.get(state, 'album.search.type'));
+  const type = useSelector((state) => state.album?.search?.type);
 
   // 菜单点击事件
   const onClick = ({ key }) => {

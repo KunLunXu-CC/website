@@ -18,7 +18,7 @@ const login = function * ({ account, password } = {}) {
   });
   yield put({
     type: 'app/setDocks',
-    auth: _.get(user, 'role.auth') || [],
+    auth: user?.role?.auth ?? [],
   });
 };
 

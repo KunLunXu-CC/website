@@ -9,7 +9,7 @@ const useStateHook = () => {
   const dispatch = useDispatch();
 
   const article = useSelector(
-    (state) => _.get(state, `modal[${REVOKE_CONFIRM}].article`),
+    (state) => state.modal?.[REVOKE_CONFIRM]?.article,
   );
 
   // 点击取消按钮
@@ -48,7 +48,7 @@ export default () => {
       onCancel={state.onCancel}>
       撤销文章:
       <span className={scss['article-name']}>
-        {_.get(state, 'article.name') || '---'}
+        {state.article?.name ?? '---'}
       </span>
       ？
     </Modal>

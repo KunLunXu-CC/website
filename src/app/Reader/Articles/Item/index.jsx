@@ -10,7 +10,7 @@ const useStateHook = (props) => {
   const dispatch = useDispatch();
   // 缩略图列表, 当文章未设置缩略图则需要从该列表中随机获取一张作为缩略图
   const thumbs = useSelector((state) => (
-    _.get(state, 'photos.thumb') || []
+    state.photos?.thumb ?? []
   ));
 
   // 缩略图

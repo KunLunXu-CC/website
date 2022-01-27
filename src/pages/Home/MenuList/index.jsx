@@ -10,7 +10,7 @@ import { Icon } from 'qyrc';
 import { useSelector }  from 'react-redux';
 
 const useStateHook = () => {
-  const opens = useSelector((state) => _.get(state, 'app.opens'));
+  const opens = useSelector((state) => state.app?.opens);
 
   // 菜单 className
   const menuClassName = React.useMemo(() => {

@@ -54,7 +54,7 @@ const useStateHook = () => {
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = React.useMemo(() => (
-    _.get(works.find((v) => v.action), 'article')
+    works.find((v) => v.action)?.article
   ), [works]);
 
   // 渲染菜单列表

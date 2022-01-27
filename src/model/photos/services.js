@@ -31,7 +31,7 @@ export const getPhotos = async () => {
         }`,
     },
   });
-  return _.get(res, 'data.data.photos.list') || [];
+  return res?.data.data.photos.list ?? [];
 };
 
 // 占位: 要不然 eslint 将会抛错

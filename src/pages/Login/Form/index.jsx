@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const avatars = useSelector(
-    (state) => _.get(state, 'photos.avatar') || [],
+    (state) => state.photos?.avatar ?? [],
   );
 
   const history = useHistory();

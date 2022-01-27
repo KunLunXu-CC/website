@@ -10,7 +10,7 @@ const useStateHook = () => {
 
   // 获取当前文章内容
   const article = useSelector(
-    (state) => _.get(state, `modal[${RELEASE_CONFIRM}].article`),
+    (state) => state.modal?.[RELEASE_CONFIRM]?.article,
   );
 
   // 点击取消
@@ -49,7 +49,7 @@ export default () => {
       onCancel={state.onCancel}>
       发布文章:
       <span className={scss['article-name']}>
-        {_.get(state, 'article.name') || '---'}
+        {state.article?.name ?? '---'}
       </span>
       ？
     </Modal>

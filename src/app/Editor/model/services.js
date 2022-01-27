@@ -35,8 +35,8 @@ export const initData = async () => {
     },
   });
   return {
-    tags: _.get(res, 'data.data.datasetsfroms.list') || [],
-    articles: _.get(res, 'data.data.articles.list') || [],
+    tags: res?.data?.data?.datasetsfroms?.list ?? [],
+    articles: res?.data?.data?.articles?.list ?? [],
   };
 };
 
@@ -68,7 +68,7 @@ export const createDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createDatasetsfroms') || {};
+  return res?.data?.data?.createDatasetsfroms ?? {};
 };
 
 // 更新字典
@@ -102,7 +102,7 @@ export const updateDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.updateDatasetsfroms') || {};
+  return res?.data?.data?.updateDatasetsfroms ?? {};
 };
 
 // 删除字典
@@ -133,7 +133,7 @@ export const removeDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.removeDatasetsfroms') || {};
+  return res?.data?.data?.removeDatasetsfroms ?? {};
 };
 
 // 创建文章
@@ -163,7 +163,7 @@ export const createArticles = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createArticles') || {};
+  return res?.data?.data?.createArticles ?? {};
 };
 
 // 更新文章
@@ -199,7 +199,7 @@ export const updateArticles = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.updateArticles') || {};
+  return res?.data?.data?.updateArticles ?? {};
 };
 
 // 删除文章
@@ -228,7 +228,7 @@ export const removeArticles = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.removeArticles') || {};
+  return res?.data?.data?.removeArticles ?? {};
 };
 
 // 发布
@@ -261,7 +261,7 @@ export const releaseArticles = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.releaseArticles') || {};
+  return res?.data?.data?.releaseArticles ?? {};
 };
 
 // 撤销(取消发布)
@@ -294,7 +294,7 @@ export const revokeArticles = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.revokeArticles') || {};
+  return res?.data?.data?.revokeArticles ?? {};
 };
 
 // 图片上传
@@ -317,5 +317,5 @@ export const uploadPhotos = async ({
     timeout: 1000 * 60 * 30,
     headers: { 'Content-Type': 'multipart/form-data' },
   });
-  return _.get(res, 'data.data');
+  return res?.data?.data;
 };

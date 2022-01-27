@@ -25,11 +25,11 @@ const useStateHook = (props) => {
 
   // 体重
   const weight = useMemo(() => (
-    _.get(diary, 'bodyIndex.weight') || '---'
+    diary?.bodyIndex?.weight ?? '---'
   ), [diary]);
 
   // 花销
-  const expenses = useMemo(() => (_.get(diary, 'bill') || []).reduce(
+  const expenses = useMemo(() => (diary?.bill ?? []).reduce(
     (total, ele) => (total + ele.expend || 0), 0,
   ).toFixed(1), [diary]);
 

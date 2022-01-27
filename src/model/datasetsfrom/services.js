@@ -35,7 +35,7 @@ export const getDatasetsfroms = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.datasetsfroms') || {};
+  return res?.data?.data?.datasetsfroms ?? {};
 };
 
 export const space = {};

@@ -21,7 +21,7 @@ const useStateHook = () => {
 
   // 当前选中项
   const selected = React.useMemo(() => (
-    _.get(works.find((v) => v.action), 'article')
+    works.find((v) => v.action)?.article
   ), [works]);
 
   // 点击 tab 切换事件: 将当前窗口设置为活动窗口

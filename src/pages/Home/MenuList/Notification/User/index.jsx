@@ -16,8 +16,8 @@ const useStateHook = () => {
   }, []);
 
   const { avatars, user  } = useSelector((state) => ({
-    user: _.get(state, 'user'),
-    avatars: _.get(state, 'photos.avatar'),
+    user: state.user,
+    avatars: state.photos?.avatar,
   }));
 
   // 随机头像

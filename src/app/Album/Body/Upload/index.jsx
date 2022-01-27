@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
-  const show = useSelector((state) => _.get(state, 'album.upload.show'));
+  const show = useSelector((state) => state.album?.upload?.show);
 
   const onClose = () => {
     dispatch({ type: 'album/closeUploadForm' });

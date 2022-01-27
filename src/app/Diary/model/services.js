@@ -42,7 +42,7 @@ export const getDiaries = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.diaries.list');
+  return res?.data?.data?.diaries?.list ?? [];
 };
 
 // 创建日记
@@ -64,7 +64,7 @@ export const createDiaries = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.createDiaries') || {};
+  return res?.data?.data?.createDiaries ?? {};
 };
 
 // 更新日记
@@ -87,7 +87,7 @@ export const updateDiaries = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.updateDiaries') || {};
+  return res?.data?.data?.updateDiaries ?? {};
 };
 
 // 获取账单统计
@@ -123,7 +123,7 @@ export const getStatsBill = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.statsBill') || {};
+  return res?.data?.data?.statsBill ?? {};
 };
 
 // 获取 bodyIndex 列表
@@ -148,5 +148,5 @@ export const getStatsBodyIndex = async ({
         }`,
     },
   });
-  return _.get(res, 'data.data.diaries.list');
+  return res?.data?.data?.diaries?.list ?? [];
 };
