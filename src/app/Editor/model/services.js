@@ -2,300 +2,204 @@ import axios from '@utils/request';
 import { DATASETSFROM_CODE } from '@config/consts';
 
 // 初始化: 一次性获取所有数据并在前端进行存储
-export const initData = async () => {
-  const res = await axios({
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      query: `
-        query {
-          datasetsfroms(
-            search: { code: [
-              ${DATASETSFROM_CODE.ARTICLE_TAG.VALUE}
-            ]},
-          ){
-            list {
-              id value code desc icon name
-              parent {
-                id value code desc icon name
-              }
-            }
+export const initData = axios({
+  query: `
+    query {
+      datasetsfroms(
+        search: { code: [
+          ${DATASETSFROM_CODE.ARTICLE_TAG.VALUE}
+        ]},
+      ){
+        list {
+          id value code desc icon name
+          parent {
+            id value code desc icon name
           }
-          articles {
-            list {
-              id
-              name
-              thumb
-              status
-              content
-              tags { id name }
-            }
-          }
-        }`,
-    },
-  });
-  return {
-    tags: res?.data?.data?.datasetsfroms?.list ?? [],
-    articles: res?.data?.data?.articles?.list ?? [],
-  };
-};
+        }
+      }
+      articles {
+        list {
+          id
+          name
+          thumb
+          status
+          content
+          tags { id name }
+        }
+      }
+    }`,
+  getRes: (res) => ({
+    tags: res.datasetsfroms?.list ?? [],
+    articles: res.articles?.list ?? [],
+  }),
+});
 
 // 创建字典
-export const createDatasetsfroms = async ({
-  spin,
-  body,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { body },
-      query: `
-        mutation(
-          $body: [DatasetsfromFields!]!,
-        ){
-          createDatasetsfroms(
-            body: $body,
-          ){
-            change {
-              id value code desc icon name
-              parent {
-                id value code desc icon name
-              }
-            }
+export const createDatasetsfroms = axios({
+  query: `
+    mutation(
+      $body: [DatasetsfromFields!]!,
+    ){
+      createDatasetsfroms(
+        body: $body,
+      ){
+        change {
+          id value code desc icon name
+          parent {
+            id value code desc icon name
           }
-        }`,
-    },
-  });
-  return res?.data?.data?.createDatasetsfroms ?? {};
-};
+        }
+      }
+    }`,
+  getRes: (res) => res.createDatasetsfroms ?? {},
+});
 
 // 更新字典
-export const updateDatasetsfroms = async ({
-  spin,
-  body,
-  conds,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { body, conds },
-      query: `
-        mutation(
-          $body: DatasetsfromFields!
-          $conds: DatasetsfromSearch!
-        ){
-          updateDatasetsfroms(
-            body: $body,
-            conds: $conds,
-          ){
-            change {
-              id value code desc icon name
-              parent {
-                id value code desc icon name
-              }
-            }
+export const updateDatasetsfroms = axios({
+  query: `
+    mutation(
+      $body: DatasetsfromFields!
+      $conds: DatasetsfromSearch!
+    ){
+      updateDatasetsfroms(
+        body: $body,
+        conds: $conds,
+      ){
+        change {
+          id value code desc icon name
+          parent {
+            id value code desc icon name
           }
-        }`,
-    },
-  });
-  return res?.data?.data?.updateDatasetsfroms ?? {};
-};
+        }
+      }
+    }`,
+  getRes: (res) => res.updateDatasetsfroms ?? {},
+});
 
 // 删除字典
-export const removeDatasetsfroms = async ({
-  spin,
-  conds,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds },
-      query: `
-        mutation(
-          $conds: DatasetsfromSearch!
-        ){
-          removeDatasetsfroms(
-            conds: $conds,
-          ){
-            change {
-              id value code desc icon name
-              parent {
-                id value code desc icon name
-              }
-            }
+export const removeDatasetsfroms = axios({
+  query: `
+    mutation(
+      $conds: DatasetsfromSearch!
+    ){
+      removeDatasetsfroms(
+        conds: $conds,
+      ){
+        change {
+          id value code desc icon name
+          parent {
+            id value code desc icon name
           }
-        }`,
-    },
-  });
-  return res?.data?.data?.removeDatasetsfroms ?? {};
-};
+        }
+      }
+    }`,
+  getRes: (res) => res.removeDatasetsfroms ?? {},
+});
 
 // 创建文章
-export const createArticles = async ({
-  spin,
-  body,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { body },
-      query: `
-        mutation(
-          $body: [ArticleFields!]!,
-        ){
-          createArticles(
-            body: $body,
-          ){
-            change {
-              id
-              name
-              tags { id name }
-            }
-          }
-        }`,
-    },
-  });
-  return res?.data?.data?.createArticles ?? {};
-};
+export const createArticles = axios({
+  query: `
+    mutation(
+      $body: [ArticleFields!]!,
+    ){
+      createArticles(
+        body: $body,
+      ){
+        change {
+          id
+          name
+          tags { id name }
+        }
+      }
+    }`,
+  getRes: (res) => res.createArticles ?? {},
+});
 
 // 更新文章
-export const updateArticles = async ({
-  spin,
-  body,
-  conds,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds, body },
-      query: `
-        mutation(
-          $body: ArticleFields!,
-          $conds: ArticleSearch!,
-        ){
-          updateArticles(
-            body: $body,
-            conds: $conds,
-          ){
-            change {
-              id
-              name
-              content
-              thumb
-              status
-              tags { id name }
-            }
-          }
-        }`,
-    },
-  });
-  return res?.data?.data?.updateArticles ?? {};
-};
+export const updateArticles = axios({
+  query: `
+    mutation(
+      $body: ArticleFields!,
+      $conds: ArticleSearch!,
+    ){
+      updateArticles(
+        body: $body,
+        conds: $conds,
+      ){
+        change {
+          id
+          name
+          content
+          thumb
+          status
+          tags { id name }
+        }
+      }
+    }`,
+  getRes: (res) =>  res.updateArticles ?? {},
+});
 
 // 删除文章
-export const removeArticles = async ({
-  spin,
-  conds,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds },
-      query: `
-        mutation(
-          $conds: ArticleSearch!
-        ){
-          removeArticles(
-            conds: $conds,
-          ){
-            change {
-              id
-              name
-            }
-          }
-        }`,
-    },
-  });
-  return res?.data?.data?.removeArticles ?? {};
-};
+export const removeArticles = axios({
+  query: `
+    mutation(
+      $conds: ArticleSearch!
+    ){
+      removeArticles(
+        conds: $conds,
+      ){
+        change {
+          id
+          name
+        }
+      }
+    }`,
+  getRes: (res) => res.removeArticles ?? {},
+});
 
 // 发布
-export const releaseArticles = async ({
-  spin,
-  conds,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds },
-      query: `
-        mutation(
-          $conds: ArticleSearch!,
-        ){
-          releaseArticles(
-            conds: $conds,
-          ){
-            change {
-              id
-              name
-              content
-              thumb
-              status
-              tags { id name }
-            }
-          }
-        }`,
-    },
-  });
-  return res?.data?.data?.releaseArticles ?? {};
-};
+export const releaseArticles = axios({
+  query: `
+    mutation(
+      $conds: ArticleSearch!,
+    ){
+      releaseArticles(
+        conds: $conds,
+      ){
+        change {
+          id
+          name
+          content
+          thumb
+          status
+          tags { id name }
+        }
+      }
+    }`,
+  getRes: (res) => res.releaseArticles ?? {},
+});
 
 // 撤销(取消发布)
-export const revokeArticles = async ({
-  spin,
-  conds,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds },
-      query: `
-        mutation(
-          $conds: ArticleSearch!,
-        ){
-          revokeArticles(
-            conds: $conds,
-          ){
-            change {
-              id
-              name
-              content
-              thumb
-              status
-              tags { id name }
-            }
-          }
-        }`,
-    },
-  });
-  return res?.data?.data?.revokeArticles ?? {};
-};
+export const revokeArticles = axios({
+  query: `
+    mutation(
+      $conds: ArticleSearch!,
+    ){
+      revokeArticles(
+        conds: $conds,
+      ){
+        change {
+          id
+          name
+          content
+          thumb
+          status
+          tags { id name }
+        }
+      }
+    }`,
+  getRes: (res) => res.revokeArticles ?? {},
+});
 
 // 图片上传
 export const uploadPhotos = async ({

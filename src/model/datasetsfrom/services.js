@@ -4,38 +4,28 @@ import axios from '@utils/request';
 const BASE_FIELD = 'id value code desc icon name';
 
 // 获取字典
-export const getDatasetsfroms = async ({
-  spin,
-  search,
-} = {}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { search, orderBy: { value: -1 } },
-      query: `
-        query(
-          $orderBy: OrderBy
-          $pagination: Pagination
-          $search: DatasetsfromSearch
-        ){
-          datasetsfroms(
-            search: $search,
-            orderBy: $orderBy,
-            pagination: $pagination,
-          ){
-            list {
-              ${BASE_FIELD}
-              parent {
-                ${BASE_FIELD}
-              }
-            }
+// TODO: 临时删除排序, 后面再考虑是否添加 variables: { search, orderBy: { value: -1 } }
+export const getDatasetsfroms = axios({
+  query: `
+    query(
+      $orderBy: OrderBy
+      $pagination: Pagination
+      $search: DatasetsfromSearch
+    ){
+      datasetsfroms(
+        search: $search,
+        orderBy: $orderBy,
+        pagination: $pagination,
+      ){
+        list {
+          ${BASE_FIELD}
+          parent {
+            ${BASE_FIELD}
           }
-        }`,
-    },
-  });
-  return res?.data?.data?.datasetsfroms ?? {};
-};
+        }
+      }
+    }`,
+  getRes: (res) => res.datasetsfroms ?? {},
+});
 
 export const space = {};

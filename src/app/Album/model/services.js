@@ -1,5 +1,4 @@
-
-import axios from '@utils/request';
+import axios, { request } from '@utils/request';
 
 /**
  * 上传文件
@@ -16,7 +15,7 @@ export const uploadPhotos = async ({
   _.isFinite(type) && formData.append('type', type);
   files.forEach((v) => (formData.append('file', v)));
 
-  const res = await axios({
+  const res = await request({
     spin,
     data: formData,
     method: 'post',
@@ -27,71 +26,48 @@ export const uploadPhotos = async ({
   return res.data.data;
 };
 
-
 /**
  * 获取所有图片: 桌面、缩略图、头像
- * @return {Objject[]} 返回查询到的列表数据
+ * @return {Object[]} 返回查询到的列表数据
  */
-export const getPhotos = async ({ search, spin }) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { search },
-      query: `
-        query($search: PhotoSearch){
-          photos(search: $search){
-            list {
-              id
-              name
-              type
-            }
-          }
-        }`,
-    },
-  });
-
-  return res?.data?.data?.photos?.list ?? [];
-};
+export const getPhotos = axios({
+  query: `
+    query($search: PhotoSearch){
+      photos(search: $search){
+        list {
+          id
+          name
+          type
+        }
+      }
+    }`,
+  getRes: (res) => res.photos?.list ?? [],
+});
 
 /**
  * 移除图片
  * @return {void 0}
  */
-export const removePhotos = async ({
-  spin,
-  conds,
-  search,
-}) => {
-  const res = await axios({
-    spin,
-    url: GLOBAL_SERVICER.GRAPHQL_URL,
-    method: 'post',
-    data: {
-      variables: { conds, search },
-      query: `
-        mutation(
-          $conds: PhotoSearch!,
-          $search: PhotoSearch,
-        ){
-          removePhotos(
-            conds: $conds,
-            search: $search,
-            orderBy: { creationTime: -1 }
-          ){
-            list {
-              id
-              url
-              type
-              name
-              creationTime
-              sourceFileName
-            }
-          }
-        }`,
-    },
-  });
-
-  return res?.data?.data?.removePhotos?.list ?? [];
-};
+export const removePhotos = axios({
+  query: `
+    mutation(
+      $conds: PhotoSearch!,
+      $search: PhotoSearch,
+    ){
+      removePhotos(
+        conds: $conds,
+        search: $search,
+        orderBy: { creationTime: -1 }
+      ){
+        list {
+          id
+          url
+          type
+          name
+          creationTime
+          sourceFileName
+        }
+      }
+    }`,
+  getRes: (res) => res.removePhotos?.list ?? [],
+});
