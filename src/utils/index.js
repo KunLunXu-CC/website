@@ -15,13 +15,6 @@ export const filterObject = (obj, filterVaslue = []) => {
 };
 
 /**
- * 通用打印: 当前为开发环境下才允许打印
- */
-export const log = (...args) => {
-  _DEV_ && console.log(...args);
-};
-
-/**
  * 防抖
  * @param {Function} fn  传入函数
  * @param {Number} wait  等待时长

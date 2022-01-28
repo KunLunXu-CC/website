@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { message } from 'antd';
-import { log } from '@utils';
 import { store } from '@model';
 
 // 创建 axios 实例
@@ -45,17 +44,28 @@ export const eject = ({ request, response }) => {
   response && instance.interceptors.response.eject(response);
 };
 
-// 添加拦截器: 打印数据
+// 添加拦截器: 请求成功打印请求信息
 use({
-  request: [
-    (config) => {
-      log('request:', config);
-      return config;
-    },
-  ],
   response: [
     (response) => {
-      log('response:', response);
+      const { request, config, data } = response;
+      console.group(
+        `%c request ${request.responseURL} => ${data?.resCode}`,
+        'color: #48a8ee;',
+      );
+
+      try {
+        // graphql 请求相关参数
+        const { query, variables } = JSON.parse(config.data) ?? {};
+        console.log('%c graphql.query: ', 'color: #67ac5b;', query);
+        console.log('%c graphql.variables: ', 'color: #67ac5b;', variables);
+      } catch {
+        console.log('$c data', 'color: #67ac5b;', config.data);
+      }
+
+      console.log('%c response.data: ', 'color: #67ac5b;', data); // 请求响应数据
+      console.log('%c response: ', 'color: #67ac5b;', response); // 完整信息
+      console.groupEnd();
       return response;
     },
   ],

@@ -35,7 +35,10 @@ const getPhotos = function * ({ search }) {
  * 2. 重新查询数据
  */
 const upload = function * () {
-  const { type, files } = yield select((state) => state.album?.upload);
+  const { type, searchType, files } = yield select((state) => ({
+    ...state.album?.upload,
+    searchType: state.album.search?.type,
+  }));
 
   if (files.length < 1) {
     return message({
@@ -55,7 +58,10 @@ const upload = function * () {
     message: '上传成功!',
   });
 
-  yield call(getPhotos, { search: { type, files } });
+  // 当前菜单栏为所有, 或者上传类型等于当前查询的类型
+  if (searchType === 'all' || Number(type) === Number(searchType)) {
+    yield call(getPhotos, { search: {} });
+  }
 };
 
 /**
