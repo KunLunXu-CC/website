@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.0.10](https://github.com/qianyin925/blog-client/compare/v3.0.9...v3.0.10) (2022-03-03)
+
 ### [3.0.9](https://github.com/qianyin925/blog-client/compare/v3.0.8...v3.0.9) (2022-02-27)
 
 ### [3.0.8](https://github.com/qianyin925/blog-client/compare/v3.0.7...v3.0.8) (2022-02-27)
