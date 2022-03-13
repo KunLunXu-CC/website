@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/qianyin925/blog-client/compare/v3.0.13...v3.1.0) (2022-03-13)
+
+
+### Features
+
+* 🎸 【菜单模糊失效处理】 https://www.tapd.cn/58837035/prong/stories/view/1158837035001000758 ([e11843b](https://github.com/qianyin925/blog-client/commit/e11843bfe12ca96a3ca6fd2c7697f642670cbcda))
+* 🎸 【简化版实现】 https://www.tapd.cn/58837035/prong/stories/view/1158837035001000749 ([6c3ed48](https://github.com/qianyin925/blog-client/commit/6c3ed4803fa2a560ca91ae9ae9b56d201cfa3100))
+* 🎸 【前台日志请求信息打印】 https://www.tapd.cn/58837035/prong/stories/view/1158837035001000762 ([5f8e3aa](https://github.com/qianyin925/blog-client/commit/5f8e3aaf7f6cfa520104ed41fac89969342f3932))
+* 🎸 【client】_.get 全局替换为 ?. ([6107ed2](https://github.com/qianyin925/blog-client/commit/6107ed234adeca4b056dd2a358ef5dc215f60877))
+* 🎸 【GRAPHQL search 方法抽离】 https://www.tapd.cn/58837035/prong/stories/view/1158837035001000760 ([b55b197](https://github.com/qianyin925/blog-client/commit/b55b1973ccea957741b9e601314c3fb834e2eaaa))
+
 ### [3.0.13](https://github.com/qianyin925/blog-client/compare/v3.0.12...v3.0.13) (2022-03-03)
 
 ### [3.0.12](https://github.com/qianyin925/blog-client/compare/v3.0.11...v3.0.12) (2022-03-03)
