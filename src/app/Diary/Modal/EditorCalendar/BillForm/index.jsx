@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Item from './Item';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { Form, Empty } from 'antd';
 
 export default (props) => {

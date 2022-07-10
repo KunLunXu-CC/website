@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import scss from './index.module.scss';
 
-import { Image, Icon } from 'qyrc';
+import { Image, Icon } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 

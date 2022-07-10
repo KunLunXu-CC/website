@@ -7,7 +7,7 @@ import {
   Form,
   Empty,
 } from 'antd';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 
 export default (props) => {
   const { tools: Tools } = props;

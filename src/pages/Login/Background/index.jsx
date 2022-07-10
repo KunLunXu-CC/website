@@ -5,7 +5,7 @@ import Error from './Error';
 import Loading from './Loading';
 import scss from './index.module.scss';
 
-import { Image } from 'qyrc';
+import { Image } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 

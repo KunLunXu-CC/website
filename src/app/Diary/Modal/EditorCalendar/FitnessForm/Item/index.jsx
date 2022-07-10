@@ -9,7 +9,7 @@ import {
   Form,
   Select,
 } from 'antd';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 import { DATASETSFROM_CODE } from '@config/consts';
 

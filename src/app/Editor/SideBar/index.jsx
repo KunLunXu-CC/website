@@ -2,7 +2,7 @@ import React from 'react';
 import Resource from './Resource';
 import classNames from 'classnames';
 import scss from './index.module.scss';
-import { VariableContainer } from 'qyrc';
+import { VariableContainer } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SIDE_MIN_WIDTH = 4;  // 菜单最小宽度

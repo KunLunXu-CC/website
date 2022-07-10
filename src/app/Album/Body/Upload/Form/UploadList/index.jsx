@@ -1,7 +1,7 @@
 import React from 'react';
 import scss from './index.module.scss';
 
-import { Icon, Image } from 'qyrc';
+import { Icon, Image } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {

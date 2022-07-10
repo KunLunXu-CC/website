@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 import { MENU_LIST, MODAL_CODE_DATASETSFROM_EDITOR } from '../consts';
 

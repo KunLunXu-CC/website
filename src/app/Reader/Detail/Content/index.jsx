@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Markdown } from 'qyrc';
+import { Markdown } from '@kunlunxu/brick';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const options = {

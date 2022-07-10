@@ -43,12 +43,12 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@kunlunxu/brick": "^2.2.2",
     "antd": "^4.16.6",
     "axios": "^0.21.1",
     "jsencrypt": "^3.2.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
-    "qyrc": "^1.4.15",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",

@@ -2,7 +2,7 @@ import React, {
   useCallback,
 } from 'react';
 
-import { CodeEditor } from 'qyrc';
+import { Markdown } from '@kunlunxu/brick';
 import { uploadPhotos } from '../../model/services';
 import { useDispatch, useSelector } from 'react-redux';
 import { APP_CODE, PHOTO_TYPE } from '@config/consts';
@@ -67,7 +67,7 @@ export default (props) => {
   const state = useStateHook(props);
 
   return (
-    <CodeEditor
+    <Markdown
       options={OPTIONS}
       onSave={state.onSave}
       onChange={state.onChange}

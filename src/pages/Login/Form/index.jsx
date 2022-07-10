@@ -4,7 +4,7 @@ import React, {
 import scss from './index.module.scss';
 
 import { rsa } from '@utils';
-import { Image, Icon } from 'qyrc';
+import { Image, Icon } from '@kunlunxu/brick';
 import { Input, Form, Button } from 'antd';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 import { useHistory } from 'react-router-dom';

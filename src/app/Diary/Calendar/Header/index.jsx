@@ -6,7 +6,7 @@ import moment from 'moment';
 import scss from './index.module.scss';
 
 import { Input } from 'antd';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useDispatch } from 'react-redux';
 
 // 获取区间内所有时间

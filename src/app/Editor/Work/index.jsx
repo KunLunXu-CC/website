@@ -5,7 +5,7 @@ import scss from './index.module.scss';
 import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { APP_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 

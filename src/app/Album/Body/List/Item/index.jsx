@@ -4,7 +4,7 @@ import React, {
 import moment from 'moment';
 import scss from './index.module.scss';
 
-import { Image, Icon } from 'qyrc';
+import { Image, Icon } from '@kunlunxu/brick';
 import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = (props) => {

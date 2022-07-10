@@ -5,7 +5,7 @@ import React, {
 import scss from './index.module.scss';
 
 import { Modal } from 'antd';
-import { Icon, Image } from 'qyrc';
+import { Icon, Image } from '@kunlunxu/brick';
 import { THUMB_SETTING } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
 

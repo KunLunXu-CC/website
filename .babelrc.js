@@ -6,12 +6,12 @@ module.exports = {
       "libraryDirectory": "es",
       "style": "css"
     }, "antd"],
-    // 按需加载 - qyrc
+    // 按需加载 - @kunlunxu/brick
     ["import", {
-      "libraryName": "qyrc",
+      "libraryName": "@kunlunxu/brick",
       "libraryDirectory": "es",
       "style": true
-    }, "qyrc"],
+    }, "@kunlunxu/brick"],
   ],
   'presets': [
     '@babel/preset-react',

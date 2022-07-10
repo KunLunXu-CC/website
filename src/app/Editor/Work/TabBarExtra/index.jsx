@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import scss from './index.module.scss';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 import {

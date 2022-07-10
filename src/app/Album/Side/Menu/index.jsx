@@ -2,7 +2,7 @@ import React from 'react';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { PHOTO_TYPE } from '@config/consts';
 import { useSelector, useDispatch } from 'react-redux';
 

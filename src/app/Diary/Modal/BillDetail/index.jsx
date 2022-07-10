@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Echart } from 'qyrc';
+import { Echarts } from '@kunlunxu/brick';
 import { Modal, Button } from 'antd';
 import { STATS_BILL_DETAIL } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -104,7 +104,7 @@ export default () => {
           关闭
         </Button>
       )}>
-      <Echart
+      <Echarts
         height={300}
         option={state.option}
       />

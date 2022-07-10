@@ -4,7 +4,7 @@ import React, {
 import apps from '@app';
 import scss from './index.module.scss';
 
-import { Window } from 'qyrc';
+import { Window } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {

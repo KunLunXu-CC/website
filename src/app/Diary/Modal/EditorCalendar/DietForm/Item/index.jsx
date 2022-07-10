@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import scss from './index.module.scss';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 import { DATASETSFROM_CODE } from '@config/consts';
 import { Row, Col, Select, Input, Form } from 'antd';

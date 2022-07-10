@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 import styled from 'styled-components';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 
 const DockApp = styled.div`

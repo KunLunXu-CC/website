@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../Card';
 import scss from './index.module.scss';
 
-import { Image, Icon } from 'qyrc';
+import { Image, Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';

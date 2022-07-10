@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { Dropdown, Menu, Input } from 'antd';
 import { MOVE } from '../../../consts';
 import { ARTICLE_STATUS } from '@config/consts';

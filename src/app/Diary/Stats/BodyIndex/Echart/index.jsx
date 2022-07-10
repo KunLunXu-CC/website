@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Echart } from 'qyrc';
+import { Echarts } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {
@@ -71,7 +71,7 @@ export default (props) => {
   const state = useStateHook(props);
 
   return (
-    <Echart
+    <Echarts
       height={300}
       option={state.option}
     />

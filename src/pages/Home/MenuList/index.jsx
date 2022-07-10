@@ -6,7 +6,7 @@ import Fullscreen from './Fullscreen';
 import scss from './index.module.scss';
 import Notification from './Notification';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useSelector }  from 'react-redux';
 
 const useStateHook = () => {

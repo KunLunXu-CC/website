@@ -2,7 +2,7 @@ import React from 'react';
 import scss from './index.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { VariableContainer, Markdown, Icon } from 'qyrc';
+import { VariableContainer, Markdown, Icon } from '@kunlunxu/brick';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {

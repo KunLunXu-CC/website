@@ -29,11 +29,11 @@
     justify-content: space-between;
 
     :global {
-      .qyrc-icon {
+      .brick-icon {
         color: rgba($color: #fff, $alpha: 0.3);
       }
 
-      .qyrc-icon:hover {
+      .brick-icon:hover {
         color: #40a9ff;
       }
     }

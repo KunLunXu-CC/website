@@ -1,7 +1,7 @@
 import React from 'react';
 import useFullscreen from '@utils/useFullscreen';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {

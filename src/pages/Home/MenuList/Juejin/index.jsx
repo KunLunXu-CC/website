@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 
 export default () => (
   <a

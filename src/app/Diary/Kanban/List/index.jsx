@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
 
 const useStateHook = () => {
   const [active, setActive] = React.useState(false);

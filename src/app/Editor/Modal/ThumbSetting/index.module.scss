@@ -24,14 +24,14 @@
   border: 1px dashed rgba($color: #fff, $alpha: 0.2);
 
   :global {
-    .qyrc-image-body {
+    .brick-image-body {
       display: flex;
       align-items: center;
       transition: all 0.5s;
       justify-content: center;
     }
 
-    .qyrc-icon {
+    .brick-icon {
       opacity: 0;
       transition: all 0.5s;
     }
@@ -42,11 +42,11 @@
     border-color: rgba($color: #1890ff, $alpha: 0.6);
 
     :global {
-      .qyrc-icon {
+      .brick-icon {
         opacity: 1;
       }
 
-      .qyrc-image-body {
+      .brick-image-body {
         background: rgba($color: #000, $alpha: 0.5);
       }
     }
