@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
@@ -37,7 +37,7 @@ const listData = [
   },
 ];
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
 
   const type = useSelector((state) => state.album?.search?.type);
@@ -54,30 +54,24 @@ const useStateHook = () => {
     });
   };
 
-  return { onClick, type };
-};
-
-export default () => {
-  const state = useStateHook();
+  const items = useMemo(() => listData.map((value) => ({
+    key: value.key,
+    label: (
+      <>
+        <Icon type={value.icon} />
+        {value.name}
+      </>
+    ),
+  })), []);
 
   return (
     <div className={scss.menu}>
       <Menu
         mode="inline"
-        onClick={state.onClick}
-        selectedKeys={[`${state.type}`]}>
-        {listData.map((value) => (
-          <Menu.Item key={`${value.key}`}>
-            <Icon
-              type={value.icon}
-              className="anticon"
-            />
-            <span>
-              {value.name}
-            </span>
-          </Menu.Item>
-        ))}
-      </Menu>
+        items={items}
+        onClick={onClick}
+        selectedKeys={[`${type}`]}
+      />
     </div>
   );
 };

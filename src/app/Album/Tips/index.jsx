@@ -1,6 +1,4 @@
-import React, {
-  Fragment,
-} from 'react';
+import React from 'react';
 import scss from './index.module.scss';
 
 import { Spin } from 'antd';
@@ -12,7 +10,7 @@ export default () => {
     (state) => state.spin?.[APP_CODE.ALBUM],
   );
   return (
-    <Fragment>
+    <>
       {show
         ? (
           <Spin
@@ -26,6 +24,6 @@ export default () => {
         id={APP_CODE.ALBUM}
         className={scss.notification}
       />
-    </Fragment>
+    </>
   );
 };

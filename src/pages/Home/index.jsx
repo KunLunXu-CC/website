@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import AppList from './AppList';
 import Desktop from './Desktop';
@@ -12,10 +12,10 @@ import MenuList from './MenuList';
  * AppList z-index = 0（默认）
  */
 export default () => (
-  <Fragment>
+  <>
     <AppList />
     <MenuList />
     <DockList />
     <Desktop />
-  </Fragment>
+  </>
 );

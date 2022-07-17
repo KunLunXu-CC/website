@@ -1,6 +1,4 @@
-import React, {
-  Fragment,
-} from 'react';
+import React from 'react';
 import scss from './index.module.scss';
 
 import { Spin } from 'antd';
@@ -17,7 +15,7 @@ const useStateHook = () => {
 export default () => {
   const state = useStateHook();
   return (
-    <Fragment>
+    <>
       {state.showSpin
         ? (
           <Spin
@@ -30,6 +28,6 @@ export default () => {
         id={APP_CODE.DIARY}
         className={scss.notification}
       />
-    </Fragment>
+    </>
   );
 };

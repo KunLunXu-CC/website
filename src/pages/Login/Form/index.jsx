@@ -4,10 +4,10 @@ import React, {
 import scss from './index.module.scss';
 
 import { rsa } from '@utils';
-import { Image, Icon } from '@kunlunxu/brick';
 import { Input, Form, Button } from 'antd';
+import { Image, Icon } from '@kunlunxu/brick';
+import { useNavigate } from 'react-router-dom';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
-import { useHistory } from 'react-router-dom';
 import { getPublicKey } from '@model/user/services';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -16,7 +16,8 @@ const useStateHook = () => {
     (state) => state.photos?.avatar ?? [],
   );
 
-  const history = useHistory();
+  const navigate = useNavigate();
+
 
   const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ const useStateHook = () => {
       type: 'user/login',
       password: rsa(password, await publicKey),
     });
-    history.push('/');
+    navigate('/');
   };
 
   return { onLogin, avatar, form };

@@ -4,15 +4,15 @@ import scss from './index.module.scss';
 
 import { Image, Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // 退出
   const signOut = React.useCallback(() => {
-    history.push('/login');
+    navigate('/login');
   }, []);
 
   const { avatars, user  } = useSelector((state) => ({

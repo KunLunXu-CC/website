@@ -95,14 +95,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: 'assets/[hash].[ext]',
-          },
-        }],
+        // 图片、字体
+        test: [/\.(png|jpg|gif|svg)$/, /\.(ttf|woff|eot)$/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[hash].[ext]',
+        },
       },
       {
         test: /\.(text|md)$/,

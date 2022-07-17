@@ -28,7 +28,7 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <React.Fragment>
+    <>
       <Target onClick={state.onToogle} />
       <Drawer
         width={374}
@@ -40,6 +40,6 @@ export default () => {
         className={scss.notification}>
         <User />
       </Drawer>
-    </React.Fragment>
+    </>
   );
 };

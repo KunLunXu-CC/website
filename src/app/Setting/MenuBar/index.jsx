@@ -25,7 +25,7 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <React.Fragment>
+    <>
       <Checkbox
         checked={state.setting.showFullScreenOnMenu}
         onChange={state.onChange.bind(null, 'showFullScreenOnMenu')}>
@@ -43,6 +43,6 @@ export default () => {
           onChange={state.onChange.bind(null, 'formatDate')}
         />
       </div>
-    </React.Fragment>
+    </>
   );
 };

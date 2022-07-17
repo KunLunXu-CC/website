@@ -1,6 +1,4 @@
-import React, {
-  Fragment,
-} from 'react';
+import React from 'react';
 import Item from './Item';
 
 import { Icon } from '@kunlunxu/brick';
@@ -12,7 +10,7 @@ export default (props) => {
   return (
     <Form.List name="bill">
       {(fields, { add, remove }) => (
-        <Fragment>
+        <>
           {fields.map((field) => (
             <Item
               field={field}
@@ -30,7 +28,7 @@ export default (props) => {
               />
             </Tools>
           ) : null}
-        </Fragment>
+        </>
       )}
     </Form.List>
   );

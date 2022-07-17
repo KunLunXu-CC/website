@@ -100,14 +100,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: 'assets/[hash].[ext]',
-          },
-        }],
+        // 图片、字体
+        test: [/\.(png|jpg|gif|svg)$/, /\.(ttf|woff|eot)$/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[hash].[ext]',
+        },
       },
       {
         test: /\.(text|md)$/,
@@ -134,7 +132,9 @@ module.exports = {
 
   devServer: {
     // webpack-dev-server 相关配置
-    contentBase: path.resolve(__dirname, '../build'),
+    static: {
+      directory: path.join(__dirname, '../build'),
+    },
     compress: true,
     port: 9000,
 
