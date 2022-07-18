@@ -17,7 +17,7 @@
     "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.9",
     "@babel/preset-react": "^7.14.5",
-    "@kunlunxu/norm": "^2.5.6",
+    "@kunlunxu/norm": "^2.5.8",
     "babel-loader": "^8.2.2",
     "babel-plugin-import": "^1.13.3",
     "copy-webpack-plugin": "^11.0.0",
@@ -40,7 +40,7 @@
     "webpack-dev-server": "^4.9.3"
   },
   "dependencies": {
-    "@kunlunxu/brick": "^2.2.4",
+    "@kunlunxu/brick": "^2.2.5",
     "antd": "^4.21.7",
     "axios": "^0.27.2",
     "jsencrypt": "^3.2.0",
