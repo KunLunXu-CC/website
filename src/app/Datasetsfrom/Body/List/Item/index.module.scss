@@ -7,7 +7,7 @@
   margin-top: 20px;
 
   &:hover {
-    box-shadow: 0 0 10px rgba($color: #999, $alpha: 0.2);
+    box-shadow: 0 0 10px rgba($color: #999, $alpha: 20%);
   }
 
   &:last-child:nth-child(4n - 2) {
@@ -23,11 +23,11 @@
   padding: 20px;
 
   .title {
-    color: rgba(0, 0, 0, 0.85);
+    color: rgb(0 0 0 / 85%);
   }
 
   .desc {
-    color: rgba(0, 0, 0, 0.45);
+    color: rgb(0 0 0 / 45%);
   }
 }
 
@@ -39,7 +39,7 @@
   align-items: center;
 
   .value {
-    color: rgba(0, 0, 0, 0.85);
+    color: rgb(0 0 0 / 85%);
     flex: 1;
   }
 
@@ -49,7 +49,7 @@
 
     cursor: pointer;
     font-size: 18px;
-    color: rgba(0, 0, 0, 0.85);
+    color: rgb(0 0 0 / 85%);
 
     .icon-edit {
       color: #40a9ff;

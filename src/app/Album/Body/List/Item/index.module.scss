@@ -8,7 +8,7 @@
   flex-direction: column;
   width: calc(50% - 10px);
 
-  box-shadow: 2px 0 8px rgba($color: #ddd, $alpha: 0.2);
+  box-shadow: 2px 0 8px rgba($color: #ddd, $alpha: 20%);
   border: 1px solid #f9f9f9;
 
   margin: {
@@ -43,8 +43,8 @@
     align-items: center;
     transition: all 0.5s;
     justify-content: center;
-    color: rgba($color: #fff, $alpha: 0.6);
-    background: rgba($color: #000, $alpha: 0.5);
+    color: rgba($color: #fff, $alpha: 60%);
+    background: rgba($color: #000, $alpha: 50%);
   }
 
   &:hover {
