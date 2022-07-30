@@ -3,8 +3,10 @@ import JSEncrypt from 'jsencrypt';
 
 /**
  * 根据需要过滤的列表过滤指定对象
- * @param {Object} obj          要过滤的对象
+ *
+ * @param {object} obj          要过滤的对象
  * @param {Array} filterVaslue  要过滤的值的列表
+ * @returns {object} 过滤后的对象
  */
 export const filterObject = (obj, filterVaslue = []) => {
   const filter = {};
@@ -16,8 +18,11 @@ export const filterObject = (obj, filterVaslue = []) => {
 
 /**
  * 防抖
+ * TODO: 替换为 lodash 中的函数
+ *
  * @param {Function} fn  传入函数
- * @param {Number} wait  等待时长
+ * @param {number} wait  等待时长
+ * @returns {Function} 返回被调用函数
  */
 export const debounce = (fn, wait) => {
   let timeout = null;
@@ -33,9 +38,10 @@ export const debounce = (fn, wait) => {
 
 /**
  * RSA 加密
- * @param {String} data   待加密数据
- * @param {String} publicKey 公钥
- * @returns {String}      加密后的数据
+ *
+ * @param {string} data   待加密数据
+ * @param {string} publicKey 公钥
+ * @returns {string}      加密后的数据
  */
 export const rsa = (data, publicKey) => {
   const encrypt = new JSEncrypt();
@@ -45,7 +51,10 @@ export const rsa = (data, publicKey) => {
 
 /**
  * 格式化数字
- * @param {Number} num  待处理数据
+ * TODO: 改用 number 自带的格式化函数
+ *
+ * @param {number} num  待处理数据
+ * @returns {string} 格式化后的字符串
  */
 export const formatNum = (num) => [...`${num}`]
   .reverse()
@@ -55,9 +64,11 @@ export const formatNum = (num) => [...`${num}`]
 
 /**
  * 提示
- * @param {String} code 提示信息唯一值
- * @param {String} type 提示信息类别, 参考 antd 文档
- * @param {Object} options 参考 antd notification 组件参数, message description
+ *
+ * @param {object} params 函数对象参数, 除了下面两个菜参数, 其余参考 antd notification 组件参数, message description
+ * @param {string} params.code 提示信息唯一值
+ * @param {string} params.type 提示信息类别, 参考 antd 文档
+ * @returns {undefined}
  */
 export const message = ({
   code,

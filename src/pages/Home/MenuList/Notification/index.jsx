@@ -1,42 +1,35 @@
-import React from 'react';
+
 import User from './User';
 import Target from './Target';
 import scss from './index.module.scss';
 
+import { useState, useCallback  } from 'react';
 import { Drawer } from 'antd';
 
-const useStateHook = () => {
-  const [visible, setVisible] = React.useState(false);
+export default () => {
+  const [visible, setVisible] = useState(false);
 
   // 关闭
-  const onClose = React.useCallback(setVisible.bind(null, false), []);
+  const onClose = useCallback(() => setVisible(false), []);
 
   // 切换状态(显示/关闭)
-  const onToogle = React.useCallback(
-    setVisible.bind(null, !visible),
-    [visible],
-  );
+  const onToggle = useCallback(() => setVisible((pre) => !pre), []);
 
   // // 点击抽屉
-  // const onCloseDrawer = React.useCallback(() => {
+  // const onCloseDrawer = useCallback(() => {
   // }, []);
 
-  return { visible, onClose, onToogle };
-};
-
-export default () => {
-  const state = useStateHook();
 
   return (
     <>
-      <Target onClick={state.onToogle} />
+      <Target onClick={onToggle} />
       <Drawer
         width={374}
         closable={false}
         placement="right"
         // getContainer={false}
-        onClose={state.onClose}
-        visible={state.visible}
+        onClose={onClose}
+        visible={visible}
         className={scss.notification}>
         <User />
       </Drawer>

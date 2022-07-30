@@ -7,10 +7,12 @@
 
 .layout-side {
   width: 160px;
-  background: rgba($color: #f1f1f1, $alpha: 0.99);
+  background: rgba($color: #f1f1f1, $alpha: 99%);
 }
 
 .layout-body {
   flex: 1;
+  overflow: hidden;
   background: #fff;
+  position: relative;
 }

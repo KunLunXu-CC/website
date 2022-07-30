@@ -1,9 +1,8 @@
-import React from 'react';
-import scss from './index.module.scss';
-
+import { useMemo } from 'react';
 import { MOVE } from '../../consts';
 import { Modal, Cascader, Form } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import scss from './index.module.scss';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -15,7 +14,7 @@ const useStateHook = () => {
   }));
 
   // Cascader 组件 options 配置
-  const options = React.useMemo(() => {
+  const options = useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(tags)).reduce((total, ele) => {
       // 移动目录时, 移除当前目录
       (modal?.data?.tags || ele.id !== modal?.data?.id) && total.push({

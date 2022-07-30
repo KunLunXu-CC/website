@@ -1,7 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
+import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { Dropdown, Menu, Input } from 'antd';
 import { MOVE } from '../../../consts';
@@ -13,14 +13,14 @@ const stopPropagation = (e) => e.stopPropagation();
 
 const useStateHook = (props) => {
   const dispatch = useDispatch();
-  const editorInputRef = React.useRef(null);
+  const editorInputRef = useRef(null);
   const { openKeys, activity } = useSelector((state) => ({
     openKeys: state.editor.side.openKeys,
     activity: state.editor.activity,
   }));
 
   // 下拉菜单点击事件: 点击创建文件夹
-  const onClickCreateFolderMenu = () => {
+  const onClickCreateFolderMenu = useCallback(() => {
     if (!props.data.tags) { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
@@ -36,10 +36,10 @@ const useStateHook = (props) => {
         parent: props.data.tags?.[0].id,
       });
     }
-  };
+  }, [dispatch, openKeys, props.data.id, props.data.tags]);
 
   // 下拉菜单点击事件: 点击创建文章
-  const onClickCreateArticleMenu = () => {
+  const onClickCreateArticleMenu = useCallback(() => {
     if (!props.data.tags) { // 在文件夹上触发下拉框
       dispatch({
         type: 'editor/setSide',
@@ -55,33 +55,33 @@ const useStateHook = (props) => {
         type: 'editor/createTmpArticle',
       });
     }
-  };
+  }, [dispatch, openKeys, props.data.id, props.data.tags]);
 
   // 下拉菜单点击事件: 点击编辑
-  const onClickEditMenu = () => {
+  const onClickEditMenu = useCallback(() => {
     const type = !props.data.tags
       ? 'editor/addEditorStatusWithTag'
       : 'editor/addEditorStatusWithArticle';
     dispatch({ type, id: props.data.id });
-  };
+  }, [dispatch, props.data.id, props.data.tags]);
 
   // 下拉菜单点击事件: 移动
-  const onClickMoveMenu = () => dispatch({
+  const onClickMoveMenu = useCallback(() => dispatch({
     data: props.data,
     code: MOVE,
     type: 'modal/openModal',
-  });
+  }), [dispatch, props.data]);
 
   // 下拉菜单点击事件: 点击删除
-  const onClickDeleteMenu = () => {
+  const onClickDeleteMenu = useCallback(() => {
     const type = !props.data.tags
       ? 'editor/removeTag'
       : 'editor/removeArticle';
     dispatch({ ...props.data, type, id: props.data.id });
-  };
+  }, [dispatch, props.data]);
 
   // 下拉菜单配置
-  const dropdownMenuSetting = React.useMemo(() => ([
+  const dropdownMenuSetting = useMemo(() => ([
     {
       conds: true,
       title: '创建文件夹',
@@ -115,9 +115,11 @@ const useStateHook = (props) => {
     },
   ].filter((v) => v.conds)), [
     onClickEditMenu,
+    onClickMoveMenu,
     onClickDeleteMenu,
     onClickCreateFolderMenu,
     onClickCreateArticleMenu,
+    props.data.children?.length,
   ]);
 
   // 编辑数据: 根据不同 id、type 设置不同 dispatch 参数
@@ -167,20 +169,20 @@ const useStateHook = (props) => {
   };
 
   // 点击下拉菜单
-  const onClickMenu = React.useCallback(({ item, domEvent }) => {
+  const onClickMenu = useCallback(({ item, domEvent }) => {
     stopPropagation(domEvent);
     item.props.data.onClick();
   }, []);
 
   // 最外层 className
-  const className = React.useMemo(() => (classNames(scss['menu-title'], {
+  const className = useMemo(() => (classNames(scss['menu-title'], {
     [scss['menu-title-article']]: props.data.tags,
     [scss['menu-title-release']]:
       !_.isNumber(activity.selectKey) &&
       props.data.status === ARTICLE_STATUS.RELEASE,
   })), [props.data, activity.selectKey]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     editorInputRef.current && editorInputRef.current.focus();
   });
 

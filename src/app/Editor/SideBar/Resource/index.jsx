@@ -1,9 +1,9 @@
 import Add from './Add';
-import React from 'react';
 import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
@@ -25,7 +25,7 @@ const useStateHook = () => {
   }));
 
   // 菜单
-  const treeData = React.useMemo(() => {
+  const treeData = useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(tags));
     const cloneArticles = _.cloneDeep(Object.values(articles));
 
@@ -53,12 +53,12 @@ const useStateHook = () => {
   }, [articles, tags, side.openKeys, selectKey]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
-  const selectedKeys = React.useMemo(() => (
+  const selectedKeys = useMemo(() => (
     works.find((v) => v.action)?.article
   ), [works]);
 
   // 渲染菜单列表
-  const menu = React.useMemo(() => {
+  const menu = useMemo(() => {
     const recursion = (item, level) => {
       const title = (
         <Title

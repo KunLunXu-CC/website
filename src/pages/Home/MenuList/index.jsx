@@ -1,4 +1,3 @@
-import React from 'react';
 import Github from './Github';
 import Juejin from './Juejin';
 import classNames from 'classnames';
@@ -6,6 +5,7 @@ import Fullscreen from './Fullscreen';
 import scss from './index.module.scss';
 import Notification from './Notification';
 
+import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { useSelector }  from 'react-redux';
 
@@ -13,7 +13,7 @@ const useStateHook = () => {
   const opens = useSelector((state) => state.app?.opens);
 
   // 菜单 className
-  const menuClassName = React.useMemo(() => {
+  const menuClassName = useMemo(() => {
     const hideMenu = opens.find((v) => v.isMax && v.isMin === false);
     return classNames(
       scss.menu,

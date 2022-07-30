@@ -1,0 +1,49 @@
+.menu {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+
+  &-middle {
+    flex: 1;
+  }
+
+  :global {
+    $menu-bg: transparent;
+    $menu-color: rgba($color: #fff, $alpha: 100%,);
+    $menu-color-active: rgba($color: #397dff, $alpha: 100%,);
+
+    .brick-modal-tool-item {
+      font-size: 14px;
+    }
+    %default {
+      background: $menu-bg;
+    }
+
+    %selected {
+      background: $menu-bg;
+    }
+
+    // 菜单
+    .ant-menu {
+      @extend %default;
+      border: unset;
+    }
+
+    // 根菜单样式覆盖 - 停放状态
+    .ant-menu-item.ant-menu-item-active,
+    .ant-menu-item.ant-menu-item-selected {
+      @extend %selected;
+    }
+
+    // 根菜单样式覆盖 - 正常状态
+    .ant-menu-item {
+      @extend %default;
+
+      &::after {
+        right: initial;
+        left: 0;
+      }
+    }
+  }
+}

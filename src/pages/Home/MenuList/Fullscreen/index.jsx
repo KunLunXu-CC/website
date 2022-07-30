@@ -1,23 +1,20 @@
-import React from 'react';
-import useFullscreen from '@utils/useFullscreen';
+import useFullscreen from '@hooks/useFullscreen';
 
 import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 
-const useStateHook = () => {
+export default () => {
   const { onToggle, fulled } = useFullscreen(document.body);
   const setting = useSelector((state) => state.setting.menuBar);
 
-  return { fulled, onToggle, setting };
-};
+  if (!setting.showFullScreenOnMenu) {
+    return null;
+  }
 
-export default (props) => {
-  const state = useStateHook(props);
-
-  return state.setting.showFullScreenOnMenu ? (
+  return (
     <Icon
-      onClick={state.onToggle}
-      type={state.fulled ? 'icon-compress' :  'icon-shipinquanping'}
+      onClick={onToggle}
+      type={fulled ? 'icon-compress' :  'icon-shipinquanping'}
     />
-  ) : null;
+  );
 };

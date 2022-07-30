@@ -1,4 +1,3 @@
-import React from 'react';
 import Item from './Item';
 import scss from './index.module.scss';
 
@@ -10,7 +9,7 @@ const useStateHook = () => {
   const datasetsfroms = useSelector((state) => {
     const {
       datasetsfrom,
-      datasetsfromManage: { menu: { selectedKey } },
+      datasetsfrom: { menu: { selectedKey } },
     } = state;
     return selectedKey === MENU_LIST[0].key
       ? Object.values(datasetsfrom).reduce(
@@ -33,7 +32,7 @@ const useStateHook = () => {
   const onDelete = ({ id }) => {
     dispatch({
       id,
-      type: 'datasetsfromManage/removeDatasetsfrom',
+      type: 'datasetsfrom/removeDatasetsfrom',
     });
   };
 

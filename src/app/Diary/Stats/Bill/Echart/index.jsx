@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import { Echarts } from '@kunlunxu/brick';
 import { STATS_BILL_DETAIL } from '../../../consts';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ const useStateHook = () => {
   const { groupWithName } = useSelector((state) => state.diary.statsBill);
 
   // 处理数据
-  const data = React.useMemo(() => (groupWithName.reduce((total, ele) => ({
+  const data = useMemo(() => (groupWithName.reduce((total, ele) => ({
     xAxis: [...total.xAxis, ele.name],
     income: [...total.income, ele.income],
     balance: [...total.balance, (ele.income - ele.expend).toFixed(2)],
@@ -16,7 +16,7 @@ const useStateHook = () => {
   }), { xAxis: [], expend: [], income: [], balance: [] })), [groupWithName]);
 
   // echarts 配置
-  const option = React.useMemo(() => ({
+  const option = useMemo(() => ({
     tooltip: {
       trigger: 'axis',
     },
@@ -64,21 +64,23 @@ const useStateHook = () => {
   }), [data]);
 
   // 绑定事件
-  const on = React.useMemo(() => ([{
+  const on = useMemo(() => ([{
     eventName: 'click',
-    handler: (echart, { data: { diaries } }) => {
+    handler: (echarts, { data: { diaries } }) => {
       if (!diaries) {
         return false;
       }
 
-      echart.dispatchAction({ type: 'hideTip' });
+      echarts.dispatchAction({ type: 'hideTip' });
+
       dispatch({
         diaries,
         type: 'modal/openModal',
         code: STATS_BILL_DETAIL,
       });
     },
-  }]), []);
+  }]), [dispatch]);
+
   return { option, on };
 };
 

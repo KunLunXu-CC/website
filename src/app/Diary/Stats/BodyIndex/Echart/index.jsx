@@ -1,5 +1,4 @@
-import React from 'react';
-
+import { useMemo } from 'react';
 import { Echarts } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 
@@ -7,7 +6,7 @@ const useStateHook = () => {
   const statsBodyIndex = useSelector((state) => state.diary.statsBodyIndex);
 
   // 处理数据
-  const data = React.useMemo(
+  const data = useMemo(
     () => (statsBodyIndex.reduce((total, { name, bodyIndex }) => ({
       xAxis: [...total.xAxis, name],
       weight: [...total.weight, bodyIndex?.weight ?? 0],
@@ -21,7 +20,7 @@ const useStateHook = () => {
   );
 
   // echarts 配置
-  const option = React.useMemo(() => ({
+  const option = useMemo(() => ({
     tooltip: {
       trigger: 'axis',
     },

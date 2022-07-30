@@ -1,9 +1,9 @@
-import React, {
-  useCallback,
-} from 'react';
+import _ from 'lodash';
 import apps from '@app';
 import scss from './index.module.scss';
 
+import { actions } from '@store';
+import { useCallback } from 'react';
 import { Window } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,24 +12,24 @@ const useStateHook = () => {
   const opens = useSelector((state) => state.app?.opens);
 
   const onClose = useCallback((app) => {
-    dispatch({ type: 'app/onClose', app });
-  }, []);
+    dispatch(actions.app.close(app));
+  }, [dispatch]);
 
   const onMin = useCallback((app) => {
-    dispatch({ type: 'app/onMin', app });
-  }, []);
+    dispatch(actions.app.minimize(app));
+  }, [dispatch]);
 
   const onMax = useCallback((app) => {
-    dispatch({ type: 'app/onMax', app });
-  }, []);
+    dispatch(actions.app.maximize(app));
+  }, [dispatch]);
 
   const onMouseDown = useCallback((app) => {
-    if (opens?.code === app.code) {
+    if (_.last(opens)?.code === app.code) {
       return false;
     }
 
-    dispatch({ type: 'app/onMouseDown', app });
-  }, [opens]);
+    dispatch(actions.app.stick(app));
+  }, [dispatch, opens]);
 
   return { opens, onClose, onMin, onMax, onMouseDown };
 };

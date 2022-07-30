@@ -1,4 +1,3 @@
-import React from 'react';
 import scss from './index.module.scss';
 
 import { Icon } from '@kunlunxu/brick';
@@ -9,7 +8,6 @@ export default () => (
     <Input
       size="large"
       placeholder="查询"
-      onPressEnter={() => {}}
       prefix={<Icon type="icon-search" />}
     />
   </div>

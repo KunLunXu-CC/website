@@ -1,9 +1,9 @@
-import React from 'react';
 import scss from './index.module.scss';
 
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { VariableContainer, Markdown, Icon } from '@kunlunxu/brick';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
+import { VariableContainer, Markdown, Icon } from '@kunlunxu/brick';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const useStateHook = () => {
   };
 
   // Markdown 配置参数
-  const options = React.useMemo(() => ({
+  const options = useMemo(() => ({
     overrides: {
       img: {
         component: (props) => (

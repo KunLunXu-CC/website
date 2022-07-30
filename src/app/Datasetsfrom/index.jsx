@@ -1,4 +1,3 @@
-import React from 'react';
 import Menu from './Menu';
 import Body from './Body';
 import Tips from './Tips';

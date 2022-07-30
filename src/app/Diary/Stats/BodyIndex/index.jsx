@@ -1,7 +1,4 @@
-import React, {
-  useEffect,
-  useCallback,
-} from 'react';
+import { useEffect, useCallback } from 'react';
 import moment from 'moment';
 import Echart from './Echart';
 import scss from './index.module.scss';

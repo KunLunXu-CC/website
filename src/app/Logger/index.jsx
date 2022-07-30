@@ -1,13 +1,13 @@
-import React from 'react';
 import scss from './index.module.scss';
 import ws from '@utils/ws';
+import { useState, useRef, useCallback,  useEffect } from 'react';
 
 const useStateHook = () => {
-  const [logger, setLogger] = React.useState([]);
-  const mainRef = React.useRef();
+  const [logger, setLogger] = useState([]);
+  const mainRef =  useRef();
 
   // 滚动带底部
-  const onScrollEnd = React.useCallback(() => {
+  const onScrollEnd = useCallback(() => {
     if (!mainRef.current) {
       return false;
     }
@@ -16,7 +16,7 @@ const useStateHook = () => {
     mainRef.current.scrollTop = scrollHeight - clientHeight;
   }, [mainRef.current]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const wss = ws('/ws/logger');
     const tmp = [];
     onScrollEnd();
@@ -31,7 +31,7 @@ const useStateHook = () => {
     };
 
     return () => wss.close();
-  }, []);
+  }, [onScrollEnd]);
 
   return { logger, mainRef };
 };

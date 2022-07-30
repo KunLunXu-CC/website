@@ -14,7 +14,9 @@ module.exports = {
     }, "@kunlunxu/brick"],
   ],
   'presets': [
-    '@babel/preset-react',
+    ['@babel/preset-react', {
+      runtime: 'automatic',
+    }],
     '@babel/preset-env'
   ]
 }

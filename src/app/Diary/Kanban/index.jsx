@@ -1,4 +1,3 @@
-import React from 'react';
 // import mock from './mock';
 // import Item from './Item';
 // import List from './List';

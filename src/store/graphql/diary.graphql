@@ -1,0 +1,26 @@
+query getDiaries($search: DiarySearch){
+  diaries(search: $search){
+    list {
+      id
+      name
+      getUp
+      toRest
+      informalEssay
+      diet {
+        type { value name desc }
+        desc
+      }
+      fitness {
+        type { value name desc }
+        place { value name desc }
+      }
+      bill {
+        desc
+        income
+        expend
+        tag { value name desc }
+      }
+      bodyIndex { weight muscle moistureContent bodyfat bim }
+    }
+  }
+}

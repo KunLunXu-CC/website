@@ -1,5 +1,5 @@
-import React from 'react';
 import scss from './index.module.scss';
+import { useMemo, useEffect } from 'react';
 
 import {
   Row,
@@ -30,11 +30,11 @@ const useStateHook = () => {
   const { modal, menuSelectedKey, datasetsfrom } = useSelector((state) => ({
     datasetsfrom: state.datasetsfrom,
     modal: state.modal[MODAL_CODE_DATASETSFROM_EDITOR],
-    menuSelectedKey: state.datasetsfromManage.menu.selectedKey,
+    menuSelectedKey: state.datasetsfrom.menu.selectedKey,
   }));
 
   // antd Cascader 配置
-  const options = React.useMemo(() => Object.values(DATASETSFROM_CODE)
+  const options = useMemo(() => Object.values(DATASETSFROM_CODE)
     .filter((v) => datasetsfrom[v.VALUE])
     .map(
       (v) => ({
@@ -61,13 +61,13 @@ const useStateHook = () => {
       code: MODAL_CODE_DATASETSFROM_EDITOR,
       body: { ...rest, parent: parent?.[1] },
       type: modal.data
-        ? 'datasetsfromManage/updateDatasetsfrom'
-        : 'datasetsfromManage/createDatasetsfrom',
+        ? 'datasetsfrom/updateDatasetsfrom'
+        : 'datasetsfrom/createDatasetsfrom',
     });
     onCancel();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     modal
       ? form.setFieldsValue({
         name: modal.data?.name ?? void 0,

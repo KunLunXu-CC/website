@@ -1,0 +1,27 @@
+# 登录
+mutation login (
+  $account: String,
+  $password: String,
+){
+  login(
+    account: $account,
+    password: $password,
+  ){
+    user {
+      id
+      sex
+      name
+      status
+      account
+      role { id desc auth name }
+    }
+    message
+  }
+}
+
+# 获取公钥
+query getPublicKey {
+  publicKey {
+    data
+  }
+}

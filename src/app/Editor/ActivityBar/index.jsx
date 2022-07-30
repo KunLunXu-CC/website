@@ -1,7 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
+import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { ACTIVITY_LIST } from '../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ const useStateHook = () => {
   });
 
   // 菜单项 className
-  const getItemClassName = React.useCallback((key) => classNames(
+  const getItemClassName = useCallback((key) => classNames(
     scss['activity-item'],
     { [scss['activity-item-action']]: key === selectKey },
   ), [selectKey]);

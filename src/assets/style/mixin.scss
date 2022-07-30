@@ -1,31 +1,12 @@
-// 设置 input 默认 placeholder 样式
-// @mixin input-placeholder ($color) {
-//   :placeholder {
-//     color: $color;
-//   }
-
-//   ::placeholder {
-//     color: $color;
-//   }
-
-//   input:input-placeholder {
-//     color: $color;
-//   }
-
-//   input::input-placeholder {
-//     color: $color;
-//   }
-// }
+@use "sass:math";
 
 // 行截断 - 超出显示神略号: $line 显示多少行
-@mixin line-clamp ($line) {
+@mixin line-clamp($line) {
   @if $line == 1 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-  }
-
-  @else {
+  } @else {
     overflow: hidden;
     display: box;
     -webkit-line-clamp: $line;
@@ -39,13 +20,13 @@
  *   @include scrollbar($thumb-bg: red);
  * }
 **/
-@mixin scrollbar (
-  $height: 6px,                        // 高度(x 轴方向上滚动时有效)
-  $width: 6px,                         // 宽度(y 轴方向上滚动时有效)
-  $radius: $width / 2,                 // 圆角大小
-  $init-alpha: 0,                      // 初始透明度、鼠标停放在元素上才变为 1
-  $thumb-bg: #bfbfbf,                // 滑块背景
-  $track-bg: rgba(255, 255, 255, 0), // 轨道背景
+@mixin scrollbar(
+  $width: 6px,
+  $height: 6px,
+  $init-alpha: 0,
+  $thumb-bg: #bfbfbf,
+  $radius: math.div($width, 2),
+  $track-bg: rgba(255, 255, 255, 0),
 ) {
   $hover-alpha: 1;          // 鼠标停放时透明度
 

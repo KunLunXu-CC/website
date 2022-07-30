@@ -1,17 +1,17 @@
-import React from 'react';
 import scss from './index.module.scss';
 
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
 
-  const onClick = React.useCallback(() => {
+  const onClick = useCallback(() => {
     dispatch({
       parent: null,
       type: 'editor/createTmpTag',
     });
-  }, []);
+  }, [dispatch]);
 
   return { onClick };
 };

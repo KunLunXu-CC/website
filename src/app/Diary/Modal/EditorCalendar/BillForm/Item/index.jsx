@@ -1,10 +1,9 @@
-import React from 'react';
-import scss from './index.module.scss';
-
+import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 import { DATASETSFROM_CODE } from '@config/consts';
 import { Row, Col, InputNumber, Input, Form, Select } from 'antd';
+import scss from './index.module.scss';
 
 const useStateHook = () => {
   const billTags = useSelector(
@@ -12,7 +11,7 @@ const useStateHook = () => {
   );
 
   // 下拉框
-  const billTagOptions = React.useMemo(() => billTags.map((v) => (
+  const billTagOptions = useMemo(() => billTags.map((v) => (
     <Select.Option
       value={v.value}
       key={v.value}>

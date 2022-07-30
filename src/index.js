@@ -1,11 +1,11 @@
 import './console';
-import React from 'react';
-import Store from '@model';
+import store from '@store';
 import moment from 'moment';
 import Router from './Router';
 import ReactDOM from 'react-dom/client';
 import zhCN from 'antd/es/locale/zh_CN';
 import { ConfigProvider } from 'antd';
+import { Provider } from 'react-redux';
 
 import 'moment/locale/zh-cn';
 import '@assets/style';
@@ -16,8 +16,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <ConfigProvider locale={zhCN}>
-    <Store>
+    <Provider store={store}>
       <Router />
-    </Store>
+    </Provider>
   </ConfigProvider>,
 );

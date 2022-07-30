@@ -1,5 +1,3 @@
-
-import React from 'react';
 import * as Pages from '@pages';
 import { useRoutes } from 'react-router-dom';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import Move from './Move';
 import ThumbSetting from './ThumbSetting';
 import RevokeConfirm from './RevokeConfirm';

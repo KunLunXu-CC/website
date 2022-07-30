@@ -7,6 +7,9 @@
   position: fixed !important;
 
   > :global(.brick-image-body) {
-    background: radial-gradient(ellipse at bottom, rgba($color: #1b2735, $alpha: 0.05) 0, rgba($color: #090a0f, $alpha: 0.2) 100%);
+    $bg-start: rgba($color: #1b2735, $alpha: 5%);
+    $bg-end: rgba($color: #090a0f, $alpha: 20%);
+
+    background: radial-gradient(ellipse at bottom, $bg-start 0, $bg-end 100%);
   }
 }

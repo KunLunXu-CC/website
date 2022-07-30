@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
@@ -9,14 +8,14 @@ import { MENU_LIST, MODAL_CODE_DATASETSFROM_EDITOR } from '../consts';
 const useStateHook = () => {
   const dispatch = useDispatch();
   const { selectedKey } = useSelector(
-    (state) => state.datasetsfromManage.menu,
+    (state) => state.datasetsfrom.menu,
   );
 
   // 切换菜单
   const onToggleMenu = ({ key: selectedKey }) => {
     dispatch({
       menu: { selectedKey },
-      type: 'datasetsfromManage/setMenu',
+      type: 'datasetsfrom/setMenu',
     });
   };
 

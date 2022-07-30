@@ -64,9 +64,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(mjs|js|jsx)$/,
+        test: /\.(ts|tsx|mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: cssRegex,
@@ -126,7 +126,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['.mjs', '.js', '.jsx'],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
     alias: config.alias || {},
   },
 

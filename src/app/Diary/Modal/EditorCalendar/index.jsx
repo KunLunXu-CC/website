@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useMemo,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
+import { useRef, useMemo, useState, useCallback, useEffect } from 'react';
 import moment from 'moment';
 import ReactDOM from 'react-dom';
 import BaseForm from './BaseForm';

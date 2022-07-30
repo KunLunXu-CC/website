@@ -12,4 +12,14 @@
     "scss",
     "sass",
   ],
+  "cSpell.words": [
+    "antd",
+    "codegen",
+    "endregion",
+    "jsencrypt",
+    "kunlunxu",
+    "reduxjs",
+    "shipinquanping",
+    "tanstack"
+  ],
 }

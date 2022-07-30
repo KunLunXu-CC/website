@@ -1,7 +1,8 @@
-import React from 'react';
 import Resource from './Resource';
 import classNames from 'classnames';
 import scss from './index.module.scss';
+
+import { useMemo, useCallback } from 'react';
 import { VariableContainer } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,16 +15,16 @@ const useStateHook = () => {
   }));
 
   // 顶层 className
-  const className = React.useMemo(() => classNames(
+  const className = useMemo(() => classNames(
     scss.side,
     { [scss.collapsed]: collapsed },
   ), [collapsed]);
 
   // 尺寸变化
-  const onResize = React.useCallback(({ width }) => dispatch({
+  const onResize = useCallback(({ width }) => dispatch({
     type: 'editor/setSide',
     side: { collapsed: SIDE_MIN_WIDTH === width },
-  }), []);
+  }), [dispatch]);
 
   return { className, onResize };
 };

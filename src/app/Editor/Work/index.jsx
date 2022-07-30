@@ -1,10 +1,10 @@
 import Tab from './Tab';
-import React from 'react';
 import Editor from './Editor';
 import scss from './index.module.scss';
 import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
+import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { APP_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ const useStateHook = () => {
   }));
 
   // 当前选中项
-  const selected = React.useMemo(() => (
+  const selected = useMemo(() => (
     works.find((v) => v.action)?.article
   ), [works]);
 

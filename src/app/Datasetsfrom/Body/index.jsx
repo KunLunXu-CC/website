@@ -1,4 +1,3 @@
-import React from 'react';
 import List from './List';
 import Header from './Header';
 import scss from './index.module.scss';
