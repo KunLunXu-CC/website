@@ -94,8 +94,8 @@ export default () => {
       title="账单详情"
       destroyOnClose
       closable={false}
+      open={!!state.modal}
       getContainer={false}
-      visible={!!state.modal}
       footer={(
         <Button
           onClick={state.onCancel}

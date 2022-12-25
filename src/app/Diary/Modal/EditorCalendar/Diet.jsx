@@ -1,34 +1,31 @@
-import React, {
-  useMemo,
-} from 'react';
-import scss from './index.module.scss';
-
+import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { useSelector } from 'react-redux';
-import { DATASETSFROM_CODE } from '@config/consts';
-import { Row, Col, Select, Input, Form } from 'antd';
+import { Row, Col, Select, Input, Form, Empty  } from 'antd';
+import scss from './diet.module.scss';
 
-const useStateHook = () => {
-  const dietTags = useSelector(
-    (state) => state.datasetsfrom[DATASETSFROM_CODE.DIET_TAG.VALUE] || [],
-  );
 
+const DIET = [
+  { name: '早餐', value: 0 },
+  { name: '上午加餐', value: 1 },
+  { name: '午餐', value: 2 },
+  { name: '下午加餐', value: 3 },
+  { name: '晚餐', value: 4 },
+  { name: '晚上加餐(夜宵)', value: 5 },
+  { name: '健身加餐(健身之后)', value: 6 },
+  { name: '零食', value: 7 },
+];
+
+const Item = (props) => {
   // 类型下拉项
   const typeOptions = useMemo(() => (
-    dietTags.map((v) => (
+    DIET.map((v) => (
       <Select.Option
         value={v.value}
         key={v.value}>
         {v.name}
       </Select.Option>
     ))
-  ), [dietTags]);
-
-  return { typeOptions };
-};
-
-export default (props) => {
-  const state = useStateHook(props);
+  ), []);
 
   return (
     <Row
@@ -43,12 +40,11 @@ export default (props) => {
             message: '请选择类型!',
           }]}
           name={[props.field.name, 'type']}
-          className={scss['form-item']}
           fieldKey={[props.field.fieldKey, 'type']}>
           <Select
             style={{ width: '100%' }}
             placeholder="类型">
-            {state.typeOptions}
+            {typeOptions}
           </Select>
         </Form.Item>
       </Col>
@@ -61,7 +57,6 @@ export default (props) => {
             message: '请填写描述!',
           }]}
           name={[props.field.name, 'desc']}
-          className={scss['form-item']}
           fieldKey={[props.field.fieldKey, 'desc']}>
           <Input placeholder="饮食描述" />
         </Form.Item>
@@ -76,5 +71,35 @@ export default (props) => {
         />
       </Col>
     </Row>
+  );
+};
+
+export default (props) => {
+  const { tools: Tools } = props;
+
+  return (
+    <Form.List name="diet">
+      {(fields, { add, remove }) => (
+        <>
+          {fields.map((field) => (
+            <Item
+              field={field}
+              remove={remove}
+              key={field.key}
+              form={props.form}
+            />
+          ))}
+          {fields.length === 0 ? <Empty /> : null}
+          {props.showTools ? (
+            <Tools>
+              <Icon
+                type="icon-xinzeng"
+                onClick={add.bind(null, null)}
+              />
+            </Tools>
+          ) : null}
+        </>
+      )}
+    </Form.List>
   );
 };

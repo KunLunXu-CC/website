@@ -1,28 +1,38 @@
 import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { useSelector } from 'react-redux';
-import { DATASETSFROM_CODE } from '@config/consts';
-import { Row, Col, InputNumber, Input, Form, Select } from 'antd';
-import scss from './index.module.scss';
+import { Row, Col, InputNumber, Input, Form, Select, Empty } from 'antd';
+import scss from './bill.module.scss';
+
+const BILL = [
+  { name: '三餐', value: 1 },
+  { name: '加餐(健康)', value: 2 },
+  { name: '聚餐', value: 3 },
+  { name: '水果', value: 4 },
+  { name: '日用百货', value: 5 },
+  { name: '固定支出', value: 6 },
+  { name: '服装穿戴', value: 7 },
+  { name: '健身', value: 8 },
+  { name: '大件', value: 9 },
+  { name: '意外', value: 10 },
+  { name: '加餐(不健康)', value: 11 },
+  { name: '交通', value: 12 },
+  { name: '收入 - 工资', value: 13 },
+];
 
 const useStateHook = () => {
-  const billTags = useSelector(
-    (state) => state.datasetsfrom[DATASETSFROM_CODE.BILL_TAG.VALUE] || [],
-  );
-
   // 下拉框
-  const billTagOptions = useMemo(() => billTags.map((v) => (
+  const billTagOptions = useMemo(() => BILL.map((v) => (
     <Select.Option
       value={v.value}
       key={v.value}>
       {v.name}
     </Select.Option>
-  )), [billTags]);
+  )), []);
 
   return { billTagOptions };
 };
 
-export default (props) => {
+const Item = (props) => {
   const state = useStateHook();
 
   return (
@@ -37,7 +47,6 @@ export default (props) => {
                 required: true,
                 message: '请填写描述!',
               }]}
-              className={scss['form-item']}
               name={[props.field.name, 'desc']}
               fieldKey={[props.field.fieldKey, 'desc']}>
               <Input placeholder="账单描述" />
@@ -47,7 +56,6 @@ export default (props) => {
             <Form.Item
               {... props.field}
               label="标签"
-              className={scss['form-item']}
               name={[props.field.name, 'tag']}
               fieldKey={[props.field.fieldKey, 'tag']}>
               <Select
@@ -61,7 +69,6 @@ export default (props) => {
             <Form.Item
               {... props.field}
               label="收入"
-              className={scss['form-item']}
               name={[props.field.name, 'income']}
               fieldKey={[props.field.fieldKey, 'income']}>
               <InputNumber
@@ -75,7 +82,6 @@ export default (props) => {
             <Form.Item
               {... props.field}
               label="支出"
-              className={scss['form-item']}
               name={[props.field.name, 'expend']}
               fieldKey={[props.field.fieldKey, 'expend']}>
               <InputNumber
@@ -97,5 +103,35 @@ export default (props) => {
         />
       </Col>
     </Row>
+  );
+};
+
+export default (props) => {
+  const { tools: Tools } = props;
+
+  return (
+    <Form.List name="bill">
+      {(fields, { add, remove }) => (
+        <>
+          {fields.map((field) => (
+            <Item
+              field={field}
+              remove={remove}
+              key={field.key}
+              form={props.form}
+            />
+          ))}
+          {fields.length === 0 ? <Empty /> : null}
+          {props.showTools ? (
+            <Tools>
+              <Icon
+                type="icon-xinzeng"
+                onClick={add.bind(null, null)}
+              />
+            </Tools>
+          ) : null}
+        </>
+      )}
+    </Form.List>
   );
 };

@@ -7,13 +7,13 @@ import { useState, useCallback  } from 'react';
 import { Drawer } from 'antd';
 
 export default () => {
-  const [visible, setVisible] = useState(false);
+  const [open, setOpen] = useState(false);
 
   // 关闭
-  const onClose = useCallback(() => setVisible(false), []);
+  const onClose = useCallback(() => setOpen(false), []);
 
   // 切换状态(显示/关闭)
-  const onToggle = useCallback(() => setVisible((pre) => !pre), []);
+  const onToggle = useCallback(() => setOpen((pre) => !pre), []);
 
   // // 点击抽屉
   // const onCloseDrawer = useCallback(() => {
@@ -25,12 +25,12 @@ export default () => {
       <Target onClick={onToggle} />
       <Drawer
         width={374}
+        open={open}
         closable={false}
         placement="right"
         // getContainer={false}
         onClose={onClose}
-        visible={visible}
-        className={scss.notification}>
+        rootClassName={scss.notification}>
         <User />
       </Drawer>
     </>

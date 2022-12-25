@@ -1,10 +1,7 @@
-import React, {
-  useMemo,
-  useState,
-} from 'react';
 import scss from './index.module.scss';
 
 import { Modal } from 'antd';
+import { useMemo, useState } from 'react';
 import { Icon, Image } from '@kunlunxu/brick';
 import { THUMB_SETTING } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,7 +58,7 @@ export default () => {
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      visible={!!state.article}
+      open={!!state.article}
       onCancel={state.onCancel}>
       <label className={scss.upload}>
         {state.src ? (

@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Cards from './Cards';
 import Echart from './Echart';
 import classNames from 'classnames';
@@ -8,24 +7,25 @@ import scss from './index.module.scss';
 import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
 import { STATS_SAPN } from '../../consts';
+import { useState, useEffect } from 'react';
 
 // span 和 name 映射表
 const SPAN_MAP_NAME = {
   [STATS_SAPN.MONTH.VALUE]: [
-    moment()
+    dayjs()
       .startOf('month')
       .subtract(12, 'months')
       .format('YYYY-MM-DD'),
-    moment()
+    dayjs()
       .endOf('month')
       .format('YYYY-MM-DD'),
   ],
   [STATS_SAPN.YEAR.VALUE]: [
-    moment()
+    dayjs()
       .subtract(10, 'years')
       .startOf('years')
       .format('YYYY-MM-DD'),
-    moment()
+    dayjs()
       .endOf('years')
       .format('YYYY-MM-DD'),
   ],

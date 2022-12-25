@@ -58,10 +58,10 @@ export default () => {
       cancelText="取消"
       closable={false}
       onOk={state.onOk}
+      open={!!state.modal}
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      visible={!!state.modal}
       onCancel={state.onCancel}>
       <Form form={state.form}>
         <Form.Item

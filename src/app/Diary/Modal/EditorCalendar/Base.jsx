@@ -1,5 +1,3 @@
-import scss from './index.module.scss';
-
 import {
   Col,
   Row,
@@ -17,16 +15,14 @@ export default () => (
         rules={[{
           required: true,
           message: '请填写日期',
-        }]}
-        className={scss['form-item']}>
+        }]}>
         <DatePicker style={{ width: '100%' }} />
       </Form.Item>
     </Col>
     <Col span={12}>
       <Form.Item
         label="体重 (KG)"
-        name={['bodyIndex', 'weight']}
-        className={scss['form-item']}>
+        name={['bodyIndex', 'weight']}>
         <InputNumber
           min={50}
           placeholder="体重"
@@ -37,8 +33,7 @@ export default () => (
     <Col span={12}>
       <Form.Item
         label="起居"
-        name="getUp"
-        className={scss['form-item']}>
+        name="getUp">
         <DatePicker
           showTime
           style={{ width: '100%' }}
@@ -48,7 +43,6 @@ export default () => (
     <Col span={12}>
       <Form.Item
         label="体脂 (%) "
-        className={scss['form-item']}
         name={['bodyIndex', 'bodyfat']}>
         <InputNumber
           min={8}
@@ -61,8 +55,7 @@ export default () => (
     <Col span={12}>
       <Form.Item
         label="歇息"
-        name="toRest"
-        className={scss['form-item']}>
+        name="toRest">
         <DatePicker
           showTime
           style={{ width: '100%' }}
@@ -72,7 +65,6 @@ export default () => (
     <Col span={12}>
       <Form.Item
         label="水分 (%) "
-        className={scss['form-item']}
         name={['bodyIndex', 'moistureContent']}>
         <InputNumber
           min={10}

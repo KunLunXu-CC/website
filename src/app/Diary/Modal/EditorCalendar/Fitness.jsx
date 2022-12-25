@@ -1,45 +1,53 @@
-import React, {
-  useMemo,
-} from 'react';
-import scss from './index.module.scss';
+import { useMemo } from 'react';
+import scss from './fitness.module.scss';
 
 import {
   Col,
   Row,
   Form,
+  Empty,
   Select,
 } from 'antd';
 import { Icon } from '@kunlunxu/brick';
-import { useSelector } from 'react-redux';
-import { DATASETSFROM_CODE } from '@config/consts';
+
+const FITNESS_TYPE = [
+  { name: '有氧', value: 0 },
+  { name: '无氧', value: 1 },
+];
+
+const FITNESS_PLACES = [
+  { name: '背', value: 0 },
+  { name: '胸', value: 1 },
+  { name: '肩', value: 2 },
+  { name: '肱二头', value: 3 },
+  { name: '肱三头', value: 4 },
+  { name: '腹', value: 5 },
+  { name: '腿', value: 6 },
+  { name: '小臂', value: 7 },
+];
 
 const useStateHook = (props) => {
-  const { fitnessTypes, fitnessPlaces } = useSelector((state) => ({
-    fitnessTypes: state.datasetsfrom[DATASETSFROM_CODE.FITNESS_TYPE.VALUE],
-    fitnessPlaces: state.datasetsfrom[DATASETSFROM_CODE.FITNESS_PLACE.VALUE],
-  }));
-
   // 类型下拉项
   const typeOptions = useMemo(() => (
-    (fitnessTypes || []).map((v) => (
+    FITNESS_TYPE.map((v) => (
       <Select.Option
         value={v.value}
         key={v.value}>
         {v.name}
       </Select.Option>
     ))
-  ), [fitnessTypes]);
+  ), []);
 
   // 训练部位下拉项
   const placeOptions = useMemo(() => (
-    (fitnessPlaces || []).map((v) => (
+    FITNESS_PLACES.map((v) => (
       <Select.Option
         value={v.value}
         key={v.value}>
         {v.name}
       </Select.Option>
     ))
-  ), [fitnessPlaces]);
+  ), []);
 
   // type 修改
   const onTypeChange = () => {
@@ -55,7 +63,7 @@ const useStateHook = (props) => {
   };
 };
 
-export default (props) => {
+const Item = (props) => {
   const { field } = props;
   const state = useStateHook(props);
 
@@ -72,7 +80,6 @@ export default (props) => {
                 message: '请选择类型!',
               }]}
               name={[field.name, 'type']}
-              className={scss['form-item']}
               fieldKey={[field.fieldKey, 'type']}>
               <Select
                 placeholder="类型"
@@ -91,7 +98,6 @@ export default (props) => {
                 message: '请选择训练部位!',
               }]}
               name={[field.name, 'place']}
-              className={scss['form-item']}
               fieldKey={[field.fieldKey, 'place']}>
               <Select
                 placeholder="训练部位"
@@ -112,5 +118,35 @@ export default (props) => {
         />
       </Col>
     </Row>
+  );
+};
+
+export default (props) => {
+  const { tools: Tools } = props;
+
+  return (
+    <Form.List name="fitness">
+      {(fields, { add, remove }) => (
+        <>
+          {fields.map((field) => (
+            <Item
+              field={field}
+              remove={remove}
+              key={field.key}
+              form={props.form}
+            />
+          ))}
+          {fields.length === 0 ? <Empty /> : null}
+          {props.showTools ? (
+            <Tools>
+              <Icon
+                type="icon-xinzeng"
+                onClick={add.bind(null, null)}
+              />
+            </Tools>
+          ) : null}
+        </>
+      )}
+    </Form.List>
   );
 };

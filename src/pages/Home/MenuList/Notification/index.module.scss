@@ -1,11 +1,8 @@
 .notification {
   top: 22px;
+  outline: none;
 
   :global {
-    .ant-drawer-header {
-      display: none;
-    }
-
     .ant-drawer-content-wrapper {
       box-shadow: initial !important;
     }

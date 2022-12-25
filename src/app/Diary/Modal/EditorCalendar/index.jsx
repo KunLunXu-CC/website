@@ -1,22 +1,23 @@
-import { useRef, useMemo, useState, useCallback, useEffect } from 'react';
-import moment from 'moment';
+import Base from './Base';
+import Bill from './Bill';
+import Diet from './Diet';
+import dayjs from 'dayjs';
+import Fitness from './Fitness';
 import ReactDOM from 'react-dom';
-import BaseForm from './BaseForm';
-import BillForm from './BillForm';
-import DietForm from './DietForm';
-import FitnessForm from './FitnessForm';
 import scss from './index.module.scss';
 
+import { actions } from '@store';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useMemo, useState, useCallback, useEffect } from 'react';
 
 // tabs 配置
 const TABS_SETTING = [
-  { tab: '基础设置', key: 'base', Component: BaseForm },
-  { tab: '饮食记录', key: 'diet', Component: DietForm },
-  { tab: '训练记录', key: 'fitness', Component: FitnessForm },
-  { tab: '账单记录', key: 'bill', Component: BillForm },
+  { tab: '基础设置', key: 'base', Component: Base },
+  { tab: '饮食记录', key: 'diet', Component: Diet },
+  { tab: '训练记录', key: 'fitness', Component: Fitness },
+  { tab: '账单记录', key: 'bill', Component: Bill },
 ];
 
 // 获取 body
@@ -41,7 +42,7 @@ const getBody = (values) => {
   };
 };
 
-const useStateHook = () => {
+export default () => {
   const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
   const titleToolRef = useRef();
   const dispatch = useDispatch();
@@ -68,14 +69,11 @@ const useStateHook = () => {
         ref={titleToolRef}
       />
     </div>
-  ), [modal, titleToolRef]);
+  ), [titleToolRef]);
 
   // 取消
   const onCancel = () => {
-    dispatch({
-      code: DIARY_EDITOR_DIARY,
-      type: 'modal/closeModal',
-    });
+    dispatch(actions.modal.close());
     form.resetFields();
   };
 
@@ -111,44 +109,30 @@ const useStateHook = () => {
           (v) => ({ ...v, tag: v.tag?.value }),
         ),
         bodyIndex: modal?.diary?.bodyIndex ?? {},
-        name: moment(modal?.diary?.name ?? modal.date),
-        getUp: moment(modal?.diary?.getUp ?? modal.date),
-        toRest: moment(modal?.diary?.toRest ?? modal.date),
+        name: dayjs(modal?.diary?.name ?? modal.date),
+        getUp: dayjs(modal?.diary?.getUp ?? modal.date),
+        toRest: dayjs(modal?.diary?.toRest ?? modal.date),
       } : void 0,
     );
-  }, [modal]);
+  }, [form, modal]);
 
-  return {
-    onOk,
-    form,
-    title,
-    Tools,
-    modal,
-    onCancel,
-    onTabsChange,
-    activeTabKey,
-  };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
-    <Form form={state.form}>
+    <Form form={form}>
       <Modal
         width="80%"
         okText="确定"
         destroyOnClose
         closable={false}
         cancelText="取消"
-        onOk={state.onOk}
-        title={state.title}
+        onOk={onOk}
+        title={title}
+        open={!!modal}
         getContainer={false}
         className={scss.modal}
-        visible={!!state.modal}
-        onCancel={state.onCancel}>
+        onCancel={onCancel}>
         <Tabs
           tabPosition="left"
-          onChange={state.onTabsChange}>
+          onChange={onTabsChange}>
           {TABS_SETTING.map((V) => (
             <Tabs.TabPane
               tab={V.tab}
@@ -156,9 +140,9 @@ export default () => {
               forceRender
               className={scss.body}>
               <V.Component
-                form={state.form}
-                tools={state.Tools}
-                showTools={state.activeTabKey === V.key}
+                form={form}
+                tools={Tools}
+                showTools={activeTabKey === V.key}
               />
             </Tabs.TabPane>
           ))}

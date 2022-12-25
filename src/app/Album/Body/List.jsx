@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import scss from './list.module.scss';
 
 import { Empty } from 'antd';
@@ -50,7 +50,7 @@ export default () => {
                   {_.find(PHOTO_TYPE, (v) => v.VALUE === item.type)?.DESC ?? ''}
                 </div>
                 <div className={scss['info-body-time']}>
-                  {moment(item.creationTime).format('YYYY / MM / DD')}
+                  {dayjs(item.creationTime).format('YYYY / MM / DD')}
                 </div>
               </div>
             </div>

@@ -1,25 +1,25 @@
-import { useEffect, useCallback } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Echart from './Echart';
 import scss from './index.module.scss';
 
 import { DatePicker, Card } from 'antd';
 import { useDispatch } from 'react-redux';
+import { useEffect, useCallback } from 'react';
 
 // 默认日期
 const DEFAULT_DATE = [
-  moment().subtract(365, 'days'),
-  moment(),
+  dayjs().subtract(365, 'days'),
+  dayjs(),
 ];
 
 // 获取区间内所有时间
 const getFullDate = ([start, end]) => {
   const res = [];
-  const current = start.clone();
+  let current = start.clone();
 
-  while (moment(current).isBefore(end)) {
-    current.add(1, 'day');
+  while (current.isBefore(end)) {
     res.push(current.format('YYYY-MM-DD'));
+    current = current.add(1, 'day');
   }
 
   return res;

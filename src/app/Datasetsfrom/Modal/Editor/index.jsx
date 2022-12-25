@@ -83,7 +83,7 @@ const useStateHook = () => {
           ?? (_.isNumber(menuSelectedKey) ? menuSelectedKey : void 0),
       })
       : form.resetFields();
-  }, [modal]);
+  }, [modal, menuSelectedKey, form]);
 
   return { form, modal, onOk, onCancel, options };
 };
@@ -100,9 +100,9 @@ export default () => {
         closable={false}
         cancelText="取消"
         onOk={state.onOk}
+        open={!!state.modal}
         getContainer={false}
         className={scss.modal}
-        visible={!!state.modal}
         onCancel={state.onCancel}
         title={state.modal?.title}>
         <Row gutter={40}>

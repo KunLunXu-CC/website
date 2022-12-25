@@ -10,17 +10,17 @@
   };
 
   &:global(.small) {
-    height: 166px;
+    height: 106px;
     width: calc(50% - 16px);
   }
 
   &:global(.middle) {
     width: 100%;
-    height: 166px;
+    height: 106px;
   }
 
   &:global(.large) {
     width: 100%;
-    height: 350px;
+    height: 290px;
   }
 }

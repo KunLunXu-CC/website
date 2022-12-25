@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import scss from './index.module.scss';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 // TODO：优化，是否可以放于浏览器进程中
 const useStateHook = () => {
-  const [date, setDate] = useState(moment());
+  const [date, setDate] = useState(dayjs());
   const setting = useSelector((state) => state.setting.menuBar);
 
   // 星期
@@ -30,7 +30,7 @@ const useStateHook = () => {
         return false;
       }
 
-      setDate(moment());
+      setDate(dayjs());
       requestAnimationFrame(resetDate);
     };
 

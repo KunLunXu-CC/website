@@ -22,6 +22,7 @@ $dock-body-height: 54px; // dock 内容高度
   justify-content: center;
 
   min-width: 50%;
+  box-sizing: border-box;
   height: $dock-body-height;
 
   border-radius: 10px;

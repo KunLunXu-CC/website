@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import scss from './header.module.scss';
 
 import { Input } from 'antd';
@@ -10,18 +10,20 @@ import { useGetDiariesQuery } from '@store/graphql';
 
 // 获取区间内所有时间
 const getFullDate = (value) => {
-  const start = moment(value)
+  const res = [];
+
+  let start = dayjs(value)
     .startOf('month')
     .subtract(6, 'day');
-  const end = moment(value)
+
+  const end = dayjs(value)
     .endOf('month')
     .add(6, 'day');
-  const res = [];
-  const current = start.clone();
 
-  while (moment(current).isBefore(end)) {
-    current.add(1, 'day');
-    res.push(current.format('YYYY-MM-DD'));
+
+  while (start.isBefore(end)) {
+    start = start.add(1, 'day');
+    res.push(start.format('YYYY-MM-DD'));
   }
 
   return res;
@@ -35,8 +37,6 @@ export default (props) => {
     search: { names: getFullDate(value) },
   });
 
-  console.log('%c [ data ]-31', 'font-size:13px; background:pink; color:#bf2c9f;', data);
-
   // 切换面板: 1 下一个月, -1 上一个月, event 读取输入框值
   const onChange = (value) => {
     if (value === 1) {
@@ -44,7 +44,7 @@ export default (props) => {
     } else if (value === -1) {
       props.onChange(props.value.clone().subtract(1, 'months'));
     } else {
-      props.onChange(moment(
+      props.onChange(dayjs(
         `${value.target.value}-${props.value.format('DD')}`,
       ));
     }
@@ -59,6 +59,7 @@ export default (props) => {
     setValue(props.value.format('YYYY-MM'));
   }, [props.value.format('YYYY-MM')]);
 
+  // 读取数据
   useEffect(() => {
     dispatch(actions.diary.updateDiaries(data?.diaries.list ?? []));
   }, [data, dispatch]);

@@ -8,13 +8,13 @@ export default createSlice({
   reducers: {
     // 开启弹窗: modal[code]
     open: (state, { payload: modal }) => {
-      const { code, data } = modal;
-      return code ? { ...state, [code]: data } : state;
+      const { code, ...rest } = modal;
+      return code ? { ...state, [code]: rest } : state;
     },
 
     // 关闭弹窗: modal[code]
     close: (state, { payload: code }) => (
-      code ? { ...state, [code]: void 0 } : state
+      code ? { ...state, [code]: void 0 } : {}
     ),
   },
 });

@@ -42,8 +42,8 @@ export default () => {
       onOk={state.onOk}
       maskClosable={false}
       getContainer={false}
+      open={!!state.article}
       className={scss.modal}
-      visible={!!state.article}
       onCancel={state.onCancel}>
       撤销文章:
       <span className={scss['article-name']}>

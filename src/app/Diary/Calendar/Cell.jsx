@@ -1,6 +1,7 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import scss from './cell.module.scss';
 
+import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
 import { useMemo, useCallback } from 'react';
 import { DIARY_EDITOR_DIARY } from '../consts';
@@ -12,7 +13,7 @@ const useStateHook = (props) => {
 
   // 日期
   const date = useMemo(() => (
-    moment(props.date).date()
+    dayjs(props.date).date()
   ), [props.date]);
 
   // 当天笔记
@@ -32,13 +33,12 @@ const useStateHook = (props) => {
 
   // 点击单元格
   const onClick = useCallback(() => {
-    dispatch({
+    dispatch(actions.modal.open({
       diary,
       date: props.date,
-      type: 'modal/openModal',
       code: DIARY_EDITOR_DIARY,
-    });
-  }, [props.date, diary]);
+    }));
+  }, [props.date, diary, dispatch]);
 
   return { date, diary, onClick, weight, expenses };
 };
@@ -57,12 +57,10 @@ export default (props) => {
         <div className={scss.stats}>
           <div className={scss['stats-item']}>
             {state.expenses}
-            {' '}
             <Icon type="icon-dingdanjine" />
           </div>
           <div className={scss['stats-item']}>
             {state.weight}
-            {' '}
             <Icon type="icon-ccgl-chengzhongsaomiao-5" />
           </div>
         </div>
