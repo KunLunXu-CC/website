@@ -39,8 +39,7 @@ const Item = (props) => {
             required: true,
             message: '请选择类型!',
           }]}
-          name={[props.field.name, 'type']}
-          fieldKey={[props.field.fieldKey, 'type']}>
+          name={[props.field.name, 'type']}>
           <Select
             style={{ width: '100%' }}
             placeholder="类型">
@@ -56,8 +55,7 @@ const Item = (props) => {
             required: true,
             message: '请填写描述!',
           }]}
-          name={[props.field.name, 'desc']}
-          fieldKey={[props.field.fieldKey, 'desc']}>
+          name={[props.field.name, 'desc']}>
           <Input placeholder="饮食描述" />
         </Form.Item>
       </Col>

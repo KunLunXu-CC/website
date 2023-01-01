@@ -120,8 +120,8 @@ export default () => {
     <Modal
       destroyOnClose
       width="80%"
-      okText="确定"
       onOk={onOk}
+      okText="确定"
       title={title}
       open={!!modal}
       cancelText="取消"

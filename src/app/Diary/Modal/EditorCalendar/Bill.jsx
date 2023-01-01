@@ -47,8 +47,7 @@ const Item = (props) => {
                 required: true,
                 message: '请填写描述!',
               }]}
-              name={[props.field.name, 'desc']}
-              fieldKey={[props.field.fieldKey, 'desc']}>
+              name={[props.field.name, 'desc']}>
               <Input placeholder="账单描述" />
             </Form.Item>
           </Col>
@@ -56,8 +55,7 @@ const Item = (props) => {
             <Form.Item
               {... props.field}
               label="标签"
-              name={[props.field.name, 'tag']}
-              fieldKey={[props.field.fieldKey, 'tag']}>
+              name={[props.field.name, 'tag']}>
               <Select
                 placeholder="标签"
                 style={{ width: '100%' }}>
@@ -69,8 +67,7 @@ const Item = (props) => {
             <Form.Item
               {... props.field}
               label="收入"
-              name={[props.field.name, 'income']}
-              fieldKey={[props.field.fieldKey, 'income']}>
+              name={[props.field.name, 'income']}>
               <InputNumber
                 min={0}
                 placeholder="收入"
@@ -82,8 +79,7 @@ const Item = (props) => {
             <Form.Item
               {... props.field}
               label="支出"
-              name={[props.field.name, 'expend']}
-              fieldKey={[props.field.fieldKey, 'expend']}>
+              name={[props.field.name, 'expend']}>
               <InputNumber
                 min={0}
                 placeholder="支出"

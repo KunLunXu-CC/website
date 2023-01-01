@@ -79,8 +79,7 @@ const Item = (props) => {
                 required: true,
                 message: '请选择类型!',
               }]}
-              name={[field.name, 'type']}
-              fieldKey={[field.fieldKey, 'type']}>
+              name={[field.name, 'type']}>
               <Select
                 placeholder="类型"
                 style={{ width: '100%' }}
@@ -97,8 +96,7 @@ const Item = (props) => {
                 required: true,
                 message: '请选择训练部位!',
               }]}
-              name={[field.name, 'place']}
-              fieldKey={[field.fieldKey, 'place']}>
+              name={[field.name, 'place']}>
               <Select
                 placeholder="训练部位"
                 style={{ width: '100%' }}>
