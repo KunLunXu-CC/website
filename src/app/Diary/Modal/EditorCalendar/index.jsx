@@ -32,15 +32,15 @@ const getBody = (values) => {
     diet = [],
     fitness = [],
   } = values;
-  console.log('%c [ values ]-35', 'font-size:13px; background:pink; color:#bf2c9f;', values);
+
   return {
     getUp,
     toRest,
     bodyIndex,
     bill: bill.filter((v) => v),
     diet: diet.filter((v) => v),
-    fitness: fitness.filter((v) => v),
     name: name.format('YYYY-MM-DD'),
+    fitness: fitness.filter((v) => v),
   };
 };
 

@@ -50,7 +50,7 @@ export default createSlice({
   reducers: {
     updateDiaries: (state, { payload: diaries }) => ({
       ...state,
-      diaries: _.uniqBy([...state.diaries, ...diaries], 'id'),
+      diaries: _.uniqBy([...diaries, ...state.diaries], 'id'),
     }),
 
     updateMenu: (state, { payload: menu }) => ({
