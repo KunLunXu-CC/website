@@ -117,27 +117,27 @@ export default () => {
   }, [form, modal]);
 
   return (
-    <Form form={form}>
-      <Modal
-        width="80%"
-        okText="确定"
-        destroyOnClose
-        closable={false}
-        cancelText="取消"
-        onOk={onOk}
-        title={title}
-        open={!!modal}
-        getContainer={false}
-        className={scss.modal}
-        onCancel={onCancel}>
+    <Modal
+      destroyOnClose
+      width="80%"
+      okText="确定"
+      onOk={onOk}
+      title={title}
+      open={!!modal}
+      cancelText="取消"
+      closable={false}
+      onCancel={onCancel}
+      getContainer={false}
+      className={scss.modal}>
+      <Form form={form}>
         <Tabs
           tabPosition="left"
           onChange={onTabsChange}>
           {TABS_SETTING.map((V) => (
             <Tabs.TabPane
+              forceRender
               tab={V.tab}
               key={V.key}
-              forceRender
               className={scss.body}>
               <V.Component
                 form={form}
@@ -147,7 +147,7 @@ export default () => {
             </Tabs.TabPane>
           ))}
         </Tabs>
-      </Modal>
-    </Form>
+      </Form>
+    </Modal>
   );
 };
