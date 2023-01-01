@@ -11,6 +11,7 @@ import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useMemo, useState, useCallback, useEffect } from 'react';
+import { useCreateDiariesMutation, useUpdateDiariesMutation } from '@store/graphql';
 
 // tabs 配置
 const TABS_SETTING = [
@@ -31,6 +32,7 @@ const getBody = (values) => {
     diet = [],
     fitness = [],
   } = values;
+  console.log('%c [ values ]-35', 'font-size:13px; background:pink; color:#bf2c9f;', values);
   return {
     getUp,
     toRest,
@@ -43,6 +45,8 @@ const getBody = (values) => {
 };
 
 export default () => {
+  const [createDiaries] = useCreateDiariesMutation();
+  const [updateDiaries] = useUpdateDiariesMutation();
   const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
   const titleToolRef = useRef();
   const dispatch = useDispatch();
@@ -72,23 +76,33 @@ export default () => {
   ), [titleToolRef]);
 
   // 取消
-  const onCancel = () => {
+  const onCancel = useCallback(() => {
     dispatch(actions.modal.close());
     form.resetFields();
-  };
+  }, [dispatch, form]);
 
   // 确认
-  const onOk = async () => {
+  const onOk = useCallback(async () => {
     const values = await form.validateFields();
+
     const id = modal?.diary?.id;
     const body = getBody(values);
-    dispatch({
-      id,
-      body,
-      type: id ? 'diary/updateDiaries' : 'diary/createDiarie',
-    });
+
+    const res = id
+      ? await updateDiaries({ body, conds: { id } })
+      : await createDiaries({ body });
+    const { change } = res.data[id ? 'updateDiaries' : 'createDiaries'];
+
+    dispatch(actions.diary.updateDiaries(change));
     onCancel();
-  };
+  }, [
+    form,
+    onCancel,
+    dispatch,
+    createDiaries,
+    updateDiaries,
+    modal?.diary?.id,
+  ]);
 
   // tabs 切换
   const onTabsChange = (activeTabKey) => {
