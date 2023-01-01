@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import scss from './fitness.module.scss';
 
 import {
@@ -8,6 +7,7 @@ import {
   Empty,
   Select,
 } from 'antd';
+import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
 
 const FITNESS_TYPE = [
@@ -26,46 +26,33 @@ const FITNESS_PLACES = [
   { name: '小臂', value: 7 },
 ];
 
-const useStateHook = (props) => {
-  // 类型下拉项
-  const typeOptions = useMemo(() => (
-    FITNESS_TYPE.map((v) => (
-      <Select.Option
-        value={v.value}
-        key={v.value}>
-        {v.name}
-      </Select.Option>
-    ))
-  ), []);
 
-  // 训练部位下拉项
-  const placeOptions = useMemo(() => (
-    FITNESS_PLACES.map((v) => (
-      <Select.Option
-        value={v.value}
-        key={v.value}>
-        {v.name}
-      </Select.Option>
-    ))
-  ), []);
+// 类型下拉项
+const TYPE_OPTIONS = FITNESS_TYPE.map((v) => (
+  <Select.Option
+    value={v.value}
+    key={v.value}>
+    {v.name}
+  </Select.Option>
+));
 
-  // type 修改
+// 训练部位下拉项
+const PLACE_OPTIONS = FITNESS_PLACES.map((v) => (
+  <Select.Option
+    value={v.value}
+    key={v.value}>
+    {v.name}
+  </Select.Option>
+));
+
+const Item = (props) => {
+  const { field } = props;
+
   const onTypeChange = () => {
     const fitness = props.form.getFieldValue(['fitness']);
     fitness[props.field.fieldKey].place = void 0;
     props.form.setFieldsValue({ fitness });
   };
-
-  return {
-    typeOptions,
-    placeOptions,
-    onTypeChange,
-  };
-};
-
-const Item = (props) => {
-  const { field } = props;
-  const state = useStateHook(props);
 
   return (
     <Row className={scss.row}>
@@ -82,9 +69,9 @@ const Item = (props) => {
               name={[field.name, 'type']}>
               <Select
                 placeholder="类型"
-                style={{ width: '100%' }}
-                onChange={state.onTypeChange}>
-                {state.typeOptions}
+                onChange={onTypeChange}
+                style={{ width: '100%' }}>
+                {TYPE_OPTIONS}
               </Select>
             </Form.Item>
           </Col>
@@ -100,7 +87,7 @@ const Item = (props) => {
               <Select
                 placeholder="训练部位"
                 style={{ width: '100%' }}>
-                {state.placeOptions}
+                {PLACE_OPTIONS}
               </Select>
             </Form.Item>
           </Col>
@@ -120,31 +107,33 @@ const Item = (props) => {
 };
 
 export default (props) => {
-  const { tools: Tools } = props;
+  const { isShow, renderTool } = props;
+
+  const renderItems = useCallback((fields, { add, remove }) => {
+    if (isShow) {
+      renderTool(
+        <Icon
+          type="icon-xinzeng"
+          onClick={add.bind(null, null)}
+        />,
+      );
+    }
+
+    return (
+      fields.length === 0 ? <Empty /> : fields.map((field) => (
+        <Item
+          field={field}
+          remove={remove}
+          key={field.key}
+          form={props.form}
+        />
+      ))
+    );
+  }, [isShow, props.form, renderTool]);
 
   return (
     <Form.List name="fitness">
-      {(fields, { add, remove }) => (
-        <>
-          {fields.map((field) => (
-            <Item
-              field={field}
-              remove={remove}
-              key={field.key}
-              form={props.form}
-            />
-          ))}
-          {fields.length === 0 ? <Empty /> : null}
-          {props.showTools ? (
-            <Tools>
-              <Icon
-                type="icon-xinzeng"
-                onClick={add.bind(null, null)}
-              />
-            </Tools>
-          ) : null}
-        </>
-      )}
+      {renderItems}
     </Form.List>
   );
 };

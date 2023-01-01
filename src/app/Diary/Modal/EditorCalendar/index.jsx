@@ -10,7 +10,7 @@ import { actions } from '@store';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRef, useMemo, useState, useCallback, useEffect } from 'react';
+import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
 import { useCreateDiariesMutation, useUpdateDiariesMutation } from '@store/graphql';
 
 // tabs 配置
@@ -45,41 +45,43 @@ const getBody = (values) => {
 };
 
 export default () => {
+  const dispatch = useDispatch();
   const [createDiaries] = useCreateDiariesMutation();
   const [updateDiaries] = useUpdateDiariesMutation();
+
+  const toolRef = useRef();
   const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
-  const titleToolRef = useRef();
-  const dispatch = useDispatch();
+
   const [form] = Form.useForm();
+  const name = Form.useWatch('name', form);
 
   // 弹窗
   const modal = useSelector((state) => state.modal[DIARY_EDITOR_DIARY]);
-
-  // 工具: 传送门
-  const Tools = useCallback(({ children }) => (
-    titleToolRef.current
-      ? ReactDOM.createPortal(children, titleToolRef.current)
-      : null
-  ), [titleToolRef]);
 
   // 弹窗标题
   const title = useMemo(() => (
     <div className={scss.title}>
       <div className={scss['title-text']}>
         添加数据
+        {name?.format('YYYY-MM-DD')}
       </div>
       <div
+        ref={toolRef}
         className={scss['title-tool']}
-        ref={titleToolRef}
       />
     </div>
-  ), [titleToolRef]);
+  ), [name]);
+
+  const renderTool = useCallback((tool) => {
+    toolRef.current
+      ? ReactDOM.createPortal(tool, toolRef.current)
+      : null;
+  }, []);
 
   // 取消
   const onCancel = useCallback(() => {
     dispatch(actions.modal.close());
-    form.resetFields();
-  }, [dispatch, form]);
+  }, [dispatch]);
 
   // 确认
   const onOk = useCallback(async () => {
@@ -109,41 +111,43 @@ export default () => {
     setActiveTabKey(activeTabKey);
   };
 
-  // 重新设置值
+  const initialValues = useMemo(() => (modal ? {
+    bill: (modal.diary?.bill ?? []).map(
+      (v) => ({ ...v, tag: v.tag?.value }),
+    ),
+    diet: (modal.diary?.diet ?? []).map(
+      (v) => ({ ...v, type: v.type?.value }),
+    ),
+    fitness: (modal.diary?.fitness ?? []).map(
+      (v) => ({ type: v.type?.value, place: v.place?.value }),
+    ),
+    bodyIndex: modal.diary?.bodyIndex ?? {},
+    name: dayjs(modal.diary?.name ?? modal.date),
+    getUp: dayjs(modal.diary?.getUp ?? modal.date),
+    toRest: dayjs(modal.diary?.toRest ?? modal.date),
+  } : {}), [modal]);
+
+  // modal 变化时, 需要重新 resetFields
   useEffect(() => {
-    form.setFieldsValue(
-      modal ? {
-        diet: (modal?.diary?.diet ?? []).map(
-          (v) => ({ ...v, type: v.type?.value }),
-        ),
-        fitness: (modal?.diary?.fitness ?? []).map(
-          (v) => ({ type: v.type?.value, place: v.place?.value }),
-        ),
-        bill: (modal?.diary?.bill ?? []).map(
-          (v) => ({ ...v, tag: v.tag?.value }),
-        ),
-        bodyIndex: modal?.diary?.bodyIndex ?? {},
-        name: dayjs(modal?.diary?.name ?? modal.date),
-        getUp: dayjs(modal?.diary?.getUp ?? modal.date),
-        toRest: dayjs(modal?.diary?.toRest ?? modal.date),
-      } : void 0,
-    );
+    form.resetFields();
   }, [form, modal]);
 
   return (
-    <Modal
-      destroyOnClose
-      width="80%"
-      onOk={onOk}
-      okText="确定"
-      title={title}
-      open={!!modal}
-      cancelText="取消"
-      closable={false}
-      onCancel={onCancel}
-      getContainer={false}
-      className={scss.modal}>
-      <Form form={form}>
+    <Form
+      form={form}
+      initialValues={initialValues}>
+      <Modal
+        destroyOnClose
+        width="80%"
+        onOk={onOk}
+        okText="确定"
+        title={title}
+        open={!!modal}
+        cancelText="取消"
+        closable={false}
+        onCancel={onCancel}
+        getContainer={false}
+        className={scss.modal}>
         <Tabs
           tabPosition="left"
           onChange={onTabsChange}>
@@ -155,13 +159,13 @@ export default () => {
               className={scss.body}>
               <V.Component
                 form={form}
-                tools={Tools}
-                showTools={activeTabKey === V.key}
+                renderTool={renderTool}
+                isShow={activeTabKey === V.key}
               />
             </Tabs.TabPane>
           ))}
         </Tabs>
-      </Form>
-    </Modal>
+      </Modal>
+    </Form>
   );
 };
