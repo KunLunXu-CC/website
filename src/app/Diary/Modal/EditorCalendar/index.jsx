@@ -33,8 +33,6 @@ const getBody = (values) => {
     fitness = [],
   } = values;
 
-  console.log('%c [ values ]-35', 'font-size:13px; background:pink; color:#bf2c9f;', values);
-
   return {
     getUp,
     toRest,
@@ -61,21 +59,15 @@ export default () => {
   const modal = useSelector((state) => state.modal[DIARY_EDITOR_DIARY]);
 
   const initialValues = useMemo(() => (modal ? {
-    bill: (modal.diary?.bill ?? []).map(
-      (v) => ({ ...v, tag: v.tag?.value }),
-    ),
-    diet: (modal.diary?.diet ?? []).map(
-      (v) => ({ ...v, type: v.type?.value }),
-    ),
-    fitness: (modal.diary?.fitness ?? []).map(
-      (v) => ({ type: v.type?.value, place: v.place?.value }),
-    ),
+    bill: modal.diary?.bill ?? [],
+    diet: modal.diary?.diet ?? [],
+    fitness: modal.diary?.fitness ?? [],
     bodyIndex: modal.diary?.bodyIndex ?? {},
     name: dayjs(modal.diary?.name ?? modal.date),
     getUp: dayjs(modal.diary?.getUp ?? modal.date),
     toRest: dayjs(modal.diary?.toRest ?? modal.date),
   } : {}), [modal]);
-  console.log('%c [ initialValues ]-77', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues);
+
   // 弹窗标题
   const title = useMemo(() => (
     <div className={scss.title}>
