@@ -6,34 +6,18 @@ fragment DiaryOutputFields on Diary {
   toRest
   informalEssay
   diet {
-    type {
-      name
-      desc
-      value
-    }
+    type
     desc
   }
   fitness {
-    type {
-      name
-      desc
-      value
-    }
-    place {
-      name
-      desc
-      value
-    }
+    type
+    place
   }
   bill {
+    tag
     desc
     income
     expend
-    tag {
-      value
-      name
-      desc
-    }
   }
   bodyIndex {
     bim

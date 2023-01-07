@@ -129,7 +129,7 @@ export type Bill = {
   desc?: Maybe<Scalars['String']>;
   expend?: Maybe<Scalars['Float']>;
   income?: Maybe<Scalars['Float']>;
-  tag?: Maybe<Datasetsfrom>;
+  tag?: Maybe<Scalars['Int']>;
 };
 
 export type BodyIndex = {
@@ -245,13 +245,13 @@ export type DiarySearch = {
 export type Diet = {
   __typename?: 'Diet';
   desc?: Maybe<Scalars['String']>;
-  type?: Maybe<Datasetsfrom>;
+  type?: Maybe<Scalars['Int']>;
 };
 
 export type Fitness = {
   __typename?: 'Fitness';
-  place?: Maybe<Datasetsfrom>;
-  type?: Maybe<Datasetsfrom>;
+  place?: Maybe<Scalars['Int']>;
+  type?: Maybe<Scalars['Int']>;
 };
 
 export type Interview = {
@@ -1227,21 +1227,21 @@ export type Users = {
   pagination?: Maybe<Scalars['Pagination']>;
 };
 
-export type DiaryOutputFieldsFragment = { __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', desc?: string | null, type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null, place?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, bill?: Array<{ __typename?: 'Bill', desc?: string | null, income?: number | null, expend?: number | null, tag?: { __typename?: 'Datasetsfrom', value?: number | null, name?: string | null, desc?: string | null } | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null };
+export type DiaryOutputFieldsFragment = { __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null };
 
 export type GetDiariesQueryVariables = Exact<{
   search?: InputMaybe<DiarySearch>;
 }>;
 
 
-export type GetDiariesQuery = { __typename?: 'Query', diaries?: { __typename?: 'Diaries', list?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', desc?: string | null, type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null, place?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, bill?: Array<{ __typename?: 'Bill', desc?: string | null, income?: number | null, expend?: number | null, tag?: { __typename?: 'Datasetsfrom', value?: number | null, name?: string | null, desc?: string | null } | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
+export type GetDiariesQuery = { __typename?: 'Query', diaries?: { __typename?: 'Diaries', list?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
 
 export type CreateDiariesMutationVariables = Exact<{
   body: Array<DiaryFields> | DiaryFields;
 }>;
 
 
-export type CreateDiariesMutation = { __typename?: 'Mutation', createDiaries?: { __typename?: 'Diaries', change?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', desc?: string | null, type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null, place?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, bill?: Array<{ __typename?: 'Bill', desc?: string | null, income?: number | null, expend?: number | null, tag?: { __typename?: 'Datasetsfrom', value?: number | null, name?: string | null, desc?: string | null } | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
+export type CreateDiariesMutation = { __typename?: 'Mutation', createDiaries?: { __typename?: 'Diaries', change?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
 
 export type UpdateDiariesMutationVariables = Exact<{
   body: DiaryFields;
@@ -1249,7 +1249,7 @@ export type UpdateDiariesMutationVariables = Exact<{
 }>;
 
 
-export type UpdateDiariesMutation = { __typename?: 'Mutation', updateDiaries?: { __typename?: 'Diaries', change?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', desc?: string | null, type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null, place?: { __typename?: 'Datasetsfrom', name?: string | null, desc?: string | null, value?: number | null } | null } | null> | null, bill?: Array<{ __typename?: 'Bill', desc?: string | null, income?: number | null, expend?: number | null, tag?: { __typename?: 'Datasetsfrom', value?: number | null, name?: string | null, desc?: string | null } | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
+export type UpdateDiariesMutation = { __typename?: 'Mutation', updateDiaries?: { __typename?: 'Diaries', change?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
 
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
@@ -1294,34 +1294,18 @@ export const DiaryOutputFieldsFragmentDoc = `
   toRest
   informalEssay
   diet {
-    type {
-      name
-      desc
-      value
-    }
+    type
     desc
   }
   fitness {
-    type {
-      name
-      desc
-      value
-    }
-    place {
-      name
-      desc
-      value
-    }
+    type
+    place
   }
   bill {
+    tag
     desc
     income
     expend
-    tag {
-      value
-      name
-      desc
-    }
   }
   bodyIndex {
     bim

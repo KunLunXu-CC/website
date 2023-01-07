@@ -33,6 +33,8 @@ const getBody = (values) => {
     fitness = [],
   } = values;
 
+  console.log('%c [ values ]-35', 'font-size:13px; background:pink; color:#bf2c9f;', values);
+
   return {
     getUp,
     toRest,
@@ -73,7 +75,7 @@ export default () => {
     getUp: dayjs(modal.diary?.getUp ?? modal.date),
     toRest: dayjs(modal.diary?.toRest ?? modal.date),
   } : {}), [modal]);
-
+  console.log('%c [ initialValues ]-77', 'font-size:13px; background:pink; color:#bf2c9f;', initialValues);
   // 弹窗标题
   const title = useMemo(() => (
     <div className={scss.title}>
