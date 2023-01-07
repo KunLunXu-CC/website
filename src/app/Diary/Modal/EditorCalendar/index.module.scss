@@ -27,16 +27,6 @@
       }
     }
 
-    // antd 表单
-    .ant-form {
-      height: 100%;
-
-      .ant-form-item-label {
-        width: 5em;
-        text-align: right;
-      }
-    }
-
     // antd tabs 设置
     .ant-tabs-left {
       height: 100%;
@@ -72,5 +62,17 @@
     padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+}
+
+// 表单
+.form {
+  height: 100%;
+
+  :global {
+    .ant-form-item-label {
+      width: 5em;
+      text-align: right;
+    }
   }
 }

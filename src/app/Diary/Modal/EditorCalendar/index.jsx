@@ -143,6 +143,7 @@ export default () => {
   return (
     <Form
       form={form}
+      className={scss.form}
       initialValues={initialValues}>
       <Modal
         destroyOnClose
