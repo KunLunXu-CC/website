@@ -154,6 +154,7 @@ export default () => {
         open={!!modal}
         cancelText="取消"
         closable={false}
+        maskClosable={false}
         getContainer={false}
         className={scss.modal}
         onCancel={handleCancel}>
