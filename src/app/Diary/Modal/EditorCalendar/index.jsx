@@ -71,10 +71,10 @@ export default () => {
   // 弹窗标题
   const title = useMemo(() => (
     <div className={scss.title}>
-      <div className={scss['title-text']}>
-        添加数据
+      添加数据
+      <span className={scss['title-date']}>
         {name?.format('YYYY-MM-DD')}
-      </div>
+      </span>
       <div
         ref={toolRef}
         className={scss['title-tool']}

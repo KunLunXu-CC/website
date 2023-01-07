@@ -50,7 +50,11 @@
   // 标题
   .title {
     display: flex;
-    justify-content: space-between;
+
+    .title-date {
+      flex: 1;
+      color: #999;
+    }
 
     .title-tool {
       font-weight: 300;
