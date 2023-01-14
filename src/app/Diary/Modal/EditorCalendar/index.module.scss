@@ -28,6 +28,14 @@
       }
     }
 
+    .ant-modal-title {
+      .brick-icon {
+        float: right;
+        cursor: pointer;
+        padding-top: 4px;
+      }
+    }
+
     // antd tabs 设置
     .ant-tabs-left {
       height: 100%;
@@ -45,15 +53,6 @@
 
     .brick-icon:hover {
       color: #69c0ff;
-    }
-  }
-
-  // 标题
-  .title {
-    display: flex;
-
-    .title-tool {
-      font-weight: 300;
     }
   }
 

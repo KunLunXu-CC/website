@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import scss from './index.module.scss';
 
 import { actions } from '@store';
+import { Icon } from '@kunlunxu/brick';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -70,13 +71,13 @@ export default () => {
 
   // 弹窗标题
   const title = useMemo(() => (
-    <div className={scss.title}>
+    <>
       {name?.format('YYYY-MM-DD')}
-      <div
-        ref={toolRef}
+      <Icon
+        type="icon-xinzeng"
         className={scss['title-tool']}
       />
-    </div>
+    </>
   ), [name]);
 
   const renderTool = useCallback((tool) => {
