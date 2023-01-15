@@ -1251,6 +1251,20 @@ export type UpdateDiariesMutationVariables = Exact<{
 
 export type UpdateDiariesMutation = { __typename?: 'Mutation', updateDiaries?: { __typename?: 'Diaries', change?: Array<{ __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } | null> | null } | null };
 
+export type GetStatsBillQueryVariables = Exact<{
+  search?: InputMaybe<StatsBillSearch>;
+}>;
+
+
+export type GetStatsBillQuery = { __typename?: 'Query', statsBill?: { __typename?: 'StatsBill', stats?: { __typename?: 'Bill', income?: number | null, expend?: number | null } | null, groupWithName?: Array<{ __typename?: 'StatsBillItem', name?: string | null, income?: number | null, expend?: number | null, diaries?: Array<{ __typename?: 'Diary', name?: string | null, bill?: Array<{ __typename?: 'Bill', desc?: string | null, income?: number | null, expend?: number | null, tag?: number | null } | null> | null } | null> | null } | null> | null } | null };
+
+export type GetStatsBodyIndexQueryVariables = Exact<{
+  search?: InputMaybe<DiarySearch>;
+}>;
+
+
+export type GetStatsBodyIndexQuery = { __typename?: 'Query', diaries?: { __typename?: 'Diaries', list?: Array<{ __typename?: 'Diary', name?: string | null, bodyIndex?: { __typename?: 'BodyIndex', weight?: number | null, muscle?: number | null, moistureContent?: number | null, bodyfat?: number | null, bim?: number | null } | null } | null> | null } | null };
+
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
 }>;
@@ -1343,6 +1357,46 @@ export const UpdateDiariesDocument = `
   }
 }
     ${DiaryOutputFieldsFragmentDoc}`;
+export const GetStatsBillDocument = `
+    query getStatsBill($search: StatsBillSearch) {
+  statsBill(search: $search) {
+    stats {
+      income
+      expend
+    }
+    groupWithName {
+      name
+      income
+      expend
+      diaries {
+        name
+        bill {
+          desc
+          income
+          expend
+          tag
+        }
+      }
+    }
+  }
+}
+    `;
+export const GetStatsBodyIndexDocument = `
+    query getStatsBodyIndex($search: DiarySearch) {
+  diaries(search: $search) {
+    list {
+      name
+      bodyIndex {
+        weight
+        muscle
+        moistureContent
+        bodyfat
+        bim
+      }
+    }
+  }
+}
+    `;
 export const GetPhotosDocument = `
     query getPhotos($search: PhotoSearch) {
   photos(search: $search) {
@@ -1413,6 +1467,12 @@ const injectedRtkApi = api.injectEndpoints({
     updateDiaries: build.mutation<UpdateDiariesMutation, UpdateDiariesMutationVariables>({
       query: (variables) => ({ document: UpdateDiariesDocument, variables })
     }),
+    getStatsBill: build.query<GetStatsBillQuery, GetStatsBillQueryVariables | void>({
+      query: (variables) => ({ document: GetStatsBillDocument, variables })
+    }),
+    getStatsBodyIndex: build.query<GetStatsBodyIndexQuery, GetStatsBodyIndexQueryVariables | void>({
+      query: (variables) => ({ document: GetStatsBodyIndexDocument, variables })
+    }),
     getPhotos: build.query<GetPhotosQuery, GetPhotosQueryVariables | void>({
       query: (variables) => ({ document: GetPhotosDocument, variables })
     }),
@@ -1432,5 +1492,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 
