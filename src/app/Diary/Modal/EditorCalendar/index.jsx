@@ -6,6 +6,7 @@ import Fitness from './Fitness';
 import scss from './index.module.scss';
 
 import { actions } from '@store';
+import classNames from 'classnames';
 import { Icon } from '@kunlunxu/brick';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
@@ -135,8 +136,8 @@ export default () => {
   return (
     <Form
       form={form}
-      className={scss.form}
-      initialValues={initialValues}>
+      initialValues={initialValues}
+      className={classNames(scss.form, scss[activeTabKey])}>
       <Modal
         destroyOnClose
         width="80%"

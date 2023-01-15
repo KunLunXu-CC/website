@@ -74,4 +74,12 @@
       text-align: right;
     }
   }
+
+  &.base {
+    :global {
+      .brick-icon {
+        opacity: 0;
+      }
+    }
+  }
 }
