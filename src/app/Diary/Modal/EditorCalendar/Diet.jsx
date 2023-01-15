@@ -71,16 +71,11 @@ const Item = (props) => (
 );
 
 export default (props) => {
-  const { isShow, renderTool } = props;
+  const { isShow, addRef } = props;
 
   const renderItems = useCallback((fields, { add, remove }) => {
     if (isShow) {
-      renderTool(
-        <Icon
-          type="icon-xinzeng"
-          onClick={add.bind(null, null)}
-        />,
-      );
+      addRef.current = add;
     }
 
     return (
@@ -93,7 +88,7 @@ export default (props) => {
         />
       ))
     );
-  }, [isShow, props.form, renderTool]);
+  }, [addRef, isShow, props.form]);
 
   return (
     <Form.List name="diet">

@@ -3,7 +3,6 @@ import Bill from './Bill';
 import Diet from './Diet';
 import dayjs from 'dayjs';
 import Fitness from './Fitness';
-import ReactDOM from 'react-dom';
 import scss from './index.module.scss';
 
 import { actions } from '@store';
@@ -50,7 +49,7 @@ export default () => {
   const [createDiaries] = useCreateDiariesMutation();
   const [updateDiaries] = useUpdateDiariesMutation();
 
-  const toolRef = useRef();
+  const addRef = useRef();
   const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
 
   const [form] = Form.useForm();
@@ -76,15 +75,10 @@ export default () => {
       <Icon
         type="icon-xinzeng"
         className={scss['title-tool']}
+        onClick={() => addRef.current?.()}
       />
     </>
   ), [name]);
-
-  const renderTool = useCallback((tool) => {
-    toolRef.current
-      ? ReactDOM.createPortal(tool, toolRef.current)
-      : null;
-  }, []);
 
   const items = useMemo(() => TABS_SETTING.map((V) => (
     {
@@ -94,12 +88,12 @@ export default () => {
       children: (
         <V.Component
           form={form}
-          renderTool={renderTool}
+          addRef={addRef}
           isShow={V.key === activeTabKey}
         />
       ),
     }
-  )), [activeTabKey, form, renderTool]);
+  )), [activeTabKey, form]);
 
   const handleCancel = useCallback(() => {
     dispatch(actions.modal.close());
