@@ -1,4 +1,4 @@
-import scss from './index.module.scss';
+import scss from './cards.module.scss';
 
 import { formatNum } from '@utils';
 import { useSelector } from 'react-redux';
