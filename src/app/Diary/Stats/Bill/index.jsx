@@ -68,7 +68,7 @@ export default () => {
       title="历史收入 / 支出"
       className={scss.card}
       extra={(
-        <div className={scss['header-btns']}>
+        <div className={scss['header-btn']}>
           {Object.values(STATS_SPAN).map((v) => (
             <div
               key={v.VALUE}
