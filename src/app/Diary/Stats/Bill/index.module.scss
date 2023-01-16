@@ -2,6 +2,39 @@
   margin: 20px 20px 20px 8px;
 }
 
+.overview {
+  display: flex;
+  justify-content: space-evenly;
+
+  .overview-item {
+    flex: 1;
+    padding: 20px;
+    border-radius: 4px;
+
+    &:nth-child(1) {
+      background: linear-gradient(to bottom left, #2f9bf6, #41c3e7);
+    }
+
+    &:nth-child(2) {
+      margin: 0 20px;
+      background: linear-gradient(to bottom left, #ac7ded, #0f97f4);
+    }
+
+    &:nth-child(3) {
+      background: linear-gradient(to bottom left, #a9e56f, #70dca9);
+    }
+  }
+
+  .overview-label {
+    color: rgb(255 255 255 / 65%);
+  }
+
+  .overview-value {
+    font-size: 26px;
+    color: rgb(255 255 255 / 100%);
+  }
+}
+
 .header-btn {
   display: flex;
   align-items: center;

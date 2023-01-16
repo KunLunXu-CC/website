@@ -50,19 +50,6 @@ export const rsa = (data, publicKey) => {
 };
 
 /**
- * 格式化数字
- * TODO: 改用 number 自带的格式化函数
- *
- * @param {number} num  待处理数据
- * @returns {string} 格式化后的字符串
- */
-export const formatNum = (num) => [...`${num}`]
-  .reverse()
-  .reduce((total, ele, index) => `${ele}${
-    index !== 0 && index % 3 === 0 ? ',' : ''
-  }${total}`, '');
-
-/**
  * 提示
  *
  * @param {object} params 函数对象参数, 除了下面两个菜参数, 其余参考 antd notification 组件参数, message description

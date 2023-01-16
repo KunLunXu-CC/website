@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import Cards from './Cards';
 import Echarts from './Echarts';
 import classNames from 'classnames';
 import scss from './index.module.scss';
@@ -7,7 +6,8 @@ import scss from './index.module.scss';
 import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
 import { STATS_SPAN } from '../../consts';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useGetStatsBillQuery } from '@store/graphql';
 
 // span 和 name 映射表
 const SPAN_MAP_NAME = {
@@ -31,9 +31,18 @@ const SPAN_MAP_NAME = {
   ],
 };
 
-const useStateHook = () => {
+export default () => {
+  const { data } = useGetStatsBillQuery();
+
   const [span, setSpan] = useState(STATS_SPAN.MONTH.VALUE);
   const dispatch = useDispatch();
+
+  // 总览
+  const overview = useMemo(() => [
+    { label: '总收入', value: data?.statsBill.stats.income },
+    { label: '总支出', value: data?.statsBill.stats.expend },
+    { label: '总盈余', value: data?.statsBill.stats.income - data?.statsBill.stats.expend },
+  ], [data?.statsBill]);
 
   // 切换
   const onToggleSpan = (span) => {
@@ -57,11 +66,6 @@ const useStateHook = () => {
     });
   }, [span]);
 
-  return { span, onToggleSpan, getBtnClassName };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <Card
       bordered={false}
@@ -72,15 +76,30 @@ export default () => {
           {Object.values(STATS_SPAN).map((v) => (
             <div
               key={v.VALUE}
-              className={state.getBtnClassName(v.VALUE)}
-              onClick={state.onToggleSpan.bind(null, v.VALUE)}>
+              className={getBtnClassName(v.VALUE)}
+              onClick={onToggleSpan.bind(null, v.VALUE)}>
               {v.DESC}
             </div>
           ))}
         </div>
       )}>
-      <Cards />
-      <Echarts span={state.span} />
+      {/* 总览 */}
+      <div className={scss.overview}>
+        {overview.map((v) => (
+          <div
+            key={v.label}
+            className={scss['overview-item']}>
+            <div className={scss['overview-label']}>
+              {v.label}
+            </div>
+            <div className={scss['overview-value']}>
+              ¥
+              {(v.value || 0).toLocaleString()}
+            </div>
+          </div>
+        ))}
+      </div>
+      <Echarts span={span} />
     </Card>
   );
 };
