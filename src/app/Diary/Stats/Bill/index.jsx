@@ -1,17 +1,17 @@
 import dayjs from 'dayjs';
 import Cards from './Cards';
-import Echart from './Echart';
+import Echarts from './Echarts';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
-import { STATS_SAPN } from '../../consts';
+import { STATS_SPAN } from '../../consts';
 import { useState, useEffect } from 'react';
 
 // span 和 name 映射表
 const SPAN_MAP_NAME = {
-  [STATS_SAPN.MONTH.VALUE]: [
+  [STATS_SPAN.MONTH.VALUE]: [
     dayjs()
       .startOf('month')
       .subtract(12, 'months')
@@ -20,7 +20,7 @@ const SPAN_MAP_NAME = {
       .endOf('month')
       .format('YYYY-MM-DD'),
   ],
-  [STATS_SAPN.YEAR.VALUE]: [
+  [STATS_SPAN.YEAR.VALUE]: [
     dayjs()
       .subtract(10, 'years')
       .startOf('years')
@@ -32,7 +32,7 @@ const SPAN_MAP_NAME = {
 };
 
 const useStateHook = () => {
-  const [span, setSpan] = useState(STATS_SAPN.MONTH.VALUE);
+  const [span, setSpan] = useState(STATS_SPAN.MONTH.VALUE);
   const dispatch = useDispatch();
 
   // 切换
@@ -69,7 +69,7 @@ export default () => {
       className={scss.card}
       extra={(
         <div className={scss['header-btns']}>
-          {Object.values(STATS_SAPN).map((v) => (
+          {Object.values(STATS_SPAN).map((v) => (
             <div
               key={v.VALUE}
               className={state.getBtnClassName(v.VALUE)}
@@ -80,7 +80,7 @@ export default () => {
         </div>
       )}>
       <Cards />
-      <Echart span={state.span} />
+      <Echarts span={state.span} />
     </Card>
   );
 };

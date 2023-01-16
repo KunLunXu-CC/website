@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { Echarts } from '@kunlunxu/brick';
-import { STATS_BILL_DETAIL } from '../../../consts';
+import { STATS_BILL_DETAIL } from '../../consts';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
