@@ -1,12 +1,13 @@
 import dayjs from 'dayjs';
 import Echarts from './Echarts';
+import Overview from './Overview';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
 import { STATS_SPAN } from '../../consts';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useGetStatsBillQuery } from '@store/graphql';
 
 // span 和 name 映射表
@@ -36,13 +37,6 @@ export default () => {
 
   const [span, setSpan] = useState(STATS_SPAN.MONTH.VALUE);
   const dispatch = useDispatch();
-
-  // 总览
-  const overview = useMemo(() => [
-    { label: '总收入', value: data?.statsBill.stats.income },
-    { label: '总支出', value: data?.statsBill.stats.expend },
-    { label: '总盈余', value: data?.statsBill.stats.income - data?.statsBill.stats.expend },
-  ], [data?.statsBill]);
 
   // 切换
   const onToggleSpan = (span) => {
@@ -83,22 +77,7 @@ export default () => {
           ))}
         </div>
       )}>
-      {/* 总览 */}
-      <div className={scss.overview}>
-        {overview.map((v) => (
-          <div
-            key={v.label}
-            className={scss['overview-item']}>
-            <div className={scss['overview-label']}>
-              {v.label}
-            </div>
-            <div className={scss['overview-value']}>
-              ¥
-              {(v.value || 0).toLocaleString()}
-            </div>
-          </div>
-        ))}
-      </div>
+      <Overview data={data?.statsBill.stats} />
       <Echarts span={span} />
     </Card>
   );
