@@ -9,8 +9,7 @@ export default ({ data = {} }) => {
     { label: '总支出', value: data.expend },
     { label: '总盈余', value: data.income - data.expend },
   ], [data]);
-  console.log('%c [ data ]-12', 'font-size:13px; background:pink; color:#bf2c9f;', data);
-  console.log('%c [ overview ]-14', 'font-size:13px; background:pink; color:#bf2c9f;', overview);
+
   return (
     <div className={scss.overview}>
       {overview.map((v) => (

@@ -33,9 +33,13 @@ const SPAN_MAP_NAME = {
 };
 
 export default () => {
-  const { data } = useGetStatsBillQuery();
-
   const [span, setSpan] = useState(STATS_SPAN.MONTH.VALUE);
+
+  const { data } = useGetStatsBillQuery({ search: {
+    span,
+    name: SPAN_MAP_NAME[span],
+  } });
+
   const dispatch = useDispatch();
 
   // 切换
@@ -78,7 +82,7 @@ export default () => {
         </div>
       )}>
       <Overview data={data?.statsBill.stats} />
-      <Echarts span={span} />
+      <Echarts data={data?.statsBill.groupWithName} />
     </Card>
   );
 };

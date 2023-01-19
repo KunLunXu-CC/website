@@ -1,19 +1,18 @@
 import { useMemo } from 'react';
 import { Echarts } from '@kunlunxu/brick';
+import { useDispatch } from 'react-redux';
 import { STATS_BILL_DETAIL } from '../../consts';
-import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = () => {
+export default (props) => {
   const dispatch = useDispatch();
-  const { groupWithName } = useSelector((state) => state.diary.statsBill);
 
   // 处理数据
-  const data = useMemo(() => (groupWithName.reduce((total, ele) => ({
+  const data = useMemo(() => ((props.data || []).reduce((total, ele) => ({
     xAxis: [...total.xAxis, ele.name],
     income: [...total.income, ele.income],
     balance: [...total.balance, (ele.income - ele.expend).toFixed(2)],
     expend: [...total.expend, { value: ele.expend, diaries: ele.diaries }],
-  }), { xAxis: [], expend: [], income: [], balance: [] })), [groupWithName]);
+  }), { xAxis: [], expend: [], income: [], balance: [] })), [props.data]);
 
   // echarts 配置
   const option = useMemo(() => ({
@@ -81,16 +80,12 @@ const useStateHook = () => {
     },
   }]), [dispatch]);
 
-  return { option, on };
-};
 
-export default (props) => {
-  const state = useStateHook(props);
   return (
     <Echarts
+      on={on}
       height={300}
-      on={state.on}
-      option={state.option}
+      option={option}
     />
   );
 };
