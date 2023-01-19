@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import Echart from './Echart';
+import Echarts from './Echarts';
 import scss from './index.module.scss';
 
 import { DatePicker, Card } from 'antd';
@@ -25,7 +25,7 @@ const getFullDate = ([start, end]) => {
   return res;
 };
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
 
   // 查询
@@ -40,11 +40,6 @@ const useStateHook = () => {
     search();
   }, []);
 
-  return { search };
-};
-
-export default () => {
-  const state = useStateHook();
 
   return (
     <Card
@@ -54,11 +49,11 @@ export default () => {
       extra={(
         <DatePicker.RangePicker
           bordered={false}
-          onChange={state.search}
+          onChange={search}
           defaultValue={DEFAULT_DATE}
         />
       )}>
-      <Echart />
+      <Echarts />
     </Card>
   );
 };
