@@ -19,16 +19,16 @@ export default () => {
     ),
   }));
 
+  // 当前选中项
+  const activeKey = useMemo(() => (
+    works.find((v) => v.action)?.articleId
+  ), [works]);
+
   const tabsItems = useMemo(() => works.map((work) => ({
     key: work.articleId,
     label: <Tab work={work} />,
     children: <Editor work={work} />,
   })), [works]);
-
-  // 当前选中项
-  const selected = useMemo(() => (
-    works.find((v) => v.action)?.article
-  ), [works]);
 
   // 点击 tab 切换事件: 将当前窗口设置为活动窗口
   const handleTabsChange = (article) => {
@@ -44,7 +44,7 @@ export default () => {
         <Tabs
           type="card"
           items={tabsItems}
-          activeKey={selected}
+          activeKey={activeKey}
           onChange={handleTabsChange}
           tabBarExtraContent={<TabBarExtra />}
         />
