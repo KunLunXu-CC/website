@@ -1,6 +1,4 @@
-import React, {
-  useEffect,
-} from 'react';
+import { useEffect } from 'react';
 import ActivityBar from './ActivityBar';
 import SideBar from './SideBar';
 import Work from './Work';
