@@ -70,25 +70,29 @@ export default () => {
         />
       );
 
-      return (
-        !item.tags ? ( // 非文章
-          <Menu.SubMenu
-            key={item.id}
-            title={title}>
-            {item?.children?.length !== 0 ?
-              item.children.map((v) => (recursion(v, level + 1))) :
-              <Menu.Item className={scss['menu-item-empty']} />
-            }
-            <div
-              className={scss['menu-dividing']}
-              style={{ left: `${(level * INLINE_INDENT) + 12}px` }}
-            />
-          </Menu.SubMenu>
-        ) : (
+      // 文章
+      if (item.tags) {
+        return (
           <Menu.Item key={item.id}>
             {title}
           </Menu.Item>
-        )
+        );
+      }
+
+      // 目录
+      return (
+        <Menu.SubMenu
+          key={item.id}
+          title={title}>
+          {item?.children?.length !== 0
+            ? item.children.map((v) => (recursion(v, level + 1)))
+            : <Menu.Item className={scss['menu-item-empty']} />
+          }
+          <div
+            className={scss['menu-dividing']}
+            style={{ left: `${(level * INLINE_INDENT) + 12}px` }}
+          />
+        </Menu.SubMenu>
       );
     };
 
