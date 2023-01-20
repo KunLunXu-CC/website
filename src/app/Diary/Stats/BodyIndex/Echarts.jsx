@@ -1,22 +1,34 @@
 import { useMemo } from 'react';
 import { Echarts } from '@kunlunxu/brick';
-import { useSelector } from 'react-redux';
 
-const useStateHook = () => {
-  const statsBodyIndex = useSelector((state) => state.diary.statsBodyIndex);
-
+export default (props) => {
   // 处理数据
   const data = useMemo(
-    () => (statsBodyIndex.reduce((total, { name, bodyIndex }) => ({
-      xAxis: [...total.xAxis, name],
-      weight: [...total.weight, bodyIndex?.weight ?? 0],
-      bodyfat: [...total.bodyfat, bodyIndex?.bodyfat ?? 0],
-      moistureContent: [
-        ...total.moistureContent,
-        bodyIndex?.moistureContent ?? 0,
-      ],
-    }), { xAxis: [], bodyfat: [], weight: [], moistureContent: [] })),
-    [statsBodyIndex],
+    () => {
+      const reduceInit = {
+        xAxis: [],
+        weight: [],
+        bodyfat: [],
+        moistureContent: [],
+      };
+
+      const filterData = (props.data || []).filter((v) => (
+        v.bodyIndex?.bodyfat &&
+        v.bodyIndex?.moistureContent &&
+        v.bodyIndex?.weight
+      ));
+
+      return filterData.reduce((total, { name, bodyIndex }) => ({
+        moistureContent: [
+          ...total.moistureContent,
+          bodyIndex?.moistureContent ?? 0,
+        ],
+        xAxis: [...total.xAxis, name],
+        weight: [...total.weight, bodyIndex?.weight ?? 0],
+        bodyfat: [...total.bodyfat, bodyIndex?.bodyfat ?? 0],
+      }), reduceInit);
+    },
+    [props.data],
   );
 
   // echarts 配置
@@ -25,19 +37,23 @@ const useStateHook = () => {
       trigger: 'axis',
     },
     legend: {
+      top: 0,
       right: 0,
       data: ['体重', '体脂', '水分'],
     },
     grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
+      top: 40,
+      left: 60,
+      right: 25,
+      bottom: 25,
     },
     xAxis: {
       type: 'category',
       data: data.xAxis,
+
     },
     yAxis: {
+      show: true,
       type: 'value',
       min: 'dataMin',
     },
@@ -63,16 +79,11 @@ const useStateHook = () => {
     ],
   }), [data]);
 
-  return { option };
-};
-
-export default (props) => {
-  const state = useStateHook(props);
 
   return (
     <Echarts
       height={300}
-      option={state.option}
+      option={option}
     />
   );
 };

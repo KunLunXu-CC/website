@@ -2,9 +2,9 @@ import dayjs from 'dayjs';
 import Echarts from './Echarts';
 import scss from './index.module.scss';
 
+import { useState } from 'react';
 import { DatePicker, Card } from 'antd';
-import { useDispatch } from 'react-redux';
-import { useEffect, useCallback } from 'react';
+import { useGetStatsBodyIndexQuery } from '@store/graphql';
 
 // 默认日期
 const DEFAULT_DATE = [
@@ -26,20 +26,11 @@ const getFullDate = ([start, end]) => {
 };
 
 export default () => {
-  const dispatch = useDispatch();
+  const [date, setDate] = useState(DEFAULT_DATE);
 
-  // 查询
-  const search = useCallback((date) => {
-    dispatch({
-      type: 'diary/getStatsBodyIndex',
-      search: { names: getFullDate(date ?? DEFAULT_DATE) },
-    });
-  }, []);
-
-  useEffect(() => {
-    search();
-  }, []);
-
+  const { data } = useGetStatsBodyIndexQuery({
+    search: { names: getFullDate(date) },
+  });
 
   return (
     <Card
@@ -49,11 +40,11 @@ export default () => {
       extra={(
         <DatePicker.RangePicker
           bordered={false}
-          onChange={search}
+          onChange={setDate}
           defaultValue={DEFAULT_DATE}
         />
       )}>
-      <Echarts />
+      <Echarts data={data?.diaries.list ?? []} />
     </Card>
   );
 };
