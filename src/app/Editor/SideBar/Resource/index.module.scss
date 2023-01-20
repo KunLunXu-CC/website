@@ -1,4 +1,4 @@
-@import '@assets/style/mixin';
+@import "@assets/style/mixin";
 
 .menu-item-empty {
   height: 0 !important;
@@ -40,12 +40,20 @@
       }
     }
 
-    // 子菜单 - 正常
-    .ant-menu-submenu-title {
-      padding-right: 0 !important;
+    // 根菜单样式覆盖 - 正常状态
+    .ant-menu-item {
+      background: $bg;
     }
 
     // 子菜单 - 活动或者选中
+    .ant-menu-item:not(.ant-menu-item-selected) {
+      &:hover,
+      &:active {
+        color: $color !important;
+        background: $bg-selected !important;
+      }
+    }
+
     .ant-menu-submenu-active,
     .ant-menu-submenu-selected {
       > .ant-menu-submenu-title {
@@ -62,18 +70,6 @@
       }
     }
 
-    // 根菜单样式覆盖 - 正常状态
-    .ant-menu-item {
-      border: unset;
-      background: $bg;
-      margin: 0 !important;
-      padding-right: 5px !important;
-
-      &::after {
-        display: none;
-      }
-    }
-
     // 根菜单样式覆盖 - 停放状态
     .ant-menu-item.ant-menu-item-active,
     .ant-menu-item.ant-menu-item-selected {
@@ -81,7 +77,7 @@
       background: $bg-selected;
     }
 
-    // 箭头
+    // 隐藏后面的箭头
     .ant-menu-submenu-arrow {
       display: none;
     }

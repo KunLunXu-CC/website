@@ -90,7 +90,7 @@ export default () => {
           }
           <div
             className={scss['menu-dividing']}
-            style={{ left: `${(level * INLINE_INDENT) + 12}px` }}
+            style={{ left: `${(level * INLINE_INDENT) + 15}px` }}
           />
         </Menu.SubMenu>
       );
