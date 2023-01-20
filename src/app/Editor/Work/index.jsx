@@ -19,6 +19,12 @@ export default () => {
     ),
   }));
 
+  const tabsItems = useMemo(() => works.map((work) => ({
+    key: work.articleId,
+    label: <Tab work={work} />,
+    children: <Editor work={work} />,
+  })), [works]);
+
   // 当前选中项
   const selected = useMemo(() => (
     works.find((v) => v.action)?.article
@@ -37,17 +43,11 @@ export default () => {
       {works.length > 0 && showWork ? (
         <Tabs
           type="card"
+          items={tabsItems}
           activeKey={selected}
           onChange={handleTabsChange}
-          tabBarExtraContent={<TabBarExtra />}>
-          {works.map((v) => (
-            <Tabs.TabPane
-              key={v.articleId}
-              tab={<Tab work={v} />}>
-              <Editor work={v} />
-            </Tabs.TabPane>
-          ))}
-        </Tabs>
+          tabBarExtraContent={<TabBarExtra />}
+        />
       ) : (
         <div className={scss.empty}>
           <Icon type="icon-kong" />
