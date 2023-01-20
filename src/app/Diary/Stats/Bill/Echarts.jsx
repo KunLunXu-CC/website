@@ -72,6 +72,7 @@ export default (props) => {
 
       echarts.dispatchAction({ type: 'hideTip' });
 
+      // TODO: 弹窗查看
       dispatch({
         diaries,
         type: 'modal/openModal',
