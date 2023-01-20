@@ -132,7 +132,6 @@ export default (props) => {
           <>
             <Icon type={data.icon} />
             {data.title}
-            9
           </>
         ),
       }));

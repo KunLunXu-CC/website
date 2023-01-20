@@ -1,4 +1,4 @@
-@import '@assets/style/mixin';
+@import "@assets/style/mixin";
 
 .menu-title {
   display: flex;
@@ -17,7 +17,7 @@
       outline: none;
       height: initial;
       border-radius: 0;
-      background: rgba($color: #fff, $alpha: 0.1);
+      background: rgba($color: #fff, $alpha: 10%);
 
       &:hover,
       &:focus,
@@ -50,15 +50,15 @@
 }
 
 // 操作菜单
-.operation-menu {
+.operation-menu:global(.ant-dropdown-menu.ant-dropdown-menu-root) {
   background: #2c343a;
 
   :global {
     .ant-dropdown-menu-item {
-      color: rgba($color: #fff, $alpha: 0.5);
+      color: rgba($color: #fff, $alpha: 50%);
 
       &:hover {
-        background-color: rgba($color: #fff, $alpha: 0.1);
+        background-color: rgba($color: #fff, $alpha: 10%);
       }
     }
   }
