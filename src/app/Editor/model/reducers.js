@@ -1,39 +1,3 @@
-/**
- * 插入工作窗口配置: works = [{ article, change: false }]
- * 1. reducer: action = { type: 'editor/appendWorks' }
- * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
- *
- * @param {object} state 当前 state
- * @param {string} action.article 文章 ID
- * @returns {object} 更新后的状态
- */
-export const appendWorks = (state, { article }) => {
-  if (!article || article === 'new') {
-    return state;
-  }
-
-  return (
-    state.works.find((v) => v.article === article)
-      ? {
-        ...state,
-        works: state.works.map((v) => ({
-          ...v,
-          action: v.article === article,
-        })),
-      }
-      : {
-        ...state,
-        works: [
-          ...state.works.map((v) => ({ ...v, action: false })),
-          {
-            article,
-            action: true,
-            change: false,
-          },
-        ],
-      }
-  );
-};
 
 /**
  * 设置某个工作区

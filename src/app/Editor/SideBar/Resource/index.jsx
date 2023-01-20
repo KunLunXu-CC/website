@@ -3,8 +3,8 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { useCallback, useMemo } from 'react';
 import { actions } from '@store';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
@@ -100,26 +100,25 @@ export default () => {
   }, [treeData]);
 
   // 点击菜单项
-  const onSelect = useCallback(({ key: article }) => dispatch({
-    article,
-    type: 'editor/appendWorks',
-  }), [dispatch]);
+  const handleSelect = useCallback(({ key: articleId }) => {
+    dispatch(actions.editor.appendWorks(articleId));
+  }, [dispatch]);
 
   // SubMenu 展开/关闭的回调
-  const onOpenChange = useCallback((openKeys) => {
+  const handleOpenChange = useCallback((openKeys) => {
     dispatch(actions.editor.setSide({ openKeys }));
   }, [dispatch]);
 
   return (
     <Menu
       mode="inline"
-      onSelect={onSelect}
       className={scss.menu}
+      onSelect={handleSelect}
       inlineCollapsed={false}
       openKeys={side.openKeys}
-      onOpenChange={onOpenChange}
       inlineIndent={INLINE_INDENT}
-      selectedKeys={[selectedKeys]}>
+      selectedKeys={[selectedKeys]}
+      onOpenChange={handleOpenChange}>
       {menu}
       <Add />
     </Menu>

@@ -9,7 +9,7 @@ import { Icon } from '@kunlunxu/brick';
 import { APP_CODE } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
 
   const { works, showWork } = useSelector((state) => ({
@@ -25,29 +25,24 @@ const useStateHook = () => {
   ), [works]);
 
   // 点击 tab 切换事件: 将当前窗口设置为活动窗口
-  const onTabsChange = (article) => {
+  const handleTabsChange = (article) => {
     dispatch({
       article,
       type: 'editor/appendWorks',
     });
   };
 
-  return { onTabsChange, selected, works, showWork };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <div className={scss.work}>
-      {state.works.length > 0 && state.showWork ? (
+      {works.length > 0 && showWork ? (
         <Tabs
           type="card"
-          activeKey={state.selected}
-          onChange={state.onTabsChange}
+          activeKey={selected}
+          onChange={handleTabsChange}
           tabBarExtraContent={<TabBarExtra />}>
-          {state.works.map((v) => (
+          {works.map((v) => (
             <Tabs.TabPane
-              key={v.article}
+              key={v.articleId}
               tab={<Tab work={v} />}>
               <Editor work={v} />
             </Tabs.TabPane>

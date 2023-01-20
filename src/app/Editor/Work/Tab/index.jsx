@@ -1,22 +1,20 @@
-import React, {
-  useMemo,
-} from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
+import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = (props) => {
+export default (props) => {
   const dispatch = useDispatch();
 
   // 读取文章详细内容
   const article = useSelector((state) => (
-    state.editor?.articles?.[props.work.article]
+    state.editor?.articles?.[props.work.articleId]
   ));
 
   // 移除: 点击小叉叉
-  const onClose = (e) => {
+  const handleClose = (e) => {
     e.stopPropagation();
     dispatch({
       article: article.id,
@@ -30,19 +28,13 @@ const useStateHook = (props) => {
     { [scss['tab-icon-change']]: props.work.change },
   ), [props.work.change]);
 
-  return { article, onClose, iconClassName };
-};
-
-export default (props) => {
-  const state = useStateHook(props);
-
   return (
     <span className={scss.tab}>
-      {state.article.name}
+      {article.name}
       <Icon
         type="icon-guanbi6"
-        onClick={state.onClose}
-        className={state.iconClassName}
+        onClick={handleClose}
+        className={iconClassName}
       />
     </span>
   );
