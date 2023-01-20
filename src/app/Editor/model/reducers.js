@@ -1,53 +1,11 @@
 /**
- * 设置 tags
- * 1. reducer: action = { type: 'editor/setTags' }
- * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
- *
- * @param {Object} state 当前 state
- * @param {String} action.tags 需要修改的 tags
- * @return {Object} 更新后的状态
- */
-export const setTags = (state, { tags }) => ({
-  ...state,
-  tags,
-});
-
-/**
- * 设置 articles
- * 1. reducer: action = { type: 'editor/setArticles' }
- * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
- *
- * @param {Object} state 当前 state
- * @param {String} action.articles 需要修改的 articles
- * @return {Object} 更新后的状态
- */
-export const setArticles = (state, { articles }) => ({
-  ...state,
-  articles,
-});
-
-/**
- * 设置 side: 替换式修改
- * 1. reducer: action = { type: 'editor/setSide' }
- * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
- *
- * @param {Object} state 当前 state
- * @param {String} action.side 需要修改字段
- * @return {Object} 更新后的状态
- */
-export const setSide = (state, { side }) => ({
-  ...state,
-  side: { ...state.side, ...side },
-});
-
-/**
  * 插入工作窗口配置: works = [{ article, change: false }]
  * 1. reducer: action = { type: 'editor/appendWorks' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {String} action.article 文章 ID
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {string} action.article 文章 ID
+ * @returns {object} 更新后的状态
  */
 export const appendWorks = (state, { article }) => {
   if (!article || article === 'new') {
@@ -82,10 +40,10 @@ export const appendWorks = (state, { article }) => {
  * 1. reducer: action = { type: 'editor/setWork' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {String} action.article 文章 ID
- * @param {String} action.work 工作区需要修改的内容
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {string} action.article 文章 ID
+ * @param {string} action.work 工作区需要修改的内容
+ * @returns {object} 更新后的状态
  */
 export const setWork = (state, { article, work }) => ({
   ...state,
@@ -100,9 +58,9 @@ export const setWork = (state, { article, work }) => ({
  * 1. reducer: action = { type: 'editor/removeWork' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {String} action.article 文章 ID
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {string} action.article 文章 ID
+ * @returns {object} 更新后的状态
  */
 export const removeWork = (state, { article }) => {
   const works =  article
@@ -122,9 +80,10 @@ export const removeWork = (state, { article }) => {
  * 1. reducer: action = { type: 'editor/createTmpTag' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {Object} action.parent 父级节点
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {object} action.parent 父级节点
+ * @param action.parent.parent
+ * @returns {object} 更新后的状态
  */
 export const createTmpTag = (state, { parent }) => ({
   ...state,
@@ -144,9 +103,10 @@ export const createTmpTag = (state, { parent }) => ({
  * 1. reducer: action = { type: 'editor/createTmpArticle' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {Object} action.parent 父级节点
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {object} action.parent 父级节点
+ * @param action.parent.tag
+ * @returns {object} 更新后的状态
  */
 export const createTmpArticle = (state, { tag }) => ({
   ...state,
@@ -166,9 +126,10 @@ export const createTmpArticle = (state, { tag }) => ({
  * 1. reducer: action = { type: 'editor/addEditorStatusWithTag' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {Object} action.id 要修改 tag id
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {object} action.id 要修改 tag id
+ * @param action.id.id
+ * @returns {object} 更新后的状态
  */
 export const addEditorStatusWithTag = (state, { id }) => {
   const tags = { ...state.tags };
@@ -181,9 +142,10 @@ export const addEditorStatusWithTag = (state, { id }) => {
  * 1. reducer: action = { type: 'editor/addEditorStatusWithArticle' }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {Object} action.id 要修改 article id
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {object} action.id 要修改 article id
+ * @param action.id.id
+ * @returns {object} 更新后的状态
  */
 export const addEditorStatusWithArticle = (state, { id }) => {
   const articles = { ...state.articles };
@@ -196,9 +158,10 @@ export const addEditorStatusWithArticle = (state, { id }) => {
  * 1. reducer: action = { type: 'editor/setActivity', activity }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {Object} action.activity 要修改 activity
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {object} action.activity 要修改 activity
+ * @param action.activity.activity
+ * @returns {object} 更新后的状态
  */
 export const setActivity = (state, { activity }) => ({
   ...state,
@@ -210,9 +173,10 @@ export const setActivity = (state, { activity }) => ({
  * 1. reducer: action = { type: 'editor/setPreview', preview }
  * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
  *
- * @param {Object} state 当前 state
- * @param {Object} action.preview 要修改 preview: article id
- * @return {Object} 更新后的状态
+ * @param {object} state 当前 state
+ * @param {object} action.preview 要修改 preview: article id
+ * @param action.preview.preview
+ * @returns {object} 更新后的状态
  */
 export const setPreview = (state, { preview }) => {
   const { preview: prePreview } = state;

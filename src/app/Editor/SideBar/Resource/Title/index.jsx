@@ -1,19 +1,21 @@
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { useRef, useMemo, useCallback, useEffect } from 'react';
+import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
-import { Dropdown, Menu, Input } from 'antd';
 import { MOVE } from '../../../consts';
+import { Dropdown, Menu, Input } from 'antd';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useMemo, useCallback, useEffect } from 'react';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
-const useStateHook = (props) => {
+export default (props) => {
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
+
   const { openKeys, activity } = useSelector((state) => ({
     openKeys: state.editor.side.openKeys,
     activity: state.editor.activity,
@@ -22,10 +24,10 @@ const useStateHook = (props) => {
   // 下拉菜单点击事件: 点击创建文件夹
   const onClickCreateFolderMenu = useCallback(() => {
     if (!props.data.tags) { // 在文件夹上触发下拉框
-      dispatch({
-        type: 'editor/setSide',
-        side: { openKeys: [...openKeys, props.data.id] },
-      });
+      dispatch(actions.editor.setSide({
+        openKeys: [...openKeys, props.data.id],
+      }));
+
       dispatch({
         parent: props.data.id,
         type: 'editor/createTmpTag',
@@ -41,10 +43,10 @@ const useStateHook = (props) => {
   // 下拉菜单点击事件: 点击创建文章
   const onClickCreateArticleMenu = useCallback(() => {
     if (!props.data.tags) { // 在文件夹上触发下拉框
-      dispatch({
-        type: 'editor/setSide',
-        side: { openKeys: [...openKeys, props.data.id] },
-      });
+      dispatch(actions.editor.setSide({
+        openKeys: [...openKeys, props.data.id],
+      }));
+
       dispatch({
         tag: props.data.id,
         type: 'editor/createTmpArticle',
@@ -123,7 +125,7 @@ const useStateHook = (props) => {
   ]);
 
   // 编辑数据: 根据不同 id、type 设置不同 dispatch 参数
-  const onEdit = (e) => {
+  const onEdit = useCallback((e) => {
     const name = e.target.value;
     const isNew = props.data.id === 'new';
     const isFolder = !props.data.tags;
@@ -166,7 +168,7 @@ const useStateHook = (props) => {
         },
       },
     ].find((v) => v.filter).dispatchParams);
-  };
+  }, [dispatch, props.data]);
 
   // 点击下拉菜单
   const onClickMenu = useCallback(({ item, domEvent }) => {
@@ -186,20 +188,8 @@ const useStateHook = (props) => {
     editorInputRef.current && editorInputRef.current.focus();
   });
 
-  return {
-    onEdit,
-    className,
-    onClickMenu,
-    editorInputRef,
-    stopPropagation,
-    dropdownMenuSetting,
-  };
-};
-
-export default (props) => {
-  const state = useStateHook(props);
   return (
-    <div className={state.className}>
+    <div className={className}>
       <Icon
         type="icon-jiantou"
         className={scss['menu-title-arrow']}
@@ -208,11 +198,11 @@ export default (props) => {
       <div className={scss['menu-title-content']}>
         {props.data.editor ? (
           <Input
-            onBlur={state.onEdit}
-            ref={state.editorInputRef}
-            onPressEnter={state.onEdit}
+            onBlur={onEdit}
+            ref={editorInputRef}
+            onPressEnter={onEdit}
             defaultValue={props.data.name}
-            onClick={state.stopPropagation}
+            onClick={stopPropagation}
             className={scss['menu-title-content-input']}
           />
         ) : props.data.name
@@ -224,9 +214,9 @@ export default (props) => {
             trigger={['click']}
             overlay={(
               <Menu
-                onClick={state.onClickMenu}
+                onClick={onClickMenu}
                 className={scss['operation-menu']}>
-                {state.dropdownMenuSetting.map((v) => (
+                {dropdownMenuSetting.map((v) => (
                   <Menu.Item
                     key={v.title}
                     data={v}>
@@ -237,7 +227,7 @@ export default (props) => {
               </Menu>
             )}
             placement="bottomRight"
-            onClick={state.stopPropagation}>
+            onClick={stopPropagation}>
             <Icon type="icon-gengduo" />
           </Dropdown>
         </div>

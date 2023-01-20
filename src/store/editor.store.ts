@@ -34,5 +34,10 @@ export default createSlice({
         [ele.id]: ele,
       }), {}),
     }),
+
+    setSide: (state, { payload: side }) => ({
+      ...state,
+      side: { ...state.side, ...side },
+    }),
   },
 });

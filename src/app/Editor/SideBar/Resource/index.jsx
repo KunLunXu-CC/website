@@ -3,13 +3,15 @@ import Title from './Title';
 import scss from './index.module.scss';
 
 import { Menu } from 'antd';
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { actions } from '@store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const INLINE_INDENT = 14;  // 菜单缩进大小
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
+
   const {
     tags,
     side,
@@ -28,14 +30,15 @@ const useStateHook = () => {
   const treeData = useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(tags));
     const cloneArticles = _.cloneDeep(Object.values(articles));
-
     const groupTags = _.groupBy(cloneTags, 'parent.id');
+
     const groupArticles = _.groupBy(cloneArticles.reduce((total, ele) => {
       // 根据状态来过滤数据
       (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
         ...ele,
         tags: ele.tags.reverse(),
       });
+
       return total;
     }, []), 'tags[0].id');
 
@@ -66,6 +69,7 @@ const useStateHook = () => {
           level={level}
         />
       );
+
       return (
         !item.tags ? ( // 非文章
           <Menu.SubMenu
@@ -92,39 +96,27 @@ const useStateHook = () => {
   }, [treeData]);
 
   // 点击菜单项
-  const onSelect = ({ key: article }) => dispatch({
+  const onSelect = useCallback(({ key: article }) => dispatch({
     article,
     type: 'editor/appendWorks',
-  });
+  }), [dispatch]);
 
   // SubMenu 展开/关闭的回调
-  const onOpenChange = (openKeys) => dispatch({
-    type: 'editor/setSide',
-    side: { openKeys },
-  });
+  const onOpenChange = useCallback((openKeys) => {
+    dispatch(actions.editor.setSide({ openKeys }));
+  }, [dispatch]);
 
-  return {
-    side,
-    menu,
-    onSelect,
-    selectedKeys,
-    onOpenChange,
-  };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <Menu
       mode="inline"
+      onSelect={onSelect}
       className={scss.menu}
       inlineCollapsed={false}
-      onSelect={state.onSelect}
+      openKeys={side.openKeys}
+      onOpenChange={onOpenChange}
       inlineIndent={INLINE_INDENT}
-      openKeys={state.side.openKeys}
-      onOpenChange={state.onOpenChange}
-      selectedKeys={[state.selectedKeys]}>
-      {state.menu}
+      selectedKeys={[selectedKeys]}>
+      {menu}
       <Add />
     </Menu>
   );
