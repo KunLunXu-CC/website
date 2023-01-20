@@ -7,7 +7,8 @@ import { APP_CODE, PHOTO_TYPE, DATASETSFROM_CODE } from '@config/consts';
 
 /**
  * 初始化: 一次性获取所有数据并在前端进行存储
- * @return {void 0}
+ *
+ * @returns {void 0}
  */
 const initData = function * () {
   // 如果已初始化则不再次初始化
@@ -37,7 +38,10 @@ const initData = function * () {
 
 /**
  * 创建标签
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.body
+ * @returns {void 0}
  */
 const createTag = function * ({ body }) {
   const currentTags = yield select((state) => state.editor.tags);
@@ -70,7 +74,11 @@ const createTag = function * ({ body }) {
 
 /**
  * 更新标签
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.body
+ * @param root0.id
+ * @returns {void 0}
  */
 const updateTag = function * ({ body, id }) {
   const currentTags = yield select((state) => state.editor.tags);
@@ -94,7 +102,11 @@ const updateTag = function * ({ body, id }) {
 
 /**
  * 删除标签
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.id
+ * @param root0.childrenLength
+ * @returns {void 0}
  */
 const removeTag = function * ({ id, childrenLength }) {
   if (childrenLength > 0) {
@@ -126,7 +138,10 @@ const removeTag = function * ({ id, childrenLength }) {
 
 /**
  * 删除文章
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.id
+ * @returns {void 0}
  */
 const removeArticle = function * ({ id }) {
   const currentArticles = yield select((state) => state.editor.articles);
@@ -154,7 +169,10 @@ const removeArticle = function * ({ id }) {
 
 /**
  * 创建文章
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.body
+ * @returns {void 0}
  */
 const createArticle = function * ({ body }) {
   const currentArticles = yield select((state) => state.editor.articles);
@@ -188,7 +206,11 @@ const createArticle = function * ({ body }) {
 
 /**
  * 更新文章
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.body
+ * @param root0.id
+ * @returns {void 0}
  */
 const updateArticle = function * ({ body, id }) {
   const currentArticles = yield select((state) => state.editor.articles);
@@ -217,7 +239,11 @@ const updateArticle = function * ({ body, id }) {
 
 /**
  * 更新文章内容
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.content
+ * @param root0.id
+ * @returns {void 0}
  */
 const updateArticleContent = function * ({ content, id }) {
   const currentArticles = yield select((state) => state.editor.articles);
@@ -255,7 +281,10 @@ const updateArticleContent = function * ({ content, id }) {
 
 /**
  * 撤销(取消发布)文章
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.id
+ * @returns {void 0}
  */
 const revokeArticle = function * ({ id }) {
   const currentArticles = yield select((state) => state.editor.articles);
@@ -278,7 +307,10 @@ const revokeArticle = function * ({ id }) {
 
 /**
  * 发布文章
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.id
+ * @returns {void 0}
  */
 const releaseArticle = function * ({ id }) {
   const currentArticles = yield select((state) => state.editor.articles);
@@ -300,7 +332,11 @@ const releaseArticle = function * ({ id }) {
 
 /**
  * 设置文章缩略图
- * @return {void 0}
+ *
+ * @param root0
+ * @param root0.file
+ * @param root0.id
+ * @returns {void 0}
  */
 const setArticleThumb = function * ({ file, id }) {
   const res = yield call(services.uploadPhotos, {
@@ -320,8 +356,11 @@ const setArticleThumb = function * ({ file, id }) {
 };
 
 // 导出
+/**
+ *
+ */
 export default function * () {
-  yield takeEvery('editor/initData', initData);
+  yield takeEvery('editor/', initData);
 
   yield takeEvery('editor/createTag', createTag);
   yield takeEvery('editor/updateTag', updateTag);

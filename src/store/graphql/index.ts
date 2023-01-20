@@ -1265,6 +1265,11 @@ export type GetStatsBodyIndexQueryVariables = Exact<{
 
 export type GetStatsBodyIndexQuery = { __typename?: 'Query', diaries?: { __typename?: 'Diaries', list?: Array<{ __typename?: 'Diary', name?: string | null, bodyIndex?: { __typename?: 'BodyIndex', weight?: number | null, muscle?: number | null, moistureContent?: number | null, bodyfat?: number | null, bim?: number | null } | null } | null> | null } | null };
 
+export type InitEditorDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type InitEditorDataQuery = { __typename?: 'Query', toc?: { __typename?: 'Datasetsfroms', list?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null, articles?: { __typename?: 'Articles', list?: Array<{ __typename?: 'Article', id?: string | null, name: string, thumb?: string | null, status?: number | null, content?: string | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
 }>;
@@ -1397,6 +1402,41 @@ export const GetStatsBodyIndexDocument = `
   }
 }
     `;
+export const InitEditorDataDocument = `
+    query initEditorData {
+  toc: datasetsfroms(search: {code: [6]}) {
+    list {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
+        name
+      }
+    }
+  }
+  articles {
+    list {
+      id
+      name
+      thumb
+      status
+      content
+      tags {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
 export const GetPhotosDocument = `
     query getPhotos($search: PhotoSearch) {
   photos(search: $search) {
@@ -1473,6 +1513,9 @@ const injectedRtkApi = api.injectEndpoints({
     getStatsBodyIndex: build.query<GetStatsBodyIndexQuery, GetStatsBodyIndexQueryVariables | void>({
       query: (variables) => ({ document: GetStatsBodyIndexDocument, variables })
     }),
+    initEditorData: build.query<InitEditorDataQuery, InitEditorDataQueryVariables | void>({
+      query: (variables) => ({ document: InitEditorDataDocument, variables })
+    }),
     getPhotos: build.query<GetPhotosQuery, GetPhotosQueryVariables | void>({
       query: (variables) => ({ document: GetPhotosDocument, variables })
     }),
@@ -1492,5 +1535,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 

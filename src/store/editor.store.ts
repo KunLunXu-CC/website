@@ -19,6 +19,20 @@ export default createSlice({
   initialState,
   name: 'editor',
   reducers: {
-    set: (state, { payload }) => ({ ...state, ...payload }),
+    setTags: (state, { payload: tags }) => ({
+      ...state,
+      tags: tags.reduce((total: any, ele: { id: any; }) => ({
+        ...total,
+        [ele.id]: ele,
+      }), {}),
+    }),
+
+    setArticles: (state, { payload: articles }) => ({
+      ...state,
+      articles: articles.reduce((total: any, ele: { id: any; }) => ({
+        ...total,
+        [ele.id]: ele,
+      }), {}),
+    }),
   },
 });

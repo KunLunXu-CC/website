@@ -1,0 +1,34 @@
+query initEditorData {
+  # toc 是别名
+  toc: datasetsfroms(search: { code: [6] }) {
+    list {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
+        name
+      }
+    }
+  }
+  articles {
+    list {
+      id
+      name
+      thumb
+      status
+      content
+      tags {
+        id
+        name
+      }
+    }
+  }
+}
