@@ -1270,12 +1270,19 @@ export type InitEditorDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type InitEditorDataQuery = { __typename?: 'Query', folder?: { __typename?: 'Datasetsfroms', list?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null, articles?: { __typename?: 'Articles', list?: Array<{ __typename?: 'Article', id?: string | null, name: string, thumb?: string | null, status?: number | null, content?: string | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
 
-export type CreateFolderMutationVariables = Exact<{
+export type CreateFoldersMutationVariables = Exact<{
   body: Array<DatasetsfromFields> | DatasetsfromFields;
 }>;
 
 
-export type CreateFolderMutation = { __typename?: 'Mutation', folder?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+export type CreateFoldersMutation = { __typename?: 'Mutation', folder?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+
+export type CreateArticlesMutationVariables = Exact<{
+  body: Array<ArticleFields> | ArticleFields;
+}>;
+
+
+export type CreateArticlesMutation = { __typename?: 'Mutation', createArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
 
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
@@ -1444,8 +1451,8 @@ export const InitEditorDataDocument = `
   }
 }
     `;
-export const CreateFolderDocument = `
-    mutation createFolder($body: [DatasetsfromFields!]!) {
+export const CreateFoldersDocument = `
+    mutation createFolders($body: [DatasetsfromFields!]!) {
   folder: createDatasetsfroms(body: $body) {
     change {
       id
@@ -1460,6 +1467,20 @@ export const CreateFolderDocument = `
         code
         desc
         icon
+        name
+      }
+    }
+  }
+}
+    `;
+export const CreateArticlesDocument = `
+    mutation createArticles($body: [ArticleFields!]!) {
+  createArticles(body: $body) {
+    change {
+      id
+      name
+      tags {
+        id
         name
       }
     }
@@ -1545,8 +1566,11 @@ const injectedRtkApi = api.injectEndpoints({
     initEditorData: build.query<InitEditorDataQuery, InitEditorDataQueryVariables | void>({
       query: (variables) => ({ document: InitEditorDataDocument, variables })
     }),
-    createFolder: build.mutation<CreateFolderMutation, CreateFolderMutationVariables>({
-      query: (variables) => ({ document: CreateFolderDocument, variables })
+    createFolders: build.mutation<CreateFoldersMutation, CreateFoldersMutationVariables>({
+      query: (variables) => ({ document: CreateFoldersDocument, variables })
+    }),
+    createArticles: build.mutation<CreateArticlesMutation, CreateArticlesMutationVariables>({
+      query: (variables) => ({ document: CreateArticlesDocument, variables })
     }),
     getPhotos: build.query<GetPhotosQuery, GetPhotosQueryVariables | void>({
       query: (variables) => ({ document: GetPhotosDocument, variables })
@@ -1567,5 +1591,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFolderMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 

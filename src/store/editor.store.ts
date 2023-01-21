@@ -35,13 +35,20 @@ export default createSlice({
       };
     },
 
-    setArticles: (state, { payload: articles }) => ({
-      ...state,
-      articles: articles.reduce((total: any, ele: { id: any; }) => ({
-        ...total,
-        [ele.id]: ele,
-      }), {}),
-    }),
+    setArticles: (state, { payload: articles }) => {
+      const newArticles = [
+        ...Object.values(state.articles),
+        ...articles,
+      ].filter((v) => v.id !== 'new');
+
+      return {
+        ...state,
+        articles: newArticles.reduce((total: any, ele: { id: any; }) => ({
+          ...total,
+          [ele.id]: ele,
+        }), {}),
+      };
+    },
 
     setSide: (state, { payload: side }) => ({
       ...state,
@@ -102,6 +109,20 @@ export default createSlice({
           id: 'new',
           editor: true,
           parent: { id: parentId },
+        },
+      },
+    }),
+
+    // 创建临时 article (占位符)
+    createTmpArticle: (state, { payload: folderId }) => ({
+      ...state,
+      articles: {
+        ...state.articles,
+        new: {
+          name: '',
+          id: 'new',
+          editor: true,
+          tags: [{ id: folderId }],
         },
       },
     }),

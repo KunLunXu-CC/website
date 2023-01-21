@@ -6,15 +6,16 @@ import { Icon } from '@kunlunxu/brick';
 import { MOVE } from '../../../consts';
 import { Dropdown, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCreateFolderMutation } from '@store/graphql';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { ARTICLE_STATUS, DATASETSFROM_CODE } from '@config/consts';
+import { useCreateFoldersMutation, useCreateArticlesMutation } from '@store/graphql';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
 export default (props) => {
-  const [createFolder] = useCreateFolderMutation();
+  const [createFolders] = useCreateFoldersMutation();
+  const [createArticles] = useCreateArticlesMutation();
 
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
@@ -47,22 +48,18 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击创建文章
   const handleCreateArticleMenu = useCallback(() => {
-    if (!props.data.folders) { // 在文件夹上触发下拉框
+    if (!props.data.folders) {
+      // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
       }));
 
-      dispatch({
-        tag: props.data.id,
-        type: 'editor/createTmpArticle',
-      });
-    } else { // 在文章上触发下拉框
-      dispatch({
-        tag: props.data.folders?.[0].id,
-        type: 'editor/createTmpArticle',
-      });
+      dispatch(actions.editor.createTmpArticle(props.data.id));
+    } else {
+      // 在文章上触发下拉框
+      dispatch(actions.editor.createTmpArticle(props.data.tags?.[0].id));
     }
-  }, [dispatch, openKeys, props.data.id, props.data.folders]);
+  }, [props.data, dispatch, openKeys]);
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
@@ -155,16 +152,61 @@ export default (props) => {
     const isFolder = !props.data.folders;
 
     const map = [
+      // 1. 新建文件夹
       {
         cond: isFolder && isNew,
         handler: async () => {
-          const { data } = await createFolder({ body: {
+          const { data } = await createFolders({ body: [{
             name,
             value: 0,
             parent: props.data.parent?.id,
             code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
-          } });
+          }] });
           dispatch(actions.editor.setTags(data.folder?.change));
+        },
+      },
+      // 2. 新建文章
+      {
+        cond: !isFolder && isNew,
+        handler: async () => {
+          // name,
+          // folders: [props.data.folders?.[0].id],
+
+          const { data } = await  createArticles({ body: [{
+            name,
+            tags: [props.data.folders?.[0].id],
+          }] });
+
+          dispatch(actions.editor.setArticles(data.createArticles?.change));
+
+          // ------------------
+          // const currentArticles = yield select((state) => state.editor.articles);
+          // delete currentArticles.new;
+
+          // const { change } = body.name ?
+          //   yield call(services.createArticles, {
+          //     body,
+          //     spin: APP_CODE.EDITOR,
+          //   }) : { change: [] };
+
+          // yield put({
+          //   articles: change.reduce((total, ele) => ({
+          //     ...total,
+          //     [ele.id]: ele,
+          //   }), { ...currentArticles }),
+          //   type: 'editor/setArticles',
+          // });
+
+          // yield put({
+          //   article: change?.[0]?.id,
+          //   type: 'editor/appendWorks',
+          // });
+
+          // message({
+          //   ...MESSAGE_CONFIG,
+          //   type: body.name ? 'success' : 'error',
+          //   message: body.name ? '操作成功!' : '名称不能为空!',
+          // });
         },
       },
     ];
@@ -172,7 +214,6 @@ export default (props) => {
     const { handler } = map.find((v) => v.cond);
 
     handler();
-
 
     // dispatch([
     //   {

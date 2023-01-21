@@ -3,7 +3,7 @@ import * as services from './services';
 import { message } from '@utils';
 import { MESSAGE_CONFIG } from '../consts';
 import { put, call, takeEvery, select } from 'redux-saga/effects';
-import { APP_CODE, PHOTO_TYPE, DATASETSFROM_CODE } from '@config/consts';
+import { APP_CODE, PHOTO_TYPE } from '@config/consts';
 
 /**
  * 初始化: 一次性获取所有数据并在前端进行存储
@@ -34,42 +34,6 @@ const initData = function * () {
   });
 
   message({ ...MESSAGE_CONFIG, message: '数据初始化完成!' });
-};
-
-/**
- * 创建标签
- *
- * @param root0
- * @param root0.body
- * @returns {void 0}
- */
-const createTag = function * ({ body }) {
-  const currentTags = yield select((state) => state.editor.tags);
-  delete currentTags.new;
-
-  const { change } = body.name ?
-    yield call(services.createDatasetsfroms, {
-      spin: APP_CODE.EDITOR,
-      body: {
-        ...body,
-        value: 0,
-        code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
-      },
-    }) : { change: [] };
-
-  yield put({
-    tags: change.reduce((total, ele) => ({
-      ...total,
-      [ele.id]: ele,
-    }), { ...currentTags }),
-    type: 'editor/setTags',
-  });
-
-  message({
-    ...MESSAGE_CONFIG,
-    type: body.name ? 'success' : 'error',
-    message: body.name ? '操作成功!' : '名称不能为空!',
-  });
 };
 
 /**
@@ -165,43 +129,6 @@ const removeArticle = function * ({ id }) {
   });
 
   message({ ...MESSAGE_CONFIG, message: '成功删除文章!' });
-};
-
-/**
- * 创建文章
- *
- * @param root0
- * @param root0.body
- * @returns {void 0}
- */
-const createArticle = function * ({ body }) {
-  const currentArticles = yield select((state) => state.editor.articles);
-  delete currentArticles.new;
-
-  const { change } = body.name ?
-    yield call(services.createArticles, {
-      body,
-      spin: APP_CODE.EDITOR,
-    }) : { change: [] };
-
-  yield put({
-    articles: change.reduce((total, ele) => ({
-      ...total,
-      [ele.id]: ele,
-    }), { ...currentArticles }),
-    type: 'editor/setArticles',
-  });
-
-  yield put({
-    article: change?.[0]?.id,
-    type: 'editor/appendWorks',
-  });
-
-  message({
-    ...MESSAGE_CONFIG,
-    type: body.name ? 'success' : 'error',
-    message: body.name ? '操作成功!' : '名称不能为空!',
-  });
 };
 
 /**
@@ -362,11 +289,9 @@ const setArticleThumb = function * ({ file, id }) {
 export default function * () {
   yield takeEvery('editor/', initData);
 
-  yield takeEvery('editor/createTag', createTag);
   yield takeEvery('editor/updateTag', updateTag);
   yield takeEvery('editor/removeTag', removeTag);
 
-  yield takeEvery('editor/createArticle', createArticle);
   yield takeEvery('editor/updateArticle', updateArticle);
   yield takeEvery('editor/removeArticle', removeArticle);
   yield takeEvery('editor/updateArticleContent', updateArticleContent);
