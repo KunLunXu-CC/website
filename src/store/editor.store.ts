@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
 import { ACTIVITY_LIST } from '@app/Editor/consts';
 
@@ -72,21 +73,14 @@ export default createSlice({
 
     // 移除工作窗口: 没传 article 则移除所有
     removeWork: (state, { payload: articleId }): any => {
-      // return state;
-      const works = [...state.works]
-        .reverse()
-        .reduce((total, ele: any): any => {
-          const idClose = ele.articleId === articleId;
-          const newWorks = idClose ? total : [...total, { ...ele }];
+      const works = cloneDeep(state.works).filter(
+        (v: any) => v.articleId !== articleId,
+      );
 
-          // 关闭已选中的
-          if (idClose && ele.active && newWorks[0]) {
-            newWorks[0].active = true;
-          }
-
-          return newWorks;
-        }, [])
-        .reverse();
+      // 如果所有 active 都是 false, 则需要将最后一个 active 设置为 true
+      if (works.length > 0 && works.every((v: any) => !v.active)) {
+        (works[works.length - 1] as any).active = true;
+      }
 
       return { ...state, works };
     },
