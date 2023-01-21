@@ -17,27 +17,6 @@ export const setWork = (state, { article, work }) => ({
   )),
 });
 
-/**
- * 移除工作窗口: 没传 article 则移除所有
- * 1. reducer: action = { type: 'editor/removeWork' }
- * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
- *
- * @param {object} state 当前 state
- * @param {string} action.article 文章 ID
- * @returns {object} 更新后的状态
- */
-export const removeWork = (state, { article }) => {
-  const works =  article
-    ? state.works.filter((v) => v.article !== article)
-    : [];
-  const hasAction = works.find((v) => v.action);
-
-  if (!hasAction && works.length > 0) {
-    works[works.length - 1].action = true;
-  }
-
-  return { ...state, works };
-};
 
 /**
  * 创建临时 tag (占位符)

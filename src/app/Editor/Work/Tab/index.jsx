@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
-import { useMemo } from 'react';
+import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default (props) => {
@@ -14,13 +15,10 @@ export default (props) => {
   ));
 
   // 移除: 点击小叉叉
-  const handleClose = (e) => {
+  const handleClose = useCallback((e) => {
     e.stopPropagation();
-    dispatch({
-      article: article.id,
-      type: 'editor/removeWork',
-    });
-  };
+    dispatch(actions.editor.removeWork(article.id));
+  }, [article.id, dispatch]);
 
   // icon className
   const iconClassName = useMemo(() => classNames(

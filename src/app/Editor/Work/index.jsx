@@ -4,9 +4,10 @@ import scss from './index.module.scss';
 import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
-import { useMemo } from 'react';
+import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
 import { APP_CODE } from '@config/consts';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default () => {
@@ -31,12 +32,9 @@ export default () => {
   })), [works]);
 
   // 点击 tab 切换事件: 将当前窗口设置为活动窗口
-  const handleTabsChange = (article) => {
-    dispatch({
-      article,
-      type: 'editor/appendWorks',
-    });
-  };
+  const handleTabsChange = useCallback((articleId) => {
+    dispatch(actions.editor.appendWorks(articleId));
+  }, [dispatch]);
 
   return (
     <div className={scss.work}>

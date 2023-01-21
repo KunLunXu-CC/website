@@ -46,6 +46,7 @@ export default createSlice({
         return state;
       }
 
+      // 已打开, 切换 tab
       if (state.works.find((v: any) => v.articleId === articleId)) {
         return {
           ...state,
@@ -67,6 +68,28 @@ export default createSlice({
           },
         ],
       };
+    },
+
+    // 移除工作窗口: 没传 article 则移除所有
+    removeWork: (state, { payload: articleId }): any => {
+      console.log('%c [ articleId ]-75', 'font-size:13px; background:pink; color:#bf2c9f;', articleId);
+      return state;
+      const works = [...state.works]
+        .reverse()
+        .reduce((total, ele: any): any => {
+          const idClose = ele.articleId === articleId;
+          const newWorks = idClose ? total : [...total, { ...ele }];
+
+          // 关闭已选中的
+          if (idClose && ele.action && newWorks[0]) {
+            newWorks[0].action = true;
+          }
+
+          return newWorks;
+        }, [])
+        .reverse();
+      console.log('%c [ works ]-89', 'font-size:13px; background:pink; color:#bf2c9f;', works);
+      return { ...state, works };
     },
   },
 });
