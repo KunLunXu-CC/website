@@ -1,8 +1,6 @@
-import React, {
-  useMemo,
-} from 'react';
 import scss from './index.module.scss';
 
+import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +10,7 @@ import {
   RELEASE_CONFIRM,
 } from '../../consts';
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
 
   const { articles, works } = useSelector((state) => ({
@@ -22,8 +20,8 @@ const useStateHook = () => {
 
   // 文章内容
   const article = useMemo(() => (
-    articles[works.find((v) => v.action)?.article]
-  ));
+    articles[works.find((v) => v.active)?.articleId]
+  ), [articles, works]);
 
   // 当前文章是否是未发布状态
   const unpublished = useMemo(
@@ -32,7 +30,7 @@ const useStateHook = () => {
   );
 
   // 预览
-  const onPreview = () => {
+  const handlePreview = () => {
     dispatch({
       preview: article.id,
       type: 'editor/setPreview',
@@ -40,7 +38,7 @@ const useStateHook = () => {
   };
 
   // 发布
-  const onRelease = () => {
+  const handleRelease = () => {
     dispatch({
       article,
       code: RELEASE_CONFIRM,
@@ -49,7 +47,7 @@ const useStateHook = () => {
   };
 
   // 撤销(下架)
-  const onRevoke = () => {
+  const handleRevoke = () => {
     dispatch({
       article,
       code: REVOKE_CONFIRM,
@@ -66,40 +64,28 @@ const useStateHook = () => {
     });
   };
 
-  return {
-    onRevoke,
-    onRelease,
-    onPreview,
-    unpublished,
-    thumbSetting,
-  };
-};
-
-export default () => {
-  const state = useStateHook();
-
   return (
     <div className={scss.extra}>
       <Icon
         type="icon-yulan"
-        onClick={state.onPreview}
+        onClick={handlePreview}
         className={scss['icon-preview']}
       />
       <Icon
+        onClick={thumbSetting}
         type="icon-genghuanfengmian"
-        onClick={state.thumbSetting}
         className={scss['icon-thumbnail']}
       />
-      {state.unpublished ? (
+      {unpublished ? (
         <Icon
           type="icon-fabu"
-          onClick={state.onRelease}
+          onClick={handleRelease}
           className={scss['icon-release']}
         />
       ) : (
         <Icon
           type="icon-xiajia"
-          onClick={state.onRevoke}
+          onClick={handleRevoke}
           className={scss['icon-lower-shelf']}
         />
       )}

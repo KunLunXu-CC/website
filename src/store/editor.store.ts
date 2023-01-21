@@ -52,7 +52,7 @@ export default createSlice({
           ...state,
           works: state.works.map((v: any) => ({
             ...v,
-            action: v.articleId === articleId,
+            active: v.articleId === articleId,
           })),
         };
       }
@@ -60,10 +60,10 @@ export default createSlice({
       return {
         ...state,
         works: [
-          ...state.works.map((v: any) => ({ ...v, action: false })),
+          ...state.works.map((v: any) => ({ ...v, active: false })),
           {
             articleId,
-            action: true,
+            active: true,
             change: false,
           },
         ],
@@ -80,8 +80,8 @@ export default createSlice({
           const newWorks = idClose ? total : [...total, { ...ele }];
 
           // 关闭已选中的
-          if (idClose && ele.action && newWorks[0]) {
-            newWorks[0].action = true;
+          if (idClose && ele.active && newWorks[0]) {
+            newWorks[0].active = true;
           }
 
           return newWorks;

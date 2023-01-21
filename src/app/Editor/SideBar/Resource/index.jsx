@@ -57,7 +57,7 @@ export default () => {
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = useMemo(() => (
-    works.find((v) => v.action)?.article
+    works.find((v) => v.active)?.articleId
   ), [works]);
 
   // 渲染菜单列表

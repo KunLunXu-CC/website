@@ -22,7 +22,7 @@ export default () => {
 
   // 当前选中项
   const activeKey = useMemo(() => (
-    works.find((v) => v.action)?.articleId
+    works.find((v) => v.active)?.articleId
   ), [works]);
 
   const tabsItems = useMemo(() => works.map((work) => ({
