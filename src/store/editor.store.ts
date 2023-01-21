@@ -72,8 +72,7 @@ export default createSlice({
 
     // 移除工作窗口: 没传 article 则移除所有
     removeWork: (state, { payload: articleId }): any => {
-      console.log('%c [ articleId ]-75', 'font-size:13px; background:pink; color:#bf2c9f;', articleId);
-      return state;
+      // return state;
       const works = [...state.works]
         .reverse()
         .reduce((total, ele: any): any => {
@@ -88,7 +87,7 @@ export default createSlice({
           return newWorks;
         }, [])
         .reverse();
-      console.log('%c [ works ]-89', 'font-size:13px; background:pink; color:#bf2c9f;', works);
+
       return { ...state, works };
     },
   },
