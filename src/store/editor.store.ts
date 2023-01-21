@@ -84,5 +84,21 @@ export default createSlice({
 
       return { ...state, works };
     },
+
+    // 创建临时 tag (占位符)
+    createTmpTag: (state, { payload: parentId }) => ({
+      ...state,
+      tags: {
+        ...state.tags,
+        new: {
+          name: '',
+          id: 'new',
+          editor: true,
+          parent: { id: parentId },
+        },
+      },
+    }),
+
   },
 });
+

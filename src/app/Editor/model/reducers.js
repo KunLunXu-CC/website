@@ -17,30 +17,6 @@ export const setWork = (state, { article, work }) => ({
   )),
 });
 
-
-/**
- * 创建临时 tag (占位符)
- * 1. reducer: action = { type: 'editor/createTmpTag' }
- * 2. 本项目所有 reducer 对应 action.type = ${model 命名空间}/${reducer 函数名}
- *
- * @param {object} state 当前 state
- * @param {object} action.parent 父级节点
- * @param action.parent.parent
- * @returns {object} 更新后的状态
- */
-export const createTmpTag = (state, { parent }) => ({
-  ...state,
-  tags: {
-    ...state.tags,
-    new: {
-      name: '',
-      id: 'new',
-      editor: true,
-      parent: { id: parent },
-    },
-  },
-});
-
 /**
  * 创建临时 article (占位符)
  * 1. reducer: action = { type: 'editor/createTmpArticle' }

@@ -29,20 +29,16 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击创建文件夹
   const handleCreateFolderMenu = useCallback(() => {
-    if (!props.data.tags) { // 在文件夹上触发下拉框
+    if (!props.data.tags) {
+      // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
       }));
 
-      dispatch({
-        parent: props.data.id,
-        type: 'editor/createTmpTag',
-      });
-    } else { // 在文章上触发下拉框
-      dispatch({
-        type: 'editor/createTmpTag',
-        parent: props.data.tags?.[0].id,
-      });
+      dispatch(actions.editor.createTmpTag(props.data.id));
+    } else {
+      // 在文章上触发下拉框
+      dispatch(actions.editor.createTmpTag(props.data.tags?.[0].id));
     }
   }, [dispatch, openKeys, props.data.id, props.data.tags]);
 

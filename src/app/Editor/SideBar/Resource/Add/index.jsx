@@ -1,27 +1,20 @@
 import scss from './index.module.scss';
 
+import { actions } from '@store';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
 
-  const onClick = useCallback(() => {
-    dispatch({
-      parent: null,
-      type: 'editor/createTmpTag',
-    });
+  const handleClick = useCallback(() => {
+    dispatch(actions.editor.createTmpTag(null));
   }, [dispatch]);
 
-  return { onClick };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <div
-      onClick={state.onClick}
-      className={scss.add}>
+      className={scss.add}
+      onClick={handleClick}>
       +
     </div>
   );
