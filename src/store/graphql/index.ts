@@ -1275,7 +1275,7 @@ export type CreateFolderMutationVariables = Exact<{
 }>;
 
 
-export type CreateFolderMutation = { __typename?: 'Mutation', createDatasetsfroms?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+export type CreateFolderMutation = { __typename?: 'Mutation', folder?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
@@ -1446,7 +1446,7 @@ export const InitEditorDataDocument = `
     `;
 export const CreateFolderDocument = `
     mutation createFolder($body: [DatasetsfromFields!]!) {
-  createDatasetsfroms(body: $body) {
+  folder: createDatasetsfroms(body: $body) {
     change {
       id
       value

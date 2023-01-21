@@ -5,14 +5,17 @@ import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
 import { MOVE } from '../../../consts';
 import { Dropdown, Input } from 'antd';
-import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
+import { useCreateFolderMutation } from '@store/graphql';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
+import { ARTICLE_STATUS, DATASETSFROM_CODE } from '@config/consts';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
 export default (props) => {
+  const [createFolder] = useCreateFolderMutation();
+
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
 
@@ -63,10 +66,8 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const type = !props.data.folders
-      ? 'editor/addEditorStatusWithTag'
-      : 'editor/addEditorStatusWithArticle';
-    dispatch({ type, id: props.data.id });
+    const reducerName = !props.data.folders ? 'addEditorStatusWithTag' : 'addEditorStatusWithArticle';
+    dispatch(actions.editor[reducerName](props.data.id));
   }, [dispatch, props.data.id, props.data.folders]);
 
   // 下拉菜单点击事件: 移动
@@ -150,7 +151,6 @@ export default (props) => {
   // 编辑数据: 根据不同 id、type 设置不同 dispatch 参数
   const handleEdit = useCallback((e) => {
     const name = e.target.value;
-    console.log('%c [ name ]-153', 'font-size:13px; background:pink; color:#bf2c9f;', name);
     const isNew = props.data.id === 'new';
     const isFolder = !props.data.folders;
 
@@ -158,7 +158,13 @@ export default (props) => {
       {
         cond: isFolder && isNew,
         handler: async () => {
-          console.log('%c [ 1 ]-161', 'font-size:13px; background:pink; color:#bf2c9f;', 1);
+          const { data } = await createFolder({ body: {
+            name,
+            value: 0,
+            parent: props.data.parent?.id,
+            code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
+          } });
+          dispatch(actions.editor.setTags(data.folder?.change));
         },
       },
     ];
@@ -169,14 +175,6 @@ export default (props) => {
 
 
     // dispatch([
-    //   {
-    //     // 新建文件夹
-    //     filter: isFolder && isNew,
-    //     dispatchParams: {
-    //       type: 'editor/createTag',
-    //       body: { name, parent: props.data.parent?.id },
-    //     },
-    //   },
     //   {
     //     // 编辑文件夹
     //     filter: isFolder && !isNew,

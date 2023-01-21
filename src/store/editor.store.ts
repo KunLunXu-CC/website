@@ -20,13 +20,20 @@ export default createSlice({
   initialState,
   name: 'editor',
   reducers: {
-    setTags: (state, { payload: folders }) => ({
-      ...state,
-      folders: folders.reduce((total: any, ele: { id: any; }) => ({
-        ...total,
-        [ele.id]: ele,
-      }), {}),
-    }),
+    setTags: (state, { payload: folders }) => {
+      const newFolders = [
+        ...Object.values(state.folders),
+        ...folders,
+      ].filter((v) => v.id !== 'new');
+
+      return {
+        ...state,
+        folders: newFolders.reduce((total: any, ele: { id: any; }) => ({
+          ...total,
+          [ele.id]: ele,
+        }), {}),
+      };
+    },
 
     setArticles: (state, { payload: articles }) => ({
       ...state,
@@ -98,6 +105,20 @@ export default createSlice({
         },
       },
     }),
+
+    // 为 tag 添加编辑状态: 找到数据设置状态 editor = true
+    addEditorStatusWithTag: (state, { payload: folderId }) => {
+      const folders: any = cloneDeep(state.folders);
+      folders[folderId].editor = true;
+      return { ...state, folders };
+    },
+
+    //  为 article 添加编辑状态: 找到数据设置状态 editor = true
+    addEditorStatusWithArticle: (state, { payload: articleId }) => {
+      const articles: any = cloneDeep(state.articles);
+      articles[articleId].editor = true;
+      return { ...state, articles };
+    },
 
   },
 });

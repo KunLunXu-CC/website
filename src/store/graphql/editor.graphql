@@ -34,7 +34,8 @@ query initEditorData {
 }
 
 mutation createFolder($body: [DatasetsfromFields!]!) {
-  createDatasetsfroms(body: $body) {
+  # folder 是别名
+  folder: createDatasetsfroms(body: $body) {
     change {
       id
       value
