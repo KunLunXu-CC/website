@@ -1,6 +1,6 @@
 query initEditorData {
-  # toc 是别名
-  toc: datasetsfroms(search: { code: [6] }) {
+  # folder 是别名
+  folder: datasetsfroms(search: { code: [6] }) {
     list {
       id
       value
@@ -27,6 +27,27 @@ query initEditorData {
       content
       tags {
         id
+        name
+      }
+    }
+  }
+}
+
+mutation createFolder($body: [DatasetsfromFields!]!) {
+  createDatasetsfroms(body: $body) {
+    change {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
         name
       }
     }

@@ -13,13 +13,13 @@ export default () => {
   const dispatch = useDispatch();
 
   const {
-    tags,
+    folders,
     side,
     works,
     articles,
     selectKey,
   } = useSelector((state) => ({
-    tags: state.editor.tags,
+    folders: state.editor.folders,
     side: state.editor.side,
     works: state.editor.works,
     articles: state.editor.articles,
@@ -28,7 +28,7 @@ export default () => {
 
   // 菜单
   const treeData = useMemo(() => {
-    const cloneTags = _.cloneDeep(Object.values(tags));
+    const cloneTags = _.cloneDeep(Object.values(folders));
     const cloneArticles = _.cloneDeep(Object.values(articles));
     const groupTags = _.groupBy(cloneTags, 'parent.id');
 
@@ -36,11 +36,11 @@ export default () => {
       // 根据状态来过滤数据
       (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
         ...ele,
-        tags: ele.tags.reverse(),
+        folders: ele.tags.reverse(),
       });
 
       return total;
-    }, []), 'tags[0].id');
+    }, []), 'folders[0].id');
 
     cloneTags.forEach((v) => {
       const tagLength = groupTags[v.id]?.length ?? 0;
@@ -53,7 +53,7 @@ export default () => {
     });
 
     return _.sortBy(cloneTags.filter((v) => !v.parent?.id), 'name');
-  }, [articles, tags, side.openKeys, selectKey]);
+  }, [articles, folders, side.openKeys, selectKey]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = useMemo(() => (
@@ -71,7 +71,7 @@ export default () => {
       );
 
       // 文章
-      if (item.tags) {
+      if (item.folders) {
         return (
           <Menu.Item key={item.id}>
             {title}

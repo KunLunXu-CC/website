@@ -8,27 +8,29 @@ const useStateHook = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const { modal, tags } = useSelector((state) => ({
-    tags: state.editor.tags,
+  const { modal, folders } = useSelector((state) => ({
+    folders: state.editor.folders,
     modal: state.modal[MOVE],
   }));
 
   // Cascader 组件 options 配置
   const options = useMemo(() => {
-    const cloneTags = _.cloneDeep(Object.values(tags)).reduce((total, ele) => {
+    const cloneTags = _.cloneDeep(Object.values(folders))
+      .reduce((total, ele) => {
       // 移动目录时, 移除当前目录
-      (modal?.data?.tags || ele.id !== modal?.data?.id) && total.push({
-        ...ele,
-        value: ele.id,
-        label: ele.name,
-      });
-      return total;
-    }, []);
+        (modal?.data?.folders || ele.id !== modal?.data?.id) && total.push({
+          ...ele,
+          value: ele.id,
+          label: ele.name,
+        });
+
+        return total;
+      }, []);
     const groupTags = _.groupBy(cloneTags, 'parent.id');
 
     cloneTags.forEach(v => (v.children = groupTags[v.id])); // eslint-disable-line
     return _.sortBy(cloneTags.filter((v) => !v.parent?.id), 'name');
-  }, [tags, modal]);
+  }, [folders, modal]);
 
   // 点击取消
   const onCancel = () => dispatch({
@@ -41,8 +43,8 @@ const useStateHook = () => {
     const { paths } = await form.validateFields();
     dispatch({
       id: modal.data.id,
-      type: modal.data.tags ? 'editor/updateArticle' : 'editor/updateTag',
-      body: modal.data.tags ? { tags: paths } : { parent: _.last(paths) },
+      type: modal.data.folders ? 'editor/updateArticle' : 'editor/updateTag',
+      body: modal.data.folders ? { folders: paths } : { parent: _.last(paths) },
     });
     onCancel();
   };

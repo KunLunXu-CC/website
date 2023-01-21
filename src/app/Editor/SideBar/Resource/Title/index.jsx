@@ -29,7 +29,7 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击创建文件夹
   const handleCreateFolderMenu = useCallback(() => {
-    if (!props.data.tags) {
+    if (!props.data.folders) {
       // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
@@ -38,13 +38,13 @@ export default (props) => {
       dispatch(actions.editor.createTmpTag(props.data.id));
     } else {
       // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpTag(props.data.tags?.[0].id));
+      dispatch(actions.editor.createTmpTag(props.data.folders?.[0].id));
     }
-  }, [dispatch, openKeys, props.data.id, props.data.tags]);
+  }, [dispatch, openKeys, props.data.id, props.data.folders]);
 
   // 下拉菜单点击事件: 点击创建文章
   const handleCreateArticleMenu = useCallback(() => {
-    if (!props.data.tags) { // 在文件夹上触发下拉框
+    if (!props.data.folders) { // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
       }));
@@ -55,19 +55,19 @@ export default (props) => {
       });
     } else { // 在文章上触发下拉框
       dispatch({
-        tag: props.data.tags?.[0].id,
+        tag: props.data.folders?.[0].id,
         type: 'editor/createTmpArticle',
       });
     }
-  }, [dispatch, openKeys, props.data.id, props.data.tags]);
+  }, [dispatch, openKeys, props.data.id, props.data.folders]);
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const type = !props.data.tags
+    const type = !props.data.folders
       ? 'editor/addEditorStatusWithTag'
       : 'editor/addEditorStatusWithArticle';
     dispatch({ type, id: props.data.id });
-  }, [dispatch, props.data.id, props.data.tags]);
+  }, [dispatch, props.data.id, props.data.folders]);
 
   // 下拉菜单点击事件: 移动
   const handleMoveMenu = useCallback(() => dispatch({
@@ -78,7 +78,7 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击删除
   const handleDeleteMenu = useCallback(() => {
-    const type = !props.data.tags
+    const type = !props.data.folders
       ? 'editor/removeTag'
       : 'editor/removeArticle';
     dispatch({ ...props.data, type, id: props.data.id });
@@ -150,52 +150,68 @@ export default (props) => {
   // 编辑数据: 根据不同 id、type 设置不同 dispatch 参数
   const handleEdit = useCallback((e) => {
     const name = e.target.value;
+    console.log('%c [ name ]-153', 'font-size:13px; background:pink; color:#bf2c9f;', name);
     const isNew = props.data.id === 'new';
-    const isFolder = !props.data.tags;
-    dispatch([
+    const isFolder = !props.data.folders;
+
+    const map = [
       {
-        // 新建文件夹
-        filter: isFolder && isNew,
-        dispatchParams: {
-          type: 'editor/createTag',
-          body: { name, parent: props.data.parent?.id },
+        cond: isFolder && isNew,
+        handler: async () => {
+          console.log('%c [ 1 ]-161', 'font-size:13px; background:pink; color:#bf2c9f;', 1);
         },
       },
-      {
-        // 编辑文件夹
-        filter: isFolder && !isNew,
-        dispatchParams: {
-          body: { name },
-          id: props.data.id,
-          type: 'editor/updateTag',
-        },
-      },
-      {
-        // 新建文件
-        filter: !isFolder && isNew,
-        dispatchParams: {
-          type: 'editor/createArticle',
-          body: {
-            name,
-            tags: [props.data.tags?.[0].id],
-          },
-        },
-      },
-      {
-        // 编辑文章
-        filter: !isFolder && !isNew,
-        dispatchParams: {
-          body: { name },
-          id: props.data.id,
-          type: 'editor/updateArticle',
-        },
-      },
-    ].find((v) => v.filter).dispatchParams);
+    ];
+
+    const { handler } = map.find((v) => v.cond);
+
+    handler();
+
+
+    // dispatch([
+    //   {
+    //     // 新建文件夹
+    //     filter: isFolder && isNew,
+    //     dispatchParams: {
+    //       type: 'editor/createTag',
+    //       body: { name, parent: props.data.parent?.id },
+    //     },
+    //   },
+    //   {
+    //     // 编辑文件夹
+    //     filter: isFolder && !isNew,
+    //     dispatchParams: {
+    //       body: { name },
+    //       id: props.data.id,
+    //       type: 'editor/updateTag',
+    //     },
+    //   },
+    //   {
+    //     // 新建文件
+    //     filter: !isFolder && isNew,
+    //     dispatchParams: {
+    //       type: 'editor/createArticle',
+    //       body: {
+    //         name,
+    //         folders: [props.data.folders?.[0].id],
+    //       },
+    //     },
+    //   },
+    //   {
+    //     // 编辑文章
+    //     filter: !isFolder && !isNew,
+    //     dispatchParams: {
+    //       body: { name },
+    //       id: props.data.id,
+    //       type: 'editor/updateArticle',
+    //     },
+    //   },
+    // ].find((v) => v.filter).dispatchParams);
   }, [dispatch, props.data]);
 
   // 最外层 className
   const className = useMemo(() => (classNames(scss['menu-title'], {
-    [scss['menu-title-article']]: props.data.tags,
+    [scss['menu-title-article']]: props.data.folders,
     [scss['menu-title-release']]:
       !_.isNumber(activity.selectKey) &&
       props.data.status === ARTICLE_STATUS.RELEASE,
@@ -211,7 +227,7 @@ export default (props) => {
         type="icon-jiantou"
         className={scss['menu-title-arrow']}
       />
-      <Icon type={props.data.tags ? 'icon-24' : 'icon-wenjianjia'} />
+      <Icon type={props.data.folders ? 'icon-24' : 'icon-wenjianjia'} />
       <div className={scss['menu-title-content']}>
         {props.data.editor ? (
           <Input

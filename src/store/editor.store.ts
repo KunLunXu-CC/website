@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ACTIVITY_LIST } from '@app/Editor/consts';
 
 export const initialState = {
-  tags: {},        // {[id]: value}
+  folders: {},        // {[id]: value}
   articles: {},    // {[id]: value}
   preview: void 0, // 预览文章(文章 id)
   side: {
@@ -20,9 +20,9 @@ export default createSlice({
   initialState,
   name: 'editor',
   reducers: {
-    setTags: (state, { payload: tags }) => ({
+    setTags: (state, { payload: folders }) => ({
       ...state,
-      tags: tags.reduce((total: any, ele: { id: any; }) => ({
+      folders: folders.reduce((total: any, ele: { id: any; }) => ({
         ...total,
         [ele.id]: ele,
       }), {}),
@@ -88,8 +88,8 @@ export default createSlice({
     // 创建临时 tag (占位符)
     createTmpTag: (state, { payload: parentId }) => ({
       ...state,
-      tags: {
-        ...state.tags,
+      folders: {
+        ...state.folders,
         new: {
           name: '',
           id: 'new',
