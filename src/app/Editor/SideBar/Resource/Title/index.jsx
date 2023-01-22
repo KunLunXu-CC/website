@@ -8,13 +8,18 @@ import { Dropdown, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
 import { ARTICLE_STATUS, DATASETSFROM_CODE } from '@config/consts';
-import { useCreateFoldersMutation, useCreateArticlesMutation } from '@store/graphql';
+import {
+  useCreateFoldersMutation,
+  useUpdateFoldersMutation,
+  useCreateArticlesMutation,
+} from '@store/graphql';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
 export default (props) => {
   const [createFolders] = useCreateFoldersMutation();
+  const [updateFolders] = useUpdateFoldersMutation();
   const [createArticles] = useCreateArticlesMutation();
 
   const dispatch = useDispatch();
@@ -180,27 +185,11 @@ export default (props) => {
       {
         cond: isFolder && !isNew,
         handler: async () => {
-          // body: { name },
-          // id: props.data.id,
-          // updateTag
-
-          // ---------
-          // const currentTags = yield select((state) => state.editor.tags);
-          // const { change } = yield call(services.updateDatasetsfroms, {
-          //   body,
-          //   conds: { id },
-          //   spin: APP_CODE.EDITOR,
-          // });
-
-          // yield put({
-          //   tags: change.reduce((total, ele) => ({
-          //     ...total,
-          //     [ele.id]: ele,
-          //   }), currentTags),
-          //   type: 'editor/setTags',
-          // });
-
-          // message({ ...MESSAGE_CONFIG, message: '成功更新标签!' });
+          const { data } = await updateFolders({
+            body: { name },
+            conds: { id: props.data.id },
+          });
+          dispatch(actions.editor.setTags(data.updateFolders?.change));
         },
       },
     ];
@@ -210,15 +199,6 @@ export default (props) => {
     handler();
 
     // dispatch([
-    //   {
-    //     // 编辑文件夹
-    //     filter: isFolder && !isNew,
-    //     dispatchParams: {
-    //       body: { name },
-    //       id: props.data.id,
-    //       type: 'editor/updateTag',
-    //     },
-    //   },
     //   {
     //     // 编辑文章
     //     filter: !isFolder && !isNew,
