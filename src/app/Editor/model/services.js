@@ -54,28 +54,6 @@ export const createDatasetsfroms = axios({
   getRes: (res) => res.createDatasetsfroms ?? {},
 });
 
-// 更新字典
-export const updateDatasetsfroms = axios({
-  query: `
-    mutation(
-      $body: DatasetsfromFields!
-      $conds: DatasetsfromSearch!
-    ){
-      updateDatasetsfroms(
-        body: $body,
-        conds: $conds,
-      ){
-        change {
-          id value code desc icon name
-          parent {
-            id value code desc icon name
-          }
-        }
-      }
-    }`,
-  getRes: (res) => res.updateDatasetsfroms ?? {},
-});
-
 // 删除字典
 export const removeDatasetsfroms = axios({
   query: `

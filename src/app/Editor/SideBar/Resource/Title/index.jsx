@@ -152,7 +152,7 @@ export default (props) => {
     const isFolder = !props.data.folders;
 
     const map = [
-      // 1. 新建文件夹
+      // 1. 新建 - 文件夹
       {
         cond: isFolder && isNew,
         handler: async () => {
@@ -162,51 +162,45 @@ export default (props) => {
             parent: props.data.parent?.id,
             code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
           }] });
-          dispatch(actions.editor.setTags(data.folder?.change));
+          dispatch(actions.editor.setTags(data.createFolders?.change));
         },
       },
-      // 2. 新建文章
+      // 2. 新建 - 文章
       {
         cond: !isFolder && isNew,
         handler: async () => {
-          // name,
-          // folders: [props.data.folders?.[0].id],
-
           const { data } = await  createArticles({ body: [{
             name,
             tags: [props.data.folders?.[0].id],
           }] });
-
           dispatch(actions.editor.setArticles(data.createArticles?.change));
+        },
+      },
+      // 3. 编辑 - 文件夹
+      {
+        cond: isFolder && !isNew,
+        handler: async () => {
+          // body: { name },
+          // id: props.data.id,
+          // updateTag
 
-          // ------------------
-          // const currentArticles = yield select((state) => state.editor.articles);
-          // delete currentArticles.new;
-
-          // const { change } = body.name ?
-          //   yield call(services.createArticles, {
-          //     body,
-          //     spin: APP_CODE.EDITOR,
-          //   }) : { change: [] };
+          // ---------
+          // const currentTags = yield select((state) => state.editor.tags);
+          // const { change } = yield call(services.updateDatasetsfroms, {
+          //   body,
+          //   conds: { id },
+          //   spin: APP_CODE.EDITOR,
+          // });
 
           // yield put({
-          //   articles: change.reduce((total, ele) => ({
+          //   tags: change.reduce((total, ele) => ({
           //     ...total,
           //     [ele.id]: ele,
-          //   }), { ...currentArticles }),
-          //   type: 'editor/setArticles',
+          //   }), currentTags),
+          //   type: 'editor/setTags',
           // });
 
-          // yield put({
-          //   article: change?.[0]?.id,
-          //   type: 'editor/appendWorks',
-          // });
-
-          // message({
-          //   ...MESSAGE_CONFIG,
-          //   type: body.name ? 'success' : 'error',
-          //   message: body.name ? '操作成功!' : '名称不能为空!',
-          // });
+          // message({ ...MESSAGE_CONFIG, message: '成功更新标签!' });
         },
       },
     ];
@@ -223,17 +217,6 @@ export default (props) => {
     //       body: { name },
     //       id: props.data.id,
     //       type: 'editor/updateTag',
-    //     },
-    //   },
-    //   {
-    //     // 新建文件
-    //     filter: !isFolder && isNew,
-    //     dispatchParams: {
-    //       type: 'editor/createArticle',
-    //       body: {
-    //         name,
-    //         folders: [props.data.folders?.[0].id],
-    //       },
     //     },
     //   },
     //   {

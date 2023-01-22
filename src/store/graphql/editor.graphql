@@ -1,6 +1,6 @@
 query initEditorData {
   # folder 是别名
-  folder: datasetsfroms(search: { code: [6] }) {
+  folders: datasetsfroms(search: { code: [6] }) {
     list {
       id
       value
@@ -35,7 +35,7 @@ query initEditorData {
 
 mutation createFolders($body: [DatasetsfromFields!]!) {
   # folder 是别名
-  folder: createDatasetsfroms(body: $body) {
+  createFolders: createDatasetsfroms(body: $body) {
     change {
       id
       value
@@ -62,6 +62,30 @@ mutation createArticles($body: [ArticleFields!]!) {
       name
       tags {
         id
+        name
+      }
+    }
+  }
+}
+
+mutation updateFolders(
+  $body: DatasetsfromFields!
+  $conds: DatasetsfromSearch!
+) {
+  updateFolders: updateDatasetsfroms(body: $body, conds: $conds) {
+    change {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
         name
       }
     }

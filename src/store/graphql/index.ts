@@ -1268,14 +1268,14 @@ export type GetStatsBodyIndexQuery = { __typename?: 'Query', diaries?: { __typen
 export type InitEditorDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type InitEditorDataQuery = { __typename?: 'Query', folder?: { __typename?: 'Datasetsfroms', list?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null, articles?: { __typename?: 'Articles', list?: Array<{ __typename?: 'Article', id?: string | null, name: string, thumb?: string | null, status?: number | null, content?: string | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+export type InitEditorDataQuery = { __typename?: 'Query', folders?: { __typename?: 'Datasetsfroms', list?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null, articles?: { __typename?: 'Articles', list?: Array<{ __typename?: 'Article', id?: string | null, name: string, thumb?: string | null, status?: number | null, content?: string | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
 
 export type CreateFoldersMutationVariables = Exact<{
   body: Array<DatasetsfromFields> | DatasetsfromFields;
 }>;
 
 
-export type CreateFoldersMutation = { __typename?: 'Mutation', folder?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+export type CreateFoldersMutation = { __typename?: 'Mutation', createFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type CreateArticlesMutationVariables = Exact<{
   body: Array<ArticleFields> | ArticleFields;
@@ -1283,6 +1283,14 @@ export type CreateArticlesMutationVariables = Exact<{
 
 
 export type CreateArticlesMutation = { __typename?: 'Mutation', createArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+
+export type UpdateFoldersMutationVariables = Exact<{
+  body: DatasetsfromFields;
+  conds: DatasetsfromSearch;
+}>;
+
+
+export type UpdateFoldersMutation = { __typename?: 'Mutation', updateFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
@@ -1418,7 +1426,7 @@ export const GetStatsBodyIndexDocument = `
     `;
 export const InitEditorDataDocument = `
     query initEditorData {
-  folder: datasetsfroms(search: {code: [6]}) {
+  folders: datasetsfroms(search: {code: [6]}) {
     list {
       id
       value
@@ -1453,7 +1461,7 @@ export const InitEditorDataDocument = `
     `;
 export const CreateFoldersDocument = `
     mutation createFolders($body: [DatasetsfromFields!]!) {
-  folder: createDatasetsfroms(body: $body) {
+  createFolders: createDatasetsfroms(body: $body) {
     change {
       id
       value
@@ -1481,6 +1489,28 @@ export const CreateArticlesDocument = `
       name
       tags {
         id
+        name
+      }
+    }
+  }
+}
+    `;
+export const UpdateFoldersDocument = `
+    mutation updateFolders($body: DatasetsfromFields!, $conds: DatasetsfromSearch!) {
+  updateFolders: updateDatasetsfroms(body: $body, conds: $conds) {
+    change {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
         name
       }
     }
@@ -1572,6 +1602,9 @@ const injectedRtkApi = api.injectEndpoints({
     createArticles: build.mutation<CreateArticlesMutation, CreateArticlesMutationVariables>({
       query: (variables) => ({ document: CreateArticlesDocument, variables })
     }),
+    updateFolders: build.mutation<UpdateFoldersMutation, UpdateFoldersMutationVariables>({
+      query: (variables) => ({ document: UpdateFoldersDocument, variables })
+    }),
     getPhotos: build.query<GetPhotosQuery, GetPhotosQueryVariables | void>({
       query: (variables) => ({ document: GetPhotosDocument, variables })
     }),
@@ -1591,5 +1624,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 

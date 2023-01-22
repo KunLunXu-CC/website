@@ -37,34 +37,6 @@ const initData = function * () {
 };
 
 /**
- * 更新标签
- *
- * @param root0
- * @param root0.body
- * @param root0.id
- * @returns {void 0}
- */
-const updateTag = function * ({ body, id }) {
-  const currentTags = yield select((state) => state.editor.tags);
-
-  const { change } = yield call(services.updateDatasetsfroms, {
-    body,
-    conds: { id },
-    spin: APP_CODE.EDITOR,
-  });
-
-  yield put({
-    tags: change.reduce((total, ele) => ({
-      ...total,
-      [ele.id]: ele,
-    }), currentTags),
-    type: 'editor/setTags',
-  });
-
-  message({ ...MESSAGE_CONFIG, message: '成功更新标签!' });
-};
-
-/**
  * 删除标签
  *
  * @param root0
@@ -289,7 +261,6 @@ const setArticleThumb = function * ({ file, id }) {
 export default function * () {
   yield takeEvery('editor/', initData);
 
-  yield takeEvery('editor/updateTag', updateTag);
   yield takeEvery('editor/removeTag', removeTag);
 
   yield takeEvery('editor/updateArticle', updateArticle);
