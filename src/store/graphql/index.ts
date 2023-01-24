@@ -1300,6 +1300,20 @@ export type UpdateArticlesMutationVariables = Exact<{
 
 export type UpdateArticlesMutation = { __typename?: 'Mutation', updateArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, content?: string | null, thumb?: string | null, status?: number | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
 
+export type RemoveArticlesMutationVariables = Exact<{
+  conds: ArticleSearch;
+}>;
+
+
+export type RemoveArticlesMutation = { __typename?: 'Mutation', removeArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string } | null> | null } | null };
+
+export type RemoveFoldersMutationVariables = Exact<{
+  conds: DatasetsfromSearch;
+}>;
+
+
+export type RemoveFoldersMutation = { __typename?: 'Mutation', removeFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
 }>;
@@ -1542,6 +1556,38 @@ export const UpdateArticlesDocument = `
   }
 }
     `;
+export const RemoveArticlesDocument = `
+    mutation removeArticles($conds: ArticleSearch!) {
+  removeArticles(conds: $conds) {
+    change {
+      id
+      name
+    }
+  }
+}
+    `;
+export const RemoveFoldersDocument = `
+    mutation removeFolders($conds: DatasetsfromSearch!) {
+  removeFolders: removeDatasetsfroms(conds: $conds) {
+    change {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
+        name
+      }
+    }
+  }
+}
+    `;
 export const GetPhotosDocument = `
     query getPhotos($search: PhotoSearch) {
   photos(search: $search) {
@@ -1633,6 +1679,12 @@ const injectedRtkApi = api.injectEndpoints({
     updateArticles: build.mutation<UpdateArticlesMutation, UpdateArticlesMutationVariables>({
       query: (variables) => ({ document: UpdateArticlesDocument, variables })
     }),
+    removeArticles: build.mutation<RemoveArticlesMutation, RemoveArticlesMutationVariables>({
+      query: (variables) => ({ document: RemoveArticlesDocument, variables })
+    }),
+    removeFolders: build.mutation<RemoveFoldersMutation, RemoveFoldersMutationVariables>({
+      query: (variables) => ({ document: RemoveFoldersDocument, variables })
+    }),
     getPhotos: build.query<GetPhotosQuery, GetPhotosQueryVariables | void>({
       query: (variables) => ({ document: GetPhotosDocument, variables })
     }),
@@ -1652,5 +1704,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 

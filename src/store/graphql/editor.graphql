@@ -107,3 +107,33 @@ mutation updateArticles($body: ArticleFields!, $conds: ArticleSearch!) {
     }
   }
 }
+
+mutation removeArticles($conds: ArticleSearch!) {
+  removeArticles(conds: $conds) {
+    change {
+      id
+      name
+    }
+  }
+}
+
+mutation removeFolders($conds: DatasetsfromSearch!) {
+  removeFolders: removeDatasetsfroms(conds: $conds) {
+    change {
+      id
+      value
+      code
+      desc
+      icon
+      name
+      parent {
+        id
+        value
+        code
+        desc
+        icon
+        name
+      }
+    }
+  }
+}
