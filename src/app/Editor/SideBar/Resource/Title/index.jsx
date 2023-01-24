@@ -12,6 +12,7 @@ import {
   useCreateFoldersMutation,
   useUpdateFoldersMutation,
   useCreateArticlesMutation,
+  useUpdateArticlesMutation,
 } from '@store/graphql';
 
 // 阻止事件冒泡
@@ -21,6 +22,7 @@ export default (props) => {
   const [createFolders] = useCreateFoldersMutation();
   const [updateFolders] = useUpdateFoldersMutation();
   const [createArticles] = useCreateArticlesMutation();
+  const [updateArticles] = useUpdateArticlesMutation();
 
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
@@ -192,24 +194,28 @@ export default (props) => {
           dispatch(actions.editor.setTags(data.updateFolders?.change));
         },
       },
+      // 4. 编辑 - 文章
+      {
+        cond: !isFolder && !isNew,
+        handler: async () => {
+          const { data } = await updateArticles({
+            body: { name },
+            conds: { id: props.data.id },
+          });
+          dispatch(actions.editor.setArticles(data.updateArticles?.change));
+        },
+      },
     ];
 
-    const { handler } = map.find((v) => v.cond);
-
-    handler();
-
-    // dispatch([
-    //   {
-    //     // 编辑文章
-    //     filter: !isFolder && !isNew,
-    //     dispatchParams: {
-    //       body: { name },
-    //       id: props.data.id,
-    //       type: 'editor/updateArticle',
-    //     },
-    //   },
-    // ].find((v) => v.filter).dispatchParams);
-  }, [dispatch, props.data]);
+    map.find((v) => v.cond).handler();
+  }, [
+    dispatch,
+    props.data,
+    createFolders,
+    createArticles,
+    updateFolders,
+    updateArticles,
+  ]);
 
   // 最外层 className
   const className = useMemo(() => (classNames(scss['menu-title'], {

@@ -91,3 +91,19 @@ mutation updateFolders(
     }
   }
 }
+
+mutation updateArticles($body: ArticleFields!, $conds: ArticleSearch!) {
+  updateArticles(body: $body, conds: $conds) {
+    change {
+      id
+      name
+      content
+      thumb
+      status
+      tags {
+        id
+        name
+      }
+    }
+  }
+}

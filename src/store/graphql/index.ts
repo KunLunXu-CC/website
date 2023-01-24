@@ -1292,6 +1292,14 @@ export type UpdateFoldersMutationVariables = Exact<{
 
 export type UpdateFoldersMutation = { __typename?: 'Mutation', updateFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
 
+export type UpdateArticlesMutationVariables = Exact<{
+  body: ArticleFields;
+  conds: ArticleSearch;
+}>;
+
+
+export type UpdateArticlesMutation = { __typename?: 'Mutation', updateArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, content?: string | null, thumb?: string | null, status?: number | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
 }>;
@@ -1517,6 +1525,23 @@ export const UpdateFoldersDocument = `
   }
 }
     `;
+export const UpdateArticlesDocument = `
+    mutation updateArticles($body: ArticleFields!, $conds: ArticleSearch!) {
+  updateArticles(body: $body, conds: $conds) {
+    change {
+      id
+      name
+      content
+      thumb
+      status
+      tags {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
 export const GetPhotosDocument = `
     query getPhotos($search: PhotoSearch) {
   photos(search: $search) {
@@ -1605,6 +1630,9 @@ const injectedRtkApi = api.injectEndpoints({
     updateFolders: build.mutation<UpdateFoldersMutation, UpdateFoldersMutationVariables>({
       query: (variables) => ({ document: UpdateFoldersDocument, variables })
     }),
+    updateArticles: build.mutation<UpdateArticlesMutation, UpdateArticlesMutationVariables>({
+      query: (variables) => ({ document: UpdateArticlesDocument, variables })
+    }),
     getPhotos: build.query<GetPhotosQuery, GetPhotosQueryVariables | void>({
       query: (variables) => ({ document: GetPhotosDocument, variables })
     }),
@@ -1624,5 +1652,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 

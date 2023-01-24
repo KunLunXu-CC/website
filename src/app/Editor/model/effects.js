@@ -104,39 +104,6 @@ const removeArticle = function * ({ id }) {
 };
 
 /**
- * 更新文章
- *
- * @param root0
- * @param root0.body
- * @param root0.id
- * @returns {void 0}
- */
-const updateArticle = function * ({ body, id }) {
-  const currentArticles = yield select((state) => state.editor.articles);
-
-  const { change } = yield call(services.updateArticles, {
-    body,
-    conds: { id },
-  });
-
-  yield put({
-    articles: change.reduce((total, ele) => ({
-      ...total,
-      [ele.id]: ele,
-    }), currentArticles),
-    type: 'editor/setArticles',
-  });
-
-  yield put({
-    article: id,
-    type: 'editor/setWork',
-    work: { change: false },
-  });
-
-  message({ ...MESSAGE_CONFIG, message: '成功修改文章信息!' });
-};
-
-/**
  * 更新文章内容
  *
  * @param root0
@@ -263,7 +230,6 @@ export default function * () {
 
   yield takeEvery('editor/removeTag', removeTag);
 
-  yield takeEvery('editor/updateArticle', updateArticle);
   yield takeEvery('editor/removeArticle', removeArticle);
   yield takeEvery('editor/updateArticleContent', updateArticleContent);
   yield takeEvery('editor/revokeArticle', revokeArticle);

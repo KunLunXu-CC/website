@@ -93,30 +93,6 @@ export const createArticles = axios({
   getRes: (res) => res.createArticles ?? {},
 });
 
-// 更新文章
-export const updateArticles = axios({
-  query: `
-    mutation(
-      $body: ArticleFields!,
-      $conds: ArticleSearch!,
-    ){
-      updateArticles(
-        body: $body,
-        conds: $conds,
-      ){
-        change {
-          id
-          name
-          content
-          thumb
-          status
-          tags { id name }
-        }
-      }
-    }`,
-  getRes: (res) =>  res.updateArticles ?? {},
-});
-
 // 删除文章
 export const removeArticles = axios({
   query: `
