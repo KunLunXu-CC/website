@@ -11,10 +11,10 @@ import { ARTICLE_STATUS, DATASETSFROM_CODE } from '@config/consts';
 import {
   useCreateFoldersMutation,
   useUpdateFoldersMutation,
-  // useRemoveFoldersMutation,
+  useRemoveFoldersMutation,
   useCreateArticlesMutation,
   useUpdateArticlesMutation,
-  // useRemoveArticlesMutation,
+  useRemoveArticlesMutation,
 } from '@store/graphql';
 
 // 阻止事件冒泡
@@ -23,8 +23,10 @@ const stopPropagation = (e) => e.stopPropagation();
 export default (props) => {
   const [createFolders] = useCreateFoldersMutation();
   const [updateFolders] = useUpdateFoldersMutation();
+  const [removeFolders] = useRemoveFoldersMutation();
   const [createArticles] = useCreateArticlesMutation();
   const [updateArticles] = useUpdateArticlesMutation();
+  const [removeArticles] = useRemoveArticlesMutation();
 
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
@@ -84,14 +86,21 @@ export default (props) => {
   }), [dispatch, props.data]);
 
   // 下拉菜单点击事件: 点击删除
-  const handleDeleteMenu = useCallback(() => {
-    console.log('%c [ props.data ]-87', 'font-size:13px; background:pink; color:#bf2c9f;', props.data);
-
-    // const type = !props.data.folders
-    //   ? 'editor/removeTag'
-    //   : 'editor/removeArticle';
-    // dispatch({ ...props.data, type, id: props.data.id });
-  }, [dispatch, props.data]);
+  const handleDeleteMenu = useCallback(async () => {
+    if (props.data.tags) {
+      // 删除文章
+      const { data: articlesData } = await removeArticles({
+        conds: { id: props.data.id },
+      });
+      dispatch(actions.editor.removeTags(articlesData?.removeArticles.change));
+    } else {
+      // 删除文件夹
+      const { data: foldersData } = await removeFolders({
+        conds: { id: props.data.id },
+      });
+      dispatch(actions.editor.removeFolders(foldersData?.removeFolders.change));
+    }
+  }, [props.data, dispatch, removeArticles, removeFolders]);
 
   // 标题 - 更多 - 下列菜单
   const moreMenu = useMemo(() => {

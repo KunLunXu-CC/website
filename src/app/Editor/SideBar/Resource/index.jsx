@@ -71,7 +71,7 @@ export default () => {
       );
 
       // 文章
-      if (item.folders) {
+      if (item.tags) {
         return (
           <Menu.Item key={item.id}>
             {title}

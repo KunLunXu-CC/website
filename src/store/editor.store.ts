@@ -35,6 +35,14 @@ export default createSlice({
       };
     },
 
+    removeTags: (state, { payload: folders }) => {
+      const newFolders = cloneDeep(state.folders);
+      folders.forEach(({ id }: { id:string }) => {
+        delete (newFolders as any)[id];
+      });
+      return { ...state, folders: newFolders };
+    },
+
     setArticles: (state, { payload: articles }) => {
       const newArticles = [
         ...Object.values(state.articles),
@@ -48,6 +56,14 @@ export default createSlice({
           [ele.id]: ele,
         }), {}),
       };
+    },
+
+    removeArticles: (state, { payload: articles }) => {
+      const newArticles = cloneDeep(state.articles);
+      articles.forEach(({ id }: { id: string }) => {
+        delete (newArticles as any)[id];
+      });
+      return { ...state, articles: newArticles };
     },
 
     setSide: (state, { payload: side }) => ({
