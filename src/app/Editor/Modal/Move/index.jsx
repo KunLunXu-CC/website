@@ -17,7 +17,7 @@ const useStateHook = () => {
   const options = useMemo(() => {
     const cloneTags = _.cloneDeep(Object.values(folders))
       .reduce((total, ele) => {
-      // 移动目录时, 移除当前目录
+        // 移动目录时, 移除当前目录
         (modal?.data?.folders || ele.id !== modal?.data?.id) && total.push({
           ...ele,
           value: ele.id,

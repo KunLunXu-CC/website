@@ -36,11 +36,11 @@ export default () => {
       // 根据状态来过滤数据
       (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
         ...ele,
-        folders: ele.tags.reverse(),
+        tags: ele.tags.reverse(),
       });
 
       return total;
-    }, []), 'folders[0].id');
+    }, []), 'tags[0].id');
 
     cloneTags.forEach((v) => {
       const tagLength = groupTags[v.id]?.length ?? 0;
@@ -84,7 +84,7 @@ export default () => {
         <Menu.SubMenu
           key={item.id}
           title={title}>
-          {item?.children?.length !== 0
+          {item?.children?.length
             ? item.children.map((v) => (recursion(v, level + 1)))
             : <Menu.Item className={scss['menu-item-empty']} />
           }

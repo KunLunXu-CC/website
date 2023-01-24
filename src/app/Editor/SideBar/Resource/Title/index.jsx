@@ -11,8 +11,10 @@ import { ARTICLE_STATUS, DATASETSFROM_CODE } from '@config/consts';
 import {
   useCreateFoldersMutation,
   useUpdateFoldersMutation,
+  // useRemoveFoldersMutation,
   useCreateArticlesMutation,
   useUpdateArticlesMutation,
+  // useRemoveArticlesMutation,
 } from '@store/graphql';
 
 // 阻止事件冒泡
@@ -40,7 +42,7 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击创建文件夹
   const handleCreateFolderMenu = useCallback(() => {
-    if (!props.data.folders) {
+    if (!props.data.tags) {
       // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
@@ -49,13 +51,13 @@ export default (props) => {
       dispatch(actions.editor.createTmpTag(props.data.id));
     } else {
       // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpTag(props.data.folders?.[0].id));
+      dispatch(actions.editor.createTmpTag(props.data.tags?.[0].id));
     }
-  }, [dispatch, openKeys, props.data.id, props.data.folders]);
+  }, [dispatch, openKeys, props.data.id, props.data.tags]);
 
   // 下拉菜单点击事件: 点击创建文章
   const handleCreateArticleMenu = useCallback(() => {
-    if (!props.data.folders) {
+    if (!props.data.tags) {
       // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
@@ -70,9 +72,9 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const reducerName = !props.data.folders ? 'addEditorStatusWithTag' : 'addEditorStatusWithArticle';
+    const reducerName = !props.data.tags ? 'addEditorStatusWithTag' : 'addEditorStatusWithArticle';
     dispatch(actions.editor[reducerName](props.data.id));
-  }, [dispatch, props.data.id, props.data.folders]);
+  }, [dispatch, props.data.id, props.data.tags]);
 
   // 下拉菜单点击事件: 移动
   const handleMoveMenu = useCallback(() => dispatch({
@@ -83,10 +85,12 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击删除
   const handleDeleteMenu = useCallback(() => {
-    const type = !props.data.folders
-      ? 'editor/removeTag'
-      : 'editor/removeArticle';
-    dispatch({ ...props.data, type, id: props.data.id });
+    console.log('%c [ props.data ]-87', 'font-size:13px; background:pink; color:#bf2c9f;', props.data);
+
+    // const type = !props.data.folders
+    //   ? 'editor/removeTag'
+    //   : 'editor/removeArticle';
+    // dispatch({ ...props.data, type, id: props.data.id });
   }, [dispatch, props.data]);
 
   // 标题 - 更多 - 下列菜单
@@ -178,7 +182,7 @@ export default (props) => {
         handler: async () => {
           const { data } = await  createArticles({ body: [{
             name,
-            tags: [props.data.folders?.[0].id],
+            tags: [props.data.tags?.[0].id],
           }] });
           dispatch(actions.editor.setArticles(data.createArticles?.change));
         },
@@ -219,7 +223,7 @@ export default (props) => {
 
   // 最外层 className
   const className = useMemo(() => (classNames(scss['menu-title'], {
-    [scss['menu-title-article']]: props.data.folders,
+    [scss['menu-title-article']]: props.data.tags,
     [scss['menu-title-release']]:
       !_.isNumber(activity.selectKey) &&
       props.data.status === ARTICLE_STATUS.RELEASE,
@@ -235,7 +239,7 @@ export default (props) => {
         type="icon-jiantou"
         className={scss['menu-title-arrow']}
       />
-      <Icon type={props.data.folders ? 'icon-24' : 'icon-wenjianjia'} />
+      <Icon type={props.data.tags ? 'icon-24' : 'icon-wenjianjia'} />
       <div className={scss['menu-title-content']}>
         {props.data.editor ? (
           <Input
