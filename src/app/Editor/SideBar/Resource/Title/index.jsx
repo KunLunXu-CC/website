@@ -92,13 +92,17 @@ export default (props) => {
       const { data: articlesData } = await removeArticles({
         conds: { id: props.data.id },
       });
-      dispatch(actions.editor.removeTags(articlesData?.removeArticles.change));
+      dispatch(actions.editor.removeArticles(
+        articlesData?.removeArticles.change,
+      ));
     } else {
       // 删除文件夹
       const { data: foldersData } = await removeFolders({
         conds: { id: props.data.id },
       });
-      dispatch(actions.editor.removeFolders(foldersData?.removeFolders.change));
+      dispatch(actions.editor.removeTags (
+        foldersData?.removeFolders.change,
+      ));
     }
   }, [props.data, dispatch, removeArticles, removeFolders]);
 
@@ -169,7 +173,7 @@ export default (props) => {
   const handleEdit = useCallback((e) => {
     const name = e.target.value;
     const isNew = props.data.id === 'new';
-    const isFolder = !props.data.folders;
+    const isFolder = !props.data.tags;
 
     const map = [
       // 1. 新建 - 文件夹
