@@ -6,73 +6,6 @@ import { put, call, takeEvery, select } from 'redux-saga/effects';
 import { APP_CODE, PHOTO_TYPE } from '@config/consts';
 
 /**
- * 初始化: 一次性获取所有数据并在前端进行存储
- *
- * @returns {void 0}
- */
-const initData = function * () {
-  // 如果已初始化则不再次初始化
-  const currentTags = yield select((state) => state.editor.tags);
-
-  if (!_.isEmpty(currentTags)) {
-    return false;
-  }
-
-  const { tags, articles } = yield call(services.initData, {});
-
-  yield put({
-    type: 'editor/setTags',
-    tags: tags.reduce((total, ele) => ({ ...total, [ele.id]: ele }), {}),
-  });
-
-  yield put({
-    type: 'editor/setArticles',
-    articles: articles.reduce(
-      (total, ele) => ({ ...total, [ele.id]: ele }),
-      {},
-    ),
-  });
-
-  message({ ...MESSAGE_CONFIG, message: '数据初始化完成!' });
-};
-
-/**
- * 删除标签
- *
- * @param root0
- * @param root0.id
- * @param root0.childrenLength
- * @returns {void 0}
- */
-const removeTag = function * ({ id, childrenLength }) {
-  if (childrenLength > 0) {
-    message({
-      ...MESSAGE_CONFIG,
-      type: 'error',
-      message: '不允许删除非空目录!',
-    });
-    return false;
-  }
-
-  const currentTags = yield select((state) => state.editor.tags);
-  const { change } = yield call(services.removeDatasetsfroms, {
-    spin: APP_CODE.EDITOR,
-    conds: { id },
-  });
-
-  change.forEach((v) => {
-    delete currentTags[v.id];
-  });
-
-  yield put({
-    type: 'editor/setTags',
-    tags: { ...currentTags },
-  });
-
-  message({ ...MESSAGE_CONFIG, message: '成功移除标签!' });
-};
-
-/**
  * 删除文章
  *
  * @param root0
@@ -226,10 +159,6 @@ const setArticleThumb = function * ({ file, id }) {
  *
  */
 export default function * () {
-  yield takeEvery('editor/', initData);
-
-  yield takeEvery('editor/removeTag', removeTag);
-
   yield takeEvery('editor/removeArticle', removeArticle);
   yield takeEvery('editor/updateArticleContent', updateArticleContent);
   yield takeEvery('editor/revokeArticle', revokeArticle);
