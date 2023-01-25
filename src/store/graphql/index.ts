@@ -79,10 +79,11 @@ export type Article = {
   creationTime?: Maybe<Scalars['Date']>;
   creator?: Maybe<User>;
   desc?: Maybe<Scalars['String']>;
+  folder?: Maybe<Folder>;
   id?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   status?: Maybe<Scalars['Int']>;
-  tags?: Maybe<Array<Datasetsfrom>>;
+  tags?: Maybe<Array<Scalars['ID']>>;
   thumb?: Maybe<Scalars['String']>;
   updateTime?: Maybe<Scalars['Date']>;
   updater?: Maybe<User>;
@@ -252,6 +253,51 @@ export type Fitness = {
   __typename?: 'Fitness';
   place?: Maybe<Scalars['Int']>;
   type?: Maybe<Scalars['Int']>;
+};
+
+export type Folder = {
+  __typename?: 'Folder';
+  creationTime?: Maybe<Scalars['Date']>;
+  creator?: Maybe<User>;
+  desc?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  parent?: Maybe<Folder>;
+  status?: Maybe<Scalars['Int']>;
+  type?: Maybe<Scalars['Int']>;
+  updateTime?: Maybe<Scalars['Date']>;
+  updater?: Maybe<User>;
+};
+
+export type FolderFields = {
+  desc?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  parent?: InputMaybe<Scalars['ID']>;
+  type?: InputMaybe<Scalars['Int']>;
+};
+
+export type FolderSearch = {
+  creator?: InputMaybe<Scalars['ID']>;
+  desc?: InputMaybe<Scalars['String']>;
+  endCreationTime?: InputMaybe<Scalars['Date']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['ID']>;
+  ids?: InputMaybe<Array<Scalars['ID']>>;
+  name?: InputMaybe<Scalars['String']>;
+  parent?: InputMaybe<Scalars['ID']>;
+  startCreationTime?: InputMaybe<Scalars['Date']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  type?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  updater?: InputMaybe<Scalars['ID']>;
+};
+
+export type Folders = {
+  __typename?: 'Folders';
+  change?: Maybe<Array<Maybe<Folder>>>;
+  list?: Maybe<Array<Maybe<Folder>>>;
+  message?: Maybe<Scalars['String']>;
+  pagination?: Maybe<Scalars['Pagination']>;
 };
 
 export type Interview = {
@@ -438,6 +484,7 @@ export type Mutation = {
   createArticles?: Maybe<Articles>;
   createDatasetsfroms?: Maybe<Datasetsfroms>;
   createDiaries?: Maybe<Diaries>;
+  createFolders?: Maybe<Folders>;
   createInterviews?: Maybe<Interviews>;
   createKanbanGroups?: Maybe<KanbanGroups>;
   createKanbanTasks?: Maybe<KanbanTasks>;
@@ -452,6 +499,7 @@ export type Mutation = {
   removeArticles?: Maybe<Articles>;
   removeDatasetsfroms?: Maybe<Datasetsfroms>;
   removeDiaries?: Maybe<Diaries>;
+  removeFolders?: Maybe<Folders>;
   removeInterviews?: Maybe<Interviews>;
   removeKanbanGroups?: Maybe<KanbanGroups>;
   removeKanbanTasks?: Maybe<KanbanTasks>;
@@ -466,6 +514,7 @@ export type Mutation = {
   updateArticles?: Maybe<Articles>;
   updateDatasetsfroms?: Maybe<Datasetsfroms>;
   updateDiaries?: Maybe<Diaries>;
+  updateFolders?: Maybe<Folders>;
   updateInterviews?: Maybe<Interviews>;
   updateKanbanGroups?: Maybe<KanbanGroups>;
   updateKanbanTasks?: Maybe<KanbanTasks>;
@@ -507,6 +556,14 @@ export type MutationCreateDiariesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<DiarySearch>;
+};
+
+
+export type MutationCreateFoldersArgs = {
+  body: Array<FolderFields>;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<FolderSearch>;
 };
 
 
@@ -617,6 +674,14 @@ export type MutationRemoveDiariesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<DiarySearch>;
+};
+
+
+export type MutationRemoveFoldersArgs = {
+  conds: FolderSearch;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<FolderSearch>;
 };
 
 
@@ -733,6 +798,15 @@ export type MutationUpdateDiariesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<DiarySearch>;
+};
+
+
+export type MutationUpdateFoldersArgs = {
+  body: FolderFields;
+  conds: FolderSearch;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<FolderSearch>;
 };
 
 
@@ -897,6 +971,7 @@ export type Query = {
   articles?: Maybe<Articles>;
   datasetsfroms?: Maybe<Datasetsfroms>;
   diaries?: Maybe<Diaries>;
+  folders?: Maybe<Folders>;
   interviews?: Maybe<Interviews>;
   kanbanGroups?: Maybe<KanbanGroups>;
   kanbanTasks?: Maybe<KanbanTasks>;
@@ -938,6 +1013,13 @@ export type QueryDiariesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<DiarySearch>;
+};
+
+
+export type QueryFoldersArgs = {
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<FolderSearch>;
 };
 
 
@@ -1268,29 +1350,29 @@ export type GetStatsBodyIndexQuery = { __typename?: 'Query', diaries?: { __typen
 export type InitEditorDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type InitEditorDataQuery = { __typename?: 'Query', folders?: { __typename?: 'Datasetsfroms', list?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null, articles?: { __typename?: 'Articles', list?: Array<{ __typename?: 'Article', id?: string | null, name: string, thumb?: string | null, status?: number | null, content?: string | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+export type InitEditorDataQuery = { __typename?: 'Query', folders?: { __typename?: 'Folders', list?: Array<{ __typename?: 'Folder', id?: string | null, name?: string | null, parent?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null, articles?: { __typename?: 'Articles', list?: Array<{ __typename?: 'Article', id?: string | null, name: string, thumb?: string | null, status?: number | null, content?: string | null, folder?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type CreateFoldersMutationVariables = Exact<{
-  body: Array<DatasetsfromFields> | DatasetsfromFields;
+  body: Array<FolderFields> | FolderFields;
 }>;
 
 
-export type CreateFoldersMutation = { __typename?: 'Mutation', createFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+export type CreateFoldersMutation = { __typename?: 'Mutation', createFolders?: { __typename?: 'Folders', change?: Array<{ __typename?: 'Folder', id?: string | null, name?: string | null, parent?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type CreateArticlesMutationVariables = Exact<{
   body: Array<ArticleFields> | ArticleFields;
 }>;
 
 
-export type CreateArticlesMutation = { __typename?: 'Mutation', createArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+export type CreateArticlesMutation = { __typename?: 'Mutation', createArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, folder?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type UpdateFoldersMutationVariables = Exact<{
-  body: DatasetsfromFields;
-  conds: DatasetsfromSearch;
+  body: FolderFields;
+  conds: FolderSearch;
 }>;
 
 
-export type UpdateFoldersMutation = { __typename?: 'Mutation', updateFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+export type UpdateFoldersMutation = { __typename?: 'Mutation', updateFolders?: { __typename?: 'Folders', change?: Array<{ __typename?: 'Folder', id?: string | null, name?: string | null, parent?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type UpdateArticlesMutationVariables = Exact<{
   body: ArticleFields;
@@ -1298,7 +1380,7 @@ export type UpdateArticlesMutationVariables = Exact<{
 }>;
 
 
-export type UpdateArticlesMutation = { __typename?: 'Mutation', updateArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, content?: string | null, thumb?: string | null, status?: number | null, tags?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, name?: string | null }> | null } | null> | null } | null };
+export type UpdateArticlesMutation = { __typename?: 'Mutation', updateArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string, content?: string | null, thumb?: string | null, status?: number | null, folder?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type RemoveArticlesMutationVariables = Exact<{
   conds: ArticleSearch;
@@ -1308,11 +1390,11 @@ export type RemoveArticlesMutationVariables = Exact<{
 export type RemoveArticlesMutation = { __typename?: 'Mutation', removeArticles?: { __typename?: 'Articles', change?: Array<{ __typename?: 'Article', id?: string | null, name: string } | null> | null } | null };
 
 export type RemoveFoldersMutationVariables = Exact<{
-  conds: DatasetsfromSearch;
+  conds: FolderSearch;
 }>;
 
 
-export type RemoveFoldersMutation = { __typename?: 'Mutation', removeFolders?: { __typename?: 'Datasetsfroms', change?: Array<{ __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null, parent?: { __typename?: 'Datasetsfrom', id?: string | null, value?: number | null, code?: number | null, desc?: string | null, icon?: string | null, name?: string | null } | null } | null> | null } | null };
+export type RemoveFoldersMutation = { __typename?: 'Mutation', removeFolders?: { __typename?: 'Folders', change?: Array<{ __typename?: 'Folder', id?: string | null, name?: string | null, parent?: { __typename?: 'Folder', id?: string | null, name?: string | null } | null } | null> | null } | null };
 
 export type GetPhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
@@ -1448,20 +1530,12 @@ export const GetStatsBodyIndexDocument = `
     `;
 export const InitEditorDataDocument = `
     query initEditorData {
-  folders: datasetsfroms(search: {code: [6]}) {
+  folders(search: {type: 6}) {
     list {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
@@ -1473,7 +1547,7 @@ export const InitEditorDataDocument = `
       thumb
       status
       content
-      tags {
+      folder {
         id
         name
       }
@@ -1482,21 +1556,13 @@ export const InitEditorDataDocument = `
 }
     `;
 export const CreateFoldersDocument = `
-    mutation createFolders($body: [DatasetsfromFields!]!) {
-  createFolders: createDatasetsfroms(body: $body) {
+    mutation createFolders($body: [FolderFields!]!) {
+  createFolders(body: $body) {
     change {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
@@ -1509,7 +1575,7 @@ export const CreateArticlesDocument = `
     change {
       id
       name
-      tags {
+      folder {
         id
         name
       }
@@ -1518,21 +1584,13 @@ export const CreateArticlesDocument = `
 }
     `;
 export const UpdateFoldersDocument = `
-    mutation updateFolders($body: DatasetsfromFields!, $conds: DatasetsfromSearch!) {
-  updateFolders: updateDatasetsfroms(body: $body, conds: $conds) {
+    mutation updateFolders($body: FolderFields!, $conds: FolderSearch!) {
+  updateFolders(body: $body, conds: $conds) {
     change {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
@@ -1548,7 +1606,7 @@ export const UpdateArticlesDocument = `
       content
       thumb
       status
-      tags {
+      folder {
         id
         name
       }
@@ -1567,21 +1625,13 @@ export const RemoveArticlesDocument = `
 }
     `;
 export const RemoveFoldersDocument = `
-    mutation removeFolders($conds: DatasetsfromSearch!) {
-  removeFolders: removeDatasetsfroms(conds: $conds) {
+    mutation removeFolders($conds: FolderSearch!) {
+  removeFolders(conds: $conds) {
     change {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }

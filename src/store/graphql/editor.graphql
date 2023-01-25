@@ -1,19 +1,11 @@
 query initEditorData {
   # folder 是别名
-  folders: datasetsfroms(search: { code: [6] }) {
+  folders(search: { type: 6 }) {
     list {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
@@ -25,7 +17,7 @@ query initEditorData {
       thumb
       status
       content
-      tags {
+      folder {
         id
         name
       }
@@ -33,22 +25,13 @@ query initEditorData {
   }
 }
 
-mutation createFolders($body: [DatasetsfromFields!]!) {
-  # folder 是别名
-  createFolders: createDatasetsfroms(body: $body) {
+mutation createFolders($body: [FolderFields!]!) {
+  createFolders(body: $body) {
     change {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
@@ -60,7 +43,7 @@ mutation createArticles($body: [ArticleFields!]!) {
     change {
       id
       name
-      tags {
+      folder {
         id
         name
       }
@@ -68,24 +51,13 @@ mutation createArticles($body: [ArticleFields!]!) {
   }
 }
 
-mutation updateFolders(
-  $body: DatasetsfromFields!
-  $conds: DatasetsfromSearch!
-) {
-  updateFolders: updateDatasetsfroms(body: $body, conds: $conds) {
+mutation updateFolders($body: FolderFields!, $conds: FolderSearch!) {
+  updateFolders(body: $body, conds: $conds) {
     change {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
@@ -100,7 +72,7 @@ mutation updateArticles($body: ArticleFields!, $conds: ArticleSearch!) {
       content
       thumb
       status
-      tags {
+      folder {
         id
         name
       }
@@ -117,21 +89,13 @@ mutation removeArticles($conds: ArticleSearch!) {
   }
 }
 
-mutation removeFolders($conds: DatasetsfromSearch!) {
-  removeFolders: removeDatasetsfroms(conds: $conds) {
+mutation removeFolders($conds: FolderSearch!) {
+  removeFolders(conds: $conds) {
     change {
       id
-      value
-      code
-      desc
-      icon
       name
       parent {
         id
-        value
-        code
-        desc
-        icon
         name
       }
     }
