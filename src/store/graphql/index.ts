@@ -142,57 +142,6 @@ export type BodyIndex = {
   weight?: Maybe<Scalars['Float']>;
 };
 
-export type Datasetsfrom = {
-  __typename?: 'Datasetsfrom';
-  code?: Maybe<Scalars['Int']>;
-  creationTime?: Maybe<Scalars['Date']>;
-  creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
-  icon?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  parent?: Maybe<Datasetsfrom>;
-  status?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
-  updater?: Maybe<User>;
-  value?: Maybe<Scalars['Int']>;
-};
-
-export type DatasetsfromFields = {
-  code?: InputMaybe<Scalars['Int']>;
-  desc?: InputMaybe<Scalars['String']>;
-  icon?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<Scalars['ID']>;
-  value?: InputMaybe<Scalars['Int']>;
-};
-
-export type DatasetsfromSearch = {
-  code?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  icon?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<Scalars['ID']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
-  value?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-};
-
-export type Datasetsfroms = {
-  __typename?: 'Datasetsfroms';
-  change?: Maybe<Array<Maybe<Datasetsfrom>>>;
-  list?: Maybe<Array<Maybe<Datasetsfrom>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
-};
-
 export type Diaries = {
   __typename?: 'Diaries';
   change?: Maybe<Array<Maybe<Diary>>>;
@@ -482,7 +431,6 @@ export type Mutation = {
   __typename?: 'Mutation';
   createAlgorithms?: Maybe<Algorithms>;
   createArticles?: Maybe<Articles>;
-  createDatasetsfroms?: Maybe<Datasetsfroms>;
   createDiaries?: Maybe<Diaries>;
   createFolders?: Maybe<Folders>;
   createInterviews?: Maybe<Interviews>;
@@ -497,7 +445,6 @@ export type Mutation = {
   releaseArticles?: Maybe<Articles>;
   removeAlgorithms?: Maybe<Algorithms>;
   removeArticles?: Maybe<Articles>;
-  removeDatasetsfroms?: Maybe<Datasetsfroms>;
   removeDiaries?: Maybe<Diaries>;
   removeFolders?: Maybe<Folders>;
   removeInterviews?: Maybe<Interviews>;
@@ -507,12 +454,11 @@ export type Mutation = {
   removePhotos?: Maybe<Photos>;
   removeRoles?: Maybe<Roles>;
   removeSnippets?: Maybe<Snippets>;
-  removeTags?: Maybe<Tags>;
+  removeFolders?: Maybe<Tags>;
   removeUsers?: Maybe<Users>;
   revokeArticles?: Maybe<Articles>;
   updateAlgorithms?: Maybe<Algorithms>;
   updateArticles?: Maybe<Articles>;
-  updateDatasetsfroms?: Maybe<Datasetsfroms>;
   updateDiaries?: Maybe<Diaries>;
   updateFolders?: Maybe<Folders>;
   updateInterviews?: Maybe<Interviews>;
@@ -540,14 +486,6 @@ export type MutationCreateArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<ArticleSearch>;
-};
-
-
-export type MutationCreateDatasetsfromsArgs = {
-  body: Array<DatasetsfromFields>;
-  orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
-  search?: InputMaybe<DatasetsfromSearch>;
 };
 
 
@@ -658,14 +596,6 @@ export type MutationRemoveArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<ArticleSearch>;
-};
-
-
-export type MutationRemoveDatasetsfromsArgs = {
-  conds: DatasetsfromSearch;
-  orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
-  search?: InputMaybe<DatasetsfromSearch>;
 };
 
 
@@ -780,15 +710,6 @@ export type MutationUpdateArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<ArticleSearch>;
-};
-
-
-export type MutationUpdateDatasetsfromsArgs = {
-  body: DatasetsfromFields;
-  conds: DatasetsfromSearch;
-  orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
-  search?: InputMaybe<DatasetsfromSearch>;
 };
 
 
@@ -969,7 +890,6 @@ export type Query = {
   algorithms?: Maybe<Algorithms>;
   appleTouchbar?: Maybe<Touchbar>;
   articles?: Maybe<Articles>;
-  datasetsfroms?: Maybe<Datasetsfroms>;
   diaries?: Maybe<Diaries>;
   folders?: Maybe<Folders>;
   interviews?: Maybe<Interviews>;
@@ -999,13 +919,6 @@ export type QueryArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<ArticleSearch>;
-};
-
-
-export type QueryDatasetsfromsArgs = {
-  orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
-  search?: InputMaybe<DatasetsfromSearch>;
 };
 
 
@@ -1530,7 +1443,7 @@ export const GetStatsBodyIndexDocument = `
     `;
 export const InitEditorDataDocument = `
     query initEditorData {
-  folders(search: {type: 6}) {
+  folders(search: {type: [0]}) {
     list {
       id
       name

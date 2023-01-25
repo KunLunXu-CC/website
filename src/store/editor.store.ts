@@ -20,7 +20,7 @@ export default createSlice({
   initialState,
   name: 'editor',
   reducers: {
-    setTags: (state, { payload: folders }) => {
+    setFolders: (state, { payload: folders }) => {
       const newFolders = [
         ...Object.values(state.folders),
         ...folders,
@@ -35,7 +35,7 @@ export default createSlice({
       };
     },
 
-    removeTags: (state, { payload: folders }) => {
+    removeFolders: (state, { payload: folders }) => {
       const newFolders = cloneDeep(state.folders);
       folders.forEach(({ id }: { id:string }) => {
         delete (newFolders as any)[id];
@@ -115,8 +115,8 @@ export default createSlice({
       return { ...state, works };
     },
 
-    // 创建临时 tag (占位符)
-    createTmpTag: (state, { payload: parentId }) => ({
+    // 创建临时 folder (占位符)
+    createTmpFolder: (state, { payload: parentId }) => ({
       ...state,
       folders: {
         ...state.folders,
@@ -138,13 +138,13 @@ export default createSlice({
           name: '',
           id: 'new',
           editor: true,
-          tags: [{ id: folderId }],
+          folder: { id: folderId },
         },
       },
     }),
 
-    // 为 tag 添加编辑状态: 找到数据设置状态 editor = true
-    addEditorStatusWithTag: (state, { payload: folderId }) => {
+    // 为 folder 添加编辑状态: 找到数据设置状态 editor = true
+    addEditorStatusWithFolder: (state, { payload: folderId }) => {
       const folders: any = cloneDeep(state.folders);
       folders[folderId].editor = true;
       return { ...state, folders };

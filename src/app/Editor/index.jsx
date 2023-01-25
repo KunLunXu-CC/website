@@ -16,7 +16,7 @@ const useStateHook = () => {
   const { data: initEditorData } = useInitEditorDataQuery();
 
   useEffect(() => {
-    dispatch(actions.editor.setTags(initEditorData?.folders.list ?? []));
+    dispatch(actions.editor.setFolders(initEditorData?.folders.list ?? []));
     dispatch(actions.editor.setArticles(initEditorData?.articles.list ?? []));
   }, [dispatch, initEditorData]);
 };

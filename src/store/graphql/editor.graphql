@@ -1,6 +1,5 @@
 query initEditorData {
-  # folder 是别名
-  folders(search: { type: 6 }) {
+  folders(search: { type: [0] }) {
     list {
       id
       name

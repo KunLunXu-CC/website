@@ -8,7 +8,7 @@ export default () => {
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
-    dispatch(actions.editor.createTmpTag(null));
+    dispatch(actions.editor.createTmpFolder(null));
   }, [dispatch]);
 
   return (

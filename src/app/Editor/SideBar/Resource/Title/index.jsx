@@ -50,10 +50,10 @@ export default (props) => {
         openKeys: [...openKeys, props.data.id],
       }));
 
-      dispatch(actions.editor.createTmpTag(props.data.id));
+      dispatch(actions.editor.createTmpFolder(props.data.id));
     } else {
       // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpTag(props.data.folder?.id));
+      dispatch(actions.editor.createTmpFolder(props.data.folder?.id));
     }
   }, [dispatch, openKeys, props.data.id, props.data.folder]);
 
@@ -74,7 +74,7 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const reducerName = !props.data.folder ? 'addEditorStatusWithTag' : 'addEditorStatusWithArticle';
+    const reducerName = !props.data.folder ? 'addEditorStatusWithFolder' : 'addEditorStatusWithArticle';
     dispatch(actions.editor[reducerName](props.data.id));
   }, [dispatch, props.data.id, props.data.folder]);
 
@@ -98,7 +98,7 @@ export default (props) => {
       const { data: foldersData } = await removeFolders({
         conds: { id: props.data.id },
       });
-      dispatch(actions.editor.removeTags (
+      dispatch(actions.editor.removeFolders (
         foldersData?.removeFolders.change,
       ));
     }
@@ -183,7 +183,7 @@ export default (props) => {
             value: 0,
             parent: props.data.parent?.id,
           }] });
-          dispatch(actions.editor.setTags(data.createFolders?.change));
+          dispatch(actions.editor.setFolders(data.createFolders?.change));
         },
       },
       // 2. 新建 - 文章
@@ -205,7 +205,7 @@ export default (props) => {
             body: { name },
             conds: { id: props.data.id },
           });
-          dispatch(actions.editor.setTags(data.updateFolders?.change));
+          dispatch(actions.editor.setFolders(data.updateFolders?.change));
         },
       },
       // 4. 编辑 - 文章
