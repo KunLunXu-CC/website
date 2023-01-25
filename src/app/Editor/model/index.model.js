@@ -4,7 +4,7 @@ import * as reducers from './reducers';
 import { ACTIVITY_LIST } from '../consts';
 
 const initState = {
-  tags: {},        // {[id]: value}
+  folders: {},        // {[id]: value}
   articles: {},    // {[id]: value}
   preview: void 0, // 预览文章(文章 id)
   side: {

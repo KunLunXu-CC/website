@@ -28,31 +28,30 @@ export default () => {
 
   // 菜单
   const treeData = useMemo(() => {
-    const cloneTags = _.cloneDeep(Object.values(folders));
+    const cloneFolders = _.cloneDeep(Object.values(folders));
     const cloneArticles = _.cloneDeep(Object.values(articles));
-    const groupTags = _.groupBy(cloneTags, 'parent.id');
+    const groupFolders = _.groupBy(cloneFolders, 'parent.id');
 
     const groupArticles = _.groupBy(cloneArticles.reduce((total, ele) => {
       // 根据状态来过滤数据
       (!_.isNumber(selectKey) || ele.status === selectKey) && total.push({
         ...ele,
-        tags: ele.tags.reverse(),
       });
 
       return total;
-    }, []), 'tags[0].id');
+    }, []), 'folder.id');
 
-    cloneTags.forEach((v) => {
-      const tagLength = groupTags[v.id]?.length ?? 0;
+    cloneFolders.forEach((v) => {
+      const tagLength = groupFolders[v.id]?.length ?? 0;
       const articleLength = groupArticles[v.id]?.length ?? 0;
       v.childrenLength = tagLength + articleLength; // eslint-disable-line
       v.children = side.openKeys.includes(v.id) ? [ // eslint-disable-line
-        ..._.sortBy(groupTags[v.id] || [], 'name'),
+        ..._.sortBy(groupFolders[v.id] || [], 'name'),
         ..._.sortBy(groupArticles[v.id] || [], 'name'),
       ] : [];
     });
 
-    return _.sortBy(cloneTags.filter((v) => !v.parent?.id), 'name');
+    return _.sortBy(cloneFolders.filter((v) => !v.parent?.id), 'name');
   }, [articles, folders, side.openKeys, selectKey]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
@@ -71,7 +70,7 @@ export default () => {
       );
 
       // 文章
-      if (item.tags) {
+      if (item.folder) {
         return (
           <Menu.Item key={item.id}>
             {title}

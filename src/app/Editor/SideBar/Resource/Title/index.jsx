@@ -7,7 +7,7 @@ import { MOVE } from '../../../consts';
 import { Dropdown, Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
-import { ARTICLE_STATUS, DATASETSFROM_CODE } from '@config/consts';
+import { ARTICLE_STATUS } from '@config/consts';
 import {
   useCreateFoldersMutation,
   useUpdateFoldersMutation,
@@ -44,7 +44,7 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击创建文件夹
   const handleCreateFolderMenu = useCallback(() => {
-    if (!props.data.tags) {
+    if (!props.data.folder) {
       // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
@@ -53,13 +53,13 @@ export default (props) => {
       dispatch(actions.editor.createTmpTag(props.data.id));
     } else {
       // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpTag(props.data.tags?.[0].id));
+      dispatch(actions.editor.createTmpTag(props.data.folder?.id));
     }
-  }, [dispatch, openKeys, props.data.id, props.data.tags]);
+  }, [dispatch, openKeys, props.data.id, props.data.folder]);
 
   // 下拉菜单点击事件: 点击创建文章
   const handleCreateArticleMenu = useCallback(() => {
-    if (!props.data.tags) {
+    if (!props.data.folder) {
       // 在文件夹上触发下拉框
       dispatch(actions.editor.setSide({
         openKeys: [...openKeys, props.data.id],
@@ -68,15 +68,15 @@ export default (props) => {
       dispatch(actions.editor.createTmpArticle(props.data.id));
     } else {
       // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpArticle(props.data.tags?.[0].id));
+      dispatch(actions.editor.createTmpArticle(props.data.folder?.id));
     }
   }, [props.data, dispatch, openKeys]);
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const reducerName = !props.data.tags ? 'addEditorStatusWithTag' : 'addEditorStatusWithArticle';
+    const reducerName = !props.data.folder ? 'addEditorStatusWithTag' : 'addEditorStatusWithArticle';
     dispatch(actions.editor[reducerName](props.data.id));
-  }, [dispatch, props.data.id, props.data.tags]);
+  }, [dispatch, props.data.id, props.data.folder]);
 
   // 下拉菜单点击事件: 移动
   const handleMoveMenu = useCallback(() => {
@@ -85,7 +85,7 @@ export default (props) => {
 
   // 下拉菜单点击事件: 点击删除
   const handleDeleteMenu = useCallback(async () => {
-    if (props.data.tags) {
+    if (props.data.folder) {
       // 删除文章
       const { data: articlesData } = await removeArticles({
         conds: { id: props.data.id },
@@ -171,7 +171,7 @@ export default (props) => {
   const handleEdit = useCallback((e) => {
     const name = e.target.value;
     const isNew = props.data.id === 'new';
-    const isFolder = !props.data.tags;
+    const isFolder = !props.data.folder;
 
     const map = [
       // 1. 新建 - 文件夹
@@ -182,7 +182,6 @@ export default (props) => {
             name,
             value: 0,
             parent: props.data.parent?.id,
-            code: DATASETSFROM_CODE.ARTICLE_TAG.VALUE,
           }] });
           dispatch(actions.editor.setTags(data.createFolders?.change));
         },
@@ -193,7 +192,7 @@ export default (props) => {
         handler: async () => {
           const { data } = await  createArticles({ body: [{
             name,
-            tags: [props.data.tags?.[0].id],
+            folder: props.data.folder?.id,
           }] });
           dispatch(actions.editor.setArticles(data.createArticles?.change));
         },
@@ -234,7 +233,7 @@ export default (props) => {
 
   // 最外层 className
   const className = useMemo(() => (classNames(scss['menu-title'], {
-    [scss['menu-title-article']]: props.data.tags,
+    [scss['menu-title-article']]: props.data.folder,
     [scss['menu-title-release']]:
       !_.isNumber(activity.selectKey) &&
       props.data.status === ARTICLE_STATUS.RELEASE,
@@ -250,7 +249,7 @@ export default (props) => {
         type="icon-jiantou"
         className={scss['menu-title-arrow']}
       />
-      <Icon type={props.data.tags ? 'icon-24' : 'icon-wenjianjia'} />
+      <Icon type={props.data.folder ? 'icon-24' : 'icon-wenjianjia'} />
       <div className={scss['menu-title-content']}>
         {props.data.editor ? (
           <Input

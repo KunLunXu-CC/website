@@ -15,7 +15,7 @@ export const releaseArticles = axios({
           content
           thumb
           status
-          tags { id name }
+          folders { id name }
         }
       }
     }`,
@@ -37,7 +37,7 @@ export const revokeArticles = axios({
           content
           thumb
           status
-          tags { id name }
+          folders { id name }
         }
       }
     }`,
