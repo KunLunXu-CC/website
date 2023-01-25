@@ -5,7 +5,6 @@ import Editor from './Editor';
 import Reader from './Reader';
 import Logger from './Logger';
 import Setting from './Setting';
-import Datasetsfrom from './Datasetsfrom';
 import { APP_CODE } from '@config/consts';
 
 export default {
@@ -51,17 +50,6 @@ export default {
       dragHeight: 20,
       toolPosition: { top: 11, left: 18 },
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
-    },
-  },
-  [APP_CODE.DATASETSFROM]: {
-    name: '数据字典',
-    icon: 'icon-zidian',
-    component: Datasetsfrom,
-    code: APP_CODE.DATASETSFROM,
-    modalProps: {
-      dragHeight: 40,
-      toolPosition: { top: 11, left: 11 },
-      defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },
   [APP_CODE.LOGGER]: {

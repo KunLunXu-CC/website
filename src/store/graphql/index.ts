@@ -454,7 +454,7 @@ export type Mutation = {
   removePhotos?: Maybe<Photos>;
   removeRoles?: Maybe<Roles>;
   removeSnippets?: Maybe<Snippets>;
-  removeFolders?: Maybe<Tags>;
+  removeTags?: Maybe<Tags>;
   removeUsers?: Maybe<Users>;
   revokeArticles?: Maybe<Articles>;
   updateAlgorithms?: Maybe<Algorithms>;

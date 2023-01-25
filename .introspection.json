@@ -5557,7 +5557,7 @@
             "deprecationReason": null
           },
           {
-            "name": "removeFolders",
+            "name": "removeTags",
             "description": null,
             "args": [
               {
