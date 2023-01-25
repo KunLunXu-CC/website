@@ -1,10 +1,12 @@
-import { useMemo } from 'react';
-import { MOVE } from '../../consts';
-import { Modal, Cascader, Form } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
 import scss from './index.module.scss';
 
-const useStateHook = () => {
+import { actions } from '@store';
+import { MOVE } from '../../consts';
+import { Modal, Cascader, Form } from 'antd';
+import { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+export default () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -33,39 +35,33 @@ const useStateHook = () => {
   }, [folders, modal]);
 
   // 点击取消
-  const onCancel = () => dispatch({
-    code: MOVE,
-    type: 'modal/closeModal',
-  });
+  const onCancel = useCallback(() => {
+    dispatch(actions.modal.close());
+  }, [dispatch]);
 
   // 点击确定
-  const onOk = async () => {
+  const onOk = useCallback(async () => {
     const { paths } = await form.validateFields();
     dispatch({
       id: modal.data.id,
-      type: modal.data.folders ? 'editor/updateArticle' : 'editor/updateTag',
-      body: modal.data.folders ? { folders: paths } : { parent: _.last(paths) },
+      type: modal.data.tags ? 'editor/updateArticle' : 'editor/updateTag',
+      body: modal.data.tags ? { folders: paths } : { parent: _.last(paths) },
     });
     onCancel();
-  };
+  }, [dispatch, form, onCancel, modal?.data]);
 
-  return { onCancel, onOk, modal, options, form };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <Modal
       okText="确定"
       cancelText="取消"
       closable={false}
-      onOk={state.onOk}
-      open={!!state.modal}
+      onOk={onOk}
+      open={!!modal}
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      onCancel={state.onCancel}>
-      <Form form={state.form}>
+      onCancel={onCancel}>
+      <Form form={form}>
         <Form.Item
           name="paths"
           label="移动到"
@@ -77,7 +73,7 @@ export default () => {
           }]}>
           <Cascader
             changeOnSelect
-            options={state.options}
+            options={options}
             placeholder="选择要移动位置"
             getPopupContainer={(triggerNode) => triggerNode}
           />

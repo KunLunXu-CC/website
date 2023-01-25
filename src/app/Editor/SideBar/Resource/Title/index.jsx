@@ -79,11 +79,9 @@ export default (props) => {
   }, [dispatch, props.data.id, props.data.tags]);
 
   // 下拉菜单点击事件: 移动
-  const handleMoveMenu = useCallback(() => dispatch({
-    data: props.data,
-    code: MOVE,
-    type: 'modal/openModal',
-  }), [dispatch, props.data]);
+  const handleMoveMenu = useCallback(() => {
+    dispatch(actions.modal.open({ code: MOVE, data: props.data }));
+  }, [dispatch, props.data]);
 
   // 下拉菜单点击事件: 点击删除
   const handleDeleteMenu = useCallback(async () => {
