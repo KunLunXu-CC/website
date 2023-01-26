@@ -90,6 +90,7 @@ export default (props) => {
       const { data: articlesData } = await removeArticles({
         conds: { id: props.data.id },
       });
+      dispatch(actions.editor.removeWorks([props.data.id]));
       dispatch(actions.editor.removeArticles(
         articlesData?.removeArticles.change,
       ));

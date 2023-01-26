@@ -102,9 +102,13 @@ export default createSlice({
     },
 
     // 移除工作窗口: 没传 article 则移除所有
-    removeWork: (state, { payload: articleId }): any => {
+    removeWorks: (state, { payload: articleIds }): any => {
+      if (!articleIds) {
+        return { ...state, works: [] };
+      }
+
       const works = cloneDeep(state.works).filter(
-        (v: any) => v.articleId !== articleId,
+        (v: any) => articleIds.includes(v.articleId),
       );
 
       // 如果所有 active 都是 false, 则需要将最后一个 active 设置为 true

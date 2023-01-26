@@ -94,6 +94,7 @@ export type Article = {
 export type ArticleFields = {
   content?: InputMaybe<Scalars['String']>;
   desc?: InputMaybe<Scalars['String']>;
+  folder?: InputMaybe<Scalars['ID']>;
   name?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Array<Scalars['ID']>>;
   thumb?: InputMaybe<Scalars['String']>;

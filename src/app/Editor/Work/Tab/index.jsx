@@ -17,7 +17,7 @@ export default (props) => {
   // 移除: 点击小叉叉
   const handleClose = useCallback((e) => {
     e.stopPropagation();
-    dispatch(actions.editor.removeWork(article.id));
+    dispatch(actions.editor.removeWorks([article.id]));
   }, [article.id, dispatch]);
 
   // icon className
