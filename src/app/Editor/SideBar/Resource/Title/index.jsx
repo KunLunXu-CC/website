@@ -180,7 +180,6 @@ export default (props) => {
         handler: async () => {
           const { data } = await createFolders({ body: [{
             name,
-            value: 0,
             parent: props.data.parent?.id,
           }] });
           dispatch(actions.editor.setFolders(data.createFolders?.change));
