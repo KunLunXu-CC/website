@@ -108,7 +108,7 @@ export default createSlice({
       }
 
       const works = cloneDeep(state.works).filter(
-        (v: any) => articleIds.includes(v.articleId),
+        (v: any) => !articleIds.includes(v.articleId),
       );
 
       // 如果所有 active 都是 false, 则需要将最后一个 active 设置为 true
