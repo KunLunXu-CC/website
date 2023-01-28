@@ -42,6 +42,7 @@ export default () => {
   // 点击确定
   const onOk = useCallback(async () => {
     const { paths } = await form.validateFields();
+
     dispatch({
       id: modal.data.id,
       type: modal.data.folder ? 'editor/updateArticle' : 'editor/updateTag',
@@ -49,6 +50,7 @@ export default () => {
         ? { folder: _.last(paths) }
         : { parent: _.last(paths) },
     });
+
     onCancel();
   }, [dispatch, form, onCancel, modal?.data]);
 
