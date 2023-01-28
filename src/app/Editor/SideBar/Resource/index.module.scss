@@ -1,15 +1,15 @@
 @import "@assets/style/mixin";
 
+$bg: transparent;
+$bg-selected: #2c313a;
+$color: rgba($color: #ccc, $alpha: 80%);
+
 .menu-item-empty {
   height: 0 !important;
   overflow: hidden !important;
 }
 
 .menu {
-  $bg: transparent;
-  $bg-selected: #2c313a;
-  $color: rgba($color: #ccc, $alpha: 80%);
-
   @include scrollbar(
     $width: 2px,
     $thumb-bg: lighten($color: #2c313a, $amount: 5%)
@@ -24,18 +24,17 @@
   overflow-x: hidden;
 
   :global {
-    // 设置分割线(虚线)
-    .ant-menu-sub {
-      border: unset;
-      color: $color;
-      background: $bg;
+    .ant-menu-submenu {
       position: relative;
 
-      :local(.menu-dividing) {
-        top: 0;
-        width: 1;
-        bottom: 0;
+      &::after {
+        content: "";
+        display: block;
+        top: 44px;
+        width: 1px;
+        bottom: 4px;
         position: absolute;
+        left: var(--dividing-left);
         border-right: 1px dashed rgba($color: $color, $alpha: 10%);
       }
     }
@@ -87,5 +86,29 @@
     .ant-menu-submenu-arrow {
       display: none;
     }
+  }
+}
+
+.add {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  position: absolute;
+
+  font-size: 20px;
+  color: rgba($color: #ccc, $alpha: 80%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  cursor: pointer;
+  background: $bg-selected;
+  transition: all 0.5s;
+
+  &:hover {
+    opacity: 0.8;
   }
 }

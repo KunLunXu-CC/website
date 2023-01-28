@@ -1,4 +1,3 @@
-import Add from './Add';
 import Title from './Title';
 import scss from './index.module.scss';
 
@@ -71,28 +70,21 @@ export default () => {
 
       // 文章
       if (item.folder) {
-        return (
-          <Menu.Item key={item.id}>
-            {title}
-          </Menu.Item>
-        );
+        return {
+          label: title,
+          key: item.id,
+        };
       }
 
       // 目录
-      return (
-        <Menu.SubMenu
-          key={item.id}
-          title={title}>
-          {item?.children?.length
-            ? item.children.map((v) => (recursion(v, level + 1)))
-            : <Menu.Item className={scss['menu-item-empty']} />
-          }
-          <div
-            className={scss['menu-dividing']}
-            style={{ left: `${(level * INLINE_INDENT) + 15}px` }}
-          />
-        </Menu.SubMenu>
-      );
+      return {
+        label: title,
+        key: item.id,
+        style: { '--dividing-left': `${(level * INLINE_INDENT) + 15}px` },
+        children: item?.children?.length
+          ? item.children.map((v) => (recursion(v, level + 1)))
+          : [{ key: `${item.id}-empty`, className: scss['menu-item-empty'] }],
+      };
     };
 
     return treeData.map((v) => (recursion(v, 1)));
@@ -108,18 +100,28 @@ export default () => {
     dispatch(actions.editor.setSide({ openKeys }));
   }, [dispatch]);
 
+  const handleAdd = useCallback(() => {
+    dispatch(actions.editor.createTmpFolder(null));
+  }, [dispatch]);
+
   return (
-    <Menu
-      mode="inline"
-      className={scss.menu}
-      onSelect={handleSelect}
-      inlineCollapsed={false}
-      openKeys={side.openKeys}
-      inlineIndent={INLINE_INDENT}
-      selectedKeys={[selectedKeys]}
-      onOpenChange={handleOpenChange}>
-      {menu}
-      <Add />
-    </Menu>
+    <>
+      <Menu
+        items={menu}
+        mode="inline"
+        className={scss.menu}
+        onSelect={handleSelect}
+        inlineCollapsed={false}
+        openKeys={side.openKeys}
+        inlineIndent={INLINE_INDENT}
+        selectedKeys={[selectedKeys]}
+        onOpenChange={handleOpenChange}
+      />
+      <div
+        onClick={handleAdd}
+        className={scss.add}>
+        +
+      </div>
+    </>
   );
 };

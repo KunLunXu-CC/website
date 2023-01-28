@@ -1,13 +1,13 @@
 import classNames from 'classnames';
-import scss from './index.module.scss';
+import scss from './title.module.scss';
 
 import { actions } from '@store';
+import { MOVE } from '../../consts';
 import { Icon } from '@kunlunxu/brick';
-import { MOVE } from '../../../consts';
 import { Dropdown, Input } from 'antd';
+import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
-import { ARTICLE_STATUS } from '@config/consts';
 import {
   useCreateFoldersMutation,
   useUpdateFoldersMutation,
