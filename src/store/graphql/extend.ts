@@ -1,14 +1,10 @@
-import { actions } from '@store';
 import { GraphQLClient, ClientError } from 'graphql-request';
 import { createApi, BaseQueryFn } from '@reduxjs/toolkit/query/react';
 
 // see: https://github.com/prisma-labs/graphql-request
 export const client = new GraphQLClient('http://localhost:4000/graphql');
 
-const graphqlBaseQuery: BaseQueryFn = async (
-  { document, variables },
-  { endpoint, dispatch },
-) => {
+const graphqlBaseQuery: BaseQueryFn = async ({ document, variables }) => {
   try {
     // 1. 设置请求头 authorization: 身份认证
     const authorization = localStorage.getItem('authorization');
@@ -20,14 +16,9 @@ const graphqlBaseQuery: BaseQueryFn = async (
     // 2. 请求接口
     const { data, headers } = await client.rawRequest(document, variables);
 
-    // 3. 如果存在 action = `${endpoint}After` 则调用 action
-    const actionAfter =  `${endpoint}After`;
+    // TODO: baseQuery 第二个参数能拿到 dispatch、state 等信息
 
-    if (actions[actionAfter]) {
-      dispatch(actions[actionAfter]({ data }));
-    }
-
-    // 4. 存储响应头 authorization: 身份认证
+    // 3. 存储响应头 authorization: 身份认证
     const newAuthorization = headers.get('authorization');
 
     if (newAuthorization) {
