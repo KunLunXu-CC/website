@@ -13,9 +13,9 @@ import {
   useUpdateFoldersMutation,
   useRemoveFoldersMutation,
   useCreateArticlesMutation,
-  useUpdateArticlesMutation,
   useRemoveArticlesMutation,
 } from '@store/graphql';
+import { useHandleUpdateArticles } from '@app/Editor/hooks';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
@@ -25,8 +25,9 @@ export default (props) => {
   const [updateFolders] = useUpdateFoldersMutation();
   const [removeFolders] = useRemoveFoldersMutation();
   const [createArticles] = useCreateArticlesMutation();
-  const [updateArticles] = useUpdateArticlesMutation();
   const [removeArticles] = useRemoveArticlesMutation();
+
+  const handleUpdateArticles = useHandleUpdateArticles();
 
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
@@ -211,13 +212,10 @@ export default (props) => {
       // 4. 编辑 - 文章
       {
         cond: !isFolder && !isNew,
-        handler: async () => {
-          const { data } = await updateArticles({
-            body: { name },
-            conds: { id: props.data.id },
-          });
-          dispatch(actions.editor.setArticles(data.updateArticles?.change));
-        },
+        handler: handleUpdateArticles.bind(null, {
+          body: { name },
+          conds: { id: props.data.id },
+        }),
       },
     ];
 
@@ -228,7 +226,7 @@ export default (props) => {
     createFolders,
     createArticles,
     updateFolders,
-    updateArticles,
+    handleUpdateArticles,
   ]);
 
   // 最外层 className
