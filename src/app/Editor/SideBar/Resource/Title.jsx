@@ -9,25 +9,24 @@ import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
 import {
-  useCreateFoldersMutation,
-  useUpdateFoldersMutation,
-  useRemoveFoldersMutation,
-  useCreateArticlesMutation,
-  useRemoveArticlesMutation,
-} from '@store/graphql';
-import { useHandleUpdateArticles } from '@app/Editor/hooks';
+  useHandleUpdateFolders,
+  useHandleUpdateArticles,
+  useHandleCreateFolders,
+  useHandleCreateArticles,
+  useHandleRemoveFolders,
+  useHandleRemoveArticles,
+} from '@app/Editor/hooks';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
 export default (props) => {
-  const [createFolders] = useCreateFoldersMutation();
-  const [updateFolders] = useUpdateFoldersMutation();
-  const [removeFolders] = useRemoveFoldersMutation();
-  const [createArticles] = useCreateArticlesMutation();
-  const [removeArticles] = useRemoveArticlesMutation();
-
+  const handleCreateFolders = useHandleCreateFolders();
+  const handleCreateArticles = useHandleCreateArticles();
+  const handleUpdateFolders = useHandleUpdateFolders();
   const handleUpdateArticles = useHandleUpdateArticles();
+  const handleRemoveFolders = useHandleRemoveFolders();
+  const handleRemoveArticles = useHandleRemoveArticles();
 
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
@@ -87,24 +86,15 @@ export default (props) => {
   // 下拉菜单点击事件: 点击删除
   const handleDeleteMenu = useCallback(async () => {
     if (props.data.folder) {
-      // 删除文章
-      const { data: articlesData } = await removeArticles({
+      handleRemoveArticles({
         conds: { id: props.data.id },
       });
-      dispatch(actions.editor.removeWorks([props.data.id]));
-      dispatch(actions.editor.removeArticles(
-        articlesData?.removeArticles.change,
-      ));
     } else {
-      // 删除文件夹
-      const { data: foldersData } = await removeFolders({
+      handleRemoveFolders({
         conds: { id: props.data.id },
       });
-      dispatch(actions.editor.removeFolders (
-        foldersData?.removeFolders.change,
-      ));
     }
-  }, [props.data, dispatch, removeArticles, removeFolders]);
+  }, [props.data, handleRemoveArticles, handleRemoveFolders]);
 
   // 标题 - 更多 - 下列菜单
   const moreMenu = useMemo(() => {
@@ -179,35 +169,30 @@ export default (props) => {
       // 1. 新建 - 文件夹
       {
         cond: isFolder && isNew,
-        handler: async () => {
-          const { data } = await createFolders({ body: [{
+        handler: handleCreateFolders.bind(null, {
+          body: [{
             name,
             parent: props.data.parent?.id,
-          }] });
-          dispatch(actions.editor.setFolders(data.createFolders?.change));
-        },
+          }],
+        }),
       },
       // 2. 新建 - 文章
       {
         cond: !isFolder && isNew,
-        handler: async () => {
-          const { data } = await  createArticles({ body: [{
+        handler: handleCreateArticles.bind(null, {
+          body: [{
             name,
             folder: props.data.folder?.id,
-          }] });
-          dispatch(actions.editor.setArticles(data.createArticles?.change));
-        },
+          }],
+        }),
       },
       // 3. 编辑 - 文件夹
       {
         cond: isFolder && !isNew,
-        handler: async () => {
-          const { data } = await updateFolders({
-            body: { name },
-            conds: { id: props.data.id },
-          });
-          dispatch(actions.editor.setFolders(data.updateFolders?.change));
-        },
+        handler: handleUpdateFolders.bind(null, {
+          body: { name },
+          conds: { id: props.data.id },
+        }),
       },
       // 4. 编辑 - 文章
       {
@@ -221,11 +206,10 @@ export default (props) => {
 
     map.find((v) => v.cond).handler();
   }, [
-    dispatch,
     props.data,
-    createFolders,
-    createArticles,
-    updateFolders,
+    handleCreateFolders,
+    handleUpdateFolders,
+    handleCreateArticles,
     handleUpdateArticles,
   ]);
 
