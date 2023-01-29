@@ -26,7 +26,7 @@ export const useHandleUpdateFolders = () => {
 
   return useCallback(async ({ body,  conds }) => {
     const { data } = await updateFolders({ body, conds });
-    dispatch(actions.editor.setFolders(data.updateFolders?.change));
+    dispatch(actions.editor.setFolders(data.updateFolders.change));
   }, [dispatch, updateFolders]);
 };
 
@@ -36,7 +36,7 @@ export const useHandleCreateFolders = () => {
 
   return useCallback(async ({ body }) => {
     const { data } = await createFolders({ body });
-    dispatch(actions.editor.setFolders(data.createFolders?.change));
+    dispatch(actions.editor.setFolders(data.createFolders.change));
   }, [dispatch, createFolders]);
 };
 
@@ -46,7 +46,7 @@ export const useHandleCreateArticles = () => {
 
   return useCallback(async ({ body }) => {
     const { data } = await createArticles({ body });
-    dispatch(actions.editor.setArticles(data.createArticles?.change));
+    dispatch(actions.editor.setArticles(data.createArticles.change));
   }, [dispatch, createArticles]);
 };
 
@@ -59,7 +59,7 @@ export const useHandleRemoveFolders = () => {
     // 删除文件夹
     const { data: foldersData } = await removeFolders({ conds });
     dispatch(actions.editor.removeFolders (
-      foldersData?.removeFolders.change,
+      foldersData.removeFolders.change,
     ));
   }, [dispatch, removeFolders]);
 };
@@ -73,10 +73,10 @@ export const useHandleRemoveArticles = () => {
       conds,
     });
     dispatch(actions.editor.removeWorks(
-      articlesData?.removeArticles.change.map((v) => v.id),
+      articlesData.removeArticles.change.map((v) => v.id),
     ));
     dispatch(actions.editor.removeArticles(
-      articlesData?.removeArticles.change,
+      articlesData.removeArticles.change,
     ));
   }, [dispatch, removeArticles]);
 };
