@@ -77,14 +77,14 @@ export default () => {
   return (
     <Modal
       okText="确定"
+      open={!!modal}
+      onOk={handleOk}
       cancelText="取消"
       closable={false}
-      handleOk={handleOk}
-      open={!!modal}
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      handleCancel={handleCancel}>
+      onCancel={handleCancel}>
       <Form form={form}>
         <Form.Item
           name="paths"
