@@ -5,8 +5,12 @@ import { MOVE } from '../../consts';
 import { Modal, Cascader, Form } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHandleUpdateArticles, useHandleUpdateFolders } from '@app/Editor/hooks';
 
 export default () => {
+  const handleUpdateFolders = useHandleUpdateFolders();
+  const handleUpdateArticles = useHandleUpdateArticles();
+
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
@@ -35,36 +39,52 @@ export default () => {
   }, [folders, modal]);
 
   // 点击取消
-  const onCancel = useCallback(() => {
+  const handleCancel = useCallback(() => {
     dispatch(actions.modal.close());
   }, [dispatch]);
 
   // 点击确定
-  const onOk = useCallback(async () => {
+  const handleOk = useCallback(async () => {
     const { paths } = await form.validateFields();
+    const editorArticles = !!modal.data.folder;
+    const last = _.last(paths);
 
-    dispatch({
-      id: modal.data.id,
-      type: modal.data.folder ? 'editor/updateArticle' : 'editor/updateTag',
-      body: modal.data.folder
-        ? { folder: _.last(paths) }
-        : { parent: _.last(paths) },
-    });
+    // 编辑文章 folder, folder 不能为空
+    if (editorArticles && last) {
+      handleUpdateArticles({
+        conds: { id: modal.data.id },
+        body: { folder: last },
+      });
+    }
 
-    onCancel();
-  }, [dispatch, form, onCancel, modal?.data]);
+    // 编辑目录 parent, parent 允许为空
+    if (!editorArticles) {
+      handleUpdateFolders({
+        conds: { id: modal.data.id },
+        body: { parent: last },
+      });
+    }
+
+    handleCancel();
+  }, [
+    form,
+    modal?.data,
+    handleCancel,
+    handleUpdateFolders,
+    handleUpdateArticles,
+  ]);
 
   return (
     <Modal
       okText="确定"
       cancelText="取消"
       closable={false}
-      onOk={onOk}
+      handleOk={handleOk}
       open={!!modal}
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      onCancel={onCancel}>
+      handleCancel={handleCancel}>
       <Form form={form}>
         <Form.Item
           name="paths"
