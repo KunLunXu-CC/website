@@ -1,12 +1,13 @@
-$color: rgba($color: #fff, $alpha: 0.8);
-$color-light: rgba($color: #fff, $alpha: 0.6);
-$bg-light: rgba($color: #fff, $alpha: 0.1);
+$color: rgba($color: #fff, $alpha: 80%);
+$color-light: rgba($color: #fff, $alpha: 60%);
+$bg-light: rgba($color: #fff, $alpha: 10%);
 
 .modal {
   width: 420px !important;
 
   :global {
     .ant-modal-content {
+      padding: 30px 20px;
       background: #2c343a;
     }
 
@@ -19,11 +20,6 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
       }
     }
 
-    .ant-modal-body {
-      padding: 10px;
-      border-radius: 4px;
-    }
-
     .ant-modal-footer {
       border: unset;
     }
@@ -32,14 +28,8 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
 
 .item {
   color: $color-light;
-  padding: 30px 10px 0;
 
   :global {
-    .ant-cascader-picker {
-      color: $color;
-      background: $bg-light;
-    }
-
     .ant-form-item-label > label {
       color: $color-light;
     }
@@ -53,6 +43,7 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
     }
 
     .ant-cascader-menu {
+      color: $color;
       background: #2c343a;
       border-right: 1px solid $bg-light;
 
@@ -62,7 +53,7 @@ $bg-light: rgba($color: #fff, $alpha: 0.1);
     }
 
     .ant-cascader-menu-item-expand-icon {
-      color: $color-light;
+      color: $color-light !important;
     }
 
     .ant-cascader-menu-item:hover,
