@@ -29,14 +29,6 @@ export default () => {
     [article],
   );
 
-  // 预览
-  const handlePreview = () => {
-    dispatch({
-      preview: article.id,
-      type: 'editor/setPreview',
-    });
-  };
-
   // 发布
   const handleRelease = () => {
     dispatch({
@@ -66,11 +58,6 @@ export default () => {
 
   return (
     <div className={scss.extra}>
-      <Icon
-        type="icon-yulan"
-        onClick={handlePreview}
-        className={scss['icon-preview']}
-      />
       <Icon
         onClick={thumbSetting}
         type="icon-genghuanfengmian"
