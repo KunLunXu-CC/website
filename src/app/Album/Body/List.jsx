@@ -29,7 +29,9 @@ export default () => {
     <div className={scss.list}>
       {listData.length > 0 ?
         listData.map((item) => (
-          <div className={scss.item}>
+          <div
+            key={item.name}
+            className={scss.item}>
             <div className={scss.preview}>
               <div className={scss['preview-body']}>
                 <Image src={`${SERVICE_STATIC_IMAGE_URL}${item.name}`} />
