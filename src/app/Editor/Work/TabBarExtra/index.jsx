@@ -1,6 +1,7 @@
 import scss from './index.module.scss';
 
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
+import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
 import { ARTICLE_STATUS } from '@config/consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +9,7 @@ import {
   THUMB_SETTING,
   REVOKE_CONFIRM,
   RELEASE_CONFIRM,
-} from '../../consts';
+} from '@app/Editor/consts';
 
 export default () => {
   const dispatch = useDispatch();
@@ -30,31 +31,23 @@ export default () => {
   );
 
   // 发布
-  const handleRelease = () => {
-    dispatch({
-      article,
-      code: RELEASE_CONFIRM,
-      type: 'modal/openModal',
-    });
-  };
+  const handleRelease = useCallback(() => {
+    dispatch(actions.modal.open({ code: RELEASE_CONFIRM, article }));
+  }, [article, dispatch]);
 
   // 撤销(下架)
-  const handleRevoke = () => {
-    dispatch({
-      article,
-      code: REVOKE_CONFIRM,
-      type: 'modal/openModal',
-    });
-  };
+  const handleRevoke = useCallback(() => {
+    dispatch(actions.modal.open({ code: REVOKE_CONFIRM, article }));
+  }, [article, dispatch]);
 
   // 缩略图配置
-  const thumbSetting = () => {
+  const thumbSetting = useCallback(() => {
     dispatch({
       article,
       code: THUMB_SETTING,
       type: 'modal/openModal',
     });
-  };
+  }, [article, dispatch]);
 
   return (
     <div className={scss.extra}>
