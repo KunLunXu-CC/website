@@ -19,6 +19,9 @@ export default () => {
     modal: state.modal[MOVE],
   }));
 
+  // 移动文章
+  const moveArticles = useMemo(() => (!!modal?.data.folder), [modal?.data]);
+
   // Cascader 组件 options 配置
   const options = useMemo(() => {
     const cloneFolders = _.cloneDeep(Object.values(folders))
@@ -46,11 +49,10 @@ export default () => {
   // 点击确定
   const handleOk = useCallback(async () => {
     const { paths } = await form.validateFields();
-    const editorArticles = !!modal.data.folder;
     const last = _.last(paths);
 
     // 编辑文章 folder, folder 不能为空
-    if (editorArticles && last) {
+    if (moveArticles && last) {
       handleUpdateArticles({
         conds: { id: modal.data.id },
         body: { folder: last },
@@ -58,10 +60,10 @@ export default () => {
     }
 
     // 编辑目录 parent, parent 允许为空
-    if (!editorArticles) {
+    if (!moveArticles) {
       handleUpdateFolders({
         conds: { id: modal.data.id },
-        body: { parent: last },
+        body: { parent: last || null },
       });
     }
 
@@ -69,6 +71,7 @@ export default () => {
   }, [
     form,
     modal?.data,
+    moveArticles,
     handleCancel,
     handleUpdateFolders,
     handleUpdateArticles,
@@ -79,8 +82,8 @@ export default () => {
       okText="确定"
       open={!!modal}
       onOk={handleOk}
-      cancelText="取消"
       closable={false}
+      cancelText="取消"
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
@@ -92,8 +95,8 @@ export default () => {
           className={scss.item}
           rules={[{
             type: 'array',
-            required: true,
             message: '移动路径必填!',
+            required: moveArticles,
           }]}>
           <Cascader
             changeOnSelect
