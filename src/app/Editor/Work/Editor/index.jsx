@@ -1,3 +1,4 @@
+import { actions } from '@store';
 import { useCallback } from 'react';
 import { Markdown } from '@kunlunxu/brick';
 import { PHOTO_TYPE } from '@config/consts';
@@ -38,18 +39,17 @@ export default (props) => {
 
   // 内容改变
   const handleChange = useCallback(({ value: content }) => {
-    const change = article.content !== content;
+    const change = (article.content || '') !== content;
 
     if (props.work.change === change) {
       return false;
     }
 
-    dispatch({
-      work: { change },
-      type: 'editor/setWork',
-      article: props.work.articleId,
-    });
-  }, [article.content, dispatch, props.work.articleId, props.work.change]);
+    dispatch(actions.editor.setWorks([{
+      change,
+      articleId: props.work.articleId,
+    }]));
+  }, [article.content, dispatch, props.work]);
 
   return (
     <Markdown

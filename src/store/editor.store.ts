@@ -100,6 +100,17 @@ export default createSlice({
       };
     },
 
+    setWorks: (state, { payload: works }): any => ({
+      ...state,
+      works: state.works.map((v: any) => {
+        const newWork = works.find(
+          (e: any) => e.articleId === v.articleId,
+        ) ?? {};
+
+        return { ...v, ...newWork };
+      }),
+    }),
+
     // 移除工作窗口: 没传 article 则移除所有
     removeWorks: (state, { payload: articleIds }): any => {
       if (!articleIds) {
