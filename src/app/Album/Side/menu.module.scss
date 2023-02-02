@@ -27,7 +27,7 @@
     // 菜单
     .ant-menu {
       @extend %default;
-      border: unset;
+      border: 0 !important;
     }
 
     // 根菜单样式覆盖 - 停放状态
