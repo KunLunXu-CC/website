@@ -1,4 +1,4 @@
-import scss from './index.module.scss';
+import scss from './tabBarExtra.module.scss';
 
 import { useCallback, useMemo } from 'react';
 import { actions } from '@store';

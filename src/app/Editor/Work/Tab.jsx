@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import scss from './index.module.scss';
+import scss from './tab.module.scss';
 
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
@@ -26,6 +26,7 @@ export default (props) => {
     { [scss['tab-icon-change']]: props.work.change },
   ), [props.work.change]);
 
+  // TODO: 改为 antd 自带的新增、关闭
   return (
     <span className={scss.tab}>
       {article.name}
