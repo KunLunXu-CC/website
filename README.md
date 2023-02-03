@@ -9,9 +9,9 @@
 
 ### 1.2 相关链接
 
-1. 前端开源代码: https://github.com/qianyin925/blog-client  
-2. 后端开源代码: https://github.com/qianyin925/blog-service  
-3. 组件库(项目开发过程中抽离出独立的组件库): https://github.com/qianyin925/qyrc  
+1. 前端开源代码: https://github.com/KunLunXu0-0/website
+2. 后端开源代码: https://github.com/KunLunXu0-0/service
+3. 组件库(项目开发过程中抽离出独立的组件库): hhttps://github.com/KunLunXu0-0/brick
 4. 在线预览(游客权限有限无法查看所有应用): https://www.qianyin925.com/   
 
 ## 二、为什么要写这个项目
@@ -27,7 +27,7 @@
 ### 3.1 前端
 
 1. 使用 `React Hooks` 以函数式组件来进行编码, 并使用新版 `Antd` 来进行开发
-2. 使用个人组件库 `qyrc` 进行项目开发, 并将项目中部分组件封装到 `qyrc` 并进行发布
+2. 使用个人组件库 `@kunlunxu/brick` 进行项目开发, 并将项目中部分组件封装到 `@kunlunxu/brick` 并进行发布
 2. 使用 `Redux` 来管理状态, 并使用 `redux-saga` 解决异步问题
 3. 使用 `Sass` 预处理器来编写样式
 4. 使用 `Webpack` 从零搭建项目, 完成基本的项目配置

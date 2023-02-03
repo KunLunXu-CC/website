@@ -11,7 +11,6 @@ export const APP_CODE = {
   LOGGER: 'logger',              // 日志
   SETTING: 'setting',            // 系统偏好设置
   ARTICLE: 'article',            // 文章
-  DATASETSFROM: 'datasetsfrom',  // 数据字典(数据集)
 };
 
 // 布尔值
@@ -45,13 +44,4 @@ export const PHOTO_TYPE = {
   DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
   THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
   AVATAR: { VALUE: 4, DESC: '头像' },           // 头像
-};
-
-// 字典类型
-export const DATASETSFROM_CODE = {
-  BILL_TAG: { VALUE: 1, DESC: '账单(标签)', ICON: 'icon-dingdanjine' },
-  DIET_TAG: { VALUE: 2, DESC: '饮食(标签)', ICON: 'icon-yinshi' },
-  FITNESS_PLACE: { VALUE: 3, DESC: '健身部位', ICON: 'icon-buwei' },
-  FITNESS_TYPE: { VALUE: 4, DESC: '健身类型', ICON: 'icon-leixing' },
-  ARTICLE_TAG: { VALUE: 6, DESC: '文章标签', ICON: 'icon-suanfa' },
 };

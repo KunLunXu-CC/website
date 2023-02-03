@@ -2,24 +2,38 @@
   height: 80% !important;
 
   :global {
+    // 弹窗
     .ant-modal-content {
+      padding: 0;
       height: 100%;
       display: flex;
-      overflow: hidden;
-      border-radius: 10px;
       flex-direction: column;
+
+      .ant-modal-header {
+        margin-bottom: 0;
+        padding: 16px 24px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .ant-modal-body {
+        flex: 1;
+        overflow: auto;
+        padding-right: 24px;
+      }
+
+      .ant-modal-footer {
+        margin-top: 0;
+        padding: 16px 24px;
+        border-top: 1px solid #f0f0f0;
+      }
     }
 
-    // antd 弹窗
-    .ant-modal-body {
-      flex: 1;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    // antd 表单
-    .ant-form {
-      height: 100%;
+    .ant-modal-title {
+      .brick-icon {
+        float: right;
+        cursor: pointer;
+        padding-top: 4px;
+      }
     }
 
     // antd tabs 设置
@@ -37,18 +51,8 @@
       }
     }
 
-    .qyrc-icon:hover {
+    .brick-icon:hover {
       color: #69c0ff;
-    }
-  }
-
-  // 标题
-  .title {
-    display: flex;
-    justify-content: space-between;
-
-    .title-tool {
-      font-weight: 300;
     }
   }
 
@@ -57,5 +61,25 @@
     padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+}
+
+// 表单
+.form {
+  height: 100%;
+
+  :global {
+    .ant-form-item-label {
+      width: 5em;
+      text-align: right;
+    }
+  }
+
+  &.base {
+    :global {
+      .brick-icon {
+        opacity: 0;
+      }
+    }
   }
 }

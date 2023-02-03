@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 
 module.exports = {
@@ -7,7 +8,5 @@ module.exports = {
     WS_SERVICER: true,
     PUBLICKEY: true,
   },
-  extends: [
-    path.resolve(__dirname, './node_modules/qy-norm/.eslintrc.js'),
-  ],
+  extends: [path.resolve(__dirname, './node_modules/@kunlunxu/norm/.eslintrc.ts.js')],
 };

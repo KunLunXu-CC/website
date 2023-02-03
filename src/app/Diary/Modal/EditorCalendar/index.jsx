@@ -1,28 +1,25 @@
-import React, {
-  useRef,
-  useMemo,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
-import moment from 'moment';
-import ReactDOM from 'react-dom';
-import BaseForm from './BaseForm';
-import BillForm from './BillForm';
-import DietForm from './DietForm';
-import FitnessForm from './FitnessForm';
+import Base from './Base';
+import Bill from './Bill';
+import Diet from './Diet';
+import dayjs from 'dayjs';
+import Fitness from './Fitness';
 import scss from './index.module.scss';
 
+import { actions } from '@store';
+import classNames from 'classnames';
+import { Icon } from '@kunlunxu/brick';
 import { Modal, Tabs, Form } from 'antd';
 import { DIARY_EDITOR_DIARY } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
+import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
+import { useCreateDiariesMutation, useUpdateDiariesMutation } from '@store/graphql';
 
 // tabs 配置
 const TABS_SETTING = [
-  { tab: '基础设置', key: 'base', Component: BaseForm },
-  { tab: '饮食记录', key: 'diet', Component: DietForm },
-  { tab: '训练记录', key: 'fitness', Component: FitnessForm },
-  { tab: '账单记录', key: 'bill', Component: BillForm },
+  { label: '基础设置', key: 'base', Component: Base },
+  { label: '饮食记录', key: 'diet', Component: Diet },
+  { label: '训练记录', key: 'fitness', Component: Fitness },
+  { label: '账单记录', key: 'bill', Component: Bill },
 ];
 
 // 获取 body
@@ -36,139 +33,129 @@ const getBody = (values) => {
     diet = [],
     fitness = [],
   } = values;
+
   return {
     getUp,
     toRest,
     bodyIndex,
     bill: bill.filter((v) => v),
     diet: diet.filter((v) => v),
-    fitness: fitness.filter((v) => v),
     name: name.format('YYYY-MM-DD'),
+    fitness: fitness.filter((v) => v),
   };
 };
 
-const useStateHook = () => {
-  const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
-  const titleToolRef = useRef();
+export default () => {
   const dispatch = useDispatch();
+  const [createDiaries] = useCreateDiariesMutation();
+  const [updateDiaries] = useUpdateDiariesMutation();
+
+  const addRef = useRef();
+  const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
+
   const [form] = Form.useForm();
+  const name = Form.useWatch('name', form);
 
   // 弹窗
   const modal = useSelector((state) => state.modal[DIARY_EDITOR_DIARY]);
 
-  // 工具: 传送门
-  const Tools = useCallback(({ children }) => (
-    titleToolRef.current
-      ? ReactDOM.createPortal(children, titleToolRef.current)
-      : null
-  ), [titleToolRef]);
+  const initialValues = useMemo(() => (modal ? {
+    bill: modal.diary?.bill ?? [],
+    diet: modal.diary?.diet ?? [],
+    fitness: modal.diary?.fitness ?? [],
+    bodyIndex: modal.diary?.bodyIndex ?? {},
+    name: dayjs(modal.diary?.name ?? modal.date),
+    getUp: dayjs(modal.diary?.getUp ?? modal.date),
+    toRest: dayjs(modal.diary?.toRest ?? modal.date),
+  } : {}), [modal]);
 
   // 弹窗标题
   const title = useMemo(() => (
-    <div className={scss.title}>
-      <div className={scss['title-text']}>
-        添加数据
-      </div>
-      <div
+    <>
+      {name?.format('YYYY-MM-DD')}
+      <Icon
+        type="icon-xinzeng"
         className={scss['title-tool']}
-        ref={titleToolRef}
+        onClick={() => addRef.current?.()}
       />
-    </div>
-  ), [modal, titleToolRef]);
+    </>
+  ), [name]);
 
-  // 取消
-  const onCancel = () => {
-    dispatch({
-      code: DIARY_EDITOR_DIARY,
-      type: 'modal/closeModal',
-    });
-    form.resetFields();
-  };
+  const items = useMemo(() => TABS_SETTING.map((V) => (
+    {
+      ...V,
+      forceRender: true,
+      className: scss.body,
+      children: (
+        <V.Component
+          form={form}
+          addRef={addRef}
+          isShow={V.key === activeTabKey}
+        />
+      ),
+    }
+  )), [activeTabKey, form]);
+
+  const handleCancel = useCallback(() => {
+    dispatch(actions.modal.close());
+  }, [dispatch]);
 
   // 确认
-  const onOk = async () => {
+  const onOk = useCallback(async () => {
     const values = await form.validateFields();
+
     const id = modal?.diary?.id;
     const body = getBody(values);
-    dispatch({
-      id,
-      body,
-      type: id ? 'diary/updateDiaries' : 'diary/createDiarie',
-    });
-    onCancel();
-  };
+
+    const res = id
+      ? await updateDiaries({ body, conds: { id } })
+      : await createDiaries({ body });
+    const { change } = res.data[id ? 'updateDiaries' : 'createDiaries'];
+
+    dispatch(actions.diary.updateDiaries(change));
+    handleCancel();
+  }, [
+    form,
+    handleCancel,
+    dispatch,
+    createDiaries,
+    updateDiaries,
+    modal?.diary?.id,
+  ]);
 
   // tabs 切换
   const onTabsChange = (activeTabKey) => {
     setActiveTabKey(activeTabKey);
   };
 
-  // 重新设置值
+  // modal 变化时, 需要重新 resetFields
   useEffect(() => {
-    form.setFieldsValue(
-      modal ? {
-        diet: (modal?.diary?.diet ?? []).map(
-          (v) => ({ ...v, type: v.type?.value }),
-        ),
-        fitness: (modal?.diary?.fitness ?? []).map(
-          (v) => ({ type: v.type?.value, place: v.place?.value }),
-        ),
-        bill: (modal?.diary?.bill ?? []).map(
-          (v) => ({ ...v, tag: v.tag?.value }),
-        ),
-        bodyIndex: modal?.diary?.bodyIndex ?? {},
-        name: moment(modal?.diary?.name ?? modal.date),
-        getUp: moment(modal?.diary?.getUp ?? modal.date),
-        toRest: moment(modal?.diary?.toRest ?? modal.date),
-      } : void 0,
-    );
-  }, [modal]);
+    form.resetFields();
+  }, [form, modal]);
 
-  return {
-    onOk,
-    form,
-    title,
-    Tools,
-    modal,
-    onCancel,
-    onTabsChange,
-    activeTabKey,
-  };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
-    <Form form={state.form}>
+    <Form
+      form={form}
+      initialValues={initialValues}
+      className={classNames(scss.form, scss[activeTabKey])}>
       <Modal
-        width="80%"
-        okText="确定"
         destroyOnClose
-        closable={false}
+        width="80%"
+        onOk={onOk}
+        okText="确定"
+        title={title}
+        open={!!modal}
         cancelText="取消"
-        onOk={state.onOk}
-        title={state.title}
+        closable={false}
+        maskClosable={false}
         getContainer={false}
         className={scss.modal}
-        visible={!!state.modal}
-        onCancel={state.onCancel}>
+        onCancel={handleCancel}>
         <Tabs
+          items={items}
           tabPosition="left"
-          onChange={state.onTabsChange}>
-          {TABS_SETTING.map((V) => (
-            <Tabs.TabPane
-              tab={V.tab}
-              key={V.key}
-              forceRender
-              className={scss.body}>
-              <V.Component
-                form={state.form}
-                tools={state.Tools}
-                showTools={state.activeTabKey === V.key}
-              />
-            </Tabs.TabPane>
-          ))}
-        </Tabs>
+          onChange={onTabsChange}
+        />
       </Modal>
     </Form>
   );

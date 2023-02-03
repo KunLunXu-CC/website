@@ -1,22 +1,23 @@
 import './console';
-import React from 'react';
-import Store from '@model';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import store from '@store';
 import Router from './Router';
-import reactDom from 'react-dom';
-import zhCN from 'antd/es/locale/zh_CN';
-import 'moment/locale/zh-cn';
-import '@assets/style';
+import ReactDOM from 'react-dom/client';
+import zhCN from 'antd/locale/zh_CN';
 
 import { ConfigProvider } from 'antd';
+import { Provider } from 'react-redux';
+import 'dayjs/locale/zh-cn';
+import '@assets/style';
 
-moment.locale('zh-cn'); // 时区设置
+dayjs.locale('zh-cn'); // 时区设置
 
-reactDom.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
   <ConfigProvider locale={zhCN}>
-    <Store>
+    <Provider store={store}>
       <Router />
-    </Store>
+    </Provider>
   </ConfigProvider>,
-  document.getElementById('root'),
 );

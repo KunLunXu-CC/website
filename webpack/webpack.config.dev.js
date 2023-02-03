@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const config = require('./config');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -64,9 +65,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(mjs|js|jsx)$/,
+        test: /\.(ts|tsx|mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: cssRegex,
@@ -100,14 +101,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: 'assets/[hash].[ext]',
-          },
-        }],
+        // 图片、字体
+        test: [/\.(png|jpg|gif|svg)$/, /\.(ttf|woff|eot)$/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[hash].[ext]',
+        },
       },
       {
         test: /\.(text|md)$/,
@@ -128,13 +127,15 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['.mjs', '.js', '.jsx'],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
     alias: config.alias || {},
   },
 
   devServer: {
     // webpack-dev-server 相关配置
-    contentBase: path.resolve(__dirname, '../build'),
+    static: {
+      directory: path.join(__dirname, '../build'),
+    },
     compress: true,
     port: 9000,
 

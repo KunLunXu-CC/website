@@ -1,7 +1,7 @@
-import React from 'react';
 import Body from './Body';
-import Side from './Side';
 import Tips from './Tips';
+import Side from './Side';
+import Upload from './Upload';
 import scss from './index.module.scss';
 
 export default () => (
@@ -11,6 +11,7 @@ export default () => (
     </div>
     <div className={scss['layout-body']}>
       <Body />
+      <Upload />
     </div>
     <Tips />
   </div>

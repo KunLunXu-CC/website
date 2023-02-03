@@ -1,10 +1,10 @@
-import React from 'react';
 import apps from '@app';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 import styled from 'styled-components';
 
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
+import { useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 const DockApp = styled.div`
@@ -21,16 +21,16 @@ const DockApp = styled.div`
 `;
 
 const useStateHook = (props) => {
-  const [currentIndex, setCurrentIndex] = React.useState(null);
+  const [currentIndex, setCurrentIndex] = useState(null);
   const setting = useSelector((state) => state.setting.dock);
 
   // 点击事件
-  const onClick = React.useCallback((dock) => {
+  const onClick = useCallback((dock) => {
     _.isFunction(props.onClick) && props.onClick(dock);
   }, [props]);
 
   // 最外层容器 className
-  const className = React.useMemo(() => classNames(
+  const className = useMemo(() => classNames(
     scss.dock,
     { [scss['dock-auto-hiding']]: setting.hideDock },
   ), [setting.hideDock]);

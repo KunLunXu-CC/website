@@ -5,7 +5,7 @@
     .ant-modal-body {
       padding: 10px;
       border-radius: 4px;
-      border: 1px dashed rgba($color: #fff, $alpha: 0.2);
+      border: 1px dashed rgba($color: #fff, $alpha: 20%);
     }
   }
 }
@@ -17,37 +17,37 @@
   justify-content: center;
 
   font-size: 40px;
-  color: rgba($color: #fff, $alpha: 0.1);
+  color: rgba($color: #fff, $alpha: 10%);
 
   cursor: pointer;
   border-radius: 4px;
-  border: 1px dashed rgba($color: #fff, $alpha: 0.2);
+  border: 1px dashed rgba($color: #fff, $alpha: 20%);
 
   :global {
-    .qyrc-image-body {
+    .brick-image-body {
       display: flex;
       align-items: center;
       transition: all 0.5s;
       justify-content: center;
     }
 
-    .qyrc-icon {
+    .brick-icon {
       opacity: 0;
       transition: all 0.5s;
     }
   }
 
   &:hover {
-    color: rgba($color: #1890ff, $alpha: 0.6);
-    border-color: rgba($color: #1890ff, $alpha: 0.6);
+    color: rgba($color: #1890ff, $alpha: 60%);
+    border-color: rgba($color: #1890ff, $alpha: 60%);
 
     :global {
-      .qyrc-icon {
+      .brick-icon {
         opacity: 1;
       }
 
-      .qyrc-image-body {
-        background: rgba($color: #000, $alpha: 0.5);
+      .brick-image-body {
+        background: rgba($color: #000, $alpha: 50%);
       }
     }
   }

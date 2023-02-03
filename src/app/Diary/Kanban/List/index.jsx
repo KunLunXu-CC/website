@@ -1,13 +1,13 @@
-import React from 'react';
 import classNames from 'classnames';
 import scss from './index.module.scss';
-import { Icon } from 'qyrc';
+import { Icon } from '@kunlunxu/brick';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 
 const useStateHook = () => {
-  const [active, setActive] = React.useState(false);
+  const [active, setActive] = useState(false);
 
   // 开启弹窗
-  const onOpen = React.useCallback(() => {
+  const onOpen = useCallback(() => {
     if (active) {
       return false;
     }
@@ -16,13 +16,13 @@ const useStateHook = () => {
   }, [active]);
 
   // 容器 className
-  const className = React.useMemo(() => classNames(
+  const className = useMemo(() => classNames(
     scss.wrapper,
     { [scss.active]: active },
   ), [active]);
 
   // 监听 active 并绑定 click 用于关闭弹窗
-  React.useEffect(() => {
+  useEffect(() => {
     if (active) {
       const onClose = () => setActive(false);
       window.addEventListener('click', onClose);

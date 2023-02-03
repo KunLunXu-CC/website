@@ -1,5 +1,5 @@
 $height: 22px;                              // 菜单栏高度
-$color: rgba($color: #fff, $alpha: 0.8);  // 字体颜色
+$color: rgba($color: #fff, $alpha: 80%);  // 字体颜色
 $menu-trigger-height: 10px;                 // 鼠标移动到顶部多少算触底
 
 .menu {
@@ -24,12 +24,12 @@ $menu-trigger-height: 10px;                 // 鼠标移动到顶部多少算触
     height: $height;
 
     backdrop-filter: blur(40px);
-    background: rgba($color: #000, $alpha: 0.45);
-    border-bottom: 1px solid rgba($color: #fff, $alpha: 0.08);
+    background: rgba($color: #000, $alpha: 45%);
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 8%);
   }
 
   :global {
-    .qyrc-icon {
+    .brick-icon {
       color: $color;
       margin: 0 10px;
       font-size: 16px;

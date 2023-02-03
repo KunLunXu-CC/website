@@ -25,6 +25,7 @@
     .ant-picker-body,
     .ant-picker-content {
       flex: 1;
+      height: 100%;
       outline: none;
       display: flex;
       overflow: hidden;
@@ -58,8 +59,8 @@
 
     // 设置边框
     tbody {
-      border-top: 1px solid rgba($color: #dbdbdb, $alpha: 0.2);
-      border-left: 1px solid rgba($color: #dbdbdb, $alpha: 0.2);
+      border-top: 1px solid rgba($color: #dbdbdb, $alpha: 20%);
+      border-left: 1px solid rgba($color: #dbdbdb, $alpha: 20%);
     }
   }
 }

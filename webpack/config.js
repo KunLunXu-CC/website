@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 
 // 自动加载 配置
@@ -9,10 +10,10 @@ module.exports.providePlugin = {
 /* 路径别名配置 */
 module.exports.alias = {
   '@app': path.resolve(__dirname, '../src/app'),
-  '@model': path.resolve(__dirname, '../src/model'),
-  '@hook': path.resolve(__dirname, '../src/hook'),
+  '@hooks': path.resolve(__dirname, '../src/hooks'),
   '@pages': path.resolve(__dirname, '../src/pages'),
   '@utils': path.resolve(__dirname, '../src/utils'),
+  '@store': path.resolve(__dirname, '../src/store'),
   '@config': path.resolve(__dirname, '../src/config'),
   '@assets': path.resolve(__dirname, '../src/assets'),
 };

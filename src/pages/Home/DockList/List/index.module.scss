@@ -1,4 +1,3 @@
-
 /* Dock 样式 */
 $dock-body-height: 54px; // dock 内容高度
 
@@ -6,9 +5,12 @@ $dock-body-height: 54px; // dock 内容高度
 .dock {
   left: 0;
   right: 0;
+  bottom: 0;
   z-index: 9;
-  display: flex;
   position: fixed;
+
+  display: flex;
+  padding-bottom: 6px;
   box-sizing: content-box;
   justify-content: center;
 }
@@ -20,13 +22,14 @@ $dock-body-height: 54px; // dock 内容高度
   justify-content: center;
 
   min-width: 50%;
+  box-sizing: border-box;
   height: $dock-body-height;
 
   border-radius: 10px;
   backdrop-filter: blur(40px);   // 背景虚化
-  background: rgba(0, 0, 0, 0.2);
-  border: 2px solid rgba($color: #fff, $alpha: 0.06);
-  box-shadow: 0 0 0 1px rgba($color: #000, $alpha: 0.3);
+  background: rgb(0 0 0 / 20%);
+  border: 2px solid rgba($color: #fff, $alpha: 6%);
+  box-shadow: 0 0 0 1px rgba($color: #000, $alpha: 30%);
 }
 
 // 应用设置
@@ -51,8 +54,8 @@ $dock-body-height: 54px; // dock 内容高度
     transition: all 0.3s;
     font-size: calc(var(--size) - 15px);
 
-    // 设置倒影
-    -webkit-box-reflect: below 2px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.8, transparent), to(rgba(255, 255, 255, 0.2)));
+    // TODO: 设置倒影: 参考 https://www.zhangxinxu.com/wordpress/2016/08/webkit-box-reflect-moz-element/
+    // -webkit-box-reflect: below 0 linear-gradient(transparent 50%, #fff 100%);
   }
 
   // 文字提示
@@ -82,6 +85,7 @@ $dock-body-height: 54px; // dock 内容高度
 .dock.dock-auto-hiding {
   cursor: auto;
   padding-top: 12px;
+  padding-bottom: 0;
   transition: bottom 0.5s;
   bottom: -$dock-body-height;
 

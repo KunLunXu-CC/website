@@ -1,15 +1,16 @@
 import Tab from './Tab';
-import React from 'react';
 import Editor from './Editor';
 import scss from './index.module.scss';
 import TabBarExtra from './TabBarExtra';
 
 import { Tabs } from 'antd';
-import { Icon } from 'qyrc';
+import { actions } from '@store';
+import { Icon } from '@kunlunxu/brick';
 import { APP_CODE } from '@config/consts';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
 
   const { works, showWork } = useSelector((state) => ({
@@ -20,39 +21,31 @@ const useStateHook = () => {
   }));
 
   // 当前选中项
-  const selected = React.useMemo(() => (
-    works.find((v) => v.action)?.article
+  const activeKey = useMemo(() => (
+    works.find((v) => v.active)?.articleId
   ), [works]);
 
+  const tabsItems = useMemo(() => works.map((work) => ({
+    key: work.articleId,
+    label: <Tab work={work} />,
+    children: <Editor work={work} />,
+  })), [works]);
+
   // 点击 tab 切换事件: 将当前窗口设置为活动窗口
-  const onTabsChange = (article) => {
-    dispatch({
-      article,
-      type: 'editor/appendWorks',
-    });
-  };
+  const handleTabsChange = useCallback((articleId) => {
+    dispatch(actions.editor.appendWorks(articleId));
+  }, [dispatch]);
 
-  return { onTabsChange, selected, works, showWork };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <div className={scss.work}>
-      {state.works.length > 0 && state.showWork ? (
+      {works.length > 0 && showWork ? (
         <Tabs
           type="card"
-          activeKey={state.selected}
-          onChange={state.onTabsChange}
-          tabBarExtraContent={<TabBarExtra />}>
-          {state.works.map((v) => (
-            <Tabs.TabPane
-              key={v.article}
-              tab={<Tab work={v} />}>
-              <Editor work={v} />
-            </Tabs.TabPane>
-          ))}
-        </Tabs>
+          items={tabsItems}
+          activeKey={activeKey}
+          onChange={handleTabsChange}
+          tabBarExtraContent={<TabBarExtra />}
+        />
       ) : (
         <div className={scss.empty}>
           <Icon type="icon-kong" />

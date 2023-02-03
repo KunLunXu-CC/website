@@ -1,4 +1,8 @@
-@import '@assets/style/mixin';
+@import "@assets/style/mixin";
+
+$bg: transparent;
+$bg-selected: #2c313a;
+$color: rgba($color: #ccc, $alpha: 80%);
 
 .menu-item-empty {
   height: 0 !important;
@@ -6,10 +10,6 @@
 }
 
 .menu {
-  $bg: transparent;
-  $bg-selected: #2c313a;
-  $color: rgba($color: #ccc, $alpha: 0.8,);
-
   @include scrollbar(
     $width: 2px,
     $thumb-bg: lighten($color: #2c313a, $amount: 5%)
@@ -24,28 +24,41 @@
   overflow-x: hidden;
 
   :global {
-    // 设置分割线(虚线)
-    .ant-menu-sub {
-      border: unset;
-      color: $color;
-      background: $bg;
+    .ant-menu-submenu {
       position: relative;
 
-      :local(.menu-dividing) {
-        top: 0;
-        width: 1;
-        bottom: 0;
+      &::after {
+        content: "";
+        display: block;
+        top: 44px;
+        width: 1px;
+        bottom: 4px;
         position: absolute;
-        border-right: 1px dashed rgba($color: $color, $alpha: 0.1);
+        left: var(--dividing-left);
+        border-right: 1px dashed rgba($color: $color, $alpha: 10%);
       }
     }
 
-    // 子菜单 - 正常
+    // 清除右边距
+    .ant-menu-item,
     .ant-menu-submenu-title {
-      padding-right: 0 !important;
+      padding-right: 0;
+    }
+
+    // 根菜单样式覆盖 - 正常状态
+    .ant-menu-item {
+      background: $bg;
     }
 
     // 子菜单 - 活动或者选中
+    .ant-menu-item:not(.ant-menu-item-selected) {
+      &:hover,
+      &:active {
+        color: $color !important;
+        background: $bg-selected !important;
+      }
+    }
+
     .ant-menu-submenu-active,
     .ant-menu-submenu-selected {
       > .ant-menu-submenu-title {
@@ -62,18 +75,6 @@
       }
     }
 
-    // 根菜单样式覆盖 - 正常状态
-    .ant-menu-item {
-      border: unset;
-      background: $bg;
-      margin: 0 !important;
-      padding-right: 5px !important;
-
-      &::after {
-        display: none;
-      }
-    }
-
     // 根菜单样式覆盖 - 停放状态
     .ant-menu-item.ant-menu-item-active,
     .ant-menu-item.ant-menu-item-selected {
@@ -81,9 +82,33 @@
       background: $bg-selected;
     }
 
-    // 箭头
+    // 隐藏后面的箭头
     .ant-menu-submenu-arrow {
       display: none;
     }
+  }
+}
+
+.add {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  position: absolute;
+
+  font-size: 20px;
+  color: rgba($color: #ccc, $alpha: 80%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  cursor: pointer;
+  background: $bg-selected;
+  transition: all 0.5s;
+
+  &:hover {
+    opacity: 0.8;
   }
 }

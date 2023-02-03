@@ -1,53 +1,36 @@
-import React, {
-  useEffect,
-  useCallback,
-} from 'react';
-import moment from 'moment';
-import Echart from './Echart';
+import dayjs from 'dayjs';
+import Echarts from './Echarts';
 import scss from './index.module.scss';
 
+import { useState } from 'react';
 import { DatePicker, Card } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useGetStatsBodyIndexQuery } from '@store/graphql';
 
 // 默认日期
 const DEFAULT_DATE = [
-  moment().subtract(365, 'days'),
-  moment(),
+  dayjs().subtract(365, 'days'),
+  dayjs(),
 ];
 
 // 获取区间内所有时间
 const getFullDate = ([start, end]) => {
   const res = [];
-  const current = start.clone();
+  let current = start.clone();
 
-  while (moment(current).isBefore(end)) {
-    current.add(1, 'day');
+  while (current.isBefore(end)) {
     res.push(current.format('YYYY-MM-DD'));
+    current = current.add(1, 'day');
   }
 
   return res;
 };
 
-const useStateHook = () => {
-  const dispatch = useDispatch();
-
-  // 查询
-  const search = useCallback((date) => {
-    dispatch({
-      type: 'diary/getStatsBodyIndex',
-      search: { names: getFullDate(date ?? DEFAULT_DATE) },
-    });
-  }, []);
-
-  useEffect(() => {
-    search();
-  }, []);
-
-  return { search };
-};
-
 export default () => {
-  const state = useStateHook();
+  const [date, setDate] = useState(DEFAULT_DATE);
+
+  const { data } = useGetStatsBodyIndexQuery({
+    search: { names: getFullDate(date) },
+  });
 
   return (
     <Card
@@ -57,11 +40,11 @@ export default () => {
       extra={(
         <DatePicker.RangePicker
           bordered={false}
-          onChange={state.search}
+          onChange={setDate}
           defaultValue={DEFAULT_DATE}
         />
       )}>
-      <Echart />
+      <Echarts data={data?.diaries.list ?? []} />
     </Card>
   );
 };

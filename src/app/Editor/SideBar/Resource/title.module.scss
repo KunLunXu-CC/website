@@ -1,0 +1,85 @@
+@import "@assets/style/mixin";
+
+.menu-title {
+  display: flex;
+  align-items: center;
+
+  &-content {
+    @include line-clamp(1);
+
+    flex: 1;
+    height: 40px;
+
+    &-input {
+      padding: 2px;
+      border: unset;
+      color: #fff;
+      outline: none;
+      height: initial;
+      border-radius: 0;
+      background: rgba($color: #fff, $alpha: 10%);
+
+      &:hover,
+      &:focus,
+      &:active {
+        border: unset;
+        box-shadow: none;
+      }
+    }
+  }
+
+  &-more {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    :global {
+      .brick-icon {
+        box-sizing: content-box;
+        padding: 10px 5px;
+      }
+    }
+  }
+}
+
+.menu-title-article {
+  .menu-title-arrow {
+    opacity: 0;
+  }
+}
+
+// 操作菜单
+.operation-menu:global(.ant-dropdown-menu.ant-dropdown-menu-root) {
+  background: #2c343a;
+
+  :global {
+    .ant-dropdown-menu-item {
+      color: rgba($color: #fff, $alpha: 50%);
+
+      &:hover {
+        background-color: rgba($color: #fff, $alpha: 10%);
+      }
+    }
+  }
+}
+
+// 鼠标停放显示 ...
+:global(.ant-menu-item-active),
+:global(.ant-menu-submenu-active > .ant-menu-submenu-title) {
+  .menu-title-more {
+    opacity: 1;
+  }
+}
+
+// 子菜单 - 展开 - 旋转箭头
+:global(.ant-menu-submenu-open > .ant-menu-submenu-title) {
+  .menu-title-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+// 已发布文章
+.menu-title-release {
+  color: #68bf22;
+}

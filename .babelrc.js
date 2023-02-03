@@ -1,20 +1,16 @@
 module.exports = {
   'plugins': [
-    // 按需加载 - antd
+    // 按需加载 - @kunlunxu/brick
     ["import", {
-      "libraryName": "antd",
-      "libraryDirectory": "es",
-      "style": "css"
-    }, "antd"],
-    // 按需加载 - qyrc
-    ["import", {
-      "libraryName": "qyrc",
+      "libraryName": "@kunlunxu/brick",
       "libraryDirectory": "es",
       "style": true
-    }, "qyrc"],
+    }, "@kunlunxu/brick"],
   ],
   'presets': [
-    '@babel/preset-react',
+    ['@babel/preset-react', {
+      runtime: 'automatic',
+    }],
     '@babel/preset-env'
   ]
 }

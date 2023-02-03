@@ -1,27 +1,27 @@
-import React from 'react';
 import Card from '../Card';
 import scss from './index.module.scss';
 
-import { Image, Icon } from 'qyrc';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useCallback, useMemo } from 'react';
+import { Image, Icon } from '@kunlunxu/brick';
+import { useNavigate } from 'react-router-dom';
 import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
 
 const useStateHook = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // 退出
-  const signOut = React.useCallback(() => {
-    history.push('/login');
-  }, []);
+  const signOut = useCallback(() => {
+    navigate('/login');
+  }, [navigate]);
 
   const { avatars, user  } = useSelector((state) => ({
     user: state.user,
-    avatars: state.photos?.avatar,
+    avatars: state.photos?.avatar ?? [],
   }));
 
   // 随机头像
-  const avatar = React.useMemo(() => {
+  const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
       ? `${SERVICE_STATIC_IMAGE_URL}${avatars[index].name}`

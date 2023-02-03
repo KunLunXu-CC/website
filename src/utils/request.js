@@ -1,6 +1,6 @@
 import axios from 'axios';
+import store from '@store';
 import { message } from 'antd';
-import { store } from '@model';
 
 // 创建 axios 实例
 const instance = axios.create({
@@ -11,9 +11,11 @@ const instance = axios.create({
 
 /**
  * 添加 axios 拦截器中间件 (记得方法中需要返回 config 或者 response 否则请求会被中止)
- * @param {Array} request 请求拦截器 格式： [请求成功处理函数 function(config)， 请求失败处理函数 function(error)]
- * @param {Array} response 响应拦截器 格式： [响应成功处理函数 function(response), 响应失败处理函数 function(error)]
- * @return {Object} { request: '移除请求拦截器 || null', response '移除响应拦截器 || null' }
+ *
+ * @param {object} params 参数
+ * @param {Array} params.request 请求拦截器 格式： [请求成功处理函数 function(config)， 请求失败处理函数 function(error)]
+ * @param {Array} params.response 响应拦截器 格式： [响应成功处理函数 function(response), 响应失败处理函数 function(error)]
+ * @returns {object} { request: '移除请求拦截器 || null', response '移除响应拦截器 || null' }
  * @example
  * const interceptors = use({
  *  request: [function(config), function(error)],
@@ -31,8 +33,10 @@ export const use = ({ request, response }) => ({
 
 /**
  * 取消指定拦截器 (直接将上面use方法返回值传入即可移除对应的拦截器)
- * @param {Object} request 拦截请求时返回的值
- * @param {Object} response 拦截响应时返回的值
+ *
+ * @param {object} params 参数
+ * @param {object} params.request 拦截请求时返回的值
+ * @param {object} params.response 拦截响应时返回的值
  * @example 配合上面的 use 方法使用
  * // 添加拦截器
  * const interceptors = use(...args);
@@ -92,8 +96,10 @@ use({
 /**
  * // TODO: 上传问题解决后删除
  * 请求方法: 处理 spin
- * @param {String} spin 加载中标记
- * @param {Object} options 请求参数
+ *
+ * @param {object} params 参数
+ * @param {string} params.spin 加载中标记
+ * @param {object} params.options 请求参数
  */
 export const request =  async ({ spin: code, ...options }) => {
   store.dispatch({ type: 'spin/openSpin', code });
@@ -106,9 +112,10 @@ export const request =  async ({ spin: code, ...options }) => {
 
 /**
  * graphql 请求方法: 处理 spin
- * @param {String} spin 加载中标记
- * @param {String} query 请求文档
- * @param {Object} variables 请求文档参数
+ *
+ * @param {object} params 参数
+ * @param {string} params.query 请求文档
+ * @param {Function} params.getRes 获取查询结果
  * @returns {Function} 返回 graphql 请求方法
  */
 export const graphql = ({ query, getRes }) => (async ({

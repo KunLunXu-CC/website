@@ -1,19 +1,9 @@
-import React from 'react';
-import config from './config';
+import Routes from './Routes';
+import { BrowserRouter } from 'react-router-dom';
 
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 export default () => (
-  <Router>
-    <Switch>
-      {config.map((v) => (
-        <Route
-          key={v.path}
-          path={v.path}
-          exact={v.exact}
-          component={v.component}
-        />
-      ))}
-    </Switch>
-  </Router>
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>
 );

@@ -1,6 +1,7 @@
-import React from 'react';
 import scss from './index.module.scss';
 
+import { actions } from '@store';
+import { useCallback } from 'react';
 import { Checkbox, Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,14 +10,13 @@ const useStateHook = () => {
   const setting = useSelector((state) => state.setting.menuBar);
 
   // 修改值
-  const onChange = React.useCallback((key, { target }) => {
+  const onChange = useCallback((key, { target }) => {
     const value = target?.value ?? target?.checked;
 
-    dispatch({
-      type: 'setting/setValue',
-      setting: { menuBar: { [key]: value } },
-    });
-  }, []);
+    dispatch(actions.setting.set({
+      menuBar: { [key]: value },
+    }));
+  }, [dispatch]);
 
   return { setting, onChange };
 };
@@ -25,7 +25,7 @@ export default () => {
   const state = useStateHook();
 
   return (
-    <React.Fragment>
+    <>
       <Checkbox
         checked={state.setting.showFullScreenOnMenu}
         onChange={state.onChange.bind(null, 'showFullScreenOnMenu')}>
@@ -43,6 +43,6 @@ export default () => {
           onChange={state.onChange.bind(null, 'formatDate')}
         />
       </div>
-    </React.Fragment>
+    </>
   );
 };

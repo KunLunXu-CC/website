@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const config = require('./config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -59,9 +60,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(mjs|js|jsx)$/,
+        test: /\.(ts|tsx|mjs|js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: cssRegex,
@@ -95,14 +96,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|woff|svg|eot|ttf)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-            name: 'assets/[hash].[ext]',
-          },
-        }],
+        // 图片、字体
+        test: [/\.(png|jpg|gif|svg)$/, /\.(ttf|woff|eot)$/],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[hash].[ext]',
+        },
       },
       {
         test: /\.(text|md)$/,
@@ -122,7 +121,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: ['.mjs', '.js', '.jsx'],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx'],
     alias: config.alias || {},
   },
 };

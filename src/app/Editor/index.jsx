@@ -1,22 +1,23 @@
-import React, {
-  useEffect,
-} from 'react';
-import ActivityBar from './ActivityBar';
-import SideBar from './SideBar';
 import Work from './Work';
 import Tips from './Tips';
 import Modal from './Modal';
-import Preview from './Preview';
+import SideBar from './SideBar';
 import scss from './index.module.scss';
+import ActivityBar from './ActivityBar';
 
+import { actions } from '@store';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useInitEditorDataQuery } from '@store/graphql';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
+  const { data: initEditorData } = useInitEditorDataQuery();
 
   useEffect(() => {
-    dispatch({ type: 'editor/initData' });
-  }, []);
+    dispatch(actions.editor.setFolders(initEditorData?.folders.list ?? []));
+    dispatch(actions.editor.setArticles(initEditorData?.articles.list ?? []));
+  }, [dispatch, initEditorData]);
 };
 
 export default () => {
@@ -28,7 +29,6 @@ export default () => {
         <ActivityBar />
         <SideBar />
         <Work />
-        <Preview />
       </div>
       <div className={scss.footer} />
       <Tips />

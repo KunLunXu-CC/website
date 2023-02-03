@@ -15,7 +15,7 @@ export const DIARY_MENU = {
 };
 
 // 统计跨度
-export const STATS_SAPN = {
+export const STATS_SPAN = {
   MONTH: { VALUE: 'month', DESC: '月' },  // 按月
   YEAR: { VALUE: 'year', DESC: '年' },    // 按年
 };

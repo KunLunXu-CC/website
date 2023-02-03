@@ -1,6 +1,5 @@
-import React from 'react';
-
-import { Echart } from 'qyrc';
+import { useMemo } from 'react';
+import { Echarts } from '@kunlunxu/brick';
 import { Modal, Button } from 'antd';
 import { STATS_BILL_DETAIL } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,18 +10,18 @@ const useStateHook = () => {
   const modal = useSelector((state) => state.modal[STATS_BILL_DETAIL]);
 
   // 数据
-  const data = React.useMemo(() => {
+  const data = useMemo(() => {
     const bill = modal?.diaries.reduce((total, ele) => ([
       ...total,
       ...ele.bill.filter((v) => v.expend),
     ]), []);
-    const gloup = _.groupBy(bill, 'tag.name');
+    const group = _.groupBy(bill, 'tag.name');
     const res = [];
 
-    for (const name in gloup) {
+    for (const name in group) {
       res.push({
         name,
-        value: gloup[name].reduce(
+        value: group[name].reduce(
           (total, ele) => Math.round(total + ele.expend), 0,
         ),
       });
@@ -31,8 +30,8 @@ const useStateHook = () => {
     return res;
   }, [modal]);
 
-  // echart 配置
-  const option = React.useMemo(() => ({
+  // echarts 配置
+  const option = useMemo(() => ({
     tooltip: {
       trigger: 'item',
       formatter: '{a} <br/>{b}: {c} ({d}%)',
@@ -95,8 +94,8 @@ export default () => {
       title="账单详情"
       destroyOnClose
       closable={false}
+      open={!!state.modal}
       getContainer={false}
-      visible={!!state.modal}
       footer={(
         <Button
           onClick={state.onCancel}
@@ -104,7 +103,7 @@ export default () => {
           关闭
         </Button>
       )}>
-      <Echart
+      <Echarts
         height={300}
         option={state.option}
       />

@@ -1,6 +1,6 @@
-import React from 'react';
-
 import { Checkbox } from 'antd';
+import { actions } from '@store';
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = () => {
@@ -8,13 +8,12 @@ const useStateHook = () => {
   const setting = useSelector((state) => state.setting.dock);
 
   // 修改值
-  const onChange = React.useCallback((key, event) => {
+  const onChange = useCallback((key, event) => {
     const value = event.target.checked;
-    dispatch({
-      type: 'setting/setValue',
-      setting: { dock: { [key]: value } },
-    });
-  }, []);
+    dispatch(actions.setting.set({
+      dock: { [key]: value },
+    }));
+  }, [dispatch]);
 
   return { setting, onChange };
 };

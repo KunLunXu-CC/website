@@ -1,8 +1,0 @@
-@import '@assets/style/mixin';
-
-.form {
-  @include scrollbar($width: 4px);
-  flex: 1;
-  padding: 20px;
-  overflow-y: auto;
-}

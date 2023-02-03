@@ -1,14 +1,12 @@
-import React, {
-  useMemo,
-} from 'react';
 import Menu from './Menu';
 import Tips from './Tips';
 import Stats from './Stats';
 import Modal from './Modal';
-import Calendar from './Calendar';
 import Kanban from './Kanban';
+import Calendar from './Calendar';
 import scss from './index.module.scss';
 
+import { useMemo } from 'react';
 import { DIARY_MENU } from './consts';
 import { useSelector } from 'react-redux';
 

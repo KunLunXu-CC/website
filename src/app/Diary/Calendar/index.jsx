@@ -1,4 +1,3 @@
-import React from 'react';
 import Cell from './Cell';
 import Header from './Header';
 import scss from './index.module.scss';

@@ -1,4 +1,3 @@
-import React from 'react';
 import scss from './index.module.scss';
 
 import { Modal } from 'antd';
@@ -44,8 +43,8 @@ export default () => {
       onOk={state.onOk}
       maskClosable={false}
       getContainer={false}
+      open={!!state.article}
       className={scss.modal}
-      visible={!!state.article}
       onCancel={state.onCancel}>
       发布文章:
       <span className={scss['article-name']}>

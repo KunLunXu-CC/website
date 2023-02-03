@@ -1,0 +1,102 @@
+query initEditorData {
+  folders(search: { type: [0] }) {
+    list {
+      id
+      name
+      parent {
+        id
+        name
+      }
+    }
+  }
+  articles {
+    list {
+      id
+      name
+      thumb
+      status
+      content
+      folder {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation createFolders($body: [FolderFields!]!) {
+  createFolders(body: $body) {
+    change {
+      id
+      name
+      parent {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation createArticles($body: [ArticleFields!]!) {
+  createArticles(body: $body) {
+    change {
+      id
+      name
+      folder {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation updateFolders($body: FolderFields!, $conds: FolderSearch!) {
+  updateFolders(body: $body, conds: $conds) {
+    change {
+      id
+      name
+      parent {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation updateArticles($body: ArticleFields!, $conds: ArticleSearch!) {
+  updateArticles(body: $body, conds: $conds) {
+    change {
+      id
+      name
+      content
+      thumb
+      status
+      folder {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation removeArticles($conds: ArticleSearch!) {
+  removeArticles(conds: $conds) {
+    change {
+      id
+      name
+    }
+  }
+}
+
+mutation removeFolders($conds: FolderSearch!) {
+  removeFolders(conds: $conds) {
+    change {
+      id
+      name
+      parent {
+        id
+        name
+      }
+    }
+  }
+}
