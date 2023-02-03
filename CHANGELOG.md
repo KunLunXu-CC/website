@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/KunLunXu0-0/website/compare/v3.1.0...v4.0.0) (2023-02-03)
+
+
+### Features
+
+* 🎸 update npm ([d6735c6](https://github.com/KunLunXu0-0/website/commit/d6735c6dae68b0f5ca17fd901ac868f658e76350))
+* 🎸 update npm ([0d4c86c](https://github.com/KunLunXu0-0/website/commit/0d4c86cb7505d708777c672a3b22ca138481ad0b))
+
 ## [3.1.0](https://github.com/qianyin925/blog-client/compare/v3.0.13...v3.1.0) (2022-03-13)
 
 
