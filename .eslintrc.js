@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   globals: {
     $console: true,
+    GRAPHQL_URL: true,
     GLOBAL_SERVICER: true,
     WS_SERVICER: true,
     PUBLICKEY: true,
