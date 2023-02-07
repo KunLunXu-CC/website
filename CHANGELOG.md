@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.3](https://github.com/KunLunXu0-0/website/compare/v4.0.2...v4.0.3) (2023-02-07)
+
+
+### Bug Fixes
+
+* 🐛 editor 预览图片不生效 ([f82a329](https://github.com/KunLunXu0-0/website/commit/f82a3295fcbec06071344a47ca2bda3b9af3b561))
+
 ### [4.0.2](https://github.com/KunLunXu0-0/website/compare/v4.0.1...v4.0.2) (2023-02-03)
 
 ### [4.0.1](https://github.com/KunLunXu0-0/website/compare/v4.0.0...v4.0.1) (2023-02-03)
