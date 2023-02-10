@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
+import { actions } from '@store';
 import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { ACTIVITY_LIST } from '../consts';
+import { ACTIVITY_LIST } from '@app/Editor/consts';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default () => {
@@ -14,10 +15,9 @@ export default () => {
   }));
 
   // 点击菜单
-  const handleClick = (selectKey) => dispatch({
-    type: 'editor/setActivity',
-    activity: { selectKey },
-  });
+  const handleClick = useCallback((selectKey) => {
+    dispatch(actions.editor.setActivity({ selectKey }));
+  }, [dispatch]);
 
   // 菜单项 className
   const getItemClassName = useCallback((key) => classNames(

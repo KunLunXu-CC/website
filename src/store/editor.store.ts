@@ -19,6 +19,11 @@ export default createSlice({
   initialState,
   name: 'editor',
   reducers: {
+    setActivity: (state, { payload: activity }) => ({
+      ...state,
+      activity: { ...state.activity, ...activity },
+    }),
+
     setFolders: (state, { payload: folders }) => {
       const newFolders = [
         ...Object.values(state.folders),
