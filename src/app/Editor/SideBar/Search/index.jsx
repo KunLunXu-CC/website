@@ -20,6 +20,7 @@ export default () => {
       <div className={scss['input-wrapper']}>
         <Input
           value={keyword}
+          placeholder="关键词"
           className={scss.input}
           onChange={handleChange}
         />

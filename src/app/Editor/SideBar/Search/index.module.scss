@@ -1,6 +1,7 @@
 @import "@assets/style/mixin";
 
 $base-color: #ccc;
+$content-color: rgba($color: $base-color, $alpha: 80%);
 
 .search {
   height: 100%;
@@ -21,17 +22,25 @@ $base-color: #ccc;
 .input {
   border: 0;
   background-color: #1d1f23;
-  color: rgba($color: $base-color, $alpha: 80%);
+  color: $content-color;
+
+  &::placeholder {
+    color: rgba($color: $base-color, $alpha: 10%);
+  }
 }
 
 .item {
   padding: 10px;
-  color: rgba($color: $base-color, $alpha: 80%);
-  border-bottom: 1px solid rgba($color: $base-color, $alpha: 10%);
+  color: $content-color;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba($color: $base-color, $alpha: 10%);
+  }
 }
 
 .title {
   @include line-clamp(1);
+  color: $base-color;
 }
 
 .content {
