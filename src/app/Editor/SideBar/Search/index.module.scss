@@ -1,6 +1,7 @@
 @import "@assets/style/mixin";
 
 $base-color: #ccc;
+$bg-selected: #2c313a;
 $content-color: rgba($color: $base-color, $alpha: 80%);
 
 .search {
@@ -10,13 +11,13 @@ $content-color: rgba($color: $base-color, $alpha: 80%);
 }
 
 .input-wrapper {
-  padding: 20px;
+  padding: 10px;
 }
 
 .body {
   flex: 1;
-  padding: 20px;
   overflow: auto;
+  padding: 0 10px 10px;
 }
 
 .input {
@@ -30,11 +31,17 @@ $content-color: rgba($color: $base-color, $alpha: 80%);
 }
 
 .item {
-  padding: 10px;
+  cursor: pointer;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+
+  border-radius: 4px;
   color: $content-color;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid rgba($color: $base-color, $alpha: 10%);
+  transition: background-color 0.4s;
+
+  &:hover {
+    background-color: $bg-selected;
   }
 }
 

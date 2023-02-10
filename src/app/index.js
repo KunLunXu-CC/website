@@ -25,8 +25,9 @@ export default {
     icon: 'icon-daima',
     code: APP_CODE.EDITOR,
     modalProps: {
-      dragHeight: 40,
-      toolPosition: { top: 8, left: 2 },
+      dragHeight: 30,
+      toolPosition: { top: 6, left: -4 },
+      toolStyle: { transform: 'scale(0.8)' },
       defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 40 },
     },
   },

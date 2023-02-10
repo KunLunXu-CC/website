@@ -1,14 +1,14 @@
 .activity {
   $color: #a9abae;
-  width: 80px;
+  width: 64px;
   background: #282c34;
 
   &-item {
-    padding: 15px;
-    font-size: 26px;
+    padding: 15px 0;
     text-align: center;
 
     cursor: pointer;
+    font-size: 22px;
     color: rgba($color: $color, $alpha: 40%);
 
     &:hover {
