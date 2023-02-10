@@ -33,7 +33,7 @@ export default () => {
 
   // 点击 tab 切换事件: 将当前窗口设置为活动窗口
   const handleTabsChange = useCallback((articleId) => {
-    dispatch(actions.editor.appendWorks(articleId));
+    dispatch(actions.editor.appendWork(articleId));
   }, [dispatch]);
 
   return (

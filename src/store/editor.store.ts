@@ -29,19 +29,17 @@ export default createSlice({
     }),
 
     setSearchKeyword: (state, { payload: keyword }): any => {
-      const results = Object.values(cloneDeep(state.articles))
-        .filter((v: any) => {
+      const results = keyword
+        ? Object.values(cloneDeep(state.articles)).filter((v: any) => {
           const matchName = RegExp(keyword, 'i').test(v.name);
           const matchValue = RegExp(keyword, 'i').test(v.content);
           return matchName ||  matchValue;
-        });
+        })
+        : [];
 
       return {
         ...state,
-        search: {
-          keyword,
-          results,
-        },
+        search: { keyword, results },
       };
     },
 
@@ -96,8 +94,8 @@ export default createSlice({
       side: { ...state.side, ...side },
     }),
 
-    //  插入工作窗口配置
-    appendWorks: (state, { payload: articleId }): any => {
+    // 插入工作窗口配置
+    appendWork: (state, { payload: articleId }): any => {
       if (!articleId || articleId === 'new') {
         return state;
       }

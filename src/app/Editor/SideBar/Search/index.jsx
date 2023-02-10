@@ -14,6 +14,10 @@ export default () => {
     dispatch(actions.editor.setSearchKeyword(event.target.value));
   }, [dispatch]);
 
+  const handleClick = useCallback(({ id: articleId }) => {
+    dispatch(actions.editor.appendWork(articleId));
+  }, [dispatch]);
+
   return (
     <div className={scss.search}>
 
@@ -30,7 +34,8 @@ export default () => {
         {results.map((v)  => (
           <div
             key={v.id}
-            className={scss.item}>
+            className={scss.item}
+            onClick={handleClick.bind(null, v)}>
             <div className={scss.title}>
               {v.name}
             </div>
