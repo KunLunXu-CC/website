@@ -12,6 +12,10 @@ export const initialState = {
   activity: {
     selectKey: ACTIVITY_LIST[0].key,  // 当前选中 key
   },
+  search: {
+    keyword: '',
+    results: [],
+  },
   works: [], // [{ article, change: false }]
 };
 
@@ -23,6 +27,23 @@ export default createSlice({
       ...state,
       activity: { ...state.activity, ...activity },
     }),
+
+    setSearchKeyword: (state, { payload: keyword }): any => {
+      const results = Object.values(cloneDeep(state.articles))
+        .filter((v: any) => {
+          const matchName = RegExp(keyword, 'i').test(v.name);
+          const matchValue = RegExp(keyword, 'i').test(v.content);
+          return matchName ||  matchValue;
+        });
+
+      return {
+        ...state,
+        search: {
+          keyword,
+          results,
+        },
+      };
+    },
 
     setFolders: (state, { payload: folders }) => {
       const newFolders = [
