@@ -92,7 +92,7 @@ export default () => {
 
   // 点击菜单项
   const handleSelect = useCallback(({ key: articleId }) => {
-    dispatch(actions.editor.appendWorks(articleId));
+    dispatch(actions.editor.appendWork(articleId));
   }, [dispatch]);
 
   // SubMenu 展开/关闭的回调

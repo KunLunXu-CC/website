@@ -1,9 +1,9 @@
-import Resource from './Resource';
 import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { actions } from '@store';
 import { useMemo, useCallback } from 'react';
+import { ACTIVITY_LIST } from '@app/Editor/consts';
 import { VariableContainer } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,8 +12,9 @@ const SIDE_MIN_WIDTH = 4;  // 菜单最小宽度
 export default () => {
   const dispatch = useDispatch();
 
-  const { collapsed } = useSelector((state) => ({
+  const { collapsed, activity } = useSelector((state) => ({
     collapsed: state.editor.side.collapsed,
+    activity: state.editor.activity,
   }));
 
   // 顶层 className
@@ -29,6 +30,13 @@ export default () => {
     }));
   }, [dispatch]);
 
+  const bodyEle = useMemo(() => {
+    const { component: Body } = ACTIVITY_LIST.find(
+      (v) => v.key === activity.selectKey,
+    );
+    return <Body />;
+  }, [activity.selectKey]);
+
   return (
     <VariableContainer
       layout
@@ -38,7 +46,7 @@ export default () => {
       operationList={['right']}
       style={{ height: '100%' }}
       constraintSize={{ width: SIDE_MIN_WIDTH }}>
-      <Resource />
+      {bodyEle}
     </VariableContainer >
   );
 };

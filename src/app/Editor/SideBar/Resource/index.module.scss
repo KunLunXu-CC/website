@@ -1,5 +1,3 @@
-@import "@assets/style/mixin";
-
 $bg: transparent;
 $bg-selected: #2c313a;
 $color: rgba($color: #ccc, $alpha: 80%);
@@ -10,11 +8,6 @@ $color: rgba($color: #ccc, $alpha: 80%);
 }
 
 .menu {
-  @include scrollbar(
-    $width: 2px,
-    $thumb-bg: lighten($color: #2c313a, $amount: 5%)
-  );
-
   height: 100%;
   border: unset;
   color: $color;

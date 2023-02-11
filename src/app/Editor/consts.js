@@ -1,3 +1,5 @@
+import Search from './SideBar/Search';
+import Resource from './SideBar/Resource';
 import { APP_CODE, ARTICLE_STATUS } from '@config/consts';
 
 // 弹窗类型常量 - 发布
@@ -17,18 +19,27 @@ export const ACTIVITY_LIST = [
   {
     key: 'all',
     title: '全部',
-    icon: 'icon-all',
     status: null,
+    icon: 'icon-all',
+    component: Resource,
+  },
+  {
+    key: 'search',
+    title: '查找',
+    icon: 'icon-search',
+    component: Search,
   },
   {
     title: '未发布',
     icon: 'icon-editor',
     key: ARTICLE_STATUS.SAVE,
+    component: () => '未发布',
   },
   {
     title: '已发布',
     icon: 'icon-fabu',
     key: ARTICLE_STATUS.RELEASE,
+    component: () => '已发布',
   },
 ];
 

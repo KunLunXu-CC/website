@@ -12,6 +12,10 @@ export const initialState = {
   activity: {
     selectKey: ACTIVITY_LIST[0].key,  // 当前选中 key
   },
+  search: {
+    keyword: '',
+    results: [],
+  },
   works: [], // [{ article, change: false }]
 };
 
@@ -19,6 +23,26 @@ export default createSlice({
   initialState,
   name: 'editor',
   reducers: {
+    setActivity: (state, { payload: activity }) => ({
+      ...state,
+      activity: { ...state.activity, ...activity },
+    }),
+
+    setSearchKeyword: (state, { payload: keyword }): any => {
+      const results = keyword
+        ? Object.values(cloneDeep(state.articles)).filter((v: any) => {
+          const matchName = RegExp(keyword, 'i').test(v.name);
+          const matchValue = RegExp(keyword, 'i').test(v.content);
+          return matchName ||  matchValue;
+        })
+        : [];
+
+      return {
+        ...state,
+        search: { keyword, results },
+      };
+    },
+
     setFolders: (state, { payload: folders }) => {
       const newFolders = [
         ...Object.values(state.folders),
@@ -70,8 +94,8 @@ export default createSlice({
       side: { ...state.side, ...side },
     }),
 
-    //  插入工作窗口配置
-    appendWorks: (state, { payload: articleId }): any => {
+    // 插入工作窗口配置
+    appendWork: (state, { payload: articleId }): any => {
       if (!articleId || articleId === 'new') {
         return state;
       }
