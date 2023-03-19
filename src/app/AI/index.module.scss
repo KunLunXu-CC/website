@@ -1,0 +1,16 @@
+.layout {
+  height: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.layout-side {
+  width: 70px;
+  background-color: #181a1e;
+}
+
+.layout-main {
+  flex: 1;
+}

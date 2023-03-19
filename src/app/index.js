@@ -15,9 +15,10 @@ export default {
     icon: 'icon-AI',
     code: APP_CODE.AI,
     modalProps: {
-      dragHeight: 40,
-      toolPosition: { top: 8, left: 10 },
-      defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
+      dragHeight: 30,
+      toolPosition: { top: 6, left: -4 },
+      toolStyle: { transform: 'scale(0.8)' },
+      defaultParams: { width: 1000, height: 530, offsetX: 100, offsetY: 40 },
     },
   },
   [APP_CODE.ALBUM]: {
