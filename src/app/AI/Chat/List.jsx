@@ -1,7 +1,6 @@
-import { Input } from 'antd';
 import { actions } from '@store';
-import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useCallback, useEffect } from 'react';
 import { VariableContainer } from '@kunlunxu/brick';
 import { useGetAiChatsQuery } from '@store/graphql';
 
@@ -10,6 +9,10 @@ import scss from './list.module.scss';
 export default () => {
   const dispatch = useDispatch();
   const { data } = useGetAiChatsQuery();
+
+  const handleAdd = useCallback(() => {
+    dispatch(actions.ai.setActiveChat(null));
+  }, [dispatch]);
 
   // 读取数据
   useEffect(() => {
@@ -23,16 +26,8 @@ export default () => {
       operationList={['right']}
       margin={{ right: '20%' }}
       style={{ height: '100%' }}>
-      <Input
-        placeholder='检索词'
-        addonAfter={(
-          <span>
-            +
-          </span>
-        )}
-      />
-      <div>
-        2
+      <div onClick={handleAdd}>
+        +
       </div>
     </VariableContainer>
   );

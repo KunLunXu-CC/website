@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   chat: {
     list: [],
-    active: null,
+    activeId: null,
   },
 };
 
@@ -22,9 +22,9 @@ export default createSlice({
         list: [...state.chat.list, chat],
       },
     }),
-    setActiveChat: (state, { payload: active }): any => ({
+    setActiveChat: (state, { payload: activeId }): any => ({
       ...state,
-      chat: { ...state.chat, active },
+      chat: { ...state.chat, activeId },
     }),
   },
 });
