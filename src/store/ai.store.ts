@@ -1,6 +1,24 @@
+import { cloneDeep, last } from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
 
-export const initialState = {
+interface Message {
+  role: string
+  content: string
+}
+interface Chat {
+  id: string
+  name: string
+  messages: Message[]
+}
+
+interface State {
+  chat: {
+    list: Chat[]
+    activeId: string | null
+  }
+}
+
+export const initialState: State = {
   chat: {
     list: [],
     activeId: null,
@@ -26,5 +44,26 @@ export default createSlice({
       ...state,
       chat: { ...state.chat, activeId },
     }),
+
+    appendChatMessage: (state, { payload: content }): any => {
+      const newChatList: Chat[] = cloneDeep(state.chat.list);
+
+      const currentChar = newChatList.find(
+        (v) => v.id === state.chat.activeId,
+      ) as Chat;
+
+      const lastMessage = last(currentChar.messages) as Message;
+
+      if (lastMessage?.role === 'user') {
+        currentChar.messages.push({ role: 'assistant', content });
+      } else {
+        lastMessage.content = `${lastMessage.content || ''}${content}`;
+      }
+
+      return {
+        ...state,
+        chat: { ...state.chat, list: newChatList },
+      };
+    },
   },
 });

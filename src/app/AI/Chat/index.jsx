@@ -22,6 +22,8 @@ export default () => {
       const [newChat] = data.createAiChats.change;
 
       chatId = newChat.id;
+      newChat.messages.push({ role: 'user', content: message });
+
       dispatch(actions.ai.addChat(newChat));
       dispatch(actions.ai.setActiveChat(newChat.id));
     }
