@@ -1,3 +1,4 @@
+import AI from './AI';
 import User from './User';
 import Diary from './Diary';
 import Album from './Album';
@@ -8,6 +9,17 @@ import Setting from './Setting';
 import { APP_CODE } from '@config/constants';
 
 export default {
+  [APP_CODE.AI]: {
+    name: 'AI',
+    component: AI,
+    icon: 'icon-AI',
+    code: APP_CODE.AI,
+    modalProps: {
+      dragHeight: 40,
+      toolPosition: { top: 8, left: 10 },
+      defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
+    },
+  },
   [APP_CODE.ALBUM]: {
     name: '相册',
     component: Album,
