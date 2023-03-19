@@ -6,7 +6,7 @@ import { Input, Form, Button } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
 import { useNavigate } from 'react-router-dom';
-import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
+import { SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 import { useGetPublicKeyQuery, useLoginMutation } from '@store/graphql';
 
 export default () => {

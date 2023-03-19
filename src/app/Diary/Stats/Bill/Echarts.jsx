@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Echarts } from '@kunlunxu/brick';
 import { useDispatch } from 'react-redux';
-import { STATS_BILL_DETAIL } from '../../consts';
+import { STATS_BILL_DETAIL } from '../../constants';
 
 export default (props) => {
   const dispatch = useDispatch();

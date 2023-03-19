@@ -5,7 +5,7 @@ import Editor from './Editor';
 import Reader from './Reader';
 import Logger from './Logger';
 import Setting from './Setting';
-import { APP_CODE } from '@config/consts';
+import { APP_CODE } from '@config/constants';
 
 export default {
   [APP_CODE.ALBUM]: {

@@ -2,7 +2,7 @@ import scss from './index.module.scss';
 
 import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
-import { APP_CODE } from '@config/consts';
+import { APP_CODE } from '@config/constants';
 
 const useStateHook = () => {
   const showSpin = useSelector(

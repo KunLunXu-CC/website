@@ -4,7 +4,7 @@ import scss from './index.module.scss';
 import { actions } from '@store';
 import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { ACTIVITY_LIST } from '@app/Editor/consts';
+import { ACTIVITY_LIST } from '@app/Editor/constants';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default () => {

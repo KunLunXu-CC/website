@@ -10,6 +10,10 @@ const config = [
     path: '/login',
     element: <Pages.Login />,
   },
+  {
+    path: '/demo',
+    element: <Pages.Demo />,
+  },
 ];
 
 export default () => useRoutes(config);

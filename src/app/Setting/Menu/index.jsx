@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 
 import { actions } from '@store';
-import { MENUS } from '../consts';
+import { MENUS } from '../constants';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

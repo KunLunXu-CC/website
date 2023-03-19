@@ -4,7 +4,7 @@ import { Menu } from 'antd';
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
 import { useMemo, useCallback } from 'react';
-import { PHOTO_TYPE } from '@config/consts';
+import { PHOTO_TYPE } from '@config/constants';
 import { useSelector, useDispatch } from 'react-redux';
 
 const DEFAULT_TYPE = 'all';

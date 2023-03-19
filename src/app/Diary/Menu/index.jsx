@@ -4,7 +4,7 @@ import scss from './index.module.scss';
 
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
-import { DIARY_MENU } from '../consts';
+import { DIARY_MENU } from '../constants';
 import { useDispatch, useSelector } from 'react-redux';
 
 // 菜单列表

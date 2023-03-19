@@ -6,7 +6,7 @@ import scss from './index.module.scss';
 
 import { Card } from 'antd';
 import { useDispatch } from 'react-redux';
-import { STATS_SPAN } from '../../consts';
+import { STATS_SPAN } from '../../constants';
 import { useState, useEffect } from 'react';
 import { useGetStatsBillQuery } from '@store/graphql';
 

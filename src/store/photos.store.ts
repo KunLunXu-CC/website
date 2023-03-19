@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { PHOTO_TYPE } from '@config/consts';
+import { PHOTO_TYPE } from '@config/constants';
 import { createSlice } from '@reduxjs/toolkit';
 
 // TODO: 改为对象存储 oss

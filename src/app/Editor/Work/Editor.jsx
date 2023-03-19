@@ -4,7 +4,7 @@ import { Markdown } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUploadPhotosMutation } from '@store/graphql';
 import { useHandleUpdateArticles } from '@app/Editor/hooks';
-import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/consts';
+import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 // 渲染 md 插件 markdown-to-jsx 配置
 const MD_TO_JSX_OPTIONS = {

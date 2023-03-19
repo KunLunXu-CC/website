@@ -1,7 +1,7 @@
 import scss from './index.module.scss';
 
 import { actions } from '@store';
-import { MOVE } from '../../consts';
+import { MOVE } from '../../constants';
 import { Modal, Cascader, Form } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

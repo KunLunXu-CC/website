@@ -1,6 +1,6 @@
 import Search from './SideBar/Search';
 import Resource from './SideBar/Resource';
-import { APP_CODE, ARTICLE_STATUS } from '@config/consts';
+import { APP_CODE, ARTICLE_STATUS } from '@config/constants';
 
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';

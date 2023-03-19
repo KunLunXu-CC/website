@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
-import { ACTIVITY_LIST } from '@app/Editor/consts';
+import { ACTIVITY_LIST } from '@app/Editor/constants';
 
 export const initialState = {
   folders: {},        // {[id]: value}

@@ -2,7 +2,7 @@ import scss from './form.module.scss';
 
 import { Select } from 'antd';
 import { actions } from '@store';
-import { PHOTO_TYPE } from '@config/consts';
+import { PHOTO_TYPE } from '@config/constants';
 import { useCallback, useMemo } from 'react';
 import { Icon, Image } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';

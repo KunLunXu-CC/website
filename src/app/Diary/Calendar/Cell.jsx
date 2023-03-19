@@ -4,7 +4,7 @@ import scss from './cell.module.scss';
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
 import { useMemo, useCallback } from 'react';
-import { DIARY_EDITOR_DIARY } from '../consts';
+import { DIARY_EDITOR_DIARY } from '../constants';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useStateHook = (props) => {

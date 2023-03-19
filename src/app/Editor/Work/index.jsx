@@ -6,7 +6,7 @@ import TabBarExtra from './TabBarExtra';
 import { Tabs } from 'antd';
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
-import { APP_CODE } from '@config/consts';
+import { APP_CODE } from '@config/constants';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -9,7 +9,7 @@ import { actions } from '@store';
 import classNames from 'classnames';
 import { Icon } from '@kunlunxu/brick';
 import { Modal, Tabs, Form } from 'antd';
-import { DIARY_EDITOR_DIARY } from '../../consts';
+import { DIARY_EDITOR_DIARY } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
 import { useCreateDiariesMutation, useUpdateDiariesMutation } from '@store/graphql';

@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRemovePhotosMutation } from '@store/graphql';
-import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/consts';
+import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 export default () => {
   const dispatch = useDispatch();

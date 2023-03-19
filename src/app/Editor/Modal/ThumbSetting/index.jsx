@@ -3,7 +3,7 @@ import scss from './index.module.scss';
 import { Modal } from 'antd';
 import { useMemo, useState } from 'react';
 import { Icon, Image } from '@kunlunxu/brick';
-import { THUMB_SETTING } from '../../consts';
+import { THUMB_SETTING } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {

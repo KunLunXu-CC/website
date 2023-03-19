@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useCallback, useMemo } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
 import { useNavigate } from 'react-router-dom';
-import { SERVICE_STATIC_IMAGE_URL } from '@config/consts';
+import { SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 const useStateHook = () => {
   const navigate = useNavigate();

@@ -3,13 +3,13 @@ import scss from './tabBarExtra.module.scss';
 import { useCallback, useMemo } from 'react';
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
-import { ARTICLE_STATUS } from '@config/consts';
+import { ARTICLE_STATUS } from '@config/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   THUMB_SETTING,
   REVOKE_CONFIRM,
   RELEASE_CONFIRM,
-} from '@app/Editor/consts';
+} from '@app/Editor/constants';
 
 export default () => {
   const dispatch = useDispatch();

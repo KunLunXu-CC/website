@@ -7,7 +7,7 @@ import Calendar from './Calendar';
 import scss from './index.module.scss';
 
 import { useMemo } from 'react';
-import { DIARY_MENU } from './consts';
+import { DIARY_MENU } from './constants';
 import { useSelector } from 'react-redux';
 
 // 菜单和组件的映射关系

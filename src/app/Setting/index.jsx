@@ -3,7 +3,7 @@ import Header from './Header';
 import scss from './index.module.scss';
 
 import { useMemo } from 'react';
-import { MENUS } from './consts';
+import { MENUS } from './constants';
 import { useSelector } from 'react-redux';
 
 const useStateHook = () => {

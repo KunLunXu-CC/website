@@ -1,7 +1,7 @@
 import scss from './index.module.scss';
 
 import { Modal } from 'antd';
-import { RELEASE_CONFIRM } from '../../consts';
+import { RELEASE_CONFIRM } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useStateHook = () => {

@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import scss from './title.module.scss';
 
 import { actions } from '@store';
-import { MOVE } from '../../consts';
+import { MOVE } from '../../constants';
 import { Icon } from '@kunlunxu/brick';
 import { Dropdown, Input } from 'antd';
-import { ARTICLE_STATUS } from '@config/consts';
+import { ARTICLE_STATUS } from '@config/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useMemo, useCallback, useEffect } from 'react';
 import {
