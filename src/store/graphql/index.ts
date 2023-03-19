@@ -45,15 +45,19 @@ export type AiChat = {
 };
 
 export type AiChatFields = {
-  content?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['Int']>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  messages?: InputMaybe<Array<InputMaybe<AiChatMessageField>>>;
+  name?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
 };
 
 export type AiChatMessage = {
   __typename?: 'AiChatMessage';
   content?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['String']>;
+};
+
+export type AiChatMessageField = {
+  content?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
 };
 
 export type AiChatSearch = {
@@ -1314,7 +1318,7 @@ export type CreateAiChatMutationVariables = Exact<{
 }>;
 
 
-export type CreateAiChatMutation = { __typename?: 'Mutation', createAiChats?: { __typename?: 'AiChats', change?: Array<{ __typename?: 'AiChat', id?: string | null, name?: string | null } | null> | null } | null };
+export type CreateAiChatMutation = { __typename?: 'Mutation', createAiChats?: { __typename?: 'AiChats', change?: Array<{ __typename?: 'AiChat', id?: string | null, name?: string | null, messages?: Array<{ __typename?: 'AiChatMessage', role?: string | null, content?: string | null } | null> | null } | null> | null } | null };
 
 export type DiaryOutputFieldsFragment = { __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null };
 
@@ -1488,6 +1492,10 @@ export const CreateAiChatDocument = `
     change {
       id
       name
+      messages {
+        role
+        content
+      }
     }
   }
 }

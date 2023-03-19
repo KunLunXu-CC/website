@@ -28,3 +28,13 @@
 .view {
   flex: 1;
 }
+
+.footer {
+  position: relative;
+}
+
+.send-btn {
+  right: 0;
+  bottom: 0;
+  position: absolute;
+}

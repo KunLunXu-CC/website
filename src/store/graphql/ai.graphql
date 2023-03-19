@@ -13,6 +13,7 @@ mutation createAiChat ($body: [AiChatFields!]!) {
     change {
       id
       name
+      messages { role content }
     }
   }
 }
