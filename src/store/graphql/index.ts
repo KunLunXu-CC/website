@@ -33,6 +33,49 @@ export type Scalars = {
   Upload: any;
 };
 
+export type AiChat = {
+  __typename?: 'AiChat';
+  creationTime?: Maybe<Scalars['Date']>;
+  creator?: Maybe<User>;
+  id?: Maybe<Scalars['ID']>;
+  messages?: Maybe<Array<Maybe<AiChatMessage>>>;
+  name?: Maybe<Scalars['String']>;
+  updateTime?: Maybe<Scalars['Date']>;
+  updater?: Maybe<User>;
+};
+
+export type AiChatFields = {
+  content?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<Scalars['Int']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+};
+
+export type AiChatMessage = {
+  __typename?: 'AiChatMessage';
+  content?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+};
+
+export type AiChatSearch = {
+  creator?: InputMaybe<Scalars['ID']>;
+  endCreationTime?: InputMaybe<Scalars['Date']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['ID']>;
+  ids?: InputMaybe<Array<Scalars['ID']>>;
+  name?: InputMaybe<Scalars['String']>;
+  startCreationTime?: InputMaybe<Scalars['Date']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']>;
+  updater?: InputMaybe<Scalars['ID']>;
+};
+
+export type AiChats = {
+  __typename?: 'AiChats';
+  change?: Maybe<Array<Maybe<AiChat>>>;
+  list?: Maybe<Array<Maybe<AiChat>>>;
+  message?: Maybe<Scalars['String']>;
+  pagination?: Maybe<Scalars['Pagination']>;
+};
+
 export type Algorithm = {
   __typename?: 'Algorithm';
   content?: Maybe<Scalars['String']>;
@@ -430,6 +473,7 @@ export type MonthlyBill = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAiChats?: Maybe<AiChats>;
   createAlgorithms?: Maybe<Algorithms>;
   createArticles?: Maybe<Articles>;
   createDiaries?: Maybe<Diaries>;
@@ -444,6 +488,7 @@ export type Mutation = {
   createUsers?: Maybe<Users>;
   login?: Maybe<Login>;
   releaseArticles?: Maybe<Articles>;
+  removeAiChats?: Maybe<AiChats>;
   removeAlgorithms?: Maybe<Algorithms>;
   removeArticles?: Maybe<Articles>;
   removeDiaries?: Maybe<Diaries>;
@@ -458,6 +503,7 @@ export type Mutation = {
   removeTags?: Maybe<Tags>;
   removeUsers?: Maybe<Users>;
   revokeArticles?: Maybe<Articles>;
+  updateAiChats?: Maybe<AiChats>;
   updateAlgorithms?: Maybe<Algorithms>;
   updateArticles?: Maybe<Articles>;
   updateDiaries?: Maybe<Diaries>;
@@ -471,6 +517,14 @@ export type Mutation = {
   updateTags?: Maybe<Tags>;
   updateUsers?: Maybe<Users>;
   uploadPhotos?: Maybe<Photos>;
+};
+
+
+export type MutationCreateAiChatsArgs = {
+  body: Array<AiChatFields>;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
 };
 
 
@@ -584,6 +638,14 @@ export type MutationReleaseArticlesArgs = {
 };
 
 
+export type MutationRemoveAiChatsArgs = {
+  conds: AiChatSearch;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
+};
+
+
 export type MutationRemoveAlgorithmsArgs = {
   conds: AlgorithmSearch;
   orderBy?: InputMaybe<OrderBy>;
@@ -693,6 +755,15 @@ export type MutationRevokeArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<ArticleSearch>;
+};
+
+
+export type MutationUpdateAiChatsArgs = {
+  body: AiChatFields;
+  conds: AiChatSearch;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
 };
 
 
@@ -888,6 +959,7 @@ export type PublicKey = {
 
 export type Query = {
   __typename?: 'Query';
+  aiChats?: Maybe<AiChats>;
   algorithms?: Maybe<Algorithms>;
   appleTouchbar?: Maybe<Touchbar>;
   articles?: Maybe<Articles>;
@@ -906,6 +978,13 @@ export type Query = {
   tags?: Maybe<Tags>;
   tagsWithArticles?: Maybe<Tags>;
   users?: Maybe<Users>;
+};
+
+
+export type QueryAiChatsArgs = {
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
 };
 
 
@@ -1223,6 +1302,20 @@ export type Users = {
   pagination?: Maybe<Scalars['Pagination']>;
 };
 
+export type GetAiChatsQueryVariables = Exact<{
+  search?: InputMaybe<AiChatSearch>;
+}>;
+
+
+export type GetAiChatsQuery = { __typename?: 'Query', aiChats?: { __typename?: 'AiChats', list?: Array<{ __typename?: 'AiChat', id?: string | null, name?: string | null, messages?: Array<{ __typename?: 'AiChatMessage', role?: string | null, content?: string | null } | null> | null } | null> | null } | null };
+
+export type CreateAiChatMutationVariables = Exact<{
+  body: Array<AiChatFields> | AiChatFields;
+}>;
+
+
+export type CreateAiChatMutation = { __typename?: 'Mutation', createAiChats?: { __typename?: 'AiChats', change?: Array<{ __typename?: 'AiChat', id?: string | null, name?: string | null } | null> | null } | null };
+
 export type DiaryOutputFieldsFragment = { __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null };
 
 export type GetDiariesQueryVariables = Exact<{
@@ -1372,6 +1465,30 @@ export const DiaryOutputFieldsFragmentDoc = `
     muscle
     bodyfat
     moistureContent
+  }
+}
+    `;
+export const GetAiChatsDocument = `
+    query getAiChats($search: AiChatSearch) {
+  aiChats(search: $search) {
+    list {
+      id
+      name
+      messages {
+        role
+        content
+      }
+    }
+  }
+}
+    `;
+export const CreateAiChatDocument = `
+    mutation createAiChat($body: [AiChatFields!]!) {
+  createAiChats(body: $body) {
+    change {
+      id
+      name
+    }
   }
 }
     `;
@@ -1613,6 +1730,12 @@ export const GetPublicKeyDocument = `
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
+    getAiChats: build.query<GetAiChatsQuery, GetAiChatsQueryVariables | void>({
+      query: (variables) => ({ document: GetAiChatsDocument, variables })
+    }),
+    createAiChat: build.mutation<CreateAiChatMutation, CreateAiChatMutationVariables>({
+      query: (variables) => ({ document: CreateAiChatDocument, variables })
+    }),
     getDiaries: build.query<GetDiariesQuery, GetDiariesQueryVariables | void>({
       query: (variables) => ({ document: GetDiariesDocument, variables })
     }),
@@ -1668,5 +1791,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 

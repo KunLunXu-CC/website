@@ -1,0 +1,18 @@
+query getAiChats ($search: AiChatSearch) {
+  aiChats (search: $search) {
+    list {
+      id
+      name
+      messages { role content }
+    }
+  }
+}
+
+mutation createAiChat ($body: [AiChatFields!]!) {
+  createAiChats(body: $body) {
+    change {
+      id
+      name
+    }
+  }
+}
