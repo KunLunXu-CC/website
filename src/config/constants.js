@@ -2,6 +2,7 @@
 
 // 应用 CODE
 export const APP_CODE = {
+  AI: 'ai',          // AI: 来自希腊神话中的工匠和发明家，代表着创造和技术能力，适合用于一款涉及工程和技术的
   USER: 'user',                  // 用户(包括权限)
   FUND: 'fund',                  // 基金
   ALBUM: 'album',                // 相册
@@ -11,7 +12,6 @@ export const APP_CODE = {
   LOGGER: 'logger',              // 日志
   SETTING: 'setting',            // 系统偏好设置
   ARTICLE: 'article',            // 文章
-  DAEDALUS: 'daedalus',          // AI: 来自希腊神话中的工匠和发明家，代表着创造和技术能力，适合用于一款涉及工程和技术的
 };
 
 // 布尔值
