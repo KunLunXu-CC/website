@@ -2,4 +2,15 @@
   padding: 16px 10px;
   box-sizing: border-box;
   background-color: #fff;
+
+  :global {
+    .ant-input-group-addon {
+      cursor: pointer;
+      font-size: 18px;
+
+      &:hover {
+        color: #69b1ff;
+      }
+    }
+  }
 }
