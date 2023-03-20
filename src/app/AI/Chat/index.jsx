@@ -51,29 +51,25 @@ export default () => {
   return (
     <div className={scss.chat}>
       <List />
-      <div className={scss.main}>
-        <div className={scss.header}>
-          header
+      <div className={scss.session}>
+        <div className={scss.view}>
+          111
         </div>
-        <div className={scss.session}>
-          <div className={scss.view}>
-            预览
-          </div>
-          <div className={scss.footer}>
-            <Input.TextArea
-              rows={1}
-              value={sendMessage}
-              disabled={isConnecting}
-              onChange={(e) => setSendMessage(e.target.value)}
-            />
-            <span
-              onClick={handleSend}
-              className={scss['send-btn']}>
-              发送
-            </span>
-          </div>
+        <div className={scss.edit}>
+          <Input.TextArea
+            bordered={false}
+            value={sendMessage}
+            disabled={isConnecting}
+            autoSize={{ minRows: 2, maxRows: 6 }}
+            onChange={(e) => setSendMessage(e.target.value)}
+          />
+          <span
+            onClick={handleSend}
+            className={scss['send-btn']}>
+            发送
+          </span>
+        </div>
 
-        </div>
       </div>
     </div>
   );

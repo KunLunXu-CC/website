@@ -24,7 +24,7 @@ export default () => {
       layout
       className={scss.list}
       operationList={['right']}
-      margin={{ right: '20%' }}
+      margin={{ right: '50%' }}
       style={{ height: '100%' }}>
       <div onClick={handleAdd}>
         +
