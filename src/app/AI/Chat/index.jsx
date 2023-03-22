@@ -1,5 +1,6 @@
 import { Input } from 'antd';
 import { actions } from '@store';
+import { Icon } from '@kunlunxu/brick';
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCreateAiChatMutation } from '@store/graphql';
@@ -60,13 +61,14 @@ export default () => {
             bordered={false}
             value={sendMessage}
             disabled={isConnecting}
+            placeholder="请说出你的疑惑"
             autoSize={{ minRows: 1, maxRows: 3 }}
             onChange={(e) => setSendMessage(e.target.value)}
           />
           <span
             onClick={handleSend}
             className={scss['send-btn']}>
-            发送
+            <Icon type="icon-send" />
           </span>
         </div>
 

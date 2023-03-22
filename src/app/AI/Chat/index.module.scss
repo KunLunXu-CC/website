@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
 
-  margin: 5px;
+  margin: 2px;
   padding: 20px;
 
   border-radius: 0 8px 8px 0;
@@ -29,7 +29,7 @@
 
   :global {
     .ant-input {
-      padding: 10px 0;
+      padding: 10px;
       box-sizing: border-box;
       background-color: #f3f3f3;
     }
@@ -37,8 +37,22 @@
 }
 
 .send-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   right: 0;
   bottom: 0;
   position: absolute;
-  background-color: #181a1e;
+
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  &:hover {
+    border-radius: 4px;
+    background-color: #ebf3ff;
+  }
 }
