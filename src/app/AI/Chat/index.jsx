@@ -60,7 +60,7 @@ export default () => {
             bordered={false}
             value={sendMessage}
             disabled={isConnecting}
-            autoSize={{ minRows: 2, maxRows: 6 }}
+            autoSize={{ minRows: 1, maxRows: 3 }}
             onChange={(e) => setSendMessage(e.target.value)}
           />
           <span

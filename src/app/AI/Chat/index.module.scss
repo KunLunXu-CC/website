@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
 
-  background-color: #f5f7fb;
+  background-color: #161727;
 }
 
 .session {
@@ -11,10 +11,10 @@
   display: flex;
   flex-direction: column;
 
-  margin: 20px;
+  margin: 5px;
   padding: 20px;
 
-  border-radius: 16px;
+  border-radius: 0 8px 8px 0;
   background-color: #fff;
 }
 
@@ -29,7 +29,9 @@
 
   :global {
     .ant-input {
-      background: transparent;
+      padding: 10px 0;
+      box-sizing: border-box;
+      background-color: #f3f3f3;
     }
   }
 }
