@@ -54,7 +54,12 @@ export default () => {
       <List />
       <div className={scss.session}>
         <div className={scss.view}>
-          111
+          <div className={scss.ai}>
+            成都倍特得诺药业有限公司
+          </div>
+          <div className={scss.user}>
+            同申请号相关药物信息
+          </div>
         </div>
         <div className={scss.edit}>
           <Input.TextArea
