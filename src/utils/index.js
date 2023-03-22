@@ -71,3 +71,19 @@ export const message = ({
     getContainer: () => (document.getElementById(code)),
   });
 };
+
+/**
+ * 获取 url 参数
+ *
+ * @param {string} key 要获取的指定参数
+ * @returns {string|URLSearchParams} 返回 URLSearchParams 对象或者参数值
+ */
+export const urlParams = (key) => {
+  const urlSearchParams = new URLSearchParams(location.search);
+
+  if (key) {
+    return urlSearchParams.get(key);
+  }
+
+  return urlSearchParams;
+};

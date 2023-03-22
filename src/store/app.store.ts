@@ -1,5 +1,11 @@
 import apps from '@app';
+import { urlParams } from '@utils';
 import { createSlice } from '@reduxjs/toolkit';
+
+interface APP {
+  code: string,
+  name: string,
+}
 
 export interface AppStore {
   docks: {
@@ -29,7 +35,15 @@ export default createSlice({
         const { code, name } = apps[v.code] || {};
         return { code, name };
       }).filter((v: any) => v.code && v.name);
-      return { ...state, docks };
+
+      // 默认开启的「应用」
+      const appCodeOfUrl = urlParams('app');
+      const defaultOpen = docks.find((v: APP) => v.code === appCodeOfUrl);
+      const opens = defaultOpen
+        ? [{ ...defaultOpen,  isMin: false, isMax: false }]
+        : [];
+
+      return { ...state, opens, docks };
     },
 
     open: (state, { payload: app }) => {
