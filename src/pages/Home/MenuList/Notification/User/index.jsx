@@ -1,11 +1,11 @@
 import Card from '../Card';
 import scss from './index.module.scss';
 
+import { getOssUrl } from '@utils';
 import { useSelector } from 'react-redux';
 import { useCallback, useMemo } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
 import { useNavigate } from 'react-router-dom';
-import { SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 const useStateHook = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const useStateHook = () => {
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
-      ? `${SERVICE_STATIC_IMAGE_URL}${avatars[index].name}`
+      ? getOssUrl(avatars[index].name)
       : '';
   }, [avatars]);
 

@@ -20,10 +20,6 @@ export const BOOLEAN = {
   FALSE: 0,
 };
 
-// 服务器静态资源-图片 url
-export const SERVICE_STATIC_IMAGE_URL
-  = 'https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/';
-
 // [状态] 模型基本状态 (0: 禁用， 1： 启用， -11： 删除)
 export const STATUS = {
   DISABLE: 0,   // 禁用

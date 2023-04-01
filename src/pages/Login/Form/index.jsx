@@ -1,12 +1,11 @@
 import scss from './index.module.scss';
 
-import { rsa } from '@utils';
+import { rsa, getOssUrl } from '@utils';
 import { useSelector } from 'react-redux';
 import { Input, Form, Button } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
 import { useNavigate } from 'react-router-dom';
-import { SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 import { useGetPublicKeyQuery, useLoginMutation } from '@store/graphql';
 
 export default () => {
@@ -23,7 +22,7 @@ export default () => {
   const avatar = useMemo(() => {
     const index = Math.floor(Math.random() * avatars.length);
     return avatars.length > 0
-      ? `${SERVICE_STATIC_IMAGE_URL}${avatars[index].name}`
+      ? getOssUrl(avatars[index].name)
       : '';
   }, [avatars]);
 

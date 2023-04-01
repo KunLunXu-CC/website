@@ -3,11 +3,12 @@ import scss from './list.module.scss';
 
 import { Empty } from 'antd';
 import { actions } from '@store';
+import { getOssUrl } from '@utils';
 import { useCallback } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
+import { PHOTO_TYPE } from '@config/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRemovePhotosMutation } from '@store/graphql';
-import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 export default () => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export default () => {
             className={scss.item}>
             <div className={scss.preview}>
               <div className={scss['preview-body']}>
-                <Image src={`${SERVICE_STATIC_IMAGE_URL}${item.name}`} />
+                <Image src={getOssUrl(item.name)} />
               </div>
               <div className={scss['preview-mask']}>
                 <Icon

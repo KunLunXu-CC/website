@@ -1,17 +1,17 @@
-import { notification } from 'antd';
 import JSEncrypt from 'jsencrypt';
+import { notification } from 'antd';
 
 /**
  * 根据需要过滤的列表过滤指定对象
  *
  * @param {object} obj          要过滤的对象
- * @param {Array} filterVaslue  要过滤的值的列表
+ * @param {Array} filterValues  要过滤的值的列表
  * @returns {object} 过滤后的对象
  */
-export const filterObject = (obj, filterVaslue = []) => {
+export const filterObject = (obj, filterValues = []) => {
   const filter = {};
   _.forIn(obj, (value, key) => {
-    !filterVaslue.includes(value) && (filter[key] = value);
+    !filterValues.includes(value) && (filter[key] = value);
   });
   return filter;
 };
@@ -87,3 +87,7 @@ export const urlParams = (key) => {
 
   return urlSearchParams;
 };
+
+
+// 获取 OSS 对应资源 url
+export const getOssUrl = (fileName) => `https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/${fileName}`;

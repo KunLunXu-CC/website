@@ -1,16 +1,18 @@
 import { actions } from '@store';
+import { getOssUrl } from '@utils';
 import { useCallback } from 'react';
 import { Markdown } from '@kunlunxu/brick';
+import { PHOTO_TYPE } from '@config/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUploadPhotosMutation } from '@store/graphql';
 import { useHandleUpdateArticles } from '@app/Editor/hooks';
-import { PHOTO_TYPE, SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 // 渲染 md 插件 markdown-to-jsx 配置
 const MD_TO_JSX_OPTIONS = {
   overrides: {
     img: ({ alt, src }) => {
-      const handledSrc = `${/^https?:/.test(src) ? '' : SERVICE_STATIC_IMAGE_URL}${src}`;
+      const handledSrc = /^https?:/.test(src) ? src : getOssUrl(src);
+
       return (
         <img
           alt={alt}

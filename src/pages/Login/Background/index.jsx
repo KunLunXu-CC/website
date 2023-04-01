@@ -1,13 +1,11 @@
-import React, {
-  useMemo,
-} from 'react';
 import Error from './Error';
 import Loading from './Loading';
 import scss from './index.module.scss';
 
+import { useMemo } from 'react';
+import { getOssUrl } from '@utils';
 import { Image } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
-import { SERVICE_STATIC_IMAGE_URL } from '@config/constants';
 
 const useStateHook = () => {
   const photos = useSelector((state) => (
@@ -17,7 +15,7 @@ const useStateHook = () => {
   const bg = useMemo(() => {
     const index = Math.floor(Math.random() * photos.length);
     return photos.length > 0
-      ? `${SERVICE_STATIC_IMAGE_URL}${photos[index].name}`
+      ? getOssUrl(photos[index].name)
       : '';
   }, [photos]);
 
