@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.7](https://github.com/KunLunXu0-0/website/compare/v4.0.6...v4.0.7) (2023-04-01)
+
+
+### Features
+
+* 相册新增配置 ([4e965ab](https://github.com/KunLunXu0-0/website/commit/4e965ab0ab06076ceebd4697f61d0753ae040f97))
+
+
+### Bug Fixes
+
+* 搜索时默认聚焦 ([65e6ff7](https://github.com/KunLunXu0-0/website/commit/65e6ff72390cd931b7584ef87ec052033fffb8bb))
+
 ### [4.0.6](https://github.com/KunLunXu0-0/website/compare/v4.0.5...v4.0.6) (2023-04-01)
 
 ### [4.0.5](https://github.com/KunLunXu0-0/website/compare/v4.0.4...v4.0.5) (2023-03-08)
