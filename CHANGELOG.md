@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.3](https://github.com/KunLunXu0-0/website/compare/v4.1.2...v4.1.3) (2023-04-01)
+
+
+### Features
+
+* 🎸 update title ([7a5ce4e](https://github.com/KunLunXu0-0/website/commit/7a5ce4e128e5abded28349e81dab99b2c7022118))
+
 ### [4.1.2](https://github.com/KunLunXu0-0/website/compare/v4.1.1...v4.1.2) (2023-04-01)
 
 ### [4.1.1](https://github.com/KunLunXu0-0/website/compare/v4.1.0...v4.1.1) (2023-04-01)
