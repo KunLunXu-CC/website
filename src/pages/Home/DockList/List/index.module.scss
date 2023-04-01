@@ -26,9 +26,15 @@ $dock-body-height: 54px; // dock 内容高度
   height: $dock-body-height;
 
   border-radius: 10px;
+  mix-blend-mode: normal;
   backdrop-filter: blur(40px);   // 背景虚化
-  background: rgb(0 0 0 / 20%);
-  border: 2px solid rgba($color: #fff, $alpha: 6%);
+  background:
+    linear-gradient(
+      163.27deg,
+      rgba($color: #2f2f2f, $alpha: 69%) 47.94%,
+      rgba($color: #212121, $alpha: 79%) 77.13%
+    );
+  border: 2px solid rgba($color: #fff, $alpha: 10%);
   box-shadow: 0 0 0 1px rgba($color: #000, $alpha: 30%);
 }
 
