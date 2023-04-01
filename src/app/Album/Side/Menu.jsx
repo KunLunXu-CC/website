@@ -36,6 +36,11 @@ const listData = [
     key: PHOTO_TYPE.DESKTOP.VALUE,
     icon: 'icon-yunzhuomian-shouye',
   },
+  {
+    icon: 'icon-album-icon',
+    name: PHOTO_TYPE.ICON.DESC,
+    key: PHOTO_TYPE.ICON.VALUE,
+  },
 ];
 
 export default () => {

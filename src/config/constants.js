@@ -45,4 +45,5 @@ export const PHOTO_TYPE = {
   DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
   THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
   AVATAR: { VALUE: 4, DESC: '头像' },           // 头像
+  ICON: { VALUE: 5, DESC: '应用图标' },            // 图标
 };
