@@ -52,7 +52,7 @@ $dock-body-height: 54px; // dock 内容高度
   // 图标大小设置
   .dock-icon {
     transition: all 0.3s;
-    font-size: calc(var(--size) - 15px);
+    width: calc(var(--size) - 6px);
 
     // TODO: 设置倒影: 参考 https://www.zhangxinxu.com/wordpress/2016/08/webkit-box-reflect-moz-element/
     // -webkit-box-reflect: below 0 linear-gradient(transparent 50%, #fff 100%);

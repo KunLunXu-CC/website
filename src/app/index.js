@@ -8,11 +8,12 @@ import Logger from './Logger';
 import Setting from './Setting';
 import { APP_CODE } from '@config/constants';
 
+// 图标来自 figma
 export default {
   [APP_CODE.AI]: {
     name: 'AI',
     component: AI,
-    icon: 'klx.pro.71e88db3660e596de6ded68375b8bb38.svg',
+    icon: 'klx.pro.abf8398cdc33310c6bf5b439a890da0a.svg',
     code: APP_CODE.AI,
     modalProps: {
       dragHeight: 30,
@@ -25,7 +26,7 @@ export default {
     name: '相册',
     component: Album,
     code: APP_CODE.ALBUM,
-    icon: 'klx.pro.6f66375e9c7d528f20c5fa57b3ad1ea0.svg',
+    icon: 'klx.pro.a0200bdbf017134abc741194fd98faf8.svg',
     modalProps: {
       dragHeight: 40,
       toolPosition: { top: 8, left: 10 },
@@ -35,7 +36,7 @@ export default {
   [APP_CODE.EDITOR]: {
     name: '编辑器',
     component: Editor,
-    icon: 'klx.pro.a0745138b76ad9e1d99e2489297e8131.svg',
+    icon: 'klx.pro.510a9a0f9a06596a9debe051979ae81c.svg',
     code: APP_CODE.EDITOR,
     modalProps: {
       dragHeight: 30,
@@ -47,7 +48,7 @@ export default {
   [APP_CODE.READER]: {
     name: '阅读',
     component: Reader,
-    icon: 'klx.pro.4bc44b31f4d00e5192b7deabf6682cf1.svg',
+    icon: 'klx.pro.626304a5235e36b3bddf04e2f688b5df.svg',
     code: APP_CODE.READER,
     modalProps: {
       dragHeight: 40,
@@ -58,7 +59,7 @@ export default {
   [APP_CODE.DIARY]: {
     name: '日记',
     component: Diary,
-    icon: 'klx.pro.fe12a2f0188beb3fce602354664551ab.svg',
+    icon: 'klx.pro.271ab305dd478bb0332ddc5db76219fc.svg',
     code: APP_CODE.DIARY,
     modalProps: {
       dragHeight: 20,
@@ -69,7 +70,7 @@ export default {
   [APP_CODE.LOGGER]: {
     name: '日志',
     component: Logger,
-    icon: 'klx.pro.c2a2a3a8b3e4ddfea309d3e292531d82.svg',
+    icon: 'klx.pro.446ad243a8ff5ab63e1c774bbea5db93.svg',
     code: APP_CODE.LOGGER,
     modalProps: {
       dragHeight: 40,
@@ -79,7 +80,7 @@ export default {
   },
   [APP_CODE.SETTING]: {
     name: '系统偏好设置',
-    icon: 'klx.pro.38008433a4ff3ef788a5baae4f077483.svg',
+    icon: 'klx.pro.4a3046239475ce8e5e87c1f056d2b973.svg',
     component: Setting,
     code: APP_CODE.SETTING,
     modalProps: {

@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 import styled from 'styled-components';
 
-import { Icon } from '@kunlunxu/brick';
-import { useState, useCallback, useMemo } from 'react';
+import { getOssUrl } from '@utils';
 import { useSelector } from 'react-redux';
+import { useState, useCallback, useMemo } from 'react';
 
 const DockApp = styled.div`
   --scale: ${({ index, currentIndex }) => {
@@ -57,9 +57,10 @@ export default (props) => {
             <div className={scss['dock-tooltip']}>
               {apps[v.code].name}
             </div>
-            <Icon
-              type={apps[v.code].icon}
+            <img
+              alt={apps[v.code].name}
               className={scss['dock-icon']}
+              src={getOssUrl(apps[v.code].icon)}
             />
           </DockApp>
         ))}
