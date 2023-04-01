@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.1](https://github.com/KunLunXu0-0/website/compare/v4.1.0...v4.1.1) (2023-04-01)
+
+
+### Features
+
+* 🎸 调整 oss 资源链接的拼接方式 ([17c988b](https://github.com/KunLunXu0-0/website/commit/17c988b9d523adbf76e9159e4054117698438a5d))
+* 🎸 应用图标管理 ([7529907](https://github.com/KunLunXu0-0/website/commit/7529907de055ab94b4ab6c55da6eab170f6ff8a8))
+* 🎸 update app icons ([77447c4](https://github.com/KunLunXu0-0/website/commit/77447c45212ebb194589c44b557a386b7615d0df))
+* 🎸 update dock style ([11ecc8d](https://github.com/KunLunXu0-0/website/commit/11ecc8ddb4f5abd1ffea1639abe51a66cc381755))
+
 ## [4.1.0](https://github.com/KunLunXu0-0/website/compare/v4.0.7...v4.1.0) (2023-04-01)
 
 ### [4.0.7](https://github.com/KunLunXu0-0/website/compare/v4.0.6...v4.0.7) (2023-04-01)
