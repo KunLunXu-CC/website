@@ -23,8 +23,8 @@ module.exports.globalConsts = {
   // 生产环境配置
   production: {
     _DEV_: false,
-    GRAPHQL_URL: JSON.stringify('https://www.qianyin925.com:4000/graphql'),
-    WS_SERVICER: JSON.stringify('wss://www.qianyin925.com:4000'),
+    GRAPHQL_URL: JSON.stringify('https://www.kunlunxu.cc:4000/graphql'),
+    WS_SERVICER: JSON.stringify('wss://www.kunlunxu.cc:4000'),
   },
 
   // 开发环境配置
