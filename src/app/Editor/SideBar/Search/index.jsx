@@ -23,6 +23,7 @@ export default () => {
 
       <div className={scss['input-wrapper']}>
         <Input
+          autoFocus
           value={keyword}
           placeholder="关键词"
           className={scss.input}
