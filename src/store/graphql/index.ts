@@ -33,6 +33,53 @@ export type Scalars = {
   Upload: any;
 };
 
+export type AiChat = {
+  __typename?: 'AiChat';
+  creationTime?: Maybe<Scalars['Date']>;
+  creator?: Maybe<User>;
+  id?: Maybe<Scalars['ID']>;
+  messages?: Maybe<Array<Maybe<AiChatMessage>>>;
+  name?: Maybe<Scalars['String']>;
+  updateTime?: Maybe<Scalars['Date']>;
+  updater?: Maybe<User>;
+};
+
+export type AiChatFields = {
+  messages?: InputMaybe<Array<InputMaybe<AiChatMessageField>>>;
+  name?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+};
+
+export type AiChatMessage = {
+  __typename?: 'AiChatMessage';
+  content?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+};
+
+export type AiChatMessageField = {
+  content?: InputMaybe<Scalars['String']>;
+  role?: InputMaybe<Scalars['String']>;
+};
+
+export type AiChatSearch = {
+  creator?: InputMaybe<Scalars['ID']>;
+  endCreationTime?: InputMaybe<Scalars['Date']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']>;
+  id?: InputMaybe<Scalars['ID']>;
+  ids?: InputMaybe<Array<Scalars['ID']>>;
+  name?: InputMaybe<Scalars['String']>;
+  startCreationTime?: InputMaybe<Scalars['Date']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']>;
+  updater?: InputMaybe<Scalars['ID']>;
+};
+
+export type AiChats = {
+  __typename?: 'AiChats';
+  change?: Maybe<Array<Maybe<AiChat>>>;
+  list?: Maybe<Array<Maybe<AiChat>>>;
+  message?: Maybe<Scalars['String']>;
+  pagination?: Maybe<Scalars['Pagination']>;
+};
+
 export type Algorithm = {
   __typename?: 'Algorithm';
   content?: Maybe<Scalars['String']>;
@@ -430,6 +477,7 @@ export type MonthlyBill = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAiChats?: Maybe<AiChats>;
   createAlgorithms?: Maybe<Algorithms>;
   createArticles?: Maybe<Articles>;
   createDiaries?: Maybe<Diaries>;
@@ -444,6 +492,7 @@ export type Mutation = {
   createUsers?: Maybe<Users>;
   login?: Maybe<Login>;
   releaseArticles?: Maybe<Articles>;
+  removeAiChats?: Maybe<AiChats>;
   removeAlgorithms?: Maybe<Algorithms>;
   removeArticles?: Maybe<Articles>;
   removeDiaries?: Maybe<Diaries>;
@@ -458,6 +507,7 @@ export type Mutation = {
   removeTags?: Maybe<Tags>;
   removeUsers?: Maybe<Users>;
   revokeArticles?: Maybe<Articles>;
+  updateAiChats?: Maybe<AiChats>;
   updateAlgorithms?: Maybe<Algorithms>;
   updateArticles?: Maybe<Articles>;
   updateDiaries?: Maybe<Diaries>;
@@ -471,6 +521,14 @@ export type Mutation = {
   updateTags?: Maybe<Tags>;
   updateUsers?: Maybe<Users>;
   uploadPhotos?: Maybe<Photos>;
+};
+
+
+export type MutationCreateAiChatsArgs = {
+  body: Array<AiChatFields>;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
 };
 
 
@@ -584,6 +642,14 @@ export type MutationReleaseArticlesArgs = {
 };
 
 
+export type MutationRemoveAiChatsArgs = {
+  conds: AiChatSearch;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
+};
+
+
 export type MutationRemoveAlgorithmsArgs = {
   conds: AlgorithmSearch;
   orderBy?: InputMaybe<OrderBy>;
@@ -693,6 +759,15 @@ export type MutationRevokeArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
   pagination?: InputMaybe<Scalars['Pagination']>;
   search?: InputMaybe<ArticleSearch>;
+};
+
+
+export type MutationUpdateAiChatsArgs = {
+  body: AiChatFields;
+  conds: AiChatSearch;
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
 };
 
 
@@ -888,6 +963,7 @@ export type PublicKey = {
 
 export type Query = {
   __typename?: 'Query';
+  aiChats?: Maybe<AiChats>;
   algorithms?: Maybe<Algorithms>;
   appleTouchbar?: Maybe<Touchbar>;
   articles?: Maybe<Articles>;
@@ -906,6 +982,13 @@ export type Query = {
   tags?: Maybe<Tags>;
   tagsWithArticles?: Maybe<Tags>;
   users?: Maybe<Users>;
+};
+
+
+export type QueryAiChatsArgs = {
+  orderBy?: InputMaybe<OrderBy>;
+  pagination?: InputMaybe<Scalars['Pagination']>;
+  search?: InputMaybe<AiChatSearch>;
 };
 
 
