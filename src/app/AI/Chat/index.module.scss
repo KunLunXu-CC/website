@@ -12,46 +12,8 @@
   flex-direction: column;
 
   margin: 2px;
-  padding: 20px;
-
   border-radius: 0 8px 8px 0;
   background-color: #fff;
-}
-
-.view {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  > div {
-    padding: 10px;
-    max-width: 80%;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    background-color: #f1f1f1;
-  }
-
-  > div:nth-child(odd) {
-    align-self: flex-start;
-  }
-
-  > div:nth-child(even) {
-    align-self: flex-end;
-  }
-}
-
-.edit {
-  position: relative;
-  border-radius: 16px;
-  background-color: #f5f7fb;
-
-  :global {
-    .ant-input {
-      padding: 10px;
-      box-sizing: border-box;
-      background-color: #f3f3f3;
-    }
-  }
 }
 
 .send-btn {

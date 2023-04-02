@@ -1,0 +1,14 @@
+.text-area {
+  margin: 20px;
+  position: relative;
+  border-radius: 16px;
+  background-color: #f5f7fb;
+
+  :global {
+    .ant-input {
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #f3f3f3;
+    }
+  }
+}

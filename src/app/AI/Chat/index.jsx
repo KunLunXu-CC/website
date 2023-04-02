@@ -1,85 +1,14 @@
-import { Input } from 'antd';
-import { actions } from '@store';
-import { Icon } from '@kunlunxu/brick';
-import { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCreateAiChatMutation } from '@store/graphql';
-
-import scss from './index.module.scss';
 import List from './List';
+import History from './History';
+import TextArea from './TextArea';
+import scss from './index.module.scss';
 
-// 参考: https://dribbble.com/shots/20298059-Messenger-UI
-export default () => {
-  const dispatch = useDispatch();
-  const [sendMessage, setSendMessage] = useState();
-  const [isConnecting, setIsConnecting] = useState(false); // 连接中
-  const activeId = useSelector((state) => state.ai.chat.activeId);
-  const [createAiChat] = useCreateAiChatMutation();
-
-  const handleSend = useCallback(async () => {
-    let chatId = activeId;
-
-    if (!activeId) {
-      const { data } = await createAiChat({ body: {
-        messages: [{ role: 'user', content: sendMessage }],
-      } });
-
-      const [newChat] = data.createAiChats.change;
-      chatId = newChat.id;
-
-      dispatch(actions.ai.addChat(newChat));
-      dispatch(actions.ai.setActiveChat(newChat.id));
-    }
-
-    const source = new EventSource(`http://127.0.0.1:4000/demo?message=${sendMessage}&chatId=${chatId}`);
-    source.addEventListener('open', () => setIsConnecting(true));
-    source.addEventListener('error', () => {
-      source.close();
-      setIsConnecting(false);
-    });
-
-    source.addEventListener('message', (event) => {
-      if (event.data.trim() === '[DONE]') { // 结束则关闭链接
-        source.close();
-        setIsConnecting(false);
-        return;
-      }
-
-      console.log(event.data);
-    });
-  }, [activeId, createAiChat, dispatch, sendMessage]);
-
-  return (
-    <div className={scss.chat}>
-      <List />
-      <div className={scss.session}>
-        <div className={scss.view}>
-          <div className={scss.ai}>
-            成都倍特得诺药业有限公司
-          </div>
-          <div className={scss.user}>
-            同申请号相关药物信息
-          </div>
-        </div>
-        <div className={scss.edit}>
-          <Input.TextArea
-            bordered={false}
-            value={sendMessage}
-            disabled={isConnecting}
-            placeholder="请说出你的疑惑"
-            autoSize={{ minRows: 1, maxRows: 3 }}
-            onChange={(e) => setSendMessage(e.target.value)}
-          />
-          <span
-            onClick={handleSend}
-            className={scss['send-btn']}>
-            <Icon type="icon-send" />
-          </span>
-        </div>
-
-      </div>
+export default () => (
+  <div className={scss.chat}>
+    <List />
+    <div className={scss.session}>
+      <History />
+      <TextArea />
     </div>
-  );
-};
-
-
+  </div>
+);

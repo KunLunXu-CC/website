@@ -14,14 +14,14 @@ interface Chat {
 interface State {
   chat: {
     list: Chat[]
-    activeId: string | null
+    active: Chat | null
   }
 }
 
 export const initialState: State = {
   chat: {
     list: [],
-    activeId: null,
+    active: null,
   },
 };
 
@@ -40,16 +40,16 @@ export default createSlice({
         list: [...state.chat.list, chat],
       },
     }),
-    setActiveChat: (state, { payload: activeId }): any => ({
+    setActiveChat: (state, { payload: active }): any => ({
       ...state,
-      chat: { ...state.chat, activeId },
+      chat: { ...state.chat, active },
     }),
 
     appendChatMessage: (state, { payload: content }): any => {
       const newChatList: Chat[] = cloneDeep(state.chat.list);
 
       const currentChar = newChatList.find(
-        (v) => v.id === state.chat.activeId,
+        (v) => v.id === state.chat.active?.id,
       ) as Chat;
 
       const lastMessage = last(currentChar.messages) as Message;

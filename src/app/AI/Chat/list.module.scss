@@ -13,3 +13,20 @@
     }
   }
 }
+
+.item {
+  cursor: pointer;
+
+  padding: 6px;
+  margin: 10px 0;
+
+  border-radius: 4px;
+  transition: all 0.4s;
+  background-color: #2c3137;
+
+  color: rgba($color: #fff, $alpha: 60%);
+
+  &:hover {
+    background-color: #374047;
+  }
+}
