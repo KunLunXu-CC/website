@@ -9,9 +9,9 @@ export const APP_CODE = {
   DIARY: 'diary',                // 日记
   READER: 'reader',              // 阅读
   EDITOR: 'editor',              // 编辑器
-  LOGGER: 'logger',              // 日志
   SETTING: 'setting',            // 系统偏好设置
   ARTICLE: 'article',            // 文章
+  MONITORING: 'monitoring',      // 鉴查院
 };
 
 // 布尔值

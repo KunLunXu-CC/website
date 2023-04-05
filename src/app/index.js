@@ -4,8 +4,8 @@ import Diary from './Diary';
 import Album from './Album';
 import Editor from './Editor';
 import Reader from './Reader';
-import Logger from './Logger';
 import Setting from './Setting';
+import Monitoring from './Monitoring';
 import { APP_CODE } from '@config/constants';
 
 // 图标来自 figma
@@ -67,13 +67,14 @@ export default {
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
-  [APP_CODE.LOGGER]: {
-    name: '日志',
-    component: Logger,
+  [APP_CODE.MONITORING]: {
+    name: '鉴查院',
+    component: Monitoring,
     icon: 'klx.pro.446ad243a8ff5ab63e1c774bbea5db93.svg',
-    code: APP_CODE.LOGGER,
+    code: APP_CODE.MONITORING,
     modalProps: {
       dragHeight: 40,
+      showShadow: false,
       toolPosition: { top: 10, left: 10 },
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
