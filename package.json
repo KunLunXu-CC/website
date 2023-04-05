@@ -54,7 +54,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
-    "@kunlunxu/brick": "^2.2.8",
+    "@kunlunxu/brick": "^2.2.9",
     "@reduxjs/toolkit": "^1.8.3",
     "antd": "^5.1.1",
     "axios": "^0.27.2",

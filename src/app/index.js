@@ -17,8 +17,6 @@ export default {
     code: APP_CODE.AI,
     modalProps: {
       dragHeight: 30,
-      toolPosition: { top: 6, left: -4 },
-      toolStyle: { transform: 'scale(0.8)' },
       defaultParams: { width: 1000, height: 530, offsetX: 100, offsetY: 40 },
     },
   },
@@ -29,7 +27,6 @@ export default {
     icon: 'klx.pro.a0200bdbf017134abc741194fd98faf8.svg',
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 8, left: 10 },
       defaultParams: { width: 1000, height: 530, offsetX: 50, offsetY: 50 },
     },
   },
@@ -39,9 +36,13 @@ export default {
     icon: 'klx.pro.510a9a0f9a06596a9debe051979ae81c.svg',
     code: APP_CODE.EDITOR,
     modalProps: {
+      tool: {
+        top: 11,
+        left: 8,
+        size: 10,
+        width: 50,
+      },
       dragHeight: 30,
-      toolPosition: { top: 6, left: -4 },
-      toolStyle: { transform: 'scale(0.8)' },
       defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 40 },
     },
   },
@@ -52,7 +53,6 @@ export default {
     code: APP_CODE.READER,
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 10, left: 10 },
       defaultParams: { width: 1020, height: 530, offsetX: 60, offsetY: 60 },
     },
   },
@@ -63,7 +63,7 @@ export default {
     code: APP_CODE.DIARY,
     modalProps: {
       dragHeight: 20,
-      toolPosition: { top: 11, left: 18 },
+      tool: { top: 11, left: 18 },
       defaultParams: { width: 1220, height: 630, offsetX: 50, offsetY: 50 },
     },
   },
@@ -73,9 +73,8 @@ export default {
     icon: 'klx.pro.446ad243a8ff5ab63e1c774bbea5db93.svg',
     code: APP_CODE.MONITORING,
     modalProps: {
+      isPure: true,
       dragHeight: 40,
-      showShadow: false,
-      toolPosition: { top: 6, left: 40 },
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },
@@ -85,8 +84,11 @@ export default {
     component: Setting,
     code: APP_CODE.SETTING,
     modalProps: {
+      tool: {
+        top: 18,
+        left: 14,
+      },
       dragHeight: 40,
-      toolPosition: { top: 14, left: 14 },
       defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
     },
   },
@@ -98,7 +100,6 @@ export default {
     icon: 'klx.pro.d1fb923369fb7b28217133738e37ba2f.svg',
     modalProps: {
       dragHeight: 40,
-      toolPosition: { top: 14, left: 14 },
       defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
     },
   },
