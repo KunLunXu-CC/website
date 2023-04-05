@@ -7,23 +7,23 @@ import { useCallback } from 'react';
 import { Window } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = () => {
+export default () => {
   const dispatch = useDispatch();
   const opens = useSelector((state) => state.app?.opens);
 
-  const onClose = useCallback((app) => {
+  const handleClose = useCallback((app) => {
     dispatch(actions.app.close(app));
   }, [dispatch]);
 
-  const onMin = useCallback((app) => {
+  const handleMin = useCallback((app) => {
     dispatch(actions.app.minimize(app));
   }, [dispatch]);
 
-  const onMax = useCallback((app) => {
+  const handleMax = useCallback((app) => {
     dispatch(actions.app.maximize(app));
   }, [dispatch]);
 
-  const onMouseDown = useCallback((app) => {
+  const handleMouseDown = useCallback((app) => {
     if (_.last(opens)?.code === app.code) {
       return false;
     }
@@ -31,23 +31,18 @@ const useStateHook = () => {
     dispatch(actions.app.stick(app));
   }, [dispatch, opens]);
 
-  return { opens, onClose, onMin, onMax, onMouseDown };
-};
-
-export default () => {
-  const state = useStateHook();
   return (
     <div className={scss['app-block']}>
-      {state.opens.map((app) => {
+      {opens.map((app) => {
         const { component: Component, modalProps } = apps[app.code];
         return (
           <Window
             key={app.code}
             isMin={app.isMin}
-            onMin={state.onMin.bind(null, app)}
-            onMax={state.onMax.bind(null, app)}
-            onClose={state.onClose.bind(null, app)}
-            onMouseDown={state.onMouseDown.bind(null, app)}
+            onMin={handleMin.bind(null, app)}
+            onMax={handleMax.bind(null, app)}
+            onClose={handleClose.bind(null, app)}
+            onMouseDown={handleMouseDown.bind(null, app)}
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
             {...modalProps}>
             <Component />
