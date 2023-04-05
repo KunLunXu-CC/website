@@ -75,7 +75,7 @@ export default {
     modalProps: {
       dragHeight: 40,
       showShadow: false,
-      toolPosition: { top: 10, left: 10 },
+      toolPosition: { top: 6, left: 40 },
       defaultParams: { width: 1220, height: 630, offsetX: 40, offsetY: 40 },
     },
   },

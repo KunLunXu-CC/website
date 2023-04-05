@@ -1,13 +1,33 @@
 .logger {
   height: 100%;
   position: relative;
-  background: linear-gradient(160deg, #9276a4, #3f4474);
+  padding-left: 40px;
 }
 
 .side {
+  width: 234px;
+
+  top: 36px;
+  left: 10px;
+  bottom: 28px;
   position: absolute;
-  top: 0;
-  left: -10px;
-  width: 100px;
-  height: 100px;
+
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 30px 0 rgba($color: #000, $alpha: 20%);
+  background: linear-gradient(160deg, #9276a4, #3f4474);
+
+  transition: all 0.4s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.body {
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 30px 0 rgba($color: #000, $alpha: 20%);
+  background: linear-gradient(160deg, #9276a4, #3f4474);
 }

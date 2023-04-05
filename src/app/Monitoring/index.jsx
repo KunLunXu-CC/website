@@ -5,5 +5,8 @@ export default () => (
     <div className={scss.side}>
       side
     </div>
+    <div className={scss.body}>
+      body
+    </div>
   </div>
 );
