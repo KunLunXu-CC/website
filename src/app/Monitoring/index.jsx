@@ -1,3 +1,4 @@
+import Role from './Role';
 import scss from './index.module.scss';
 
 export default () => (
@@ -6,7 +7,7 @@ export default () => (
       side
     </div>
     <div className={scss.body}>
-      body
+      <Role />
     </div>
   </div>
 );

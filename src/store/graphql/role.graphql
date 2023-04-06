@@ -1,0 +1,10 @@
+# 获取角色列表
+query getRoles ($search: RoleSearch) {
+  roles (search: $search) {
+    list {
+      id
+      name
+      auth
+    }
+  }
+}

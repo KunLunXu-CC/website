@@ -14,7 +14,7 @@
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 30px 0 rgba($color: #000, $alpha: 20%);
-  background: linear-gradient(160deg, #9276a4, #3f4474);
+  background: linear-gradient(160deg, #6396ba, #3b4071);
 
   transition: all 0.4s;
 
@@ -26,7 +26,9 @@
 .body {
   height: 100%;
   overflow: hidden;
+  padding-left: 240px;
+
   border-radius: 10px;
   box-shadow: 0 0 30px 0 rgba($color: #000, $alpha: 20%);
-  background: linear-gradient(160deg, #9276a4, #3f4474);
+  background: linear-gradient(160deg, #73a4c6, #525c89);
 }

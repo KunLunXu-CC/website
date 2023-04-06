@@ -1429,6 +1429,13 @@ export type UploadPhotosMutationVariables = Exact<{
 
 export type UploadPhotosMutation = { __typename?: 'Mutation', uploadPhotos?: { __typename?: 'Photos', change?: Array<{ __typename?: 'Photo', id?: string | null, type?: number | null, name?: string | null } | null> | null } | null };
 
+export type GetRolesQueryVariables = Exact<{
+  search?: InputMaybe<RoleSearch>;
+}>;
+
+
+export type GetRolesQuery = { __typename?: 'Query', roles?: { __typename?: 'Roles', list?: Array<{ __typename?: 'Role', id?: string | null, name?: string | null, auth?: Array<any | null> | null } | null> | null } | null };
+
 export type LoginMutationVariables = Exact<{
   account?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
@@ -1708,6 +1715,17 @@ export const UploadPhotosDocument = `
   }
 }
     `;
+export const GetRolesDocument = `
+    query getRoles($search: RoleSearch) {
+  roles(search: $search) {
+    list {
+      id
+      name
+      auth
+    }
+  }
+}
+    `;
 export const LoginDocument = `
     mutation login($account: String, $password: String) {
   login(account: $account, password: $password) {
@@ -1789,6 +1807,9 @@ const injectedRtkApi = api.injectEndpoints({
     uploadPhotos: build.mutation<UploadPhotosMutation, UploadPhotosMutationVariables>({
       query: (variables) => ({ document: UploadPhotosDocument, variables })
     }),
+    getRoles: build.query<GetRolesQuery, GetRolesQueryVariables | void>({
+      query: (variables) => ({ document: GetRolesDocument, variables })
+    }),
     login: build.mutation<LoginMutation, LoginMutationVariables | void>({
       query: (variables) => ({ document: LoginDocument, variables })
     }),
@@ -1799,5 +1820,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
 
