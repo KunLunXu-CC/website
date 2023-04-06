@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { api as graphqlApi } from '@store/graphql';
 
 // 1. 加载所有 *.store.js 文件
-const files = require.context('.', true, /\.store\.ts/);
+const files = require.context('../', true, /store\.ts/);
 
 // 2. 收集 reducer、action
 export const { reducer, actions } = files.keys().reduce((total, filePath) => {
