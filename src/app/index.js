@@ -10,7 +10,7 @@ import Monitoring from './Monitoring';
 import { APP_SETTING } from '@config/constants';
 
 // 图标来自 figma
-const setting = {
+export default {
   [APP_SETTING.AI.code]: {
     ...APP_SETTING.AI,
     component: AI,
@@ -89,5 +89,3 @@ const setting = {
     },
   },
 };
-
-export default setting;
