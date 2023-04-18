@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import scss from './index.module.scss';
 import styled from 'styled-components';
 
-import { getOssUrl } from '@utils';
 import { useSelector } from 'react-redux';
 import { useState, useCallback, useMemo } from 'react';
 
@@ -58,9 +57,9 @@ export default (props) => {
               {apps[v.code].name}
             </div>
             <img
+              src={apps[v.code].icon}
               alt={apps[v.code].name}
               className={scss['dock-icon']}
-              src={getOssUrl(apps[v.code].icon)}
             />
           </DockApp>
         ))}
