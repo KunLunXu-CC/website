@@ -2,11 +2,11 @@ import scss from './index.module.scss';
 
 import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
-import { APP_CODE } from '@config/constants';
+import { APP_SETTING } from '@config/constants';
 
 const useStateHook = () => {
   const showSpin = useSelector(
-    (state) => state.spin?.[APP_CODE.DIARY],
+    (state) => state.spin?.[APP_SETTING.DIARY.code],
   );
   return { showSpin };
 };
@@ -24,7 +24,7 @@ export default () => {
         )
         : null}
       <div
-        id={APP_CODE.DIARY}
+        id={APP_SETTING.DIARY.code}
         className={scss.notification}
       />
     </>

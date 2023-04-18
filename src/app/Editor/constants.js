@@ -1,6 +1,6 @@
 import Search from './SideBar/Search';
 import Resource from './SideBar/Resource';
-import { APP_CODE, ARTICLE_STATUS } from '@config/constants';
+import { APP_SETTING, ARTICLE_STATUS } from '@config/constants';
 
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';
@@ -46,6 +46,6 @@ export const ACTIVITY_LIST = [
 // message 配置
 export const MESSAGE_CONFIG = {
   bottom: 10,
-  code: APP_CODE.EDITOR,
   placement: 'bottomRight',
+  code: APP_SETTING.EDITOR.code,
 };

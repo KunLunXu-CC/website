@@ -1,17 +1,47 @@
 /* 业务常量配置 */
+// 应用 配置
+export const APP_SETTING = {
+  AI: {
+    name: 'AI',
+    code: 'ai',
+    icon: 'klx.pro.abf8398cdc33310c6bf5b439a890da0a.svg',
+  },
+  ALBUM: {
+    name: '相册',
+    code: 'album',
+    icon: 'klx.pro.a0200bdbf017134abc741194fd98faf8.svg',
+  },
+  EDITOR: {
+    name: '编辑器',
+    code: 'editor',
+    icon: 'klx.pro.510a9a0f9a06596a9debe051979ae81c.svg',
+  },
+  READER: {
+    name: '阅读',
+    code: 'reader',
+    icon: 'klx.pro.626304a5235e36b3bddf04e2f688b5df.svg',
+  },
+  DIARY: {
+    name: '日记',
+    code: 'diary',
+    icon: 'klx.pro.271ab305dd478bb0332ddc5db76219fc.svg',
+  },
+  MONITORING: {
+    name: '鉴查院',
+    code: 'monitoring',
+    icon: 'klx.pro.446ad243a8ff5ab63e1c774bbea5db93.svg',
+  },
+  SETTING: {
+    code: 'setting',
+    name: '系统偏好设置',
+    icon: 'klx.pro.4a3046239475ce8e5e87c1f056d2b973.svg',
+  },
 
-// 应用 CODE
-export const APP_CODE = {
-  AI: 'ai',                 // AI: 来自希腊神话中的工匠和发明家，代表着创造和技术能力，适合用于一款涉及工程和技术的
-  USER: 'user',             // 用户(包括权限)
-  FUND: 'fund',             // 基金
-  ALBUM: 'album',           // 相册
-  DIARY: 'diary',           // 日记
-  READER: 'reader',         // 阅读
-  EDITOR: 'editor',         // 编辑器
-  SETTING: 'setting',       // 系统偏好设置
-  ARTICLE: 'article',       // 文章
-  MONITORING: 'monitoring', // 鉴查院
+  USER: {
+    name: '用户管理',
+    code: 'user',
+    icon: 'klx.pro.d1fb923369fb7b28217133738e37ba2f.svg',
+  },
 };
 
 // 布尔值

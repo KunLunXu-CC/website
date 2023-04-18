@@ -1,0 +1,31 @@
+.role {
+  height: 100%;
+
+  display: flex;
+  padding-top: 52px;
+  box-sizing: border-box;
+}
+
+.role-list {
+  width: 270px;
+  color: #d6d6d9;
+  margin-right: 30px;
+}
+
+.role-item {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  transition: all 0.4s;
+
+  &.active {
+    font-size: 14px;
+    border-radius: 8px;
+    background-color: rgba($color: #000, $alpha: 20%);
+  }
+}
+
+.auth-list {
+  flex: 1;
+}

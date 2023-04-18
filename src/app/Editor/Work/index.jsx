@@ -6,7 +6,7 @@ import TabBarExtra from './TabBarExtra';
 import { Tabs } from 'antd';
 import { actions } from '@store';
 import { Icon } from '@kunlunxu/brick';
-import { APP_CODE } from '@config/constants';
+import { APP_SETTING } from '@config/constants';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,7 +16,7 @@ export default () => {
   const { works, showWork } = useSelector((state) => ({
     works: state.editor?.works,
     showWork: state.app.opens.find(
-      (v) => v.code === APP_CODE.EDITOR && !v.isMin,
+      (v) => v.code === APP_SETTING.EDITOR.code && !v.isMin,
     ),
   }));
 
