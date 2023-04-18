@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import scss from './role.module.scss';
 
 import { useState } from 'react';
+import { Checkbox } from 'antd';
+import { APP_SETTING } from '@config/constants';
 import { useGetRolesQuery } from '@store/graphql';
 
 
@@ -31,12 +33,12 @@ export default () => {
       </div>
 
       <div className={scss['auth-list']}>
-        {/* {app.map((v) => (
+        {Object.values(APP_SETTING).map((v) => (
           <div key={v.code}>
             {v.name}
           </div>
-        ))} */}
-        1
+        ))}
+        <Checkbox.Group options={['Apple', 'Pear', 'Orange']} />
       </div>
     </div>
   );
