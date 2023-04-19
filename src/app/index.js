@@ -64,7 +64,7 @@ export default {
     modalProps: {
       isPure: true,
       dragHeight: 40,
-      defaultParams: { width: 1220, height: 630, offsetX: 240, offsetY: 140 },
+      defaultParams: { width: 900, height: 530, offsetX: 200, offsetY: 100 },
     },
   },
   [APP_SETTING.SETTING.code]: {

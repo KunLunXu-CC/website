@@ -1,20 +1,29 @@
 import classNames from 'classnames';
 import scss from './role.module.scss';
 
-import { useState } from 'react';
 import { Checkbox } from 'antd';
 import { APP_SETTING } from '@config/constants';
 import { useGetRolesQuery } from '@store/graphql';
-
-
-// console.log('%c [ app ]-10', 'font-size:13px; background:pink; color:#bf2c9f;', app);
+import { useCallback, useEffect, useState } from 'react';
 
 export default () => {
   const { data } = useGetRolesQuery();
-
   const [activeRole, setActiveRole] = useState();
 
-  console.log('%c [ data ]-5', 'font-size:13px; background:pink; color:#bf2c9f;', data);
+  const handleChangeAuth = useCallback((values) => {
+    const auth = Object.values(APP_SETTING)
+      .filter((v) => values.includes(v.code))
+      .map((v) => ({ code: v.code, name: v.name, readable: 1, writable: 1 }));
+
+    setActiveRole((pre) => ({ ...pre, auth }));
+  }, []);
+
+  // 初始化 activeRole
+  useEffect(() => {
+    if (!activeRole) {
+      setActiveRole(data?.roles?.list[0]);
+    }
+  }, [data, activeRole]);
 
   return (
     <div className={scss.role}>
@@ -23,23 +32,30 @@ export default () => {
           <div
             key={role.id}
             className={classNames(scss['role-item'], {
-              [scss.active]: activeRole === role.id,
+              [scss.active]: activeRole?.id === role.id,
             })}
-            onClick={setActiveRole.bind(null,  role.id)}>
+            onClick={setActiveRole.bind(null,  role)}>
             {role.name}
-            {role.auth.length}
+            <span>
+              {role.auth.length}
+            </span>
           </div>
         ))}
       </div>
-
-      <div className={scss['auth-list']}>
-        {Object.values(APP_SETTING).map((v) => (
-          <div key={v.code}>
-            {v.name}
-          </div>
-        ))}
-        <Checkbox.Group options={['Apple', 'Pear', 'Orange']} />
-      </div>
+      <Checkbox.Group
+        onChange={handleChangeAuth}
+        className={scss['auth-list']}
+        value={activeRole?.auth.map((v) => v.code)}
+        options={Object.values(APP_SETTING).map((item) => ({
+          value: item.code,
+          label: (
+            <div className={scss['auth-item']}>
+              <img src={item.icon} />
+              {item.name}
+            </div>
+          ),
+        }))}
+      />
     </div>
   );
 };
