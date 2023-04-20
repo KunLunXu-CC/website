@@ -1,4 +1,4 @@
-import Role from './Role';
+import Role, { BottomBtn } from './Role';
 import scss from './index.module.scss';
 
 export default () => (
@@ -8,6 +8,9 @@ export default () => (
     </div>
     <div className={scss.body}>
       <Role />
+    </div>
+    <div className={scss.button}>
+      <BottomBtn />
     </div>
   </div>
 );

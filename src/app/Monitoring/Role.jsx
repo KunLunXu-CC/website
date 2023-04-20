@@ -6,6 +6,15 @@ import { APP_SETTING } from '@config/constants';
 import { useGetRolesQuery } from '@store/graphql';
 import { useCallback, useEffect, useState } from 'react';
 
+export const BottomBtn = () => {
+  console.log('%c [ 1 ]-12', 'font-size:13px; background:pink; color:#bf2c9f;', 1);
+  return (
+    <div className={scss.save}>
+      11
+    </div>
+  );
+};
+
 export default () => {
   const { data } = useGetRolesQuery();
   const [activeRole, setActiveRole] = useState();
