@@ -1,23 +1,55 @@
 import classNames from 'classnames';
 import scss from './role.module.scss';
 
-import { Checkbox } from 'antd';
 import { actions } from '@store';
-import { useCallback, useEffect } from 'react';
+import { Checkbox, Progress } from 'antd';
 import { APP_SETTING } from '@config/constants';
-import { useGetRolesQuery } from '@store/graphql';
 import { useSelector, useDispatch } from 'react-redux';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { useGetRolesQuery, useUpdateRolesMutation } from '@store/graphql';
 
 export const BottomBtn = () => {
-  const handleSave = useCallback(() => {
-    //
+  const loadingRef = useRef(false);
+  const [percent, setPercent] = useState(100);
+  const [updateRoles] = useUpdateRolesMutation();
+  const { active } = useSelector((state) => state.monitoring.role);
+
+  const animation = useCallback(() => {
+    if (!loadingRef.current) {
+      setPercent(100);
+      return;
+    }
+
+    setPercent((pre) =>  (pre === 100 ? 0 : pre + ((100 - pre) / 2)));
+
+    window.requestAnimationFrame(animation);
   }, []);
+
+  const handleSave = useCallback(async () => {
+    if (!active) {
+      return false;
+    }
+
+    animation();
+    loadingRef.current = true;
+    await updateRoles({
+      conds: { id: active.id },
+      body: { auth: active.auth },
+    });
+    loadingRef.current = false;
+  }, [active, updateRoles, animation]);
 
   return (
     <div
       onClick={handleSave}
       className={scss.save}>
-      保存
+      <Progress
+        type="circle"
+        percent={percent}
+        format={() => '保存'}
+        strokeColor="#fb8da7"
+        trailColo="rgba(0, 0, 0, 0)"
+      />
     </div>
   );
 };
@@ -36,18 +68,14 @@ export default () => {
   }, [dispatch]);
 
   const handleChangeActive = useCallback((activeRole) => {
-    dispatch(actions.monitoring.setRole({
-      active: activeRole,
-    }));
+    dispatch(actions.monitoring.setActiveRole(activeRole));
   }, [dispatch]);
 
   // 初始化 activeRole
   useEffect(() => {
     if (data?.roles) {
-      dispatch(actions.monitoring.setRole({
-        list: data.roles.list,
-        active: data.roles.list[0],
-      }));
+      dispatch(actions.monitoring.setRoleList(data.roles.list));
+      dispatch(actions.monitoring.setActiveRole(data.roles.list[0]));
     }
   }, [data, dispatch]);
 

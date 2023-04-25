@@ -19,9 +19,10 @@ export default createSlice({
   initialState,
   name: 'monitoring',
   reducers: {
-    setRole: ((state, { payload: role }) => ({
+    // 设置 role.list
+    setRoleList: ((state, { payload: list }) => ({
       ...state,
-      role: { ...state.role, ...role },
+      role: { ...state.role, list },
     })),
 
     // 设置活跃角色
