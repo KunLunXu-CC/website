@@ -2,54 +2,34 @@ import classNames from 'classnames';
 import scss from './role.module.scss';
 
 import { actions } from '@store';
-import { Checkbox, Progress } from 'antd';
+import { Checkbox, Spin } from 'antd';
+import { useCallback, useEffect } from 'react';
 import { APP_SETTING } from '@config/constants';
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useEffect, useState, useRef } from 'react';
 import { useGetRolesQuery, useUpdateRolesMutation } from '@store/graphql';
 
 export const BottomBtn = () => {
-  const loadingRef = useRef(false);
-  const [percent, setPercent] = useState(100);
-  const [updateRoles] = useUpdateRolesMutation();
+  const [updateRoles, { isLoading }] = useUpdateRolesMutation();
   const { active } = useSelector((state) => state.monitoring.role);
-
-  const animation = useCallback(() => {
-    if (!loadingRef.current) {
-      setPercent(100);
-      return;
-    }
-
-    setPercent((pre) =>  (pre === 100 ? 0 : pre + ((100 - pre) / 2)));
-
-    window.requestAnimationFrame(animation);
-  }, []);
 
   const handleSave = useCallback(async () => {
     if (!active) {
       return false;
     }
 
-    animation();
-    loadingRef.current = true;
     await updateRoles({
       conds: { id: active.id },
       body: { auth: active.auth },
     });
-    loadingRef.current = false;
-  }, [active, updateRoles, animation]);
+  }, [active, updateRoles]);
 
   return (
     <div
       onClick={handleSave}
       className={scss.save}>
-      <Progress
-        type="circle"
-        percent={percent}
-        format={() => '保存'}
-        strokeColor="#fb8da7"
-        trailColo="rgba(0, 0, 0, 0)"
-      />
+      <Spin spinning={isLoading}>
+        保存
+      </Spin>
     </div>
   );
 };
