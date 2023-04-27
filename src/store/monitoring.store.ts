@@ -1,7 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { Role } from '@store/graphql';
+import { createSlice } from '@reduxjs/toolkit';
+import { MENU_OPTIONS } from '@app/Monitoring/constants';
 
 interface State {
+  menu: {
+    activeMenuKey: number
+  },
   role: {
     list: Role[],
     active: Role | null
@@ -9,6 +13,9 @@ interface State {
 }
 
 export const initialState: State = {
+  menu: {
+    activeMenuKey: MENU_OPTIONS[0].key,
+  },
   role: {
     list: [],
     active: null,
@@ -19,6 +26,15 @@ export default createSlice({
   initialState,
   name: 'monitoring',
   reducers: {
+    // 设置当前活跃菜单 key
+    setActiveMenuKey: ((state, { payload: activeMenuKey }) => ({
+      ...state,
+      menu: {
+        ...state.menu,
+        activeMenuKey,
+      },
+    })),
+
     // 设置 role.list
     setRoleList: ((state, { payload: list }) => ({
       ...state,
