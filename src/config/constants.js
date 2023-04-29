@@ -1,6 +1,6 @@
+/* 业务常量配置 */
 import { getOssUrl } from '@utils';
 
-/* 业务常量配置 */
 // 应用 配置
 export const APP_SETTING = {
   AI: {
@@ -62,16 +62,16 @@ export const STATUS = {
 // [状态] 文章状态： 基础状态 + 保存 + 发布
 export const ARTICLE_STATUS = {
   ...STATUS,        // 基础状态
-  SAVE: 10,          // 保存(未发布)
-  RELEASE: 11,       // 发布(已发布)
+  SAVE: 10,         // 保存(未发布)
+  RELEASE: 11,      // 发布(已发布)
 };
 
 // 图片类型(使用场景)
 export const PHOTO_TYPE = {
-  UNKNOWN: { VALUE: 0, DESC: '未知' },          // 未知
-  ARTICLE: { VALUE: 1, DESC: '文章' },          // 文章(包括专用缩略图)
-  DESKTOP: { VALUE: 2, DESC: '桌面背景' },      // 桌面
-  THUMB: { VALUE: 3, DESC: '缩略图' },          // 封面(通用)
-  AVATAR: { VALUE: 4, DESC: '头像' },           // 头像
-  ICON: { VALUE: 5, DESC: '应用图标' },            // 图标
+  UNKNOWN: { VALUE: 0, DESC: '未知' },        // 未知
+  ARTICLE: { VALUE: 1, DESC: '文章' },        // 文章(包括专用缩略图)
+  DESKTOP: { VALUE: 2, DESC: '桌面背景' },     // 桌面
+  THUMB: { VALUE: 3, DESC: '缩略图' },         // 封面(通用)
+  AVATAR: { VALUE: 4, DESC: '头像' },          // 头像
+  ICON: { VALUE: 5, DESC: '应用图标' },         // 图标
 };
