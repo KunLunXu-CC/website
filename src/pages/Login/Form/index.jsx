@@ -1,11 +1,10 @@
 import scss from './index.module.scss';
 
-import { rsa, getOssUrl } from '@utils';
-import { useSelector } from 'react-redux';
-import { Input, Form, Button } from 'antd';
-import { useCallback, useMemo } from 'react';
-import { Image, Icon } from '@kunlunxu/brick';
+import { rsa } from '@utils';
+import { useCallback } from 'react';
+import { Icon } from '@kunlunxu/brick';
 import { useNavigate } from 'react-router-dom';
+import { Input, Form, Button, Divider } from 'antd';
 import { useGetPublicKeyQuery, useLoginMutation } from '@store/graphql';
 
 export default () => {
@@ -13,18 +12,6 @@ export default () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
   const { data: publicKeyQuery } = useGetPublicKeyQuery();
-
-  const avatars = useSelector(
-    (state) => state.photos?.avatar ?? [],
-  );
-
-  // 随机头像
-  const avatar = useMemo(() => {
-    const index = Math.floor(Math.random() * avatars.length);
-    return avatars.length > 0
-      ? getOssUrl(avatars[index].name)
-      : '';
-  }, [avatars]);
 
   // 登录
   const onLogin = useCallback(async () => {
@@ -40,9 +27,22 @@ export default () => {
 
   return (
     <div className={scss.login}>
-      <div className={scss['login-avatar']} >
-        <Image src={avatar} />
+      <div className={scss.title}>
+        Welcome back
       </div>
+      <div className={scss['sub-title']}>
+        Please enter your details to sign in.
+      </div>
+      <Button
+        block
+        size="large"
+        className={scss.github}>
+        <Icon type="icon-github" />
+        Sign in with GitHub
+      </Button>
+      <Divider className={scss.divider}>
+        or use account sign in
+      </Divider>
       <div className={scss['login-form']}>
         <Form form={form}>
           <Form.Item
