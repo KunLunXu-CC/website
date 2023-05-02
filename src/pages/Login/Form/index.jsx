@@ -14,7 +14,7 @@ export default () => {
   const { data: publicKeyQuery } = useGetPublicKeyQuery();
 
   // 登录
-  const onLogin = useCallback(async () => {
+  const handleSign = useCallback(async () => {
     const { account, password } = await form.validateFields();
 
     await login({
@@ -36,7 +36,8 @@ export default () => {
       <Button
         block
         size="large"
-        className={scss.github}>
+        className={scss.github}
+        href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_CLIENT_ID}`}>
         <Icon type="icon-github" />
         Sign in with GitHub
       </Button>
@@ -68,7 +69,7 @@ export default () => {
               block
               size="large"
               type="primary"
-              onClick={onLogin}>
+              onClick={handleSign}>
               登录
             </Button>
           </Form.Item>
