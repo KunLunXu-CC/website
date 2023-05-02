@@ -23,14 +23,16 @@ module.exports.globalConsts = {
   // 生产环境配置
   production: {
     _DEV_: false,
-    GRAPHQL_URL: JSON.stringify('https://www.kunlunxu.cc:4000/graphql'),
     WS_SERVICER: JSON.stringify('wss://www.kunlunxu.cc:4000'),
+    GITHUB_APP_CLIENT_ID: JSON.stringify('276f6034688775fc70eb'),
+    GRAPHQL_URL: JSON.stringify('https://www.kunlunxu.cc:4000/graphql'),
   },
 
   // 开发环境配置
   development: {
     _DEV_: true,
-    GRAPHQL_URL: JSON.stringify('http://localhost:4000/graphql'),
     WS_SERVICER: JSON.stringify('ws://localhost:4000'),
+    GITHUB_APP_CLIENT_ID: JSON.stringify('6aa8689e618b1e87e483'),
+    GRAPHQL_URL: JSON.stringify('http://localhost:4000/graphql'),
   },
 };
