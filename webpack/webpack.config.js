@@ -9,7 +9,7 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const { DefinePlugin, ProvidePlugin } = require('webpack');
 
 // 全局常量定义
-const definePlugin = new DefinePlugin(config.globalConsts.production);
+const definePlugin = new DefinePlugin(config.globalConstants.production);
 
 // 自动加载
 const providePlugin = new ProvidePlugin(config.providePlugin);

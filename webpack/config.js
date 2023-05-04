@@ -19,7 +19,7 @@ module.exports.alias = {
 };
 
 /* 全局变量 */
-module.exports.globalConsts = {
+module.exports.globalConstants = {
   // 生产环境配置
   production: {
     _DEV_: false,
@@ -33,6 +33,6 @@ module.exports.globalConsts = {
     _DEV_: true,
     WS_SERVICER: JSON.stringify('ws://localhost:4000'),
     GITHUB_APP_CLIENT_ID: JSON.stringify('6aa8689e618b1e87e483'),
-    GRAPHQL_URL: JSON.stringify('http://localhost:4000/graphql'),
+    GRAPHQL_URL: JSON.stringify('http://www.dev.kunlunxu.cc:4000/graphql'),
   },
 };

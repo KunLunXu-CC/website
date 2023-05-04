@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently --restart-tries 20 'npm:watch-*'",
     "build": "webpack --config ./webpack/webpack.config.js",
-    "watch-CRA": "webpack serve --config ./webpack/webpack.config.dev.js --open",
+    "watch-CRA": "webpack serve --config ./webpack/webpack.config.dev.js",
     "watch-codegen": "graphql-codegen --config codegen.ts --watch 'src/**/*.graphql'",
     "graphql-codegen": "graphql-codegen --config codegen.ts",
     "cz": "klx-cz",

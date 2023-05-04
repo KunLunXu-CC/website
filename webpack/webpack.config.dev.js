@@ -12,7 +12,7 @@ const { DefinePlugin, ProvidePlugin } = require('webpack');
 /* ================== 插件 ================= */
 
 // 全局常量定义
-const definePlugin = new DefinePlugin(config.globalConsts.development);
+const definePlugin = new DefinePlugin(config.globalConstants.development);
 
 // 自动加载
 const providePlugin = new ProvidePlugin(config.providePlugin);
@@ -136,8 +136,12 @@ module.exports = {
     static: {
       directory: path.join(__dirname, '../build'),
     },
+    // open: {
+    //   target: ['www.dev.kunlunxu.cc'],
+    // },
+    allowedHosts: 'all',
     compress: true,
-    port: 9000,
+    port: 80,
 
     hot: true,
 
