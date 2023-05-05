@@ -3,8 +3,8 @@ import { createApi, BaseQueryFn } from '@reduxjs/toolkit/query/react';
 
 // see: https://github.com/prisma-labs/graphql-request
 export const client = new GraphQLClient(GRAPHQL_URL, {
-  // mode: 'cors',
-  // credentials: 'include',
+  mode: 'cors',
+  credentials: 'include',
 });
 
 const graphqlBaseQuery: BaseQueryFn = async ({ document, variables }) => {
