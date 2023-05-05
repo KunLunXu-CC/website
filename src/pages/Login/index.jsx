@@ -5,7 +5,7 @@ import Background from './Background';
 
 const useStateHook = () => {
   useEffect(() => {
-    localStorage.setItem('authorization', null);
+    // localStorage.setItem('authorization', null);
   }, []);
 };
 
