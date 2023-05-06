@@ -32,7 +32,7 @@ module.exports.globalConstants = {
   development: {
     _DEV_: true,
     WS_SERVICER: JSON.stringify('ws://localhost:4000'),
-    GITHUB_APP_CLIENT_ID: JSON.stringify('6aa8689e618b1e87e483'),
+    GITHUB_APP_CLIENT_ID: JSON.stringify('e6eea93d6ebcc8000931'),
     GRAPHQL_URL: JSON.stringify('http://www.dev.kunlunxu.cc:4000/graphql'),
   },
 };
