@@ -1269,7 +1269,6 @@ export type User = {
   name?: Maybe<Scalars['String']>;
   role?: Maybe<Role>;
   sex?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['Int']>;
   updateTime?: Maybe<Scalars['Date']>;
   updater?: Maybe<User>;
 };
@@ -1280,7 +1279,6 @@ export type UserFields = {
   password?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Scalars['ID']>;
   sex?: InputMaybe<Scalars['Int']>;
-  status?: InputMaybe<Scalars['Int']>;
 };
 
 export type UserSearch = {
@@ -1295,7 +1293,6 @@ export type UserSearch = {
   sex?: InputMaybe<Scalars['Int']>;
   startCreationTime?: InputMaybe<Scalars['Date']>;
   startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
   updater?: InputMaybe<Scalars['ID']>;
 };
 
@@ -1453,7 +1450,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'Login', message?: string | null, user?: { __typename?: 'User', id?: string | null, sex?: number | null, name?: string | null, status?: number | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'Login', message?: string | null, user?: { __typename?: 'User', id?: string | null, sex?: number | null, name?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null } | null };
 
 export type GetPublicKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1758,7 +1755,6 @@ export const LoginDocument = `
       id
       sex
       name
-      status
       account
       role {
         id
