@@ -59,7 +59,7 @@
 
 ### 4.2 日记
 
-![image.png](https://github.com/KunLunXu-CC/website/blob/dev/tmp/Snipaste_2023-05-15_11-43-51.png)
+![image.png](https://github.com/KunLunXu-CC/website/blob/dev/tmp/Snipaste_2023-05-15_14-17-18.png)
 
 > 用于记录每天起居、体重、体脂、饮食、运动、账单    
 > 已完成功能: 数据的增删改查、历史收支统计、每日账单统计图、身体体征(体征、体脂)统计图……
