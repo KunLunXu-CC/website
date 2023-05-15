@@ -1,4 +1,4 @@
-import { Role } from '@store/graphql';
+import { Role, User } from '@store/graphql';
 import { createSlice } from '@reduxjs/toolkit';
 import { MENU_OPTIONS } from '@app/Monitoring/constants';
 
@@ -10,6 +10,10 @@ interface State {
     list: Role[],
     active: Role | null
   }
+  user: {
+    list: User[]
+    active: User | null
+  }
 }
 
 export const initialState: State = {
@@ -17,6 +21,10 @@ export const initialState: State = {
     activeMenuKey: MENU_OPTIONS[0].key,
   },
   role: {
+    list: [],
+    active: null,
+  },
+  user: {
     list: [],
     active: null,
   },
@@ -55,5 +63,18 @@ export default createSlice({
         active: { ...state.role.active, auth },
       },
     })),
+
+    // 设置用户列表
+    setUserList: ((state, { payload: list }) => ({
+      ...state,
+      user: { ...state.user, list },
+    })),
+
+    // 设置活跃用户
+    setActiveUser: ((state, { payload: active }) => ({
+      ...state,
+      user: { ...state.user, active },
+    })),
+
   },
 });

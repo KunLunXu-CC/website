@@ -1457,6 +1457,11 @@ export type GetPublicKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetPublicKeyQuery = { __typename?: 'Query', publicKey?: { __typename?: 'PublicKey', data?: string | null } | null };
 
+export type GetUserListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserListQuery = { __typename?: 'Query', users?: { __typename?: 'Users', list?: Array<{ __typename?: 'User', id?: string | null, name?: string | null } | null> | null } | null };
+
 export const DiaryOutputFieldsFragmentDoc = `
     fragment DiaryOutputFields on Diary {
   id
@@ -1774,6 +1779,16 @@ export const GetPublicKeyDocument = `
   }
 }
     `;
+export const GetUserListDocument = `
+    query getUserList {
+  users {
+    list {
+      id
+      name
+    }
+  }
+}
+    `;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -1840,9 +1855,12 @@ const injectedRtkApi = api.injectEndpoints({
     getPublicKey: build.query<GetPublicKeyQuery, GetPublicKeyQueryVariables | void>({
       query: (variables) => ({ document: GetPublicKeyDocument, variables })
     }),
+    getUserList: build.query<GetUserListQuery, GetUserListQueryVariables | void>({
+      query: (variables) => ({ document: GetUserListDocument, variables })
+    }),
   }),
 });
 
 export { injectedRtkApi as api };
-export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useUpdateRolesMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery } = injectedRtkApi;
+export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useUpdateRolesMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery, useGetUserListQuery, useLazyGetUserListQuery } = injectedRtkApi;
 

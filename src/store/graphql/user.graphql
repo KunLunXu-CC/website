@@ -24,3 +24,13 @@ query getPublicKey {
     data
   }
 }
+
+# 获取用户列表
+query getUserList {
+  users {
+    list {
+      id
+      name
+    }
+  }
+}

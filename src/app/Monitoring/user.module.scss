@@ -1,3 +1,29 @@
+.wrapper {
+  display: flex;
+  padding-top: 52px;
+  padding-bottom: 20px;
+}
+
+.user-list {
+  width: 40%;
+}
+
 .user {
-  background-color: #fff;
+  height: 56px;
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.4s;
+
+  &.active {
+    background-color: rgba($color: #000, $alpha: 20%);
+  }
+}
+
+.detail {
+  flex: 1;
 }
