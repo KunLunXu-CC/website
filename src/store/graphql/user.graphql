@@ -30,7 +30,10 @@ query getUserList {
   users {
     list {
       id
+      bio
       name
+      avatar
+      role { id desc auth name }
     }
   }
 }

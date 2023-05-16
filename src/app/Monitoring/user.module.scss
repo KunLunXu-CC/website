@@ -24,6 +24,22 @@
   }
 }
 
+.avatar {
+  width: 32px;
+  border-radius: 6px;
+}
+
+.user-name {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 14px;
+
+  span:nth-child(2) {
+    color: rgba($color: #fff, $alpha: 60%);
+  }
+}
+
 .detail {
   flex: 1;
 }

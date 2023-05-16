@@ -1263,6 +1263,8 @@ export type Touchbar = {
 export type User = {
   __typename?: 'User';
   account?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
   creationTime?: Maybe<Scalars['Date']>;
   creator?: Maybe<User>;
   id?: Maybe<Scalars['ID']>;
@@ -1460,7 +1462,7 @@ export type GetPublicKeyQuery = { __typename?: 'Query', publicKey?: { __typename
 export type GetUserListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserListQuery = { __typename?: 'Query', users?: { __typename?: 'Users', list?: Array<{ __typename?: 'User', id?: string | null, name?: string | null } | null> | null } | null };
+export type GetUserListQuery = { __typename?: 'Query', users?: { __typename?: 'Users', list?: Array<{ __typename?: 'User', id?: string | null, bio?: string | null, name?: string | null, avatar?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null> | null } | null };
 
 export const DiaryOutputFieldsFragmentDoc = `
     fragment DiaryOutputFields on Diary {
@@ -1784,7 +1786,15 @@ export const GetUserListDocument = `
   users {
     list {
       id
+      bio
       name
+      avatar
+      role {
+        id
+        desc
+        auth
+        name
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import { actions } from '@store';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useGetUserListQuery } from '@store/graphql';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,6 +11,10 @@ export default () => {
   const { data } = useGetUserListQuery();
 
   const { list, active } = useSelector((state) => state.monitoring.user);
+
+  const handleChangeActive = useCallback((activeUser) => {
+    dispatch(actions.monitoring.setActiveUser(activeUser));
+  }, [dispatch]);
 
   // 初始化 activeRole
   useEffect(() => {
@@ -28,8 +32,21 @@ export default () => {
             key={user.id}
             className={classNames(scss.user, {
               [scss.active]: active?.id === user.id,
-            })}>
-            {user.name}
+            })}
+            onClick={handleChangeActive.bind(null, user)}>
+            <img
+              alt="用户头像"
+              src={user.avatar}
+              className={scss.avatar}
+            />
+            <div className={scss['user-name']}>
+              <span>
+                {user.name}
+              </span>
+              <span>
+                {user.bio}
+              </span>
+            </div>
           </div>
         ))}
       </div>
