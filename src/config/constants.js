@@ -1,6 +1,9 @@
 /* 业务常量配置 */
 import { getOssUrl } from '@utils';
 
+// 默认用户头像
+export const DEFAULT_USER_AVATAR = 'klx.pro.tinify.e07793859fadd13b57564dd36ddb66ef.png';
+
 // 应用 配置
 export const APP_SETTING = {
   AI: {

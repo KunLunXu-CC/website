@@ -1,7 +1,9 @@
 import { actions } from '@store';
+import { getOssUrl } from '@utils';
 import { useEffect, useCallback } from 'react';
 import { useGetUserListQuery } from '@store/graphql';
 import { useSelector, useDispatch } from 'react-redux';
+import { DEFAULT_USER_AVATAR } from '@config/constants';
 
 import classNames from 'classnames';
 import scss from './user.module.scss';
@@ -11,6 +13,14 @@ export default () => {
   const { data } = useGetUserListQuery();
 
   const { list, active } = useSelector((state) => state.monitoring.user);
+
+  const getAvatar = useCallback((avatar) => {
+    if (/^http/.test(avatar)) {
+      return avatar;
+    }
+
+    return getOssUrl(avatar ?? DEFAULT_USER_AVATAR);
+  }, []);
 
   const handleChangeActive = useCallback((activeUser) => {
     dispatch(actions.monitoring.setActiveUser(activeUser));
@@ -36,8 +46,8 @@ export default () => {
             onClick={handleChangeActive.bind(null, user)}>
             <img
               alt="用户头像"
-              src={user.avatar}
               className={scss.avatar}
+              src={getAvatar(user.avatar)}
             />
             <div className={scss['user-name']}>
               <span>
