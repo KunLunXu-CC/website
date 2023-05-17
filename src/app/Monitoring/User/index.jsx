@@ -5,8 +5,9 @@ import { useGetUserListQuery } from '@store/graphql';
 import { useSelector, useDispatch } from 'react-redux';
 import { DEFAULT_USER_AVATAR } from '@config/constants';
 
+import Detail from './Detail';
 import classNames from 'classnames';
-import scss from './user.module.scss';
+import scss from './index.module.scss';
 
 export default () => {
   const dispatch = useDispatch();
@@ -60,9 +61,8 @@ export default () => {
           </div>
         ))}
       </div>
-      <div className={scss.detail}>
-        1
-      </div>
+      <Detail />
+
     </div>
   );
 };

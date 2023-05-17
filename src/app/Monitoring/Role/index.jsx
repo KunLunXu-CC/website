@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import scss from './role.module.scss';
+import scss from './index.module.scss';
 
 import { actions } from '@store';
 import { Checkbox, Spin } from 'antd';

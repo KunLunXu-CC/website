@@ -38,7 +38,7 @@ export const APP_SETTING = {
   },
   SETTING: {
     code: 'setting',
-    name: '系统偏好设置',
+    name: '偏好设置',
     icon: getOssUrl('klx.pro.4a3046239475ce8e5e87c1f056d2b973.svg'),
   },
 
