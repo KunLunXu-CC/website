@@ -25,11 +25,9 @@ export default () => {
     return null;
   }
 
-  console.log('%c [ role ]-28', 'font-size:13px; background:pink; color:#bf2c9f;', role);
   return (
     <div className={scss.detail}>
-      <div>
-        角色:
+      <div className={scss.title}>
         { role.name }
       </div>
       <div className={scss['auth-list']}>

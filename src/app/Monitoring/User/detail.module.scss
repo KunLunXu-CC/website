@@ -1,6 +1,12 @@
 .detail {
   flex: 1;
-  padding-left: 30px;
+  padding-left: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  padding-left: 10px;
 }
 
 .auth-list {
@@ -9,7 +15,8 @@
 }
 
 .auth-item {
-  width: 60px;
+  width: 50px;
+  padding: 10px;
   text-align: center;
 
   img {
