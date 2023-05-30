@@ -12,7 +12,6 @@ import scss from './index.module.scss';
 export default () => {
   const dispatch = useDispatch();
   const { data } = useGetUserListQuery();
-
   const { list, active } = useSelector((state) => state.monitoring.user);
 
   const getAvatar = useCallback((avatar) => {
@@ -62,7 +61,6 @@ export default () => {
         ))}
       </div>
       <Detail />
-
     </div>
   );
 };

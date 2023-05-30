@@ -9,6 +9,43 @@
   padding-left: 10px;
 }
 
+.select-role:global(.ant-select) {
+  :global {
+    .ant-select-selector {
+      padding: 0;
+      border-width: 0;
+      background-color: transparent;
+    }
+
+    .ant-select-selection-item {
+      color: #fff;
+      font-size: 20px;
+    }
+
+    .ant-select-arrow {
+      right: 0;
+      color: #fff;
+      font-size: 14px;
+    }
+  }
+}
+
+.select-role-popup {
+  backdrop-filter: blur(40px);
+  background: rgba($color: #000, $alpha: 10%);
+
+  :global {
+    .ant-select-item {
+      color: #fff !important;
+    }
+
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled),
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+      background-color: rgba($color: #000, $alpha: 20%);
+    }
+  }
+}
+
 .auth-list {
   display: flex;
   flex-wrap: wrap;
