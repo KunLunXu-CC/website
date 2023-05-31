@@ -10,7 +10,7 @@ export const client = new GraphQLClient(GRAPHQL_URL, {
 const graphqlBaseQuery: BaseQueryFn = async ({ document, variables }) => {
   try {
     const { data } = await client.rawRequest(document, variables);
-    return { data };
+    return { data, resCode: 200 };
   } catch (error) {
     if (error instanceof ClientError) {
       return { error: { status: error.response.status, data: error } };

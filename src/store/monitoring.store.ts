@@ -76,5 +76,14 @@ export default createSlice({
       user: { ...state.user, active },
     })),
 
+    // 设置活跃用户 - 角色
+    setActiveUserRole: ((state, { payload: role }) => ({
+      ...state,
+      user: {
+        ...state.user,
+        active: { ...state.user.active, role },
+      },
+    })),
+
   },
 });

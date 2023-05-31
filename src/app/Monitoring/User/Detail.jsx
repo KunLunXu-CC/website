@@ -1,12 +1,13 @@
 import { Select } from 'antd';
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useCallback, useMemo } from 'react';
 import { APP_SETTING } from '@config/constants';
-import { useGetRolesQuery } from '@store/graphql';
+import { useGetRolesQuery, useUpdateUserMutation } from '@store/graphql';
 
 import scss from './detail.module.scss';
 
 export default () => {
+  const [updateUser] = useUpdateUserMutation();
   const { data: roleList } = useGetRolesQuery();
   const { active } = useSelector((state) => state.monitoring.user);
 
@@ -28,6 +29,25 @@ export default () => {
     };
   }, [active]);
 
+  const handleChangeRole = useCallback(async (value) => {
+    // 1. 调用更新接口
+    const res = await updateUser({
+      body: {
+        role: value,
+      },
+      conds: {
+        id: active.id,
+      },
+    });
+
+    console.log('%c [ res ]-43', 'font-size:13px; background:pink; color:#bf2c9f;', res);
+
+    // 2. 修改当前角色信息
+    // setActiveUserRole
+    console.log('%c [ value ]-19', 'font-size:13px; background:pink; color:#bf2c9f;', value);
+  }, [updateUser, active]);
+
+
   if (!active) {
     return null;
   }
@@ -38,6 +58,7 @@ export default () => {
         <Select
           value={role.id}
           options={selectOptions}
+          onChange={handleChangeRole}
           className={scss['select-role']}
           popupClassName={scss['select-role-popup']}
         />

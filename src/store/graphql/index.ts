@@ -1446,13 +1446,15 @@ export type UpdateRolesMutationVariables = Exact<{
 
 export type UpdateRolesMutation = { __typename?: 'Mutation', updateRoles?: { __typename?: 'Roles', change?: Array<{ __typename?: 'Role', id?: string | null, name?: string | null, auth?: Array<any | null> | null } | null> | null } | null };
 
+export type UserOutputFieldsFragment = { __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null };
+
 export type LoginMutationVariables = Exact<{
   account?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'Login', message?: string | null, user?: { __typename?: 'User', id?: string | null, sex?: number | null, name?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'Login', message?: string | null, user?: { __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null } | null };
 
 export type GetPublicKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1462,7 +1464,15 @@ export type GetPublicKeyQuery = { __typename?: 'Query', publicKey?: { __typename
 export type GetUserListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserListQuery = { __typename?: 'Query', users?: { __typename?: 'Users', list?: Array<{ __typename?: 'User', id?: string | null, bio?: string | null, name?: string | null, avatar?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null> | null } | null };
+export type GetUserListQuery = { __typename?: 'Query', users?: { __typename?: 'Users', list?: Array<{ __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null> | null } | null };
+
+export type UpdateUserMutationVariables = Exact<{
+  body: UserFields;
+  conds: UserSearch;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUsers?: { __typename?: 'Users', message?: string | null, change?: Array<{ __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null> | null } | null };
 
 export const DiaryOutputFieldsFragmentDoc = `
     fragment DiaryOutputFields on Diary {
@@ -1499,6 +1509,22 @@ export const RoleOutputFieldsFragmentDoc = `
   id
   name
   auth
+}
+    `;
+export const UserOutputFieldsFragmentDoc = `
+    fragment UserOutputFields on User {
+  id
+  sex
+  bio
+  name
+  avatar
+  account
+  role {
+    id
+    desc
+    auth
+    name
+  }
 }
     `;
 export const GetAiChatsDocument = `
@@ -1759,21 +1785,12 @@ export const LoginDocument = `
     mutation login($account: String, $password: String) {
   login(account: $account, password: $password) {
     user {
-      id
-      sex
-      name
-      account
-      role {
-        id
-        desc
-        auth
-        name
-      }
+      ...UserOutputFields
     }
     message
   }
 }
-    `;
+    ${UserOutputFieldsFragmentDoc}`;
 export const GetPublicKeyDocument = `
     query getPublicKey {
   publicKey {
@@ -1785,20 +1802,21 @@ export const GetUserListDocument = `
     query getUserList {
   users {
     list {
-      id
-      bio
-      name
-      avatar
-      role {
-        id
-        desc
-        auth
-        name
-      }
+      ...UserOutputFields
     }
   }
 }
-    `;
+    ${UserOutputFieldsFragmentDoc}`;
+export const UpdateUserDocument = `
+    mutation updateUser($body: UserFields!, $conds: UserSearch!) {
+  updateUsers(body: $body, conds: $conds) {
+    message
+    change {
+      ...UserOutputFields
+    }
+  }
+}
+    ${UserOutputFieldsFragmentDoc}`;
 
 const injectedRtkApi = api.injectEndpoints({
   endpoints: (build) => ({
@@ -1868,9 +1886,12 @@ const injectedRtkApi = api.injectEndpoints({
     getUserList: build.query<GetUserListQuery, GetUserListQueryVariables | void>({
       query: (variables) => ({ document: GetUserListDocument, variables })
     }),
+    updateUser: build.mutation<UpdateUserMutation, UpdateUserMutationVariables>({
+      query: (variables) => ({ document: UpdateUserDocument, variables })
+    }),
   }),
 });
 
 export { injectedRtkApi as api };
-export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useUpdateRolesMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery, useGetUserListQuery, useLazyGetUserListQuery } = injectedRtkApi;
+export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useUpdateRolesMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery, useGetUserListQuery, useLazyGetUserListQuery, useUpdateUserMutation } = injectedRtkApi;
 

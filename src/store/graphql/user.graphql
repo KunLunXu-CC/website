@@ -1,3 +1,14 @@
+# 接口返回字段
+fragment UserOutputFields on User {
+  id
+  sex
+  bio
+  name
+  avatar
+  account
+  role { id desc auth name }
+}
+
 # 登录
 mutation login (
   $account: String,
@@ -8,11 +19,7 @@ mutation login (
     password: $password,
   ){
     user {
-      id
-      sex
-      name
-      account
-      role { id desc auth name }
+      ...UserOutputFields
     }
     message
   }
@@ -29,11 +36,20 @@ query getPublicKey {
 query getUserList {
   users {
     list {
-      id
-      bio
-      name
-      avatar
-      role { id desc auth name }
+      ...UserOutputFields
+    }
+  }
+}
+
+# 更新用户
+mutation updateUser(
+  $body: UserFields!
+  $conds: UserSearch!
+) {
+  updateUsers(body: $body  , conds: $conds ) {
+    message
+    change {
+      ...UserOutputFields
     }
   }
 }
