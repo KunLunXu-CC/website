@@ -1,12 +1,14 @@
 import { Select } from 'antd';
-import { useSelector } from 'react-redux';
+import { actions } from '@store';
 import { useCallback, useMemo } from 'react';
 import { APP_SETTING } from '@config/constants';
+import { useSelector, useDispatch } from 'react-redux';
 import { useGetRolesQuery, useUpdateUserMutation } from '@store/graphql';
 
 import scss from './detail.module.scss';
 
 export default () => {
+  const dispatch = useDispatch();
   const [updateUser] = useUpdateUserMutation();
   const { data: roleList } = useGetRolesQuery();
   const { active } = useSelector((state) => state.monitoring.user);
@@ -40,12 +42,10 @@ export default () => {
       },
     });
 
-    console.log('%c [ res ]-43', 'font-size:13px; background:pink; color:#bf2c9f;', res);
-
     // 2. 修改当前角色信息
-    // setActiveUserRole
-    console.log('%c [ value ]-19', 'font-size:13px; background:pink; color:#bf2c9f;', value);
-  }, [updateUser, active]);
+    const currentRole = res.data.updateUsers.change[0].role;
+    dispatch(actions.monitoring.setActiveUserRole(currentRole));
+  }, [updateUser, active, dispatch]);
 
 
   if (!active) {
