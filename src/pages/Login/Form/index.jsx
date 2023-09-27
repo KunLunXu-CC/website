@@ -33,14 +33,14 @@ export default () => {
       <div className={scss['sub-title']}>
         Please enter your details to sign in.
       </div>
-      <Button
+      {/* <Button
         block
         size="large"
         className={scss.github}
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_CLIENT_ID}`}>
         <Icon type="icon-github" />
         Sign in with GitHub
-      </Button>
+      </Button> */}
       <Divider className={scss.divider}>
         or use account sign in
       </Divider>
