@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.5](https://github.com/KunLunXu-CC/website/compare/v4.1.4...v4.1.5) (2023-09-27)
+
+
+### Features
+
+* 🎸 更新组件库 ([9f1356e](https://github.com/KunLunXu-CC/website/commit/9f1356e395726dcdfd15346bd68c86948b6d7c39))
+* 🎸 鉴查院成立 ([1ebe234](https://github.com/KunLunXu-CC/website/commit/1ebe234b01ae0720c95f2abadcdcea0cb0151032))
+* 🎸 鉴查院样式调整 ([6845efa](https://github.com/KunLunXu-CC/website/commit/6845efa8b33172280df6ab4e8a2db3982f9de423))
+* 🎸 merge ([ef4e08d](https://github.com/KunLunXu-CC/website/commit/ef4e08d76a524c4dd4fe7d0fbb1709e31dd200b7))
+* 🎸 sign in with github ([1b06c12](https://github.com/KunLunXu-CC/website/commit/1b06c1272438c87ac18a3f3d6644ed4f93897bca))
+
 ### [4.1.4](https://github.com/KunLunXu-CC/website/compare/v4.1.3...v4.1.4) (2023-09-27)
 
 
