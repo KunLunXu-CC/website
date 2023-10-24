@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.6](https://github.com/KunLunXu-CC/website/compare/v4.1.5...v4.1.6) (2023-10-24)
+
+
+### Features
+
+* 🎸 update @kunlunxu/brick -> 2.3.4 ([947dc7a](https://github.com/KunLunXu-CC/website/commit/947dc7acf78541ffe066e366fda3183f11d04598))
+* 🎸 update login ([bce7efa](https://github.com/KunLunXu-CC/website/commit/bce7efa0e62030f69b7413dcbb3f0a9d1964d349))
+
 ### [4.1.5](https://github.com/KunLunXu-CC/website/compare/v4.1.4...v4.1.5) (2023-09-27)
 
 
