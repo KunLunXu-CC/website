@@ -3,8 +3,8 @@ import scss from './index.module.scss';
 import { rsa } from '@utils';
 import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { Input, Form, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { Input, Form, Button, Divider } from 'antd';
 import { useGetPublicKeyQuery, useLoginMutation } from '@store/graphql';
 
 export default () => {
@@ -33,17 +33,17 @@ export default () => {
       <div className={scss['sub-title']}>
         Please enter your details to sign in.
       </div>
-      {/* <Button
+      <Button
         block
         size="large"
         className={scss.github}
         href={`https://github.com/login/oauth/authorize?client_id=${GITHUB_APP_CLIENT_ID}`}>
         <Icon type="icon-github" />
         Sign in with GitHub
-      </Button> */}
-      {/* <Divider className={scss.divider}>
+      </Button>
+      <Divider className={scss.divider}>
         or use account sign in
-      </Divider> */}
+      </Divider>
       <div className={scss['login-form']}>
         <Form form={form}>
           <Form.Item

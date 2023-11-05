@@ -43,8 +43,8 @@ export const APP_SETTING = {
   },
 
   USER: {
-    name: '用户管理',
     code: 'user',
+    name: '用户管理',
     icon: getOssUrl('klx.pro.d1fb923369fb7b28217133738e37ba2f.svg'),
   },
 };
