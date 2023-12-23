@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.1.8](https://github.com/KunLunXu-CC/website/compare/v4.1.7...v4.1.8) (2023-12-23)
+
+
+### Features
+
+* 🎸 remove auth ([519e004](https://github.com/KunLunXu-CC/website/commit/519e004d59e87d30b212a64840c9852d97dad057))
+
 ### [4.1.7](https://github.com/KunLunXu-CC/website/compare/v4.1.6...v4.1.7) (2023-10-27)
 
 
