@@ -1,0 +1,22 @@
+fragment RoleOutputFields on Role {
+  id
+  name
+  auth
+}
+
+# 获取角色列表
+query getRoles ($search: RoleSearch) {
+  roles (search: $search) {
+    list {
+      ...RoleOutputFields
+    }
+  }
+}
+
+mutation updateRoles($body: RoleFields!, $conds: RoleSearch!) {
+  updateRoles(body: $body, conds: $conds) {
+    change {
+      ...RoleOutputFields
+    }
+  }
+}

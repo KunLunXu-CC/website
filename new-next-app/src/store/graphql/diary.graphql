@@ -1,0 +1,96 @@
+# 接口返回字段
+fragment DiaryOutputFields on Diary {
+  id
+  name
+  getUp
+  toRest
+  informalEssay
+  diet {
+    type
+    desc
+  }
+  fitness {
+    type
+    place
+  }
+  bill {
+    tag
+    desc
+    income
+    expend
+  }
+  bodyIndex {
+    bim
+    weight
+    muscle
+    bodyfat
+    moistureContent
+  }
+}
+
+# 获取
+query getDiaries($search: DiarySearch) {
+  diaries(search: $search) {
+    list {
+      ...DiaryOutputFields
+    }
+  }
+}
+
+# 创建
+mutation createDiaries($body: [DiaryFields!]!) {
+  createDiaries(body: $body) {
+    change {
+      ...DiaryOutputFields
+    }
+  }
+}
+
+# 更新
+mutation updateDiaries($body: DiaryFields!, $conds: DiarySearch!) {
+  updateDiaries(body: $body, conds: $conds) {
+    change {
+      ...DiaryOutputFields
+    }
+  }
+}
+
+# 获取统计
+query getStatsBill($search: StatsBillSearch) {
+  statsBill(search: $search) {
+    stats {
+      income
+      expend
+    }
+    groupWithName {
+      name
+      income
+      expend
+      diaries {
+        name
+        bill {
+          desc
+          income
+          expend
+          tag
+        }
+      }
+    }
+  }
+}
+
+# 获取 bodyIndex 列表
+query getStatsBodyIndex($search: DiarySearch) {
+  diaries(search: $search) {
+    list {
+      name
+      bodyIndex {
+        weight
+        muscle
+        moistureContent
+        bodyfat
+        bim
+      }
+    }
+  }
+}
