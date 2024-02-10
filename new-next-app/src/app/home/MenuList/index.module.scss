@@ -1,0 +1,55 @@
+$height: 22px;                              // 菜单栏高度
+$color: rgba($color: #fff, $alpha: 80%);  // 字体颜色
+$menu-trigger-height: 10px;                 // 鼠标移动到顶部多少算触底
+
+.menu {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  position: fixed;
+
+  transition: all 0.5s;
+  box-sizing: content-box;
+
+  font-size: 12px;
+  line-height: $height;
+
+  .body {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    color: $color;
+    height: $height;
+
+    backdrop-filter: blur(40px);
+    background: rgba($color: #000, $alpha: 45%);
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 8%);
+  }
+
+  :global {
+    .brick-icon {
+      color: $color;
+      margin: 0 10px;
+      font-size: 16px;
+
+      &:hover {
+        cursor: pointer;
+        color: #1890ff;
+      }
+    }
+  }
+}
+
+// 开启自动隐藏: 鼠标移动到顶部才出来
+.menu.menu-auto-hiding {
+  opacity: 0;
+  top: -$height;
+  padding-bottom: $menu-trigger-height;
+
+  &:hover {
+    top: 0;
+    opacity: 1;
+  }
+}

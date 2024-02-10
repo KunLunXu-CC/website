@@ -1,0 +1,58 @@
+@import "@/assets/style/mixin";
+
+$bg: #f2f5fc;
+
+.kanban {
+  @include scrollbar(
+    $height: 4px,
+    $thumb-bg: darken($color: $bg, $amount: 8%)
+  );
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+
+  padding: 20px 0;
+  margin-left: 116px;
+
+  overflow: hidden;
+  overflow-x: auto;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+
+  display: flex;
+}
+
+.column {
+  height: 100%;
+  width: 260px;
+  border-radius: 8px;
+
+  flex: none;
+  display: flex;
+  flex-direction: column;
+
+  background: $bg;
+  margin: {
+    right: 12px;
+  };
+
+  &.dragging {
+    box-shadow: 0 0 10px #e6f7ff;
+  }
+}
+
+.items {
+  @include scrollbar(
+    $width: 4px,
+    $thumb-bg: darken($color: $bg, $amount: 2%)
+  );
+  flex: 1;
+  overflow-y: auto;
+
+  padding: {
+    left: 12px;
+    right: 8px;
+  };
+}

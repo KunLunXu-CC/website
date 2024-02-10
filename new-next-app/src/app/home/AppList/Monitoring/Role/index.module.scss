@@ -1,0 +1,127 @@
+@import "@/assets/style/mixin";
+
+.role {
+  height: 100%;
+
+  display: flex;
+  padding: 52px 0 20px;
+  box-sizing: border-box;
+}
+
+.role-list {
+  width: 30%;
+  color: #d6d6d9;
+  margin-right: 30px;
+}
+
+.role-item {
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  transition: all 0.4s;
+
+  display: flex;
+  justify-content: space-between;
+
+  &.active {
+    font-size: 14px;
+    border-radius: 8px;
+    background-color: rgba($color: #000, $alpha: 20%);
+  }
+}
+
+.auth-list {
+  @include scrollbar(
+    $width: 6px,
+    $thumb-bg: #9fa5bd,
+  );
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  overflow: auto;
+  margin-right: 10px;
+
+  img {
+    width: 40px;
+    margin-right: 20px;
+  }
+
+  .auth-item {
+    display: flex;
+    align-items: center;
+
+    color: #fff;
+  }
+
+  :global {
+    .ant-checkbox-wrapper {
+      display: flex;
+      align-items: center;
+
+      margin-left: 0;
+
+      &:not(:last-child) {
+        padding-bottom: 10px;
+      }
+    }
+
+    .ant-checkbox {
+      transform: translateY(-3px);
+    }
+
+    .ant-checkbox-inner {
+      border-radius: 50% !important;
+      background-color: transparent;
+      border-color: #fff !important;
+    }
+
+    .ant-checkbox-checked {
+      .ant-checkbox-inner {
+        border-width: 0 !important;
+        background-color: #db493b !important;
+      }
+
+      &::after {
+        border-width: 0 !important;
+        background-color: transparent !important;
+      }
+    }
+
+    .ant-checkbox-wrapper:hover .ant-checkbox-inner {
+      border-width: 2px;
+    }
+  }
+}
+
+.save {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow:
+    0 0 0 4px #fb8da7,
+    0 0 0 8px #7c85ab,
+    0 0 40px 0 rgba($color: #fb8da7, $alpha: 90%);
+
+  transition: all 0.4s;
+  background: linear-gradient(160deg, #73a4c6, #525c89);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  :global {
+    .ant-progress-inner {
+      width: 80px !important;
+      height: 80px !important;
+    }
+  }
+}

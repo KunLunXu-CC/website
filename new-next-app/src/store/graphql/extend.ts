@@ -2,7 +2,7 @@ import { GraphQLClient, ClientError } from 'graphql-request';
 import { createApi, BaseQueryFn } from '@reduxjs/toolkit/query/react';
 
 // see: https://github.com/prisma-labs/graphql-request
-export const client = new GraphQLClient('/api/graphql' as string, {
+export const client = new GraphQLClient('/api/graphql', {
   mode: 'cors',
   credentials: 'include',
 });

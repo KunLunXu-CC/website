@@ -1,0 +1,61 @@
+@use "sass:math";
+
+// 行截断 - 超出显示神略号: $line 显示多少行
+@mixin line-clamp($line) {
+  @if $line == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    overflow: hidden;
+    display: box;
+    -webkit-line-clamp: $line;
+  }
+}
+
+/**
+ * 滚动条设置
+ * 使用:
+ * div {
+ *   @include scrollbar($thumb-bg: red);
+ * }
+**/
+@mixin scrollbar(
+  $width: 6px,
+  $height: 6px,
+  $init-alpha: 0,
+  $thumb-bg: #bfbfbf,
+  $radius: math.div($width, 2),
+  $track-bg: rgba(255, 255, 255, 0),
+) {
+  $hover-alpha: 1;          // 鼠标停放时透明度
+
+  // 滚动条整体样式
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $height;
+  }
+
+  // 滚动条里面轨道
+  &::-webkit-scrollbar-track {
+    border-radius: $radius;
+    background: rgba($color: $track-bg, $alpha: $init-alpha);
+  }
+
+  // 滚动条里面滑块
+  &::-webkit-scrollbar-thumb {
+    border-radius: $width;
+    background: rgba($color: $thumb-bg, $alpha: $init-alpha);
+  }
+
+  // 鼠标停放处理
+  &:hover {
+    &::-webkit-scrollbar-track {
+      background: if(alpha($track-bg) == 0, $track-bg, rgba($color: $track-bg, $alpha: $hover-alpha));
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($color: $thumb-bg, $alpha: $hover-alpha);
+    }
+  }
+}

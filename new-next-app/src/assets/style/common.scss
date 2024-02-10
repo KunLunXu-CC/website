@@ -1,0 +1,10 @@
+@import "./mixin";
+
+body {
+  margin: 0;
+}
+
+* {
+  // 设置默认滚动条
+  @include scrollbar;
+}

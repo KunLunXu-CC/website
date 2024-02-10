@@ -1,4 +1,4 @@
-// import apps from '@app';
+import apps from '@/app/home/AppList/config';
 import { urlParams } from '@/utils';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -24,8 +24,6 @@ const initialState: AppStore = {
   docks: [],
   opens: [],
 };
-
-const apps = {} as any
 
 export default createSlice({
   initialState,
