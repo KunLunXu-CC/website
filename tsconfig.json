@@ -1,42 +1,26 @@
 {
-  "include": [
-    "./src/**/*",
-    "types/**/*",
-  ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
     "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
-    "target": "ESNext",
-    "allowJs": true, // 如果一个glob模式里的某部分只包含*或.*，那么仅有支持的文件扩展名类型被包含在内（比如默认.ts，.tsx，和.d.ts， 如果 allowJs设置能true还包含.js和.jsx
-    "module": "ESNext",
-    "noImplicitAny": true,
-    "jsx": "react-jsx",
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "moduleResolution": "Node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@app": ["src/app"],
-      "@app/*": ["src/app/*"],
-
-      "@hooks": ["src/hooks"],
-
-      "@pages": ["src/pages"],
-      "@pages/*": ["src/pages/*"],
-
-      "@utils": ["src/utils"],
-      "@utils/*": ["src/utils/*"],
-
-      "@store": ["src/store"],
-      "@store/*": ["src/store/*"],
-
-      "@assets": ["src/assets"],
-      "@assets/*": ["src/assets/*"],
-
-      "@config": ["src/config"],
-      "@config/*": ["src/config/*"]
-    },
+      "@/*": ["./src/*"],
+    }
   },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
