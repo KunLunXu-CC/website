@@ -3,17 +3,16 @@ import scss from './index.module.scss';
 
 import { getOssUrl } from '@/utils';
 import { useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 import { Image, Icon } from '@kunlunxu/brick';
-import { useNavigate } from 'react-router-dom';
 
 const useStateHook = () => {
-  const navigate = useNavigate();
-
+  const router = useRouter()
   // 退出
   const signOut = useCallback(() => {
-    navigate('/login');
-  }, [navigate]);
+    router.push('/login');
+  }, [router]);
 
   const { avatars, user  } = useSelector((state) => ({
     user: state.user,
@@ -31,12 +30,12 @@ const useStateHook = () => {
   return { avatar, user, signOut };
 };
 
-export default () => {
+const User = () => {
   const state = useStateHook();
   return (
     <Card className={scss.user}>
       <div className={scss.avatar}>
-        <Image src={state.avatar} />
+        <Image src={state.avatar} alt="head"/>
       </div>
       <div className={scss.name}>
         { state.user.name || '---'}
@@ -51,4 +50,7 @@ export default () => {
       />
     </Card>
   );
-};
+}
+
+export default User;
+
