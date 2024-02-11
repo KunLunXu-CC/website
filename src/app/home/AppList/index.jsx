@@ -1,13 +1,13 @@
 import _ from 'lodash';
-import apps from '@/app/home/AppList';
 import scss from './index.module.scss';
+import apps from '@/app/home/AppList/config';
 
 import { actions } from '@/store';
 import { useCallback } from 'react';
 import { Window } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 
-export default () => {
+const AppList = () => {
   const dispatch = useDispatch();
   const opens = useSelector((state) => state.app?.opens);
 
@@ -51,4 +51,6 @@ export default () => {
       })}
     </div>
   );
-};
+}
+
+export default AppList;
