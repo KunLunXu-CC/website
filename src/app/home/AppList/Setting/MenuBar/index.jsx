@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { Checkbox, Input } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = () => {
+const MenuBar = () => {
   const dispatch = useDispatch();
   const setting = useSelector((state) => state.setting.menuBar);
 
@@ -18,31 +18,27 @@ const useStateHook = () => {
     }));
   }, [dispatch]);
 
-  return { setting, onChange };
-};
-
-export default () => {
-  const state = useStateHook();
-
   return (
     <>
       <Checkbox
-        checked={state.setting.showFullScreenOnMenu}
-        onChange={state.onChange.bind(null, 'showFullScreenOnMenu')}>
+        checked={setting.showFullScreenOnMenu}
+        onChange={onChange.bind(null, 'showFullScreenOnMenu')}>
         在菜单栏显示全屏切换图标
       </Checkbox>
       <Checkbox
-        checked={state.setting.showWeek}
-        onChange={state.onChange.bind(null, 'showWeek')}>
+        checked={setting.showWeek}
+        onChange={onChange.bind(null, 'showWeek')}>
         显示星期
       </Checkbox>
       <div className={scss['format-date']}>
         日期显示格式
         <Input
-          value={state.setting.formatDate}
-          onChange={state.onChange.bind(null, 'formatDate')}
+          value={setting.formatDate}
+          onChange={onChange.bind(null, 'formatDate')}
         />
       </div>
     </>
   );
-};
+}
+
+export default MenuBar;

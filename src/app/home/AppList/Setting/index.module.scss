@@ -52,7 +52,7 @@ $color: rgba($color: #fff, $alpha: 80%,);
     // 输入框
     .ant-input {
       border-radius: 8px;
-      background: #1f2223;
+      background: #1f2223 !important;
       border-color: #292b2f;
       color: $color;
     }
