@@ -45,7 +45,7 @@ const getBody = (values) => {
   };
 };
 
-export default () => {
+const EditorCalendar =  () => {
   const dispatch = useDispatch();
   const [createDiaries] = useCreateDiariesMutation();
   const [updateDiaries] = useUpdateDiariesMutation();
@@ -160,3 +160,5 @@ export default () => {
     </Form>
   );
 };
+
+export default EditorCalendar;

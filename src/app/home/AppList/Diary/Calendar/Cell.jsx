@@ -7,7 +7,7 @@ import { useMemo, useCallback } from 'react';
 import { DIARY_EDITOR_DIARY } from '../constants';
 import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = (props) => {
+const Cell =  (props) => {
   const { diaries = [] } = useSelector((state) => state.diary);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ const useStateHook = (props) => {
   ).toFixed(1), [diary]);
 
   // 点击单元格
-  const onClick = useCallback(() => {
+  const handleClick = useCallback(() => {
     dispatch(actions.modal.open({
       diary,
       date: props.date,
@@ -40,27 +40,21 @@ const useStateHook = (props) => {
     }));
   }, [props.date, diary, dispatch]);
 
-  return { date, diary, onClick, weight, expenses };
-};
-
-export default (props) => {
-  const state = useStateHook(props);
-
   return (
     <div
       className={scss.cell}
-      onClick={state.onClick}>
+      onClick={handleClick}>
       <div className={scss.date}>
-        {state.date}
+        {date}
       </div>
-      {state.diary ? (
+      {diary ? (
         <div className={scss.stats}>
           <div className={scss['stats-item']}>
-            {state.expenses}
+            {expenses}
             <Icon type="icon-dingdanjine" />
           </div>
           <div className={scss['stats-item']}>
-            {state.weight}
+            {weight}
             <Icon type="icon-ccgl-chengzhongsaomiao-5" />
           </div>
         </div>
@@ -68,3 +62,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default Cell;

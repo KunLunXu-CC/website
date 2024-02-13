@@ -40,24 +40,25 @@
   .arrow-right {
     right: -5px;
   }
-}
 
-.input-fied {
-  flex: 1;
+  .input-fied {
+    flex: 1;
 
-  :global {
-    .ant-input {
-      width: 100%;
-      padding: 0;
-      height: 40px;
-      color: #fff;
-      font-size: 18px;
-      text-align: center;
-      border-radius: 40px;
-      background: #91d5ff;
-      border: unset !important;
-      outline: none !important;
-      box-shadow: none !important;
+    :global {
+      .ant-input {
+        width: 100%;
+        padding: 0;
+        height: 40px;
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        border-radius: 40px;
+        background: #91d5ff;
+        border: unset !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
     }
   }
 }
+

@@ -17,7 +17,7 @@ const MEN_MAP_TO_COMPONENT = {
   [DIARY_MENU.PROJECT.VALUE]: Kanban,
 };
 
-const useStateHook = () => {
+const Diary = () => {
   const { menu } = useSelector((state) => state.diary);
 
   // 构建 body element
@@ -26,21 +26,19 @@ const useStateHook = () => {
     return (Body ? <Body /> : null);
   }, [menu.selectedKey]);
 
-  return { body };
-};
 
-export default () => {
-  const state = useStateHook();
   return (
     <div className={scss.layout}>
       <div className={scss['layout-menu']}>
         <Menu />
       </div>
       <div className={scss['layout-body']}>
-        {state.body}
+        {body}
       </div>
       <Tips />
       <Modal />
     </div>
   );
-};
+}
+
+export default Diary;

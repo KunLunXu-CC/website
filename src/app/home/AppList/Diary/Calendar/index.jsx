@@ -4,10 +4,12 @@ import scss from './index.module.scss';
 
 import { Calendar } from 'antd';
 
-export default () => (
+const Main = () => (
   <Calendar
     className={scss.calendar}
     dateFullCellRender={(date) => <Cell date={date} />}
     headerRender={(params) => (<Header {... params} />)}
   />
 );
+
+export default Main

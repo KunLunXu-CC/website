@@ -29,7 +29,7 @@ const getFullDate = (value) => {
   return res;
 };
 
-export default (props) => {
+const Header =  (props) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(props.value.format('YYYY-MM'));
 
@@ -86,3 +86,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default Header;
