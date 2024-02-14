@@ -1,8 +1,10 @@
 .modal {
   :global {
-    .ant-modal-mask,
-    .ant-modal-wrap {
-      position: absolute;
+    .ant-modal-root {
+      .ant-modal-mask,
+      .ant-modal-wrap {
+        position: absolute;
+      }
     }
   }
 }

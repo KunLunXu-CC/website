@@ -2,9 +2,11 @@ import BillDetail from './BillDetail';
 import EditorCalendar from './EditorCalendar';
 import scss from './index.module.scss';
 
-export default () => (
+const Modal = () => (
   <div className={scss.modal}>
     <EditorCalendar />
     <BillDetail />
   </div>
 );
+
+export default Modal;
