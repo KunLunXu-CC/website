@@ -12,14 +12,14 @@ $color: rgba($color: #ccc, $alpha: 60%);
     flex: 1;
     height: 40px;
 
-    &-input {
+    &-input:global(.ant-input) {
       padding: 2px;
       border: unset;
       color: #fff;
       outline: none;
       height: initial;
       border-radius: 0;
-      background: rgba($color: #fff, $alpha: 10%);
+      background: rgba($color: #fff, $alpha: 10%) !important;
 
       &:hover,
       &:focus,

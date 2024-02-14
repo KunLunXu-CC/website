@@ -20,7 +20,7 @@ import {
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
-export default (props) => {
+const Title =  (props) => {
   const handleCreateFolders = useHandleCreateFolders();
   const handleCreateArticles = useHandleCreateArticles();
   const handleUpdateFolders = useHandleUpdateFolders();
@@ -260,3 +260,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default Title;
