@@ -5,7 +5,7 @@ import { actions } from '@/store';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default () => {
+const Search =  () => {
   const dispatch = useDispatch();
 
   const { keyword, results } = useSelector((state) => state.editor.search);
@@ -49,3 +49,5 @@ export default () => {
     </div>
   );
 };
+
+export default Search;

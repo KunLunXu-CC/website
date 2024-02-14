@@ -20,9 +20,9 @@ $content-color: rgba($color: $base-color, $alpha: 80%);
   padding: 0 10px 10px;
 }
 
-.input {
+.input:global(.ant-input) {
   border: 0;
-  background-color: #1d1f23;
+  background-color: #1d1f23 !important;
   color: $content-color;
 
   &::placeholder {
