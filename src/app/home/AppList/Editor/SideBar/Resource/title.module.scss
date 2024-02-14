@@ -1,8 +1,10 @@
 @import "@/assets/style/mixin";
+$color: rgba($color: #ccc, $alpha: 60%);
 
 .menu-title {
   display: flex;
   align-items: center;
+  color: $color;
 
   &-content {
     @include line-clamp(1);
@@ -60,6 +62,10 @@
       &:hover {
         background-color: rgba($color: #fff, $alpha: 10%);
       }
+    }
+    .ant-dropdown-menu-title-content {
+      display: flex;
+      align-items: center;
     }
   }
 }

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SIDE_MIN_WIDTH = 4;  // 菜单最小宽度
 
-export default () => {
+const SideBar =  () => {
   const dispatch = useDispatch();
 
   const { collapsed, activity } = useSelector((state) => ({
@@ -50,3 +50,5 @@ export default () => {
     </VariableContainer >
   );
 };
+
+export default SideBar;

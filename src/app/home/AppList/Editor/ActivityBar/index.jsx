@@ -7,7 +7,7 @@ import { Icon } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 import { ACTIVITY_LIST } from '@/app/home/AppList/Editor/constants';
 
-export default () => {
+const ActivityBar = () => {
   const dispatch = useDispatch();
 
   const { selectKey } = useSelector((state) => ({
@@ -38,3 +38,5 @@ export default () => {
     </div>
   );
 };
+
+export default ActivityBar;

@@ -1,6 +1,6 @@
 $bg: transparent;
 $bg-selected: #2c313a;
-$color: rgba($color: #ccc, $alpha: 80%);
+$color: rgba($color: #ccc, $alpha: 60%);
 
 .menu-item-empty {
   height: 0 !important;
@@ -11,7 +11,7 @@ $color: rgba($color: #ccc, $alpha: 80%);
   height: 100%;
   border: unset;
   color: $color;
-  background: $bg;
+  background: $bg !important;
   padding-bottom: 40px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -40,7 +40,7 @@ $color: rgba($color: #ccc, $alpha: 80%);
 
     // 根菜单样式覆盖 - 正常状态
     .ant-menu-item {
-      background: $bg;
+      background: $bg !important;
     }
 
     // 子菜单 - 活动或者选中

@@ -5,7 +5,8 @@
 
   &-item {
     padding: 15px 0;
-    text-align: center;
+    display: flex;
+    justify-content: center;
 
     cursor: pointer;
     font-size: 22px;
