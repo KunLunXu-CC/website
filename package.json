@@ -40,7 +40,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@kunlunxu/brick": "^2.3.5",
+    "@kunlunxu/brick": "^2.3.13",
     "@reduxjs/toolkit": "^2.1.0",
     "antd": "^5.1.1",
     "axios": "^1.6.7",

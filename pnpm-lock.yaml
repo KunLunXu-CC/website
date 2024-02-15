@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@kunlunxu/brick':
-    specifier: ^2.3.5
-    version: 2.3.5(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^2.3.13
+    version: 2.3.13(react-dom@18.2.0)(react@18.2.0)
   '@reduxjs/toolkit':
     specifier: ^2.1.0
     version: 2.1.0(react-redux@9.1.0)(react@18.2.0)
@@ -1825,8 +1825,8 @@ packages:
     resolution: {integrity: sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==}
     dev: true
 
-  /@kunlunxu/brick@2.3.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-7EuSppB0X6wXpu3iYg4JW7va3WBzFvJXmMPI9aUmSJ/R+bTDQ2n7XV2DBWuBcq9HJdkTHTFuf+z16fjcRu/kAQ==}
+  /@kunlunxu/brick@2.3.13(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-PnMPK1HPKGqsBzvnweX+glLyV8Cz6X83m1glILDo0hsz5oUJ/F3IT2m0o5G54yQkk/h3yRj+zMcD51s3TvsDUg==}
     peerDependencies:
       react: '>=18.2.0'
       react-dom: '>=18.2.0'

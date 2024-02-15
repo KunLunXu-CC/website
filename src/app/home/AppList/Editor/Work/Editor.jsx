@@ -2,6 +2,7 @@ import { actions } from '@/store';
 import { getOssUrl } from '@/utils';
 import { useCallback } from 'react';
 import { Markdown } from '@kunlunxu/brick';
+import '@kunlunxu/brick/es/markdown/style';
 import { PHOTO_TYPE } from '@/config/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUploadPhotosMutation } from '@/store/graphql';
@@ -23,7 +24,7 @@ const MD_TO_JSX_OPTIONS = {
   },
 };
 
-export default (props) => {
+const Editor = (props) => {
   const dispatch = useDispatch();
   const handleUpdateArticles = useHandleUpdateArticles();
 
@@ -84,3 +85,5 @@ export default (props) => {
     />
   );
 };
+
+export default Editor;
