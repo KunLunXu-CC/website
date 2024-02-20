@@ -41,7 +41,7 @@ const User = () => {
         { state.user.name || '---'}
       </div>
       <div className={scss.motto}>
-        { state.user.motto || '这个人很懒什么都没写'}
+        { state.user.bio || '这个人很懒什么都没写'}
       </div>
       <Icon
         type="icon-tuichu"
