@@ -7,7 +7,7 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHandleUpdateArticles, useHandleUpdateFolders } from '@/app/home/AppList/Editor/hooks';
 
-export default () => {
+const Move =  () => {
   const handleUpdateFolders = useHandleUpdateFolders();
   const handleUpdateArticles = useHandleUpdateArticles();
 
@@ -109,3 +109,5 @@ export default () => {
     </Modal>
   );
 };
+
+export default Move;

@@ -1,3 +1,4 @@
+import logger from 'redux-logger'
 import { configureStore } from '@reduxjs/toolkit';
 import { api as graphqlApi } from '@/store/graphql';
 
@@ -29,6 +30,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({ serializableCheck: false }),
     graphqlApi.middleware,
+    logger,
   ],
 });
 

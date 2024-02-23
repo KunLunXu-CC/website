@@ -1,6 +1,6 @@
 import Work from './Work';
 import Tips from './Tips';
-import Modal from './Modal';
+import Modals from './Modals';
 import SideBar from './SideBar';
 import scss from './index.module.scss';
 import ActivityBar from './ActivityBar';
@@ -20,7 +20,7 @@ const useStateHook = () => {
   }, [dispatch, initEditorData]);
 };
 
-export default () => {
+const Editor = () => {
   useStateHook();
   return (
     <div className={scss.editor}>
@@ -32,7 +32,9 @@ export default () => {
       </div>
       <div className={scss.footer} />
       <Tips />
-      <Modal />
+      <Modals />
     </div>
   );
 };
+
+export default Editor;

@@ -2,7 +2,7 @@ $color: rgba($color: #fff, $alpha: 80%);
 $color-light: rgba($color: #fff, $alpha: 60%);
 $bg-light: rgba($color: #fff, $alpha: 10%);
 
-.modal {
+.modal:global(.ant-modal) {
   width: 420px !important;
 
   :global {
@@ -26,7 +26,7 @@ $bg-light: rgba($color: #fff, $alpha: 10%);
   }
 }
 
-.item {
+.item:global(.ant-form-item) {
   color: $color-light;
 
   :global {

@@ -4,11 +4,13 @@ import RevokeConfirm from './RevokeConfirm';
 import ReleaseConfirm from './ReleaseConfirm';
 import scss from './index.module.scss';
 
-export default () => (
-  <div className={scss.modal}>
+const Modals = () => (
+  <div className={scss.modals}>
     <ThumbSetting />
     <RevokeConfirm />
     <ReleaseConfirm />
     <Move />
   </div>
 );
+
+export default Modals;

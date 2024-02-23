@@ -3,8 +3,9 @@ import scss from './index.module.scss';
 import { Modal } from 'antd';
 import { RELEASE_CONFIRM } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
+import { useCallback } from 'react';
 
-const useStateHook = () => {
+const ReleaseConfirm = () => {
   const dispatch = useDispatch();
 
   // 获取当前文章内容
@@ -13,44 +14,41 @@ const useStateHook = () => {
   );
 
   // 点击取消
-  const onCancel = () => {
+  const handleCancel = useCallback(() => {
     dispatch({
-      code: RELEASE_CONFIRM,
-      type: 'modal/closeModal',
+      type: 'modal/close',
+      payload: RELEASE_CONFIRM,
     });
-  };
+  }, [dispatch]);
 
   // 点击发布
-  const onOk = async () => {
+  const handleOk = useCallback(async () => {
+    if (!article) return;
+
     dispatch({
       id: article.id,
       type: 'editor/releaseArticle',
     });
-    onCancel();
-  };
-
-  return { article, onCancel, onOk };
-};
-
-export default () => {
-  const state = useStateHook();
+    handleCancel();
+  }, [article, dispatch, handleCancel]);
 
   return (
     <Modal
       okText="发布"
+      onOk={handleOk}
+      open={!!article}
       closable={false}
       cancelText="取消"
-      onOk={state.onOk}
-      maskClosable={false}
       getContainer={false}
-      open={!!state.article}
       className={scss.modal}
-      onCancel={state.onCancel}>
+      onCancel={handleCancel}>
       发布文章:
       <span className={scss['article-name']}>
-        {state.article?.name ?? '---'}
+        {article?.name ?? '---'}
       </span>
-      ？
+      ?
     </Modal>
   );
 };
+
+export default ReleaseConfirm;
