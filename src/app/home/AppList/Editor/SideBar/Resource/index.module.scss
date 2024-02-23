@@ -1,17 +1,17 @@
 $bg: transparent;
 $bg-selected: #2c313a;
-$color: rgba($color: #ccc, $alpha: 60%);
+$color: rgba($color: #ccc, $alpha: 80%);
 
 .menu-item-empty {
   height: 0 !important;
   overflow: hidden !important;
 }
 
-.menu {
+.menu:global(.ant-menu.ant-menu-root) {
   height: 100%;
   border: unset;
   color: $color;
-  background: $bg !important;
+  background: $bg;
   padding-bottom: 40px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -40,31 +40,31 @@ $color: rgba($color: #ccc, $alpha: 60%);
 
     // 根菜单样式覆盖 - 正常状态
     .ant-menu-item {
-      background: $bg !important;
+      background: $bg;
     }
 
     // 子菜单 - 活动或者选中
     .ant-menu-item:not(.ant-menu-item-selected) {
       &:hover,
       &:active {
-        color: $color !important;
-        background: $bg-selected !important;
+        color: $color;
+        background: $bg-selected;
       }
     }
 
     .ant-menu-submenu-active,
     .ant-menu-submenu-selected {
       > .ant-menu-submenu-title {
-        color: $color !important;
-        background: $bg-selected !important;
+        color: $color;
+        background: $bg-selected;
       }
     }
 
     // 子菜单 - 选中但是被打开则不显示任何样式
     .ant-menu-submenu-selected.ant-menu-submenu-open {
       .ant-menu-submenu-title {
-        color: $color !important;
-        background: $bg !important;
+        color: $color;
+        background: $bg;
       }
     }
 
@@ -89,8 +89,8 @@ $color: rgba($color: #ccc, $alpha: 60%);
   height: 40px;
   position: absolute;
 
+  color: $color;
   font-size: 20px;
-  color: rgba($color: #ccc, $alpha: 80%);
 
   display: flex;
   align-items: center;

@@ -3,8 +3,6 @@ $color-light: rgba($color: #fff, $alpha: 60%);
 $bg-light: rgba($color: #fff, $alpha: 10%);
 
 .modal:global(.ant-modal) {
-  width: 420px !important;
-
   :global {
     .ant-modal-content {
       padding: 30px 20px;
@@ -59,7 +57,7 @@ $bg-light: rgba($color: #fff, $alpha: 10%);
     .ant-cascader-menu-item:hover,
     .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
     .ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
-      background: $bg-light;
+      background: $bg-light !important;
     }
   }
 }

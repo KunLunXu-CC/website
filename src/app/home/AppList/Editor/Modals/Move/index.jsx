@@ -79,6 +79,7 @@ const Move =  () => {
 
   return (
     <Modal
+      width={420}
       okText="确定"
       open={!!modal}
       onOk={handleOk}

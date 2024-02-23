@@ -34,6 +34,7 @@ const ReleaseConfirm = () => {
 
   return (
     <Modal
+      width={320}
       okText="发布"
       onOk={handleOk}
       open={!!article}

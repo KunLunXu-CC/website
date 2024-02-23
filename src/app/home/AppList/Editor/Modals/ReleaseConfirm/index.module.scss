@@ -1,6 +1,4 @@
-.modal {
-  width: 320px !important;
-
+.modal:global(.ant-modal) {
   .article-name {
     padding: 0 6px;
     color: rgba($color: #fff, $alpha: 80%);
@@ -14,8 +12,14 @@
 
     // 确定按钮
     .ant-btn-primary {
-      border-color: rgb(220 53 69) !important;
-      background-color: rgb(220 53 69) !important;
+      $bg: rgb(220 53 69);;
+
+      border-color: $bg;
+      background-color: $bg;
+
+      &:hover {
+        background-color: rgba($color: $bg, $alpha: 0.8) !important;
+      }
     }
   }
 }

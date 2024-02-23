@@ -1,4 +1,4 @@
-.modal {
+.modal:global(.ant-modal) {
   width: 420px !important;
 
   :global {
