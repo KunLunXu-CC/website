@@ -1,4 +1,4 @@
-import apps from '@/app/home/AppList/config';
+import apps from '@/app/(home)/AppList/config';
 import { urlParams } from '@/utils';
 import { createSlice } from '@reduxjs/toolkit';
 

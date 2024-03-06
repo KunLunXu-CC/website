@@ -9,7 +9,7 @@ import {
   THUMB_SETTING,
   REVOKE_CONFIRM,
   RELEASE_CONFIRM,
-} from '@/app/home/AppList/Editor/constants';
+} from '@/app/(home)/AppList/Editor/constants';
 
 export default () => {
   const dispatch = useDispatch();

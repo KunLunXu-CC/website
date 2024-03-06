@@ -1,6 +1,6 @@
 import { Role, User } from '@/store/graphql';
 import { createSlice } from '@reduxjs/toolkit';
-import { MENU_OPTIONS } from '@/app/home/AppList/Monitoring/constants';
+import { MENU_OPTIONS } from '@/app/(home)/AppList/Monitoring/constants';
 
 interface State {
   menu: {

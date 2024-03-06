@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
-import { MENUS } from '@/app/home/AppList/Setting/constants';
+import { MENUS } from '@/app/(home)/AppList/Setting/constants';
 
 export const initialState = {
   selectedMenuKey: MENUS[0].key, // 应用菜单 key

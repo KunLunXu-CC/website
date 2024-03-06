@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import scss from './index.module.scss';
 import styled from 'styled-components';
-import apps from '@/app/home/AppList/config';
+import apps from '@/app/(home)/AppList/config';
 
 import { useSelector } from 'react-redux';
 import { useState, useCallback, useMemo } from 'react';

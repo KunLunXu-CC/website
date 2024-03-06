@@ -1,4 +1,4 @@
-// import app from '@/app/home/AppList/';
+// import app from '@/app/(home)/AppList/';
 // export default [
 //   ... app,
 // ];

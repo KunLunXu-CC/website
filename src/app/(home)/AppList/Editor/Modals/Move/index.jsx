@@ -5,7 +5,7 @@ import { MOVE } from '../../constants';
 import { Modal, Cascader, Form } from 'antd';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHandleUpdateArticles, useHandleUpdateFolders } from '@/app/home/AppList/Editor/hooks';
+import { useHandleUpdateArticles, useHandleUpdateFolders } from '@/app/(home)/AppList/Editor/hooks';
 
 const Move =  () => {
   const handleUpdateFolders = useHandleUpdateFolders();

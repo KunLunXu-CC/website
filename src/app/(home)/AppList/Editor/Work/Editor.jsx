@@ -6,7 +6,7 @@ import '@kunlunxu/brick/es/markdown/style';
 import { PHOTO_TYPE } from '@/config/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUploadPhotosMutation } from '@/store/graphql';
-import { useHandleUpdateArticles } from '@/app/home/AppList/Editor/hooks';
+import { useHandleUpdateArticles } from '@/app/(home)/AppList/Editor/hooks';
 
 // 渲染 md 插件 markdown-to-jsx 配置
 const MD_TO_JSX_OPTIONS = {

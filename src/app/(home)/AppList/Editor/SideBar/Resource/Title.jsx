@@ -15,7 +15,7 @@ import {
   useHandleCreateArticles,
   useHandleRemoveFolders,
   useHandleRemoveArticles,
-} from '@/app/home/AppList/Editor/hooks';
+} from '@/app/(home)/AppList/Editor/hooks';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();

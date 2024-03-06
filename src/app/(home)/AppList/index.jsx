@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import scss from './index.module.scss';
-import apps from '@/app/home/AppList/config';
+import apps from '@/app/(home)/AppList/config';
 
 import { actions } from '@/store';
 import { useCallback } from 'react';

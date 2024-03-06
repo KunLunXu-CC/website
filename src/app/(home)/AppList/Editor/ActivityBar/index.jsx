@@ -5,7 +5,7 @@ import { actions } from '@/store';
 import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
-import { ACTIVITY_LIST } from '@/app/home/AppList/Editor/constants';
+import { ACTIVITY_LIST } from '@/app/(home)/AppList/Editor/constants';
 
 const ActivityBar = () => {
   const dispatch = useDispatch();

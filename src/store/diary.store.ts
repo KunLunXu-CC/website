@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
-import { DIARY_MENU } from '@/app/home/AppList/Diary/constants';
+import { DIARY_MENU } from '@/app/(home)/AppList/Diary/constants';
 
 export interface Diary {
   // bill: []

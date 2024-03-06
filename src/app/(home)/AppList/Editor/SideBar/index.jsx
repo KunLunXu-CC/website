@@ -3,7 +3,7 @@ import scss from './index.module.scss';
 
 import { actions } from '@/store';
 import { useMemo, useCallback } from 'react';
-import { ACTIVITY_LIST } from '@/app/home/AppList/Editor/constants';
+import { ACTIVITY_LIST } from '@/app/(home)/AppList/Editor/constants';
 import { VariableContainer } from '@kunlunxu/brick';
 import { useDispatch, useSelector } from 'react-redux';
 
