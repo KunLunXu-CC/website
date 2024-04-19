@@ -4,11 +4,12 @@ import scss from './index.module.scss';
 import { rsa } from '@/utils';
 import { useCallback } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { Input, Form, Button, Divider } from 'antd';
-import { useGetPublicKeyQuery, useLoginMutation } from '@/store/graphql';
+import { Button } from '@nextui-org/react';
+import { Input, Form, Divider } from 'antd';
 import { useRouter } from 'next/navigation';
+import { useGetPublicKeyQuery, useLoginMutation } from '@/store/graphql';
 
-export default () => {
+const LogInForm = () => {
   const [form] = Form.useForm();
   const router = useRouter();
   const [login] = useLoginMutation();
@@ -20,7 +21,7 @@ export default () => {
 
     await login({
       account,
-      password: rsa(password, publicKeyQuery.publicKey.data),
+      password: rsa(password, publicKeyQuery?.publicKey?.data as string),
     });
 
     router.push('/');
@@ -35,8 +36,8 @@ export default () => {
         Please enter your details to sign in.
       </div>
       <Button
-        block
-        size="large"
+        fullWidth
+        variant="bordered"
         className={scss.github}
         href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}>
         <Icon type="icon-github" />
@@ -49,27 +50,26 @@ export default () => {
         <Form form={form}>
           <Form.Item
             name="account"
-            rules={[{ required: true, message: '请输入账号!' }]}>
+            rules={[{ required: true, message: 'Please enter your account!' }]}>
             <Input
               size="large"
-              placeholder="请输入账号"
+              placeholder="Please enter your account"
               prefix={<Icon type="icon-jenkins" />}
             />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: '请输入密码!' }]}>
+            rules={[{ required: true, message: 'Please enter your password!' }]}>
             <Input.Password
               size="large"
-              placeholder="请输入密码"
+              placeholder="Please enter your password"
               prefix={<Icon type="icon-suoping" />}
             />
           </Form.Item>
           <Form.Item>
             <Button
-              block
-              size="large"
-              type="primary"
+              fullWidth
+              color="primary"
               onClick={handleSign}>
               登录
             </Button>
@@ -79,3 +79,5 @@ export default () => {
     </div>
   );
 };
+
+export default LogInForm;
