@@ -39,7 +39,8 @@ const LogInForm = () => {
         fullWidth
         variant="bordered"
         className={scss.github}
-        href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}>
+        onPress={() => location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}
+        >
         <Icon type="icon-github" />
         Sign in with GitHub
       </Button>
