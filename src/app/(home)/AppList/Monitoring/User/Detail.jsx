@@ -1,7 +1,7 @@
-import { Select } from 'antd';
 import { actions } from '@/store';
 import { useCallback, useMemo } from 'react';
 import { APP_SETTING } from '@/config/constants';
+import { Select, SelectItem } from "@nextui-org/react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useGetRolesQuery, useUpdateUserMutation } from '@/store/graphql';
 
@@ -55,13 +55,20 @@ export default () => {
   return (
     <div className={scss.detail}>
       <div className={scss.title}>
-        <Select
+        {/* <Select
           value={role.id}
           options={selectOptions}
           onChange={handleChangeRole}
           className={scss['select-role']}
           popupClassName={scss['select-role-popup']}
-        />
+        /> */}
+        <Select
+          value={role.id}
+          onChange={handleChangeRole}
+          items={roleList?.roles.list}
+          className="max-w-xs">
+          {(role) => <SelectItem key={role.id}>{role.name}</SelectItem>}
+        </Select>
       </div>
       <div className={scss['auth-list']}>
         {role.authList.map((v) => (
