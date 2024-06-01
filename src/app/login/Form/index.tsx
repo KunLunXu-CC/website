@@ -1,13 +1,15 @@
-'use client'
-import scss from './index.module.scss';
+"use client";
+import Cookies from "js-cookie";
+import scss from "./index.module.scss";
 
-import { rsa } from '@/utils';
-import { useCallback } from 'react';
-import { Icon } from '@kunlunxu/brick';
-import { Button } from '@nextui-org/react';
-import { Input, Form, Divider } from 'antd';
-import { useRouter } from 'next/navigation';
-import { useGetPublicKeyQuery, useLoginMutation } from '@/store/graphql';
+import { rsa } from "@/utils";
+import { Icon } from "@kunlunxu/brick";
+import { Button } from "@nextui-org/react";
+import { Input, Form, Divider } from "antd";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
+import { JWT_COOKIE_KEY } from "@/config/constants";
+import { useGetPublicKeyQuery, useLoginMutation } from "@/store/graphql";
 
 const LogInForm = () => {
   const [form] = Form.useForm();
@@ -24,34 +26,38 @@ const LogInForm = () => {
       password: rsa(password, publicKeyQuery?.publicKey?.data as string),
     });
 
-    router.push('/');
+    router.push("/");
   }, [form, router, login, publicKeyQuery]);
+
+  // 清除 JWT cookie
+  useEffect(() => {
+    // Cookies.remove(JWT_COOKIE_KEY);
+  }, []);
 
   return (
     <div className={scss.login}>
-      <div className={scss.title}>
-        Welcome back
-      </div>
-      <div className={scss['sub-title']}>
+      <div className={scss.title}>Welcome back</div>
+      <div className={scss["sub-title"]}>
         Please enter your details to sign in.
       </div>
       <Button
         fullWidth
         variant="bordered"
         className={scss.github}
-        onPress={() => location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}
-        >
+        onPress={() =>
+          (location.href = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`)
+        }
+      >
         <Icon type="icon-github" />
         Sign in with GitHub
       </Button>
-      <Divider className={scss.divider}>
-        or use account sign in
-      </Divider>
-      <div className={scss['login-form']}>
+      <Divider className={scss.divider}>or use account sign in</Divider>
+      <div className={scss["login-form"]}>
         <Form form={form}>
           <Form.Item
             name="account"
-            rules={[{ required: true, message: 'Please enter your account!' }]}>
+            rules={[{ required: true, message: "Please enter your account!" }]}
+          >
             <Input
               size="large"
               placeholder="Please enter your account"
@@ -60,7 +66,8 @@ const LogInForm = () => {
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please enter your password!' }]}>
+            rules={[{ required: true, message: "Please enter your password!" }]}
+          >
             <Input.Password
               size="large"
               placeholder="Please enter your password"
@@ -68,10 +75,7 @@ const LogInForm = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button
-              fullWidth
-              color="primary"
-              onClick={handleSign}>
+            <Button fullWidth color="primary" onClick={handleSign}>
               登录
             </Button>
           </Form.Item>

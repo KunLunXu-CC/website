@@ -9,6 +9,16 @@ fragment UserOutputFields on User {
   role { id desc auth name }
 }
 
+# 获取用户信息
+query getUserInfo {
+  userInfo {
+    user {
+      ...UserOutputFields
+    }
+    message
+  }
+}
+
 # 登录
 mutation login (
   $account: String,

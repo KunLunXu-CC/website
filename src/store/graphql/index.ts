@@ -10,470 +10,472 @@
            * for this file to be re-created
            */
           export * from './extend'
-
+        
 import { api } from '@/store/graphql/extend';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Auth: any;
-  BillInput: any;
-  BodyIndexInput: any;
-  Date: any;
-  DietInput: any;
-  FitnessInput: any;
-  Pagination: any;
-  Upload: any;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  Auth: { input: any; output: any; }
+  BillInput: { input: any; output: any; }
+  BodyIndexInput: { input: any; output: any; }
+  Date: { input: any; output: any; }
+  DietInput: { input: any; output: any; }
+  FitnessInput: { input: any; output: any; }
+  Pagination: { input: any; output: any; }
+  Upload: { input: any; output: any; }
 };
 
 export type AiChat = {
   __typename?: 'AiChat';
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']['output']>;
   messages?: Maybe<Array<Maybe<AiChatMessage>>>;
-  name?: Maybe<Scalars['String']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  name?: Maybe<Scalars['String']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type AiChatFields = {
   messages?: InputMaybe<Array<InputMaybe<AiChatMessageField>>>;
-  name?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  name?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type AiChatMessage = {
   __typename?: 'AiChatMessage';
-  content?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
 };
 
 export type AiChatMessageField = {
-  content?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type AiChatSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  updater?: InputMaybe<Scalars['ID']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type AiChats = {
   __typename?: 'AiChats';
   change?: Maybe<Array<Maybe<AiChat>>>;
   list?: Maybe<Array<Maybe<AiChat>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Algorithm = {
   __typename?: 'Algorithm';
-  content?: Maybe<Scalars['String']>;
-  creationTime?: Maybe<Scalars['Date']>;
+  content?: Maybe<Scalars['String']['output']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']>;
-  status?: Maybe<Scalars['Int']>;
-  tags?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  updateTime?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type AlgorithmFields = {
-  content?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['Int']>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['Int']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type AlgorithmSearch = {
-  content?: InputMaybe<Scalars['String']>;
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Algorithms = {
   __typename?: 'Algorithms';
   change?: Maybe<Array<Maybe<Algorithm>>>;
   list?: Maybe<Array<Maybe<Algorithm>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Article = {
   __typename?: 'Article';
-  content?: Maybe<Scalars['String']>;
-  creationTime?: Maybe<Scalars['Date']>;
+  content?: Maybe<Scalars['String']['output']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
+  desc?: Maybe<Scalars['String']['output']>;
   folder?: Maybe<Folder>;
-  id?: Maybe<Scalars['ID']>;
-  name: Scalars['String'];
-  status?: Maybe<Scalars['Int']>;
-  tags?: Maybe<Array<Scalars['ID']>>;
-  thumb?: Maybe<Scalars['String']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name: Scalars['String']['output'];
+  status?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Scalars['ID']['output']>>;
+  thumb?: Maybe<Scalars['String']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
-  viewCount?: Maybe<Scalars['Int']>;
-  viewHistory?: Maybe<Array<Maybe<Scalars['String']>>>;
+  viewCount?: Maybe<Scalars['Int']['output']>;
+  viewHistory?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
 };
 
 export type ArticleFields = {
-  content?: InputMaybe<Scalars['String']>;
-  desc?: InputMaybe<Scalars['String']>;
-  folder?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
-  tags?: InputMaybe<Array<Scalars['ID']>>;
-  thumb?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  folder?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<Scalars['ID']['input']>>;
+  thumb?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ArticleSearch = {
-  content?: InputMaybe<Scalars['String']>;
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  tag?: InputMaybe<Scalars['ID']>;
-  tags?: InputMaybe<Array<Scalars['ID']>>;
-  thumb?: InputMaybe<Scalars['String']>;
-  updater?: InputMaybe<Scalars['ID']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  tag?: InputMaybe<Scalars['ID']['input']>;
+  tags?: InputMaybe<Array<Scalars['ID']['input']>>;
+  thumb?: InputMaybe<Scalars['String']['input']>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Articles = {
   __typename?: 'Articles';
   change?: Maybe<Array<Maybe<Article>>>;
   list?: Maybe<Array<Maybe<Article>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Bill = {
   __typename?: 'Bill';
-  desc?: Maybe<Scalars['String']>;
-  expend?: Maybe<Scalars['Float']>;
-  income?: Maybe<Scalars['Float']>;
-  tag?: Maybe<Scalars['Int']>;
+  desc?: Maybe<Scalars['String']['output']>;
+  expend?: Maybe<Scalars['Float']['output']>;
+  income?: Maybe<Scalars['Float']['output']>;
+  tag?: Maybe<Scalars['Int']['output']>;
 };
 
 export type BodyIndex = {
   __typename?: 'BodyIndex';
-  bim?: Maybe<Scalars['Float']>;
-  bodyfat?: Maybe<Scalars['Float']>;
-  moistureContent?: Maybe<Scalars['Float']>;
-  muscle?: Maybe<Scalars['Float']>;
-  weight?: Maybe<Scalars['Float']>;
+  bim?: Maybe<Scalars['Float']['output']>;
+  bodyfat?: Maybe<Scalars['Float']['output']>;
+  moistureContent?: Maybe<Scalars['Float']['output']>;
+  muscle?: Maybe<Scalars['Float']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Diaries = {
   __typename?: 'Diaries';
   change?: Maybe<Array<Maybe<Diary>>>;
   list?: Maybe<Array<Maybe<Diary>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Diary = {
   __typename?: 'Diary';
   bill?: Maybe<Array<Maybe<Bill>>>;
   bodyIndex?: Maybe<BodyIndex>;
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
   diet?: Maybe<Array<Maybe<Diet>>>;
   fitness?: Maybe<Array<Maybe<Fitness>>>;
-  getUp?: Maybe<Scalars['Date']>;
-  id?: Maybe<Scalars['ID']>;
-  informalEssay?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Int']>;
-  toRest?: Maybe<Scalars['Date']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  getUp?: Maybe<Scalars['Date']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  informalEssay?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  toRest?: Maybe<Scalars['Date']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type DiaryFields = {
-  bill?: InputMaybe<Scalars['BillInput']>;
-  bodyIndex?: InputMaybe<Scalars['BodyIndexInput']>;
-  diet?: InputMaybe<Scalars['DietInput']>;
-  fitness?: InputMaybe<Scalars['FitnessInput']>;
-  getUp?: InputMaybe<Scalars['Date']>;
-  informalEssay?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['Int']>;
-  toRest?: InputMaybe<Scalars['Date']>;
+  bill?: InputMaybe<Scalars['BillInput']['input']>;
+  bodyIndex?: InputMaybe<Scalars['BodyIndexInput']['input']>;
+  diet?: InputMaybe<Scalars['DietInput']['input']>;
+  fitness?: InputMaybe<Scalars['FitnessInput']['input']>;
+  getUp?: InputMaybe<Scalars['Date']['input']>;
+  informalEssay?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['Int']['input']>;
+  toRest?: InputMaybe<Scalars['Date']['input']>;
 };
 
 export type DiarySearch = {
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  names?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  names?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type Diet = {
   __typename?: 'Diet';
-  desc?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['Int']>;
+  desc?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Fitness = {
   __typename?: 'Fitness';
-  place?: Maybe<Scalars['Int']>;
-  type?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['Int']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Folder = {
   __typename?: 'Folder';
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
+  desc?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   parent?: Maybe<Folder>;
-  status?: Maybe<Scalars['Int']>;
-  type?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type FolderFields = {
-  desc?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<Scalars['ID']>;
-  type?: InputMaybe<Scalars['Int']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  type?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type FolderSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<Scalars['ID']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  type?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  type?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Folders = {
   __typename?: 'Folders';
   change?: Maybe<Array<Maybe<Folder>>>;
   list?: Maybe<Array<Maybe<Folder>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Interview = {
   __typename?: 'Interview';
-  content?: Maybe<Scalars['String']>;
-  creationTime?: Maybe<Scalars['Date']>;
+  content?: Maybe<Scalars['String']['output']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']>;
-  status?: Maybe<Scalars['Int']>;
-  tags?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  updateTime?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type InterviewFields = {
-  content?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['Int']>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['Int']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type InterviewSearch = {
-  content?: InputMaybe<Scalars['String']>;
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Interviews = {
   __typename?: 'Interviews';
   change?: Maybe<Array<Maybe<Interview>>>;
   list?: Maybe<Array<Maybe<Interview>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Kanban = {
   __typename?: 'Kanban';
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  desc?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type KanbanFields = {
-  desc?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type KanbanGroup = {
   __typename?: 'KanbanGroup';
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
+  desc?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   kanban?: Maybe<Kanban>;
-  name?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type KanbanGroupFields = {
-  desc?: InputMaybe<Scalars['String']>;
-  kanban?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  kanban?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type KanbanGroupSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  kanban?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  kanban?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type KanbanGroups = {
   __typename?: 'KanbanGroups';
   change?: Maybe<Array<Maybe<KanbanGroup>>>;
   list?: Maybe<Array<Maybe<KanbanGroup>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type KanbanSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type KanbanTask = {
   __typename?: 'KanbanTask';
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
+  desc?: Maybe<Scalars['String']['output']>;
   group?: Maybe<KanbanGroup>;
-  id?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']['output']>;
   kanban?: Maybe<Kanban>;
-  name?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type KanbanTaskFields = {
-  desc?: InputMaybe<Scalars['String']>;
-  group?: InputMaybe<Scalars['ID']>;
-  kanban?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  group?: InputMaybe<Scalars['ID']['input']>;
+  kanban?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type KanbanTaskSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  group?: InputMaybe<Scalars['ID']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  kanban?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  group?: InputMaybe<Scalars['ID']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  kanban?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type KanbanTasks = {
   __typename?: 'KanbanTasks';
   change?: Maybe<Array<Maybe<KanbanTask>>>;
   list?: Maybe<Array<Maybe<KanbanTask>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Kanbans = {
   __typename?: 'Kanbans';
   change?: Maybe<Array<Maybe<Kanban>>>;
   list?: Maybe<Array<Maybe<Kanban>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Login = {
   __typename?: 'Login';
-  message?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']['output']>;
   user?: Maybe<User>;
 };
 
 export type MonthlyBill = {
   __typename?: 'MonthlyBill';
-  expend?: Maybe<Scalars['Float']>;
-  income?: Maybe<Scalars['Float']>;
+  expend?: Maybe<Scalars['Float']['output']>;
+  income?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Mutation = {
@@ -528,7 +530,7 @@ export type Mutation = {
 export type MutationCreateAiChatsArgs = {
   body: Array<AiChatFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AiChatSearch>;
 };
 
@@ -536,7 +538,7 @@ export type MutationCreateAiChatsArgs = {
 export type MutationCreateAlgorithmsArgs = {
   body: Array<AlgorithmFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AlgorithmSearch>;
 };
 
@@ -544,7 +546,7 @@ export type MutationCreateAlgorithmsArgs = {
 export type MutationCreateArticlesArgs = {
   body: Array<ArticleFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<ArticleSearch>;
 };
 
@@ -552,7 +554,7 @@ export type MutationCreateArticlesArgs = {
 export type MutationCreateDiariesArgs = {
   body: Array<DiaryFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<DiarySearch>;
 };
 
@@ -560,7 +562,7 @@ export type MutationCreateDiariesArgs = {
 export type MutationCreateFoldersArgs = {
   body: Array<FolderFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<FolderSearch>;
 };
 
@@ -568,7 +570,7 @@ export type MutationCreateFoldersArgs = {
 export type MutationCreateInterviewsArgs = {
   body: Array<InterviewFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<InterviewSearch>;
 };
 
@@ -576,7 +578,7 @@ export type MutationCreateInterviewsArgs = {
 export type MutationCreateKanbanGroupsArgs = {
   body: Array<KanbanGroupFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanGroupSearch>;
 };
 
@@ -584,7 +586,7 @@ export type MutationCreateKanbanGroupsArgs = {
 export type MutationCreateKanbanTasksArgs = {
   body: Array<KanbanTaskFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanTaskSearch>;
 };
 
@@ -592,7 +594,7 @@ export type MutationCreateKanbanTasksArgs = {
 export type MutationCreateKanbansArgs = {
   body: Array<KanbanFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanSearch>;
 };
 
@@ -600,7 +602,7 @@ export type MutationCreateKanbansArgs = {
 export type MutationCreateRolesArgs = {
   body: Array<RoleFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<RoleSearch>;
 };
 
@@ -608,7 +610,7 @@ export type MutationCreateRolesArgs = {
 export type MutationCreateSnippetsArgs = {
   body: Array<SnippetFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<SnippetSearch>;
 };
 
@@ -616,7 +618,7 @@ export type MutationCreateSnippetsArgs = {
 export type MutationCreateTagsArgs = {
   body: Array<TagFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<TagSearch>;
 };
 
@@ -624,21 +626,21 @@ export type MutationCreateTagsArgs = {
 export type MutationCreateUsersArgs = {
   body: Array<UserFields>;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<UserSearch>;
 };
 
 
 export type MutationLoginArgs = {
-  account?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
+  account?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
 };
 
 
 export type MutationReleaseArticlesArgs = {
   conds: ArticleSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<ArticleSearch>;
 };
 
@@ -646,7 +648,7 @@ export type MutationReleaseArticlesArgs = {
 export type MutationRemoveAiChatsArgs = {
   conds: AiChatSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AiChatSearch>;
 };
 
@@ -654,7 +656,7 @@ export type MutationRemoveAiChatsArgs = {
 export type MutationRemoveAlgorithmsArgs = {
   conds: AlgorithmSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AlgorithmSearch>;
 };
 
@@ -662,7 +664,7 @@ export type MutationRemoveAlgorithmsArgs = {
 export type MutationRemoveArticlesArgs = {
   conds: ArticleSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<ArticleSearch>;
 };
 
@@ -670,7 +672,7 @@ export type MutationRemoveArticlesArgs = {
 export type MutationRemoveDiariesArgs = {
   conds: DiarySearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<DiarySearch>;
 };
 
@@ -678,7 +680,7 @@ export type MutationRemoveDiariesArgs = {
 export type MutationRemoveFoldersArgs = {
   conds: FolderSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<FolderSearch>;
 };
 
@@ -686,7 +688,7 @@ export type MutationRemoveFoldersArgs = {
 export type MutationRemoveInterviewsArgs = {
   conds: InterviewSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<InterviewSearch>;
 };
 
@@ -694,7 +696,7 @@ export type MutationRemoveInterviewsArgs = {
 export type MutationRemoveKanbanGroupsArgs = {
   conds: KanbanGroupSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanGroupSearch>;
 };
 
@@ -702,7 +704,7 @@ export type MutationRemoveKanbanGroupsArgs = {
 export type MutationRemoveKanbanTasksArgs = {
   conds: KanbanTaskSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanTaskSearch>;
 };
 
@@ -710,7 +712,7 @@ export type MutationRemoveKanbanTasksArgs = {
 export type MutationRemoveKanbansArgs = {
   conds: KanbanSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanSearch>;
 };
 
@@ -718,7 +720,7 @@ export type MutationRemoveKanbansArgs = {
 export type MutationRemovePhotosArgs = {
   conds: PhotoSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<PhotoSearch>;
 };
 
@@ -726,7 +728,7 @@ export type MutationRemovePhotosArgs = {
 export type MutationRemoveRolesArgs = {
   conds: RoleSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<RoleSearch>;
 };
 
@@ -734,7 +736,7 @@ export type MutationRemoveRolesArgs = {
 export type MutationRemoveSnippetsArgs = {
   conds: SnippetSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<SnippetSearch>;
 };
 
@@ -742,7 +744,7 @@ export type MutationRemoveSnippetsArgs = {
 export type MutationRemoveTagsArgs = {
   conds: TagSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<TagSearch>;
 };
 
@@ -750,7 +752,7 @@ export type MutationRemoveTagsArgs = {
 export type MutationRemoveUsersArgs = {
   conds: UserSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<UserSearch>;
 };
 
@@ -758,7 +760,7 @@ export type MutationRemoveUsersArgs = {
 export type MutationRevokeArticlesArgs = {
   conds: ArticleSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<ArticleSearch>;
 };
 
@@ -767,7 +769,7 @@ export type MutationUpdateAiChatsArgs = {
   body: AiChatFields;
   conds: AiChatSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AiChatSearch>;
 };
 
@@ -776,7 +778,7 @@ export type MutationUpdateAlgorithmsArgs = {
   body: AlgorithmFields;
   conds: AlgorithmSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AlgorithmSearch>;
 };
 
@@ -785,7 +787,7 @@ export type MutationUpdateArticlesArgs = {
   body: ArticleFields;
   conds: ArticleSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<ArticleSearch>;
 };
 
@@ -794,7 +796,7 @@ export type MutationUpdateDiariesArgs = {
   body: DiaryFields;
   conds: DiarySearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<DiarySearch>;
 };
 
@@ -803,7 +805,7 @@ export type MutationUpdateFoldersArgs = {
   body: FolderFields;
   conds: FolderSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<FolderSearch>;
 };
 
@@ -812,7 +814,7 @@ export type MutationUpdateInterviewsArgs = {
   body: InterviewFields;
   conds: InterviewSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<InterviewSearch>;
 };
 
@@ -821,7 +823,7 @@ export type MutationUpdateKanbanGroupsArgs = {
   body: KanbanGroupFields;
   conds: KanbanGroupSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanGroupSearch>;
 };
 
@@ -830,7 +832,7 @@ export type MutationUpdateKanbanTasksArgs = {
   body: KanbanTaskFields;
   conds: KanbanTaskSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanTaskSearch>;
 };
 
@@ -839,7 +841,7 @@ export type MutationUpdateKanbansArgs = {
   body: KanbanFields;
   conds: KanbanSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanSearch>;
 };
 
@@ -848,7 +850,7 @@ export type MutationUpdateRolesArgs = {
   body: RoleFields;
   conds: RoleSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<RoleSearch>;
 };
 
@@ -857,7 +859,7 @@ export type MutationUpdateSnippetsArgs = {
   body: SnippetFields;
   conds: SnippetSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<SnippetSearch>;
 };
 
@@ -866,7 +868,7 @@ export type MutationUpdateTagsArgs = {
   body: TagFields;
   conds: TagSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<TagSearch>;
 };
 
@@ -875,7 +877,7 @@ export type MutationUpdateUsersArgs = {
   body: UserFields;
   conds: UserSearch;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<UserSearch>;
 };
 
@@ -883,83 +885,83 @@ export type MutationUpdateUsersArgs = {
 export type MutationUploadPhotosArgs = {
   body: PhotoFields;
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<PhotoSearch>;
 };
 
 export type Option = {
   __typename?: 'Option';
-  id: Scalars['ID'];
-  name: Scalars['String'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type Options = {
   __typename?: 'Options';
   list?: Maybe<Array<Maybe<Option>>>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type OptionsSearch = {
-  filter?: InputMaybe<Array<Scalars['ID']>>;
-  include?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<Array<Scalars['ID']['input']>>;
+  include?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type OrderBy = {
-  creationTime?: InputMaybe<Scalars['Int']>;
-  updateTime?: InputMaybe<Scalars['Int']>;
-  value?: InputMaybe<Scalars['Int']>;
-  viewCount?: InputMaybe<Scalars['Int']>;
+  creationTime?: InputMaybe<Scalars['Int']['input']>;
+  updateTime?: InputMaybe<Scalars['Int']['input']>;
+  value?: InputMaybe<Scalars['Int']['input']>;
+  viewCount?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type Photo = {
   __typename?: 'Photo';
-  creationTime?: Maybe<Scalars['Date']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  sourceFileName?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Int']>;
-  type?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  sourceFileName?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  type?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
-  url?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']['output']>;
 };
 
 export type PhotoFields = {
-  files?: InputMaybe<Array<Scalars['Upload']>>;
-  payload?: InputMaybe<Scalars['ID']>;
-  type?: InputMaybe<Scalars['Int']>;
+  files?: InputMaybe<Array<Scalars['Upload']['input']>>;
+  payload?: InputMaybe<Scalars['ID']['input']>;
+  type?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PhotoSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  sourceFileName?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  type?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
-  url?: InputMaybe<Scalars['String']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  sourceFileName?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  type?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Photos = {
   __typename?: 'Photos';
   change?: Maybe<Array<Maybe<Photo>>>;
   list?: Maybe<Array<Maybe<Photo>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type PublicKey = {
   __typename?: 'PublicKey';
-  data?: Maybe<Scalars['String']>;
-  message?: Maybe<Scalars['String']>;
+  data?: Maybe<Scalars['String']['output']>;
+  message?: Maybe<Scalars['String']['output']>;
 };
 
 export type Query = {
@@ -982,97 +984,98 @@ export type Query = {
   statsBill?: Maybe<StatsBill>;
   tags?: Maybe<Tags>;
   tagsWithArticles?: Maybe<Tags>;
+  userInfo?: Maybe<UserInfo>;
   users?: Maybe<Users>;
 };
 
 
 export type QueryAiChatsArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AiChatSearch>;
 };
 
 
 export type QueryAlgorithmsArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<AlgorithmSearch>;
 };
 
 
 export type QueryArticlesArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<ArticleSearch>;
 };
 
 
 export type QueryDiariesArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<DiarySearch>;
 };
 
 
 export type QueryFoldersArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<FolderSearch>;
 };
 
 
 export type QueryInterviewsArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<InterviewSearch>;
 };
 
 
 export type QueryKanbanGroupsArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanGroupSearch>;
 };
 
 
 export type QueryKanbanTasksArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanTaskSearch>;
 };
 
 
 export type QueryKanbansArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<KanbanSearch>;
 };
 
 
 export type QueryOptionsArgs = {
-  model: Scalars['String'];
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  model: Scalars['String']['input'];
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<OptionsSearch>;
 };
 
 
 export type QueryPhotosArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<PhotoSearch>;
 };
 
 
 export type QueryRolesArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<RoleSearch>;
 };
 
 
 export type QuerySnippetsArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<SnippetSearch>;
 };
 
@@ -1084,7 +1087,7 @@ export type QueryStatsBillArgs = {
 
 export type QueryTagsArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<TagSearch>;
 };
 
@@ -1097,43 +1100,43 @@ export type QueryTagsWithArticlesArgs = {
 
 export type QueryUsersArgs = {
   orderBy?: InputMaybe<OrderBy>;
-  pagination?: InputMaybe<Scalars['Pagination']>;
+  pagination?: InputMaybe<Scalars['Pagination']['input']>;
   search?: InputMaybe<UserSearch>;
 };
 
 export type Role = {
   __typename?: 'Role';
-  auth?: Maybe<Array<Maybe<Scalars['Auth']>>>;
-  creationTime?: Maybe<Scalars['Date']>;
+  auth?: Maybe<Array<Maybe<Scalars['Auth']['output']>>>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  desc?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  desc?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type RoleFields = {
-  auth?: InputMaybe<Array<InputMaybe<Scalars['Auth']>>>;
-  desc?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['Int']>;
-  type?: InputMaybe<Scalars['Int']>;
+  auth?: InputMaybe<Array<InputMaybe<Scalars['Auth']['input']>>>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['Int']['input']>;
+  type?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type RoleSearch = {
-  creator?: InputMaybe<Scalars['ID']>;
-  desc?: InputMaybe<Scalars['String']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  desc?: InputMaybe<Scalars['String']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export enum RoleType {
@@ -1145,165 +1148,171 @@ export type Roles = {
   __typename?: 'Roles';
   change?: Maybe<Array<Maybe<Role>>>;
   list?: Maybe<Array<Maybe<Role>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Snippet = {
   __typename?: 'Snippet';
-  content?: Maybe<Scalars['String']>;
-  creationTime?: Maybe<Scalars['Date']>;
+  content?: Maybe<Scalars['String']['output']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']>;
-  status?: Maybe<Scalars['Int']>;
-  tags?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  updateTime?: Maybe<Scalars['Date']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  tags?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type SnippetFields = {
-  content?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['Int']>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['Int']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
 };
 
 export type SnippetSearch = {
-  content?: InputMaybe<Scalars['String']>;
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Snippets = {
   __typename?: 'Snippets';
   change?: Maybe<Array<Maybe<Snippet>>>;
   list?: Maybe<Array<Maybe<Snippet>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type StatsBill = {
   __typename?: 'StatsBill';
   groupWithName?: Maybe<Array<Maybe<StatsBillItem>>>;
-  message?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']['output']>;
   stats?: Maybe<Bill>;
 };
 
 export type StatsBillItem = {
   __typename?: 'StatsBillItem';
   diaries?: Maybe<Array<Maybe<Diary>>>;
-  expend?: Maybe<Scalars['Float']>;
-  income?: Maybe<Scalars['Float']>;
-  name?: Maybe<Scalars['String']>;
+  expend?: Maybe<Scalars['Float']['output']>;
+  income?: Maybe<Scalars['Float']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type StatsBillSearch = {
-  name?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  span?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  span?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Tag = {
   __typename?: 'Tag';
-  color?: Maybe<Scalars['String']>;
-  creationTime?: Maybe<Scalars['Date']>;
+  color?: Maybe<Scalars['String']['output']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  icon?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
+  icon?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   parent?: Maybe<Tag>;
-  status?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type TagFields = {
-  color?: InputMaybe<Scalars['String']>;
-  icon?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<Scalars['ID']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type TagSearch = {
-  color?: InputMaybe<Scalars['String']>;
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  icon?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  parent?: InputMaybe<Scalars['ID']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  status?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
-  updater?: InputMaybe<Scalars['ID']>;
+  color?: InputMaybe<Scalars['String']['input']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  parent?: InputMaybe<Scalars['ID']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  status?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Tags = {
   __typename?: 'Tags';
   change?: Maybe<Array<Maybe<Tag>>>;
   list?: Maybe<Array<Maybe<Tag>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type Touchbar = {
   __typename?: 'Touchbar';
-  latestWeight?: Maybe<Scalars['Float']>;
+  latestWeight?: Maybe<Scalars['Float']['output']>;
   monthlyBill?: Maybe<MonthlyBill>;
 };
 
 export type User = {
   __typename?: 'User';
-  account?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
-  bio?: Maybe<Scalars['String']>;
-  creationTime?: Maybe<Scalars['Date']>;
+  account?: Maybe<Scalars['String']['output']>;
+  avatar?: Maybe<Scalars['String']['output']>;
+  bio?: Maybe<Scalars['String']['output']>;
+  creationTime?: Maybe<Scalars['Date']['output']>;
   creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']>;
-  name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   role?: Maybe<Role>;
-  sex?: Maybe<Scalars['Int']>;
-  updateTime?: Maybe<Scalars['Date']>;
+  sex?: Maybe<Scalars['Int']['output']>;
+  updateTime?: Maybe<Scalars['Date']['output']>;
   updater?: Maybe<User>;
 };
 
 export type UserFields = {
-  account?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<Scalars['ID']>;
-  sex?: InputMaybe<Scalars['Int']>;
+  account?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['ID']['input']>;
+  sex?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type UserInfo = {
+  __typename?: 'UserInfo';
+  message?: Maybe<Scalars['String']['output']>;
+  user?: Maybe<User>;
 };
 
 export type UserSearch = {
-  account?: InputMaybe<Scalars['String']>;
-  creator?: InputMaybe<Scalars['ID']>;
-  endCreationTime?: InputMaybe<Scalars['Date']>;
-  endUpdateTime?: InputMaybe<Scalars['Date']>;
-  id?: InputMaybe<Scalars['ID']>;
-  ids?: InputMaybe<Array<Scalars['ID']>>;
-  name?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<Scalars['ID']>;
-  sex?: InputMaybe<Scalars['Int']>;
-  startCreationTime?: InputMaybe<Scalars['Date']>;
-  startUpdateTime?: InputMaybe<Scalars['Date']>;
-  updater?: InputMaybe<Scalars['ID']>;
+  account?: InputMaybe<Scalars['String']['input']>;
+  creator?: InputMaybe<Scalars['ID']['input']>;
+  endCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  endUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
+  ids?: InputMaybe<Array<Scalars['ID']['input']>>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  role?: InputMaybe<Scalars['ID']['input']>;
+  sex?: InputMaybe<Scalars['Int']['input']>;
+  startCreationTime?: InputMaybe<Scalars['Date']['input']>;
+  startUpdateTime?: InputMaybe<Scalars['Date']['input']>;
+  updater?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type Users = {
   __typename?: 'Users';
   change?: Maybe<Array<Maybe<User>>>;
   list?: Maybe<Array<Maybe<User>>>;
-  message?: Maybe<Scalars['String']>;
-  pagination?: Maybe<Scalars['Pagination']>;
+  message?: Maybe<Scalars['String']['output']>;
+  pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
 export type GetAiChatsQueryVariables = Exact<{
@@ -1448,9 +1457,14 @@ export type UpdateRolesMutation = { __typename?: 'Mutation', updateRoles?: { __t
 
 export type UserOutputFieldsFragment = { __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null };
 
+export type GetUserInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserInfoQuery = { __typename?: 'Query', userInfo?: { __typename?: 'UserInfo', message?: string | null, user?: { __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } | null } | null };
+
 export type LoginMutationVariables = Exact<{
-  account?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
+  account?: InputMaybe<Scalars['String']['input']>;
+  password?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -1781,6 +1795,16 @@ export const UpdateRolesDocument = `
   }
 }
     ${RoleOutputFieldsFragmentDoc}`;
+export const GetUserInfoDocument = `
+    query getUserInfo {
+  userInfo {
+    user {
+      ...UserOutputFields
+    }
+    message
+  }
+}
+    ${UserOutputFieldsFragmentDoc}`;
 export const LoginDocument = `
     mutation login($account: String, $password: String) {
   login(account: $account, password: $password) {
@@ -1877,6 +1901,9 @@ const injectedRtkApi = api.injectEndpoints({
     updateRoles: build.mutation<UpdateRolesMutation, UpdateRolesMutationVariables>({
       query: (variables) => ({ document: UpdateRolesDocument, variables })
     }),
+    getUserInfo: build.query<GetUserInfoQuery, GetUserInfoQueryVariables | void>({
+      query: (variables) => ({ document: GetUserInfoDocument, variables })
+    }),
     login: build.mutation<LoginMutation, LoginMutationVariables | void>({
       query: (variables) => ({ document: LoginDocument, variables })
     }),
@@ -1893,5 +1920,5 @@ const injectedRtkApi = api.injectEndpoints({
 });
 
 export { injectedRtkApi as api };
-export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useUpdateRolesMutation, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery, useGetUserListQuery, useLazyGetUserListQuery, useUpdateUserMutation } = injectedRtkApi;
+export const { useGetAiChatsQuery, useLazyGetAiChatsQuery, useCreateAiChatMutation, useGetDiariesQuery, useLazyGetDiariesQuery, useCreateDiariesMutation, useUpdateDiariesMutation, useGetStatsBillQuery, useLazyGetStatsBillQuery, useGetStatsBodyIndexQuery, useLazyGetStatsBodyIndexQuery, useInitEditorDataQuery, useLazyInitEditorDataQuery, useCreateFoldersMutation, useCreateArticlesMutation, useUpdateFoldersMutation, useUpdateArticlesMutation, useRemoveArticlesMutation, useRemoveFoldersMutation, useGetPhotosQuery, useLazyGetPhotosQuery, useRemovePhotosMutation, useUploadPhotosMutation, useGetRolesQuery, useLazyGetRolesQuery, useUpdateRolesMutation, useGetUserInfoQuery, useLazyGetUserInfoQuery, useLoginMutation, useGetPublicKeyQuery, useLazyGetPublicKeyQuery, useGetUserListQuery, useLazyGetUserListQuery, useUpdateUserMutation } = injectedRtkApi;
 

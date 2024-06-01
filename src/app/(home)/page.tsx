@@ -1,12 +1,16 @@
-'use client'
-import AppList from './AppList';
-import Desktop from './Desktop';
-import DockList from './DockList';
-import MenuList from './MenuList';
-import { actions } from '@/store';
-import { useDispatch } from 'react-redux';
-import { useCallback, useEffect } from 'react';
-import { useLoginMutation, LoginMutation, useGetPhotosQuery } from '@/store/graphql';
+"use client";
+import AppList from "./AppList";
+import Desktop from "./Desktop";
+import DockList from "./DockList";
+import MenuList from "./MenuList";
+import { actions } from "@/store";
+import { useDispatch } from "react-redux";
+import { useCallback, useEffect } from "react";
+import {
+  LoginMutation,
+  useLoginMutation,
+  useGetPhotosQuery,
+} from "@/store/graphql";
 
 /**
  * 下面所有组件都使用 position: fixed 进行布局
@@ -16,14 +20,14 @@ import { useLoginMutation, LoginMutation, useGetPhotosQuery } from '@/store/grap
  *
  * @returns {any} 元素节点
  */
-export default () => {
+const Home = () => {
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
   const { data: photosData } = useGetPhotosQuery();
 
   // 登录获取用户信息
   const initUserInfo = useCallback(async () => {
-    const { data } = await login() as { data: LoginMutation; };
+    const { data } = (await login()) as { data: LoginMutation };
     const { user } = data.login ?? {};
     dispatch(actions.user.set(user));
 
@@ -38,7 +42,6 @@ export default () => {
     dispatch(actions.photos.init(photosData?.photos?.list));
   }, [photosData, dispatch]);
 
-
   useEffect(() => {
     dispatch(actions.setting.init());
   }, [dispatch]);
@@ -52,3 +55,5 @@ export default () => {
     </>
   );
 };
+
+export default Home;
