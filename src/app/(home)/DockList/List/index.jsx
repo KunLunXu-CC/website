@@ -37,7 +37,7 @@ const useStateHook = (props) => {
   return { onClick, currentIndex, setCurrentIndex, className };
 };
 
-export default (props) => {
+const List = (props) => {
   const state = useStateHook(props);
 
   return (
@@ -67,3 +67,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default List;

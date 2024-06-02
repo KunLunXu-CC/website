@@ -5,23 +5,22 @@ import List from './List';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-const useStateHook = () => {
+const DockList = (props) => {
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
 
-  const onClick = useCallback((dock) => {
+  console.log('%c [ app ]-22', 'font-size:13px; background:pink; color:#bf2c9f;', app);
+
+  const handleClick = useCallback((dock) => {
     dispatch(actions.app.open(dock));
   }, [dispatch]);
 
-  return { onClick, app };
-};
-
-export default (props) => {
-  const state = useStateHook(props);
   return (
     <List
-      onClick={state.onClick}
-      dataSource={state.app.docks}
+      onClick={handleClick}
+      dataSource={app.docks}
     />
   );
 };
+
+export default DockList;
