@@ -8,8 +8,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "watch-codegen": "graphql-codegen --config codegen.ts --watch 'src/**/*.graphql'",
-    "graphql-codegen": "graphql-codegen --config codegen.ts",
     "cz": "klx-cz",
     "release": "klx-release",
     "prepare": "husky install"
@@ -18,12 +16,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@graphql-codegen/add": "^5.0.2",
-    "@graphql-codegen/cli": "^5.0.2",
-    "@graphql-codegen/introspection": "^4.0.2",
-    "@graphql-codegen/typescript": "^4.0.4",
-    "@graphql-codegen/typescript-operations": "^4.1.2",
-    "@graphql-codegen/typescript-rtk-query": "^3.1.1",
     "@kunlunxu/norm": "^2.8.1",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.14.182",
