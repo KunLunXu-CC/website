@@ -1,6 +1,6 @@
 "use client";
-import { graphql } from "@/graphql";
-import client from "@/graphql/client";
+import { graphql } from "@/gql";
+import client from "@/gql/client";
 import { useQuery } from "@tanstack/react-query";
 
 const getUserInfoDocument = graphql(`
