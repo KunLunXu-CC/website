@@ -1,0 +1,784 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+directive @auth(requires: RoleType = ADMIN) on FIELD_DEFINITION
+
+directive @relation(model: String) on FIELD_DEFINITION
+
+directive @translate(code: String, saveField: String) on FIELD_DEFINITION
+
+type AiChat {
+  creationTime: Date
+  creator: User
+  id: ID
+  messages: [AiChatMessage]
+  name: String
+  updateTime: Date
+  updater: User
+}
+
+input AiChatFields {
+  messages: [AiChatMessageField]
+  name: [Int]
+}
+
+type AiChatMessage {
+  content: String
+  role: String
+}
+
+input AiChatMessageField {
+  content: String
+  role: String
+}
+
+input AiChatSearch {
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  updater: ID
+}
+
+type AiChats {
+  change: [AiChat]
+  list: [AiChat]
+  message: String
+  pagination: Pagination
+}
+
+type Algorithm {
+  content: String
+  creationTime: Date
+  creator: User
+  id: ID
+  status: Int
+  tags: [Int]
+  updateTime: Date
+  updater: User
+}
+
+input AlgorithmFields {
+  content: String
+  status: Int
+  tags: [Int]
+}
+
+input AlgorithmSearch {
+  content: String
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  tags: [Int]
+  updater: ID
+}
+
+type Algorithms {
+  change: [Algorithm]
+  list: [Algorithm]
+  message: String
+  pagination: Pagination
+}
+
+type Article {
+  content: String
+  creationTime: Date
+  creator: User
+  desc: String
+  folder: Folder
+  id: ID
+  name: String!
+  status: Int
+  tags: [ID!]
+  thumb: String
+  updateTime: Date
+  updater: User
+  viewCount: Int
+  viewHistory: [String]
+}
+
+input ArticleFields {
+  content: String
+  desc: String
+  folder: ID
+  name: String
+  tags: [ID!]
+  thumb: String
+}
+
+input ArticleSearch {
+  content: String
+  creator: ID
+  desc: String
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  tag: ID
+  tags: [ID!]
+  thumb: String
+  updater: ID
+}
+
+type Articles {
+  change: [Article]
+  list: [Article]
+  message: String
+  pagination: Pagination
+}
+
+scalar Auth
+
+type Bill {
+  desc: String
+  expend: Float
+  income: Float
+  tag: Int
+}
+
+scalar BillInput
+
+type BodyIndex {
+  bim: Float
+  bodyfat: Float
+  moistureContent: Float
+  muscle: Float
+  weight: Float
+}
+
+scalar BodyIndexInput
+
+"""Date类型值"""
+scalar Date
+
+type Diaries {
+  change: [Diary]
+  list: [Diary]
+  message: String
+  pagination: Pagination
+}
+
+type Diary {
+  bill: [Bill]
+  bodyIndex: BodyIndex
+  creationTime: Date
+  creator: User
+  diet: [Diet]
+  fitness: [Fitness]
+  getUp: Date
+  id: ID
+  informalEssay: String
+  name: String
+  status: Int
+  toRest: Date
+  updateTime: Date
+  updater: User
+}
+
+input DiaryFields {
+  bill: BillInput
+  bodyIndex: BodyIndexInput
+  diet: DietInput
+  fitness: FitnessInput
+  getUp: Date
+  informalEssay: String
+  name: String
+  status: Int
+  toRest: Date
+}
+
+input DiarySearch {
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  names: [String]
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+}
+
+type Diet {
+  desc: String
+  type: Int
+}
+
+scalar DietInput
+
+type Fitness {
+  place: Int
+  type: Int
+}
+
+scalar FitnessInput
+
+type Folder {
+  creationTime: Date
+  creator: User
+  desc: String
+  id: ID
+  name: String
+  parent: Folder
+  status: Int
+  type: Int
+  updateTime: Date
+  updater: User
+}
+
+input FolderFields {
+  desc: String
+  name: String
+  parent: ID
+  type: Int
+}
+
+input FolderSearch {
+  creator: ID
+  desc: String
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  parent: ID
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  type: [Int]
+  updater: ID
+}
+
+type Folders {
+  change: [Folder]
+  list: [Folder]
+  message: String
+  pagination: Pagination
+}
+
+type Interview {
+  content: String
+  creationTime: Date
+  creator: User
+  id: ID
+  status: Int
+  tags: [Int]
+  updateTime: Date
+  updater: User
+}
+
+input InterviewFields {
+  content: String
+  status: Int
+  tags: [Int]
+}
+
+input InterviewSearch {
+  content: String
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  tags: [Int]
+  updater: ID
+}
+
+type Interviews {
+  change: [Interview]
+  list: [Interview]
+  message: String
+  pagination: Pagination
+}
+
+type Kanban {
+  creationTime: Date
+  creator: User
+  desc: String
+  id: ID
+  name: String
+  status: Int
+  updateTime: Date
+  updater: User
+}
+
+input KanbanFields {
+  desc: String
+  name: String
+}
+
+type KanbanGroup {
+  creationTime: Date
+  creator: User
+  desc: String
+  id: ID
+  kanban: Kanban
+  name: String
+  status: Int
+  updateTime: Date
+  updater: User
+}
+
+input KanbanGroupFields {
+  desc: String
+  kanban: ID
+  name: String
+}
+
+input KanbanGroupSearch {
+  creator: ID
+  desc: String
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  kanban: ID
+  name: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  updater: ID
+}
+
+type KanbanGroups {
+  change: [KanbanGroup]
+  list: [KanbanGroup]
+  message: String
+  pagination: Pagination
+}
+
+input KanbanSearch {
+  creator: ID
+  desc: String
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  updater: ID
+}
+
+type KanbanTask {
+  creationTime: Date
+  creator: User
+  desc: String
+  group: KanbanGroup
+  id: ID
+  kanban: Kanban
+  name: String
+  status: Int
+  updateTime: Date
+  updater: User
+}
+
+input KanbanTaskFields {
+  desc: String
+  group: ID
+  kanban: ID
+  name: String
+}
+
+input KanbanTaskSearch {
+  creator: ID
+  desc: String
+  endCreationTime: Date
+  endUpdateTime: Date
+  group: ID
+  id: ID
+  ids: [ID!]
+  kanban: ID
+  name: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  updater: ID
+}
+
+type KanbanTasks {
+  change: [KanbanTask]
+  list: [KanbanTask]
+  message: String
+  pagination: Pagination
+}
+
+type Kanbans {
+  change: [Kanban]
+  list: [Kanban]
+  message: String
+  pagination: Pagination
+}
+
+type Login {
+  message: String
+  user: User
+}
+
+type MonthlyBill {
+  expend: Float
+  income: Float
+}
+
+type Mutation {
+  createAiChats(body: [AiChatFields!]!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
+  createAlgorithms(body: [AlgorithmFields!]!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
+  createArticles(body: [ArticleFields!]!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  createDiaries(body: [DiaryFields!]!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  createFolders(body: [FolderFields!]!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  createInterviews(body: [InterviewFields!]!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
+  createKanbanGroups(body: [KanbanGroupFields!]!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
+  createKanbanTasks(body: [KanbanTaskFields!]!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
+  createKanbans(body: [KanbanFields!]!, orderBy: OrderBy, pagination: Pagination, search: KanbanSearch): Kanbans
+  createRoles(body: [RoleFields!]!, orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
+  createSnippets(body: [SnippetFields!]!, orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
+  createTags(body: [TagFields!]!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
+  createUsers(body: [UserFields!]!, orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
+  login(account: String, password: String): Login
+  releaseArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  removeAiChats(conds: AiChatSearch!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
+  removeAlgorithms(conds: AlgorithmSearch!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
+  removeArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  removeDiaries(conds: DiarySearch!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  removeFolders(conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  removeInterviews(conds: InterviewSearch!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
+  removeKanbanGroups(conds: KanbanGroupSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
+  removeKanbanTasks(conds: KanbanTaskSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
+  removeKanbans(conds: KanbanSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanSearch): Kanbans
+  removePhotos(conds: PhotoSearch!, orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
+  removeRoles(conds: RoleSearch!, orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
+  removeSnippets(conds: SnippetSearch!, orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
+  removeTags(conds: TagSearch!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
+  removeUsers(conds: UserSearch!, orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
+  revokeArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  updateAiChats(body: AiChatFields!, conds: AiChatSearch!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
+  updateAlgorithms(body: AlgorithmFields!, conds: AlgorithmSearch!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
+  updateArticles(body: ArticleFields!, conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  updateDiaries(body: DiaryFields!, conds: DiarySearch!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  updateFolders(body: FolderFields!, conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  updateInterviews(body: InterviewFields!, conds: InterviewSearch!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
+  updateKanbanGroups(body: KanbanGroupFields!, conds: KanbanGroupSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
+  updateKanbanTasks(body: KanbanTaskFields!, conds: KanbanTaskSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
+  updateKanbans(body: KanbanFields!, conds: KanbanSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanSearch): Kanbans
+  updateRoles(body: RoleFields!, conds: RoleSearch!, orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
+  updateSnippets(body: SnippetFields!, conds: SnippetSearch!, orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
+  updateTags(body: TagFields!, conds: TagSearch!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
+  updateUsers(body: UserFields!, conds: UserSearch!, orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
+  uploadPhotos(body: PhotoFields!, orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
+}
+
+type Option {
+  id: ID!
+  name: String!
+}
+
+type Options {
+  list: [Option]
+  pagination: Pagination
+}
+
+input OptionsSearch {
+  filter: [ID!]
+  include: [ID!]
+  name: String
+}
+
+input OrderBy {
+  creationTime: Int
+  updateTime: Int
+  value: Int
+  viewCount: Int
+}
+
+scalar Pagination
+
+type Photo {
+  creationTime: Date
+  creator: User
+  id: ID
+  name: String
+  sourceFileName: String
+  status: Int
+  type: Int
+  updateTime: Date
+  updater: User
+  url: String
+}
+
+input PhotoFields {
+  files: [Upload!]
+  payload: ID
+  type: Int
+}
+
+input PhotoSearch {
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  sourceFileName: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  type: [Int]
+  updater: ID
+  url: String
+}
+
+type Photos {
+  change: [Photo]
+  list: [Photo]
+  message: String
+  pagination: Pagination
+}
+
+type PublicKey {
+  data: String
+  message: String
+}
+
+type Query {
+  aiChats(orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
+  algorithms(orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
+  appleTouchbar: Touchbar
+  articles(orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  diaries(orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  folders(orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  interviews(orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
+  kanbanGroups(orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
+  kanbanTasks(orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
+  kanbans(orderBy: OrderBy, pagination: Pagination, search: KanbanSearch): Kanbans
+  options(model: String!, pagination: Pagination, search: OptionsSearch): Options
+  photos(orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
+  publicKey: PublicKey
+  roles(orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
+  snippets(orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
+  statsBill(search: StatsBillSearch): StatsBill
+  tags(orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
+  tagsWithArticles(orderBy: OrderBy, search: ArticleSearch): Tags
+  userInfo: UserInfo
+  users(orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
+}
+
+type Role {
+  auth: [Auth]
+  creationTime: Date
+  creator: User
+  desc: String
+  id: ID
+  name: String
+  status: Int
+  updateTime: Date
+  updater: User
+}
+
+input RoleFields {
+  auth: [Auth]
+  desc: String
+  name: String
+  status: Int
+  type: Int
+}
+
+input RoleSearch {
+  creator: ID
+  desc: String
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  updater: ID
+}
+
+enum RoleType {
+  ADMIN
+  TOURIST
+}
+
+type Roles {
+  change: [Role]
+  list: [Role]
+  message: String
+  pagination: Pagination
+}
+
+type Snippet {
+  content: String
+  creationTime: Date
+  creator: User
+  id: ID
+  status: Int
+  tags: [Int]
+  updateTime: Date
+  updater: User
+}
+
+input SnippetFields {
+  content: String
+  status: Int
+  tags: [Int]
+}
+
+input SnippetSearch {
+  content: String
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  tags: [Int]
+  updater: ID
+}
+
+type Snippets {
+  change: [Snippet]
+  list: [Snippet]
+  message: String
+  pagination: Pagination
+}
+
+type StatsBill {
+  groupWithName: [StatsBillItem]
+  message: String
+  stats: Bill
+}
+
+type StatsBillItem {
+  diaries: [Diary]
+  expend: Float
+  income: Float
+  name: String
+}
+
+input StatsBillSearch {
+  name: [String]
+  span: String
+}
+
+type Tag {
+  color: String
+  creationTime: Date
+  creator: User
+  icon: String
+  id: ID
+  name: String
+  parent: Tag
+  status: Int
+  updateTime: Date
+  updater: User
+}
+
+input TagFields {
+  color: String
+  icon: String
+  name: String
+  parent: ID
+}
+
+input TagSearch {
+  color: String
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  icon: String
+  id: ID
+  ids: [ID!]
+  name: String
+  parent: ID
+  startCreationTime: Date
+  startUpdateTime: Date
+  status: [Int]
+  updater: ID
+}
+
+type Tags {
+  change: [Tag]
+  list: [Tag]
+  message: String
+  pagination: Pagination
+}
+
+type Touchbar {
+  latestWeight: Float
+  monthlyBill: MonthlyBill
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type User {
+  account: String
+  avatar: String
+  bio: String
+  creationTime: Date
+  creator: User
+  id: ID
+  name: String
+  role: Role
+  sex: Int
+  updateTime: Date
+  updater: User
+}
+
+input UserFields {
+  account: String
+  name: String
+  password: String
+  role: ID
+  sex: Int
+}
+
+type UserInfo {
+  message: String
+  user: User
+}
+
+input UserSearch {
+  account: String
+  creator: ID
+  endCreationTime: Date
+  endUpdateTime: Date
+  id: ID
+  ids: [ID!]
+  name: String
+  role: ID
+  sex: Int
+  startCreationTime: Date
+  startUpdateTime: Date
+  updater: ID
+}
+
+type Users {
+  change: [User]
+  list: [User]
+  message: String
+  pagination: Pagination
+}
