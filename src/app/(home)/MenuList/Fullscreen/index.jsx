@@ -3,8 +3,8 @@ import useFullscreen from '@/hooks/useFullscreen';
 import { Icon } from '@kunlunxu/brick';
 import { useSelector } from 'react-redux';
 
-export default () => {
-  const { onToggle, fulled } = useFullscreen(document.body);
+const Fullscreen =  () => {
+  const { onToggle, fulled } = useFullscreen();
   const setting = useSelector((state) => state.setting.menuBar);
 
   if (!setting.showFullScreenOnMenu) {
@@ -18,3 +18,5 @@ export default () => {
     />
   );
 };
+
+export default Fullscreen;
