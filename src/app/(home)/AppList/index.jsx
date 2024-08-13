@@ -1,10 +1,11 @@
+'use client';
 import _ from 'lodash';
 import scss from './index.module.scss';
+import Window from '@/components/Window';
 import apps from '@/app/(home)/AppList/config';
 
 import { actions } from '@/store';
 import { useCallback } from 'react';
-import { Window } from '@kunlunxu/brick';
 import { useSelector, useDispatch } from 'react-redux';
 
 const AppList = () => {

@@ -1,17 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
   async rewrites() {
-    const list = [{
-      // 后端接口, 统一走这里进行重写
-      source: '/api/:path*',
-      destination: `${process.env.NEXT_PUBLIC_BLACK_URL}/api/:path*`,
-    }];
+    const list = [
+      {
+        // 后端接口, 统一走这里进行重写
+        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BLACK_URL}/api/:path*`,
+      },
+    ];
 
     return list;
   },
+
+  // transpilePackages: ["@kunlunxu/brick"],
+
+  // // 按需加载
+  modularizeImports: {
+    "@kunlunxu/brick": {
+      transform: "@kunlunxu/brick/es/{{kebabCase member}}",
+    },
+  },
+
   // experimental: {
-  //   optimizePackageImports: ['@kunlunxu/brick'],
+  //   optimizePackageImports: ["@kunlunxu/brick"],
   // },
   // experimental: {
   //   optimizePackageImports: ['package-name'],

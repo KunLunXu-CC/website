@@ -1,5 +1,4 @@
-import JSEncrypt from 'jsencrypt';
-import { notification } from 'antd';
+import { notification } from "antd";
 
 /**
  * 根据需要过滤的列表过滤指定对象
@@ -43,7 +42,8 @@ export const debounce = (fn, wait) => {
  * @param {string} publicKey 公钥
  * @returns {string}      加密后的数据
  */
-export const rsa = (data, publicKey) => {
+export const rsa = async (data, publicKey) => {
+  const JSEncrypt = (await import("jsencrypt")).default;
   const encrypt = new JSEncrypt();
   encrypt.setPublicKey(publicKey);
   return encrypt.encrypt(data);
@@ -57,18 +57,14 @@ export const rsa = (data, publicKey) => {
  * @param {string} params.type 提示信息类别, 参考 antd 文档
  * @returns {undefined}
  */
-export const message = ({
-  code,
-  type = 'success',
-  ...options
-}) => {
+export const message = ({ code, type = "success", ...options }) => {
   if (!code) {
     return false;
   }
 
   notification[type]({
     ...options,
-    getContainer: () => (document.getElementById(code)),
+    getContainer: () => document.getElementById(code),
   });
 };
 
@@ -88,6 +84,6 @@ export const urlParams = (key) => {
   return urlSearchParams;
 };
 
-
 // 获取 OSS 对应资源 url
-export const getOssUrl = (fileName) => `https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/${fileName}`;
+export const getOssUrl = (fileName) =>
+  `https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/${fileName}`;

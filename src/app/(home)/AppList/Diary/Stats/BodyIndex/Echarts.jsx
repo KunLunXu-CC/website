@@ -1,5 +1,5 @@
+import ECharts from '@/components/ECharts';
 import { useMemo } from 'react';
-import { Echarts } from '@kunlunxu/brick';
 
 export default (props) => {
   // 处理数据
@@ -81,7 +81,7 @@ export default (props) => {
 
 
   return (
-    <Echarts
+    <ECharts
       height={300}
       option={option}
     />

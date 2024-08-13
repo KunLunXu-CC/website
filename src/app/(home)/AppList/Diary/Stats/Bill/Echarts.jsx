@@ -1,5 +1,6 @@
+import ECharts from '@/components/ECharts';
+
 import { useMemo } from 'react';
-import { Echarts } from '@kunlunxu/brick';
 import { useDispatch } from 'react-redux';
 import { STATS_BILL_DETAIL } from '../../constants';
 
@@ -83,7 +84,7 @@ export default (props) => {
 
 
   return (
-    <Echarts
+    <ECharts
       on={on}
       height={300}
       option={option}

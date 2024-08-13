@@ -23,7 +23,7 @@ const LogInForm = () => {
 
     await login({
       account,
-      password: rsa(password, publicKeyQuery?.publicKey?.data as string),
+      password: await rsa(password, publicKeyQuery?.publicKey?.data as string),
     });
 
     router.push("/");

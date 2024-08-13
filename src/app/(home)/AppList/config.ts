@@ -1,12 +1,12 @@
-import AI from './AI';
-import User from './User';
-import Diary from './Diary';
-import Album from './Album';
-import Editor from './Editor';
-import Reader from './Reader';
-import Setting from './Setting';
-import Monitoring from './Monitoring';
-import { APP_SETTING } from '@/config/constants';
+import AI from "./AI";
+import User from "./User";
+import Diary from "./Diary";
+import Album from "./Album";
+import Editor from "./Editor";
+import Reader from "./Reader";
+import Setting from "./Setting";
+import Monitoring from "./Monitoring";
+import { APP_SETTING } from "@/config/constants";
 
 // 图标来自 figma
 export default {
@@ -40,6 +40,7 @@ export default {
       defaultParams: { width: 1200, height: 730, offsetX: 100, offsetY: 40 },
     },
   },
+  // ---
   [APP_SETTING.READER.code]: {
     ...APP_SETTING.READER,
     component: Reader,
@@ -78,7 +79,6 @@ export default {
       defaultParams: { width: 800, height: 500, offsetX: 100, offsetY: 100 },
     },
   },
-
   [APP_SETTING.USER.code]: {
     ...APP_SETTING.USER,
     component: User,
