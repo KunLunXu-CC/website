@@ -1,1 +1,3 @@
-declare module '@kunlunxu/brick';
+declare module "@kunlunxu/brick";
+
+declare module "react-redux";

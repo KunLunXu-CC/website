@@ -1,4 +1,3 @@
-
 import User from './User';
 import Target from './Target';
 import scss from './index.module.scss';
