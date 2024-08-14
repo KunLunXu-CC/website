@@ -1,11 +1,14 @@
-import { GraphQLClient, ClientError } from 'graphql-request';
-import { createApi, BaseQueryFn } from '@reduxjs/toolkit/query/react';
+import { GraphQLClient, ClientError } from "graphql-request";
+import { createApi, BaseQueryFn } from "@reduxjs/toolkit/query/react";
 
 // see: https://github.com/prisma-labs/graphql-request
-export const client = new GraphQLClient('/api/graphql', {
-  mode: 'cors',
-  credentials: 'include',
-});
+export const client = new GraphQLClient(
+  `${process.env.NEXT_PUBLIC_BLACK_URL}/api/graphql`,
+  {
+    mode: "cors",
+    credentials: "include",
+  },
+);
 
 const graphqlBaseQuery: BaseQueryFn = async ({ document, variables }) => {
   try {
@@ -22,6 +25,6 @@ const graphqlBaseQuery: BaseQueryFn = async ({ document, variables }) => {
 
 export const api = createApi({
   endpoints: () => ({}),
-  reducerPath: 'graphql',
+  reducerPath: "graphql",
   baseQuery: graphqlBaseQuery,
 });

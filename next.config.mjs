@@ -5,7 +5,7 @@ const nextConfig = {
       {
         // 后端接口, 统一走这里进行重写
         source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BLACK_URL}/api/:path*`,
+        destination: "http://127.0.0.1:4000/api/:path*",
       },
     ];
 
