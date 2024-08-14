@@ -5,7 +5,7 @@ import { UserInfoQuery } from "@/gql/graphql";
 import { useQuery } from "@tanstack/react-query";
 
 // [片段] 接口返回字段
-const UserFragment = graphql(`
+graphql(`
   fragment UserItem on User {
     id
     sex

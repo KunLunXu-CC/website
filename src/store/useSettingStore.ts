@@ -1,6 +1,6 @@
+import { merge } from "lodash";
 import { create } from "zustand";
 import { MENUS } from "@/app/(home)/AppList/Setting/constants";
-import { merge } from "lodash";
 
 interface ISettingState {
   selectedMenuKey: string; // 应用菜单 key
@@ -34,16 +34,16 @@ const useSettingStore = create<ISettingStore>((set, get) => ({
   initSettingStore: () => {
     const setting = localStorage.getItem("setting");
     if (setting) {
-      return JSON.parse(setting);
+      set(JSON.parse(setting));
     }
   },
 
-  toggleMenu: (selectedMenuKey) => ({ selectedMenuKey }),
+  toggleMenu: (selectedMenuKey) => set({ selectedMenuKey }),
 
   setSetting: (setting) => {
     const newState = merge(get(), setting);
     localStorage.setItem("setting", JSON.stringify(newState));
-    return newState;
+    set(newState);
   },
 }));
 

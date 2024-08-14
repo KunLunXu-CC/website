@@ -5,13 +5,12 @@ import DockList from "./DockList";
 import MenuList from "./MenuList";
 import useAppStore from "@/store/useAppStore";
 import useUserStore from "@/store/useUserStore";
+import usePhotosStore from "@/store/usePhotosStore";
 import useSettingStore from "@/store/useSettingStore";
 
-import { actions } from "@/store";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useUserInfoQuery } from "@/server/user";
-import { useGetPhotosQuery } from "@/store/graphql";
+import { usePhotosQuery } from "@/server/photos";
 
 /**
  * 下面所有组件都使用 position: fixed 进行布局
@@ -24,12 +23,12 @@ import { useGetPhotosQuery } from "@/store/graphql";
 const Home = () => {
   const { setUser } = useUserStore();
   const { initAppStore } = useAppStore();
+
+  const { initPhotosStore } = usePhotosStore();
   const { initSettingStore } = useSettingStore();
+
+  const { data: photosQueryData } = usePhotosQuery({});
   const { data: userInfoQueryData } = useUserInfoQuery();
-
-  const dispatch = useDispatch();
-
-  const { data: photosData } = useGetPhotosQuery();
 
   useEffect(() => {
     const { user } = userInfoQueryData?.userInfo ?? {};
@@ -41,8 +40,10 @@ const Home = () => {
   }, [initAppStore, setUser, userInfoQueryData]);
 
   useEffect(() => {
-    dispatch(actions.photos.init(photosData?.photos?.list));
-  }, [photosData, dispatch]);
+    if (photosQueryData?.photos) {
+      initPhotosStore(photosQueryData.photos.list);
+    }
+  }, [initPhotosStore, photosQueryData]);
 
   useEffect(() => {
     initSettingStore();

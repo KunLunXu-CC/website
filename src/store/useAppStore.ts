@@ -46,7 +46,7 @@ const useAppStore = create<AppStore>((set, get) => ({
       ? [{ ...defaultOpen, isMin: false, isMax: false }]
       : [];
 
-    return { opens, docks };
+    set({ opens, docks });
   },
 
   openApp: (app) => {
@@ -61,30 +61,34 @@ const useAppStore = create<AppStore>((set, get) => ({
         }))
       : [...opens, { ...app, isMin: false, isMax: false }];
 
-    return { opens: newOpens };
+    set({ opens: newOpens });
   },
 
-  closeApp: (app) => ({
-    opens: get().opens.filter((v) => v.code !== app.code),
-  }),
+  closeApp: (app) =>
+    set({
+      opens: get().opens.filter((v) => v.code !== app.code),
+    }),
 
-  minimizeApp: (app) => ({
-    opens: get().opens.map((v) => ({
-      ...v,
-      isMin: v.code === app.code ? !v.isMin : v.isMin,
-    })),
-  }),
+  minimizeApp: (app) =>
+    set({
+      opens: get().opens.map((v) => ({
+        ...v,
+        isMin: v.code === app.code ? !v.isMin : v.isMin,
+      })),
+    }),
 
-  maximizeApp: (app) => ({
-    opens: get().opens.map((v) => ({
-      ...v,
-      isMax: v.code === app.code ? !v.isMax : v.isMax,
-    })),
-  }),
+  maximizeApp: (app) =>
+    set({
+      opens: get().opens.map((v) => ({
+        ...v,
+        isMax: v.code === app.code ? !v.isMax : v.isMax,
+      })),
+    }),
 
-  stickApp: (app) => ({
-    opens: [...get().opens.filter((v) => v.code !== app.code), app],
-  }),
+  stickApp: (app) =>
+    set({
+      opens: [...get().opens.filter((v) => v.code !== app.code), app],
+    }),
 }));
 
 export default useAppStore;

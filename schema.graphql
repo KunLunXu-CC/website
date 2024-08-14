@@ -548,7 +548,7 @@ input PhotoSearch {
 
 type Photos {
   change: [Photo]
-  list: [Photo]
+  list: [Photo!]!
   message: String
   pagination: Pagination
 }
