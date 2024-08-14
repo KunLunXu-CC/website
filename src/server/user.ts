@@ -1,7 +1,11 @@
+import client from "@/gql/client";
 import { graphql } from "@/gql/gql";
+import { UserInfoQuery } from "@/gql/graphql";
+
+import { useQuery } from "@tanstack/react-query";
 
 // [片段] 接口返回字段
-export const UserFragment = graphql(`
+const UserFragment = graphql(`
   fragment UserItem on User {
     id
     sex
@@ -19,8 +23,8 @@ export const UserFragment = graphql(`
 `);
 
 // 获取用户信息
-const ss = graphql(/* GraphQL */ `
-  query getUserInfo {
+const UserInfoDocument = graphql(`
+  query UserInfo {
     userInfo {
       user {
         ...UserItem
@@ -29,3 +33,12 @@ const ss = graphql(/* GraphQL */ `
     }
   }
 `);
+
+export const useUserInfoQuery = () => {
+  const query = useQuery<UserInfoQuery>({
+    queryKey: ["userInfo"],
+    queryFn: () => client.request(UserInfoDocument),
+  });
+
+  return query;
+};

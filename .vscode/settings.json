@@ -43,7 +43,8 @@
     "reduxjs",
     "shipinquanping",
     "tanstack",
-    "tinify"
+    "tinify",
+    "zustand"
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

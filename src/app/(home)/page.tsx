@@ -3,11 +3,15 @@ import AppList from "./AppList";
 import Desktop from "./Desktop";
 import DockList from "./DockList";
 import MenuList from "./MenuList";
+import useAppStore from "@/store/useAppStore";
+import useUserStore from "@/store/useUserStore";
+import useSettingStore from "@/store/useSettingStore";
+
 import { actions } from "@/store";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useGetPhotosQuery, useGetUserInfoQuery } from "@/store/graphql";
-import { usePathname } from "next/navigation";
+import { useUserInfoQuery } from "@/server/user";
+import { useGetPhotosQuery } from "@/store/graphql";
 
 /**
  * 下面所有组件都使用 position: fixed 进行布局
@@ -18,27 +22,31 @@ import { usePathname } from "next/navigation";
  * @returns {any} 元素节点
  */
 const Home = () => {
-  const { data: userInfo } = useGetUserInfoQuery();
+  const { setUser } = useUserStore();
+  const { initAppStore } = useAppStore();
+  const { initSettingStore } = useSettingStore();
+  const { data: userInfoQueryData } = useUserInfoQuery();
+
   const dispatch = useDispatch();
-  const pathname = usePathname();
 
   const { data: photosData } = useGetPhotosQuery();
 
   useEffect(() => {
-    const { user } = userInfo?.userInfo ?? {};
+    const { user } = userInfoQueryData?.userInfo ?? {};
     if (user) {
-      dispatch(actions.user.set(user));
-      dispatch(actions.app.init(user));
+      setUser(user);
+      initAppStore(user);
+    } else {
     }
-  }, [dispatch, userInfo]);
+  }, [initAppStore, setUser, userInfoQueryData]);
 
   useEffect(() => {
     dispatch(actions.photos.init(photosData?.photos?.list));
   }, [photosData, dispatch]);
 
   useEffect(() => {
-    dispatch(actions.setting.init());
-  }, [dispatch]);
+    initSettingStore();
+  }, [initSettingStore]);
 
   return (
     <>
