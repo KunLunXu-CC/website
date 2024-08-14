@@ -13,7 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query getUserInfo {\n    userInfo {\n      user {\n        id\n        name\n      }\n      message\n    }\n  }\n": types.GetUserInfoDocument,
+    "\n  fragment UserItem on User {\n    id\n    sex\n    bio\n    name\n    avatar\n    account\n    role {\n      id\n      desc\n      auth\n      name\n    }\n  }\n": types.UserItemFragmentDoc,
+    "\n  query getUserInfo {\n    userInfo {\n      user {\n        ...UserItem\n      }\n      message\n    }\n  }\n": types.GetUserInfoDocument,
 };
 
 /**
@@ -33,7 +34,11 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getUserInfo {\n    userInfo {\n      user {\n        id\n        name\n      }\n      message\n    }\n  }\n"): (typeof documents)["\n  query getUserInfo {\n    userInfo {\n      user {\n        id\n        name\n      }\n      message\n    }\n  }\n"];
+export function graphql(source: "\n  fragment UserItem on User {\n    id\n    sex\n    bio\n    name\n    avatar\n    account\n    role {\n      id\n      desc\n      auth\n      name\n    }\n  }\n"): (typeof documents)["\n  fragment UserItem on User {\n    id\n    sex\n    bio\n    name\n    avatar\n    account\n    role {\n      id\n      desc\n      auth\n      name\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query getUserInfo {\n    userInfo {\n      user {\n        ...UserItem\n      }\n      message\n    }\n  }\n"): (typeof documents)["\n  query getUserInfo {\n    userInfo {\n      user {\n        ...UserItem\n      }\n      message\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
