@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from "dayjs";
 import scss from "./index.module.scss";
+import useSettingStore from "@/store/useSettingStore";
 
-import { useSelector } from "react-redux";
 import { useState, useMemo, useEffect, useRef, FC } from "react";
 interface ITargetProps {
   onClick: () => void;
@@ -13,21 +13,21 @@ const Target: FC<ITargetProps> = (props) => {
   const handleRef = useRef<number>(0);
   const [date, setDate] = useState<Dayjs>();
 
-  const setting = useSelector((state) => state.setting.menuBar);
+  const { menuBar } = useSettingStore();
 
   // 星期
   const week = useMemo(() => {
-    if (!setting.showWeek || !date) {
+    if (!menuBar.showWeek || !date) {
       return "";
     }
 
     return `周${["一", "二", "三", "四", "五", "六", "天"][date.day()]}`;
-  }, [date, setting.showWeek]);
+  }, [date, menuBar.showWeek]);
 
   // 当前时间
   const time = useMemo(
-    () => date?.format(setting.formatDate),
-    [date, setting.formatDate],
+    () => date?.format(menuBar.formatDate),
+    [date, menuBar.formatDate],
   );
 
   useEffect(() => {

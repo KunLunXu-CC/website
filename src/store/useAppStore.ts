@@ -1,3 +1,4 @@
+import { last } from "lodash";
 import { create } from "zustand";
 import { urlParams } from "@/utils";
 import { User } from "@/gql/graphql";
@@ -85,10 +86,17 @@ const useAppStore = create<AppStore>((set, get) => ({
       })),
     }),
 
-  stickApp: (app) =>
+  stickApp: (app) => {
+    const { opens } = get();
+
+    if (last(opens)?.code === app.code) {
+      return false;
+    }
+
     set({
-      opens: [...get().opens.filter((v) => v.code !== app.code), app],
-    }),
+      opens: [...opens.filter((v) => v.code !== app.code), app],
+    });
+  },
 }));
 
 export default useAppStore;

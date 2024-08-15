@@ -8,9 +8,10 @@ import Notification from './Notification';
 import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 import { useSelector }  from 'react-redux';
+import useAppStore from '@/store/useAppStore';
 
-const useStateHook = () => {
-  const opens = useSelector((state) => state.app?.opens);
+const MenuList =  () => {
+  const { opens } = useAppStore();
 
   // 菜单 className
   const menuClassName = useMemo(() => {
@@ -21,13 +22,9 @@ const useStateHook = () => {
     );
   }, [opens]);
 
-  return { menuClassName };
-};
 
-export default () => {
-  const state = useStateHook();
   return (
-    <div className={state.menuClassName}>
+    <div className={menuClassName}>
       <div className={scss.body}>
         <Github />
         <Juejin />
@@ -39,3 +36,5 @@ export default () => {
     </div>
   );
 };
+
+export default MenuList;

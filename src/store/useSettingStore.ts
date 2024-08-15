@@ -1,5 +1,6 @@
 import { merge } from "lodash";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { MENUS } from "@/app/(home)/AppList/Setting/constants";
 
 interface ISettingState {
@@ -15,36 +16,36 @@ interface ISettingState {
 }
 
 interface ISettingStore extends ISettingState {
-  initSettingStore: () => void;
   toggleMenu: (selectedMenuKey: string) => void;
-  setSetting: (setting: ISettingState) => void;
+  // setSetting: (setting: Partial<ISettingState>) => void;
+  updateDock: (dock: Partial<ISettingState["dock"]>) => void;
+  updateMenuBar: (menuBar: Partial<ISettingState["menuBar"]>) => void;
 }
 
-const useSettingStore = create<ISettingStore>((set, get) => ({
-  selectedMenuKey: MENUS[0].key,
-  dock: {
-    hideDock: false,
-  },
-  menuBar: {
-    showFullScreenOnMenu: true,
-    showWeek: true,
-    formatDate: "YYYY-MM-DD HH:mm:ss",
-  },
+const useSettingStore = create<ISettingStore>()(
+  persist(
+    (set, get) => ({
+      selectedMenuKey: MENUS[0].key,
+      dock: {
+        hideDock: false,
+      },
+      menuBar: {
+        showFullScreenOnMenu: true,
+        showWeek: true,
+        formatDate: "YYYY-MM-DD HH:mm:ss",
+      },
 
-  initSettingStore: () => {
-    const setting = localStorage.getItem("setting");
-    if (setting) {
-      set(JSON.parse(setting));
-    }
-  },
-
-  toggleMenu: (selectedMenuKey) => set({ selectedMenuKey }),
-
-  setSetting: (setting) => {
-    const newState = merge(get(), setting);
-    localStorage.setItem("setting", JSON.stringify(newState));
-    set(newState);
-  },
-}));
+      toggleMenu: (selectedMenuKey) => set({ selectedMenuKey }),
+      updateDock: (dock) => set({ dock: { ...get().dock, ...dock } }),
+      updateMenuBar: (menuBar) =>
+        set({ menuBar: { ...get().menuBar, ...menuBar } }),
+      // setSetting: (setting) => {
+      //   const newState = merge(get(), setting);
+      //   set(newState);
+      // },
+    }),
+    { name: "setting", version: 1 },
+  ),
+);
 
 export default useSettingStore;

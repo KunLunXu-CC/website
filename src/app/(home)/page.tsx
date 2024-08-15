@@ -25,7 +25,6 @@ const Home = () => {
   const { initAppStore } = useAppStore();
 
   const { initPhotosStore } = usePhotosStore();
-  const { initSettingStore } = useSettingStore();
 
   const { data: photosQueryData } = usePhotosQuery({});
   const { data: userInfoQueryData } = useUserInfoQuery();
@@ -44,10 +43,6 @@ const Home = () => {
       initPhotosStore(photosQueryData.photos.list);
     }
   }, [initPhotosStore, photosQueryData]);
-
-  useEffect(() => {
-    initSettingStore();
-  }, [initSettingStore]);
 
   return (
     <>
