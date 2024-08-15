@@ -9,8 +9,8 @@ const MenuBar = () => {
 
   // 修改值
   const handleChange = useCallback(
-    (key, { target }) => {
-      const value = target?.value ?? target?.checked;
+    (key, event) => {
+      const value = event.target?.value ?? event.target?.checked;
       updateMenuBar({ [key]: value });
     },
     [updateMenuBar],
@@ -19,13 +19,13 @@ const MenuBar = () => {
   return (
     <>
       <Checkbox
-        value={menuBar.showFullScreenOnMenu}
+        checked={menuBar.showFullScreenOnMenu}
         onChange={handleChange.bind(null, "showFullScreenOnMenu")}
       >
         在菜单栏显示全屏切换图标
       </Checkbox>
       <Checkbox
-        value={menuBar.showWeek}
+        checked={menuBar.showWeek}
         onChange={handleChange.bind(null, "showWeek")}
       >
         显示星期

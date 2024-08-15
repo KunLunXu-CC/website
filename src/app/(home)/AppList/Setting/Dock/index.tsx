@@ -16,7 +16,10 @@ const Dock = () => {
   );
 
   return (
-    <Checkbox value={dock.hideDock} onChange={onChange.bind(null, "hideDock")}>
+    <Checkbox
+      checked={dock.hideDock}
+      onChange={onChange.bind(null, "hideDock")}
+    >
       自动隐藏和显示程序坞
     </Checkbox>
   );
