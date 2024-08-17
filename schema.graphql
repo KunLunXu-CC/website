@@ -554,7 +554,7 @@ type Photos {
 }
 
 type PublicKey {
-  data: String
+  data: String!
   message: String
 }
 
@@ -571,7 +571,7 @@ type Query {
   kanbans(orderBy: OrderBy, pagination: Pagination, search: KanbanSearch): Kanbans
   options(model: String!, pagination: Pagination, search: OptionsSearch): Options
   photos(orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
-  publicKey: PublicKey
+  publicKey: PublicKey!
   roles(orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
   snippets(orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
   statsBill(search: StatsBillSearch): StatsBill

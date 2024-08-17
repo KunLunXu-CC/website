@@ -9,13 +9,13 @@ import { Input, Form, Divider } from "antd";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { JWT_COOKIE_KEY } from "@/config/constants";
-import { useGetPublicKeyQuery, useLoginMutation } from "@/store/graphql";
+import { usePublicKeyQuery, useLoginMutation } from "@/server/user";
 
 const LogInForm = () => {
   const [form] = Form.useForm();
   const router = useRouter();
-  const [login] = useLoginMutation();
-  const { data: publicKeyQuery } = useGetPublicKeyQuery();
+  const { mutateAsync: login } = useLoginMutation();
+  const { data: publicKeyQueryData } = usePublicKeyQuery();
 
   // 登录
   const handleSign = useCallback(async () => {
@@ -23,11 +23,11 @@ const LogInForm = () => {
 
     await login({
       account,
-      password: await rsa(password, publicKeyQuery?.publicKey?.data as string),
+      password: await rsa(password, publicKeyQueryData?.publicKey.data!),
     });
 
     router.push("/");
-  }, [form, router, login, publicKeyQuery]);
+  }, [form, router, login, publicKeyQueryData]);
 
   // 清除 JWT cookie
   useEffect(() => {
