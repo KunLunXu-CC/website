@@ -572,25 +572,25 @@ type Query {
   options(model: String!, pagination: Pagination, search: OptionsSearch): Options
   photos(orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
   publicKey: PublicKey!
-  roles(orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
+  roles(orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles!
   snippets(orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
   statsBill(search: StatsBillSearch): StatsBill
   tags(orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
   tagsWithArticles(orderBy: OrderBy, search: ArticleSearch): Tags
   userInfo: UserInfo
-  users(orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
+  users(orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users!
 }
 
 type Role {
-  auth: [Auth]
-  creationTime: Date
-  creator: User
+  auth: [Auth]!
+  creationTime: Date!
+  creator: User!
   desc: String
-  id: ID
-  name: String
-  status: Int
-  updateTime: Date
-  updater: User
+  id: ID!
+  name: String!
+  status: Int!
+  updateTime: Date!
+  updater: User!
 }
 
 input RoleFields {
@@ -621,8 +621,8 @@ enum RoleType {
 }
 
 type Roles {
-  change: [Role]
-  list: [Role]
+  change: [Role!]!
+  list: [Role!]!
   message: String
   pagination: Pagination
 }
@@ -735,17 +735,17 @@ type Touchbar {
 scalar Upload
 
 type User {
-  account: String
+  account: String!
   avatar: String
   bio: String
-  creationTime: Date
-  creator: User
-  id: ID
-  name: String
-  role: Role
-  sex: Int
-  updateTime: Date
-  updater: User
+  creationTime: Date!
+  creator: User!
+  id: ID!
+  name: String!
+  role: Role!
+  sex: Int!
+  updateTime: Date!
+  updater: User!
 }
 
 input UserFields {
@@ -777,8 +777,8 @@ input UserSearch {
 }
 
 type Users {
-  change: [User]
-  list: [User]
+  change: [User!]!
+  list: [User!]!
   message: String
   pagination: Pagination
 }

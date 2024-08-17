@@ -23,6 +23,9 @@ dependencies:
   axios:
     specifier: ^1.6.7
     version: 1.7.3
+  classnames:
+    specifier: ^2.5.1
+    version: 2.5.1
   dayjs:
     specifier: ^1.11.7
     version: 1.11.12
@@ -76,6 +79,9 @@ devDependencies:
   '@graphql-codegen/schema-ast':
     specifier: ^4.1.0
     version: 4.1.0(graphql@16.9.0)
+  '@graphql-typed-document-node/core':
+    specifier: ^3.2.0
+    version: 3.2.0(graphql@16.9.0)
   '@kunlunxu/norm':
     specifier: ^2.8.1
     version: 2.8.1(postcss@8.4.40)

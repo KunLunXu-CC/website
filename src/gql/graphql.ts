@@ -969,13 +969,13 @@ export type Query = {
   options?: Maybe<Options>;
   photos?: Maybe<Photos>;
   publicKey: PublicKey;
-  roles?: Maybe<Roles>;
+  roles: Roles;
   snippets?: Maybe<Snippets>;
   statsBill?: Maybe<StatsBill>;
   tags?: Maybe<Tags>;
   tagsWithArticles?: Maybe<Tags>;
   userInfo?: Maybe<UserInfo>;
-  users?: Maybe<Users>;
+  users: Users;
 };
 
 
@@ -1096,15 +1096,15 @@ export type QueryUsersArgs = {
 
 export type Role = {
   __typename?: 'Role';
-  auth?: Maybe<Array<Maybe<Scalars['Auth']['output']>>>;
-  creationTime?: Maybe<Scalars['Date']['output']>;
-  creator?: Maybe<User>;
+  auth: Array<Maybe<Scalars['Auth']['output']>>;
+  creationTime: Scalars['Date']['output'];
+  creator: User;
   desc?: Maybe<Scalars['String']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['Int']['output']>;
-  updateTime?: Maybe<Scalars['Date']['output']>;
-  updater?: Maybe<User>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  status: Scalars['Int']['output'];
+  updateTime: Scalars['Date']['output'];
+  updater: User;
 };
 
 export type RoleFields = {
@@ -1136,8 +1136,8 @@ export enum RoleType {
 
 export type Roles = {
   __typename?: 'Roles';
-  change?: Maybe<Array<Maybe<Role>>>;
-  list?: Maybe<Array<Maybe<Role>>>;
+  change: Array<Role>;
+  list: Array<Role>;
   message?: Maybe<Scalars['String']['output']>;
   pagination?: Maybe<Scalars['Pagination']['output']>;
 };
@@ -1255,17 +1255,17 @@ export type Touchbar = {
 
 export type User = {
   __typename?: 'User';
-  account?: Maybe<Scalars['String']['output']>;
+  account: Scalars['String']['output'];
   avatar?: Maybe<Scalars['String']['output']>;
   bio?: Maybe<Scalars['String']['output']>;
-  creationTime?: Maybe<Scalars['Date']['output']>;
-  creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  role?: Maybe<Role>;
-  sex?: Maybe<Scalars['Int']['output']>;
-  updateTime?: Maybe<Scalars['Date']['output']>;
-  updater?: Maybe<User>;
+  creationTime: Scalars['Date']['output'];
+  creator: User;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  role: Role;
+  sex: Scalars['Int']['output'];
+  updateTime: Scalars['Date']['output'];
+  updater: User;
 };
 
 export type UserFields = {
@@ -1299,11 +1299,53 @@ export type UserSearch = {
 
 export type Users = {
   __typename?: 'Users';
-  change?: Maybe<Array<Maybe<User>>>;
-  list?: Maybe<Array<Maybe<User>>>;
+  change: Array<User>;
+  list: Array<User>;
   message?: Maybe<Scalars['String']['output']>;
   pagination?: Maybe<Scalars['Pagination']['output']>;
 };
+
+export type RoleItemFragment = { __typename?: 'Role', id: string, name: string, auth: Array<any | null> } & { ' $fragmentName'?: 'RoleItemFragment' };
+
+export type RolesQueryVariables = Exact<{
+  search?: InputMaybe<RoleSearch>;
+}>;
+
+
+export type RolesQuery = { __typename?: 'Query', roles: { __typename?: 'Roles', list: Array<(
+      { __typename?: 'Role' }
+      & { ' $fragmentRefs'?: { 'RoleItemFragment': RoleItemFragment } }
+    )> } };
+
+export type UpdateRolesMutationVariables = Exact<{
+  body: RoleFields;
+  conds: RoleSearch;
+}>;
+
+
+export type UpdateRolesMutation = { __typename?: 'Mutation', updateRoles?: { __typename?: 'Roles', change: Array<(
+      { __typename?: 'Role' }
+      & { ' $fragmentRefs'?: { 'RoleItemFragment': RoleItemFragment } }
+    )> } | null };
+
+export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UsersQuery = { __typename?: 'Query', users: { __typename?: 'Users', list: Array<(
+      { __typename?: 'User' }
+      & { ' $fragmentRefs'?: { 'UserItemFragment': UserItemFragment } }
+    )> } };
+
+export type UpdateUsersMutationVariables = Exact<{
+  body: UserFields;
+  conds: UserSearch;
+}>;
+
+
+export type UpdateUsersMutation = { __typename?: 'Mutation', updateUsers?: { __typename?: 'Users', message?: string | null, change: Array<(
+      { __typename?: 'User' }
+      & { ' $fragmentRefs'?: { 'UserItemFragment': UserItemFragment } }
+    )> } | null };
 
 export type PhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
@@ -1327,7 +1369,7 @@ export type UploadPhotosMutationVariables = Exact<{
 
 export type UploadPhotosMutation = { __typename?: 'Mutation', uploadPhotos?: { __typename?: 'Photos', change?: Array<{ __typename?: 'Photo', id?: string | null, type?: number | null, name?: string | null } | null> | null } | null };
 
-export type UserItemFragment = { __typename?: 'User', id?: string | null, sex?: number | null, bio?: string | null, name?: string | null, avatar?: string | null, account?: string | null, role?: { __typename?: 'Role', id?: string | null, desc?: string | null, auth?: Array<any | null> | null, name?: string | null } | null } & { ' $fragmentName'?: 'UserItemFragment' };
+export type UserItemFragment = { __typename?: 'User', id: string, sex: number, bio?: string | null, name: string, avatar?: string | null, account: string, role: { __typename?: 'Role', id: string, desc?: string | null, auth: Array<any | null>, name: string } } & { ' $fragmentName'?: 'UserItemFragment' };
 
 export type PublicKeyQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1353,7 +1395,12 @@ export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'L
       & { ' $fragmentRefs'?: { 'UserItemFragment': UserItemFragment } }
     ) | null } | null };
 
+export const RoleItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<RoleItemFragment, unknown>;
 export const UserItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"account"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UserItemFragment, unknown>;
+export const RolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Roles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleSearch"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"roles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RoleItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<RolesQuery, RolesQueryVariables>;
+export const UpdateRolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateRoles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleFields"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"conds"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleSearch"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateRoles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"Argument","name":{"kind":"Name","value":"conds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"conds"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RoleItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<UpdateRolesMutation, UpdateRolesMutationVariables>;
+export const UsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"account"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;
+export const UpdateUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateUsers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserFields"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"conds"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserSearch"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUsers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"Argument","name":{"kind":"Name","value":"conds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"conds"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"account"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UpdateUsersMutation, UpdateUsersMutationVariables>;
 export const PhotosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Photos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PhotoSearch"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"photos"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<PhotosQuery, PhotosQueryVariables>;
 export const RemovePhotosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"RemovePhotos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"conds"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PhotoSearch"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"PhotoSearch"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"removePhotos"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"conds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"conds"}}},{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"creationTime"},"value":{"kind":"IntValue","value":"-1"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<RemovePhotosMutation, RemovePhotosMutationVariables>;
 export const UploadPhotosDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"uploadPhotos"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PhotoFields"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uploadPhotos"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<UploadPhotosMutation, UploadPhotosMutationVariables>;

@@ -40,3 +40,37 @@
     color: rgba($color: #fff, $alpha: 60%);
   }
 }
+
+.save {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+
+  left: 50%;
+  bottom: -20px;
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow:
+    0 0 0 4px #fb8da7,
+    0 0 0 8px #7c85ab,
+    0 0 40px 0 rgba($color: #fb8da7, $alpha: 90%);
+
+  transition: all 0.4s;
+  background: linear-gradient(160deg, #73a4c6, #525c89);
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  :global {
+    .ant-progress-inner {
+      width: 80px !important;
+      height: 80px !important;
+    }
+  }
+}
