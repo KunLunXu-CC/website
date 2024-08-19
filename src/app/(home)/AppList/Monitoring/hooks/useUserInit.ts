@@ -1,13 +1,29 @@
+import { graphql } from "@/gql";
 import { useEffect } from "react";
 import { useFragment } from "@/gql";
-import { useUsersQuery } from "../server";
+import { useQuery } from "@tanstack/react-query";
+import { UserItemFragmentDoc, UsersQuery } from "@/gql/graphql";
 
-import useRoleStore from "./useRoleStore";
-import { UserItemFragmentDoc } from "@/gql/graphql";
+import client from "@/gql/client";
 import useUserStore from "./useUserStore";
 
+// 用户列表
+const UsersDocument = graphql(`
+  query Users {
+    users {
+      list {
+        ...UserItem
+      }
+    }
+  }
+`);
+
 const useInitRole = () => {
-  const { data: usersQuery } = useUsersQuery();
+  const { data: usersQuery } = useQuery<UsersQuery>({
+    staleTime: 0,
+    queryKey: ["users"],
+    queryFn: () => client.request(UsersDocument),
+  });
 
   const { setUserList, setActiveUserId } = useUserStore();
 

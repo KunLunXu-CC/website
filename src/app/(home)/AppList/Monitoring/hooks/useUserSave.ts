@@ -1,10 +1,36 @@
-import { useCallback } from "react";
+import client from "@/gql/client";
 import useUserStore from "../hooks/useUserStore";
-import { useUpdateUsersMutation } from "../server";
+
+import { graphql } from "@/gql";
+import { useCallback } from "react";
+import { useMutation } from "@tanstack/react-query";
+import {
+  UpdateUsersMutation,
+  UpdateUsersMutationVariables,
+} from "@/gql/graphql";
+
+// 更新用户
+const UpdateUsersDocument = graphql(`
+  mutation UpdateUsers($body: UserFields!, $conds: UserSearch!) {
+    updateUsers(body: $body, conds: $conds) {
+      message
+      change {
+        ...UserItem
+      }
+    }
+  }
+`);
 
 const useUserSave = () => {
   const { activeUserId, userList } = useUserStore();
-  const { mutateAsync: updateUsers, isPending } = useUpdateUsersMutation();
+  const { mutateAsync: updateUsers, isPending } = useMutation<
+    UpdateUsersMutation,
+    Error,
+    UpdateUsersMutationVariables
+  >({
+    mutationKey: ["updateUsers"],
+    mutationFn: (variables) => client.request(UpdateUsersDocument, variables),
+  });
 
   const onSave = useCallback(async () => {
     const currentUser = userList.find((user) => user.id === activeUserId);

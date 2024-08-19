@@ -13,11 +13,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n": types.RoleItemFragmentDoc,
-    "\n  query Roles($search: RoleSearch) {\n    roles(search: $search) {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n": types.RolesDocument,
+    "\n  query Roles {\n    roles {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n": types.RolesDocument,
     "\n  mutation UpdateRoles($body: RoleFields!, $conds: RoleSearch!) {\n    updateRoles(body: $body, conds: $conds) {\n      change {\n        ...RoleItem\n      }\n    }\n  }\n": types.UpdateRolesDocument,
     "\n  query Users {\n    users {\n      list {\n        ...UserItem\n      }\n    }\n  }\n": types.UsersDocument,
     "\n  mutation UpdateUsers($body: UserFields!, $conds: UserSearch!) {\n    updateUsers(body: $body, conds: $conds) {\n      message\n      change {\n        ...UserItem\n      }\n    }\n  }\n": types.UpdateUsersDocument,
+    "fragment RoleItem on Role {\n  id\n  name\n  auth\n}": types.RoleItemFragmentDoc,
     "\n  query Photos($search: PhotoSearch) {\n    photos(search: $search) {\n      list {\n        id\n        type\n        name\n      }\n    }\n  }\n": types.PhotosDocument,
     "\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(\n      conds: $conds\n      search: $search\n      orderBy: { creationTime: -1 }\n    ) {\n      change {\n        id\n      }\n    }\n  }\n": types.RemovePhotosDocument,
     "\n  mutation uploadPhotos($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        id\n        type\n        name\n      }\n    }\n  }\n": types.UploadPhotosDocument,
@@ -44,11 +44,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n"): (typeof documents)["\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query Roles($search: RoleSearch) {\n    roles(search: $search) {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query Roles($search: RoleSearch) {\n    roles(search: $search) {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query Roles {\n    roles {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query Roles {\n    roles {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -61,6 +57,10 @@ export function graphql(source: "\n  query Users {\n    users {\n      list {\n 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation UpdateUsers($body: UserFields!, $conds: UserSearch!) {\n    updateUsers(body: $body, conds: $conds) {\n      message\n      change {\n        ...UserItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateUsers($body: UserFields!, $conds: UserSearch!) {\n    updateUsers(body: $body, conds: $conds) {\n      message\n      change {\n        ...UserItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment RoleItem on Role {\n  id\n  name\n  auth\n}"): (typeof documents)["fragment RoleItem on Role {\n  id\n  name\n  auth\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

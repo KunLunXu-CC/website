@@ -1,11 +1,28 @@
 import { useEffect } from "react";
-import { useFragment } from "@/gql";
-import { useRolesQuery } from "../server";
+import { graphql, useFragment } from "@/gql";
+import { useQuery } from "@tanstack/react-query";
+import { RoleItemFragmentDoc, RolesQuery } from "@/gql/graphql";
+
+import client from "@/gql/client";
 import useRoleStore from "./useRoleStore";
-import { RoleItemFragmentDoc } from "@/gql/graphql";
+
+// 获取角色列表
+const RolesDocument = graphql(`
+  query Roles {
+    roles {
+      list {
+        ...RoleItem
+      }
+    }
+  }
+`);
 
 const useInitRole = () => {
-  const { data: rolesQuery } = useRolesQuery({});
+  const { data: rolesQuery } = useQuery<RolesQuery>({
+    staleTime: 0, // 过期时间
+    queryKey: ["roles"],
+    queryFn: () => client.request(RolesDocument),
+  });
 
   const { setRoleList, setActiveRoleId } = useRoleStore();
 

@@ -39,12 +39,6 @@ const Detail = () => {
     return null;
   }
 
-  console.log(
-    "%c [ activeUser ]-59",
-    "font-size:13px; background:pink; color:#bf2c9f;",
-    activeUser,
-  );
-
   return (
     <div className={scss.detail}>
       <div className={scss.title}>

@@ -1,10 +1,37 @@
+import client from "@/gql/client";
+
+import { graphql } from "@/gql";
 import { useCallback } from "react";
-import { useUpdateRolesMutation } from "../server";
 import useRoleActive from "./useRoleActive";
+import { useMutation } from "@tanstack/react-query";
+
+import {
+  UpdateRolesMutation,
+  UpdateRolesMutationVariables,
+} from "@/gql/graphql";
+
+// 修改角色
+const UpdateRolesDocument = graphql(`
+  mutation UpdateRoles($body: RoleFields!, $conds: RoleSearch!) {
+    updateRoles(body: $body, conds: $conds) {
+      change {
+        ...RoleItem
+      }
+    }
+  }
+`);
 
 const useSaveRole = () => {
   const activeRole = useRoleActive();
-  const { mutateAsync: updateRoles, isPending } = useUpdateRolesMutation();
+
+  const { mutateAsync: updateRoles, isPending } = useMutation<
+    UpdateRolesMutation,
+    Error,
+    UpdateRolesMutationVariables
+  >({
+    mutationKey: ["updateRoles"],
+    mutationFn: (variables) => client.request(UpdateRolesDocument, variables),
+  });
 
   const onSave = useCallback(async () => {
     if (!activeRole) {
