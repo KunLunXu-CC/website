@@ -1,5 +1,0 @@
-fragment RoleItem on Role {
-  id
-  name
-  auth
-}

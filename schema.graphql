@@ -512,16 +512,16 @@ input OrderBy {
 scalar Pagination
 
 type Photo {
-  creationTime: Date
-  creator: User
-  id: ID
-  name: String
-  sourceFileName: String
-  status: Int
-  type: Int
-  updateTime: Date
-  updater: User
-  url: String
+  creationTime: Date!
+  creator: User!
+  id: ID!
+  name: String!
+  sourceFileName: String!
+  status: Int!
+  type: Int!
+  updateTime: Date!
+  updater: User!
+  url: String!
 }
 
 input PhotoFields {

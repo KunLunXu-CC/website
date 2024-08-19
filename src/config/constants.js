@@ -71,6 +71,7 @@ export const ARTICLE_STATUS = {
 };
 
 // 图片类型(使用场景)
+// TODO: 改为枚举类型
 export const PHOTO_TYPE = {
   UNKNOWN: { VALUE: 0, DESC: "未知" }, // 未知
   ARTICLE: { VALUE: 1, DESC: "文章" }, // 文章(包括专用缩略图)

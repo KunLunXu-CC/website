@@ -906,16 +906,16 @@ export type OrderBy = {
 
 export type Photo = {
   __typename?: 'Photo';
-  creationTime?: Maybe<Scalars['Date']['output']>;
-  creator?: Maybe<User>;
-  id?: Maybe<Scalars['ID']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  sourceFileName?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['Int']['output']>;
-  type?: Maybe<Scalars['Int']['output']>;
-  updateTime?: Maybe<Scalars['Date']['output']>;
-  updater?: Maybe<User>;
-  url?: Maybe<Scalars['String']['output']>;
+  creationTime: Scalars['Date']['output'];
+  creator: User;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  sourceFileName: Scalars['String']['output'];
+  status: Scalars['Int']['output'];
+  type: Scalars['Int']['output'];
+  updateTime: Scalars['Date']['output'];
+  updater: User;
+  url: Scalars['String']['output'];
 };
 
 export type PhotoFields = {
@@ -1305,6 +1305,18 @@ export type Users = {
   pagination?: Maybe<Scalars['Pagination']['output']>;
 };
 
+export type AlbumPhotoItemFragment = { __typename?: 'Photo', id: string, type: number, name: string, creationTime: any } & { ' $fragmentName'?: 'AlbumPhotoItemFragment' };
+
+export type AlbumSearchQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AlbumSearchQuery = { __typename?: 'Query', photos?: { __typename?: 'Photos', list: Array<(
+      { __typename?: 'Photo' }
+      & { ' $fragmentRefs'?: { 'AlbumPhotoItemFragment': AlbumPhotoItemFragment } }
+    )> } | null };
+
+export type RoleItemFragment = { __typename?: 'Role', id: string, name: string, auth: Array<any | null> } & { ' $fragmentName'?: 'RoleItemFragment' };
+
 export type RolesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1343,14 +1355,12 @@ export type UpdateUsersMutation = { __typename?: 'Mutation', updateUsers?: { __t
       & { ' $fragmentRefs'?: { 'UserItemFragment': UserItemFragment } }
     )> } | null };
 
-export type RoleItemFragment = { __typename?: 'Role', id: string, name: string, auth: Array<any | null> } & { ' $fragmentName'?: 'RoleItemFragment' };
-
 export type PhotosQueryVariables = Exact<{
   search?: InputMaybe<PhotoSearch>;
 }>;
 
 
-export type PhotosQuery = { __typename?: 'Query', photos?: { __typename?: 'Photos', list: Array<{ __typename?: 'Photo', id?: string | null, type?: number | null, name?: string | null }> } | null };
+export type PhotosQuery = { __typename?: 'Query', photos?: { __typename?: 'Photos', list: Array<{ __typename?: 'Photo', id: string, type: number, name: string }> } | null };
 
 export type RemovePhotosMutationVariables = Exact<{
   conds: PhotoSearch;
@@ -1358,14 +1368,14 @@ export type RemovePhotosMutationVariables = Exact<{
 }>;
 
 
-export type RemovePhotosMutation = { __typename?: 'Mutation', removePhotos?: { __typename?: 'Photos', change?: Array<{ __typename?: 'Photo', id?: string | null } | null> | null } | null };
+export type RemovePhotosMutation = { __typename?: 'Mutation', removePhotos?: { __typename?: 'Photos', change?: Array<{ __typename?: 'Photo', id: string } | null> | null } | null };
 
 export type UploadPhotosMutationVariables = Exact<{
   body: PhotoFields;
 }>;
 
 
-export type UploadPhotosMutation = { __typename?: 'Mutation', uploadPhotos?: { __typename?: 'Photos', change?: Array<{ __typename?: 'Photo', id?: string | null, type?: number | null, name?: string | null } | null> | null } | null };
+export type UploadPhotosMutation = { __typename?: 'Mutation', uploadPhotos?: { __typename?: 'Photos', change?: Array<{ __typename?: 'Photo', id: string, type: number, name: string } | null> | null } | null };
 
 export type UserItemFragment = { __typename?: 'User', id: string, sex: number, bio?: string | null, name: string, avatar?: string | null, account: string, role: { __typename?: 'Role', id: string, desc?: string | null, auth: Array<any | null>, name: string } } & { ' $fragmentName'?: 'UserItemFragment' };
 
@@ -1393,8 +1403,10 @@ export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'L
       & { ' $fragmentRefs'?: { 'UserItemFragment': UserItemFragment } }
     ) | null } | null };
 
+export const AlbumPhotoItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AlbumPhotoItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Photo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"creationTime"}}]}}]} as unknown as DocumentNode<AlbumPhotoItemFragment, unknown>;
 export const RoleItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<RoleItemFragment, unknown>;
 export const UserItemFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"account"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UserItemFragment, unknown>;
+export const AlbumSearchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AlbumSearch"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"photos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AlbumPhotoItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AlbumPhotoItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Photo"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"creationTime"}}]}}]} as unknown as DocumentNode<AlbumSearchQuery, AlbumSearchQueryVariables>;
 export const RolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RoleItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<RolesQuery, RolesQueryVariables>;
 export const UpdateRolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateRoles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleFields"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"conds"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleSearch"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateRoles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"Argument","name":{"kind":"Name","value":"conds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"conds"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RoleItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<UpdateRolesMutation, UpdateRolesMutationVariables>;
 export const UsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"account"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;

@@ -6,6 +6,14 @@ import { RoleItemFragmentDoc, RolesQuery } from "@/gql/graphql";
 import client from "@/gql/client";
 import useRoleStore from "./useRoleStore";
 
+graphql(`
+  fragment RoleItem on Role {
+    id
+    name
+    auth
+  }
+`);
+
 // 获取角色列表
 const RolesDocument = graphql(`
   query Roles {

@@ -26,6 +26,9 @@ dependencies:
   classnames:
     specifier: ^2.5.1
     version: 2.5.1
+  clsx:
+    specifier: ^2.1.1
+    version: 2.1.1
   dayjs:
     specifier: ^1.11.7
     version: 1.11.12

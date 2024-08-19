@@ -1,5 +1,5 @@
 import User from "./User";
-import Role, { BottomBtn } from "./Role";
+import Role from "./Role";
 import { MENU_OPTIONS_KEY } from "./types";
 
 export const MENU_OPTIONS = [
