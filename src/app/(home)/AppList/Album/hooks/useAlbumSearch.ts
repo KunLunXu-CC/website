@@ -16,7 +16,7 @@ graphql(`
 
 const AlbumSearchDocument = graphql(`
   query AlbumSearch {
-    photos {
+    photos(orderBy: { creationTime: -1 }) {
       list {
         ...AlbumPhotoItem
       }

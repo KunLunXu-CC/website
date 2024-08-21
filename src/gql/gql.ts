@@ -13,8 +13,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  mutation AlbumRemove($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(conds: $conds, search: $search) {\n      change {\n        id\n      }\n    }\n  }\n": types.AlbumRemoveDocument,
     "\n  fragment AlbumPhotoItem on Photo {\n    id\n    type\n    name\n    creationTime\n  }\n": types.AlbumPhotoItemFragmentDoc,
-    "\n  query AlbumSearch {\n    photos {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n": types.AlbumSearchDocument,
+    "\n  query AlbumSearch {\n    photos(orderBy: { creationTime: -1 }) {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n": types.AlbumSearchDocument,
+    "\n  mutation AlbumUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n": types.AlbumUploadDocument,
     "\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n": types.RoleItemFragmentDoc,
     "\n  query Roles {\n    roles {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n": types.RolesDocument,
     "\n  mutation UpdateRoles($body: RoleFields!, $conds: RoleSearch!) {\n    updateRoles(body: $body, conds: $conds) {\n      change {\n        ...RoleItem\n      }\n    }\n  }\n": types.UpdateRolesDocument,
@@ -46,11 +48,19 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation AlbumRemove($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(conds: $conds, search: $search) {\n      change {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation AlbumRemove($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(conds: $conds, search: $search) {\n      change {\n        id\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment AlbumPhotoItem on Photo {\n    id\n    type\n    name\n    creationTime\n  }\n"): (typeof documents)["\n  fragment AlbumPhotoItem on Photo {\n    id\n    type\n    name\n    creationTime\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query AlbumSearch {\n    photos {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query AlbumSearch {\n    photos {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query AlbumSearch {\n    photos(orderBy: { creationTime: -1 }) {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query AlbumSearch {\n    photos(orderBy: { creationTime: -1 }) {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation AlbumUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation AlbumUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

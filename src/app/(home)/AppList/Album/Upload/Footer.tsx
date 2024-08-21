@@ -1,17 +1,13 @@
 import scss from "./footer.module.scss";
 import useAlbumStore from "../hooks/useAlbumStore";
+import useAlbumUpload from "../hooks/useAlbumUpload";
 
 import { Button } from "antd";
-import { actions } from "@/store";
 import { memo, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useUploadPhotosMutation } from "@/store/graphql";
 
 const Footer = () => {
-  const dispatch = useDispatch();
+  const { onUpload } = useAlbumUpload();
   const { setIsUploading } = useAlbumStore();
-  const [upload] = useUploadPhotosMutation();
-  const { files, type } = useSelector((state) => state.photos?.upload);
 
   // 取消
   const handleCancel = useCallback(
@@ -19,16 +15,9 @@ const Footer = () => {
     [setIsUploading],
   );
 
-  // 上传
-  const handleUpload = useCallback(async () => {
-    const { data } = await upload({ body: { files, type } });
-    dispatch(actions.photos.appendPhotos(data.uploadPhotos.change));
-    handleCancel();
-  }, [dispatch, files, handleCancel, type, upload]);
-
   return (
     <div className={scss.footer}>
-      <Button type="primary" onClick={handleUpload}>
+      <Button type="primary" onClick={onUpload}>
         上传
       </Button>
       <Button onClick={handleCancel}>取消</Button>

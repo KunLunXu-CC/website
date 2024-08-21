@@ -1,46 +1,31 @@
 import scss from "./form.module.scss";
+import useAlbumStore from "../hooks/useAlbumStore";
 
 import { Select } from "antd";
-import { actions } from "@/store";
-import { PHOTO_TYPE } from "@/config/constants";
-import { memo, useCallback, useMemo } from "react";
 import { Icon, Image } from "@kunlunxu/brick";
-import { useDispatch, useSelector } from "react-redux";
+import { PHOTO_TYPE } from "@/config/constants";
+import { ChangeEvent, memo, useCallback } from "react";
+
+// select option 数据
+const OPTIONS = Object.keys(PHOTO_TYPE).map((key: string) => {
+  const { VALUE, DESC } = PHOTO_TYPE[key as keyof typeof PHOTO_TYPE] as {
+    VALUE: number;
+    DESC: string;
+  };
+
+  return { key: VALUE, title: DESC, value: VALUE };
+});
 
 const Form = () => {
-  const dispatch = useDispatch();
-
-  const { files } = useSelector((state) => state.photos?.upload);
-
-  // select option 数据
-  const options = useMemo(
-    () =>
-      Object.keys(PHOTO_TYPE).map((key) => ({
-        key: PHOTO_TYPE[key].VALUE,
-        title: PHOTO_TYPE[key].DESC,
-        value: PHOTO_TYPE[key].VALUE,
-      })),
-    [],
-  );
-
-  // 切换类型
-  const handleSelectChange = useCallback(
-    (type) => {
-      dispatch(actions.photos.updateUpload({ type }));
-    },
-    [dispatch],
-  );
+  const { updateForm, form } = useAlbumStore();
 
   // 添加文件
   const addFiles = useCallback(
-    (e) => {
-      dispatch(
-        actions.photos.updateUpload({
-          files: [...files, ...e.target.files],
-        }),
-      );
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.files?.length) return;
+      updateForm({ files: [...form.files, ...e.target.files] });
     },
-    [dispatch, files],
+    [form, updateForm],
   );
 
   return (
@@ -50,9 +35,9 @@ const Form = () => {
           allowClear
           style={{ width: "100%" }}
           placeholder="选择上传图片类型"
-          onChange={handleSelectChange}
+          onChange={(type) => updateForm({ type })}
         >
-          {options.map((v) => (
+          {OPTIONS.map((v) => (
             <Select.Option key={v.key} value={v.value}>
               {v.title}
             </Select.Option>
@@ -62,16 +47,11 @@ const Form = () => {
       <div className={scss["upload-list"]}>
         <label className={scss.upload}>
           <Icon type="icon-tupianshangchuan" />
-          <input
-            type="file"
-            accept="image/*"
-            multiple="multiple"
-            onChange={addFiles}
-          />
+          <input multiple type="file" accept="image/*" onChange={addFiles} />
         </label>
-        {files.map((file, index) => (
+        {form.files.map((file: File, index: number) => (
           <div key={index} className={scss.item}>
-            <Image src={file} />
+            <Image alt="file" src={file} />
           </div>
         ))}
       </div>

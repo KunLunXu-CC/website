@@ -1,18 +1,18 @@
 import dayjs from "dayjs";
 import scss from "./list.module.scss";
+import useAlbumRemove from "../hooks/useAlbumRemove";
 
 import { Empty } from "antd";
+import { find } from "lodash";
 import { getOssUrl } from "@/utils";
+import { memo, useMemo } from "react";
 import { Image, Icon } from "@kunlunxu/brick";
 import { PHOTO_TYPE } from "@/config/constants";
-import { memo, useCallback, useMemo } from "react";
-// import { useRemovePhotosMutation } from "@/store/graphql";
 import useAlbumStore from "../hooks/useAlbumStore";
 import { DEFAULT_ACTIVE_MENU_KEY } from "../constants";
-import { find } from "lodash";
 
 const List = () => {
-  // const [removePhotos] = useRemovePhotosMutation();
+  const { onRemove } = useAlbumRemove();
   const { phoneList, activeMenuKey } = useAlbumStore();
 
   const listData = useMemo(
@@ -24,15 +24,9 @@ const List = () => {
           }
           return v.type === activeMenuKey;
         })
-        .splice(0, 6),
+        .splice(0, 20),
     [activeMenuKey, phoneList],
   );
-
-  // 删除
-  const handleDelete = useCallback(async (id: string) => {
-    // const { data } = await removePhotos({ conds: { id } });
-    // dispatch(actions.photos.removePhotos(data.removePhotos.change));
-  }, []);
 
   return (
     <div className={scss.list}>
@@ -46,7 +40,7 @@ const List = () => {
               <div className={scss["preview-mask"]}>
                 <Icon
                   type="icon-shanchu"
-                  onClick={handleDelete.bind(null, item.id)}
+                  onClick={onRemove.bind(null, item.id)}
                 />
               </div>
             </div>

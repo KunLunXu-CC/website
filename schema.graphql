@@ -464,7 +464,7 @@ type Mutation {
   removeKanbanGroups(conds: KanbanGroupSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
   removeKanbanTasks(conds: KanbanTaskSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
   removeKanbans(conds: KanbanSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanSearch): Kanbans
-  removePhotos(conds: PhotoSearch!, orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
+  removePhotos(conds: PhotoSearch!, orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos!
   removeRoles(conds: RoleSearch!, orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles
   removeSnippets(conds: SnippetSearch!, orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
   removeTags(conds: TagSearch!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
@@ -483,7 +483,7 @@ type Mutation {
   updateSnippets(body: SnippetFields!, conds: SnippetSearch!, orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
   updateTags(body: TagFields!, conds: TagSearch!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
   updateUsers(body: UserFields!, conds: UserSearch!, orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
-  uploadPhotos(body: PhotoFields!, orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos
+  uploadPhotos(body: PhotoFields!, orderBy: OrderBy, pagination: Pagination, search: PhotoSearch): Photos!
 }
 
 type Option {
@@ -547,7 +547,7 @@ input PhotoSearch {
 }
 
 type Photos {
-  change: [Photo]
+  change: [Photo!]!
   list: [Photo!]!
   message: String
   pagination: Pagination
