@@ -1,8 +1,8 @@
 "use client";
 import { memo } from "react";
+import { Window } from "@kunlunxu/brick";
 
 import scss from "./index.module.scss";
-import Window from "@/components/Window";
 import useAppStore from "@/store/useAppStore";
 import apps from "@/app/(home)/AppList/config";
 

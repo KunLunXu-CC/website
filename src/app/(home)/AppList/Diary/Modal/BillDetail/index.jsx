@@ -1,7 +1,6 @@
-import ECharts from '@/components/ECharts';
-
 import { useMemo } from 'react';
 import { Modal, Button } from 'antd';
+import { ECharts } from "@kunlunxu/brick";
 import { STATS_BILL_DETAIL } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 

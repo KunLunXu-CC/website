@@ -1,6 +1,5 @@
-import ECharts from '@/components/ECharts';
-
 import { useMemo } from 'react';
+import { ECharts } from "@kunlunxu/brick";
 import { useDispatch } from 'react-redux';
 import { STATS_BILL_DETAIL } from '../../constants';
 

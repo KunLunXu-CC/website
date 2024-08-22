@@ -1,5 +1,5 @@
-import ECharts from '@/components/ECharts';
 import { useMemo } from 'react';
+import { ECharts } from "@kunlunxu/brick";
 
 export default (props) => {
   // 处理数据
