@@ -5,8 +5,8 @@
 // import classNames from 'classnames';
 // import scss from './index.module.scss';
 
-export default () => (
-  <>
-    111
-  </>
-);
+import { memo } from "react";
+
+const Kanban = () => <>111</>;
+
+export default memo(Kanban);
