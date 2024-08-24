@@ -3,19 +3,33 @@ import Bill from "./Bill";
 import Diet from "./Diet";
 import dayjs from "dayjs";
 import Fitness from "./Fitness";
-import scss from "./index.module.scss";
-
-import { actions } from "@/store";
 import classNames from "classnames";
+import scss from "./index.module.scss";
+import useDisclosureStore from "@/store/useDisclosureStore";
+
 import { Icon } from "@kunlunxu/brick";
 import { Modal, Tabs, Form } from "antd";
 import { DIARY_EDITOR_DIARY } from "../../constants";
-import { useDispatch, useSelector } from "react-redux";
-import { useMemo, useState, useCallback, useEffect, useRef, memo } from "react";
+import { memo, useRef, useMemo, useState, useEffect, useCallback } from "react";
 import {
   useCreateDiariesMutation,
   useUpdateDiariesMutation,
 } from "@/store/graphql";
+import { DiaryItemFragment } from "@/gql/graphql";
+
+interface IFormData {
+  name: dayjs.Dayjs;
+  getUp: dayjs.Dayjs;
+  toRest: dayjs.Dayjs;
+  bodyIndex: {
+    weight: number;
+    bodyfat: number;
+    moistureContent: number;
+  };
+  bill: unknown[];
+  diet: unknown[];
+  fitness: unknown[];
+}
 
 // tabs 配置
 const TABS_SETTING = [
@@ -26,7 +40,7 @@ const TABS_SETTING = [
 ];
 
 // 获取 body
-const getBody = (values) => {
+const getBody = (values: IFormData) => {
   const {
     name,
     getUp,
@@ -41,57 +55,28 @@ const getBody = (values) => {
     getUp,
     toRest,
     bodyIndex,
-    bill: bill.filter((v) => v),
-    diet: diet.filter((v) => v),
+    bill: bill.filter(Boolean),
+    diet: diet.filter(Boolean),
     name: name.format("YYYY-MM-DD"),
-    fitness: fitness.filter((v) => v),
+    fitness: fitness.filter(Boolean),
   };
 };
 
 const EditorCalendar = () => {
-  const dispatch = useDispatch();
-  const [createDiaries] = useCreateDiariesMutation();
-  const [updateDiaries] = useUpdateDiariesMutation();
-
-  const addRef = useRef();
-  const [activeTabKey, setActiveTabKey] = useState(TABS_SETTING[0].key);
-
+  const addRef = useRef<() => void>();
   const [form] = Form.useForm();
   const name = Form.useWatch("name", form);
+  const [activeTabKey, setActiveTabKey] = useState<string>(TABS_SETTING[0].key);
 
-  // 弹窗
-  const modal = useSelector((state) => state.modal[DIARY_EDITOR_DIARY]);
+  const [createDiaries] = useCreateDiariesMutation();
+  const [updateDiaries] = useUpdateDiariesMutation();
+  const { isOpen, getData, onClose } = useDisclosureStore();
 
-  const initialValues = useMemo(
-    () =>
-      modal
-        ? {
-            bill: modal.diary?.bill ?? [],
-            diet: modal.diary?.diet ?? [],
-            fitness: modal.diary?.fitness ?? [],
-            bodyIndex: modal.diary?.bodyIndex ?? {},
-            name: dayjs(modal.diary?.name ?? modal.date),
-            getUp: dayjs(modal.diary?.getUp ?? modal.date),
-            toRest: dayjs(modal.diary?.toRest ?? modal.date),
-          }
-        : {},
-    [modal],
-  );
-
-  // 弹窗标题
-  const title = useMemo(
-    () => (
-      <>
-        {name?.format("YYYY-MM-DD")}
-        <Icon
-          type="icon-xinzeng"
-          className={scss["title-tool"]}
-          onClick={() => addRef.current?.()}
-        />
-      </>
-    ),
-    [name],
-  );
+  const open = isOpen(DIARY_EDITOR_DIARY);
+  const modalData = getData(DIARY_EDITOR_DIARY) as {
+    date?: dayjs.Dayjs;
+    diary?: DiaryItemFragment;
+  } | void;
 
   const items = useMemo(
     () =>
@@ -110,42 +95,73 @@ const EditorCalendar = () => {
     [activeTabKey, form],
   );
 
-  const handleCancel = useCallback(() => {
-    dispatch(actions.modal.close());
-  }, [dispatch]);
+  const initialValues = useMemo(() => {
+    if (!modalData) {
+      return {};
+    }
+
+    return {
+      bill: modalData.diary?.bill ?? [],
+      diet: modalData.diary?.diet ?? [],
+      fitness: modalData.diary?.fitness ?? [],
+      bodyIndex: modalData.diary?.bodyIndex ?? {},
+      name: dayjs(modalData.diary?.name ?? modalData.date),
+      getUp: dayjs(modalData.diary?.getUp ?? modalData.date),
+      toRest: dayjs(modalData.diary?.toRest ?? modalData.date),
+    };
+  }, [modalData]);
+
+  // 弹窗标题
+  const title = useMemo(
+    () => (
+      <>
+        {name?.format("YYYY-MM-DD")}
+        <Icon
+          type="icon-xinzeng"
+          className={scss["title-tool"]}
+          onClick={() => addRef.current?.()}
+        />
+      </>
+    ),
+    [name],
+  );
+
+  const handleCancel = useCallback(
+    () => onClose(DIARY_EDITOR_DIARY),
+    [onClose],
+  );
 
   // 确认
   const onOk = useCallback(async () => {
     const values = await form.validateFields();
 
-    const id = modal?.diary?.id;
+    const id = modalData?.diary?.id;
     const body = getBody(values);
+    console.log(
+      "%c [ body ]-127",
+      "font-size:13px; background:pink; color:#bf2c9f;",
+      body,
+    );
 
-    const res = id
-      ? await updateDiaries({ body, conds: { id } })
-      : await createDiaries({ body });
-    const { change } = res.data[id ? "updateDiaries" : "createDiaries"];
+    // const res = id
+    //   ? await updateDiaries({ body, conds: { id } })
+    //   : await createDiaries({ body });
+    // const { change } = res.data[id ? "updateDiaries" : "createDiaries"];
 
-    dispatch(actions.diary.updateDiaries(change));
+    // dispatch(actions.diary.updateDiaries(change));
     handleCancel();
-  }, [
-    form,
-    handleCancel,
-    dispatch,
-    createDiaries,
-    updateDiaries,
-    modal?.diary?.id,
-  ]);
-
-  // tabs 切换
-  const onTabsChange = (activeTabKey) => {
-    setActiveTabKey(activeTabKey);
-  };
+  }, [form, handleCancel, createDiaries, updateDiaries, modalData?.diary?.id]);
 
   // modal 变化时, 需要重新 resetFields
   useEffect(() => {
     form.resetFields();
-  }, [form, modal]);
+  }, [form, modalData]);
+
+  console.log(
+    "%c [ initialValues ]-148",
+    "font-size:13px; background:pink; color:#bf2c9f;",
+    initialValues,
+  );
 
   return (
     <Form
@@ -155,11 +171,11 @@ const EditorCalendar = () => {
     >
       <Modal
         destroyOnClose
+        open={open}
         width="80%"
         onOk={onOk}
         okText="确定"
         title={title}
-        open={!!modal}
         cancelText="取消"
         closable={false}
         maskClosable={false}
@@ -167,7 +183,7 @@ const EditorCalendar = () => {
         className={scss.modal}
         onCancel={handleCancel}
       >
-        <Tabs items={items} tabPosition="left" onChange={onTabsChange} />
+        <Tabs items={items} tabPosition="left" onChange={setActiveTabKey} />
       </Modal>
     </Form>
   );

@@ -1,18 +1,21 @@
 import dayjs from "dayjs";
 import scss from "./cell.module.scss";
+import useCalendarStore from "../hooks/useCalendarStore";
+import useDisclosureStore from "@/store/useDisclosureStore";
 
-import { actions } from "@/store";
 import { Icon } from "@kunlunxu/brick";
-import { useMemo, useCallback, memo } from "react";
 import { DIARY_EDITOR_DIARY } from "../constants";
-import { useSelector, useDispatch } from "react-redux";
+import { useMemo, useCallback, memo, FC } from "react";
 
-const Cell = (props) => {
-  const { diaries = [] } = useSelector((state) => state.diary);
-  const dispatch = useDispatch();
+interface ICellProps {
+  date: dayjs.Dayjs;
+}
 
-  // 日期
-  const date = useMemo(() => dayjs(props.date).date(), [props.date]);
+const Cell: FC<ICellProps> = (props) => {
+  const { date } = props;
+
+  const { onOpen } = useDisclosureStore();
+  const { diaries = [] } = useCalendarStore();
 
   // 当天笔记
   const diary = useMemo(
@@ -27,25 +30,19 @@ const Cell = (props) => {
   const expenses = useMemo(
     () =>
       (diary?.bill ?? [])
-        .reduce((total, ele) => total + ele.expend || 0, 0)
+        .reduce((total, ele) => total + (ele?.expend || 0), 0)
         .toFixed(1),
     [diary],
   );
 
   // 点击单元格
   const handleClick = useCallback(() => {
-    dispatch(
-      actions.modal.open({
-        diary,
-        date: props.date,
-        code: DIARY_EDITOR_DIARY,
-      }),
-    );
-  }, [props.date, diary, dispatch]);
+    onOpen(DIARY_EDITOR_DIARY, { diary, date });
+  }, [date, diary, onOpen]);
 
   return (
     <div className={scss.cell} onClick={handleClick}>
-      <div className={scss.date}>{date}</div>
+      <div className={scss.date}>{date.date()}</div>
       {diary ? (
         <div className={scss.stats}>
           <div className={scss["stats-item"]}>

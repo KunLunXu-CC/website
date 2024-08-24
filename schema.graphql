@@ -167,8 +167,8 @@ scalar BodyIndexInput
 scalar Date
 
 type Diaries {
-  change: [Diary]
-  list: [Diary]
+  change: [Diary!]!
+  list: [Diary!]!
   message: String
   pagination: Pagination
 }
@@ -563,7 +563,7 @@ type Query {
   algorithms(orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
   appleTouchbar: Touchbar
   articles(orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
-  diaries(orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  diaries(orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries!
   folders(orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
   interviews(orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   kanbanGroups(orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups

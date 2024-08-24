@@ -1,34 +1,24 @@
-import { memo, useCallback } from "react";
 import classNames from "classnames";
 import scss from "./index.module.scss";
+import useDiaryStore from "../hooks/useDiaryStore";
 
-import { actions } from "@/store";
 import { Icon } from "@kunlunxu/brick";
+import { memo, useCallback } from "react";
 import { DIARY_MENU } from "../constants";
-import { useDispatch, useSelector } from "react-redux";
 
 // 菜单列表
 const MENU_LIST = [DIARY_MENU.CALENDAR, DIARY_MENU.PROJECT, DIARY_MENU.STATS];
 
 const Menu = () => {
-  const dispatch = useDispatch();
-  const { menu } = useSelector((state) => state.diary);
-
-  // 选中菜单
-  const onSelect = useCallback(
-    (selectedKey) => {
-      dispatch(actions.diary.updateMenu({ selectedKey }));
-    },
-    [dispatch],
-  );
+  const { selectedMenuKey, setSelectedMenuKey } = useDiaryStore();
 
   // 获取子菜单 className
   const getMenuItemClassName = useCallback(
-    (menuKey) =>
+    (menuKey: string) =>
       classNames(scss["menu-body-list-item"], {
-        [scss["menu-body-list-item-action"]]: menuKey === menu.selectedKey,
+        [scss["menu-body-list-item-action"]]: menuKey === selectedMenuKey,
       }),
-    [menu.selectedKey],
+    [selectedMenuKey],
   );
 
   return (
@@ -40,8 +30,8 @@ const Menu = () => {
           {MENU_LIST.map(({ VALUE, ICON }) => (
             <div
               key={VALUE}
-              onClick={onSelect.bind(null, VALUE)}
               className={getMenuItemClassName(VALUE)}
+              onClick={setSelectedMenuKey.bind(null, VALUE)}
             >
               <Icon type={ICON} />
             </div>
