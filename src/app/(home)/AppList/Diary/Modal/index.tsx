@@ -1,7 +1,7 @@
 import { memo } from "react";
 import BillDetail from "./BillDetail";
-import EditorCalendar from "./EditorCalendar";
 import scss from "./index.module.scss";
+import EditorCalendar from "./EditorCalendar";
 
 const Modal = () => (
   <div className={scss.modal}>

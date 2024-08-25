@@ -1,8 +1,32 @@
 import scss from "./diet.module.scss";
 
-import { memo, useCallback } from "react";
+import { FC, memo, MutableRefObject, useCallback } from "react";
 import { Icon } from "@kunlunxu/brick";
-import { Row, Col, Select, Input, Form, Empty } from "antd";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  Empty,
+  Select,
+  FormInstance,
+  FormListFieldData,
+} from "antd";
+import { StoreValue } from "antd/es/form/interface";
+
+interface IDietProps {
+  isShow: boolean;
+  addRef: MutableRefObject<
+    (defaultValue?: StoreValue, insertIndex?: number) => void
+  >;
+  form: FormInstance;
+}
+
+interface IDietItemProps {
+  form: FormInstance;
+  field: FormListFieldData;
+  remove: (name: number | number[]) => void;
+}
 
 const DIET = [
   { name: "早餐", value: 0 },
@@ -22,7 +46,7 @@ const TYPE_OPTIONS = DIET.map((v) => (
   </Select.Option>
 ));
 
-const Item = (props) => (
+const Item: FC<IDietItemProps> = (props) => (
   <Row gutter={16} className={scss.row}>
     <Col span={8}>
       <Form.Item
@@ -66,31 +90,25 @@ const Item = (props) => (
   </Row>
 );
 
-const Diet = (props) => {
-  const { isShow, addRef } = props;
+const Diet: FC<IDietProps> = (props) => {
+  const { isShow, addRef, form } = props;
 
-  const renderItems = useCallback(
-    (fields, { add, remove }) => {
-      if (isShow) {
-        addRef.current = add;
-      }
+  return (
+    <Form.List name="diet">
+      {(fields, { add, remove }) => {
+        if (isShow) {
+          addRef.current = add;
+        }
 
-      return fields.length === 0 ? (
-        <Empty />
-      ) : (
-        fields.map((field) => (
-          <Item
-            field={field}
-            remove={remove}
-            key={field.key}
-            form={props.form}
-          />
-        ))
-      );
-    },
-    [addRef, isShow, props.form],
+        if (fields.length === 0) {
+          <Empty />;
+        }
+
+        return fields.map((field) => (
+          <Item form={form} field={field} remove={remove} key={field.key} />
+        ));
+      }}
+    </Form.List>
   );
-
-  return <Form.List name="diet">{renderItems}</Form.List>;
 };
 export default memo(Diet);

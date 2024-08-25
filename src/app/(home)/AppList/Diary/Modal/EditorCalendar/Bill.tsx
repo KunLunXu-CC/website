@@ -1,8 +1,33 @@
 import scss from "./bill.module.scss";
 
-import { memo, useCallback } from "react";
 import { Icon } from "@kunlunxu/brick";
-import { Row, Col, InputNumber, Input, Form, Select, Empty } from "antd";
+import { FC, memo, MutableRefObject } from "react";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  Empty,
+  Select,
+  InputNumber,
+  FormInstance,
+  FormListFieldData,
+} from "antd";
+import { StoreValue } from "antd/es/form/interface";
+
+interface IBillProps {
+  isShow: boolean;
+  addRef: MutableRefObject<
+    (defaultValue?: StoreValue, insertIndex?: number) => void
+  >;
+  form: FormInstance;
+}
+
+interface IBillItemProps {
+  form: FormInstance;
+  field: FormListFieldData;
+  remove: (name: number | number[]) => void;
+}
 
 const BILL = [
   { name: "三餐", value: 1 },
@@ -27,7 +52,7 @@ const BILL_OPTIONS = BILL.map((v) => (
   </Select.Option>
 ));
 
-const Item = (props) => (
+const Item: FC<IBillItemProps> = (props) => (
   <Row className={scss.row}>
     <Col span={22}>
       <Row gutter={16}>
@@ -87,31 +112,25 @@ const Item = (props) => (
   </Row>
 );
 
-const Bill = (props) => {
-  const { isShow, addRef } = props;
+const Bill: FC<IBillProps> = (props) => {
+  const { isShow, addRef, form } = props;
 
-  const renderItems = useCallback(
-    (fields, { add, remove }) => {
-      if (isShow) {
-        addRef.current = add;
-      }
+  return (
+    <Form.List name="bill">
+      {(fields, { add, remove }) => {
+        if (isShow) {
+          addRef.current = add;
+        }
 
-      return fields.length === 0 ? (
-        <Empty />
-      ) : (
-        fields.map((field) => (
-          <Item
-            field={field}
-            remove={remove}
-            key={field.key}
-            form={props.form}
-          />
-        ))
-      );
-    },
-    [addRef, isShow, props.form],
+        if (fields.length === 0) {
+          return <Empty />;
+        }
+
+        return fields.map((field) => (
+          <Item form={form} field={field} remove={remove} key={field.key} />
+        ));
+      }}
+    </Form.List>
   );
-
-  return <Form.List name="bill">{renderItems}</Form.List>;
 };
 export default memo(Bill);

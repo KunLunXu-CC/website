@@ -11,6 +11,7 @@ import useDisclosureStore from "@/store/useDisclosureStore";
 import { Icon } from "@kunlunxu/brick";
 import { Modal, Tabs, Form } from "antd";
 import { DiaryItemFragment } from "@/gql/graphql";
+import { StoreValue } from "antd/es/form/interface";
 import { DIARY_EDITOR_DIARY } from "../../constants";
 import { memo, useRef, useMemo, useState, useEffect, useCallback } from "react";
 
@@ -60,7 +61,10 @@ const getBody = (values: IFormData) => {
 };
 
 const EditorCalendar = () => {
-  const addRef = useRef<() => void>();
+  const addRef = useRef<
+    (defaultValue?: StoreValue, insertIndex?: number) => void
+  >(() => {});
+
   const [form] = Form.useForm();
   const name = Form.useWatch("name", form);
   const [activeTabKey, setActiveTabKey] = useState<string>(TABS_SETTING[0].key);
@@ -144,12 +148,6 @@ const EditorCalendar = () => {
   useEffect(() => {
     form.resetFields();
   }, [form, modalData]);
-
-  console.log(
-    "%c [ initialValues ]-148",
-    "font-size:13px; background:pink; color:#bf2c9f;",
-    initialValues,
-  );
 
   return (
     <Form

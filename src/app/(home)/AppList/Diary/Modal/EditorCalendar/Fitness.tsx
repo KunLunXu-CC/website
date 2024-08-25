@@ -1,8 +1,31 @@
 import scss from "./fitness.module.scss";
 
-import { Col, Row, Form, Empty, Select } from "antd";
-import { memo, useCallback } from "react";
+import {
+  Col,
+  Row,
+  Form,
+  Empty,
+  Select,
+  FormInstance,
+  FormListFieldData,
+} from "antd";
 import { Icon } from "@kunlunxu/brick";
+import { FC, memo, MutableRefObject } from "react";
+import { StoreValue } from "antd/es/form/interface";
+
+interface IFitnessProps {
+  isShow: boolean;
+  addRef: MutableRefObject<
+    (defaultValue?: StoreValue, insertIndex?: number) => void
+  >;
+  form: FormInstance;
+}
+
+interface IFitnessItemProps {
+  form: FormInstance;
+  field: FormListFieldData;
+  remove: (name: number | number[]) => void;
+}
 
 const FITNESS_TYPE = [
   { name: "有氧", value: 0 },
@@ -34,13 +57,13 @@ const PLACE_OPTIONS = FITNESS_PLACES.map((v) => (
   </Select.Option>
 ));
 
-const Item = (props) => {
-  const { field } = props;
+const Item: FC<IFitnessItemProps> = (props) => {
+  const { field, form } = props;
 
   const onTypeChange = () => {
-    const fitness = props.form.getFieldValue(["fitness"]);
-    fitness[props.field.fieldKey].place = void 0;
-    props.form.setFieldsValue({ fitness });
+    const fitness = form.getFieldValue(["fitness"]);
+    fitness[field.name].place = void 0;
+    form.setFieldsValue({ fitness });
   };
 
   return (
@@ -98,31 +121,25 @@ const Item = (props) => {
   );
 };
 
-const Fitness = (props) => {
-  const { isShow, addRef } = props;
+const Fitness: FC<IFitnessProps> = (props) => {
+  const { isShow, addRef, form } = props;
 
-  const renderItems = useCallback(
-    (fields, { add, remove }) => {
-      if (isShow) {
-        addRef.current = add;
-      }
+  return (
+    <Form.List name="fitness">
+      {(fields, { add, remove }) => {
+        if (isShow) {
+          addRef.current = add;
+        }
 
-      return fields.length === 0 ? (
-        <Empty />
-      ) : (
-        fields.map((field) => (
-          <Item
-            field={field}
-            remove={remove}
-            key={field.key}
-            form={props.form}
-          />
-        ))
-      );
-    },
-    [addRef, isShow, props.form],
+        if (fields.length === 0) {
+          <Empty />;
+        }
+
+        return fields.map((field) => (
+          <Item field={field} remove={remove} key={field.key} form={form} />
+        ));
+      }}
+    </Form.List>
   );
-
-  return <Form.List name="fitness">{renderItems}</Form.List>;
 };
 export default memo(Fitness);
