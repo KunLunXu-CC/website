@@ -17,6 +17,8 @@ const documents = {
     "\n  fragment AlbumPhotoItem on Photo {\n    id\n    type\n    name\n    creationTime\n  }\n": types.AlbumPhotoItemFragmentDoc,
     "\n  query AlbumSearch {\n    photos(orderBy: { creationTime: -1 }) {\n      list {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n": types.AlbumSearchDocument,
     "\n  mutation AlbumUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n": types.AlbumUploadDocument,
+    "\n  mutation CreateDiaries($body: [DiaryFields!]!) {\n    createDiaries(body: $body) {\n      change {\n        ...DiaryItem\n      }\n    }\n  }\n": types.CreateDiariesDocument,
+    "\n  mutation UpdateDiaries($body: DiaryFields!, $conds: DiarySearch!) {\n    updateDiaries(body: $body, conds: $conds) {\n      change {\n        ...DiaryItem\n      }\n    }\n  }\n": types.UpdateDiariesDocument,
     "\n  fragment DiaryItem on Diary {\n    id\n    name\n    getUp\n    toRest\n    informalEssay\n    diet {\n      type\n      desc\n    }\n    fitness {\n      type\n      place\n    }\n    bill {\n      tag\n      desc\n      income\n      expend\n    }\n    bodyIndex {\n      bim\n      weight\n      muscle\n      bodyfat\n      moistureContent\n    }\n  }\n": types.DiaryItemFragmentDoc,
     "\n  query CalendarDiaries($search: DiarySearch) {\n    diaries(search: $search) {\n      list {\n        ...DiaryItem\n      }\n    }\n  }\n": types.CalendarDiariesDocument,
     "\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n": types.RoleItemFragmentDoc,
@@ -63,6 +65,14 @@ export function graphql(source: "\n  query AlbumSearch {\n    photos(orderBy: { 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation AlbumUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation AlbumUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        ...AlbumPhotoItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation CreateDiaries($body: [DiaryFields!]!) {\n    createDiaries(body: $body) {\n      change {\n        ...DiaryItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateDiaries($body: [DiaryFields!]!) {\n    createDiaries(body: $body) {\n      change {\n        ...DiaryItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation UpdateDiaries($body: DiaryFields!, $conds: DiarySearch!) {\n    updateDiaries(body: $body, conds: $conds) {\n      change {\n        ...DiaryItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation UpdateDiaries($body: DiaryFields!, $conds: DiarySearch!) {\n    updateDiaries(body: $body, conds: $conds) {\n      change {\n        ...DiaryItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

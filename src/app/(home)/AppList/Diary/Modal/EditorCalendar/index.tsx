@@ -5,17 +5,14 @@ import dayjs from "dayjs";
 import Fitness from "./Fitness";
 import classNames from "classnames";
 import scss from "./index.module.scss";
+import useCalendarSave from "../../hooks/useCalendarSave";
 import useDisclosureStore from "@/store/useDisclosureStore";
 
 import { Icon } from "@kunlunxu/brick";
 import { Modal, Tabs, Form } from "antd";
+import { DiaryItemFragment } from "@/gql/graphql";
 import { DIARY_EDITOR_DIARY } from "../../constants";
 import { memo, useRef, useMemo, useState, useEffect, useCallback } from "react";
-import {
-  useCreateDiariesMutation,
-  useUpdateDiariesMutation,
-} from "@/store/graphql";
-import { DiaryItemFragment } from "@/gql/graphql";
 
 interface IFormData {
   name: dayjs.Dayjs;
@@ -68,8 +65,7 @@ const EditorCalendar = () => {
   const name = Form.useWatch("name", form);
   const [activeTabKey, setActiveTabKey] = useState<string>(TABS_SETTING[0].key);
 
-  const [createDiaries] = useCreateDiariesMutation();
-  const [updateDiaries] = useUpdateDiariesMutation();
+  const { onSave } = useCalendarSave();
   const { isOpen, getData, onClose } = useDisclosureStore();
 
   const open = isOpen(DIARY_EDITOR_DIARY);
@@ -136,21 +132,13 @@ const EditorCalendar = () => {
     const values = await form.validateFields();
 
     const id = modalData?.diary?.id;
+
     const body = getBody(values);
-    console.log(
-      "%c [ body ]-127",
-      "font-size:13px; background:pink; color:#bf2c9f;",
-      body,
-    );
 
-    // const res = id
-    //   ? await updateDiaries({ body, conds: { id } })
-    //   : await createDiaries({ body });
-    // const { change } = res.data[id ? "updateDiaries" : "createDiaries"];
+    onSave({ body, id });
 
-    // dispatch(actions.diary.updateDiaries(change));
     handleCancel();
-  }, [form, handleCancel, createDiaries, updateDiaries, modalData?.diary?.id]);
+  }, [form, modalData?.diary?.id, onSave, handleCancel]);
 
   // modal 变化时, 需要重新 resetFields
   useEffect(() => {

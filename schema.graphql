@@ -443,7 +443,7 @@ type Mutation {
   createAiChats(body: [AiChatFields!]!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
   createAlgorithms(body: [AlgorithmFields!]!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
   createArticles(body: [ArticleFields!]!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
-  createDiaries(body: [DiaryFields!]!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  createDiaries(body: [DiaryFields!]!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries!
   createFolders(body: [FolderFields!]!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
   createInterviews(body: [InterviewFields!]!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   createKanbanGroups(body: [KanbanGroupFields!]!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
@@ -473,7 +473,7 @@ type Mutation {
   updateAiChats(body: AiChatFields!, conds: AiChatSearch!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
   updateAlgorithms(body: AlgorithmFields!, conds: AlgorithmSearch!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
   updateArticles(body: ArticleFields!, conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
-  updateDiaries(body: DiaryFields!, conds: DiarySearch!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
+  updateDiaries(body: DiaryFields!, conds: DiarySearch!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries!
   updateFolders(body: FolderFields!, conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
   updateInterviews(body: InterviewFields!, conds: InterviewSearch!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   updateKanbanGroups(body: KanbanGroupFields!, conds: KanbanGroupSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups

@@ -19,4 +19,5 @@ export interface ICalendarState {
 export interface ICalendarStore extends ICalendarState {
   setDiaries: (diaries: ICalendarState["diaries"]) => void;
   setCurrentMonth: (currentMonth: ICalendarState["currentMonth"]) => void;
+  updateDiaries: (diaries: ICalendarState["diaries"]) => void;
 }
