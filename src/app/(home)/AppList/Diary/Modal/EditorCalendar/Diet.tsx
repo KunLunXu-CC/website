@@ -101,7 +101,7 @@ const Diet: FC<IDietProps> = (props) => {
         }
 
         if (fields.length === 0) {
-          <Empty />;
+          return <Empty />;
         }
 
         return fields.map((field) => (
