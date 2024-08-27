@@ -1,17 +1,24 @@
 import scss from "./overview.module.scss";
 
-import { memo, useMemo } from "react";
+import { FC, memo, useMemo } from "react";
+import { DiaryStatsBillQuery } from "@/gql/graphql";
 
-const Overview = ({ data = {} }) => {
+interface IOverviewProps {
+  data?: DiaryStatsBillQuery["statsBill"]["stats"];
+}
+
+const Overview: FC<IOverviewProps> = ({ data }) => {
   // 总览
-  const overview = useMemo(
-    () => [
-      { label: "总收入", value: data.income },
-      { label: "总支出", value: data.expend },
-      { label: "总盈余", value: data.income - data.expend },
-    ],
-    [data],
-  );
+  const overview = useMemo(() => {
+    const income = data?.income ?? 0;
+    const expend = data?.expend ?? 0;
+
+    return [
+      { label: "总收入", value: income },
+      { label: "总支出", value: expend },
+      { label: "总盈余", value: income - expend },
+    ];
+  }, [data]);
 
   return (
     <div className={scss.overview}>

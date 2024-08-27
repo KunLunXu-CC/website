@@ -1,15 +1,25 @@
-import { memo, useMemo } from "react";
-import { ECharts as EChartsCom } from "@kunlunxu/brick";
+import { FC, memo, useMemo } from "react";
+import { ECharts } from "@kunlunxu/brick";
 import { useDispatch } from "react-redux";
 import { STATS_BILL_DETAIL } from "../../constants";
+import { DiaryItemFragment, DiaryStatsBillQuery } from "@/gql/graphql";
 
-const ECharts = (props) => {
+interface ILineProps {
+  data?: DiaryStatsBillQuery["statsBill"]["groupWithName"];
+}
+
+const Line: FC<ILineProps> = (props) => {
   const dispatch = useDispatch();
 
   // 处理数据
   const data = useMemo(
     () =>
-      (props.data || []).reduce(
+      (props.data || []).reduce<{
+        xAxis: string[];
+        income: number[];
+        balance: string[];
+        expend: { value: number; diaries: any }[];
+      }>(
         (total, ele) => ({
           xAxis: [...total.xAxis, ele.name],
           income: [...total.income, ele.income],
@@ -24,7 +34,7 @@ const ECharts = (props) => {
     [props.data],
   );
 
-  // echarts 配置
+  // ECharts 配置
   const option = useMemo(
     () => ({
       tooltip: {
@@ -80,7 +90,14 @@ const ECharts = (props) => {
     () => [
       {
         eventName: "click",
-        handler: (echarts, { data: { diaries } }) => {
+        handler: (
+          echarts: { dispatchAction: (args: { type: string }) => void },
+          {
+            data: { diaries },
+          }: {
+            data: { diaries: DiaryItemFragment[] };
+          },
+        ) => {
           if (!diaries) {
             return false;
           }
@@ -99,7 +116,7 @@ const ECharts = (props) => {
     [dispatch],
   );
 
-  return <EChartsCom on={on} height={300} option={option} />;
+  return <ECharts on={on} height={300} option={option} />;
 };
 
-export default memo(ECharts);
+export default memo(Line);

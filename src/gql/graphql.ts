@@ -168,10 +168,10 @@ export type Articles = {
 
 export type Bill = {
   __typename?: 'Bill';
-  desc?: Maybe<Scalars['String']['output']>;
-  expend?: Maybe<Scalars['Float']['output']>;
-  income?: Maybe<Scalars['Float']['output']>;
-  tag?: Maybe<Scalars['Int']['output']>;
+  desc: Scalars['String']['output'];
+  expend: Scalars['Float']['output'];
+  income: Scalars['Float']['output'];
+  tag: Scalars['Int']['output'];
 };
 
 export type BodyIndex = {
@@ -195,18 +195,18 @@ export type Diary = {
   __typename?: 'Diary';
   bill?: Maybe<Array<Maybe<Bill>>>;
   bodyIndex?: Maybe<BodyIndex>;
-  creationTime?: Maybe<Scalars['Date']['output']>;
-  creator?: Maybe<User>;
+  creationTime: Scalars['Date']['output'];
+  creator: User;
   diet?: Maybe<Array<Maybe<Diet>>>;
   fitness?: Maybe<Array<Maybe<Fitness>>>;
   getUp?: Maybe<Scalars['Date']['output']>;
-  id?: Maybe<Scalars['ID']['output']>;
+  id: Scalars['ID']['output'];
   informalEssay?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  status?: Maybe<Scalars['Int']['output']>;
+  name: Scalars['String']['output'];
+  status: Scalars['Int']['output'];
   toRest?: Maybe<Scalars['Date']['output']>;
-  updateTime?: Maybe<Scalars['Date']['output']>;
-  updater?: Maybe<User>;
+  updateTime: Scalars['Date']['output'];
+  updater: User;
 };
 
 export type DiaryFields = {
@@ -971,7 +971,7 @@ export type Query = {
   publicKey: PublicKey;
   roles: Roles;
   snippets?: Maybe<Snippets>;
-  statsBill?: Maybe<StatsBill>;
+  statsBill: StatsBill;
   tags?: Maybe<Tags>;
   tagsWithArticles?: Maybe<Tags>;
   userInfo?: Maybe<UserInfo>;
@@ -1184,17 +1184,17 @@ export type Snippets = {
 
 export type StatsBill = {
   __typename?: 'StatsBill';
-  groupWithName?: Maybe<Array<Maybe<StatsBillItem>>>;
+  groupWithName: Array<StatsBillItem>;
   message?: Maybe<Scalars['String']['output']>;
-  stats?: Maybe<Bill>;
+  stats: Bill;
 };
 
 export type StatsBillItem = {
   __typename?: 'StatsBillItem';
-  diaries?: Maybe<Array<Maybe<Diary>>>;
-  expend?: Maybe<Scalars['Float']['output']>;
-  income?: Maybe<Scalars['Float']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
+  diaries: Array<Diary>;
+  expend: Scalars['Float']['output'];
+  income: Scalars['Float']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type StatsBillSearch = {
@@ -1354,7 +1354,7 @@ export type UpdateDiariesMutation = { __typename?: 'Mutation', updateDiaries: { 
       & { ' $fragmentRefs'?: { 'DiaryItemFragment': DiaryItemFragment } }
     )> } };
 
-export type DiaryItemFragment = { __typename?: 'Diary', id?: string | null, name?: string | null, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag?: number | null, desc?: string | null, income?: number | null, expend?: number | null } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } & { ' $fragmentName'?: 'DiaryItemFragment' };
+export type DiaryItemFragment = { __typename?: 'Diary', id: string, name: string, getUp?: any | null, toRest?: any | null, informalEssay?: string | null, diet?: Array<{ __typename?: 'Diet', type?: number | null, desc?: string | null } | null> | null, fitness?: Array<{ __typename?: 'Fitness', type?: number | null, place?: number | null } | null> | null, bill?: Array<{ __typename?: 'Bill', tag: number, desc: string, income: number, expend: number } | null> | null, bodyIndex?: { __typename?: 'BodyIndex', bim?: number | null, weight?: number | null, muscle?: number | null, bodyfat?: number | null, moistureContent?: number | null } | null } & { ' $fragmentName'?: 'DiaryItemFragment' };
 
 export type CalendarDiariesQueryVariables = Exact<{
   search?: InputMaybe<DiarySearch>;
@@ -1365,6 +1365,13 @@ export type CalendarDiariesQuery = { __typename?: 'Query', diaries: { __typename
       { __typename?: 'Diary' }
       & { ' $fragmentRefs'?: { 'DiaryItemFragment': DiaryItemFragment } }
     )> } };
+
+export type DiaryStatsBillQueryVariables = Exact<{
+  search?: InputMaybe<StatsBillSearch>;
+}>;
+
+
+export type DiaryStatsBillQuery = { __typename?: 'Query', statsBill: { __typename?: 'StatsBill', stats: { __typename?: 'Bill', income: number, expend: number }, groupWithName: Array<{ __typename?: 'StatsBillItem', name: string, income: number, expend: number, diaries: Array<{ __typename?: 'Diary', name: string, bill?: Array<{ __typename?: 'Bill', desc: string, income: number, expend: number, tag: number } | null> | null }> }> } };
 
 export type RoleItemFragment = { __typename?: 'Role', id: string, name: string, auth: Array<any | null> } & { ' $fragmentName'?: 'RoleItemFragment' };
 
@@ -1464,6 +1471,7 @@ export const AlbumUploadDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const CreateDiariesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateDiaries"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DiaryFields"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createDiaries"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DiaryItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DiaryItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Diary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"getUp"}},{"kind":"Field","name":{"kind":"Name","value":"toRest"}},{"kind":"Field","name":{"kind":"Name","value":"informalEssay"}},{"kind":"Field","name":{"kind":"Name","value":"diet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fitness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"place"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bill"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"income"}},{"kind":"Field","name":{"kind":"Name","value":"expend"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bodyIndex"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bim"}},{"kind":"Field","name":{"kind":"Name","value":"weight"}},{"kind":"Field","name":{"kind":"Name","value":"muscle"}},{"kind":"Field","name":{"kind":"Name","value":"bodyfat"}},{"kind":"Field","name":{"kind":"Name","value":"moistureContent"}}]}}]}}]} as unknown as DocumentNode<CreateDiariesMutation, CreateDiariesMutationVariables>;
 export const UpdateDiariesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateDiaries"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DiaryFields"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"conds"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DiarySearch"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateDiaries"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"Argument","name":{"kind":"Name","value":"conds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"conds"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DiaryItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DiaryItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Diary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"getUp"}},{"kind":"Field","name":{"kind":"Name","value":"toRest"}},{"kind":"Field","name":{"kind":"Name","value":"informalEssay"}},{"kind":"Field","name":{"kind":"Name","value":"diet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fitness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"place"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bill"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"income"}},{"kind":"Field","name":{"kind":"Name","value":"expend"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bodyIndex"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bim"}},{"kind":"Field","name":{"kind":"Name","value":"weight"}},{"kind":"Field","name":{"kind":"Name","value":"muscle"}},{"kind":"Field","name":{"kind":"Name","value":"bodyfat"}},{"kind":"Field","name":{"kind":"Name","value":"moistureContent"}}]}}]}}]} as unknown as DocumentNode<UpdateDiariesMutation, UpdateDiariesMutationVariables>;
 export const CalendarDiariesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CalendarDiaries"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"DiarySearch"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"diaries"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DiaryItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DiaryItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Diary"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"getUp"}},{"kind":"Field","name":{"kind":"Name","value":"toRest"}},{"kind":"Field","name":{"kind":"Name","value":"informalEssay"}},{"kind":"Field","name":{"kind":"Name","value":"diet"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fitness"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"place"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bill"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"income"}},{"kind":"Field","name":{"kind":"Name","value":"expend"}}]}},{"kind":"Field","name":{"kind":"Name","value":"bodyIndex"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"bim"}},{"kind":"Field","name":{"kind":"Name","value":"weight"}},{"kind":"Field","name":{"kind":"Name","value":"muscle"}},{"kind":"Field","name":{"kind":"Name","value":"bodyfat"}},{"kind":"Field","name":{"kind":"Name","value":"moistureContent"}}]}}]}}]} as unknown as DocumentNode<CalendarDiariesQuery, CalendarDiariesQueryVariables>;
+export const DiaryStatsBillDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"DiaryStatsBill"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"StatsBillSearch"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"statsBill"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"stats"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"income"}},{"kind":"Field","name":{"kind":"Name","value":"expend"}}]}},{"kind":"Field","name":{"kind":"Name","value":"groupWithName"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"income"}},{"kind":"Field","name":{"kind":"Name","value":"expend"}},{"kind":"Field","name":{"kind":"Name","value":"diaries"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"bill"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"income"}},{"kind":"Field","name":{"kind":"Name","value":"expend"}},{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<DiaryStatsBillQuery, DiaryStatsBillQueryVariables>;
 export const RolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RoleItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<RolesQuery, RolesQueryVariables>;
 export const UpdateRolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateRoles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleFields"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"conds"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleSearch"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateRoles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"Argument","name":{"kind":"Name","value":"conds"},"value":{"kind":"Variable","name":{"kind":"Name","value":"conds"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"change"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RoleItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RoleItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Role"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}}]}}]} as unknown as DocumentNode<UpdateRolesMutation, UpdateRolesMutationVariables>;
 export const UsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"UserItem"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"UserItem"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"account"}},{"kind":"Field","name":{"kind":"Name","value":"role"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"desc"}},{"kind":"Field","name":{"kind":"Name","value":"auth"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<UsersQuery, UsersQueryVariables>;

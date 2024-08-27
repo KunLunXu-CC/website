@@ -145,10 +145,10 @@ type Articles {
 scalar Auth
 
 type Bill {
-  desc: String
-  expend: Float
-  income: Float
-  tag: Int
+  desc: String!
+  expend: Float!
+  income: Float!
+  tag: Int!
 }
 
 scalar BillInput
@@ -176,18 +176,18 @@ type Diaries {
 type Diary {
   bill: [Bill]
   bodyIndex: BodyIndex
-  creationTime: Date
-  creator: User
+  creationTime: Date!
+  creator: User!
   diet: [Diet]
   fitness: [Fitness]
   getUp: Date
-  id: ID
+  id: ID!
   informalEssay: String
-  name: String
-  status: Int
+  name: String!
+  status: Int!
   toRest: Date
-  updateTime: Date
-  updater: User
+  updateTime: Date!
+  updater: User!
 }
 
 input DiaryFields {
@@ -574,7 +574,7 @@ type Query {
   publicKey: PublicKey!
   roles(orderBy: OrderBy, pagination: Pagination, search: RoleSearch): Roles!
   snippets(orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
-  statsBill(search: StatsBillSearch): StatsBill
+  statsBill(search: StatsBillSearch): StatsBill!
   tags(orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
   tagsWithArticles(orderBy: OrderBy, search: ArticleSearch): Tags
   userInfo: UserInfo
@@ -666,16 +666,16 @@ type Snippets {
 }
 
 type StatsBill {
-  groupWithName: [StatsBillItem]
+  groupWithName: [StatsBillItem!]!
   message: String
-  stats: Bill
+  stats: Bill!
 }
 
 type StatsBillItem {
-  diaries: [Diary]
-  expend: Float
-  income: Float
-  name: String
+  diaries: [Diary!]!
+  expend: Float!
+  income: Float!
+  name: String!
 }
 
 input StatsBillSearch {

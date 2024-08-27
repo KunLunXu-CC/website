@@ -1,5 +1,9 @@
 import { DiaryItemFragment } from "@/gql/graphql";
-import { set } from "lodash";
+
+export enum STATS_SPAN_VALUE {
+  MONTH = "month",
+  YEAR = "year",
+}
 
 export interface IDiaryState {
   selectedMenuKey: string;
