@@ -2,12 +2,12 @@ import dayjs from "dayjs";
 import client from "@/gql/client";
 import useCalendarStore from "./useCalendarStore";
 
-import { graphql } from "@/gql";
+import { graphql, useFragment } from "@/gql";
 import { useQuery } from "@tanstack/react-query";
 import { CalendarDiariesQuery } from "@/gql/graphql";
 import { useEffect } from "react";
 
-graphql(`
+const DiaryItemDocument = graphql(`
   fragment DiaryItem on Diary {
     id
     name
