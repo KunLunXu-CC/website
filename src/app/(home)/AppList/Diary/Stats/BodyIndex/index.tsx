@@ -1,33 +1,13 @@
-import dayjs from "dayjs";
-import ECharts from "./ECharts";
+import { Dayjs } from "dayjs";
+import Line from "./Line";
 import scss from "./index.module.scss";
+import useStatsBodyIndex from "../../hooks/useStatsBodyIndex";
 
-import { memo, useState } from "react";
+import { memo } from "react";
 import { DatePicker, Card } from "antd";
-import { useGetStatsBodyIndexQuery } from "@/store/graphql";
-
-// 默认日期
-const DEFAULT_DATE = [dayjs().subtract(365, "days"), dayjs()];
-
-// 获取区间内所有时间
-const getFullDate = ([start, end]) => {
-  const res = [];
-  let current = start.clone();
-
-  while (current.isBefore(end)) {
-    res.push(current.format("YYYY-MM-DD"));
-    current = current.add(1, "day");
-  }
-
-  return res;
-};
 
 const BodyIndex = () => {
-  const [date, setDate] = useState(DEFAULT_DATE);
-
-  const { data } = useGetStatsBodyIndexQuery({
-    search: { names: getFullDate(date) },
-  });
+  const { diaries, date, setDate } = useStatsBodyIndex();
 
   return (
     <Card
@@ -36,13 +16,13 @@ const BodyIndex = () => {
       className={scss.card}
       extra={
         <DatePicker.RangePicker
+          value={date}
           bordered={false}
-          onChange={setDate}
-          defaultValue={DEFAULT_DATE}
+          onChange={(dates) => setDate(dates as [Dayjs, Dayjs])}
         />
       }
     >
-      <ECharts data={data?.diaries.list ?? []} />
+      <Line data={diaries?.list ?? []} />
     </Card>
   );
 };

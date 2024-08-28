@@ -174,12 +174,12 @@ type Diaries {
 }
 
 type Diary {
-  bill: [Bill]
+  bill: [Bill!]!
   bodyIndex: BodyIndex
   creationTime: Date!
   creator: User!
-  diet: [Diet]
-  fitness: [Fitness]
+  diet: [Diet!]!
+  fitness: [Fitness!]!
   getUp: Date
   id: ID!
   informalEssay: String

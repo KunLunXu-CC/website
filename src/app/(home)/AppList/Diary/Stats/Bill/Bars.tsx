@@ -1,15 +1,14 @@
-import { FC, memo, useMemo } from "react";
-import { ECharts } from "@kunlunxu/brick";
-import { useDispatch } from "react-redux";
-import { STATS_BILL_DETAIL } from "../../constants";
-import { DiaryItemFragment, DiaryStatsBillQuery } from "@/gql/graphql";
+import BillDetail from "./BillDetail";
 
-interface ILineProps {
+import { FC, memo, useMemo, useState } from "react";
+import { ECharts } from "@kunlunxu/brick";
+import { DiaryItemFragment, DiaryStatsBillQuery } from "@/gql/graphql";
+interface IBarsProps {
   data?: DiaryStatsBillQuery["statsBill"]["groupWithName"];
 }
 
-const Line: FC<ILineProps> = (props) => {
-  const dispatch = useDispatch();
+const Bars: FC<IBarsProps> = (props) => {
+  const [viewDiaries, setViewDiaries] = useState<DiaryItemFragment[]>([]);
 
   // 处理数据
   const data = useMemo(
@@ -103,20 +102,22 @@ const Line: FC<ILineProps> = (props) => {
           }
 
           echarts.dispatchAction({ type: "hideTip" });
-
-          // TODO: 弹窗查看
-          dispatch({
-            diaries,
-            type: "modal/openModal",
-            code: STATS_BILL_DETAIL,
-          });
+          setViewDiaries(diaries);
         },
       },
     ],
-    [dispatch],
+    [],
   );
 
-  return <ECharts on={on} height={300} option={option} />;
+  return (
+    <>
+      <ECharts on={on} height={300} option={option} />
+      <BillDetail
+        diaries={viewDiaries}
+        onOpenChange={(open) => !open && setViewDiaries([])}
+      />
+    </>
+  );
 };
 
-export default memo(Line);
+export default memo(Bars);

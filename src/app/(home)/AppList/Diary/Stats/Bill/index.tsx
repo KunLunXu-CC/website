@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Line from "./Line";
+import Bars from "./Bars";
 import Overview from "./Overview";
 import scss from "./index.module.scss";
 import useBillStats from "../../hooks/useStatsBill";
@@ -34,7 +34,7 @@ const Bill = () => {
       }
     >
       <Overview data={statsBill?.stats} />
-      <Line data={statsBill?.groupWithName} />
+      <Bars data={statsBill?.groupWithName} />
     </Card>
   );
 };

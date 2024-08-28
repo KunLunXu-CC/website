@@ -6,13 +6,11 @@ import Fitness from "./Fitness";
 import classNames from "classnames";
 import scss from "./index.module.scss";
 import useCalendarSave from "../../hooks/useCalendarSave";
-import useDisclosureStore from "@/store/useDisclosureStore";
+import useCalendarStore from "../../hooks/useCalendarStore";
 
 import { Icon } from "@kunlunxu/brick";
 import { Modal, Tabs, Form } from "antd";
-import { DiaryItemFragment } from "@/gql/graphql";
 import { StoreValue } from "antd/es/form/interface";
-import { DIARY_EDITOR_DIARY } from "../../constants";
 import { memo, useRef, useMemo, useState, useEffect, useCallback } from "react";
 
 interface IFormData {
@@ -70,13 +68,7 @@ const EditorCalendar = () => {
   const [activeTabKey, setActiveTabKey] = useState<string>(TABS_SETTING[0].key);
 
   const { onSave } = useCalendarSave();
-  const { isOpen, getData, onClose } = useDisclosureStore();
-
-  const open = isOpen(DIARY_EDITOR_DIARY);
-  const modalData = getData(DIARY_EDITOR_DIARY) as {
-    date?: dayjs.Dayjs;
-    diary?: DiaryItemFragment;
-  } | void;
+  const { editDiary, setEditDiary } = useCalendarStore();
 
   const items = useMemo(
     () =>
@@ -96,20 +88,22 @@ const EditorCalendar = () => {
   );
 
   const initialValues = useMemo(() => {
-    if (!modalData) {
+    if (!editDiary) {
       return {};
     }
 
+    const { date, diary } = editDiary;
+
     return {
-      bill: modalData.diary?.bill ?? [],
-      diet: modalData.diary?.diet ?? [],
-      fitness: modalData.diary?.fitness ?? [],
-      bodyIndex: modalData.diary?.bodyIndex ?? {},
-      name: dayjs(modalData.diary?.name ?? modalData.date),
-      getUp: dayjs(modalData.diary?.getUp ?? modalData.date),
-      toRest: dayjs(modalData.diary?.toRest ?? modalData.date),
+      bill: diary?.bill ?? [],
+      diet: diary?.diet ?? [],
+      fitness: diary?.fitness ?? [],
+      bodyIndex: diary?.bodyIndex ?? {},
+      name: dayjs(diary?.name ?? date),
+      getUp: dayjs(diary?.getUp ?? date),
+      toRest: dayjs(diary?.toRest ?? date),
     };
-  }, [modalData]);
+  }, [editDiary]);
 
   // 弹窗标题
   const title = useMemo(
@@ -126,28 +120,26 @@ const EditorCalendar = () => {
     [name],
   );
 
-  const handleCancel = useCallback(
-    () => onClose(DIARY_EDITOR_DIARY),
-    [onClose],
-  );
+  const handleCancel = useCallback(() => setEditDiary(null), [setEditDiary]);
 
   // 确认
   const onOk = useCallback(async () => {
     const values = await form.validateFields();
+    const { diary } = editDiary!;
 
-    const id = modalData?.diary?.id;
+    const id = diary?.id;
 
     const body = getBody(values);
 
     onSave({ body, id });
 
     handleCancel();
-  }, [form, modalData?.diary?.id, onSave, handleCancel]);
+  }, [form, editDiary, onSave, handleCancel]);
 
   // modal 变化时, 需要重新 resetFields
   useEffect(() => {
     form.resetFields();
-  }, [form, modalData]);
+  }, [form, initialValues]);
 
   return (
     <Form
@@ -157,13 +149,13 @@ const EditorCalendar = () => {
     >
       <Modal
         destroyOnClose
-        open={open}
         width="80%"
         onOk={onOk}
         okText="确定"
         title={title}
         cancelText="取消"
         closable={false}
+        open={!!editDiary}
         maskClosable={false}
         getContainer={false}
         className={scss.modal}

@@ -1,7 +1,12 @@
-import { memo, useMemo } from "react";
-import { ECharts as EChartsCom } from "@kunlunxu/brick";
+import { FC, memo, useMemo } from "react";
+import { ECharts } from "@kunlunxu/brick";
+import { DiaryStatsBodyIndexQuery } from "@/gql/graphql";
 
-const ECharts = (props) => {
+interface ILineProps {
+  data: DiaryStatsBodyIndexQuery["diaries"]["list"];
+}
+
+const Line: FC<ILineProps> = (props) => {
   // 处理数据
   const data = useMemo(() => {
     const reduceInit = {
@@ -18,7 +23,12 @@ const ECharts = (props) => {
         v.bodyIndex?.weight,
     );
 
-    return filterData.reduce(
+    return filterData.reduce<{
+      xAxis: string[];
+      weight: number[];
+      bodyfat: number[];
+      moistureContent: number[];
+    }>(
       (total, { name, bodyIndex }) => ({
         moistureContent: [
           ...total.moistureContent,
@@ -82,7 +92,7 @@ const ECharts = (props) => {
     [data],
   );
 
-  return <EChartsCom height={300} option={option} />;
+  return <ECharts height={300} option={option} />;
 };
 
-export default memo(ECharts);
+export default memo(Line);

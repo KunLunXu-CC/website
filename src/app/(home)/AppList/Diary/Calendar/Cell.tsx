@@ -1,10 +1,8 @@
 import dayjs from "dayjs";
 import scss from "./cell.module.scss";
 import useCalendarStore from "../hooks/useCalendarStore";
-import useDisclosureStore from "@/store/useDisclosureStore";
 
 import { Icon } from "@kunlunxu/brick";
-import { DIARY_EDITOR_DIARY } from "../constants";
 import { useMemo, useCallback, memo, FC } from "react";
 
 interface ICellProps {
@@ -14,8 +12,7 @@ interface ICellProps {
 const Cell: FC<ICellProps> = (props) => {
   const { date } = props;
 
-  const { onOpen } = useDisclosureStore();
-  const { diaries = [] } = useCalendarStore();
+  const { diaries = [], setEditDiary } = useCalendarStore();
 
   // 当天笔记
   const diary = useMemo(
@@ -37,8 +34,8 @@ const Cell: FC<ICellProps> = (props) => {
 
   // 点击单元格
   const handleClick = useCallback(() => {
-    onOpen(DIARY_EDITOR_DIARY, { diary, date });
-  }, [date, diary, onOpen]);
+    setEditDiary({ diary, date });
+  }, [date, diary, setEditDiary]);
 
   return (
     <div className={scss.cell} onClick={handleClick}>

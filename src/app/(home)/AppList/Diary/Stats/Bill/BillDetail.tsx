@@ -1,21 +1,25 @@
-import { memo, useMemo } from "react";
-import { Modal, Button } from "antd";
+import { groupBy } from "lodash";
+import { FC, memo, useMemo } from "react";
 import { ECharts } from "@kunlunxu/brick";
-import { STATS_BILL_DETAIL } from "../../constants";
-import { useDispatch, useSelector } from "react-redux";
+import { DiaryItemFragment } from "@/gql/graphql";
+import { Modal, ModalBody, ModalContent } from "@nextui-org/react";
 
-const useStateHook = () => {
-  const dispatch = useDispatch();
-  // 弹窗
-  const modal = useSelector((state) => state.modal[STATS_BILL_DETAIL]);
+interface IBillDetailProps {
+  diaries: DiaryItemFragment[];
+  onOpenChange: (open: boolean) => void;
+}
 
-  // 数据
+const BillDetail: FC<IBillDetailProps> = (props) => {
+  const { diaries, onOpenChange } = props;
+
+  // TODO: 处理数据
   const data = useMemo(() => {
-    const bill = modal?.diaries.reduce(
+    const bill = diaries.reduce<DiaryItemFragment["bill"]>(
       (total, ele) => [...total, ...ele.bill.filter((v) => v.expend)],
       [],
     );
-    const group = _.groupBy(bill, "tag.name");
+
+    const group = groupBy(bill, "tag.name");
     const res = [];
 
     for (const name in group) {
@@ -29,7 +33,7 @@ const useStateHook = () => {
     }
 
     return res;
-  }, [modal]);
+  }, [diaries]);
 
   // echarts 配置
   const option = useMemo(
@@ -81,34 +85,15 @@ const useStateHook = () => {
     [data],
   );
 
-  // 取消
-  const onCancel = () =>
-    dispatch({
-      code: STATS_BILL_DETAIL,
-      type: "modal/closeModal",
-    });
-
-  return { modal, onCancel, data, option };
-};
-
-const BillDetail = () => {
-  const state = useStateHook();
   return (
-    <Modal
-      width="50%"
-      title="账单详情"
-      destroyOnClose
-      closable={false}
-      open={!!state.modal}
-      getContainer={false}
-      footer={
-        <Button onClick={state.onCancel} type="primary">
-          关闭
-        </Button>
-      }
-    >
-      <ECharts height={300} option={state.option} />
+    <Modal isOpen={!!diaries.length} onOpenChange={onOpenChange}>
+      <ModalContent>
+        <ModalBody>
+          <ECharts height={300} option={option} />
+        </ModalBody>
+      </ModalContent>
     </Modal>
   );
 };
+
 export default memo(BillDetail);
