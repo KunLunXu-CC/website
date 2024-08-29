@@ -1,20 +1,23 @@
+import useBillDetailModalStore from "../hooks/useBillDetailModalStore";
+
 import { groupBy } from "lodash";
-import { FC, memo, useMemo } from "react";
 import { ECharts } from "@kunlunxu/brick";
 import { DiaryItemFragment } from "@/gql/graphql";
+import { FC, memo, RefObject, useMemo } from "react";
 import { Modal, ModalBody, ModalContent } from "@nextui-org/react";
 
 interface IBillDetailProps {
-  diaries: DiaryItemFragment[];
-  onOpenChange: (open: boolean) => void;
+  modalRef: RefObject<HTMLDivElement>;
 }
 
 const BillDetail: FC<IBillDetailProps> = (props) => {
-  const { diaries, onOpenChange } = props;
+  const { modalRef } = props;
+
+  const { data: diaries, onOpenChange, isOpen } = useBillDetailModalStore();
 
   // TODO: 处理数据
   const data = useMemo(() => {
-    const bill = diaries.reduce<DiaryItemFragment["bill"]>(
+    const bill = diaries?.reduce<DiaryItemFragment["bill"]>(
       (total, ele) => [...total, ...ele.bill.filter((v) => v.expend)],
       [],
     );
@@ -52,8 +55,8 @@ const BillDetail: FC<IBillDetailProps> = (props) => {
           data,
           type: "pie",
           name: "账单详情",
-          radius: ["60%", "90%"],
-          center: ["40%", "50%"],
+          radius: ["40%", "70%"],
+          center: ["50%", "50%"],
           avoidLabelOverlap: false,
           label: {
             show: false,
@@ -86,7 +89,15 @@ const BillDetail: FC<IBillDetailProps> = (props) => {
   );
 
   return (
-    <Modal isOpen={!!diaries.length} onOpenChange={onOpenChange}>
+    <Modal
+      isOpen={isOpen}
+      onOpenChange={onOpenChange}
+      portalContainer={modalRef.current!}
+      classNames={{
+        wrapper: "absolute !size-full",
+        backdrop: "absolute !size-full",
+      }}
+    >
       <ModalContent>
         <ModalBody>
           <ECharts height={300} option={option} />

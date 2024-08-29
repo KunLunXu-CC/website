@@ -1,14 +1,15 @@
-import BillDetail from "./BillDetail";
+import useBillDetailModalStore from "../../hooks/useBillDetailModalStore";
 
-import { FC, memo, useMemo, useState } from "react";
+import { FC, memo, useMemo } from "react";
 import { ECharts } from "@kunlunxu/brick";
 import { DiaryItemFragment, DiaryStatsBillQuery } from "@/gql/graphql";
+
 interface IBarsProps {
   data?: DiaryStatsBillQuery["statsBill"]["groupWithName"];
 }
 
 const Bars: FC<IBarsProps> = (props) => {
-  const [viewDiaries, setViewDiaries] = useState<DiaryItemFragment[]>([]);
+  const { onOpen } = useBillDetailModalStore();
 
   // 处理数据
   const data = useMemo(
@@ -102,22 +103,14 @@ const Bars: FC<IBarsProps> = (props) => {
           }
 
           echarts.dispatchAction({ type: "hideTip" });
-          setViewDiaries(diaries);
+          onOpen(diaries);
         },
       },
     ],
-    [],
+    [onOpen],
   );
 
-  return (
-    <>
-      <ECharts on={on} height={300} option={option} />
-      <BillDetail
-        diaries={viewDiaries}
-        onOpenChange={(open) => !open && setViewDiaries([])}
-      />
-    </>
-  );
+  return <ECharts on={on} height={300} option={option} />;
 };
 
 export default memo(Bars);
