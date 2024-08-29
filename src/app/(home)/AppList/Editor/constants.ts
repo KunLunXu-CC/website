@@ -2,6 +2,8 @@ import Search from './SideBar/Search';
 import Resource from './SideBar/Resource';
 import { APP_SETTING, ARTICLE_STATUS } from '@/config/constants';
 
+export const NEW_FLAG_ID = 'new'; // 新建文件夹、新建文章占位 ID
+
 // 弹窗类型常量 - 发布
 export const RELEASE_CONFIRM = 'EDITOR_RELEASE_CONFIRM';
 

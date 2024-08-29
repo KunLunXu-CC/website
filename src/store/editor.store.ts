@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ACTIVITY_LIST } from '@/app/(home)/AppList/Editor/constants';
 
 export const initialState = {
-  folders: {},        // {[id]: value}
-  articles: {},    // {[id]: value}
+  folders: {}, // {[id]: value}
+  articles: {}, // {[id]: value}
   side: {
-    openKeys: [],     // 打开的菜单项
+    openKeys: [], // 打开的菜单项
     collapsed: false, // 菜单折叠状态, 是否收缩到最小
   },
   activity: {
-    selectKey: ACTIVITY_LIST[0].key,  // 当前选中 key
+    selectKey: ACTIVITY_LIST[0].key, // 当前选中 key
   },
   search: {
     keyword: '',
@@ -31,10 +31,10 @@ export default createSlice({
     setSearchKeyword: (state, { payload: keyword }): any => {
       const results = keyword
         ? Object.values(cloneDeep(state.articles)).filter((v: any) => {
-          const matchName = RegExp(keyword, 'i').test(v.name);
-          const matchValue = RegExp(keyword, 'i').test(v.content);
-          return matchName ||  matchValue;
-        })
+            const matchName = RegExp(keyword, 'i').test(v.name);
+            const matchValue = RegExp(keyword, 'i').test(v.content);
+            return matchName || matchValue;
+          })
         : [];
 
       return {
@@ -44,40 +44,40 @@ export default createSlice({
     },
 
     setFolders: (state, { payload: folders }) => {
-      const newFolders = [
-        ...Object.values(state.folders),
-        ...folders,
-      ].filter((v) => v.id !== 'new');
+      const newFolders = [...Object.values(state.folders), ...folders].filter((v) => v.id !== 'new');
 
       return {
         ...state,
-        folders: newFolders.reduce((total: any, ele: { id: any; }) => ({
-          ...total,
-          [ele.id]: ele,
-        }), {}),
+        folders: newFolders.reduce(
+          (total: any, ele: { id: any }) => ({
+            ...total,
+            [ele.id]: ele,
+          }),
+          {},
+        ),
       };
     },
 
     removeFolders: (state, { payload: folders }) => {
       const newFolders = cloneDeep(state.folders);
-      folders.forEach(({ id }: { id:string }) => {
+      folders.forEach(({ id }: { id: string }) => {
         delete (newFolders as any)[id];
       });
       return { ...state, folders: newFolders };
     },
 
     setArticles: (state, { payload: articles }) => {
-      const newArticles = [
-        ...Object.values(state.articles),
-        ...articles,
-      ].filter((v) => v.id !== 'new');
+      const newArticles = [...Object.values(state.articles), ...articles].filter((v) => v.id !== 'new');
 
       return {
         ...state,
-        articles: newArticles.reduce((total: any, ele: { id: any; }) => ({
-          ...total,
-          [ele.id]: ele,
-        }), {}),
+        articles: newArticles.reduce(
+          (total: any, ele: { id: any }) => ({
+            ...total,
+            [ele.id]: ele,
+          }),
+          {},
+        ),
       };
     },
 
@@ -127,9 +127,7 @@ export default createSlice({
     setWorks: (state, { payload: works }): any => ({
       ...state,
       works: state.works.map((v: any) => {
-        const newWork = works.find(
-          (e: any) => e.articleId === v.articleId,
-        ) ?? {};
+        const newWork = works.find((e: any) => e.articleId === v.articleId) ?? {};
 
         return { ...v, ...newWork };
       }),
@@ -141,9 +139,7 @@ export default createSlice({
         return { ...state, works: [] };
       }
 
-      const works = cloneDeep(state.works).filter(
-        (v: any) => !articleIds.includes(v.articleId),
-      );
+      const works = cloneDeep(state.works).filter((v: any) => !articleIds.includes(v.articleId));
 
       // 如果所有 active 都是 false, 则需要将最后一个 active 设置为 true
       if (works.length > 0 && works.every((v: any) => !v.active)) {
@@ -194,7 +190,5 @@ export default createSlice({
       articles[articleId].editor = true;
       return { ...state, articles };
     },
-
   },
 });
-

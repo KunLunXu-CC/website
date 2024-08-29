@@ -1,26 +1,24 @@
-import scss from './index.module.scss';
+import scss from "./index.module.scss";
 
-import { Modal } from 'antd';
-import { useMemo, useState } from 'react';
-import { Icon, Image } from '@kunlunxu/brick';
-import { THUMB_SETTING } from '../../constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { Modal } from "antd";
+import { memo, useMemo, useState } from "react";
+import { Icon, Image } from "@kunlunxu/brick";
+import { THUMB_SETTING } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStateHook = () => {
   const dispatch = useDispatch();
   const [file, setFile] = useState(null);
 
   // 获取当前文章内容
-  const article = useSelector(
-    (state) => state.modal?.[THUMB_SETTING]?.article,
-  );
+  const article = useSelector((state) => state.modal?.[THUMB_SETTING]?.article);
 
   // 点击取消
   const onCancel = () => {
     setFile(null);
     dispatch({
       code: THUMB_SETTING,
-      type: 'modal/closeModal',
+      type: "modal/closeModal",
     });
   };
 
@@ -29,24 +27,26 @@ const useStateHook = () => {
     dispatch({
       file,
       id: article.id,
-      type: 'editor/setArticleThumb',
+      type: "editor/setArticleThumb",
     });
     onCancel();
   };
 
   // 前端上传文件
   const onUpload = (event) => {
-    const { files: [file] } = event.target;
+    const {
+      files: [file],
+    } = event.target;
     file && setFile(file);
   };
 
   // 获取缩略图 src
-  const src = useMemo(() => (file || article?.thumb), [file, article]);
+  const src = useMemo(() => file || article?.thumb, [file, article]);
 
   return { article, onCancel, onOk, onUpload, src };
 };
 
-export default () => {
+const ThumbSetting = () => {
   const state = useStateHook();
   return (
     <Modal
@@ -59,20 +59,20 @@ export default () => {
       maskClosable={false}
       className={scss.modal}
       open={!!state.article}
-      onCancel={state.onCancel}>
+      onCancel={state.onCancel}
+    >
       <label className={scss.upload}>
         {state.src ? (
           <Image src={state.src}>
             <Icon type="icon-editor" />
           </Image>
-        ) :
+        ) : (
           <Icon type="icon-tupianshangchuan" />
-        }
-        <input
-          type="file"
-          onChange={state.onUpload}
-        />
+        )}
+        <input type="file" onChange={state.onUpload} />
       </label>
     </Modal>
   );
 };
+
+export default memo(ThumbSetting);

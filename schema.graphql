@@ -92,18 +92,18 @@ type Algorithms {
 }
 
 type Article {
-  content: String
-  creationTime: Date
-  creator: User
+  content: String!
+  creationTime: Date!
+  creator: User!
   desc: String
-  folder: Folder
-  id: ID
+  folder: Folder!
+  id: ID!
   name: String!
-  status: Int
-  tags: [ID!]
+  status: Int!
+  tags: [ID!]!
   thumb: String
-  updateTime: Date
-  updater: User
+  updateTime: Date!
+  updater: User!
   viewCount: Int
   viewHistory: [String]
 }
@@ -136,8 +136,8 @@ input ArticleSearch {
 }
 
 type Articles {
-  change: [Article]
-  list: [Article]
+  change: [Article!]!
+  list: [Article!]!
   message: String
   pagination: Pagination
 }
@@ -229,16 +229,16 @@ type Fitness {
 scalar FitnessInput
 
 type Folder {
-  creationTime: Date
-  creator: User
+  creationTime: Date!
+  creator: User!
   desc: String
-  id: ID
-  name: String
+  id: ID!
+  name: String!
   parent: Folder
-  status: Int
-  type: Int
-  updateTime: Date
-  updater: User
+  status: Int!
+  type: Int!
+  updateTime: Date!
+  updater: User!
 }
 
 input FolderFields {
@@ -265,8 +265,8 @@ input FolderSearch {
 }
 
 type Folders {
-  change: [Folder]
-  list: [Folder]
+  change: [Folder!]!
+  list: [Folder!]!
   message: String
   pagination: Pagination
 }
@@ -442,9 +442,9 @@ type MonthlyBill {
 type Mutation {
   createAiChats(body: [AiChatFields!]!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
   createAlgorithms(body: [AlgorithmFields!]!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
-  createArticles(body: [ArticleFields!]!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  createArticles(body: [ArticleFields!]!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles!
   createDiaries(body: [DiaryFields!]!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries!
-  createFolders(body: [FolderFields!]!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  createFolders(body: [FolderFields!]!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders!
   createInterviews(body: [InterviewFields!]!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   createKanbanGroups(body: [KanbanGroupFields!]!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
   createKanbanTasks(body: [KanbanTaskFields!]!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
@@ -454,12 +454,12 @@ type Mutation {
   createTags(body: [TagFields!]!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
   createUsers(body: [UserFields!]!, orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
   login(account: String, password: String): Login
-  releaseArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  releaseArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles!
   removeAiChats(conds: AiChatSearch!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
   removeAlgorithms(conds: AlgorithmSearch!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
-  removeArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  removeArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles!
   removeDiaries(conds: DiarySearch!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries
-  removeFolders(conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  removeFolders(conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders!
   removeInterviews(conds: InterviewSearch!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   removeKanbanGroups(conds: KanbanGroupSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
   removeKanbanTasks(conds: KanbanTaskSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
@@ -469,12 +469,12 @@ type Mutation {
   removeSnippets(conds: SnippetSearch!, orderBy: OrderBy, pagination: Pagination, search: SnippetSearch): Snippets
   removeTags(conds: TagSearch!, orderBy: OrderBy, pagination: Pagination, search: TagSearch): Tags
   removeUsers(conds: UserSearch!, orderBy: OrderBy, pagination: Pagination, search: UserSearch): Users
-  revokeArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  revokeArticles(conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles!
   updateAiChats(body: AiChatFields!, conds: AiChatSearch!, orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
   updateAlgorithms(body: AlgorithmFields!, conds: AlgorithmSearch!, orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
-  updateArticles(body: ArticleFields!, conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  updateArticles(body: ArticleFields!, conds: ArticleSearch!, orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles!
   updateDiaries(body: DiaryFields!, conds: DiarySearch!, orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries!
-  updateFolders(body: FolderFields!, conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  updateFolders(body: FolderFields!, conds: FolderSearch!, orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders!
   updateInterviews(body: InterviewFields!, conds: InterviewSearch!, orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   updateKanbanGroups(body: KanbanGroupFields!, conds: KanbanGroupSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
   updateKanbanTasks(body: KanbanTaskFields!, conds: KanbanTaskSearch!, orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks
@@ -562,9 +562,9 @@ type Query {
   aiChats(orderBy: OrderBy, pagination: Pagination, search: AiChatSearch): AiChats
   algorithms(orderBy: OrderBy, pagination: Pagination, search: AlgorithmSearch): Algorithms
   appleTouchbar: Touchbar
-  articles(orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles
+  articles(orderBy: OrderBy, pagination: Pagination, search: ArticleSearch): Articles!
   diaries(orderBy: OrderBy, pagination: Pagination, search: DiarySearch): Diaries!
-  folders(orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders
+  folders(orderBy: OrderBy, pagination: Pagination, search: FolderSearch): Folders!
   interviews(orderBy: OrderBy, pagination: Pagination, search: InterviewSearch): Interviews
   kanbanGroups(orderBy: OrderBy, pagination: Pagination, search: KanbanGroupSearch): KanbanGroups
   kanbanTasks(orderBy: OrderBy, pagination: Pagination, search: KanbanTaskSearch): KanbanTasks

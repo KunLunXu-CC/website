@@ -1,8 +1,9 @@
-import scss from './index.module.scss';
+import scss from "./index.module.scss";
 
-import { Modal } from 'antd';
-import { REVOKE_CONFIRM } from '../../constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { Modal } from "antd";
+import { REVOKE_CONFIRM } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { memo } from "react";
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const useStateHook = () => {
   const onCancel = () => {
     dispatch({
       code: REVOKE_CONFIRM,
-      type: 'modal/closeModal',
+      type: "modal/closeModal",
     });
   };
 
@@ -23,7 +24,7 @@ const useStateHook = () => {
   const onOk = async () => {
     dispatch({
       id: article.id,
-      type: 'editor/revokeArticle',
+      type: "editor/revokeArticle",
     });
     onCancel();
   };
@@ -31,7 +32,7 @@ const useStateHook = () => {
   return { article, onCancel, onOk };
 };
 
-export default () => {
+const RevokeConfirm = () => {
   const state = useStateHook();
 
   return (
@@ -44,12 +45,15 @@ export default () => {
       getContainer={false}
       open={!!state.article}
       className={scss.modal}
-      onCancel={state.onCancel}>
+      onCancel={state.onCancel}
+    >
       撤销文章:
-      <span className={scss['article-name']}>
-        {state.article?.name ?? '---'}
+      <span className={scss["article-name"]}>
+        {state.article?.name ?? "---"}
       </span>
       ？
     </Modal>
   );
 };
+
+export default memo(RevokeConfirm);

@@ -1,9 +1,9 @@
-import scss from './index.module.scss';
+import scss from "./index.module.scss";
 
-import { Modal } from 'antd';
-import { RELEASE_CONFIRM } from '../../constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
+import { Modal } from "antd";
+import { RELEASE_CONFIRM } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { memo, useCallback } from "react";
 
 const ReleaseConfirm = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const ReleaseConfirm = () => {
   // 点击取消
   const handleCancel = useCallback(() => {
     dispatch({
-      type: 'modal/close',
+      type: "modal/close",
       payload: RELEASE_CONFIRM,
     });
   }, [dispatch]);
@@ -27,7 +27,7 @@ const ReleaseConfirm = () => {
 
     dispatch({
       id: article.id,
-      type: 'editor/releaseArticle',
+      type: "editor/releaseArticle",
     });
     handleCancel();
   }, [article, dispatch, handleCancel]);
@@ -42,14 +42,12 @@ const ReleaseConfirm = () => {
       cancelText="取消"
       getContainer={false}
       className={scss.modal}
-      onCancel={handleCancel}>
+      onCancel={handleCancel}
+    >
       发布文章:
-      <span className={scss['article-name']}>
-        {article?.name ?? '---'}
-      </span>
-      ?
+      <span className={scss["article-name"]}>{article?.name ?? "---"}</span>?
     </Modal>
   );
 };
 
-export default ReleaseConfirm;
+export default memo(ReleaseConfirm);

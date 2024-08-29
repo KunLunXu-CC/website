@@ -1,13 +1,16 @@
-import scss from './index.module.scss';
+import scss from "./index.module.scss";
 
-import { actions } from '@/store';
-import { MOVE } from '../../constants';
-import { Modal, Cascader, Form } from 'antd';
-import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHandleUpdateArticles, useHandleUpdateFolders } from '@/app/(home)/AppList/Editor/hooks';
+import { actions } from "@/store";
+import { MOVE } from "../../constants";
+import { Modal, Cascader, Form } from "antd";
+import { memo, useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  useHandleUpdateArticles,
+  useHandleUpdateFolders,
+} from "@/app/(home)/AppList/Editor/hooks";
 
-const Move =  () => {
+const Move = () => {
   const handleUpdateFolders = useHandleUpdateFolders();
   const handleUpdateArticles = useHandleUpdateArticles();
 
@@ -20,25 +23,31 @@ const Move =  () => {
   }));
 
   // 移动文章
-  const moveArticles = useMemo(() => (!!modal?.data.folder), [modal?.data]);
+  const moveArticles = useMemo(() => !!modal?.data.folder, [modal?.data]);
 
   // Cascader 组件 options 配置
   const options = useMemo(() => {
-    const cloneFolders = _.cloneDeep(Object.values(folders))
-      .reduce((total, ele) => {
+    const cloneFolders = _.cloneDeep(Object.values(folders)).reduce(
+      (total, ele) => {
         // 移动目录时, 移除当前目录
-        (modal?.data?.folder || ele.id !== modal?.data?.id) && total.push({
-          ...ele,
-          value: ele.id,
-          label: ele.name,
-        });
+        (modal?.data?.folder || ele.id !== modal?.data?.id) &&
+          total.push({
+            ...ele,
+            value: ele.id,
+            label: ele.name,
+          });
 
         return total;
-      }, []);
-    const groupFolders = _.groupBy(cloneFolders, 'parent.id');
+      },
+      [],
+    );
+    const groupFolders = _.groupBy(cloneFolders, "parent.id");
 
-    cloneFolders.forEach(v => (v.children = groupFolders[v.id])); // eslint-disable-line
-    return _.sortBy(cloneFolders.filter((v) => !v.parent?.id), 'name');
+    cloneFolders.forEach((v) => (v.children = groupFolders[v.id])); // eslint-disable-line
+    return _.sortBy(
+      cloneFolders.filter((v) => !v.parent?.id),
+      "name",
+    );
   }, [folders, modal]);
 
   // 点击取消
@@ -88,17 +97,21 @@ const Move =  () => {
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      onCancel={handleCancel}>
+      onCancel={handleCancel}
+    >
       <Form form={form}>
         <Form.Item
           name="paths"
           label="移动到"
           className={scss.item}
-          rules={[{
-            type: 'array',
-            message: '移动路径必填!',
-            required: moveArticles,
-          }]}>
+          rules={[
+            {
+              type: "array",
+              message: "移动路径必填!",
+              required: moveArticles,
+            },
+          ]}
+        >
           <Cascader
             changeOnSelect
             options={options}
@@ -111,4 +124,4 @@ const Move =  () => {
   );
 };
 
-export default Move;
+export default memo(Move);

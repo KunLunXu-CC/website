@@ -1,17 +1,17 @@
-import scss from './tabBarExtra.module.scss';
+import scss from "./tabBarExtra.module.scss";
 
-import { useCallback, useMemo } from 'react';
-import { actions } from '@/store';
-import { Icon } from '@kunlunxu/brick';
-import { ARTICLE_STATUS } from '@/config/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { memo, useCallback, useMemo } from "react";
+import { actions } from "@/store";
+import { Icon } from "@kunlunxu/brick";
+import { ARTICLE_STATUS } from "@/config/constants";
+import { useDispatch, useSelector } from "react-redux";
 import {
   THUMB_SETTING,
   REVOKE_CONFIRM,
   RELEASE_CONFIRM,
-} from '@/app/(home)/AppList/Editor/constants';
+} from "@/app/(home)/AppList/Editor/constants";
 
-export default () => {
+const TabBarExtra = () => {
   const dispatch = useDispatch();
 
   const { articles, works } = useSelector((state) => ({
@@ -20,9 +20,10 @@ export default () => {
   }));
 
   // 文章内容
-  const article = useMemo(() => (
-    articles[works.find((v) => v.active)?.articleId]
-  ), [articles, works]);
+  const article = useMemo(
+    () => articles[works.find((v) => v.active)?.articleId],
+    [articles, works],
+  );
 
   // 当前文章是否是未发布状态
   const unpublished = useMemo(
@@ -45,7 +46,7 @@ export default () => {
     dispatch({
       article,
       code: THUMB_SETTING,
-      type: 'modal/openModal',
+      type: "modal/openModal",
     });
   }, [article, dispatch]);
 
@@ -54,21 +55,23 @@ export default () => {
       <Icon
         onClick={thumbSetting}
         type="icon-genghuanfengmian"
-        className={scss['icon-thumbnail']}
+        className={scss["icon-thumbnail"]}
       />
       {unpublished ? (
         <Icon
           type="icon-fabu"
           onClick={handleRelease}
-          className={scss['icon-release']}
+          className={scss["icon-release"]}
         />
       ) : (
         <Icon
           type="icon-xiajia"
           onClick={handleRevoke}
-          className={scss['icon-lower-shelf']}
+          className={scss["icon-lower-shelf"]}
         />
       )}
     </div>
   );
 };
+
+export default memo(TabBarExtra);
