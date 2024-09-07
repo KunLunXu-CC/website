@@ -1,16 +1,11 @@
 import { cloneDeep } from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
-import { ACTIVITY_LIST } from '@/app/(home)/AppList/Editor/constants';
 
 export const initialState = {
   folders: {}, // {[id]: value}
   articles: {}, // {[id]: value}
   side: {
     openKeys: [], // 打开的菜单项
-    collapsed: false, // 菜单折叠状态, 是否收缩到最小
-  },
-  activity: {
-    selectKey: ACTIVITY_LIST[0].key, // 当前选中 key
   },
   search: {
     keyword: '',
@@ -25,7 +20,7 @@ export default createSlice({
   reducers: {
     setActivity: (state, { payload: activity }) => ({
       ...state,
-      activity: { ...state.activity, ...activity },
+      // activity: { ...state.activity, ...activity },
     }),
 
     setSearchKeyword: (state, { payload: keyword }): any => {

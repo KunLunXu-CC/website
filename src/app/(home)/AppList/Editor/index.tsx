@@ -1,14 +1,14 @@
-import Work from "./Work";
-import Tips from "./Tips";
-import Modals from "./Modals";
-import SideBar from "./SideBar";
-import scss from "./index.module.scss";
-import ActivityBar from "./ActivityBar";
+import Work from './Workspace';
+import Tips from './Tips';
+import Modals from './Modals';
+import SideBar from './SideBar';
+import scss from './index.module.scss';
+import ActivityBar from './ActivityBar';
 
-import { actions } from "@/store";
-import { memo, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useInitEditorDataQuery } from "@/store/graphql";
+import { actions } from '@/store';
+import { memo, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useInitEditorDataQuery } from '@/store/graphql';
 
 const useStateHook = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Editor = () => {
   return (
     <div className={scss.editor}>
       <div className={scss.header} />
-      <div className={scss["editor-body"]}>
+      <div className={scss['editor-body']}>
         <ActivityBar />
         <SideBar />
         <Work />

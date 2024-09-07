@@ -1,6 +1,8 @@
 import Search from './SideBar/Search';
 import Resource from './SideBar/Resource';
-import { APP_SETTING, ARTICLE_STATUS } from '@/config/constants';
+import { FC } from 'react';
+import { ACTIVITY_BAR_KEY } from './types';
+import { APP_SETTING } from '@/config/constants';
 
 export const NEW_FLAG_ID = 'new'; // 新建文件夹、新建文章占位 ID
 
@@ -16,34 +18,22 @@ export const THUMB_SETTING = 'EDITOR_THUMB_SETTING';
 // 弹窗类型常量 - 移动文章
 export const MOVE = 'EDITOR_MOVE';
 
-// Activity 配置
-export const ACTIVITY_LIST = [
+// 活动栏列表(最左侧)
+export const ACTIVITY_BAR_LIST = [
   {
-    key: 'all',
-    title: '全部',
+    key: ACTIVITY_BAR_KEY.RESOURCE,
+    title: '资源管理器',
     status: null,
     icon: 'icon-all',
-    component: Resource,
+    sideBar: Resource,
   },
   {
-    key: 'search',
+    key: ACTIVITY_BAR_KEY.SEARCH,
     title: '查找',
     icon: 'icon-search',
-    component: Search,
+    sideBar: Search,
   },
-  {
-    title: '未发布',
-    icon: 'icon-editor',
-    key: ARTICLE_STATUS.SAVE,
-    component: () => '未发布',
-  },
-  {
-    title: '已发布',
-    icon: 'icon-fabu',
-    key: ARTICLE_STATUS.RELEASE,
-    component: () => '已发布',
-  },
-];
+] as { key: ACTIVITY_BAR_KEY; title: string; icon: string; sideBar: FC<any> }[];
 
 // message 配置
 export const MESSAGE_CONFIG = {

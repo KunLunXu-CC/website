@@ -92,7 +92,7 @@ type Algorithms {
 }
 
 type Article {
-  content: String!
+  content: String
   creationTime: Date!
   creator: User!
   desc: String
@@ -232,8 +232,8 @@ type Folder {
   creationTime: Date!
   creator: User!
   desc: String
-  id: ID!
-  name: String!
+  id: ID
+  name: String
   parent: Folder
   status: Int!
   type: Int!

@@ -1,18 +1,17 @@
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
 
-import { actions } from "@/store";
-import { getOssUrl } from "@/utils";
-import { memo, useCallback } from "react";
-import { PHOTO_TYPE } from "@/config/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { useUploadPhotosMutation } from "@/store/graphql";
-import { useHandleUpdateArticles } from "@/app/(home)/AppList/Editor/hooks";
-import "@kunlunxu/brick/es/markdown/style";
+import { actions } from '@/store';
+import { getOssUrl } from '@/utils';
+import { IWorkspace } from '../types';
+import { memo, useCallback } from 'react';
+import { PHOTO_TYPE } from '@/config/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { useUploadPhotosMutation } from '@/store/graphql';
+import { useHandleUpdateArticles } from '@/app/(home)/AppList/Editor/hooks';
+import '@kunlunxu/brick/es/markdown/style';
+import useArticle from '../hooks/useArticle';
 
-const Markdown = dynamic(
-  () => import("@kunlunxu/brick").then((mod) => mod.Markdown),
-  { ssr: false },
-);
+const Markdown = dynamic(() => import('@kunlunxu/brick').then((mod) => mod.Markdown), { ssr: false });
 
 // 渲染 md 插件 markdown-to-jsx 配置
 const MD_TO_JSX_OPTIONS = {
@@ -20,21 +19,28 @@ const MD_TO_JSX_OPTIONS = {
     img: ({ alt, src }) => {
       const handledSrc = /^https?:/.test(src) ? src : getOssUrl(src);
 
-      return <img alt={alt} src={handledSrc} />;
+      return (
+        <img
+          alt={alt}
+          src={handledSrc}
+        />
+      );
     },
   },
 };
 
-const Editor = (props) => {
+interface IEditorProps {
+  workspace: IWorkspace;
+}
+
+const Editor = (props: IEditorProps) => {
+  const { workspace } = props;
   const dispatch = useDispatch();
   const handleUpdateArticles = useHandleUpdateArticles();
 
-  const [uploadPhotos] = useUploadPhotosMutation();
+  const { article } = useArticle({ articleId: workspace.dataId });
 
-  // 读取文章详细内容
-  const article = useSelector(
-    (state) => state.editor?.articles?.[props.work.articleId],
-  );
+  const [uploadPhotos] = useUploadPhotosMutation();
 
   // 保存(ctr + s): 修改文章内容
   const handleSave = useCallback(
@@ -59,9 +65,9 @@ const Editor = (props) => {
   // 内容改变
   const handleChange = useCallback(
     ({ value: content }) => {
-      const change = (article.content || "") !== content;
+      const change = (article.content || '') !== content;
 
-      if (props.work.change === change) {
+      if (workspace.change === change) {
         return false;
       }
 
@@ -74,7 +80,7 @@ const Editor = (props) => {
         ]),
       );
     },
-    [article, dispatch, props.work.change],
+    [article, dispatch, workspace.change],
   );
 
   // 插入图片

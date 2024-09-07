@@ -1,15 +1,16 @@
 // 文章 + 目录
 import { create } from 'zustand';
-import { IArticlesStore } from '../types';
+import { IResourceStore } from '../types';
 import { NEW_FLAG_ID } from '../constants';
 
-const useArticlesStore = create<IArticlesStore>((set, get) => ({
+const useResourceStore = create<IResourceStore>((set, get) => ({
   folders: {},
   articles: {},
+  openFolders: [],
   setFolders: (folders) => {
     const newFolders = [...Object.values(get().folders), ...folders]
       .filter((v) => v.id !== NEW_FLAG_ID)
-      .reduce<IArticlesStore['folders']>(
+      .reduce<IResourceStore['folders']>(
         (total, ele) => ({
           ...total,
           [ele.id as string]: ele,
@@ -19,10 +20,23 @@ const useArticlesStore = create<IArticlesStore>((set, get) => ({
 
     set({ folders: newFolders });
   },
+  createTmpFolder: (parentId) => {
+    set({
+      folders: {
+        ...get().folders,
+        new: {
+          name: '',
+          id: 'new',
+          editor: true,
+          parent: { id: parentId },
+        },
+      },
+    });
+  },
   setArticles: (articles) => {
     const newArticles = [...Object.values(get().articles), ...articles]
       .filter((v) => v.id !== NEW_FLAG_ID)
-      .reduce<IArticlesStore['articles']>(
+      .reduce<IResourceStore['articles']>(
         (total, ele) => ({
           ...total,
           [ele.id as string]: ele,
@@ -32,6 +46,8 @@ const useArticlesStore = create<IArticlesStore>((set, get) => ({
 
     set({ articles: newArticles });
   },
+  setOpenFolders: (openFolders) => set({ openFolders }),
+  findArticle: (articleId) => get().articles[articleId],
 }));
 
-export default useArticlesStore;
+export default useResourceStore;

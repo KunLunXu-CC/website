@@ -1,13 +1,13 @@
-import classNames from "classnames";
-import scss from "./title.module.scss";
+import classNames from 'classnames';
+import scss from './title.module.scss';
 
-import { actions } from "@/store";
-import { MOVE } from "../../constants";
-import { Icon } from "@kunlunxu/brick";
-import { Dropdown, Input } from "antd";
-import { ARTICLE_STATUS } from "@/config/constants";
-import { useDispatch, useSelector } from "react-redux";
-import { useRef, useMemo, useCallback, useEffect, memo } from "react";
+import { actions } from '@/store';
+import { MOVE } from '../../constants';
+import { Icon } from '@kunlunxu/brick';
+import { Dropdown, Input } from 'antd';
+import { ARTICLE_STATUS } from '@/config/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useMemo, useCallback, useEffect, memo } from 'react';
 import {
   useHandleUpdateFolders,
   useHandleUpdateArticles,
@@ -15,7 +15,7 @@ import {
   useHandleCreateArticles,
   useHandleRemoveFolders,
   useHandleRemoveArticles,
-} from "@/app/(home)/AppList/Editor/hooks";
+} from '@/app/(home)/AppList/Editor/hooks';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
@@ -31,9 +31,8 @@ const Title = (props) => {
   const dispatch = useDispatch();
   const editorInputRef = useRef(null);
 
-  const { openKeys, activity } = useSelector((state) => ({
+  const { openKeys } = useSelector((state) => ({
     openKeys: state.editor.side.openKeys,
-    activity: state.editor.activity,
   }));
 
   // 点击下拉菜单
@@ -78,9 +77,7 @@ const Title = (props) => {
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const reducerName = !props.data.folder
-      ? "addEditorStatusWithFolder"
-      : "addEditorStatusWithArticle";
+    const reducerName = !props.data.folder ? 'addEditorStatusWithFolder' : 'addEditorStatusWithArticle';
     dispatch(actions.editor[reducerName](props.data.id));
   }, [dispatch, props.data.id, props.data.folder]);
 
@@ -107,31 +104,31 @@ const Title = (props) => {
     const setting = [
       {
         conds: true,
-        title: "创建文件夹",
-        icon: "icon-wenjianjia",
+        title: '创建文件夹',
+        icon: 'icon-wenjianjia',
         onClick: handleCreateFolderMenu,
       },
       {
         conds: true,
-        title: "创建文章",
-        icon: "icon-24",
+        title: '创建文章',
+        icon: 'icon-24',
         onClick: handleCreateArticleMenu,
       },
       {
         conds: true,
-        title: "编辑",
-        icon: "icon-baocun",
+        title: '编辑',
+        icon: 'icon-baocun',
         onClick: handleEditMenu,
       },
       {
         conds: true,
-        title: "移动",
-        icon: "icon-baocun",
+        title: '移动',
+        icon: 'icon-baocun',
         onClick: handleMoveMenu,
       },
       {
-        title: "删除",
-        icon: "icon-shanchu",
+        title: '删除',
+        icon: 'icon-shanchu',
         onClick: handleDeleteMenu,
         conds: !props.data.children?.length > 0, // TODO： 文件夹未展开, 是无效的
       },
@@ -153,7 +150,7 @@ const Title = (props) => {
     return {
       items,
       onClick: handleClickMenu,
-      className: scss["operation-menu"],
+      className: scss['operation-menu'],
     };
   }, [
     handleEditMenu,
@@ -169,7 +166,7 @@ const Title = (props) => {
   const handleEdit = useCallback(
     (e) => {
       const name = e.target.value;
-      const isNew = props.data.id === "new";
+      const isNew = props.data.id === 'new';
       const isFolder = !props.data.folder;
 
       const map = [
@@ -217,25 +214,19 @@ const Title = (props) => {
 
       map.find((v) => v.cond).handler();
     },
-    [
-      props.data,
-      handleCreateFolders,
-      handleUpdateFolders,
-      handleCreateArticles,
-      handleUpdateArticles,
-    ],
+    [props.data, handleCreateFolders, handleUpdateFolders, handleCreateArticles, handleUpdateArticles],
   );
 
   // 最外层 className
   const className = useMemo(
     () =>
-      classNames(scss["menu-title"], {
-        [scss["menu-title-article"]]: props.data.folder,
-        [scss["menu-title-release"]]:
-          !_.isNumber(activity.selectKey) &&
-          props.data.status === ARTICLE_STATUS.RELEASE,
+      classNames(scss['menu-title'], {
+        [scss['menu-title-article']]: props.data.folder,
+        // [scss["menu-title-release"]]:
+        //   !_.isNumber(activity.selectKey) &&
+        //   props.data.status === ARTICLE_STATUS.RELEASE,
       }),
-    [props.data, activity.selectKey],
+    [props.data],
   );
 
   useEffect(() => {
@@ -244,9 +235,12 @@ const Title = (props) => {
 
   return (
     <div className={className}>
-      <Icon type="icon-jiantou" className={scss["menu-title-arrow"]} />
-      <Icon type={props.data.folder ? "icon-24" : "icon-wenjianjia"} />
-      <div className={scss["menu-title-content"]}>
+      <Icon
+        type="icon-jiantou"
+        className={scss['menu-title-arrow']}
+      />
+      <Icon type={props.data.folder ? 'icon-24' : 'icon-wenjianjia'} />
+      <div className={scss['menu-title-content']}>
         {props.data.editor ? (
           <Input
             onBlur={handleEdit}
@@ -254,20 +248,19 @@ const Title = (props) => {
             onPressEnter={handleEdit}
             onClick={stopPropagation}
             defaultValue={props.data.name}
-            className={scss["menu-title-content-input"]}
+            className={scss['menu-title-content-input']}
           />
         ) : (
           props.data.name
         )}
       </div>
       {!props.data.editor ? (
-        <div className={scss["menu-title-more"]}>
+        <div className={scss['menu-title-more']}>
           <Dropdown
             menu={moreMenu}
-            trigger={["click"]}
+            trigger={['click']}
             placement="bottomRight"
-            onClick={stopPropagation}
-          >
+            onClick={stopPropagation}>
             <Icon type="icon-gengduo" />
           </Dropdown>
         </div>

@@ -1,44 +1,32 @@
-import classNames from "classnames";
-import scss from "./index.module.scss";
+import clsx from 'clsx';
+import scss from './index.module.scss';
+import useEditorStore from '../hooks/useActivityBarStore';
 
-import { actions } from "@/store";
-import { memo, useCallback } from "react";
-import { Icon } from "@kunlunxu/brick";
-import { useDispatch, useSelector } from "react-redux";
-import { ACTIVITY_LIST } from "@/app/(home)/AppList/Editor/constants";
+import { Icon } from '@kunlunxu/brick';
+import { memo, useCallback } from 'react';
+import { ACTIVITY_BAR_KEY } from '../types';
+import { ACTIVITY_BAR_LIST } from '@/app/(home)/AppList/Editor/constants';
 
 const ActivityBar = () => {
-  const dispatch = useDispatch();
-
-  const { selectKey } = useSelector((state) => ({
-    selectKey: state.editor.activity.selectKey,
-  }));
+  const { selectedActivityBarKey, setSelectedActivityBarKey } = useEditorStore();
 
   // 点击菜单
   const handleClick = useCallback(
-    (selectKey) => {
-      dispatch(actions.editor.setActivity({ selectKey }));
+    (selectKey: ACTIVITY_BAR_KEY) => {
+      setSelectedActivityBarKey(selectKey);
     },
-    [dispatch],
-  );
-
-  // 菜单项 className
-  const getItemClassName = useCallback(
-    (key) =>
-      classNames(scss["activity-item"], {
-        [scss["activity-item-active"]]: key === selectKey,
-      }),
-    [selectKey],
+    [setSelectedActivityBarKey],
   );
 
   return (
     <div className={scss.activity}>
-      {ACTIVITY_LIST.map((v) => (
+      {ACTIVITY_BAR_LIST.map((v) => (
         <div
           key={v.key}
-          className={getItemClassName(v.key)}
-          onClick={handleClick.bind(null, v.key)}
-        >
+          className={clsx(scss['activity-item'], {
+            [scss['activity-item-active']]: v.key === selectedActivityBarKey,
+          })}
+          onClick={handleClick.bind(null, v.key)}>
           <Icon type={v.icon} />
         </div>
       ))}
