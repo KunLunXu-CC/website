@@ -6,20 +6,24 @@ import { NEW_FLAG_ID } from '../constants';
 const useResourceStore = create<IResourceStore>((set, get) => ({
   folders: {},
   articles: {},
-  openFolders: [],
+  openFolderIds: [],
   setFolders: (folders) => {
-    const newFolders = [...Object.values(get().folders), ...folders]
-      .filter((v) => v.id !== NEW_FLAG_ID)
-      .reduce<IResourceStore['folders']>(
-        (total, ele) => ({
-          ...total,
-          [ele.id as string]: ele,
-        }),
-        {},
-      );
-
+    const newFolders = folders.reduce<IResourceStore['folders']>(
+      (total, ele) => ({
+        ...total,
+        [ele.id as string]: ele,
+      }),
+      {},
+    );
     set({ folders: newFolders });
   },
+  appendFolder: (folder) => {
+    const { folders, setFolders } = get();
+    const newFolders = [...Object.values(folders), folder].filter((v) => v.id !== NEW_FLAG_ID);
+    setFolders(newFolders);
+  },
+  setOpenFolderIds: (ids) => set({ openFolderIds: ids }),
+  openFolder: (id) => set({ openFolderIds: [...get().openFolderIds, id] }),
   createTmpFolder: (parentId) => {
     set({
       folders: {
@@ -34,19 +38,34 @@ const useResourceStore = create<IResourceStore>((set, get) => ({
     });
   },
   setArticles: (articles) => {
-    const newArticles = [...Object.values(get().articles), ...articles]
-      .filter((v) => v.id !== NEW_FLAG_ID)
-      .reduce<IResourceStore['articles']>(
-        (total, ele) => ({
-          ...total,
-          [ele.id as string]: ele,
-        }),
-        {},
-      );
-
+    const newArticles = articles.reduce<IResourceStore['articles']>(
+      (total, ele) => ({
+        ...total,
+        [ele.id as string]: ele,
+      }),
+      {},
+    );
     set({ articles: newArticles });
   },
-  setOpenFolders: (openFolders) => set({ openFolders }),
+  // 创建临时 article (占位符)
+  createTmpArticle: (folderId) => {
+    set({
+      articles: {
+        ...get().articles,
+        new: {
+          name: '',
+          id: 'new',
+          editor: true,
+          folder: { id: folderId },
+        },
+      },
+    });
+  },
+  appendArticle: (article) => {
+    const { articles, setArticles } = get();
+    const newArticles = [...Object.values(articles), article].filter((v) => v.id !== NEW_FLAG_ID);
+    setArticles(newArticles);
+  },
   findArticle: (articleId) => get().articles[articleId],
 }));
 

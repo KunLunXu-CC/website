@@ -11,7 +11,7 @@ const INLINE_INDENT = 14; // 菜单缩进大小
 
 const Resource = () => {
   const { workspaces, appendArticleWorkspace } = useWorkspaceStore();
-  const { folders, articles, setOpenFolders, openFolders, createTmpFolder } = useResourceStore();
+  const { folders, articles, setOpenFolderIds, openFolderIds, createTmpFolder } = useResourceStore();
 
   // 菜单
   const treeData = useMemo(() => {
@@ -24,7 +24,7 @@ const Resource = () => {
       const tagLength = groupFolders[v.id]?.length ?? 0;
       const articleLength = groupArticles[v.id]?.length ?? 0;
       v.childrenLength = tagLength + articleLength; // eslint-disable-line
-      v.children = openFolders.includes(v.id)
+      v.children = openFolderIds.includes(v.id)
         ? [
             // eslint-disable-line
             ...sortBy(groupFolders[v.id] || [], 'name'),
@@ -37,7 +37,7 @@ const Resource = () => {
       cloneFolders.filter((v) => !v.parent?.id),
       'name',
     );
-  }, [articles, folders, openFolders]);
+  }, [articles, folders, openFolderIds]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
   const selectedKeys = useMemo(() => {
@@ -88,10 +88,10 @@ const Resource = () => {
         mode="inline"
         className={scss.menu}
         inlineCollapsed={false}
-        openKeys={openFolders}
+        openKeys={openFolderIds}
         inlineIndent={INLINE_INDENT}
         selectedKeys={selectedKeys}
-        onOpenChange={setOpenFolders}
+        onOpenChange={setOpenFolderIds}
         onSelect={({ key }) => appendArticleWorkspace(key)}
       />
       <div

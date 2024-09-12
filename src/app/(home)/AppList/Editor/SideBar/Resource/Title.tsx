@@ -1,103 +1,95 @@
-import classNames from 'classnames';
 import scss from './title.module.scss';
 
+import { Dropdown } from 'antd';
 import { actions } from '@/store';
 import { MOVE } from '../../constants';
 import { Icon } from '@kunlunxu/brick';
-import { Dropdown, Input } from 'antd';
+import { Input } from '@nextui-org/react';
 import { ARTICLE_STATUS } from '@/config/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRef, useMemo, useCallback, useEffect, memo } from 'react';
+import { useRef, useMemo, useCallback, KeyboardEvent, memo, FocusEvent } from 'react';
 import {
   useHandleUpdateFolders,
   useHandleUpdateArticles,
-  useHandleCreateFolders,
   useHandleCreateArticles,
   useHandleRemoveFolders,
   useHandleRemoveArticles,
 } from '@/app/(home)/AppList/Editor/hooks';
+import clsx from 'clsx';
+import useResourceStore from '../../hooks/useResourceStore';
+import useCreateArticle from '../../hooks/useCreateArticle';
+import useCreateFolder from '@/app/(home)/AppList/Editor/hooks/useCreateFolder';
 
 // 阻止事件冒泡
 const stopPropagation = (e) => e.stopPropagation();
 
 const Title = (props) => {
-  const handleCreateFolders = useHandleCreateFolders();
+  const { data } = props;
+  const { createFolders } = useCreateFolder();
+  const { createArticle } = useCreateArticle();
   const handleCreateArticles = useHandleCreateArticles();
   const handleUpdateFolders = useHandleUpdateFolders();
   const handleUpdateArticles = useHandleUpdateArticles();
   const handleRemoveFolders = useHandleRemoveFolders();
   const handleRemoveArticles = useHandleRemoveArticles();
+  const { openFolderIds, openFolder, createTmpFolder, createTmpArticle } = useResourceStore();
 
   const dispatch = useDispatch();
-  const editorInputRef = useRef(null);
 
-  const { openKeys } = useSelector((state) => ({
-    openKeys: state.editor.side.openKeys,
-  }));
+  // const { openFolderIds } = useSelector((state) => ({
+  //   openFolderIds: state.editor.side.openFolderIds,
+  // }));
 
   // 点击更多下拉菜单项
   const handleClickMenu = useCallback(({ item, domEvent }) => {
+    console.log('%c [ item ]-44', 'font-size:13px; background:pink; color:#bf2c9f;', item);
     stopPropagation(domEvent);
     item.props.data.onClick();
   }, []);
 
   // 下拉菜单点击事件: 点击创建文件夹
   const handleCreateFolderMenu = useCallback(() => {
-    if (!props.data.folder) {
-      // 在文件夹上触发下拉框
-      dispatch(
-        actions.editor.setSide({
-          openKeys: [...openKeys, props.data.id],
-        }),
-      );
-
-      dispatch(actions.editor.createTmpFolder(props.data.id));
+    if (!data.folder) {
+      openFolder(data.id); // 在文件夹上触发下拉框, 先打开文件夹
+      createTmpFolder(data.id); // 创建临时文件夹
     } else {
-      // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpFolder(props.data.folder?.id));
+      createTmpFolder(data.folder?.id); // 创建临时文件夹
     }
-  }, [dispatch, openKeys, props.data.id, props.data.folder]);
+  }, [data, openFolder, createTmpFolder]);
 
   // 下拉菜单点击事件: 点击创建文章
   const handleCreateArticleMenu = useCallback(() => {
-    if (!props.data.folder) {
-      // 在文件夹上触发下拉框
-      dispatch(
-        actions.editor.setSide({
-          openKeys: [...openKeys, props.data.id],
-        }),
-      );
-
-      dispatch(actions.editor.createTmpArticle(props.data.id));
+    if (!data.folder) {
+      openFolder(data.id); // 在文件夹上触发下拉框, 先打开文件夹
+      createTmpArticle(data.id); // 创建临时文章
     } else {
-      // 在文章上触发下拉框
-      dispatch(actions.editor.createTmpArticle(props.data.folder?.id));
+      createTmpArticle(data.folder?.id); // 在文章上触发下拉框
     }
-  }, [props.data, dispatch, openKeys]);
+  }, [createTmpArticle, data, openFolder]);
 
   // 下拉菜单点击事件: 点击编辑
   const handleEditMenu = useCallback(() => {
-    const reducerName = !props.data.folder ? 'addEditorStatusWithFolder' : 'addEditorStatusWithArticle';
-    dispatch(actions.editor[reducerName](props.data.id));
-  }, [dispatch, props.data.id, props.data.folder]);
+    const reducerName = !data.folder ? 'addEditorStatusWithFolder' : 'addEditorStatusWithArticle';
+    dispatch(actions.editor[reducerName](data.id));
+  }, [dispatch, data.id, data.folder]);
 
   // 下拉菜单点击事件: 移动
   const handleMoveMenu = useCallback(() => {
-    dispatch(actions.modal.open({ code: MOVE, data: props.data }));
-  }, [dispatch, props.data]);
+    dispatch(actions.modal.open({ code: MOVE, data: data }));
+  }, [dispatch, data]);
 
   // 下拉菜单点击事件: 点击删除
   const handleDeleteMenu = useCallback(async () => {
-    if (props.data.folder) {
+    if (data.folder) {
       handleRemoveArticles({
-        conds: { id: props.data.id },
+        conds: { id: data.id },
       });
     } else {
       handleRemoveFolders({
-        conds: { id: props.data.id },
+        conds: { id: data.id },
       });
     }
-  }, [props.data, handleRemoveArticles, handleRemoveFolders]);
+  }, [data, handleRemoveArticles, handleRemoveFolders]);
 
   // 标题 - 更多 - 下列菜单
   const moreMenu = useMemo(() => {
@@ -130,7 +122,7 @@ const Title = (props) => {
         title: '删除',
         icon: 'icon-shanchu',
         onClick: handleDeleteMenu,
-        conds: !props.data.children?.length > 0, // TODO： 文件夹未展开, 是无效的
+        conds: !data.children?.length > 0, // TODO： 文件夹未展开, 是无效的
       },
     ];
 
@@ -159,102 +151,78 @@ const Title = (props) => {
     handleDeleteMenu,
     handleCreateFolderMenu,
     handleCreateArticleMenu,
-    props.data.children?.length,
+    data.children?.length,
   ]);
 
   // 编辑数据: 根据不同 id、type 设置不同 dispatch 参数
   const handleEdit = useCallback(
-    (e) => {
-      const name = e.target.value;
-      const isNew = props.data.id === 'new';
-      const isFolder = !props.data.folder;
+    (e: KeyboardEvent<HTMLInputElement> | FocusEvent<HTMLInputElement>) => {
+      const name = (e.target as HTMLInputElement).value;
+      const isNew = data.id === 'new';
+      const isFolder = !data.folder;
 
-      const map = [
-        // 1. 新建 - 文件夹
-        {
-          cond: isFolder && isNew,
-          handler: handleCreateFolders.bind(null, {
-            body: [
-              {
-                name,
-                parent: props.data.parent?.id,
-              },
-            ],
-          }),
-        },
-        // 2. 新建 - 文章
-        {
-          cond: !isFolder && isNew,
-          handler: handleCreateArticles.bind(null, {
-            body: [
-              {
-                name,
-                folder: props.data.folder?.id,
-              },
-            ],
-          }),
-        },
-        // 3. 编辑 - 文件夹
-        {
-          cond: isFolder && !isNew,
-          handler: handleUpdateFolders.bind(null, {
+      switch (true) {
+        case isFolder && isNew: // 新建 - 文件夹
+          createFolders({ name, parentId: data.parent?.id });
+          break;
+        case !isFolder && isNew: // 新建 - 文章
+          createArticle({ name, folderId: data.folder?.id });
+          break;
+        case isFolder && !isNew: // 编辑 - 文件夹
+          handleUpdateFolders({
             body: { name },
-            conds: { id: props.data.id },
-          }),
-        },
-        // 4. 编辑 - 文章
-        {
-          cond: !isFolder && !isNew,
-          handler: handleUpdateArticles.bind(null, {
+            conds: { id: data.id },
+          });
+          break;
+        case !isFolder && !isNew: // 编辑 - 文章
+          handleUpdateArticles({
             body: { name },
-            conds: { id: props.data.id },
-          }),
-        },
-      ];
-
-      map.find((v) => v.cond).handler();
+            conds: { id: data.id },
+          });
+          break;
+      }
     },
-    [props.data, handleCreateFolders, handleUpdateFolders, handleCreateArticles, handleUpdateArticles],
+    [data, createFolders, createArticle, handleUpdateFolders, handleUpdateArticles],
   );
 
-  // 最外层 className
-  const className = useMemo(
-    () =>
-      classNames(scss['menu-title'], {
-        [scss['menu-title-article']]: props.data.folder,
-        // [scss["menu-title-release"]]:
-        //   !_.isNumber(activity.selectKey) &&
-        //   props.data.status === ARTICLE_STATUS.RELEASE,
-      }),
-    [props.data],
+  // 输入框回车事件
+  const handleKeyUp = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        e.stopPropagation();
+        handleEdit(e);
+      }
+    },
+    [handleEdit],
   );
-
-  useEffect(() => {
-    editorInputRef.current && editorInputRef.current.focus();
-  });
 
   return (
-    <div className={className}>
+    <div className={clsx(scss['menu-title'], { [scss['menu-title-article']]: data.folder })}>
       <Icon
         type="icon-jiantou"
         className={scss['menu-title-arrow']}
       />
-      <Icon type={props.data.folder ? 'icon-24' : 'icon-wenjianjia'} />
+      <Icon type={data.folder ? 'icon-24' : 'icon-wenjianjia'} />
       <div className={scss['menu-title-content']}>
-        {props.data.editor ? (
+        {data.editor ? (
           <Input
+            autoFocus
+            size="sm"
+            radius="none"
             onBlur={handleEdit}
-            ref={editorInputRef}
-            onPressEnter={handleEdit}
+            onKeyUp={handleKeyUp}
             onClick={stopPropagation}
-            defaultValue={props.data.name}
-            className={scss['menu-title-content-input']}
+            defaultValue={data.name}
+            classNames={{
+              input: '!text-white/80',
+              inputWrapper: '!bg-white/10',
+            }}
           />
         ) : (
-          props.data.name
+          data.name
         )}
       </div>
-      {!props.data.editor ? (
+      {!data.editor ? (
         <div className={scss['menu-title-more']}>
           <Dropdown
             menu={moreMenu}

@@ -23,8 +23,10 @@ const documents = {
     "\n  query CalendarDiaries($search: DiarySearch) {\n    diaries(search: $search) {\n      list {\n        ...DiaryItem\n      }\n    }\n  }\n": types.CalendarDiariesDocument,
     "\n  query DiaryStatsBill($search: StatsBillSearch) {\n    statsBill(search: $search) {\n      stats {\n        income\n        expend\n      }\n      groupWithName {\n        name\n        income\n        expend\n        diaries {\n          name\n          bill {\n            desc\n            income\n            expend\n            tag\n          }\n        }\n      }\n    }\n  }\n": types.DiaryStatsBillDocument,
     "\n  query DiaryStatsBodyIndex($search: DiarySearch) {\n    diaries(search: $search) {\n      list {\n        name\n        bodyIndex {\n          weight\n          muscle\n          moistureContent\n          bodyfat\n          bim\n        }\n      }\n    }\n  }\n": types.DiaryStatsBodyIndexDocument,
+    "\n  mutation EditorCreateArticle($body: ArticleFields!) {\n    createArticles(body: [$body]) {\n      change {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n": types.EditorCreateArticleDocument,
+    "\n  mutation EditorCreateFolder($body: FolderFields!) {\n    createFolders(body: [$body]) {\n      change {\n        ...EditorResourceFolderItem\n      }\n    }\n  }\n": types.EditorCreateFolderDocument,
     "\n  fragment EditorResourceFolderItem on Folder {\n    id\n    name\n    parent {\n      id\n      name\n    }\n  }\n\n  fragment EditorResourceArticleItem on Article {\n    id\n    name\n    thumb\n    status\n    content\n    folder {\n      id\n      name\n    }\n  }\n": types.EditorResourceFolderItemFragmentDoc,
-    "\n  query InitEditorResource {\n    folders(search: { type: [0] }) {\n      list {\n        ...EditorResourceFolderItem\n      }\n    }\n    articles {\n      list {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n": types.InitEditorResourceDocument,
+    "\n  query EditorInitResource {\n    folders(search: { type: [0] }) {\n      list {\n        ...EditorResourceFolderItem\n      }\n    }\n    articles {\n      list {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n": types.EditorInitResourceDocument,
     "\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n": types.RoleItemFragmentDoc,
     "\n  query Roles {\n    roles {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n": types.RolesDocument,
     "\n  mutation UpdateRoles($body: RoleFields!, $conds: RoleSearch!) {\n    updateRoles(body: $body, conds: $conds) {\n      change {\n        ...RoleItem\n      }\n    }\n  }\n": types.UpdateRolesDocument,
@@ -96,11 +98,19 @@ export function graphql(source: "\n  query DiaryStatsBodyIndex($search: DiarySea
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  mutation EditorCreateArticle($body: ArticleFields!) {\n    createArticles(body: [$body]) {\n      change {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation EditorCreateArticle($body: ArticleFields!) {\n    createArticles(body: [$body]) {\n      change {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation EditorCreateFolder($body: FolderFields!) {\n    createFolders(body: [$body]) {\n      change {\n        ...EditorResourceFolderItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation EditorCreateFolder($body: FolderFields!) {\n    createFolders(body: [$body]) {\n      change {\n        ...EditorResourceFolderItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment EditorResourceFolderItem on Folder {\n    id\n    name\n    parent {\n      id\n      name\n    }\n  }\n\n  fragment EditorResourceArticleItem on Article {\n    id\n    name\n    thumb\n    status\n    content\n    folder {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  fragment EditorResourceFolderItem on Folder {\n    id\n    name\n    parent {\n      id\n      name\n    }\n  }\n\n  fragment EditorResourceArticleItem on Article {\n    id\n    name\n    thumb\n    status\n    content\n    folder {\n      id\n      name\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query InitEditorResource {\n    folders(search: { type: [0] }) {\n      list {\n        ...EditorResourceFolderItem\n      }\n    }\n    articles {\n      list {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query InitEditorResource {\n    folders(search: { type: [0] }) {\n      list {\n        ...EditorResourceFolderItem\n      }\n    }\n    articles {\n      list {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query EditorInitResource {\n    folders(search: { type: [0] }) {\n      list {\n        ...EditorResourceFolderItem\n      }\n    }\n    articles {\n      list {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n"): (typeof documents)["\n  query EditorInitResource {\n    folders(search: { type: [0] }) {\n      list {\n        ...EditorResourceFolderItem\n      }\n    }\n    articles {\n      list {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

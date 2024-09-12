@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import client from '@/gql/client';
 import useResourceStore from './useResourceStore';
 
@@ -6,7 +5,7 @@ import { useEffect } from 'react';
 import { graphql, useFragment } from '@/gql';
 import { useQuery } from '@tanstack/react-query';
 import {
-  InitEditorResourceQuery,
+  EditorInitResourceQuery,
   EditorResourceFolderItemFragmentDoc,
   EditorResourceArticleItemFragmentDoc,
 } from '@/gql/graphql';
@@ -34,8 +33,8 @@ graphql(`
   }
 `);
 
-const InitEditorResourceDocument = graphql(`
-  query InitEditorResource {
+const EditorInitResourceDocument = graphql(`
+  query EditorInitResource {
     folders(search: { type: [0] }) {
       list {
         ...EditorResourceFolderItem
@@ -50,17 +49,15 @@ const InitEditorResourceDocument = graphql(`
 `);
 
 const useInitArticles = () => {
-  const { data } = useQuery<InitEditorResourceQuery>({
+  const { data } = useQuery<EditorInitResourceQuery>({
     queryKey: ['initEditorResource'],
-    queryFn: () => client.request(InitEditorResourceDocument),
+    queryFn: () => client.request(EditorInitResourceDocument),
   });
 
   const { setFolders, setArticles } = useResourceStore();
 
   useEffect(() => {
     if (data) {
-      console.log('%c [ data ]-62', 'font-size:13px; background:pink; color:#bf2c9f;', data);
-
       setFolders(useFragment(EditorResourceFolderItemFragmentDoc, data?.folders?.list ?? []));
       setArticles(useFragment(EditorResourceArticleItemFragmentDoc, data?.articles?.list ?? []));
     }

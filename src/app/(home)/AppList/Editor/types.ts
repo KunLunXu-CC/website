@@ -8,14 +8,18 @@ export enum ACTIVITY_BAR_KEY {
 export interface IResourceState {
   folders: Record<string, EditorResourceFolderItemFragment>;
   articles: Record<string, EditorResourceArticleItemFragment>;
-  openFolders: string[];
+  openFolderIds: string[];
 }
 
 export interface IResourceStore extends IResourceState {
   setFolders: (folders: EditorResourceFolderItemFragment[]) => void;
+  appendFolder: (folder: EditorResourceFolderItemFragment) => void;
+  openFolder: (id: string) => void;
+  setOpenFolderIds: (ids: string[]) => void;
   createTmpFolder: (parentId: string | null) => void;
+  createTmpArticle: (folderId: string) => void;
   setArticles: (articles: EditorResourceArticleItemFragment[]) => void;
-  setOpenFolders: (openFolders: string[]) => void;
+  appendArticle: (article: EditorResourceArticleItemFragment) => void;
   findArticle: (articleId: string) => EditorResourceArticleItemFragment | undefined;
 }
 
