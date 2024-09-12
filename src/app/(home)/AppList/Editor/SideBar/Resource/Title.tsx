@@ -35,7 +35,7 @@ const Title = (props) => {
     openKeys: state.editor.side.openKeys,
   }));
 
-  // 点击下拉菜单
+  // 点击更多下拉菜单项
   const handleClickMenu = useCallback(({ item, domEvent }) => {
     stopPropagation(domEvent);
     item.props.data.onClick();
