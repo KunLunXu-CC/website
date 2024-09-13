@@ -96,7 +96,7 @@ type Article {
   creationTime: Date!
   creator: User!
   desc: String
-  folder: Folder!
+  folder: Folder
   id: ID!
   name: String!
   status: Int!

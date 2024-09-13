@@ -1,104 +1,89 @@
-import scss from "./index.module.scss";
-
-import { actions } from "@/store";
-import { MOVE } from "../../constants";
-import { Modal, Cascader, Form } from "antd";
-import { memo, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  useHandleUpdateArticles,
-  useHandleUpdateFolders,
-} from "@/app/(home)/AppList/Editor/hooks";
+import scss from './index.module.scss';
+import { Modal, Cascader, Form } from 'antd';
+import { memo, useCallback, useMemo } from 'react';
+import useMoveModalStore from '../../hooks/useMoveModalStore';
+import useResourceStore from '../../hooks/useResourceStore';
+import { last, sortBy, cloneDeep, groupBy } from 'lodash';
+import useUpdateArticle from '../../hooks/useUpdateArticle';
+import useUpdateFolder from '../../hooks/useUpdateFolder';
 
 const Move = () => {
-  const handleUpdateFolders = useHandleUpdateFolders();
-  const handleUpdateArticles = useHandleUpdateArticles();
+  const { updateArticle } = useUpdateArticle();
+  const { updateFolder } = useUpdateFolder();
+  const { onClose: closeMoveModal, data: modalData } = useMoveModalStore();
+  const { folders } = useResourceStore();
 
-  const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const { modal, folders } = useSelector((state) => ({
-    folders: state.editor.folders,
-    modal: state.modal[MOVE],
-  }));
-
   // 移动文章
-  const moveArticles = useMemo(() => !!modal?.data.folder, [modal?.data]);
+  const isMoveArticle = useMemo(() => !!modalData?.folder, [modalData]);
 
   // Cascader 组件 options 配置
   const options = useMemo(() => {
-    const cloneFolders = _.cloneDeep(Object.values(folders)).reduce(
-      (total, ele) => {
-        // 移动目录时, 移除当前目录
-        (modal?.data?.folder || ele.id !== modal?.data?.id) &&
-          total.push({
-            ...ele,
-            value: ele.id,
-            label: ele.name,
-          });
+    const cloneFolders = cloneDeep(Object.values(folders)).reduce((total, ele) => {
+      // 移动目录时, 移除当前目录
+      (modalData?.folder || ele.id !== modalData?.id) &&
+        total.push({
+          ...ele,
+          value: ele.id,
+          label: ele.name,
+        });
 
-        return total;
-      },
-      [],
-    );
-    const groupFolders = _.groupBy(cloneFolders, "parent.id");
+      return total;
+    }, []);
+    const groupFolders = groupBy(cloneFolders, 'parent.id');
 
-    cloneFolders.forEach((v) => (v.children = groupFolders[v.id])); // eslint-disable-line
-    return _.sortBy(
+    cloneFolders.forEach((v) => (v.children = groupFolders[v.id]));
+
+    return sortBy(
       cloneFolders.filter((v) => !v.parent?.id),
-      "name",
+      'name',
     );
-  }, [folders, modal]);
+  }, [folders, modalData]);
 
   // 点击取消
   const handleCancel = useCallback(() => {
-    dispatch(actions.modal.close());
-  }, [dispatch]);
+    closeMoveModal();
+  }, [closeMoveModal]);
 
   // 点击确定
   const handleOk = useCallback(async () => {
     const { paths } = await form.validateFields();
-    const last = _.last(paths);
+    const folder = last(paths) as string;
+
+    if (!modalData) return;
 
     // 编辑文章 folder, folder 不能为空
-    if (moveArticles && last) {
-      handleUpdateArticles({
-        conds: { id: modal.data.id },
-        body: { folder: last },
+    if (isMoveArticle && folder) {
+      updateArticle({
+        id: modalData.id!,
+        folder,
       });
     }
 
     // 编辑目录 parent, parent 允许为空
-    if (!moveArticles) {
-      handleUpdateFolders({
-        conds: { id: modal.data.id },
-        body: { parent: last || null },
+    if (!isMoveArticle) {
+      updateFolder({
+        id: modalData.id!,
+        parent: folder || null,
       });
     }
 
     handleCancel();
-  }, [
-    form,
-    modal?.data,
-    moveArticles,
-    handleCancel,
-    handleUpdateFolders,
-    handleUpdateArticles,
-  ]);
+  }, [form, isMoveArticle, handleCancel, updateArticle, modalData, updateFolder]);
 
   return (
     <Modal
       width={420}
       okText="确定"
-      open={!!modal}
+      open={!!modalData}
       onOk={handleOk}
       closable={false}
       cancelText="取消"
       getContainer={false}
       maskClosable={false}
       className={scss.modal}
-      onCancel={handleCancel}
-    >
+      onCancel={handleCancel}>
       <Form form={form}>
         <Form.Item
           name="paths"
@@ -106,12 +91,11 @@ const Move = () => {
           className={scss.item}
           rules={[
             {
-              type: "array",
-              message: "移动路径必填!",
-              required: moveArticles,
+              type: 'array',
+              message: '移动路径必填!',
+              required: isMoveArticle,
             },
-          ]}
-        >
+          ]}>
           <Cascader
             changeOnSelect
             options={options}

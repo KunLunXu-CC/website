@@ -5,22 +5,44 @@ export enum ACTIVITY_BAR_KEY {
   SEARCH = 'search',
 }
 
+export interface IResourceFolderItem extends EditorResourceFolderItemFragment {
+  editor?: boolean;
+}
+
+export interface IResourceArticleItem extends EditorResourceArticleItemFragment {
+  editor?: boolean;
+}
+
+export type IResourceItem = IResourceFolderItem &
+  IResourceArticleItem & {
+    childrenLength?: number;
+    children?: IResourceItem[];
+  };
+
+// ------------------------------
+
 export interface IResourceState {
-  folders: Record<string, EditorResourceFolderItemFragment>;
-  articles: Record<string, EditorResourceArticleItemFragment>;
+  folders: Record<string, IResourceFolderItem>;
+  articles: Record<string, IResourceArticleItem>;
   openFolderIds: string[];
 }
 
 export interface IResourceStore extends IResourceState {
-  setFolders: (folders: EditorResourceFolderItemFragment[]) => void;
-  appendFolder: (folder: EditorResourceFolderItemFragment) => void;
+  setFolders: (folders: IResourceFolderItem[]) => void;
+  appendFolder: (folder: IResourceFolderItem) => void;
+  removeFolder: (folderId: string) => void;
+  updateFolder: (folder: Partial<IResourceFolderItem>) => void;
   openFolder: (id: string) => void;
   setOpenFolderIds: (ids: string[]) => void;
   createTmpFolder: (parentId: string | null) => void;
+  removeTmpFolder: () => void;
   createTmpArticle: (folderId: string) => void;
-  setArticles: (articles: EditorResourceArticleItemFragment[]) => void;
-  appendArticle: (article: EditorResourceArticleItemFragment) => void;
-  findArticle: (articleId: string) => EditorResourceArticleItemFragment | undefined;
+  removeTmpArticle: () => void;
+  setArticles: (articles: IResourceArticleItem[]) => void;
+  appendArticle: (article: IResourceArticleItem) => void;
+  removeArticle: (articleId: string) => void;
+  updateArticle: (article: Partial<IResourceArticleItem>) => void;
+  findArticle: (articleId: string) => IResourceArticleItem | undefined;
 }
 
 // ------------------------------

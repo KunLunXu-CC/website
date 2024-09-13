@@ -3,11 +3,14 @@ import scss from './index.module.scss';
 import useResourceStore from '../../hooks/useResourceStore';
 import useWorkspaceStore from '../../hooks/useWorkspaceStore';
 
-import { Menu } from 'antd';
-import { memo, useCallback, useMemo } from 'react';
+import { Menu, MenuProps } from 'antd';
+import { IResourceItem } from '../../types';
 import { cloneDeep, groupBy, sortBy } from 'lodash';
+import { memo, useCallback, useMemo, CSSProperties } from 'react';
 
 const INLINE_INDENT = 14; // 菜单缩进大小
+
+type MenuItem = Required<MenuProps>['items'][number];
 
 const Resource = () => {
   const { workspaces, appendArticleWorkspace } = useWorkspaceStore();
@@ -17,18 +20,19 @@ const Resource = () => {
   const treeData = useMemo(() => {
     const cloneFolders = cloneDeep(Object.values(folders));
     const cloneArticles = cloneDeep(Object.values(articles));
-    const groupFolders = groupBy(cloneFolders, 'parent.id');
-    const groupArticles = groupBy(cloneArticles, 'folder.id');
+    const groupFolders = groupBy(cloneFolders, 'parent.id') as Record<string, IResourceItem[]>;
+    const groupArticles = groupBy(cloneArticles, 'folder.id') as Record<string, IResourceItem[]>;
 
-    cloneFolders.forEach((v) => {
-      const tagLength = groupFolders[v.id]?.length ?? 0;
-      const articleLength = groupArticles[v.id]?.length ?? 0;
+    (cloneFolders as IResourceItem[]).forEach((v) => {
+      const tagLength = groupFolders[v.id as string]?.length ?? 0;
+      const articleLength = groupArticles[v.id as string]?.length ?? 0;
+
       v.childrenLength = tagLength + articleLength; // eslint-disable-line
-      v.children = openFolderIds.includes(v.id)
+      v.children = openFolderIds.includes(v.id as string)
         ? [
             // eslint-disable-line
-            ...sortBy(groupFolders[v.id] || [], 'name'),
-            ...sortBy(groupArticles[v.id] || [], 'name'),
+            ...sortBy(groupFolders[v.id as string] || [], 'name'),
+            ...sortBy(groupArticles[v.id as string] || [], 'name'),
           ]
         : [];
     });
@@ -36,7 +40,7 @@ const Resource = () => {
     return sortBy(
       cloneFolders.filter((v) => !v.parent?.id),
       'name',
-    );
+    ) as IResourceItem[];
   }, [articles, folders, openFolderIds]);
 
   // 当前选中项菜单 key 值: 也是当前活动工作区的 article id
@@ -47,13 +51,8 @@ const Resource = () => {
 
   // 渲染菜单列表
   const menu = useMemo(() => {
-    const recursion = (item, level) => {
-      const title = (
-        <Title
-          data={item}
-          level={level}
-        />
-      );
+    const recursion = (item: IResourceItem, level: number): MenuItem => {
+      const title = <Title data={item} />;
 
       // 文章
       if (item.folder) {
@@ -67,14 +66,14 @@ const Resource = () => {
       return {
         label: title,
         key: item.id,
-        style: { '--dividing-left': `${level * INLINE_INDENT + 15}px` },
+        style: { '--dividing-left': `${level * INLINE_INDENT + 15}px` } as CSSProperties,
         children: item?.children?.length
-          ? item.children.map((v) => recursion(v, level + 1))
+          ? item.children.map((v: IResourceItem) => recursion(v, level + 1))
           : [{ key: `${item.id}-empty`, className: scss['menu-item-empty'] }],
       };
     };
 
-    return treeData.map((v) => recursion(v, 1));
+    return treeData.map((v: IResourceItem) => recursion(v, 1));
   }, [treeData]);
 
   const handleAdd = useCallback(() => {

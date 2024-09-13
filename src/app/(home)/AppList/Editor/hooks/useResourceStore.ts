@@ -2,6 +2,7 @@
 import { create } from 'zustand';
 import { IResourceStore } from '../types';
 import { NEW_FLAG_ID } from '../constants';
+import { STATUS } from '@/config/constants';
 
 const useResourceStore = create<IResourceStore>((set, get) => ({
   folders: {},
@@ -19,7 +20,21 @@ const useResourceStore = create<IResourceStore>((set, get) => ({
   },
   appendFolder: (folder) => {
     const { folders, setFolders } = get();
-    const newFolders = [...Object.values(folders), folder].filter((v) => v.id !== NEW_FLAG_ID);
+    setFolders([...Object.values(folders), folder]);
+  },
+  removeFolder: (folderId) => {
+    const { folders, setFolders } = get();
+    const newFolders = Object.values(folders).filter((v) => v.id !== folderId);
+    setFolders(newFolders);
+  },
+  updateFolder: (folder) => {
+    const { folders, setFolders } = get();
+    const newFolders = Object.values(folders).map((v) => {
+      if (v.id === folder.id) {
+        return { ...v, editor: false, ...folder };
+      }
+      return v;
+    });
     setFolders(newFolders);
   },
   setOpenFolderIds: (ids) => set({ openFolderIds: ids }),
@@ -36,6 +51,11 @@ const useResourceStore = create<IResourceStore>((set, get) => ({
         },
       },
     });
+  },
+  removeTmpFolder: () => {
+    const { folders, setFolders } = get();
+    const newFolders = Object.values(folders).filter((v) => v.id !== NEW_FLAG_ID);
+    setFolders(newFolders);
   },
   setArticles: (articles) => {
     const newArticles = articles.reduce<IResourceStore['articles']>(
@@ -56,14 +76,34 @@ const useResourceStore = create<IResourceStore>((set, get) => ({
           name: '',
           id: 'new',
           editor: true,
+          status: STATUS.ENABLE,
           folder: { id: folderId },
         },
       },
     });
   },
+  removeTmpArticle: () => {
+    const { articles, setArticles } = get();
+    const newArticles = Object.values(articles).filter((v) => v.id !== NEW_FLAG_ID);
+    setArticles(newArticles);
+  },
   appendArticle: (article) => {
     const { articles, setArticles } = get();
-    const newArticles = [...Object.values(articles), article].filter((v) => v.id !== NEW_FLAG_ID);
+    setArticles([...Object.values(articles), article]);
+  },
+  removeArticle: (articleId) => {
+    const { articles, setArticles } = get();
+    const newArticles = Object.values(articles).filter((v) => v.id !== articleId);
+    setArticles(newArticles);
+  },
+  updateArticle: (article) => {
+    const { articles, setArticles } = get();
+    const newArticles = Object.values(articles).map((v) => {
+      if (v.id === article.id) {
+        return { ...v, editor: false, ...article };
+      }
+      return v;
+    });
     setArticles(newArticles);
   },
   findArticle: (articleId) => get().articles[articleId],

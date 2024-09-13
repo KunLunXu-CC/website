@@ -5,6 +5,7 @@ import useResourceStore from './useResourceStore';
 import { graphql, useFragment } from '@/gql';
 import { useMutation } from '@tanstack/react-query';
 import {
+  Maybe,
   EditorCreateArticleMutation,
   EditorCreateArticleMutationVariables,
   EditorResourceArticleItemFragmentDoc,
@@ -22,7 +23,7 @@ const EditorCreateArticleDocument = graphql(`
 `);
 
 const useCreateArticle = () => {
-  const { appendArticle } = useResourceStore();
+  const { appendArticle, removeTmpArticle } = useResourceStore();
   const { mutateAsync: createArticles } = useMutation<
     EditorCreateArticleMutation,
     Error,
@@ -33,11 +34,17 @@ const useCreateArticle = () => {
   });
 
   const handleCreateArticle = useCallback(
-    async ({ name, folderId }: { name: string; folderId: string }) => {
+    async ({ name, folderId }: { name: string; folderId?: Maybe<string> }) => {
+      removeTmpArticle();
+
+      if (!name) {
+        return;
+      }
+
       const { createArticles: res } = await createArticles({ body: { name, folder: folderId } });
       appendArticle(useFragment(EditorResourceArticleItemFragmentDoc, res.change[0]));
     },
-    [appendArticle, createArticles],
+    [appendArticle, createArticles, removeTmpArticle],
   );
 
   return { createArticle: handleCreateArticle };

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import client from '@/gql/client';
 import useResourceStore from './useResourceStore';
 
