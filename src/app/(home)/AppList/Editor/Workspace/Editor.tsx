@@ -1,27 +1,24 @@
-import dynamic from 'next/dynamic';
-
-import { actions } from '@/store';
 import { getOssUrl } from '@/utils';
 import { IWorkspace } from '../types';
-import { memo, useCallback } from 'react';
-import { PHOTO_TYPE } from '@/config/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { useUploadPhotosMutation } from '@/store/graphql';
-import { useHandleUpdateArticles } from '@/app/(home)/AppList/Editor/hooks';
-import '@kunlunxu/brick/es/markdown/style';
+import { Image } from '@nextui-org/react';
+import { Markdown } from '@kunlunxu/brick';
+import { memo, useCallback, useEffect, useState } from 'react';
 import useArticle from '../hooks/useArticle';
-
-const Markdown = dynamic(() => import('@kunlunxu/brick').then((mod) => mod.Markdown), { ssr: false });
+import useEditorUpload from '../hooks/useUpload';
+import useUpdateArticle from '../hooks/useUpdateArticle';
+import useWorkspaceStore from '../hooks/useWorkspaceStore';
+import '@kunlunxu/brick/es/markdown/style';
 
 // 渲染 md 插件 markdown-to-jsx 配置
 const MD_TO_JSX_OPTIONS = {
   overrides: {
-    img: ({ alt, src }) => {
+    img: ({ alt, src }: { alt: string; src: string }) => {
       const handledSrc = /^https?:/.test(src) ? src : getOssUrl(src);
 
       return (
-        <img
+        <Image
           alt={alt}
+          radius="sm"
           src={handledSrc}
         />
       );
@@ -35,74 +32,60 @@ interface IEditorProps {
 
 const Editor = (props: IEditorProps) => {
   const { workspace } = props;
-  const dispatch = useDispatch();
-  const handleUpdateArticles = useHandleUpdateArticles();
-
+  const { updateArticle } = useUpdateArticle();
   const { article } = useArticle({ articleId: workspace.dataId });
+  const [currentContent, setCurrentContent] = useState<string>(article?.content || '');
 
-  const [uploadPhotos] = useUploadPhotosMutation();
+  const { upload } = useEditorUpload();
+  const { updateWorkspace } = useWorkspaceStore();
+
+  const handleChange = useCallback(({ value }: { value: string }) => setCurrentContent(value), []);
 
   // 保存(ctr + s): 修改文章内容
   const handleSave = useCallback(
-    async ({ value: content }) => {
-      await handleUpdateArticles({
-        body: { content },
-        conds: { id: article.id },
+    async ({ value: content }: { value: string }) => {
+      if (!article) return;
+
+      await updateArticle({
+        content,
+        id: article.id,
       });
-
-      dispatch(
-        actions.editor.setWorks([
-          {
-            change: false,
-            articleId: article.id,
-          },
-        ]),
-      );
     },
-    [dispatch, handleUpdateArticles, article.id],
-  );
-
-  // 内容改变
-  const handleChange = useCallback(
-    ({ value: content }) => {
-      const change = (article.content || '') !== content;
-
-      if (workspace.change === change) {
-        return false;
-      }
-
-      dispatch(
-        actions.editor.setWorks([
-          {
-            change,
-            articleId: article.id,
-          },
-        ]),
-      );
-    },
-    [article, dispatch, workspace.change],
+    [updateArticle, article],
   );
 
   // 插入图片
   const handleInsertImages = useCallback(
-    async ({ files }) => {
-      const { data } = await uploadPhotos({
-        body: {
-          files,
-          payload: article.id,
-          type: PHOTO_TYPE.ARTICLE.VALUE,
-        },
+    async ({ files }: { files: File[] }) => {
+      if (!article) return;
+
+      const list = await upload({
+        files,
+        payload: article.id,
       });
 
-      return data.uploadPhotos.change.map((v) => v.name);
+      return list.map((v) => v.name);
     },
-    [article.id, uploadPhotos],
+    [article, upload],
   );
+
+  // 监听, 修改 change
+  useEffect(() => {
+    if (!article) return;
+
+    const change = article.content !== currentContent;
+    if (workspace.change !== change) {
+      updateWorkspace({
+        change,
+        dataId: article.id,
+      });
+    }
+  }, [article, currentContent, updateWorkspace, workspace.change]);
 
   return (
     <Markdown
       onSave={handleSave}
-      value={article.content}
+      value={currentContent}
       onChange={handleChange}
       mdToJsxOptions={MD_TO_JSX_OPTIONS}
       onInsertImages={handleInsertImages}

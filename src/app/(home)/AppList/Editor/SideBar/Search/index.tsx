@@ -1,32 +1,36 @@
-import scss from "./index.module.scss";
+import scss from './index.module.scss';
+import useResourceStore from '../../hooks/useResourceStore';
+import useWorkspaceStore from '../../hooks/useWorkspaceStore';
 
-import { Input } from "antd";
-import { actions } from "@/store";
-import { memo, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Input } from 'antd';
+import { memo, useCallback, ChangeEvent, useState, useMemo } from 'react';
 
 const Search = () => {
-  const dispatch = useDispatch();
+  const { articles } = useResourceStore();
+  const { appendArticleWorkspace } = useWorkspaceStore();
 
-  const { keyword, results } = useSelector((state) => state.editor.search);
+  const [keyword, setKeyword] = useState('');
 
-  const handleChange = useCallback(
-    (event) => {
-      dispatch(actions.editor.setSearchKeyword(event.target.value));
-    },
-    [dispatch],
-  );
+  const results = useMemo(() => {
+    if (!keyword) return [];
+    const list = Object.values(articles);
+    return list.filter((v) => v.name.includes(keyword) || v.content?.includes(keyword));
+  }, [articles, keyword]);
+
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value);
+  }, []);
 
   const handleClick = useCallback(
-    ({ id: articleId }) => {
-      dispatch(actions.editor.appendWork(articleId));
+    ({ id: articleId }: { id: string }) => {
+      appendArticleWorkspace(articleId);
     },
-    [dispatch],
+    [appendArticleWorkspace],
   );
 
   return (
     <div className={scss.search}>
-      <div className={scss["input-wrapper"]}>
+      <div className={scss['input-wrapper']}>
         <Input
           autoFocus
           value={keyword}
@@ -41,8 +45,7 @@ const Search = () => {
           <div
             key={v.id}
             className={scss.item}
-            onClick={handleClick.bind(null, v)}
-          >
+            onClick={handleClick.bind(null, v)}>
             <div className={scss.title}>{v.name}</div>
             <div className={scss.content}>{v.content}</div>
           </div>

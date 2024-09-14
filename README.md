@@ -29,7 +29,7 @@
 
 1. 使用 `React Hooks` 以函数式组件来进行编码, 并使用新版 `Antd` 来进行开发
 2. 使用个人组件库 `@kunlunxu/brick` 进行项目开发, 并将项目中部分组件封装到 `@kunlunxu/brick` 并进行发布
-2. 使用 `Redux` 来管理状态, 并使用 `redux-saga` 解决异步问题
+2. 使用 `zustand` 来管理状态
 3. 使用 `Sass` 预处理器来编写样式
 4. 使用 `Webpack` 从零搭建项目, 完成基本的项目配置
 5. 使用 `Eslint` 规范代码语法、风格

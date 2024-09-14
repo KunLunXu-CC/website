@@ -9,7 +9,7 @@ import useUpdateArticle from '../../hooks/useUpdateArticle';
 import { Icon } from '@kunlunxu/brick';
 import { Input } from '@nextui-org/react';
 import { IResourceItem } from '../../types';
-import { useMemo, useCallback, KeyboardEvent, memo, FocusEvent } from 'react';
+import { useMemo, useCallback, KeyboardEvent, memo } from 'react';
 
 interface ITitleProps {
   data: IResourceItem;
@@ -57,12 +57,12 @@ const Title = (props: ITitleProps) => {
     [handleEdit],
   );
 
-  const handleBlur = useCallback(
-    (e: FocusEvent) => {
-      handleEdit((e.target as HTMLInputElement).value);
-    },
-    [handleEdit],
-  );
+  // const handleBlur = useCallback(
+  //   (e: FocusEvent) => {
+  //     handleEdit((e.target as HTMLInputElement).value);
+  //   },
+  //   [handleEdit],
+  // );
 
   return (
     <div className={clsx('group', scss['menu-title'], { [scss['menu-title-article']]: !isFolder })}>
@@ -74,10 +74,10 @@ const Title = (props: ITitleProps) => {
       <div className={scss['menu-title-content']}>
         {data.editor ? (
           <Input
-            autoFocus
+            // autoFocus
             size="sm"
             radius="none"
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
             onKeyUp={handleKeyUp}
             onClick={(e) => e.stopPropagation()}
             defaultValue={data.name}

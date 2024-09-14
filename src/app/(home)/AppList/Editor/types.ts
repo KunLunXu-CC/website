@@ -69,6 +69,7 @@ export interface IWorkspaceState {
 
 export interface IWorkspaceStore extends IWorkspaceState {
   appendArticleWorkspace: (articleId: string) => void;
+  updateWorkspace: (workspace: Partial<IWorkspace> & { dataId: string }) => void;
   removeWorkspace: (articleId: string) => void;
 }
 

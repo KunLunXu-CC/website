@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 
-export default () => (
+const Juejin = () => (
   <a
     target="_blank"
     rel="noopener noreferrer"
@@ -8,3 +9,5 @@ export default () => (
     <Icon type="icon-juejin" />
   </a>
 );
+
+export default memo(Juejin);

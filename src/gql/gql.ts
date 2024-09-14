@@ -31,6 +31,7 @@ const documents = {
     "\n  mutation EditorRemoveFolder($conds: FolderSearch!) {\n    removeFolders(conds: $conds) {\n      change {\n        id\n        name\n        parent {\n          id\n          name\n        }\n      }\n    }\n  }\n": types.EditorRemoveFolderDocument,
     "\n  mutation EditorUpdateArticle($body: ArticleFields!, $conds: ArticleSearch!) {\n    updateArticles(body: $body, conds: $conds) {\n      change {\n        ...EditorResourceArticleItem\n      }\n    }\n  }\n": types.EditorUpdateArticleDocument,
     "\n  mutation EditorUpdateFolder($body: FolderFields!, $conds: FolderSearch!) {\n    updateFolders(body: $body, conds: $conds) {\n      change {\n        ...EditorResourceFolderItem\n      }\n    }\n  }\n": types.EditorUpdateFolderDocument,
+    "\n  mutation EditorUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        name\n      }\n    }\n  }\n": types.EditorUploadDocument,
     "\n  fragment RoleItem on Role {\n    id\n    name\n    auth\n  }\n": types.RoleItemFragmentDoc,
     "\n  query Roles {\n    roles {\n      list {\n        ...RoleItem\n      }\n    }\n  }\n": types.RolesDocument,
     "\n  mutation UpdateRoles($body: RoleFields!, $conds: RoleSearch!) {\n    updateRoles(body: $body, conds: $conds) {\n      change {\n        ...RoleItem\n      }\n    }\n  }\n": types.UpdateRolesDocument,
@@ -131,6 +132,10 @@ export function graphql(source: "\n  mutation EditorUpdateArticle($body: Article
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation EditorUpdateFolder($body: FolderFields!, $conds: FolderSearch!) {\n    updateFolders(body: $body, conds: $conds) {\n      change {\n        ...EditorResourceFolderItem\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation EditorUpdateFolder($body: FolderFields!, $conds: FolderSearch!) {\n    updateFolders(body: $body, conds: $conds) {\n      change {\n        ...EditorResourceFolderItem\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation EditorUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation EditorUpload($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        name\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

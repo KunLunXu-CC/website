@@ -1,73 +1,42 @@
-import scss from "./tabBarExtra.module.scss";
+import scss from './tabBarExtra.module.scss';
 
-import { memo, useCallback, useMemo } from "react";
-import { actions } from "@/store";
-import { Icon } from "@kunlunxu/brick";
-import { ARTICLE_STATUS } from "@/config/constants";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  THUMB_SETTING,
-  REVOKE_CONFIRM,
-  RELEASE_CONFIRM,
-} from "@/app/(home)/AppList/Editor/constants";
+import { memo, useCallback } from 'react';
+import { Icon } from '@kunlunxu/brick';
 
 const TabBarExtra = () => {
-  const dispatch = useDispatch();
-
-  const { articles, works } = useSelector((state) => ({
-    works: state.editor?.works,
-    articles: state.editor?.articles,
-  }));
-
-  // 文章内容
-  const article = useMemo(
-    () => articles[works.find((v) => v.active)?.articleId],
-    [articles, works],
-  );
+  // const { article } = useArticle();
 
   // 当前文章是否是未发布状态
-  const unpublished = useMemo(
-    () => article?.status !== ARTICLE_STATUS.RELEASE,
-    [article],
-  );
+  // const unpublished = useMemo(() => article?.status !== ARTICLE_STATUS.RELEASE, [article]);
+  const unpublished = false;
 
   // 发布
-  const handleRelease = useCallback(() => {
-    dispatch(actions.modal.open({ code: RELEASE_CONFIRM, article }));
-  }, [article, dispatch]);
+  const handleRelease = useCallback(() => {}, []);
 
   // 撤销(下架)
-  const handleRevoke = useCallback(() => {
-    dispatch(actions.modal.open({ code: REVOKE_CONFIRM, article }));
-  }, [article, dispatch]);
+  const handleRevoke = useCallback(() => {}, []);
 
   // 缩略图配置
-  const thumbSetting = useCallback(() => {
-    dispatch({
-      article,
-      code: THUMB_SETTING,
-      type: "modal/openModal",
-    });
-  }, [article, dispatch]);
+  const thumbSetting = useCallback(() => {}, []);
 
   return (
     <div className={scss.extra}>
       <Icon
         onClick={thumbSetting}
         type="icon-genghuanfengmian"
-        className={scss["icon-thumbnail"]}
+        className={scss['icon-thumbnail']}
       />
       {unpublished ? (
         <Icon
           type="icon-fabu"
           onClick={handleRelease}
-          className={scss["icon-release"]}
+          className={scss['icon-release']}
         />
       ) : (
         <Icon
           type="icon-xiajia"
           onClick={handleRevoke}
-          className={scss["icon-lower-shelf"]}
+          className={scss['icon-lower-shelf']}
         />
       )}
     </div>

@@ -1,18 +1,18 @@
-import Error from "./Error";
-import Loading from "./Loading";
-import scss from "./index.module.scss";
-import usePhotosStore from "@/store/usePhotosStore";
+import Error from './Error';
+import Loading from './Loading';
+import scss from './index.module.scss';
+import usePhotosStore from '@/store/usePhotosStore';
 
-import { getOssUrl } from "@/utils";
-import { Image } from "@kunlunxu/brick";
-import { FC, memo, ReactNode, useMemo } from "react";
+import { getOssUrl } from '@/utils';
+import { Image } from '@kunlunxu/brick';
+import { FC, memo, ReactNode, useMemo } from 'react';
 
-const Background: FC<{ children: ReactNode }> = (props) => {
+const Background: FC<{ children?: ReactNode }> = (props) => {
   const { desktop } = usePhotosStore();
 
   const bgSrc = useMemo(() => {
     const index = Math.floor(Math.random() * desktop.length);
-    return desktop.length > 0 ? getOssUrl(desktop[index].name) : "";
+    return desktop.length > 0 ? getOssUrl(desktop[index].name) : '';
   }, [desktop]);
 
   return (
@@ -21,8 +21,7 @@ const Background: FC<{ children: ReactNode }> = (props) => {
       alt="background"
       error={<Error />}
       loading={<Loading />}
-      className={scss.background}
-    >
+      className={scss.background}>
       {props.children}
     </Image>
   );

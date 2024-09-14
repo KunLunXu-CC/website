@@ -1,7 +1,7 @@
-
+import { memo } from 'react';
 import { Icon } from '@kunlunxu/brick';
 
-export default () => (
+const Github = () => (
   <a
     target="_blank"
     rel="noopener noreferrer"
@@ -9,3 +9,5 @@ export default () => (
     <Icon type="icon-github" />
   </a>
 );
+
+export default memo(Github);

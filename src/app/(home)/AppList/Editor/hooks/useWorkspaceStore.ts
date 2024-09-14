@@ -20,6 +20,21 @@ const useWorkspaceStore = create<IWorkspaceStore>((set, get) => ({
 
     set({ workspaces: [{ dataId: articleId, type: WORKSPACE_TYPE.ARTICLE, active: true }, ...workspaces] });
   },
+  updateWorkspace: (workspace) => {
+    const { workspaces } = get();
+    set({
+      workspaces: workspaces.map((v) => {
+        if (v.dataId === workspace.dataId) {
+          return {
+            ...v,
+            ...workspace,
+          };
+        }
+
+        return v;
+      }),
+    });
+  },
   removeWorkspace: (dataId: string) => {
     const { workspaces } = get();
     set({ workspaces: workspaces.filter((v) => v.dataId !== dataId) });

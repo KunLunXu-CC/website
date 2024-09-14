@@ -1,20 +1,15 @@
-import React, {
-  useRef,
-  useEffect,
-} from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import scss from './index.module.scss';
 
 const useStateHook = () => {
   const canvasRef = useRef(null);
 
-  useEffect(() => {
-
-  }, [canvasRef]);
+  useEffect(() => {}, [canvasRef]);
 
   return { canvasRef };
 };
 
-export default () => {
+const Avocado = () => {
   const state = useStateHook();
 
   return (
@@ -28,3 +23,5 @@ export default () => {
     </div>
   );
 };
+
+export default memo(Avocado);

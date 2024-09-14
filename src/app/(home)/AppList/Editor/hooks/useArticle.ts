@@ -6,9 +6,15 @@ interface IUseArticleArgs {
 }
 
 const useArticle = ({ articleId }: IUseArticleArgs) => {
-  const { findArticle } = useResourceStore();
+  const { findArticle, articles } = useResourceStore();
 
-  const article = useMemo(() => findArticle(articleId)!, [findArticle, articleId]);
+  const article = useMemo(() => {
+    if (articles) {
+      return findArticle(articleId);
+    }
+
+    return null;
+  }, [findArticle, articleId, articles]);
 
   return { article };
 };

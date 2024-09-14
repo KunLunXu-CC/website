@@ -95,10 +95,11 @@ const More: FC<IMoreProps> = (props) => {
           title: '删除',
           icon: 'icon-shanchu',
           onClick: handleDeleteMenu,
-          conds: data.children?.length === 0, // TODO： 文件夹未展开, 是无效的
+          conds: !isFolder || data.children?.length === 0, // TODO： 文件夹未展开, 是无效的
         },
       ].filter((v) => v.conds),
     [
+      isFolder,
       handleEditMenu,
       handleMoveMenu,
       handleDeleteMenu,

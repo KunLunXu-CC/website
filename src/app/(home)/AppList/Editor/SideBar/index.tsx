@@ -10,7 +10,7 @@ import { ACTIVITY_BAR_LIST } from '@/app/(home)/AppList/Editor/constants';
 const SIDE_MIN_WIDTH = 4; // 菜单最小宽度
 
 const SideBar = () => {
-  const { isSideBarCollapsed, selectedActivityBarKey } = useActivityBarStore();
+  const { isSideBarCollapsed, selectedActivityBarKey, setIsSideBarCollapsed } = useActivityBarStore();
 
   // 顶层 className
   const className = useMemo(
@@ -19,12 +19,12 @@ const SideBar = () => {
   );
 
   // 尺寸变化
-  const onResize = useCallback(({ width }: { width: number }) => {
-    console.log('%c [ width ]-25', 'font-size:13px; background:pink; color:#bf2c9f;', width);
-    // actions.editor.setSide({
-    //   collapsed: SIDE_MIN_WIDTH === width,
-    // }),
-  }, []);
+  const onResize = useCallback(
+    ({ width }: { width: number }) => {
+      setIsSideBarCollapsed(SIDE_MIN_WIDTH === width);
+    },
+    [setIsSideBarCollapsed],
+  );
 
   const bodyEle = useMemo(() => {
     const { sideBar: Body } = ACTIVITY_BAR_LIST.find((v) => v.key === selectedActivityBarKey)!;

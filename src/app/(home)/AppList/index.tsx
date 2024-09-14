@@ -1,16 +1,16 @@
-"use client";
-import { memo } from "react";
-import { Window } from "@kunlunxu/brick";
+'use client';
+import { memo } from 'react';
+import { Window } from '@kunlunxu/brick';
 
-import scss from "./index.module.scss";
-import useAppStore from "@/store/useAppStore";
-import apps from "@/app/(home)/AppList/config";
+import scss from './index.module.scss';
+import useAppStore from '@/store/useAppStore';
+import apps from '@/app/(home)/AppList/config';
 
 const AppList = () => {
   const { opens, closeApp, minimizeApp, maximizeApp, stickApp } = useAppStore();
 
   return (
-    <div className={scss["app-block"]}>
+    <div className={scss['app-block']}>
       {opens.map((app) => {
         const { component: Component, modalProps } = apps[app.code];
         return (
@@ -23,8 +23,7 @@ const AppList = () => {
             onClose={closeApp.bind(null, app)}
             onMouseDown={stickApp.bind(null, app)}
             minParams={{ width: 0, height: 0, offsetX: 0, offsetY: 0 }}
-            {...modalProps}
-          >
+            {...modalProps}>
             <Component />
           </Window>
         );

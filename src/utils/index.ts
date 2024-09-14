@@ -1,4 +1,5 @@
-import { notification } from "antd";
+import { notification } from 'antd';
+import { forIn } from 'lodash';
 
 /**
  * 根据需要过滤的列表过滤指定对象
@@ -7,9 +8,9 @@ import { notification } from "antd";
  * @param {Array} filterValues  要过滤的值的列表
  * @returns {object} 过滤后的对象
  */
-export const filterObject = (obj, filterValues = []) => {
+export const filterObject = (obj: Record<string, any>, filterValues: string[] = []) => {
   const filter = {};
-  _.forIn(obj, (value, key) => {
+  forIn(obj, (value, key) => {
     !filterValues.includes(value) && (filter[key] = value);
   });
   return filter;
@@ -23,8 +24,8 @@ export const filterObject = (obj, filterValues = []) => {
  * @param {number} wait  等待时长
  * @returns {Function} 返回被调用函数
  */
-export const debounce = (fn, wait) => {
-  let timeout = null;
+export const debounce = (fn: Function, wait: number) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
 
   return () => {
     if (timeout !== null) {
@@ -42,9 +43,9 @@ export const debounce = (fn, wait) => {
  * @param {string} publicKey 公钥
  * @returns {string}      加密后的数据
  */
-export const rsa = async (data, publicKey) => {
-  const JSEncrypt = (await import("jsencrypt")).default;
-  const encrypt = new JSEncrypt();
+export const rsa = async (data: string, publicKey: string) => {
+  const JSEncrypt = (await import('jsencrypt')).default;
+  const encrypt = new JSEncrypt({});
   encrypt.setPublicKey(publicKey);
   return encrypt.encrypt(data);
 };
@@ -57,7 +58,7 @@ export const rsa = async (data, publicKey) => {
  * @param {string} params.type 提示信息类别, 参考 antd 文档
  * @returns {undefined}
  */
-export const message = ({ code, type = "success", ...options }) => {
+export const message = ({ code, type = 'success', ...options }) => {
   if (!code) {
     return false;
   }
@@ -74,7 +75,7 @@ export const message = ({ code, type = "success", ...options }) => {
  * @param {string} key 要获取的指定参数
  * @returns {string|URLSearchParams} 返回 URLSearchParams 对象或者参数值
  */
-export const urlParams = (key) => {
+export const urlParams = (key: string) => {
   const urlSearchParams = new URLSearchParams(location.search);
 
   if (key) {
@@ -85,5 +86,4 @@ export const urlParams = (key) => {
 };
 
 // 获取 OSS 对应资源 url
-export const getOssUrl = (fileName) =>
-  `https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/${fileName}`;
+export const getOssUrl = (fileName: string) => `https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/${fileName}`;

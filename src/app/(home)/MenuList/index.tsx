@@ -7,21 +7,16 @@ import Notification from './Notification';
 
 import { useMemo } from 'react';
 import { Icon } from '@kunlunxu/brick';
-import { useSelector }  from 'react-redux';
 import useAppStore from '@/store/useAppStore';
 
-const MenuList =  () => {
+const MenuList = () => {
   const { opens } = useAppStore();
 
   // 菜单 className
   const menuClassName = useMemo(() => {
     const hideMenu = opens.find((v) => v.isMax && v.isMin === false);
-    return classNames(
-      scss.menu,
-      { [scss['menu-auto-hiding']]: hideMenu },
-    );
+    return classNames(scss.menu, { [scss['menu-auto-hiding']]: hideMenu });
   }, [opens]);
-
 
   return (
     <div className={menuClassName}>
