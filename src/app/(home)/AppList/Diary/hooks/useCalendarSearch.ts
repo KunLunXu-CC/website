@@ -1,13 +1,14 @@
-import dayjs from "dayjs";
-import client from "@/gql/client";
-import useCalendarStore from "./useCalendarStore";
+/* eslint-disable react-hooks/rules-of-hooks */
+import dayjs from 'dayjs';
+import client from '@/gql/client';
+import useCalendarStore from './useCalendarStore';
 
-import { graphql, useFragment } from "@/gql";
-import { useQuery } from "@tanstack/react-query";
-import { CalendarDiariesQuery } from "@/gql/graphql";
-import { useEffect } from "react";
+import { graphql, useFragment } from '@/gql';
+import { useQuery } from '@tanstack/react-query';
+import { CalendarDiariesQuery, DiaryItemFragmentDoc } from '@/gql/graphql';
+import { useEffect } from 'react';
 
-const DiaryItemDocument = graphql(`
+graphql(`
   fragment DiaryItem on Diary {
     id
     name
@@ -52,13 +53,13 @@ const CalendarDiariesDocument = graphql(`
 const getFullDate = (value: string) => {
   const res = [];
 
-  let start = dayjs(value).startOf("month").subtract(6, "day");
+  let start = dayjs(value).startOf('month').subtract(6, 'day');
 
-  const end = dayjs(value).endOf("month").add(6, "day");
+  const end = dayjs(value).endOf('month').add(6, 'day');
 
   while (start.isBefore(end)) {
-    start = start.add(1, "day");
-    res.push(start.format("YYYY-MM-DD"));
+    start = start.add(1, 'day');
+    res.push(start.format('YYYY-MM-DD'));
   }
 
   return res;
@@ -68,7 +69,7 @@ const useCalendarSearch = () => {
   const { setDiaries, currentMonth } = useCalendarStore();
 
   const { data } = useQuery<CalendarDiariesQuery>({
-    queryKey: ["calendarDiaries", currentMonth],
+    queryKey: ['calendarDiaries', currentMonth],
     queryFn: () =>
       client.request(CalendarDiariesDocument, {
         search: { names: getFullDate(currentMonth) },
@@ -76,7 +77,7 @@ const useCalendarSearch = () => {
   });
 
   useEffect(() => {
-    setDiaries(data?.diaries.list || []);
+    setDiaries(useFragment(DiaryItemFragmentDoc, data?.diaries.list || []));
   }, [data?.diaries.list, setDiaries]);
 };
 

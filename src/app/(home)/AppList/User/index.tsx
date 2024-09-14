@@ -1,10 +1,6 @@
-import { memo } from 'react';
-import scss from './index.module.scss';
+import dynamic from 'next/dynamic';
+import Loading from '@/components/AppLoading';
 
-const User = () => (
-  <div className={scss.user}>
-    <div>11</div>
-  </div>
-);
-
-export default memo(User);
+export default dynamic(() => import('./Main'), {
+  loading: () => <Loading />,
+});

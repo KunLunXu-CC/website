@@ -1,4 +1,5 @@
-import { graphql } from '@/gql';
+/* eslint-disable react-hooks/rules-of-hooks */
+import { graphql, useFragment } from '@/gql';
 import { useCallback } from 'react';
 import {
   DiaryFields,
@@ -6,6 +7,7 @@ import {
   UpdateDiariesMutation,
   CreateDiariesMutationVariables,
   UpdateDiariesMutationVariables,
+  DiaryItemFragmentDoc,
 } from '@/gql/graphql';
 
 import { useMutation } from '@tanstack/react-query';
@@ -52,7 +54,7 @@ const useCalendarSave = () => {
 
       const { change } = (res as CreateDiariesMutation).createDiaries ?? (res as UpdateDiariesMutation).updateDiaries;
 
-      updateDiaries(change);
+      updateDiaries(useFragment(DiaryItemFragmentDoc, change));
     },
     [create, update, updateDiaries],
   );

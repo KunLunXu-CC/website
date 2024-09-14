@@ -1,25 +1,6 @@
-import { FC, memo } from 'react';
+import dynamic from 'next/dynamic';
+import Loading from '@/components/AppLoading';
 
-import Body from './Body';
-import Side from './Side';
-import Upload from './Upload';
-import scss from './index.module.scss';
-import useAlbumSearch from './hooks/useAlbumSearch';
-
-const Album: FC = () => {
-  useAlbumSearch();
-
-  return (
-    <div className={scss.layout}>
-      <div className={scss['layout-side']}>
-        <Side />
-      </div>
-      <div className={scss['layout-body']}>
-        <Body />
-        <Upload />
-      </div>
-    </div>
-  );
-};
-
-export default memo(Album);
+export default dynamic(() => import('./Main'), {
+  loading: () => <Loading />,
+});

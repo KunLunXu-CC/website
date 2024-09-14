@@ -1,3 +1,6 @@
-import scss from "./index.module.scss";
+import { memo } from 'react';
+import scss from './index.module.scss';
 
-export default () => <div className={scss.header} />;
+const Header = () => <div className={scss.header} />;
+
+export default memo(Header);

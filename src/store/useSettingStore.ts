@@ -1,9 +1,9 @@
-import { merge } from "lodash";
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { MENUS } from "@/app/(home)/AppList/Setting/constants";
+import { merge } from 'lodash';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { MENUS } from '@/app/(home)/AppList/Setting/constants';
 
-interface ISettingState {
+export interface ISettingState {
   selectedMenuKey: string; // 应用菜单 key
   dock: {
     hideDock: boolean; // 是否隐藏 dock
@@ -18,8 +18,8 @@ interface ISettingState {
 interface ISettingStore extends ISettingState {
   toggleMenu: (selectedMenuKey: string) => void;
   // setSetting: (setting: Partial<ISettingState>) => void;
-  updateDock: (dock: Partial<ISettingState["dock"]>) => void;
-  updateMenuBar: (menuBar: Partial<ISettingState["menuBar"]>) => void;
+  updateDock: (dock: Partial<ISettingState['dock']>) => void;
+  updateMenuBar: (menuBar: Partial<ISettingState['menuBar']>) => void;
 }
 
 const useSettingStore = create<ISettingStore>()(
@@ -32,19 +32,18 @@ const useSettingStore = create<ISettingStore>()(
       menuBar: {
         showFullScreenOnMenu: true,
         showWeek: true,
-        formatDate: "YYYY-MM-DD HH:mm:ss",
+        formatDate: 'YYYY-MM-DD HH:mm:ss',
       },
 
       toggleMenu: (selectedMenuKey) => set({ selectedMenuKey }),
       updateDock: (dock) => set({ dock: { ...get().dock, ...dock } }),
-      updateMenuBar: (menuBar) =>
-        set({ menuBar: { ...get().menuBar, ...menuBar } }),
+      updateMenuBar: (menuBar) => set({ menuBar: { ...get().menuBar, ...menuBar } }),
       // setSetting: (setting) => {
       //   const newState = merge(get(), setting);
       //   set(newState);
       // },
     }),
-    { name: "setting", version: 1 },
+    { name: 'setting', version: 1 },
   ),
 );
 

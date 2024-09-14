@@ -2,7 +2,6 @@ import Search from './SideBar/Search';
 import Resource from './SideBar/Resource';
 import { FC } from 'react';
 import { ACTIVITY_BAR_KEY } from './types';
-import { APP_SETTING } from '@/config/constants';
 
 export const NEW_FLAG_ID = 'new'; // 新建文件夹、新建文章占位 ID
 
@@ -34,10 +33,3 @@ export const ACTIVITY_BAR_LIST = [
     sideBar: Search,
   },
 ] as { key: ACTIVITY_BAR_KEY; title: string; icon: string; sideBar: FC<any> }[];
-
-// message 配置
-export const MESSAGE_CONFIG = {
-  bottom: 10,
-  placement: 'bottomRight',
-  code: APP_SETTING.EDITOR.code,
-};

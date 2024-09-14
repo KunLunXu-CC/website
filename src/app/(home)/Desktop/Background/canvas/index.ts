@@ -1,3 +1,5 @@
 import Avocado from './Avocado';
 
-export default [Avocado];
+const canvas = [Avocado];
+
+export default canvas;

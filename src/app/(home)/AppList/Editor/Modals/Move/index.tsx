@@ -3,9 +3,17 @@ import { Modal, Cascader, Form } from 'antd';
 import { memo, useCallback, useMemo } from 'react';
 import useMoveModalStore from '../../hooks/useMoveModalStore';
 import useResourceStore from '../../hooks/useResourceStore';
-import { last, sortBy, cloneDeep, groupBy } from 'lodash';
+import { last, sortBy, cloneDeep, groupBy, iteratee } from 'lodash';
 import useUpdateArticle from '../../hooks/useUpdateArticle';
 import useUpdateFolder from '../../hooks/useUpdateFolder';
+import { IResourceFolderItem } from '../../types';
+
+interface IOption extends IResourceFolderItem {
+  id: string;
+  value: string;
+  label: string;
+  children?: IOption[];
+}
 
 const Move = () => {
   const { updateArticle } = useUpdateArticle();
@@ -20,17 +28,21 @@ const Move = () => {
 
   // Cascader 组件 options 配置
   const options = useMemo(() => {
-    const cloneFolders = cloneDeep(Object.values(folders)).reduce((total, ele) => {
+    const cloneFolders = cloneDeep(Object.values(folders)).reduce<IOption[]>((total, ele) => {
       // 移动目录时, 移除当前目录
-      (modalData?.folder || ele.id !== modalData?.id) &&
+
+      if (modalData?.folder || ele.id !== modalData?.id) {
         total.push({
           ...ele,
-          value: ele.id,
-          label: ele.name,
+          id: ele.id!,
+          value: ele.id!,
+          label: ele.name!,
         });
+      }
 
       return total;
     }, []);
+
     const groupFolders = groupBy(cloneFolders, 'parent.id');
 
     cloneFolders.forEach((v) => (v.children = groupFolders[v.id]));
