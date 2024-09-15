@@ -1,11 +1,11 @@
-import classNames from 'classnames';
+import clsx from 'clsx';
 import scss from './tab.module.scss';
 import useArticle from '../hooks/useArticle';
 import useWorkspaceStore from '../hooks/useWorkspaceStore';
 
+import { FC, memo } from 'react';
 import { IWorkspace } from '../types';
 import { Icon } from '@kunlunxu/brick';
-import { FC, memo, useMemo } from 'react';
 
 interface ITabProps {
   workspace: IWorkspace;
@@ -17,22 +17,17 @@ const Tab: FC<ITabProps> = (props) => {
   const { removeWorkspace } = useWorkspaceStore();
   const { article } = useArticle({ articleId: workspace.dataId });
 
-  // icon className
-  const iconClassName = useMemo(
-    () =>
-      classNames(scss['tab-icon'], {
-        [scss['tab-icon-change']]: workspace.change,
-      }),
-    [workspace.change],
-  );
+  if (!article) return null;
 
   return (
     <span className={scss.tab}>
-      {article!.name}
+      {article.name}
       <Icon
         type="icon-guanbi6"
-        className={iconClassName}
-        onClick={removeWorkspace.bind(null, article!.id)}
+        className={clsx(scss['tab-icon'], {
+          [scss['tab-icon-change']]: workspace.change,
+        })}
+        onClick={removeWorkspace.bind(null, article.id)}
       />
     </span>
   );

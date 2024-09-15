@@ -5,12 +5,14 @@ import useWorkspaceStore from '../../hooks/useWorkspaceStore';
 
 import { Menu, MenuProps } from 'antd';
 import { IResourceItem } from '../../types';
+import { NEW_FLAG_ID } from '../../constants';
 import { cloneDeep, groupBy, sortBy } from 'lodash';
 import { memo, useCallback, useMemo, CSSProperties } from 'react';
 
 const INLINE_INDENT = 14; // 菜单缩进大小
 
 type MenuItem = Required<MenuProps>['items'][number];
+type MenuSelectEventHandler = Required<MenuProps>['onSelect'];
 
 const Resource = () => {
   const { workspaces, appendArticleWorkspace } = useWorkspaceStore();
@@ -80,6 +82,15 @@ const Resource = () => {
     createTmpFolder(null);
   }, [createTmpFolder]);
 
+  const handleSelect = useCallback<MenuSelectEventHandler>(
+    ({ key }) => {
+      if (key === NEW_FLAG_ID) return;
+
+      appendArticleWorkspace(key);
+    },
+    [appendArticleWorkspace],
+  );
+
   return (
     <>
       <Menu
@@ -87,11 +98,11 @@ const Resource = () => {
         mode="inline"
         className={scss.menu}
         inlineCollapsed={false}
+        onSelect={handleSelect}
         openKeys={openFolderIds}
         inlineIndent={INLINE_INDENT}
         selectedKeys={selectedKeys}
         onOpenChange={setOpenFolderIds}
-        onSelect={({ key }) => appendArticleWorkspace(key)}
       />
       <div
         onClick={handleAdd}

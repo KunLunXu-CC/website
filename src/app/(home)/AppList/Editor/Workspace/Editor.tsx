@@ -73,7 +73,7 @@ const Editor = (props: IEditorProps) => {
   useEffect(() => {
     if (!article) return;
 
-    const change = article.content !== currentContent;
+    const change = (article.content || '') !== currentContent;
     if (workspace.change !== change) {
       updateWorkspace({
         change,

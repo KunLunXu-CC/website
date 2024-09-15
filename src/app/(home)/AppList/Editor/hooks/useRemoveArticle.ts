@@ -1,5 +1,6 @@
 import client from '@/gql/client';
 import useResourceStore from './useResourceStore';
+import useWorkspaceStore from './useWorkspaceStore';
 import { graphql } from '@/gql';
 import { useCallback } from 'react';
 import { useMutation } from '@tanstack/react-query';
@@ -17,7 +18,7 @@ const EditorRemoveArticleDocument = graphql(`
 
 const useRemoveArticle = () => {
   const { removeArticle } = useResourceStore();
-
+  const { removeWorkspace } = useWorkspaceStore();
   const { mutateAsync: removeArticleFetch } = useMutation<
     EditorRemoveArticleMutation,
     Error,
@@ -29,12 +30,13 @@ const useRemoveArticle = () => {
 
   const handleRemoveArticle = useCallback(
     (articleId: string) => {
+      removeWorkspace(articleId);
       removeArticle(articleId);
       removeArticleFetch({
         conds: { id: articleId },
       });
     },
-    [removeArticle, removeArticleFetch],
+    [removeArticle, removeArticleFetch, removeWorkspace],
   );
 
   return { removeArticle: handleRemoveArticle };
