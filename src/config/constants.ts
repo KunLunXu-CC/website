@@ -91,6 +91,3 @@ export const PHOTO_TYPE = {
   AVATAR: { VALUE: 4, DESC: '头像' }, // 头像
   ICON: { VALUE: 5, DESC: '应用图标' }, // 图标
 };
-
-// JWT cookie key
-export const JWT_COOKIE_KEY = 'jwt_token';

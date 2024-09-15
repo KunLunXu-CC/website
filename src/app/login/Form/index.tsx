@@ -1,5 +1,4 @@
 'use client';
-// import Cookies from 'js-cookie';
 import scss from './index.module.scss';
 
 import { rsa } from '@/utils';
@@ -8,12 +7,10 @@ import { Icon } from '@kunlunxu/brick';
 import { Button } from '@nextui-org/react';
 import { Input, Form, Divider } from 'antd';
 import { useRouter } from 'next/navigation';
-// import { JWT_COOKIE_KEY } from '@/config/constants';
 import { usePublicKeyQuery, useLoginMutation } from '@/server/user';
 
 const LogInForm = () => {
   const [form] = Form.useForm();
-  const router = useRouter();
   const { mutateAsync: login } = useLoginMutation();
   const { data: publicKeyQueryData } = usePublicKeyQuery();
 
@@ -28,12 +25,13 @@ const LogInForm = () => {
 
     await login({ account, password: passwordEncrypt });
 
-    router.push('/');
-  }, [form, router, login, publicKeyQueryData]);
+    // 登录成功后, 跳转到首页, 使用 window.location.href 会刷新页面(这样才能够重新获用户信息)
+    window.location.href = '/';
+  }, [form, login, publicKeyQueryData]);
 
-  // 清除 JWT cookie
+  // // 清除 JWT cookie
   // useEffect(() => {
-  //   Cookies.remove(JWT_COOKIE_KEY);
+  //   document.cookie = '';
   // }, []);
 
   return (

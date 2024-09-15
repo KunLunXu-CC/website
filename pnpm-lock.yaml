@@ -44,9 +44,6 @@ dependencies:
   graphql-request:
     specifier: ^7.1.0
     version: 7.1.0(graphql@16.9.0)
-  js-cookie:
-    specifier: ^3.0.5
-    version: 3.0.5
   jsencrypt:
     specifier: 3.2.0
     version: 3.2.0
@@ -9045,11 +9042,6 @@ packages:
   /jose@5.6.3:
     resolution: {integrity: sha512-1Jh//hEEwMhNYPDDLwXHa2ePWgWiFNNUadVmguAAw2IJ6sj9mNxV5tGXJNqlMkJAybF6Lgw1mISDxTePP/187g==}
     dev: true
-
-  /js-cookie@3.0.5:
-    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
-    engines: {node: '>=14'}
-    dev: false
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
