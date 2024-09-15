@@ -2,9 +2,8 @@ import client from '@/gql/client';
 import useResourceStore from './useResourceStore';
 import { graphql } from '@/gql';
 import { useCallback } from 'react';
-import { ArticleFields, EditorUpdateArticleMutation } from '@/gql/graphql';
 import { useMutation } from '@tanstack/react-query';
-import { UpdateArticlesMutation, UpdateArticlesMutationVariables } from '@/store/graphql';
+import { ArticleFields, EditorUpdateArticleMutation, EditorUpdateArticleMutationVariables } from '@/gql/graphql';
 
 const EditorUpdateArticleDocument = graphql(`
   mutation EditorUpdateArticle($body: ArticleFields!, $conds: ArticleSearch!) {
@@ -22,7 +21,7 @@ const useUpdateArticle = () => {
   const { mutateAsync: updateArticleFetch } = useMutation<
     EditorUpdateArticleMutation,
     Error,
-    UpdateArticlesMutationVariables
+    EditorUpdateArticleMutationVariables
   >({
     mutationKey: ['updateArticle'],
     mutationFn: (variables) => client.request(EditorUpdateArticleDocument, variables),

@@ -1,14 +1,15 @@
-import useSettingStore from "@/store/useSettingStore";
+import useSettingStore from '@/store/useSettingStore';
 
-import { Checkbox } from "antd";
-import { memo, useCallback } from "react";
+import { Checkbox } from 'antd';
+import { memo, useCallback } from 'react';
+import { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 const Dock = () => {
   const { dock, updateDock } = useSettingStore();
 
   // 修改值
   const onChange = useCallback(
-    (key: string, event) => {
+    (key: string, event: CheckboxChangeEvent) => {
       const value = event.target.checked;
       updateDock({ [key]: value });
     },
@@ -18,8 +19,7 @@ const Dock = () => {
   return (
     <Checkbox
       checked={dock.hideDock}
-      onChange={onChange.bind(null, "hideDock")}
-    >
+      onChange={onChange.bind(null, 'hideDock')}>
       自动隐藏和显示程序坞
     </Checkbox>
   );

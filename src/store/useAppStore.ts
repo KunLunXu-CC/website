@@ -1,9 +1,10 @@
-import { last } from "lodash";
-import { create } from "zustand";
-import { urlParams } from "@/utils";
-import { User } from "@/gql/graphql";
+import { last } from 'lodash';
+import { create } from 'zustand';
+import { urlParams } from '@/utils';
+import { APP_CODE } from '@/config/constants';
+import { UserItemFragment } from '@/gql/graphql';
 
-import apps from "@/app/(home)/AppList/config";
+import apps from '@/app/(home)/AppList/config';
 
 export interface IApp {
   code: string;
@@ -18,7 +19,7 @@ export interface IAppState {
 }
 
 export interface AppStore extends IAppState {
-  initAppStore: (user: User) => void;
+  initAppStore: (user: UserItemFragment) => void;
   openApp: (app: IApp) => void;
   closeApp: (app: IApp) => void;
   stickApp: (app: IApp) => void;
@@ -35,17 +36,15 @@ const useAppStore = create<AppStore>((set, get) => ({
     // 1. dock 栏
     const docks = auth!
       .map((v: any) => {
-        const { code, name } = apps[v.code] || {};
+        const { code, name } = apps[v.code as APP_CODE] || {};
         return { code, name };
       })
       .filter((v: any) => v.code && v.name);
 
     // 2. 默认开启的「应用」
-    const appCodeOfUrl = urlParams("app");
+    const appCodeOfUrl = urlParams('app');
     const defaultOpen = docks.find((v) => v.code === appCodeOfUrl);
-    const opens = defaultOpen
-      ? [{ ...defaultOpen, isMin: false, isMax: false }]
-      : [];
+    const opens = defaultOpen ? [{ ...defaultOpen, isMin: false, isMax: false }] : [];
 
     set({ opens, docks });
   },

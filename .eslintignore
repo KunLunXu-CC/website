@@ -1,2 +1,3 @@
 # dem
 **/*.generated.ts
+src/gql/**

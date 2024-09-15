@@ -1,16 +1,18 @@
-"use client";
-import AppList from "./AppList";
-import Desktop from "./Desktop";
-import DockList from "./DockList";
-import MenuList from "./MenuList";
-import useAppStore from "@/store/useAppStore";
-import useUserStore from "@/store/useUserStore";
-import usePhotosStore from "@/store/usePhotosStore";
-import useSettingStore from "@/store/useSettingStore";
+/* eslint-disable react-hooks/rules-of-hooks */
+'use client';
+import AppList from './AppList';
+import Desktop from './Desktop';
+import DockList from './DockList';
+import MenuList from './MenuList';
+import useAppStore from '@/store/useAppStore';
+import useUserStore from '@/store/useUserStore';
+import usePhotosStore from '@/store/usePhotosStore';
 
-import { useEffect } from "react";
-import { useUserInfoQuery } from "@/server/user";
-import { usePhotosQuery } from "@/server/photos";
+import { useEffect } from 'react';
+import { useFragment } from '@/gql';
+import { useUserInfoQuery } from '@/server/user';
+import { usePhotosQuery } from '@/server/photos';
+import { Photo, UserItemFragmentDoc } from '@/gql/graphql';
 
 /**
  * 下面所有组件都使用 position: fixed 进行布局
@@ -30,7 +32,8 @@ const Home = () => {
   const { data: userInfoQueryData } = useUserInfoQuery();
 
   useEffect(() => {
-    const { user } = userInfoQueryData?.userInfo ?? {};
+    const user = useFragment(UserItemFragmentDoc, userInfoQueryData?.userInfo?.user);
+
     if (user) {
       setUser(user);
       initAppStore(user);
@@ -40,7 +43,7 @@ const Home = () => {
 
   useEffect(() => {
     if (photosQueryData?.photos) {
-      initPhotosStore(photosQueryData.photos.list);
+      initPhotosStore(photosQueryData.photos.list as Photo[]);
     }
   }, [initPhotosStore, photosQueryData]);
 

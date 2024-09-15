@@ -5,6 +5,7 @@ import { Window } from '@kunlunxu/brick';
 import scss from './index.module.scss';
 import useAppStore from '@/store/useAppStore';
 import apps from '@/app/(home)/AppList/config';
+import { APP_CODE } from '@/config/constants';
 
 const AppList = () => {
   const { opens, closeApp, minimizeApp, maximizeApp, stickApp } = useAppStore();
@@ -12,9 +13,8 @@ const AppList = () => {
   return (
     <div className={scss['app-block']}>
       {opens.map((app) => {
-        const { component: Component, modalProps } = apps[app.code];
+        const { component: Component, modalProps } = apps[app.code as APP_CODE];
         return (
-          // @ts-ignore
           <Window
             key={app.code}
             isMin={app.isMin}

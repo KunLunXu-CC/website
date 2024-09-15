@@ -5,9 +5,10 @@
  * @returns {undefined}
  */
 const setting = () => {
+  // @ts-ignore
   window.$console = window.console;
 
-  if (_DEV_) {
+  if (process.env.NODE_ENV === 'development') {
     return false;
   }
 
@@ -16,7 +17,7 @@ const setting = () => {
     log: (v) => v,
     info: (v) => v,
     group: (v) => v,
-    groupEnd: (v) => v,
+    groupEnd: () => {},
   };
 };
 

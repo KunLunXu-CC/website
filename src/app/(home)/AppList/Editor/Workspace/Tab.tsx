@@ -28,11 +28,11 @@ const Tab: FC<ITabProps> = (props) => {
 
   return (
     <span className={scss.tab}>
-      {article.name}
+      {article!.name}
       <Icon
         type="icon-guanbi6"
         className={iconClassName}
-        onClick={removeWorkspace.bind(null, article.id)}
+        onClick={removeWorkspace.bind(null, article!.id)}
       />
     </span>
   );

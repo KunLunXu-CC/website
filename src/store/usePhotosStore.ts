@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { Photo } from "@/gql/graphql";
-import { groupBy } from "lodash";
-import { PHOTO_TYPE } from "@/config/constants";
+import { create } from 'zustand';
+import { Photo } from '@/gql/graphql';
+import { groupBy } from 'lodash';
+import { PHOTO_TYPE } from '@/config/constants';
 
 interface IPhotosState {
   desktop: Photo[];
@@ -36,7 +36,7 @@ const usePhotosStore = create<IPhotosStore>((set, get) => ({
   thumb: [],
 
   search: {
-    type: "all",
+    type: 'all',
     sourceFileName: void 0,
   },
 
@@ -49,7 +49,7 @@ const usePhotosStore = create<IPhotosStore>((set, get) => ({
   photos: [],
 
   initPhotosStore: (photos) => {
-    const group = groupBy(photos, "type");
+    const group = groupBy(photos, 'type');
 
     set({
       photos,
@@ -80,9 +80,7 @@ const usePhotosStore = create<IPhotosStore>((set, get) => ({
   // 删除图片
   removePhotos: (removes) =>
     set({
-      photos: get().photos.filter((v) =>
-        removes.every((ele) => ele.id !== v.id),
-      ),
+      photos: get().photos.filter((v) => removes.every((ele) => ele.id !== v.id)),
     }),
 
   // 追加图片

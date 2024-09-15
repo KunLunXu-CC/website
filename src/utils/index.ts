@@ -1,21 +1,3 @@
-import { notification } from 'antd';
-import { forIn } from 'lodash';
-
-/**
- * 根据需要过滤的列表过滤指定对象
- *
- * @param {object} obj          要过滤的对象
- * @param {Array} filterValues  要过滤的值的列表
- * @returns {object} 过滤后的对象
- */
-export const filterObject = (obj: Record<string, any>, filterValues: string[] = []) => {
-  const filter = {};
-  forIn(obj, (value, key) => {
-    !filterValues.includes(value) && (filter[key] = value);
-  });
-  return filter;
-};
-
 /**
  * 防抖
  * TODO: 替换为 lodash 中的函数
@@ -48,25 +30,6 @@ export const rsa = async (data: string, publicKey: string) => {
   const encrypt = new JSEncrypt({});
   encrypt.setPublicKey(publicKey);
   return encrypt.encrypt(data);
-};
-
-/**
- * 提示
- *
- * @param {object} params 函数对象参数, 除了下面两个菜参数, 其余参考 antd notification 组件参数, message description
- * @param {string} params.code 提示信息唯一值
- * @param {string} params.type 提示信息类别, 参考 antd 文档
- * @returns {undefined}
- */
-export const message = ({ code, type = 'success', ...options }) => {
-  if (!code) {
-    return false;
-  }
-
-  notification[type]({
-    ...options,
-    getContainer: () => document.getElementById(code),
-  });
 };
 
 /**

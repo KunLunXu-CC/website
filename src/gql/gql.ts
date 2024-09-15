@@ -38,7 +38,7 @@ const documents = {
     "\n  query Users {\n    users {\n      list {\n        ...UserItem\n      }\n    }\n  }\n": types.UsersDocument,
     "\n  mutation UpdateUsers($body: UserFields!, $conds: UserSearch!) {\n    updateUsers(body: $body, conds: $conds) {\n      message\n      change {\n        ...UserItem\n      }\n    }\n  }\n": types.UpdateUsersDocument,
     "\n  query Photos($search: PhotoSearch) {\n    photos(search: $search) {\n      list {\n        id\n        type\n        name\n      }\n    }\n  }\n": types.PhotosDocument,
-    "\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(\n      conds: $conds\n      search: $search\n      orderBy: { creationTime: -1 }\n    ) {\n      change {\n        id\n      }\n    }\n  }\n": types.RemovePhotosDocument,
+    "\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(conds: $conds, search: $search, orderBy: { creationTime: -1 }) {\n      change {\n        id\n      }\n    }\n  }\n": types.RemovePhotosDocument,
     "\n  mutation uploadPhotos($body: PhotoFields!) {\n    uploadPhotos(body: $body) {\n      change {\n        id\n        type\n        name\n      }\n    }\n  }\n": types.UploadPhotosDocument,
     "\n  fragment UserItem on User {\n    id\n    sex\n    bio\n    name\n    avatar\n    account\n    role {\n      id\n      desc\n      auth\n      name\n    }\n  }\n": types.UserItemFragmentDoc,
     "\n  query PublicKey {\n    publicKey {\n      data\n    }\n  }\n": types.PublicKeyDocument,
@@ -163,7 +163,7 @@ export function graphql(source: "\n  query Photos($search: PhotoSearch) {\n    p
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(\n      conds: $conds\n      search: $search\n      orderBy: { creationTime: -1 }\n    ) {\n      change {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(\n      conds: $conds\n      search: $search\n      orderBy: { creationTime: -1 }\n    ) {\n      change {\n        id\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(conds: $conds, search: $search, orderBy: { creationTime: -1 }) {\n      change {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation RemovePhotos($conds: PhotoSearch!, $search: PhotoSearch) {\n    removePhotos(conds: $conds, search: $search, orderBy: { creationTime: -1 }) {\n      change {\n        id\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
