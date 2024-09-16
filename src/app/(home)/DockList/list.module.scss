@@ -1,0 +1,101 @@
+/* Dock 样式 */
+$dock-body-height: 54px; // dock 内容高度
+
+// dock 样式
+.dock {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  position: fixed;
+
+  display: flex;
+  padding-bottom: 6px;
+  box-sizing: content-box;
+  justify-content: center;
+}
+
+// dock 内容块
+.dock-body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  box-sizing: border-box;
+  height: $dock-body-height;
+
+  border-radius: 10px;
+  mix-blend-mode: normal;
+  backdrop-filter: blur(40px);   // 背景虚化
+  background:
+    linear-gradient(
+      163.27deg,
+      rgba($color: #2f2f2f, $alpha: 69%) 47.94%,
+      rgba($color: #212121, $alpha: 79%) 77.13%
+    );
+  border: 2px solid rgba($color: #fff, $alpha: 10%);
+  box-shadow: 0 0 0 1px rgba($color: #000, $alpha: 30%);
+}
+
+// 应用设置
+.dock-app {
+  --size: calc(#{$dock-body-height} * var(--scale));
+
+  cursor: pointer;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--size);
+  height: var(--size);
+  transition: all 0.3s;
+  box-sizing: content-box;
+  padding-bottom: calc((var(--scale) - 1) * 50px);
+
+  // 图标大小设置
+  .dock-icon {
+    transition: all 0.3s;
+    width: calc(var(--size) - 6px);
+
+    // TODO: 设置倒影: 参考 https://www.zhangxinxu.com/wordpress/2016/08/webkit-box-reflect-moz-element/
+    // -webkit-box-reflect: below 0 linear-gradient(transparent 50%, #fff 100%);
+  }
+
+  // 文字提示
+  .dock-tooltip {
+    display: none;
+
+    white-space: nowrap;
+
+    position: absolute;
+    bottom: calc(var(--size) + 16px);
+
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #222;
+  }
+
+  &:hover {
+    .dock-tooltip {
+      color: #fff;
+      display: block;
+    }
+  }
+}
+
+// 开启自动隐藏 dock 当鼠标距离底部一定距离才显示
+.dock.dock-auto-hiding {
+  cursor: auto;
+  padding-top: 12px;
+  padding-bottom: 0;
+  transition: bottom 0.5s;
+  bottom: -$dock-body-height;
+
+  &:hover {
+    bottom: 0;
+    padding-bottom: 6px;
+  }
+}
