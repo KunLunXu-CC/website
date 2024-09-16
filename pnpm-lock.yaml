@@ -15,8 +15,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@kunlunxu/brick':
-        specifier: ^2.6.3
-        version: 2.6.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.6.4
+        version: 2.6.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nextui-org/react':
         specifier: ^2.4.8
         version: 2.4.8(@types/react@18.3.5)(framer-motion@11.5.4(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.11(ts-node@10.9.2(@types/node@22.5.5)(typescript@5.6.2)))
@@ -905,8 +905,8 @@ packages:
   '@kamilkisiela/fast-url-parser@1.1.4':
     resolution: {integrity: sha512-gbkePEBupNydxCelHCESvFSFM8XPh1Zs/OAVRW/rKpEqPAl5PbOM90Si8mv9bvnR53uPD2s/FiRxdvSejpRJew==}
 
-  '@kunlunxu/brick@2.6.3':
-    resolution: {integrity: sha512-4uyekyOjZdW/tVGO5TQdpXo8E/9RpyMOkx2k42qxV36h77zhQqZfvC7tL7kUlGvO04+fadtcigweQeic9Cq2lg==}
+  '@kunlunxu/brick@2.6.4':
+    resolution: {integrity: sha512-F0E+1Y6m9oNuLlneVlVO6VosKEjSgyo0eUUoCSFINKFfBKkVJ+8itFyCm+K5avOiV4MuC00vnaMCER8a8qGGYA==}
     peerDependencies:
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
@@ -7578,7 +7578,7 @@ snapshots:
 
   '@kamilkisiela/fast-url-parser@1.1.4': {}
 
-  '@kunlunxu/brick@2.6.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@kunlunxu/brick@2.6.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       classnames: 2.5.1
       echarts: 5.5.1
