@@ -4,23 +4,25 @@ FROM node
 # 维护者信息: 填写维护者的信息
 LABEL moyuanjun moyuanjun@gmai.com
 
-# 安装 pnpm 和 pm2
-RUN npm install -g pnpm pm2
 
 # 创建工作目录
 RUN mkdir -p /var/website
+
+# 将当前目录下的所有文件复制到 /var/website 目录下
+COPY . /var/website
+
+# 安装 pnpm 和 pm2
+RUN npm install -g pnpm pm2
 
 # 设置 npm home 目录
 RUN mkdir -p /var/website/logs/pm2 && chmod -R 777 /var/website
 ENV PM2_HOME /var/website/logs/pm2
 
-RUN mkdir -p /root/.config/git /root/.npm/_logs && chmod -R 777 /root
+# 安装依赖
+RUN pnpm install
 
-# 设置工作目录
-WORKDIR /var/website
-
-# 设置挂载点
-VOLUME [/var/website]
+# 构建项目
+RUN pnpm build
 
 # 对外暴露端口
 EXPOSE 3000
