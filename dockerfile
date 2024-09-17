@@ -4,7 +4,6 @@ FROM node
 # 维护者信息: 填写维护者的信息
 LABEL moyuanjun moyuanjun@gmai.com
 
-
 # 创建工作目录
 RUN mkdir -p /var/website
 
@@ -17,6 +16,9 @@ RUN npm install -g pnpm pm2
 # 设置 npm home 目录
 RUN mkdir -p /var/website/logs/pm2 && chmod -R 777 /var/website
 ENV PM2_HOME /var/website/logs/pm2
+
+# 进入工作目录
+RUN cd /var/website
 
 # 安装依赖
 RUN pnpm install
