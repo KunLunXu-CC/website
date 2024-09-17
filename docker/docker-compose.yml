@@ -1,16 +1,12 @@
 version: '3'
 services:
   website:
-    build: ./
+    image: registry-internal.cn-hangzhou.aliyuncs.com/kunlunxu/website
     container_name: klx-website
     ports:
       - 3000:3000
     environment:
       - TZ=Asia/Shanghai
-    # sh -c "" 执行多条命令: 安装依赖、build、启动 pm2、打印 pm2 日志(保持容器常驻)
-    command: sh -c "pm2 start ecosystem.config.js --env production && pm2 logs"
-    volumes:
-      - ../:/var/website # 挂载项目目录
     logging: # 日志配置
       driver: "json-file"
       options:
