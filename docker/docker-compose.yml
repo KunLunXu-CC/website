@@ -8,7 +8,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
     # sh -c "" 执行多条命令: 安装依赖、build、启动 pm2、打印 pm2 日志(保持容器常驻)
-    command: sh -c "pnpm i && npm run build && pm2 start ecosystem.config.js --env production && pm2 logs"
+    command: sh -c "pm2 start ecosystem.config.js --env production && pm2 logs"
     volumes:
       - ../:/var/website # 挂载项目目录
     logging: # 日志配置
