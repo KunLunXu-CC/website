@@ -1,7 +1,7 @@
 version: '3'
 services:
   website:
-    image: registry.cn-hangzhou.aliyuncs.com/kunlunxu/website:4.2.3 # 镜像地址
+    image: registry.cn-hangzhou.aliyuncs.com/kunlunxu/website:4.2.4 # 镜像地址
     container_name: klx-website # 容器名称
     ports:
       - 3000:3000 # 端口映射
