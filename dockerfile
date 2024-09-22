@@ -1,3 +1,4 @@
+# 使用 amd64 架构的 node 镜像作为基础镜像
 FROM --platform=linux/amd64 node AS base
 
 # 新增用户 & 用户组
