@@ -1,9 +1,9 @@
 import Error from './Error';
 import Loading from './Loading';
 import scss from './index.module.scss';
+import getOssUrl from '@/utils/getOssUrl';
 import usePhotosStore from '@/store/usePhotosStore';
 
-import { getOssUrl } from '@/utils';
 import { Image } from '@kunlunxu/brick';
 import { FC, memo, ReactNode, useMemo } from 'react';
 

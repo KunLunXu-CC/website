@@ -1,8 +1,8 @@
-import { getOssUrl } from '@/utils';
 import { IWorkspace } from '../types';
 import { Image } from '@nextui-org/react';
 import { Markdown } from '@kunlunxu/brick';
 import { memo, useCallback, useEffect, useState } from 'react';
+import getOssUrl from '@/utils/getOssUrl';
 import useArticle from '../hooks/useArticle';
 import useEditorUpload from '../hooks/useUpload';
 import useUpdateArticle from '../hooks/useUpdateArticle';

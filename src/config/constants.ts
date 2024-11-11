@@ -1,5 +1,5 @@
 /* 业务常量配置 */
-import { getOssUrl } from '@/utils';
+import getOssUrl from '@/utils/getOssUrl';
 
 // 默认用户头像
 export const DEFAULT_USER_AVATAR = 'klx.pro.tinify.e07793859fadd13b57564dd36ddb66ef.png';

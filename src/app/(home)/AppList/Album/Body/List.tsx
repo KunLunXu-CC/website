@@ -1,15 +1,15 @@
-import dayjs from "dayjs";
-import scss from "./list.module.scss";
-import useAlbumRemove from "../hooks/useAlbumRemove";
+import dayjs from 'dayjs';
+import scss from './list.module.scss';
+import getOssUrl from '@/utils/getOssUrl';
+import useAlbumRemove from '../hooks/useAlbumRemove';
 
-import { Empty } from "antd";
-import { find } from "lodash";
-import { getOssUrl } from "@/utils";
-import { memo, useMemo } from "react";
-import { Image, Icon } from "@kunlunxu/brick";
-import { PHOTO_TYPE } from "@/config/constants";
-import useAlbumStore from "../hooks/useAlbumStore";
-import { DEFAULT_ACTIVE_MENU_KEY } from "../constants";
+import { Empty } from 'antd';
+import { find } from 'lodash';
+import { memo, useMemo } from 'react';
+import { Image, Icon } from '@kunlunxu/brick';
+import { PHOTO_TYPE } from '@/config/constants';
+import useAlbumStore from '../hooks/useAlbumStore';
+import { DEFAULT_ACTIVE_MENU_KEY } from '../constants';
 
 const List = () => {
   const { onRemove } = useAlbumRemove();
@@ -32,12 +32,17 @@ const List = () => {
     <div className={scss.list}>
       {listData.length > 0 ? (
         listData.map((item) => (
-          <div key={item.name} className={scss.item}>
+          <div
+            key={item.name}
+            className={scss.item}>
             <div className={scss.preview}>
-              <div className={scss["preview-body"]}>
-                <Image alt="phone" src={getOssUrl(item.name)} />
+              <div className={scss['preview-body']}>
+                <Image
+                  alt="phone"
+                  src={getOssUrl(item.name)}
+                />
               </div>
-              <div className={scss["preview-mask"]}>
+              <div className={scss['preview-mask']}>
                 <Icon
                   type="icon-shanchu"
                   onClick={onRemove.bind(null, item.id)}
@@ -45,16 +50,14 @@ const List = () => {
               </div>
             </div>
             <div className={scss.info}>
-              <div className={scss["info-icon"]}>
+              <div className={scss['info-icon']}>
                 <Icon type="icon-genghuanfengmian" />
               </div>
-              <div className={scss["info-body"]}>
-                <div className={scss["info-body-desc"]}>
-                  {find(PHOTO_TYPE, (v) => v.VALUE === item.type)?.DESC ?? ""}
+              <div className={scss['info-body']}>
+                <div className={scss['info-body-desc']}>
+                  {find(PHOTO_TYPE, (v) => v.VALUE === item.type)?.DESC ?? ''}
                 </div>
-                <div className={scss["info-body-time"]}>
-                  {dayjs(item.creationTime).format("YYYY / MM / DD")}
-                </div>
+                <div className={scss['info-body-time']}>{dayjs(item.creationTime).format('YYYY / MM / DD')}</div>
               </div>
             </div>
           </div>

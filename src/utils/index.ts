@@ -47,6 +47,3 @@ export const urlParams = (key: string) => {
 
   return urlSearchParams;
 };
-
-// 获取 OSS 对应资源 url
-export const getOssUrl = (fileName: string) => `https://kunlunxu.oss-cn-hangzhou.aliyuncs.com/${fileName}`;
